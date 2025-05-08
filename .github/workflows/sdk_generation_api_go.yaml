@@ -1,4 +1,4 @@
-name: Generate
+name: Generate API-GO
 permissions:
   checks: write
   contents: write
@@ -24,6 +24,8 @@ jobs:
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
+      target: api-go
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}

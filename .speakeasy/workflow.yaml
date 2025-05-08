@@ -21,6 +21,9 @@ targets:
         target: python
         source: api
         output: ./api/py
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-python-code-samples
@@ -31,6 +34,9 @@ targets:
         target: typescript
         source: api
         output: ./api/ts
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-typescript-code-samples
