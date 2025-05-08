@@ -11,13 +11,13 @@
 
 ## API SDKs
 
-- [TypeScript](https://github.com/unkeyed/sdks/tree/main/api/typescript)
+- [TypeScript](https://github.com/unkeyed/sdks/tree/main/api/ts)
 - [Go](https://github.com/unkeyed/sdks/tree/main/api/go)
-- [Python](https://github.com/unkeyed/sdks/tree/main/api/python)
+- [Python](https://github.com/unkeyed/sdks/tree/main/api/py)
 
 ## Ratelimit SDKs
 
-- [TypeScript](https://github.com/unkeyed/sdks/tree/main/ratelimit/typescript)
+- [TypeScript](https://github.com/unkeyed/sdks/tree/main/ratelimit/ts)
 
 ## Contributing
 
