@@ -43,7 +43,7 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *github.c
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/unkeyed/sdks/go/api/v2
+go get github.com/unkeyed/sdks/api/go
 ```
 <!-- End SDK Installation [installation] -->
 

@@ -5,8 +5,11 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.542.3
   generationVersion: 2.597.9
-  releaseVersion: 2.0.0-alpha.8
-  configChecksum: ea8be04f8ea2867240128cdc71f05ed1
+  releaseVersion: 2.0.0-alpha.9
+  configChecksum: 4d9c36133ce6fce90fc4ecbd69783752
+  repoURL: https://github.com/unkeyed/sdks.git
+  repoSubDirectory: api/go
+  installationURL: https://github.com/unkeyed/sdks/api/go
 features:
   go:
     additionalDependencies: 0.1.0
