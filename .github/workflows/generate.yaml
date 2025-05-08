@@ -16,7 +16,7 @@ on:
     - cron: 0 0 * * *
 jobs:
   generate:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@latest
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml
     with:
       force: ${{ github.event.inputs.force }}
       mode: pr
