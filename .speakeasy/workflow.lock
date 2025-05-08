@@ -2,33 +2,34 @@ speakeasyVersion: 1.542.3
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:5fdc16463d33034675331613d9fe804efad0073423478f13bb3b493c5eda9193
+        sourceRevisionDigest: sha256:51ac5e62b39a4b0f60a937182aba0f6aebdb35602906b918fe46ba18b74ace94
         sourceBlobDigest: sha256:85b3645ceff5010fc000082dc687048500d03c1978454341fe6b2ab3a63aa75b
         tags:
             - latest
+            - speakeasy-sdk-regen-1746694903
             - 2.0.0
 targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:5fdc16463d33034675331613d9fe804efad0073423478f13bb3b493c5eda9193
+        sourceRevisionDigest: sha256:51ac5e62b39a4b0f60a937182aba0f6aebdb35602906b918fe46ba18b74ace94
         sourceBlobDigest: sha256:85b3645ceff5010fc000082dc687048500d03c1978454341fe6b2ab3a63aa75b
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:f68aab9152d4525f9bbd59db3e2d17ee2c6fb31a60ec1c98b214ebccde7bff3e
+        codeSamplesRevisionDigest: sha256:8a8f5ec19d76aa46fcf5269f26776ed51d726e320019dfcf49212daa9c1eb34a
     api-py:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:5fdc16463d33034675331613d9fe804efad0073423478f13bb3b493c5eda9193
+        sourceRevisionDigest: sha256:51ac5e62b39a4b0f60a937182aba0f6aebdb35602906b918fe46ba18b74ace94
         sourceBlobDigest: sha256:85b3645ceff5010fc000082dc687048500d03c1978454341fe6b2ab3a63aa75b
         codeSamplesNamespace: api-python-code-samples
-        codeSamplesRevisionDigest: sha256:471fdda8bc9ac6309db4d89fc113a71e4437b3b7e933d86ab9d094efaffd810e
+        codeSamplesRevisionDigest: sha256:0355dc7591621dee70e844da059ddde73639eaa64142fc1ae22dccb3e9d93caa
     api-ts:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:5fdc16463d33034675331613d9fe804efad0073423478f13bb3b493c5eda9193
+        sourceRevisionDigest: sha256:51ac5e62b39a4b0f60a937182aba0f6aebdb35602906b918fe46ba18b74ace94
         sourceBlobDigest: sha256:85b3645ceff5010fc000082dc687048500d03c1978454341fe6b2ab3a63aa75b
         codeSamplesNamespace: api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:826b2b2c16fa53e0c11496f5a3bef144d4db45c39279e8cf454f191826d4abd3
+        codeSamplesRevisionDigest: sha256:d710e10deec62a0f5100d5400c2e618c382e5e2be507cb58944ea3a7ea5c4ad8
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
