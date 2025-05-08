@@ -4,7 +4,8 @@ permissions:
   contents: write
   pull-requests: write
   statuses: write
-"on":
+
+on:
   workflow_dispatch:
     inputs:
       force:
