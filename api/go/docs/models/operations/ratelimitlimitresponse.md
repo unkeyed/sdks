@@ -1,0 +1,9 @@
+# RatelimitLimitResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `V2RatelimitLimitResponseBody`                                                                      | [*components.V2RatelimitLimitResponseBody](../../models/components/v2ratelimitlimitresponsebody.md) | :heavy_minus_sign:                                                                                  | OK                                                                                                  |

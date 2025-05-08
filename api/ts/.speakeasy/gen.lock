@@ -1,0 +1,344 @@
+lockVersion: 2.0.0
+id: 43fe009f-2e53-4f59-b943-58496679a998
+management:
+  docChecksum: 8e78dcb4bad946f25bef0bce834f7d42
+  docVersion: 2.0.0
+  speakeasyVersion: 1.542.3
+  generationVersion: 2.597.9
+  releaseVersion: 2.0.0-alpha.8
+  configChecksum: 7ad30e0b26ee365ab0c1f4e5ae1436ef
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.11
+    core: 3.21.7
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    envVarSecurityUsage: 0.1.2
+    examples: 2.81.5
+    globalSecurity: 2.82.13
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.4
+    mcpServer: 0.9.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.2.0
+    unions: 2.85.8
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/apiscreateapiresponsedata.md
+  - docs/models/components/badrequesterrordetails.md
+  - docs/models/components/baseerror.md
+  - docs/models/components/identitiescreateidentityresponsedata.md
+  - docs/models/components/livenessresponsedata.md
+  - docs/models/components/meta.md
+  - docs/models/components/pagination.md
+  - docs/models/components/ratelimit.md
+  - docs/models/components/ratelimitdeleteoverrideresponsedata.md
+  - docs/models/components/ratelimitlimitresponsedata.md
+  - docs/models/components/ratelimitoverride.md
+  - docs/models/components/ratelimitsetoverrideresponsedata.md
+  - docs/models/components/security.md
+  - docs/models/components/v2apiscreateapirequestbody.md
+  - docs/models/components/v2apiscreateapiresponsebody.md
+  - docs/models/components/v2identitiescreateidentityrequestbody.md
+  - docs/models/components/v2identitiescreateidentityrequestbodymeta.md
+  - docs/models/components/v2identitiescreateidentityresponsebody.md
+  - docs/models/components/v2identitiesdeleteidentityrequestbody1.md
+  - docs/models/components/v2identitiesdeleteidentityrequestbody2.md
+  - docs/models/components/v2identitiesdeleteidentityrequestbodyunion.md
+  - docs/models/components/v2identitiesdeleteidentityresponsebody.md
+  - docs/models/components/v2livenessresponsebody.md
+  - docs/models/components/v2ratelimitdeleteoverriderequestbody.md
+  - docs/models/components/v2ratelimitdeleteoverrideresponsebody.md
+  - docs/models/components/v2ratelimitgetoverriderequestbody.md
+  - docs/models/components/v2ratelimitgetoverrideresponsebody.md
+  - docs/models/components/v2ratelimitlimitrequestbody.md
+  - docs/models/components/v2ratelimitlimitresponsebody.md
+  - docs/models/components/v2ratelimitlistoverridesrequestbody.md
+  - docs/models/components/v2ratelimitlistoverridesresponsebody.md
+  - docs/models/components/v2ratelimitsetoverriderequestbody.md
+  - docs/models/components/v2ratelimitsetoverrideresponsebody.md
+  - docs/models/components/validationerror.md
+  - docs/models/errors/badrequesterrorresponse.md
+  - docs/models/errors/conflicterrorresponse.md
+  - docs/models/errors/forbiddenerrorresponse.md
+  - docs/models/errors/internalservererrorresponse.md
+  - docs/models/errors/notfounderrorresponse.md
+  - docs/models/errors/preconditionfailederrorresponse.md
+  - docs/models/errors/unauthorizederrorresponse.md
+  - docs/sdks/apis/README.md
+  - docs/sdks/identities/README.md
+  - docs/sdks/liveness/README.md
+  - docs/sdks/ratelimit/README.md
+  - docs/sdks/unkey/README.md
+  - eslint.config.mjs
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/apisCreateApi.ts
+  - src/funcs/identitiesCreateIdentity.ts
+  - src/funcs/identitiesDeleteIdentity.ts
+  - src/funcs/livenessLiveness.ts
+  - src/funcs/ratelimitDeleteOverride.ts
+  - src/funcs/ratelimitGetOverride.ts
+  - src/funcs/ratelimitLimit.ts
+  - src/funcs/ratelimitListOverrides.ts
+  - src/funcs/ratelimitSetOverride.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/extensions.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/prompts.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/apisCreateApi.ts
+  - src/mcp-server/tools/identitiesCreateIdentity.ts
+  - src/mcp-server/tools/identitiesDeleteIdentity.ts
+  - src/mcp-server/tools/livenessLiveness.ts
+  - src/mcp-server/tools/ratelimitDeleteOverride.ts
+  - src/mcp-server/tools/ratelimitGetOverride.ts
+  - src/mcp-server/tools/ratelimitLimit.ts
+  - src/mcp-server/tools/ratelimitListOverrides.ts
+  - src/mcp-server/tools/ratelimitSetOverride.ts
+  - src/models/components/apiscreateapiresponsedata.ts
+  - src/models/components/badrequesterrordetails.ts
+  - src/models/components/baseerror.ts
+  - src/models/components/identitiescreateidentityresponsedata.ts
+  - src/models/components/index.ts
+  - src/models/components/livenessresponsedata.ts
+  - src/models/components/meta.ts
+  - src/models/components/pagination.ts
+  - src/models/components/ratelimit.ts
+  - src/models/components/ratelimitdeleteoverrideresponsedata.ts
+  - src/models/components/ratelimitlimitresponsedata.ts
+  - src/models/components/ratelimitoverride.ts
+  - src/models/components/ratelimitsetoverrideresponsedata.ts
+  - src/models/components/security.ts
+  - src/models/components/v2apiscreateapirequestbody.ts
+  - src/models/components/v2apiscreateapiresponsebody.ts
+  - src/models/components/v2identitiescreateidentityrequestbody.ts
+  - src/models/components/v2identitiescreateidentityresponsebody.ts
+  - src/models/components/v2identitiesdeleteidentityrequestbodyunion.ts
+  - src/models/components/v2identitiesdeleteidentityresponsebody.ts
+  - src/models/components/v2livenessresponsebody.ts
+  - src/models/components/v2ratelimitdeleteoverriderequestbody.ts
+  - src/models/components/v2ratelimitdeleteoverrideresponsebody.ts
+  - src/models/components/v2ratelimitgetoverriderequestbody.ts
+  - src/models/components/v2ratelimitgetoverrideresponsebody.ts
+  - src/models/components/v2ratelimitlimitrequestbody.ts
+  - src/models/components/v2ratelimitlimitresponsebody.ts
+  - src/models/components/v2ratelimitlistoverridesrequestbody.ts
+  - src/models/components/v2ratelimitlistoverridesresponsebody.ts
+  - src/models/components/v2ratelimitsetoverriderequestbody.ts
+  - src/models/components/v2ratelimitsetoverrideresponsebody.ts
+  - src/models/components/validationerror.ts
+  - src/models/errors/apierror.ts
+  - src/models/errors/badrequesterrorresponse.ts
+  - src/models/errors/conflicterrorresponse.ts
+  - src/models/errors/forbiddenerrorresponse.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/internalservererrorresponse.ts
+  - src/models/errors/notfounderrorresponse.ts
+  - src/models/errors/preconditionfailederrorresponse.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/unauthorizederrorresponse.ts
+  - src/sdk/apis.ts
+  - src/sdk/identities.ts
+  - src/sdk/index.ts
+  - src/sdk/liveness.ts
+  - src/sdk/ratelimit.ts
+  - src/sdk/sdk.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  ratelimit.limit:
+    speakeasy-default-ratelimit-limit:
+      requestBody:
+        application/json: {"namespace": "sms.sign_up", "cost": 1, "duration": 711276, "identifier": "<value>", "limit": 581877}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"limit": 775789, "remaining": 817258, "reset": 390320, "success": false}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  ratelimit.setOverride:
+    speakeasy-default-ratelimit-set-override:
+      requestBody:
+        application/json: {"duration": 920725, "identifier": "<value>", "limit": 354329}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  ratelimit.getOverride:
+    speakeasy-default-ratelimit-get-override:
+      requestBody:
+        application/json: {"identifier": "<value>"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"namespaceId": "<id>", "overrideId": "<id>", "duration": 223250, "identifier": "<value>", "limit": 911447}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  ratelimit.listOverrides:
+    speakeasy-default-ratelimit-list-overrides:
+      requestBody:
+        application/json: {"limit": 10}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"namespaceId": "<id>", "overrideId": "<id>", "duration": 579960, "identifier": "<value>", "limit": 62070}, {"namespaceId": "<id>", "overrideId": "<id>", "duration": 157093, "identifier": "<value>", "limit": 220141}], "pagination": {"cursor": "cursor_xyz123", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  ratelimit.deleteOverride:
+    speakeasy-default-ratelimit-delete-override:
+      requestBody:
+        application/json: {"identifier": "<value>"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  identities.createIdentity:
+    speakeasy-default-identities-create-identity:
+      requestBody:
+        application/json: {"externalId": "user_123", "ratelimits": [{"name": "api", "limit": 944235, "duration": 703242}, {"name": "api", "limit": 17275, "duration": 470912}, {"name": "api", "limit": 919479, "duration": 557622}]}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"identityId": "<id>"}}
+        "400":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "409":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  v2.identities.deleteIdentity:
+    speakeasy-default-v2-identities-delete-identity:
+      requestBody:
+        application/json: {"externalId": "user_123", "identityId": "id_123"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": [{"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}, {"location": "<value>", "message": "<value>"}]}}
+        "401":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "404":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  createApi:
+    speakeasy-default-create-api:
+      requestBody:
+        application/json: {"name": "my-api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"apiId": "<id>", "name": "<value>"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+  liveness:
+    speakeasy-default-liveness:
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"message": "OK"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "instance": "https://example.com/error-log/abc123", "status": 404, "title": "<value>", "type": "https://example.com/errors/example"}}
+examplesVersion: 1.0.1
+generatedTests: {}

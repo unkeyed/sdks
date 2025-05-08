@@ -1,0 +1,9 @@
+# RatelimitDeleteOverrideResponse
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                    | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
+| `V2RatelimitDeleteOverrideResponseBody`                                                                               | [*components.V2RatelimitDeleteOverrideResponseBody](../../models/components/v2ratelimitdeleteoverrideresponsebody.md) | :heavy_minus_sign:                                                                                                    | OK                                                                                                                    |

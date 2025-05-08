@@ -1,0 +1,39 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    api:
+        inputs:
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/unkey/unkey/api
+targets:
+    api-go:
+        target: go
+        source: api
+        output: ./api/go
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/api-go-code-samples
+            labelOverride:
+                fixedValue: Go (SDK)
+            blocking: false
+    api-py:
+        target: python
+        source: api
+        output: ./api/py
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false
+    api-ts:
+        target: typescript
+        source: api
+        output: ./api/ts
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/api-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

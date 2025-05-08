@@ -1,0 +1,9 @@
+# V2IdentitiesCreateIdentityResponseBody
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `Meta`                                                                                                             | [components.Meta](../../models/components/meta.md)                                                                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `Data`                                                                                                             | [components.IdentitiesCreateIdentityResponseData](../../models/components/identitiescreateidentityresponsedata.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

@@ -1,0 +1,9 @@
+# V2RatelimitSetOverrideResponseBody
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `Meta`                                                                                                     | [components.Meta](../../models/components/meta.md)                                                         | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `Data`                                                                                                     | [components.RatelimitSetOverrideResponseData](../../models/components/ratelimitsetoverrideresponsedata.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

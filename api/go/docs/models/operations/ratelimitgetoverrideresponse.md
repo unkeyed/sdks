@@ -1,0 +1,9 @@
+# RatelimitGetOverrideResponse
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                              | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `V2RatelimitGetOverrideResponseBody`                                                                            | [*components.V2RatelimitGetOverrideResponseBody](../../models/components/v2ratelimitgetoverrideresponsebody.md) | :heavy_minus_sign:                                                                                              | OK                                                                                                              |
