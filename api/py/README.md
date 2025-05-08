@@ -60,7 +60,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install git+https://github.com/unkeyed/sdks.git#subdirectory=api/py
 ```
 
 ### Poetry
@@ -68,7 +68,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add git+https://github.com/unkeyed/sdks.git#subdirectory=api/py
 ```
 
 ### Shell and script usage with `uv`

@@ -1,6 +1,6 @@
 {
   "name": "@unkey/api",
-  "version": "2.0.0-alpha.8",
+  "version": "2.0.0-alpha.9",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -21,6 +21,11 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unkeyed/sdks.git",
+    "directory": "api/ts"
+  },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build:mcp": "bun src/mcp-server/build.mts",
