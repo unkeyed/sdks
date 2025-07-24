@@ -1,5 +1,8 @@
 import type { Duration } from "./duration";
 
+
+export type Cache = Map<string, RatelimitResponse>
+
 export type Limit = {
   /**
    * How many requests may pass in the given duration
