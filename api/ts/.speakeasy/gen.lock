@@ -5,8 +5,8 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.592.2
   generationVersion: 2.668.4
-  releaseVersion: 2.0.0-alpha.16
-  configChecksum: 0e8b456a57a8c6493d149fefd5970982
+  releaseVersion: 2.0.0
+  configChecksum: f18b37aad0a6c0ff25122806abd15c8e
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
