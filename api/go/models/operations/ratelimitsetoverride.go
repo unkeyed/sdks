@@ -3,12 +3,12 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type RatelimitSetOverrideResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// OK
+	// Override successfully created or updated and is now active.
 	V2RatelimitSetOverrideResponseBody *components.V2RatelimitSetOverrideResponseBody
 }
 

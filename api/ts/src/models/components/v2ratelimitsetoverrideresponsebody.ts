@@ -13,15 +13,18 @@ import {
   Meta$outboundSchema,
 } from "./meta.js";
 import {
-  RatelimitSetOverrideResponseData,
-  RatelimitSetOverrideResponseData$inboundSchema,
-  RatelimitSetOverrideResponseData$Outbound,
-  RatelimitSetOverrideResponseData$outboundSchema,
-} from "./ratelimitsetoverrideresponsedata.js";
+  V2RatelimitSetOverrideResponseData,
+  V2RatelimitSetOverrideResponseData$inboundSchema,
+  V2RatelimitSetOverrideResponseData$Outbound,
+  V2RatelimitSetOverrideResponseData$outboundSchema,
+} from "./v2ratelimitsetoverrideresponsedata.js";
 
 export type V2RatelimitSetOverrideResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
-  data: RatelimitSetOverrideResponseData;
+  data: V2RatelimitSetOverrideResponseData;
 };
 
 /** @internal */
@@ -31,13 +34,13 @@ export const V2RatelimitSetOverrideResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: RatelimitSetOverrideResponseData$inboundSchema,
+  data: V2RatelimitSetOverrideResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitSetOverrideResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: RatelimitSetOverrideResponseData$Outbound;
+  data: V2RatelimitSetOverrideResponseData$Outbound;
 };
 
 /** @internal */
@@ -47,7 +50,7 @@ export const V2RatelimitSetOverrideResponseBody$outboundSchema: z.ZodType<
   V2RatelimitSetOverrideResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: RatelimitSetOverrideResponseData$outboundSchema,
+  data: V2RatelimitSetOverrideResponseData$outboundSchema,
 });
 
 /**

@@ -2,12 +2,18 @@
 
 package components
 
+// ValidationError - Individual validation error details. Each validation error provides precise information about what failed, where it failed, and how to fix it, enabling efficient error resolution.
 type ValidationError struct {
-	// Where the error occurred, e.g. 'body.items[3].tags' or 'path.thing-id'
+	// JSON path indicating exactly where in the request the error occurred. This helps pinpoint the problematic field or parameter. Examples include:
+	// - 'body.name' (field in request body)
+	// - 'body.items[3].tags' (nested array element)
+	// - 'path.apiId' (path parameter)
+	// - 'query.limit' (query parameter)
+	// Use this location to identify exactly which part of your request needs correction.
 	Location string `json:"location"`
-	// Error message text
+	// Detailed error message explaining what validation rule was violated. This provides specific information about why the field or parameter was rejected, such as format errors, invalid values, or constraint violations.
 	Message string `json:"message"`
-	// A human-readable message describing how to fix the error.
+	// A human-readable suggestion describing how to fix the error. This provides practical guidance on what changes would satisfy the validation requirements. Not all validation errors include fix suggestions, but when present, they offer specific remediation advice.
 	Fix *string `json:"fix,omitempty"`
 }
 

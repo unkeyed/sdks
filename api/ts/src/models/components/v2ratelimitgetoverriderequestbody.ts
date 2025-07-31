@@ -8,19 +8,33 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Gets the configuration of an existing override.
+ * Gets the configuration of an existing rate limit override. Use this to retrieve details about custom rate limit rules that have been created for specific identifiers within a namespace.
+ *
+ * @remarks
+ *
+ * This endpoint is useful for:
+ * - Verifying override configurations
+ * - Checking current limits for specific entities
+ * - Auditing rate limit policies
+ * - Debugging rate limiting behavior
+ * - Retrieving override settings for modification
  */
 export type V2RatelimitGetOverrideRequestBody = {
   /**
-   * The id of the namespace. Either namespaceId or namespaceName must be provided
+   * The id or name of the namespace containing the override.
    */
-  namespaceId?: string | undefined;
+  namespace: string;
   /**
-   * The name of the namespace. Either namespaceId or namespaceName must be provided
-   */
-  namespaceName?: string | undefined;
-  /**
-   * Identifier of your user, this can be their userId, an email, an ip or anything else. Wildcards ( * ) can be used to match multiple identifiers, More info can be found at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+   * The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
+   *
+   * @remarks
+   *
+   * Important notes:
+   * - This is case-sensitive and must match exactly
+   * - Include any wildcards (*) that were part of the original pattern
+   * - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'
+   *
+   * This field is used to look up the specific override configuration for this pattern.
    */
   identifier: string;
 };
@@ -31,15 +45,13 @@ export const V2RatelimitGetOverrideRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   identifier: z.string(),
 });
 
 /** @internal */
 export type V2RatelimitGetOverrideRequestBody$Outbound = {
-  namespaceId?: string | undefined;
-  namespaceName?: string | undefined;
+  namespace: string;
   identifier: string;
 };
 
@@ -49,8 +61,7 @@ export const V2RatelimitGetOverrideRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitGetOverrideRequestBody
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   identifier: z.string(),
 });
 

@@ -3,12 +3,12 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type RatelimitDeleteOverrideResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// OK
+	// Override successfully deleted. Affected identifiers now use default limits.
 	V2RatelimitDeleteOverrideResponseBody *components.V2RatelimitDeleteOverrideResponseBody
 }
 

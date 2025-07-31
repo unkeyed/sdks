@@ -1,0 +1,9 @@
+# ListRolesResponse
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                              | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `V2PermissionsListRolesResponseBody`                                                                            | [*components.V2PermissionsListRolesResponseBody](../../models/components/v2permissionslistrolesresponsebody.md) | :heavy_minus_sign:                                                                                              | Roles retrieved successfully                                                                                    |

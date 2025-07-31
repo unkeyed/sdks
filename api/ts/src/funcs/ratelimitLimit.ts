@@ -11,7 +11,6 @@ import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,10 +19,32 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnkeyError } from "../models/errors/unkeyerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Apply rate limiting
+ *
+ * @remarks
+ * Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
+ *
+ * Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
+ *
+ * **Important**: Always returns HTTP 200. Check the `success` field to determine if the request should proceed.
+ *
+ * **Required Permissions**
+ *
+ * Your root key must have one of the following permissions:
+ * - `ratelimit.*.limit` (to check limits in any namespace)
+ * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
+ *
+ * **Side Effects**
+ *
+ * Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
+ */
 export function ratelimitLimit(
   client: UnkeyCore,
   request: components.V2RatelimitLimitRequestBody,
@@ -36,13 +57,14 @@ export function ratelimitLimit(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | UnkeyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -65,13 +87,14 @@ async function $do(
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
       | errors.InternalServerErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | UnkeyError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -100,6 +123,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "ratelimit.limit",
     oAuth2Scopes: [],
@@ -130,6 +154,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -159,13 +184,14 @@ async function $do(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | UnkeyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(200, components.V2RatelimitLimitResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
@@ -175,7 +201,7 @@ async function $do(
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

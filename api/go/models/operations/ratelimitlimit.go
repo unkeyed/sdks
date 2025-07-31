@@ -3,12 +3,13 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type RatelimitLimitResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// OK
+	// Rate limit check completed. Always returns HTTP 200 - check the `success` field to determine if the request is allowed.
+	//
 	V2RatelimitLimitResponseBody *components.V2RatelimitLimitResponseBody
 }
 

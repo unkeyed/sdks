@@ -4,28 +4,26 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }

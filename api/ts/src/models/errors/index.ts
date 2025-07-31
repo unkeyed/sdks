@@ -10,5 +10,6 @@ export * from "./httpclienterrors.js";
 export * from "./internalservererrorresponse.js";
 export * from "./notfounderrorresponse.js";
 export * from "./preconditionfailederrorresponse.js";
+export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
 export * from "./unauthorizederrorresponse.js";

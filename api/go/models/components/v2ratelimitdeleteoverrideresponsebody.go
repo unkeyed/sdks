@@ -3,8 +3,10 @@
 package components
 
 type V2RatelimitDeleteOverrideResponseBody struct {
-	Meta Meta                                `json:"meta"`
-	Data RatelimitDeleteOverrideResponseData `json:"data"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta Meta `json:"meta"`
+	// Empty response object. A successful response indicates the override was successfully deleted. The operation is immediate - as soon as this response is received, the override no longer exists and affected identifiers have reverted to using the default rate limit for the namespace. No other data is returned as part of the deletion operation.
+	Data V2RatelimitDeleteOverrideResponseData `json:"data"`
 }
 
 func (o *V2RatelimitDeleteOverrideResponseBody) GetMeta() Meta {
@@ -14,9 +16,9 @@ func (o *V2RatelimitDeleteOverrideResponseBody) GetMeta() Meta {
 	return o.Meta
 }
 
-func (o *V2RatelimitDeleteOverrideResponseBody) GetData() RatelimitDeleteOverrideResponseData {
+func (o *V2RatelimitDeleteOverrideResponseBody) GetData() V2RatelimitDeleteOverrideResponseData {
 	if o == nil {
-		return RatelimitDeleteOverrideResponseData{}
+		return V2RatelimitDeleteOverrideResponseData{}
 	}
 	return o.Data
 }

@@ -2,28 +2,33 @@
 
 package components
 
-// V2RatelimitGetOverrideRequestBody - Gets the configuration of an existing override.
+// V2RatelimitGetOverrideRequestBody - Gets the configuration of an existing rate limit override. Use this to retrieve details about custom rate limit rules that have been created for specific identifiers within a namespace.
+//
+// This endpoint is useful for:
+// - Verifying override configurations
+// - Checking current limits for specific entities
+// - Auditing rate limit policies
+// - Debugging rate limiting behavior
+// - Retrieving override settings for modification
 type V2RatelimitGetOverrideRequestBody struct {
-	// The id of the namespace. Either namespaceId or namespaceName must be provided
-	NamespaceID *string `json:"namespaceId,omitempty"`
-	// The name of the namespace. Either namespaceId or namespaceName must be provided
-	NamespaceName *string `json:"namespaceName,omitempty"`
-	// Identifier of your user, this can be their userId, an email, an ip or anything else. Wildcards ( * ) can be used to match multiple identifiers, More info can be found at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+	// The id or name of the namespace containing the override.
+	Namespace string `json:"namespace"`
+	// The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
+	//
+	// Important notes:
+	// - This is case-sensitive and must match exactly
+	// - Include any wildcards (*) that were part of the original pattern
+	// - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'
+	//
+	// This field is used to look up the specific override configuration for this pattern.
 	Identifier string `json:"identifier"`
 }
 
-func (o *V2RatelimitGetOverrideRequestBody) GetNamespaceID() *string {
+func (o *V2RatelimitGetOverrideRequestBody) GetNamespace() string {
 	if o == nil {
-		return nil
+		return ""
 	}
-	return o.NamespaceID
-}
-
-func (o *V2RatelimitGetOverrideRequestBody) GetNamespaceName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.NamespaceName
+	return o.Namespace
 }
 
 func (o *V2RatelimitGetOverrideRequestBody) GetIdentifier() string {

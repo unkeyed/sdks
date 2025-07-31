@@ -3,8 +3,9 @@
 package components
 
 type V2ApisCreateAPIResponseBody struct {
-	Meta Meta                      `json:"meta"`
-	Data ApisCreateAPIResponseData `json:"data"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta Meta                        `json:"meta"`
+	Data V2ApisCreateAPIResponseData `json:"data"`
 }
 
 func (o *V2ApisCreateAPIResponseBody) GetMeta() Meta {
@@ -14,9 +15,9 @@ func (o *V2ApisCreateAPIResponseBody) GetMeta() Meta {
 	return o.Meta
 }
 
-func (o *V2ApisCreateAPIResponseBody) GetData() ApisCreateAPIResponseData {
+func (o *V2ApisCreateAPIResponseBody) GetData() V2ApisCreateAPIResponseData {
 	if o == nil {
-		return ApisCreateAPIResponseData{}
+		return V2ApisCreateAPIResponseData{}
 	}
 	return o.Data
 }

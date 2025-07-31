@@ -12,7 +12,24 @@ const args = {
 
 export const tool$ratelimitLimit: ToolDefinition<typeof args> = {
   name: "ratelimit-limit",
-  description: ``,
+  description: `Apply rate limiting
+
+Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
+
+Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
+
+**Important**: Always returns HTTP 200. Check the \`success\` field to determine if the request should proceed.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- \`ratelimit.*.limit\` (to check limits in any namespace)
+- \`ratelimit.<namespace_id>.limit\` (to check limits in a specific namespace)
+
+**Side Effects**
+
+Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitLimit(

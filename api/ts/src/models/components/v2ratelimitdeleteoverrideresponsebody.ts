@@ -13,15 +13,21 @@ import {
   Meta$outboundSchema,
 } from "./meta.js";
 import {
-  RatelimitDeleteOverrideResponseData,
-  RatelimitDeleteOverrideResponseData$inboundSchema,
-  RatelimitDeleteOverrideResponseData$Outbound,
-  RatelimitDeleteOverrideResponseData$outboundSchema,
-} from "./ratelimitdeleteoverrideresponsedata.js";
+  V2RatelimitDeleteOverrideResponseData,
+  V2RatelimitDeleteOverrideResponseData$inboundSchema,
+  V2RatelimitDeleteOverrideResponseData$Outbound,
+  V2RatelimitDeleteOverrideResponseData$outboundSchema,
+} from "./v2ratelimitdeleteoverrideresponsedata.js";
 
 export type V2RatelimitDeleteOverrideResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
-  data: RatelimitDeleteOverrideResponseData;
+  /**
+   * Empty response object. A successful response indicates the override was successfully deleted. The operation is immediate - as soon as this response is received, the override no longer exists and affected identifiers have reverted to using the default rate limit for the namespace. No other data is returned as part of the deletion operation.
+   */
+  data: V2RatelimitDeleteOverrideResponseData;
 };
 
 /** @internal */
@@ -31,13 +37,13 @@ export const V2RatelimitDeleteOverrideResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: RatelimitDeleteOverrideResponseData$inboundSchema,
+  data: V2RatelimitDeleteOverrideResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitDeleteOverrideResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: RatelimitDeleteOverrideResponseData$Outbound;
+  data: V2RatelimitDeleteOverrideResponseData$Outbound;
 };
 
 /** @internal */
@@ -47,7 +53,7 @@ export const V2RatelimitDeleteOverrideResponseBody$outboundSchema: z.ZodType<
   V2RatelimitDeleteOverrideResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: RatelimitDeleteOverrideResponseData$outboundSchema,
+  data: V2RatelimitDeleteOverrideResponseData$outboundSchema,
 });
 
 /**

@@ -3,12 +3,11 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type IdentitiesCreateIdentityResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// OK
+	HTTPMeta                               components.HTTPMetadata `json:"-"`
 	V2IdentitiesCreateIdentityResponseBody *components.V2IdentitiesCreateIdentityResponseBody
 }
 

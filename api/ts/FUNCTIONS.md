@@ -20,44 +20,24 @@ specific category of applications.
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-import { SDKValidationError } from "@unkey/api/models/errors/sdkvalidationerror.js";
+import { apisCreateApi } from "@unkey/api/funcs/apisCreateApi.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const unkey = new UnkeyCore({
-  rootKey: "UNKEY_ROOT_KEY",
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
 });
 
 async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "sms.sign_up",
-    duration: 711276,
-    identifier: "<value>",
-    limit: 581877,
+  const res = await apisCreateApi(unkey, {
+    name: "payment-service-production",
   });
-
-  switch (true) {
-    case res.ok:
-      // The success case will be handled outside of the switch block
-      break;
-    case res.error instanceof SDKValidationError:
-      // Pretty-print validation errors.
-      return console.log(res.error.pretty());
-    case res.error instanceof Error:
-      return console.log(res.error);
-    default:
-      // TypeScript's type checking will fail on the following line if the above
-      // cases were not exhaustive.
-      res.error satisfies never;
-      throw new Error("Assertion failed: expected error checks to be exhaustive: " + res.error);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("apisCreateApi failed:", res.error);
   }
-
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -3,8 +3,9 @@
 package components
 
 type V2RatelimitSetOverrideResponseBody struct {
-	Meta Meta                             `json:"meta"`
-	Data RatelimitSetOverrideResponseData `json:"data"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta Meta                               `json:"meta"`
+	Data V2RatelimitSetOverrideResponseData `json:"data"`
 }
 
 func (o *V2RatelimitSetOverrideResponseBody) GetMeta() Meta {
@@ -14,9 +15,9 @@ func (o *V2RatelimitSetOverrideResponseBody) GetMeta() Meta {
 	return o.Meta
 }
 
-func (o *V2RatelimitSetOverrideResponseBody) GetData() RatelimitSetOverrideResponseData {
+func (o *V2RatelimitSetOverrideResponseBody) GetData() V2RatelimitSetOverrideResponseData {
 	if o == nil {
-		return RatelimitSetOverrideResponseData{}
+		return V2RatelimitSetOverrideResponseData{}
 	}
 	return o.Data
 }

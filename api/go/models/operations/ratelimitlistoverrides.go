@@ -3,12 +3,12 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type RatelimitListOverridesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// OK
+	// Overrides retrieved successfully. Includes pagination metadata if more results are available.
 	V2RatelimitListOverridesResponseBody *components.V2RatelimitListOverridesResponseBody
 }
 

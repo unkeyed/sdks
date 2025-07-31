@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     api:
         inputs:
-            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi.json
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi-generated.yaml
         registry:
             location: registry.speakeasyapi.dev/unkey/unkey/api
 targets:

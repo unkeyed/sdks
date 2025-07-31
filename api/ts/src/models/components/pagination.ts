@@ -7,15 +7,26 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
+ */
 export type Pagination = {
   /**
-   * Opaque token for retrieving the next set of results
+   * Opaque pagination token for retrieving the next page of results.
+   *
+   * @remarks
+   * Include this exact value in the cursor field of subsequent requests.
+   * Cursors are temporary and may expire after extended periods.
    */
   cursor?: string | undefined;
   /**
-   * Indicates if more results exist beyond this page
+   * Indicates whether additional results exist beyond this page.
+   *
+   * @remarks
+   * When true, use the cursor to fetch the next page.
+   * When false, you have reached the end of the result set.
    */
-  hasMore?: boolean | undefined;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -25,13 +36,13 @@ export const Pagination$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cursor: z.string().optional(),
-  hasMore: z.boolean().optional(),
+  hasMore: z.boolean(),
 });
 
 /** @internal */
 export type Pagination$Outbound = {
   cursor?: string | undefined;
-  hasMore?: boolean | undefined;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -41,7 +52,7 @@ export const Pagination$outboundSchema: z.ZodType<
   Pagination
 > = z.object({
   cursor: z.string().optional(),
-  hasMore: z.boolean().optional(),
+  hasMore: z.boolean(),
 });
 
 /**

@@ -12,7 +12,16 @@ const args = {
 
 export const tool$ratelimitListOverrides: ToolDefinition<typeof args> = {
   name: "ratelimit-list-overrides",
-  description: ``,
+  description: `List ratelimit overrides
+
+Retrieve a paginated list of all rate limit overrides in a namespace.
+
+Use this to audit rate limiting policies, build admin dashboards, or manage override configurations.
+
+**Important:** Results are paginated. Use the cursor parameter to retrieve additional pages when more results are available.
+
+**Permissions:** Requires \`ratelimit.*.read_override\` or \`ratelimit.<namespace_id>.read_override\`
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitListOverrides(

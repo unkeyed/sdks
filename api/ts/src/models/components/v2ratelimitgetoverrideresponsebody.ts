@@ -20,6 +20,9 @@ import {
 } from "./ratelimitoverride.js";
 
 export type V2RatelimitGetOverrideResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
   data: RatelimitOverride;
 };

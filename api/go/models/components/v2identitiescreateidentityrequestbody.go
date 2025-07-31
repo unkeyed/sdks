@@ -2,30 +2,38 @@
 
 package components
 
-// V2IdentitiesCreateIdentityRequestBodyMeta - Attach metadata to this identity that you need to have access to when verifying a key.
-//
-// This will be returned as part of the `verifyKey` response.
-type V2IdentitiesCreateIdentityRequestBodyMeta struct {
-}
-
 type V2IdentitiesCreateIdentityRequestBody struct {
-	// The id of this identity in your system.
+	// Creates an identity using your system's unique identifier for a user, organization, or entity.
+	// Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
+	// This identifier links Unkey identities to your authentication system, database records, or tenant structure.
 	//
-	// This usually comes from your authentication provider and could be a userId, organisationId or even an email.
-	// It does not matter what you use, as long as it uniquely identifies something in your application.
-	//
-	// `externalId`s are unique across your workspace and therefore a `CONFLICT` error is returned when you try to create duplicates.
+	// Avoid changing externalIds after creation as this breaks the link between your systems.
+	// Use consistent identifier patterns across your application for easier management and debugging.
+	// Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+	// Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
 	//
 	ExternalID string `json:"externalId"`
-	// Attach metadata to this identity that you need to have access to when verifying a key.
+	// Stores arbitrary JSON metadata returned during key verification for contextual information.
+	// Eliminates additional database lookups during verification, improving performance for stateless services.
+	// Avoid storing sensitive data here as it's returned in verification responses.
 	//
-	// This will be returned as part of the `verifyKey` response.
+	// Large metadata objects increase verification latency and should stay under 10KB total size.
+	// Use this for subscription details, feature flags, user preferences, and organization information.
+	// Metadata is returned as-is whenever keys associated with this identity are verified.
 	//
-	Meta *V2IdentitiesCreateIdentityRequestBodyMeta `json:"meta,omitempty"`
-	// Attach ratelimits to this identity.
+	Meta map[string]any `json:"meta,omitempty"`
+	// Defines shared rate limits that apply to all keys belonging to this identity.
+	// Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio.
+	// Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.
 	//
-	// When verifying keys, you can specify which limits you want to use and all keys attached to this identity, will share the limits.
-	Ratelimits []Ratelimit `json:"ratelimits,omitempty"`
+	// Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates.
+	// During verification, specify which named limits to check for enforcement.
+	// Identity rate limits supplement any key-specific rate limits that may also be configured.
+	// - Each named limit can have different thresholds and windows
+	//
+	// When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
+	//
+	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
 }
 
 func (o *V2IdentitiesCreateIdentityRequestBody) GetExternalID() string {
@@ -35,14 +43,14 @@ func (o *V2IdentitiesCreateIdentityRequestBody) GetExternalID() string {
 	return o.ExternalID
 }
 
-func (o *V2IdentitiesCreateIdentityRequestBody) GetMeta() *V2IdentitiesCreateIdentityRequestBodyMeta {
+func (o *V2IdentitiesCreateIdentityRequestBody) GetMeta() map[string]any {
 	if o == nil {
 		return nil
 	}
 	return o.Meta
 }
 
-func (o *V2IdentitiesCreateIdentityRequestBody) GetRatelimits() []Ratelimit {
+func (o *V2IdentitiesCreateIdentityRequestBody) GetRatelimits() []RatelimitRequest {
 	if o == nil {
 		return nil
 	}

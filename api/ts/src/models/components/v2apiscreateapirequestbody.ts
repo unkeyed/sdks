@@ -9,7 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2ApisCreateApiRequestBody = {
   /**
-   * The name for your API. This is not customer facing.
+   * Unique identifier for this API namespace within your workspace.
+   *
+   * @remarks
+   * Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
    */
   name: string;
 };

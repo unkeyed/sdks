@@ -10,14 +10,86 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *github.c
 </div>
 
 
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/unkey/unkey). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
 
+Unkey API: Unkey's API provides programmatic access for all resources within our platform.
 
+
+### Authentication
+#
+This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+```
+Authorization: Bearer unkey_xxxxxxxxxxx
+```
+
+All responses follow a consistent envelope structure that separates operational metadata from actual data. This design provides several benefits:
+- Debugging: Every response includes a unique requestId for tracing issues
+- Consistency: Predictable response format across all endpoints
+- Extensibility: Easy to add new metadata without breaking existing integrations
+- Error Handling: Unified error format with actionable information
+
+### Success Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_123456"
+  },
+  "data": {
+    // Actual response data here
+  }
+}
+```
+
+The meta object contains operational information:
+- `requestId`: Unique identifier for this request (essential for support)
+
+The data object contains the actual response data specific to each endpoint.
+
+### Paginated Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_123456"
+  },
+  "data": [
+    // Array of results
+  ],
+  "pagination": {
+    "cursor": "next_page_token",
+    "hasMore": true
+  }
+}
+```
+
+The pagination object appears on list endpoints and contains:
+- `cursor`: Token for requesting the next page
+- `hasMore`: Whether more results are available
+
+### Error Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_2c9a0jf23l4k567"
+  },
+  "error": {
+    "detail": "The resource you are attempting to modify is protected and cannot be changed",
+    "status": 403,
+    "title": "Forbidden",
+    "type": "https://unkey.com/docs/errors/unkey/application/protected_resource"
+  }
+}
+```
+
+Error responses include comprehensive diagnostic information:
+- `title`: Human-readable error summary
+- `detail`: Specific description of what went wrong
+- `status`: HTTP status code
+- `type`: Link to error documentation
+- `errors`: Array of validation errors (for 400 responses)
+
+This structure ensures you always have the context needed to debug issues and take corrective action.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -28,6 +100,7 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *github.c
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Pagination](#pagination)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -57,28 +130,26 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }
@@ -103,28 +174,26 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }
@@ -140,28 +209,109 @@ func main() {
 
 ### [Apis](docs/sdks/apis/README.md)
 
-* [CreateAPI](docs/sdks/apis/README.md#createapi)
+* [CreateAPI](docs/sdks/apis/README.md#createapi) - Create API namespace
+* [DeleteAPI](docs/sdks/apis/README.md#deleteapi) - Delete API namespace
+* [GetAPI](docs/sdks/apis/README.md#getapi) - Get API namespace
+* [ListKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
 ### [Identities](docs/sdks/identities/README.md)
 
-* [CreateIdentity](docs/sdks/identities/README.md#createidentity)
-* [DeleteIdentity](docs/sdks/identities/README.md#deleteidentity)
+* [CreateIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
+* [DeleteIdentity](docs/sdks/identities/README.md#deleteidentity) - Delete Identity
+* [GetIdentity](docs/sdks/identities/README.md#getidentity) - Get Identity
+* [ListIdentities](docs/sdks/identities/README.md#listidentities) - List Identities
+* [UpdateIdentity](docs/sdks/identities/README.md#updateidentity) - Update Identity
 
-### [Liveness](docs/sdks/liveness/README.md)
+### [Keys](docs/sdks/keys/README.md)
 
-* [Liveness](docs/sdks/liveness/README.md#liveness) - Liveness check
+* [AddPermissions](docs/sdks/keys/README.md#addpermissions) - Add key permissions
+* [AddRoles](docs/sdks/keys/README.md#addroles) - Add key roles
+* [CreateKey](docs/sdks/keys/README.md#createkey) - Create API key
+* [DeleteKey](docs/sdks/keys/README.md#deletekey) - Delete API keys
+* [GetKey](docs/sdks/keys/README.md#getkey) - Get API key
+* [RemovePermissions](docs/sdks/keys/README.md#removepermissions) - Remove key permissions
+* [RemoveRoles](docs/sdks/keys/README.md#removeroles) - Remove key roles
+* [SetPermissions](docs/sdks/keys/README.md#setpermissions) - Set key permissions
+* [SetRoles](docs/sdks/keys/README.md#setroles) - Set key roles
+* [UpdateCredits](docs/sdks/keys/README.md#updatecredits) - Update key credits
+* [UpdateKey](docs/sdks/keys/README.md#updatekey) - Update key settings
+* [VerifyKey](docs/sdks/keys/README.md#verifykey) - Verify API key
+* [Whoami](docs/sdks/keys/README.md#whoami) - Get API key by hash
+
+### [Permissions](docs/sdks/permissions/README.md)
+
+* [CreatePermission](docs/sdks/permissions/README.md#createpermission) - Create permission
+* [CreateRole](docs/sdks/permissions/README.md#createrole) - Create role
+* [DeletePermission](docs/sdks/permissions/README.md#deletepermission) - Delete permission
+* [DeleteRole](docs/sdks/permissions/README.md#deleterole) - Delete role
+* [GetPermission](docs/sdks/permissions/README.md#getpermission) - Get permission
+* [GetRole](docs/sdks/permissions/README.md#getrole) - Get role
+* [ListPermissions](docs/sdks/permissions/README.md#listpermissions) - List permissions
+* [ListRoles](docs/sdks/permissions/README.md#listroles) - List roles
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
-* [Limit](docs/sdks/ratelimit/README.md#limit)
-* [SetOverride](docs/sdks/ratelimit/README.md#setoverride)
-* [GetOverride](docs/sdks/ratelimit/README.md#getoverride)
-* [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides)
-* [DeleteOverride](docs/sdks/ratelimit/README.md#deleteoverride)
+* [DeleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
+* [GetOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
+* [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
+* [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```go
+package main
+
+import (
+	"context"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+	)
+
+	res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
+		Limit: unkey.Int64(50),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.V2IdentitiesListIdentitiesResponseBody != nil {
+		for {
+			// handle items
+
+			res, err = res.Next()
+
+			if err != nil {
+				// handle error
+			}
+
+			if res == nil {
+				break
+			}
+		}
+	}
+}
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -174,25 +324,23 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
-	"github.com/unkeyed/sdks/go/api/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/retry"
 	"log"
 	"models/operations"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
@@ -207,7 +355,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }
@@ -220,17 +368,18 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
-	"github.com/unkeyed/sdks/go/api/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/retry"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithRetryConfig(
+	s := unkey.New(
+		unkey.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -241,19 +390,16 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }
@@ -268,14 +414,13 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `Limit` function may return the following errors:
+For example, the `CreateAPI` function may return the following errors:
 
 | Error Type                            | Status Code | Content Type     |
 | ------------------------------------- | ----------- | ---------------- |
 | apierrors.BadRequestErrorResponse     | 400         | application/json |
 | apierrors.UnauthorizedErrorResponse   | 401         | application/json |
 | apierrors.ForbiddenErrorResponse      | 403         | application/json |
-| apierrors.NotFoundErrorResponse       | 404         | application/json |
 | apierrors.InternalServerErrorResponse | 500         | application/json |
 | apierrors.APIError                    | 4XX, 5XX    | \*/\*            |
 
@@ -287,24 +432,22 @@ package main
 import (
 	"context"
 	"errors"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/apierrors"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/apierrors"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 
@@ -321,12 +464,6 @@ func main() {
 		}
 
 		var e *apierrors.ForbiddenErrorResponse
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.NotFoundErrorResponse
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -360,29 +497,27 @@ package main
 
 import (
 	"context"
-	api "github.com/unkeyed/sdks/go/api/v2"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
+	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := api.New(
-		api.WithServerURL("https://api.unkey.com"),
-		api.WithSecurity("UNKEY_ROOT_KEY"),
+	s := unkey.New(
+		unkey.WithServerURL("https://api.unkey.com"),
+		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-		Namespace:  "sms.sign_up",
-		Duration:   711276,
-		Identifier: "<value>",
-		Limit:      581877,
+	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
+		Name: "payment-service-production",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2RatelimitLimitResponseBody != nil {
+	if res.V2ApisCreateAPIResponseBody != nil {
 		// handle response
 	}
 }
@@ -407,12 +542,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/unkeyed/sdks/api/go/v2"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = unkey.New(unkey.WithClient(httpClient))
 )
 ```
 
@@ -431,7 +567,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=github-com/unkeyed/sdks/go/api&utm_campaign=go)

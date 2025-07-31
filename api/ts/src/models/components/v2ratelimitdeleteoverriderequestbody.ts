@@ -8,19 +8,35 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Deletes an existing override.
+ * Deletes an existing rate limit override. This permanently removes a custom rate limit rule, reverting affected identifiers back to the default rate limits for the namespace.
+ *
+ * @remarks
+ *
+ * Use this endpoint when you need to:
+ * - Remove special rate limit rules that are no longer needed
+ * - Reset entities back to standard rate limits
+ * - Clean up temporary overrides
+ * - Remove outdated tiering or custom limit rules
+ * - Fix misconfigured overrides
+ *
+ * Once deleted, the override cannot be recovered, and the operation takes effect immediately.
  */
 export type V2RatelimitDeleteOverrideRequestBody = {
   /**
-   * The id of the namespace. Either namespaceId or namespaceName must be provided
+   * The id or name of the namespace containing the override.
    */
-  namespaceId?: string | undefined;
+  namespace: string;
   /**
-   * The name of the namespace. Either namespaceId or namespaceName must be provided
-   */
-  namespaceName?: string | undefined;
-  /**
-   * Identifier of the override to delete
+   * The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
+   *
+   * @remarks
+   *
+   * Important notes:
+   * - This is case-sensitive and must match exactly
+   * - Include any wildcards (*) that were part of the original pattern
+   * - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID
+   *
+   * After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
    */
   identifier: string;
 };
@@ -31,15 +47,13 @@ export const V2RatelimitDeleteOverrideRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   identifier: z.string(),
 });
 
 /** @internal */
 export type V2RatelimitDeleteOverrideRequestBody$Outbound = {
-  namespaceId?: string | undefined;
-  namespaceName?: string | undefined;
+  namespace: string;
   identifier: string;
 };
 
@@ -49,8 +63,7 @@ export const V2RatelimitDeleteOverrideRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitDeleteOverrideRequestBody
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   identifier: z.string(),
 });
 

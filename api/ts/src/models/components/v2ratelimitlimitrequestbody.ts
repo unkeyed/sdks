@@ -9,23 +9,44 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2RatelimitLimitRequestBody = {
   /**
-   * The namespace name for the rate limit.
+   * The id or name of the namespace.
    */
   namespace: string;
   /**
-   * The cost of the request. Defaults to 1 if not provided.
+   * Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
+   *
+   * @remarks
+   * Use higher values for resource-intensive operations and 0 for tracking without limiting.
+   * When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.
+   * Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
    */
   cost?: number | undefined;
   /**
-   * The duration in milliseconds for the rate limit window.
+   * Sets the rate limit window duration in milliseconds after which the counter resets.
+   *
+   * @remarks
+   * Shorter durations enable faster recovery but may be less effective against sustained abuse.
+   * Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
+   * Balance user experience with protection needs when choosing window sizes.
    */
   duration: number;
   /**
-   * The identifier for the rate limit.
+   * Defines the scope of rate limiting by identifying the entity being limited.
+   *
+   * @remarks
+   * Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
+   * Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.
+   * The same identifier can be used across different namespaces to apply multiple rate limit types.
+   * Choose identifiers that provide appropriate granularity for your rate limiting strategy.
    */
   identifier: string;
   /**
-   * The maximum number of requests allowed.
+   * Sets the maximum operations allowed within the duration window before requests are rejected.
+   *
+   * @remarks
+   * When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
+   * Balance user experience with resource protection when setting limits for different user tiers.
+   * Consider system capacity, business requirements, and fair usage policies in limit determination.
    */
   limit: number;
 };

@@ -3,17 +3,21 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 )
 
 type V2RatelimitListOverridesRequestBody struct {
-	// The id of the namespace to list overrides for.
-	NamespaceID *string `json:"namespaceId,omitempty"`
-	// The name of the namespace to list overrides for.
-	NamespaceName *string `json:"namespaceName,omitempty"`
-	// Pagination cursor from a previous response
+	// The id or name of the rate limit namespace to list overrides for.
+	Namespace string `json:"namespace"`
+	// Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
 	Cursor *string `json:"cursor,omitempty"`
-	// Maximum number of results to return
+	// Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
+	//
+	// - Lower values (10-20): Better for UI displays and faster response times
+	// - Higher values (50-100): Better for data exports or bulk operations
+	// - Default (10): Suitable for most dashboard views
+	//
+	// Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
 	Limit *int64 `default:"10" json:"limit"`
 }
 
@@ -28,18 +32,11 @@ func (v *V2RatelimitListOverridesRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2RatelimitListOverridesRequestBody) GetNamespaceID() *string {
+func (o *V2RatelimitListOverridesRequestBody) GetNamespace() string {
 	if o == nil {
-		return nil
+		return ""
 	}
-	return o.NamespaceID
-}
-
-func (o *V2RatelimitListOverridesRequestBody) GetNamespaceName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.NamespaceName
+	return o.Namespace
 }
 
 func (o *V2RatelimitListOverridesRequestBody) GetCursor() *string {

@@ -1,0 +1,9 @@
+# CreateRoleResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2PermissionsCreateRoleResponseBody`                                                                             | [*components.V2PermissionsCreateRoleResponseBody](../../models/components/v2permissionscreateroleresponsebody.md) | :heavy_minus_sign:                                                                                                | Role created successfully                                                                                         |

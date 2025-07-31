@@ -1,0 +1,23 @@
+# V2PermissionsCreateRoleResponseBody
+
+## Example Usage
+
+```typescript
+import { V2PermissionsCreateRoleResponseBody } from "@unkey/api/models/components";
+
+let value: V2PermissionsCreateRoleResponseBody = {
+  meta: {
+    requestId: "req_123",
+  },
+  data: {
+    roleId: "role_1234567890abcdef",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta`                                                                                                                                                                                                                                                          | [components.Meta](../../models/components/meta.md)                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                              | Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team. |
+| `data`                                                                                                                                                                                                                                                          | [components.V2PermissionsCreateRoleResponseData](../../models/components/v2permissionscreateroleresponsedata.md)                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                              | N/A                                                                                                                                                                                                                                                             |

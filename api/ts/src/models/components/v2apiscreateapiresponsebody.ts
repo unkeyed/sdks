@@ -7,21 +7,24 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ApisCreateApiResponseData,
-  ApisCreateApiResponseData$inboundSchema,
-  ApisCreateApiResponseData$Outbound,
-  ApisCreateApiResponseData$outboundSchema,
-} from "./apiscreateapiresponsedata.js";
-import {
   Meta,
   Meta$inboundSchema,
   Meta$Outbound,
   Meta$outboundSchema,
 } from "./meta.js";
+import {
+  V2ApisCreateApiResponseData,
+  V2ApisCreateApiResponseData$inboundSchema,
+  V2ApisCreateApiResponseData$Outbound,
+  V2ApisCreateApiResponseData$outboundSchema,
+} from "./v2apiscreateapiresponsedata.js";
 
 export type V2ApisCreateApiResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
-  data: ApisCreateApiResponseData;
+  data: V2ApisCreateApiResponseData;
 };
 
 /** @internal */
@@ -31,13 +34,13 @@ export const V2ApisCreateApiResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: ApisCreateApiResponseData$inboundSchema,
+  data: V2ApisCreateApiResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2ApisCreateApiResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: ApisCreateApiResponseData$Outbound;
+  data: V2ApisCreateApiResponseData$Outbound;
 };
 
 /** @internal */
@@ -47,7 +50,7 @@ export const V2ApisCreateApiResponseBody$outboundSchema: z.ZodType<
   V2ApisCreateApiResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: ApisCreateApiResponseData$outboundSchema,
+  data: V2ApisCreateApiResponseData$outboundSchema,
 });
 
 /**

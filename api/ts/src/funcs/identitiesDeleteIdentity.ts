@@ -11,7 +11,6 @@ import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,13 +19,28 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnkeyError } from "../models/errors/unkeyerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Delete Identity
+ *
+ * @remarks
+ * Permanently delete an identity. This operation cannot be undone.
+ *
+ * Use this for data cleanup, compliance requirements, or when removing entities from your system.
+ *
+ * > **Important**
+ * > Requires `identity.*.delete_identity` permission
+ * > Associated API keys remain functional but lose shared resources
+ * > External ID becomes available for reuse immediately
+ */
 export function identitiesDeleteIdentity(
   client: UnkeyCore,
-  request: components.V2IdentitiesDeleteIdentityRequestBodyUnion,
+  request: components.V2IdentitiesDeleteIdentityRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -36,13 +50,14 @@ export function identitiesDeleteIdentity(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | UnkeyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -54,7 +69,7 @@ export function identitiesDeleteIdentity(
 
 async function $do(
   client: UnkeyCore,
-  request: components.V2IdentitiesDeleteIdentityRequestBodyUnion,
+  request: components.V2IdentitiesDeleteIdentityRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -65,13 +80,14 @@ async function $do(
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
       | errors.InternalServerErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | UnkeyError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -79,8 +95,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.V2IdentitiesDeleteIdentityRequestBodyUnion$outboundSchema
-        .parse(value),
+      components.V2IdentitiesDeleteIdentityRequestBody$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -101,6 +118,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "v2.identities.deleteIdentity",
     oAuth2Scopes: [],
@@ -131,6 +149,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -160,13 +179,14 @@ async function $do(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | UnkeyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(
       200,
@@ -189,7 +209,7 @@ async function $do(
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

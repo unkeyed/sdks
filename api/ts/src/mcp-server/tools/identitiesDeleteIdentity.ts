@@ -7,12 +7,22 @@ import * as components from "../../models/components/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: components.V2IdentitiesDeleteIdentityRequestBodyUnion$inboundSchema,
+  request: components.V2IdentitiesDeleteIdentityRequestBody$inboundSchema,
 };
 
 export const tool$identitiesDeleteIdentity: ToolDefinition<typeof args> = {
   name: "identities-delete-identity",
-  description: ``,
+  description: `Delete Identity
+
+Permanently delete an identity. This operation cannot be undone.
+
+Use this for data cleanup, compliance requirements, or when removing entities from your system.
+
+> **Important**  
+> Requires \`identity.*.delete_identity\` permission  
+> Associated API keys remain functional but lose shared resources  
+> External ID becomes available for reuse immediately
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await identitiesDeleteIdentity(

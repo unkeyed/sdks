@@ -12,7 +12,16 @@ const args = {
 
 export const tool$ratelimitGetOverride: ToolDefinition<typeof args> = {
   name: "ratelimit-get-override",
-  description: ``,
+  description: `Get ratelimit override
+
+Retrieve the configuration of a specific rate limit override by its identifier.
+
+Use this to inspect override configurations, audit rate limiting policies, or debug rate limiting behavior.
+
+**Important:** The identifier must match exactly as specified when creating the override, including wildcard patterns.
+
+**Permissions:** Requires \`ratelimit.*.read_override\` or \`ratelimit.<namespace_id>.read_override\`
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitGetOverride(

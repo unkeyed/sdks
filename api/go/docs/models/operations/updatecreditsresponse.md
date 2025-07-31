@@ -1,0 +1,9 @@
+# UpdateCreditsResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2KeysUpdateCreditsResponseBody`                                                                         | [*components.V2KeysUpdateCreditsResponseBody](../../models/components/v2keysupdatecreditsresponsebody.md) | :heavy_minus_sign:                                                                                        | Credits updated successfully. Response includes updated remaining credits and refill settings.<br/>       |

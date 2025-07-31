@@ -13,7 +13,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/unkeyed/sdks/go/api/v2/types"
+	"github.com/unkeyed/sdks/api/go/v2/types"
 
 	"github.com/ericlagergren/decimal"
 )

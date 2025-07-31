@@ -4,11 +4,19 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
+// ConflictErrorResponse - Error response when the request conflicts with the current state of the resource. This occurs when:
+// - Attempting to create a resource that already exists
+// - Modifying a resource that has been changed by another operation
+// - Violating unique constraints or business rules
+//
+// To resolve this error, check the current state of the resource and adjust your request accordingly.
 type ConflictErrorResponse struct {
-	Meta   components.Meta      `json:"meta"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta components.Meta `json:"meta"`
+	// Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
 	Error_ components.BaseError `json:"error"`
 }
 

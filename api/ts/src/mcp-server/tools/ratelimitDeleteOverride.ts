@@ -12,7 +12,16 @@ const args = {
 
 export const tool$ratelimitDeleteOverride: ToolDefinition<typeof args> = {
   name: "ratelimit-delete-override",
-  description: ``,
+  description: `Delete ratelimit override
+
+Permanently remove a rate limit override. Affected identifiers immediately revert to the namespace default.
+
+Use this to remove temporary overrides, reset identifiers to standard limits, or clean up outdated rules.
+
+**Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
+
+**Permissions:** Requires \`ratelimit.*.delete_override\` or \`ratelimit.<namespace_id>.delete_override\`
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitDeleteOverride(

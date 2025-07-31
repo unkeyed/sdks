@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `root_key`         | *str*              | :heavy_check_mark: | N/A                | UNKEY_ROOT_KEY     |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `root_key`         | *Optional[str]*    | :heavy_minus_sign: | N/A                |

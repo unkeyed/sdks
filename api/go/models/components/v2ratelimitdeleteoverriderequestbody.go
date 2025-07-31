@@ -2,28 +2,35 @@
 
 package components
 
-// V2RatelimitDeleteOverrideRequestBody - Deletes an existing override.
+// V2RatelimitDeleteOverrideRequestBody - Deletes an existing rate limit override. This permanently removes a custom rate limit rule, reverting affected identifiers back to the default rate limits for the namespace.
+//
+// Use this endpoint when you need to:
+// - Remove special rate limit rules that are no longer needed
+// - Reset entities back to standard rate limits
+// - Clean up temporary overrides
+// - Remove outdated tiering or custom limit rules
+// - Fix misconfigured overrides
+//
+// Once deleted, the override cannot be recovered, and the operation takes effect immediately.
 type V2RatelimitDeleteOverrideRequestBody struct {
-	// The id of the namespace. Either namespaceId or namespaceName must be provided
-	NamespaceID *string `json:"namespaceId,omitempty"`
-	// The name of the namespace. Either namespaceId or namespaceName must be provided
-	NamespaceName *string `json:"namespaceName,omitempty"`
-	// Identifier of the override to delete
+	// The id or name of the namespace containing the override.
+	Namespace string `json:"namespace"`
+	// The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
+	//
+	// Important notes:
+	// - This is case-sensitive and must match exactly
+	// - Include any wildcards (*) that were part of the original pattern
+	// - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID
+	//
+	// After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
 	Identifier string `json:"identifier"`
 }
 
-func (o *V2RatelimitDeleteOverrideRequestBody) GetNamespaceID() *string {
+func (o *V2RatelimitDeleteOverrideRequestBody) GetNamespace() string {
 	if o == nil {
-		return nil
+		return ""
 	}
-	return o.NamespaceID
-}
-
-func (o *V2RatelimitDeleteOverrideRequestBody) GetNamespaceName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.NamespaceName
+	return o.Namespace
 }
 
 func (o *V2RatelimitDeleteOverrideRequestBody) GetIdentifier() string {

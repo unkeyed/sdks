@@ -9,19 +9,23 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2RatelimitListOverridesRequestBody = {
   /**
-   * The id of the namespace to list overrides for.
+   * The id or name of the rate limit namespace to list overrides for.
    */
-  namespaceId?: string | undefined;
+  namespace: string;
   /**
-   * The name of the namespace to list overrides for.
-   */
-  namespaceName?: string | undefined;
-  /**
-   * Pagination cursor from a previous response
+   * Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
    */
   cursor?: string | undefined;
   /**
-   * Maximum number of results to return
+   * Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
+   *
+   * @remarks
+   *
+   * - Lower values (10-20): Better for UI displays and faster response times
+   * - Higher values (50-100): Better for data exports or bulk operations
+   * - Default (10): Suitable for most dashboard views
+   *
+   * Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
    */
   limit?: number | undefined;
 };
@@ -32,16 +36,14 @@ export const V2RatelimitListOverridesRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   cursor: z.string().optional(),
   limit: z.number().int().default(10),
 });
 
 /** @internal */
 export type V2RatelimitListOverridesRequestBody$Outbound = {
-  namespaceId?: string | undefined;
-  namespaceName?: string | undefined;
+  namespace: string;
   cursor?: string | undefined;
   limit: number;
 };
@@ -52,8 +54,7 @@ export const V2RatelimitListOverridesRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitListOverridesRequestBody
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   cursor: z.string().optional(),
   limit: z.number().int().default(10),
 });

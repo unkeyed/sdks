@@ -4,26 +4,47 @@
 
 import * as z from "zod";
 import * as components from "../components/index.js";
+import { UnkeyError } from "./unkeyerror.js";
 
+/**
+ * Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying.
+ */
 export type BadRequestErrorResponseData = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: components.Meta;
+  /**
+   * Extended error details specifically for bad request (400) errors. This builds on the BaseError structure by adding an array of individual validation errors, making it easy to identify and fix multiple issues at once.
+   */
   error: components.BadRequestErrorDetails;
 };
 
-export class BadRequestErrorResponse extends Error {
+/**
+ * Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying.
+ */
+export class BadRequestErrorResponse extends UnkeyError {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: components.Meta;
+  /**
+   * Extended error details specifically for bad request (400) errors. This builds on the BaseError structure by adding an array of individual validation errors, making it easy to identify and fix multiple issues at once.
+   */
   error: components.BadRequestErrorDetails;
 
   /** The original data that was passed to this error instance. */
   data$: BadRequestErrorResponseData;
 
-  constructor(err: BadRequestErrorResponseData) {
+  constructor(
+    err: BadRequestErrorResponseData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     this.meta = err.meta;
     this.error = err.error;
 
@@ -39,9 +60,16 @@ export const BadRequestErrorResponse$inboundSchema: z.ZodType<
 > = z.object({
   meta: components.Meta$inboundSchema,
   error: components.BadRequestErrorDetails$inboundSchema,
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new BadRequestErrorResponse(v);
+    return new BadRequestErrorResponse(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

@@ -2,16 +2,15 @@
 
 package components
 
+// BaseError - Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
 type BaseError struct {
-	// A human-readable explanation specific to this occurrence of the problem.
+	// A human-readable explanation specific to this occurrence of the problem. This provides detailed information about what went wrong and potential remediation steps. The message is intended to be helpful for developers troubleshooting the issue.
 	Detail string `json:"detail"`
-	// A URI reference that identifies the specific occurrence of the problem.
-	Instance *string `json:"instance,omitempty"`
-	// HTTP status code
+	// HTTP status code that corresponds to this error. This will match the status code in the HTTP response. Common codes include `400` (Bad Request), `401` (Unauthorized), `403` (Forbidden), `404` (Not Found), `409` (Conflict), and `500` (Internal Server Error).
 	Status int64 `json:"status"`
-	// A short, human-readable summary of the problem type. This value should not change between occurrences of the error.
+	// A short, human-readable summary of the problem type. This remains constant from occurrence to occurrence of the same problem and should be used for programmatic handling.
 	Title string `json:"title"`
-	// A URI reference to human-readable documentation for the error.
+	// A URI reference that identifies the problem type. This provides a stable identifier for the error that can be used for documentation lookups and programmatic error handling. When followed, this URI should provide human-readable documentation for the problem type.
 	Type string `json:"type"`
 }
 
@@ -20,13 +19,6 @@ func (o *BaseError) GetDetail() string {
 		return ""
 	}
 	return o.Detail
-}
-
-func (o *BaseError) GetInstance() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Instance
 }
 
 func (o *BaseError) GetStatus() int64 {

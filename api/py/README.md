@@ -10,14 +10,86 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *unke
 </div>
 
 
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/unkey/unkey). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
 
+Unkey API: Unkey's API provides programmatic access for all resources within our platform.
 
+
+### Authentication
+#
+This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+```
+Authorization: Bearer unkey_xxxxxxxxxxx
+```
+
+All responses follow a consistent envelope structure that separates operational metadata from actual data. This design provides several benefits:
+- Debugging: Every response includes a unique requestId for tracing issues
+- Consistency: Predictable response format across all endpoints
+- Extensibility: Easy to add new metadata without breaking existing integrations
+- Error Handling: Unified error format with actionable information
+
+### Success Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_123456"
+  },
+  "data": {
+    // Actual response data here
+  }
+}
+```
+
+The meta object contains operational information:
+- `requestId`: Unique identifier for this request (essential for support)
+
+The data object contains the actual response data specific to each endpoint.
+
+### Paginated Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_123456"
+  },
+  "data": [
+    // Array of results
+  ],
+  "pagination": {
+    "cursor": "next_page_token",
+    "hasMore": true
+  }
+}
+```
+
+The pagination object appears on list endpoints and contains:
+- `cursor`: Token for requesting the next page
+- `hasMore`: Whether more results are available
+
+### Error Response Format:
+```json
+{
+  "meta": {
+    "requestId": "req_2c9a0jf23l4k567"
+  },
+  "error": {
+    "detail": "The resource you are attempting to modify is protected and cannot be changed",
+    "status": 403,
+    "title": "Forbidden",
+    "type": "https://unkey.com/docs/errors/unkey/application/protected_resource"
+  }
+}
+```
+
+Error responses include comprehensive diagnostic information:
+- `title`: Human-readable error summary
+- `detail`: Specific description of what went wrong
+- `status`: HTTP status code
+- `type`: Link to error documentation
+- `errors`: Array of validation errors (for 400 responses)
+
+This structure ensures you always have the context needed to debug issues and take corrective action.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -29,6 +101,7 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *unke
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Pagination](#pagination)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -44,10 +117,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *unke
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 > [!NOTE]
 > **Python version upgrade policy**
 >
@@ -60,7 +129,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/unkeyed/sdks.git#subdirectory=api/py
+pip install unkey.py
 ```
 
 ### Poetry
@@ -68,7 +137,7 @@ pip install git+https://github.com/unkeyed/sdks.git#subdirectory=api/py
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/unkeyed/sdks.git#subdirectory=api/py
+poetry add unkey.py
 ```
 
 ### Shell and script usage with `uv`
@@ -90,7 +159,7 @@ It's also possible to write a standalone Python script without needing to set up
 # ]
 # ///
 
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 sdk = Unkey(
   # SDK arguments
@@ -120,14 +189,14 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 
 with Unkey(
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+    res = unkey.apis.create_api(name="payment-service-production")
 
     # Handle response
     print(res)
@@ -139,15 +208,15 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 async def main():
 
     async with Unkey(
-        root_key="UNKEY_ROOT_KEY",
+        root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.ratelimit.limit_async(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+        res = await unkey.apis.create_api_async(name="payment-service-production")
 
         # Handle response
         print(res)
@@ -169,14 +238,14 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `root_key` parameter must be set when initializing the SDK client instance. For example:
 ```python
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 
 with Unkey(
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+    res = unkey.apis.create_api(name="payment-service-production")
 
     # Handle response
     print(res)
@@ -192,28 +261,83 @@ with Unkey(
 
 ### [apis](docs/sdks/apis/README.md)
 
-* [create_api](docs/sdks/apis/README.md#create_api)
+* [create_api](docs/sdks/apis/README.md#create_api) - Create API namespace
+* [delete_api](docs/sdks/apis/README.md#delete_api) - Delete API namespace
+* [get_api](docs/sdks/apis/README.md#get_api) - Get API namespace
+* [list_keys](docs/sdks/apis/README.md#list_keys) - List API keys
 
 ### [identities](docs/sdks/identities/README.md)
 
-* [create_identity](docs/sdks/identities/README.md#create_identity)
-* [delete_identity](docs/sdks/identities/README.md#delete_identity)
+* [create_identity](docs/sdks/identities/README.md#create_identity) - Create Identity
+* [delete_identity](docs/sdks/identities/README.md#delete_identity) - Delete Identity
+* [get_identity](docs/sdks/identities/README.md#get_identity) - Get Identity
+* [list_identities](docs/sdks/identities/README.md#list_identities) - List Identities
+* [update_identity](docs/sdks/identities/README.md#update_identity) - Update Identity
 
-### [liveness](docs/sdks/liveness/README.md)
+### [keys](docs/sdks/keys/README.md)
 
-* [liveness](docs/sdks/liveness/README.md#liveness) - Liveness check
+* [add_permissions](docs/sdks/keys/README.md#add_permissions) - Add key permissions
+* [add_roles](docs/sdks/keys/README.md#add_roles) - Add key roles
+* [create_key](docs/sdks/keys/README.md#create_key) - Create API key
+* [delete_key](docs/sdks/keys/README.md#delete_key) - Delete API keys
+* [get_key](docs/sdks/keys/README.md#get_key) - Get API key
+* [remove_permissions](docs/sdks/keys/README.md#remove_permissions) - Remove key permissions
+* [remove_roles](docs/sdks/keys/README.md#remove_roles) - Remove key roles
+* [set_permissions](docs/sdks/keys/README.md#set_permissions) - Set key permissions
+* [set_roles](docs/sdks/keys/README.md#set_roles) - Set key roles
+* [update_credits](docs/sdks/keys/README.md#update_credits) - Update key credits
+* [update_key](docs/sdks/keys/README.md#update_key) - Update key settings
+* [verify_key](docs/sdks/keys/README.md#verify_key) - Verify API key
+* [whoami](docs/sdks/keys/README.md#whoami) - Get API key by hash
 
-### [ratelimit](docs/sdks/ratelimitsdk/README.md)
+### [permissions](docs/sdks/permissions/README.md)
 
-* [limit](docs/sdks/ratelimitsdk/README.md#limit)
-* [set_override](docs/sdks/ratelimitsdk/README.md#set_override)
-* [get_override](docs/sdks/ratelimitsdk/README.md#get_override)
-* [list_overrides](docs/sdks/ratelimitsdk/README.md#list_overrides)
-* [delete_override](docs/sdks/ratelimitsdk/README.md#delete_override)
+* [create_permission](docs/sdks/permissions/README.md#create_permission) - Create permission
+* [create_role](docs/sdks/permissions/README.md#create_role) - Create role
+* [delete_permission](docs/sdks/permissions/README.md#delete_permission) - Delete permission
+* [delete_role](docs/sdks/permissions/README.md#delete_role) - Delete role
+* [get_permission](docs/sdks/permissions/README.md#get_permission) - Get permission
+* [get_role](docs/sdks/permissions/README.md#get_role) - Get role
+* [list_permissions](docs/sdks/permissions/README.md#list_permissions) - List permissions
+* [list_roles](docs/sdks/permissions/README.md#list_roles) - List roles
+
+### [ratelimit](docs/sdks/ratelimit/README.md)
+
+* [delete_override](docs/sdks/ratelimit/README.md#delete_override) - Delete ratelimit override
+* [get_override](docs/sdks/ratelimit/README.md#get_override) - Get ratelimit override
+* [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [list_overrides](docs/sdks/ratelimit/README.md#list_overrides) - List ratelimit overrides
+* [set_override](docs/sdks/ratelimit/README.md#set_override) - Set ratelimit override
 
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `None`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -222,15 +346,15 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from unkey_py import Unkey
-from unkey_py.utils import BackoffStrategy, RetryConfig
+from unkey.py import Unkey
+from unkey.py.utils import BackoffStrategy, RetryConfig
 
 
 with Unkey(
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877,
+    res = unkey.apis.create_api(name="payment-service-production",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -240,16 +364,16 @@ with Unkey(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from unkey_py import Unkey
-from unkey_py.utils import BackoffStrategy, RetryConfig
+from unkey.py import Unkey
+from unkey.py.utils import BackoffStrategy, RetryConfig
 
 
 with Unkey(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+    res = unkey.apis.create_api(name="payment-service-production")
 
     # Handle response
     print(res)
@@ -260,64 +384,75 @@ with Unkey(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
+[`UnkeyError`](./src/unkey/py/errors/unkeyerror.py) is the base class for all HTTP error responses. It has the following properties:
 
-By default, an API error will raise a errors.APIError exception, which has the following properties:
-
-| Property        | Type             | Description           |
-|-----------------|------------------|-----------------------|
-| `.status_code`  | *int*            | The HTTP status code  |
-| `.message`      | *str*            | The error message     |
-| `.raw_response` | *httpx.Response* | The raw HTTP response |
-| `.body`         | *str*            | The response content  |
-
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `limit_async` method may raise the following exceptions:
-
-| Error Type                         | Status Code | Content Type     |
-| ---------------------------------- | ----------- | ---------------- |
-| errors.BadRequestErrorResponse     | 400         | application/json |
-| errors.UnauthorizedErrorResponse   | 401         | application/json |
-| errors.ForbiddenErrorResponse      | 403         | application/json |
-| errors.NotFoundErrorResponse       | 404         | application/json |
-| errors.InternalServerErrorResponse | 500         | application/json |
-| errors.APIError                    | 4XX, 5XX    | \*/\*            |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
-
 ```python
-from unkey_py import Unkey, errors
+from unkey.py import Unkey, errors
 
 
 with Unkey(
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
     res = None
     try:
 
-        res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+        res = unkey.apis.create_api(name="payment-service-production")
 
         # Handle response
         print(res)
 
-    except errors.BadRequestErrorResponse as e:
-        # handle e.data: errors.BadRequestErrorResponseData
-        raise(e)
-    except errors.UnauthorizedErrorResponse as e:
-        # handle e.data: errors.UnauthorizedErrorResponseData
-        raise(e)
-    except errors.ForbiddenErrorResponse as e:
-        # handle e.data: errors.ForbiddenErrorResponseData
-        raise(e)
-    except errors.NotFoundErrorResponse as e:
-        # handle e.data: errors.NotFoundErrorResponseData
-        raise(e)
-    except errors.InternalServerErrorResponse as e:
-        # handle e.data: errors.InternalServerErrorResponseData
-        raise(e)
-    except errors.APIError as e:
-        # handle exception
-        raise(e)
+
+    except errors.UnkeyError as e:
+        # The base class for HTTP error responses
+        print(e.message)
+        print(e.status_code)
+        print(e.body)
+        print(e.headers)
+        print(e.raw_response)
+
+        # Depending on the method different errors may be thrown
+        if isinstance(e, errors.BadRequestErrorResponse):
+            print(e.data.meta)  # models.Meta
+            print(e.data.error)  # models.BadRequestErrorDetails
 ```
+
+### Error Classes
+**Primary errors:**
+* [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py): The base class for HTTP error responses.
+  * [`BadRequestErrorResponse`](./src/unkey/py/errors/badrequesterrorresponse.py): Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying. Status code `400`.
+  * [`UnauthorizedErrorResponse`](./src/unkey/py/errors/unauthorizederrorresponse.py): Error response when authentication has failed or credentials are missing. This occurs when: - No authentication token is provided in the request - The provided token is invalid, expired, or malformed - The token format doesn't match expected patterns  To resolve this error, ensure you're including a valid root key in the Authorization header. Status code `401`.
+  * [`ForbiddenErrorResponse`](./src/unkey/py/errors/forbiddenerrorresponse.py): Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when: - The root key doesn't have the required permissions for this endpoint - The operation requires elevated privileges that the current key lacks - Access to the requested resource is restricted based on workspace settings  To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator. Status code `403`.
+  * [`InternalServerErrorResponse`](./src/unkey/py/errors/internalservererrorresponse.py): Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.  When you encounter this error: - The request ID in the response can help Unkey support investigate the issue - The error is likely temporary and retrying may succeed - If the error persists, contact Unkey support with the request ID. Status code `500`.
+  * [`NotFoundErrorResponse`](./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. *
+
+<details><summary>Less common errors (7)</summary>
+
+<br />
+
+**Network errors:**
+* [`httpx.RequestError`](https://www.python-httpx.org/exceptions/#httpx.RequestError): Base class for request errors.
+    * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
+    * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+
+
+**Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 35 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 35 methods.*
+* [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+
+</details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -327,15 +462,15 @@ with Unkey(
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 
 with Unkey(
     server_url="https://api.unkey.com",
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+    res = unkey.apis.create_api(name="payment-service-production")
 
     # Handle response
     print(res)
@@ -352,7 +487,7 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from unkey_py import Unkey
+from unkey.py import Unkey
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
@@ -361,8 +496,8 @@ s = Unkey(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
-from unkey_py import Unkey
-from unkey_py.httpclient import AsyncHttpClient
+from unkey.py import Unkey
+from unkey.py.httpclient import AsyncHttpClient
 import httpx
 
 class CustomClient(AsyncHttpClient):
@@ -432,11 +567,11 @@ The `Unkey` class implements the context manager protocol and registers a finali
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-from unkey_py import Unkey
+from unkey.py import Unkey
 def main():
 
     with Unkey(
-        root_key="UNKEY_ROOT_KEY",
+        root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
         # Rest of application here...
 
@@ -445,7 +580,7 @@ def main():
 async def amain():
 
     async with Unkey(
-        root_key="UNKEY_ROOT_KEY",
+        root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
         # Rest of application here...
 ```
@@ -458,11 +593,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from unkey_py import Unkey
+from unkey.py import Unkey
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Unkey(debug_logger=logging.getLogger("unkey_py"))
+s = Unkey(debug_logger=logging.getLogger("unkey.py"))
 ```
 <!-- End Debugging [debug] -->
 
@@ -478,7 +613,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=unkey-py&utm_campaign=python)

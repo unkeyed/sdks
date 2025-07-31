@@ -3,23 +3,31 @@
 package components
 
 type RatelimitOverride struct {
-	// The id of the namespace.
-	NamespaceID string `json:"namespaceId"`
-	// The id of the override.
+	// The unique identifier of this specific rate limit override. This ID is generated when the override is created and can be used for management operations like updating or deleting the override.
 	OverrideID string `json:"overrideId"`
-	// The duration in milliseconds for the rate limit window.
+	// The duration in milliseconds for this override's rate limit window. This may differ from the default duration for the namespace, allowing custom time windows for specific entities. After this duration elapses, the rate limit counter for affected identifiers resets to zero.
 	Duration int64 `json:"duration"`
-	// Identifier of your user, this can be their userId, an email, an ip or anything else. Wildcards ( * ) can be used to match multiple identifiers, More info can be found at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+	// The identifier pattern this override applies to. This determines which entities receive the custom rate limit.
+	//
+	// This can be:
+	// - An exact identifier for a specific entity
+	// - A pattern with wildcards for matching multiple entities
+	//
+	// Wildcard examples:
+	// - 'admin_*' matches any identifier starting with 'admin_'
+	// - '*_test' matches any identifier ending with '_test'
+	// - '*premium*' matches any identifier containing 'premium'
+	//
+	// More complex patterns can combine multiple wildcards. Detailed documentation on pattern matching rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
 	Identifier string `json:"identifier"`
-	// The maximum number of requests allowed.
+	// The maximum number of requests allowed for entities matching this override. This replaces the default limit for the namespace when applied.
+	//
+	// Common use cases:
+	// - Higher limits for premium customers
+	// - Reduced limits for abusive or suspicious entities
+	// - Zero limit to completely block specific patterns
+	// - Custom tier-based limits for different customer segments
 	Limit int64 `json:"limit"`
-}
-
-func (o *RatelimitOverride) GetNamespaceID() string {
-	if o == nil {
-		return ""
-	}
-	return o.NamespaceID
 }
 
 func (o *RatelimitOverride) GetOverrideID() string {

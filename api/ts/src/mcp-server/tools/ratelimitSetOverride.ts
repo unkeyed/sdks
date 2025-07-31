@@ -12,7 +12,16 @@ const args = {
 
 export const tool$ratelimitSetOverride: ToolDefinition<typeof args> = {
   name: "ratelimit-set-override",
-  description: ``,
+  description: `Set ratelimit override
+
+Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
+
+Use this to create premium tiers with higher limits, apply stricter limits to specific users, or implement emergency throttling.
+
+**Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., \`premium_*\`) to match multiple identifiers.
+
+**Permissions:** Requires \`ratelimit.*.set_override\` or \`ratelimit.<namespace_id>.set_override\`
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await ratelimitSetOverride(

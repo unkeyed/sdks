@@ -12,7 +12,19 @@ const args = {
 
 export const tool$apisCreateApi: ToolDefinition<typeof args> = {
   name: "apis-create-api",
-  description: ``,
+  description: `Create API namespace
+
+Create an API namespace for organizing keys by environment, service, or product.
+
+Use this to separate production from development keys, isolate different services, or manage multiple products. Each API gets a unique identifier and dedicated infrastructure for secure key operations.
+
+**Important**: API names must be unique within your workspace and cannot be changed after creation.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- \`api.*.create_api\` (to create APIs in any workspace)
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await apisCreateApi(

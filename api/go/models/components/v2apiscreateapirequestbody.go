@@ -3,7 +3,9 @@
 package components
 
 type V2ApisCreateAPIRequestBody struct {
-	// The name for your API. This is not customer facing.
+	// Unique identifier for this API namespace within your workspace.
+	// Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+	//
 	Name string `json:"name"`
 }
 

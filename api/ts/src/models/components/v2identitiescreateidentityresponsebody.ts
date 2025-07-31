@@ -7,21 +7,24 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  IdentitiesCreateIdentityResponseData,
-  IdentitiesCreateIdentityResponseData$inboundSchema,
-  IdentitiesCreateIdentityResponseData$Outbound,
-  IdentitiesCreateIdentityResponseData$outboundSchema,
-} from "./identitiescreateidentityresponsedata.js";
-import {
   Meta,
   Meta$inboundSchema,
   Meta$Outbound,
   Meta$outboundSchema,
 } from "./meta.js";
+import {
+  V2IdentitiesCreateIdentityResponseData,
+  V2IdentitiesCreateIdentityResponseData$inboundSchema,
+  V2IdentitiesCreateIdentityResponseData$Outbound,
+  V2IdentitiesCreateIdentityResponseData$outboundSchema,
+} from "./v2identitiescreateidentityresponsedata.js";
 
 export type V2IdentitiesCreateIdentityResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
-  data: IdentitiesCreateIdentityResponseData;
+  data: V2IdentitiesCreateIdentityResponseData;
 };
 
 /** @internal */
@@ -31,13 +34,13 @@ export const V2IdentitiesCreateIdentityResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: IdentitiesCreateIdentityResponseData$inboundSchema,
+  data: V2IdentitiesCreateIdentityResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2IdentitiesCreateIdentityResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: IdentitiesCreateIdentityResponseData$Outbound;
+  data: V2IdentitiesCreateIdentityResponseData$Outbound;
 };
 
 /** @internal */
@@ -47,7 +50,7 @@ export const V2IdentitiesCreateIdentityResponseBody$outboundSchema: z.ZodType<
   V2IdentitiesCreateIdentityResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: IdentitiesCreateIdentityResponseData$outboundSchema,
+  data: V2IdentitiesCreateIdentityResponseData$outboundSchema,
 });
 
 /**

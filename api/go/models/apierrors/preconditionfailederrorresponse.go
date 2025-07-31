@@ -4,11 +4,19 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
+// PreconditionFailedErrorResponse - Error response when one or more conditions specified in the request headers are not met. This typically occurs when:
+// - Using conditional requests with If-Match or If-None-Match headers
+// - The resource version doesn't match the expected value
+// - Optimistic concurrency control detects a conflict
+//
+// To resolve this error, fetch the latest version of the resource and retry with updated conditions.
 type PreconditionFailedErrorResponse struct {
-	Meta   components.Meta      `json:"meta"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta components.Meta `json:"meta"`
+	// Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
 	Error_ components.BaseError `json:"error"`
 }
 

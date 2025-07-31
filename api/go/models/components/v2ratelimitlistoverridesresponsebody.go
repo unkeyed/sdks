@@ -3,9 +3,11 @@
 package components
 
 type V2RatelimitListOverridesResponseBody struct {
-	Meta       Meta                `json:"meta"`
-	Data       []RatelimitOverride `json:"data"`
-	Pagination *Pagination         `json:"pagination,omitempty"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta Meta                `json:"meta"`
+	Data []RatelimitOverride `json:"data"`
+	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
+	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
 func (o *V2RatelimitListOverridesResponseBody) GetMeta() Meta {

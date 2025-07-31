@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/unkeyed/sdks/go/api/v2/retry"
+	"github.com/unkeyed/sdks/api/go/v2/retry"
 	"math"
 	"math/rand"
 	"net/http"

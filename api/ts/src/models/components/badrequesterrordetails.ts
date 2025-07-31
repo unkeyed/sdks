@@ -13,29 +13,28 @@ import {
   ValidationError$outboundSchema,
 } from "./validationerror.js";
 
+/**
+ * Extended error details specifically for bad request (400) errors. This builds on the BaseError structure by adding an array of individual validation errors, making it easy to identify and fix multiple issues at once.
+ */
 export type BadRequestErrorDetails = {
   /**
-   * A human-readable explanation specific to this occurrence of the problem.
+   * A human-readable explanation specific to this occurrence of the problem. This provides detailed information about what went wrong and potential remediation steps. The message is intended to be helpful for developers troubleshooting the issue.
    */
   detail: string;
   /**
-   * A URI reference that identifies the specific occurrence of the problem.
-   */
-  instance?: string | undefined;
-  /**
-   * HTTP status code
+   * HTTP status code that corresponds to this error. This will match the status code in the HTTP response. Common codes include `400` (Bad Request), `401` (Unauthorized), `403` (Forbidden), `404` (Not Found), `409` (Conflict), and `500` (Internal Server Error).
    */
   status: number;
   /**
-   * A short, human-readable summary of the problem type. This value should not change between occurrences of the error.
+   * A short, human-readable summary of the problem type. This remains constant from occurrence to occurrence of the same problem and should be used for programmatic handling.
    */
   title: string;
   /**
-   * A URI reference to human-readable documentation for the error.
+   * A URI reference that identifies the problem type. This provides a stable identifier for the error that can be used for documentation lookups and programmatic error handling. When followed, this URI should provide human-readable documentation for the problem type.
    */
   type: string;
   /**
-   * Optional list of individual error details
+   * List of individual validation errors that occurred in the request. Each error provides specific details about what failed validation, where the error occurred in the request, and suggestions for fixing it. This granular information helps developers quickly identify and resolve multiple issues in a single request without having to make repeated API calls.
    */
   errors: Array<ValidationError>;
 };
@@ -47,7 +46,6 @@ export const BadRequestErrorDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   detail: z.string(),
-  instance: z.string().optional(),
   status: z.number().int(),
   title: z.string(),
   type: z.string(),
@@ -57,7 +55,6 @@ export const BadRequestErrorDetails$inboundSchema: z.ZodType<
 /** @internal */
 export type BadRequestErrorDetails$Outbound = {
   detail: string;
-  instance?: string | undefined;
   status: number;
   title: string;
   type: string;
@@ -71,7 +68,6 @@ export const BadRequestErrorDetails$outboundSchema: z.ZodType<
   BadRequestErrorDetails
 > = z.object({
   detail: z.string(),
-  instance: z.string().optional(),
   status: z.number().int(),
   title: z.string(),
   type: z.string(),

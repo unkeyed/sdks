@@ -1,0 +1,9 @@
+# DeleteKeyResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `V2KeysDeleteKeyResponseBody`                                                                     | [*components.V2KeysDeleteKeyResponseBody](../../models/components/v2keysdeletekeyresponsebody.md) | :heavy_minus_sign:                                                                                | Key deleted successfully. Verification fails immediately with up to 30-second edge propagation.<br/> |

@@ -14,9 +14,35 @@ import {
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
+import { tool$apisDeleteApi } from "./tools/apisDeleteApi.js";
+import { tool$apisGetApi } from "./tools/apisGetApi.js";
+import { tool$apisListKeys } from "./tools/apisListKeys.js";
 import { tool$identitiesCreateIdentity } from "./tools/identitiesCreateIdentity.js";
 import { tool$identitiesDeleteIdentity } from "./tools/identitiesDeleteIdentity.js";
-import { tool$livenessLiveness } from "./tools/livenessLiveness.js";
+import { tool$identitiesGetIdentity } from "./tools/identitiesGetIdentity.js";
+import { tool$identitiesListIdentities } from "./tools/identitiesListIdentities.js";
+import { tool$identitiesUpdateIdentity } from "./tools/identitiesUpdateIdentity.js";
+import { tool$keysAddPermissions } from "./tools/keysAddPermissions.js";
+import { tool$keysAddRoles } from "./tools/keysAddRoles.js";
+import { tool$keysCreateKey } from "./tools/keysCreateKey.js";
+import { tool$keysDeleteKey } from "./tools/keysDeleteKey.js";
+import { tool$keysGetKey } from "./tools/keysGetKey.js";
+import { tool$keysRemovePermissions } from "./tools/keysRemovePermissions.js";
+import { tool$keysRemoveRoles } from "./tools/keysRemoveRoles.js";
+import { tool$keysSetPermissions } from "./tools/keysSetPermissions.js";
+import { tool$keysSetRoles } from "./tools/keysSetRoles.js";
+import { tool$keysUpdateCredits } from "./tools/keysUpdateCredits.js";
+import { tool$keysUpdateKey } from "./tools/keysUpdateKey.js";
+import { tool$keysVerifyKey } from "./tools/keysVerifyKey.js";
+import { tool$keysWhoami } from "./tools/keysWhoami.js";
+import { tool$permissionsCreatePermission } from "./tools/permissionsCreatePermission.js";
+import { tool$permissionsCreateRole } from "./tools/permissionsCreateRole.js";
+import { tool$permissionsDeletePermission } from "./tools/permissionsDeletePermission.js";
+import { tool$permissionsDeleteRole } from "./tools/permissionsDeleteRole.js";
+import { tool$permissionsGetPermission } from "./tools/permissionsGetPermission.js";
+import { tool$permissionsGetRole } from "./tools/permissionsGetRole.js";
+import { tool$permissionsListPermissions } from "./tools/permissionsListPermissions.js";
+import { tool$permissionsListRoles } from "./tools/permissionsListRoles.js";
 import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js";
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
 import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
@@ -33,7 +59,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.0-alpha.9",
+    version: "2.0.0-alpha.16",
   });
 
   const client = new UnkeyCore({
@@ -63,15 +89,41 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$ratelimitLimit);
-  tool(tool$ratelimitSetOverride);
-  tool(tool$ratelimitGetOverride);
-  tool(tool$ratelimitListOverrides);
-  tool(tool$ratelimitDeleteOverride);
+  tool(tool$apisCreateApi);
+  tool(tool$apisDeleteApi);
+  tool(tool$apisGetApi);
+  tool(tool$apisListKeys);
   tool(tool$identitiesCreateIdentity);
   tool(tool$identitiesDeleteIdentity);
-  tool(tool$apisCreateApi);
-  tool(tool$livenessLiveness);
+  tool(tool$identitiesGetIdentity);
+  tool(tool$identitiesListIdentities);
+  tool(tool$identitiesUpdateIdentity);
+  tool(tool$keysAddPermissions);
+  tool(tool$keysAddRoles);
+  tool(tool$keysCreateKey);
+  tool(tool$keysDeleteKey);
+  tool(tool$keysGetKey);
+  tool(tool$keysRemovePermissions);
+  tool(tool$keysRemoveRoles);
+  tool(tool$keysSetPermissions);
+  tool(tool$keysSetRoles);
+  tool(tool$keysUpdateCredits);
+  tool(tool$keysUpdateKey);
+  tool(tool$keysVerifyKey);
+  tool(tool$keysWhoami);
+  tool(tool$permissionsCreatePermission);
+  tool(tool$permissionsCreateRole);
+  tool(tool$permissionsDeletePermission);
+  tool(tool$permissionsDeleteRole);
+  tool(tool$permissionsGetPermission);
+  tool(tool$permissionsGetRole);
+  tool(tool$permissionsListPermissions);
+  tool(tool$permissionsListRoles);
+  tool(tool$ratelimitDeleteOverride);
+  tool(tool$ratelimitGetOverride);
+  tool(tool$ratelimitLimit);
+  tool(tool$ratelimitListOverrides);
+  tool(tool$ratelimitSetOverride);
 
   return server;
 }

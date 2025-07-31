@@ -13,15 +13,18 @@ import {
   Meta$outboundSchema,
 } from "./meta.js";
 import {
-  RatelimitLimitResponseData,
-  RatelimitLimitResponseData$inboundSchema,
-  RatelimitLimitResponseData$Outbound,
-  RatelimitLimitResponseData$outboundSchema,
-} from "./ratelimitlimitresponsedata.js";
+  V2RatelimitLimitResponseData,
+  V2RatelimitLimitResponseData$inboundSchema,
+  V2RatelimitLimitResponseData$Outbound,
+  V2RatelimitLimitResponseData$outboundSchema,
+} from "./v2ratelimitlimitresponsedata.js";
 
 export type V2RatelimitLimitResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: Meta;
-  data: RatelimitLimitResponseData;
+  data: V2RatelimitLimitResponseData;
 };
 
 /** @internal */
@@ -31,13 +34,13 @@ export const V2RatelimitLimitResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: RatelimitLimitResponseData$inboundSchema,
+  data: V2RatelimitLimitResponseData$inboundSchema,
 });
 
 /** @internal */
 export type V2RatelimitLimitResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: RatelimitLimitResponseData$Outbound;
+  data: V2RatelimitLimitResponseData$Outbound;
 };
 
 /** @internal */
@@ -47,7 +50,7 @@ export const V2RatelimitLimitResponseBody$outboundSchema: z.ZodType<
   V2RatelimitLimitResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: RatelimitLimitResponseData$outboundSchema,
+  data: V2RatelimitLimitResponseData$outboundSchema,
 });
 
 /**

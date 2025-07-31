@@ -8,27 +8,63 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Sets a new or overwrites an existing override.
+ * Sets a new or overwrites an existing rate limit override. Overrides allow you to apply special rate limit rules to specific identifiers, providing custom limits that differ from the default.
+ *
+ * @remarks
+ *
+ * Overrides are useful for:
+ * - Granting higher limits to premium users or trusted partners
+ * - Implementing stricter limits for suspicious or abusive users
+ * - Creating tiered access levels with different quotas
+ * - Implementing temporary rate limit adjustments
+ * - Prioritizing important clients with higher limits
  */
 export type V2RatelimitSetOverrideRequestBody = {
   /**
-   * The id of the namespace. Either namespaceId or namespaceName must be provided
+   * The ID or name of the rate limit namespace.
    */
-  namespaceId?: string | undefined;
+  namespace: string;
   /**
-   * The name of the namespace. Either namespaceId or namespaceName must be provided
-   */
-  namespaceName?: string | undefined;
-  /**
-   * The duration in milliseconds for the rate limit window.
+   * The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.
+   *
+   * @remarks
+   *
+   * Considerations:
+   * - This can differ from the default duration for the namespace
+   * - Longer durations create stricter limits that take longer to reset
+   * - Shorter durations allow more frequent bursts of activity
+   * - Common values: 60000 (1 minute), 3600000 (1 hour), 86400000 (1 day)
    */
   duration: number;
   /**
-   * Identifier of your user, this can be their userId, an email, an ip or anything else. Wildcards ( * ) can be used to match multiple identifiers, More info can be found at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+   * Identifier of the entity receiving this custom rate limit. This can be:
+   *
+   * @remarks
+   *
+   * - A specific user ID for individual custom limits
+   * - An IP address for location-based rules
+   * - An email domain for organization-wide policies
+   * - Any other string that identifies the target entity
+   *
+   * Wildcards (*) can be used to create pattern-matching rules that apply to multiple identifiers. For example:
+   * - 'premium_*' would match all identifiers starting with 'premium_'
+   * - '*_admin' would match all identifiers ending with '_admin'
+   * - '*suspicious*' would match any identifier containing 'suspicious'
+   *
+   * More detailed information on wildcard pattern rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
    */
   identifier: string;
   /**
-   * The maximum number of requests allowed.
+   * The maximum number of requests allowed for this override. This defines the custom quota for the specified identifier(s).
+   *
+   * @remarks
+   *
+   * Special values:
+   * - Higher than default: For premium or trusted entities
+   * - Lower than default: For suspicious or abusive entities
+   * - 0: To completely block access (useful for ban implementation)
+   *
+   * This limit entirely replaces the default limit for matching identifiers.
    */
   limit: number;
 };
@@ -39,8 +75,7 @@ export const V2RatelimitSetOverrideRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   duration: z.number().int(),
   identifier: z.string(),
   limit: z.number().int(),
@@ -48,8 +83,7 @@ export const V2RatelimitSetOverrideRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type V2RatelimitSetOverrideRequestBody$Outbound = {
-  namespaceId?: string | undefined;
-  namespaceName?: string | undefined;
+  namespace: string;
   duration: number;
   identifier: string;
   limit: number;
@@ -61,8 +95,7 @@ export const V2RatelimitSetOverrideRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2RatelimitSetOverrideRequestBody
 > = z.object({
-  namespaceId: z.string().optional(),
-  namespaceName: z.string().optional(),
+  namespace: z.string(),
   duration: z.number().int(),
   identifier: z.string(),
   limit: z.number().int(),

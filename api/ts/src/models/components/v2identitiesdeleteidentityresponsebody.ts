@@ -6,25 +6,45 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Meta,
+  Meta$inboundSchema,
+  Meta$Outbound,
+  Meta$outboundSchema,
+} from "./meta.js";
 
-export type V2IdentitiesDeleteIdentityResponseBody = {};
+/**
+ * Empty response object. A successful response indicates the identity was deleted successfully.
+ */
+export type V2IdentitiesDeleteIdentityResponseBody = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
+  meta: Meta;
+};
 
 /** @internal */
 export const V2IdentitiesDeleteIdentityResponseBody$inboundSchema: z.ZodType<
   V2IdentitiesDeleteIdentityResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  meta: Meta$inboundSchema,
+});
 
 /** @internal */
-export type V2IdentitiesDeleteIdentityResponseBody$Outbound = {};
+export type V2IdentitiesDeleteIdentityResponseBody$Outbound = {
+  meta: Meta$Outbound;
+};
 
 /** @internal */
 export const V2IdentitiesDeleteIdentityResponseBody$outboundSchema: z.ZodType<
   V2IdentitiesDeleteIdentityResponseBody$Outbound,
   z.ZodTypeDef,
   V2IdentitiesDeleteIdentityResponseBody
-> = z.object({});
+> = z.object({
+  meta: Meta$outboundSchema,
+});
 
 /**
  * @internal

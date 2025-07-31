@@ -4,11 +4,19 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
+// ForbiddenErrorResponse - Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:
+// - The root key doesn't have the required permissions for this endpoint
+// - The operation requires elevated privileges that the current key lacks
+// - Access to the requested resource is restricted based on workspace settings
+//
+// To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator.
 type ForbiddenErrorResponse struct {
-	Meta   components.Meta      `json:"meta"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta components.Meta `json:"meta"`
+	// Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
 	Error_ components.BaseError `json:"error"`
 }
 

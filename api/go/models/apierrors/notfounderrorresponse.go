@@ -4,11 +4,19 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
+// NotFoundErrorResponse - Error response when the requested resource cannot be found. This occurs when:
+// - The specified resource ID doesn't exist in your workspace
+// - The resource has been deleted or moved
+// - The resource exists but is not accessible with current permissions
+//
+// To resolve this error, verify the resource ID is correct and that you have access to it.
 type NotFoundErrorResponse struct {
-	Meta   components.Meta      `json:"meta"`
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta components.Meta `json:"meta"`
+	// Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
 	Error_ components.BaseError `json:"error"`
 }
 

@@ -3,12 +3,13 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/go/api/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type CreateAPIResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successfully created API
+	// API namespace created successfully. The response contains the unique API ID for referencing this namespace in key operations.
+	//
 	V2ApisCreateAPIResponseBody *components.V2ApisCreateAPIResponseBody
 }
 

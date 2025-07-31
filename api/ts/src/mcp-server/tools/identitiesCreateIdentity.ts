@@ -12,7 +12,15 @@ const args = {
 
 export const tool$identitiesCreateIdentity: ToolDefinition<typeof args> = {
   name: "identities-create-identity",
-  description: ``,
+  description: `Create Identity
+
+Create an identity to group multiple API keys under a single entity. Identities enable shared rate limits and metadata across all associated keys.
+
+Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
+
+> **Important**  
+> Requires \`identity.*.create_identity\` permission
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await identitiesCreateIdentity(

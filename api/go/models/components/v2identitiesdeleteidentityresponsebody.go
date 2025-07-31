@@ -2,5 +2,15 @@
 
 package components
 
+// V2IdentitiesDeleteIdentityResponseBody - Empty response object. A successful response indicates the identity was deleted successfully.
 type V2IdentitiesDeleteIdentityResponseBody struct {
+	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+	Meta Meta `json:"meta"`
+}
+
+func (o *V2IdentitiesDeleteIdentityResponseBody) GetMeta() Meta {
+	if o == nil {
+		return Meta{}
+	}
+	return o.Meta
 }

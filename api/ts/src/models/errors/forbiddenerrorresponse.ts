@@ -4,26 +4,61 @@
 
 import * as z from "zod";
 import * as components from "../components/index.js";
+import { UnkeyError } from "./unkeyerror.js";
 
+/**
+ * Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:
+ *
+ * @remarks
+ * - The root key doesn't have the required permissions for this endpoint
+ * - The operation requires elevated privileges that the current key lacks
+ * - Access to the requested resource is restricted based on workspace settings
+ *
+ * To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator.
+ */
 export type ForbiddenErrorResponseData = {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: components.Meta;
+  /**
+   * Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
+   */
   error: components.BaseError;
 };
 
-export class ForbiddenErrorResponse extends Error {
+/**
+ * Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:
+ *
+ * @remarks
+ * - The root key doesn't have the required permissions for this endpoint
+ * - The operation requires elevated privileges that the current key lacks
+ * - Access to the requested resource is restricted based on workspace settings
+ *
+ * To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator.
+ */
+export class ForbiddenErrorResponse extends UnkeyError {
+  /**
+   * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+   */
   meta: components.Meta;
+  /**
+   * Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.
+   */
   error: components.BaseError;
 
   /** The original data that was passed to this error instance. */
   data$: ForbiddenErrorResponseData;
 
-  constructor(err: ForbiddenErrorResponseData) {
+  constructor(
+    err: ForbiddenErrorResponseData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     this.meta = err.meta;
     this.error = err.error;
 
@@ -39,9 +74,16 @@ export const ForbiddenErrorResponse$inboundSchema: z.ZodType<
 > = z.object({
   meta: components.Meta$inboundSchema,
   error: components.BaseError$inboundSchema,
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new ForbiddenErrorResponse(v);
+    return new ForbiddenErrorResponse(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

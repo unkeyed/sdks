@@ -1,0 +1,23 @@
+# KeyCreditsRefill
+
+Configuration for automatic credit refill behavior.
+
+## Example Usage
+
+```typescript
+import { KeyCreditsRefill } from "@unkey/api/models/components";
+
+let value: KeyCreditsRefill = {
+  interval: "daily",
+  amount: 1000,
+  refillDay: 15,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                   | Type                                                                                                                                                                    | Required                                                                                                                                                                | Description                                                                                                                                                             | Example                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interval`                                                                                                                                                              | [components.Interval](../../models/components/interval.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                      | How often credits are automatically refilled.                                                                                                                           | daily                                                                                                                                                                   |
+| `amount`                                                                                                                                                                | *number*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                      | Number of credits to add during each refill cycle.                                                                                                                      | 1000                                                                                                                                                                    |
+| `refillDay`                                                                                                                                                             | *number*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                      | Day of the month for monthly refills (1-31).<br/>Only required when interval is 'monthly'.<br/>For days beyond the month's length, refill occurs on the last day of the month.<br/> | 15                                                                                                                                                                      |

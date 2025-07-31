@@ -1,14 +1,14 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 # Synchronous Example
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 
 with Unkey(
-    root_key="UNKEY_ROOT_KEY",
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+    res = unkey.apis.create_api(name="payment-service-production")
 
     # Handle response
     print(res)
@@ -20,15 +20,15 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from unkey_py import Unkey
+from unkey.py import Unkey
 
 async def main():
 
     async with Unkey(
-        root_key="UNKEY_ROOT_KEY",
+        root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.ratelimit.limit_async(namespace="sms.sign_up", duration=711276, identifier="<value>", limit=581877)
+        res = await unkey.apis.create_api_async(name="payment-service-production")
 
         # Handle response
         print(res)

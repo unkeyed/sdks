@@ -1,0 +1,9 @@
+# IdentitiesGetIdentityResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2IdentitiesGetIdentityResponseBody`                                                                             | [*components.V2IdentitiesGetIdentityResponseBody](../../models/components/v2identitiesgetidentityresponsebody.md) | :heavy_minus_sign:                                                                                                | Successfully retrieved the identity information                                                                   |

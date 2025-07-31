@@ -2,11 +2,18 @@
 
 package components
 
+// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
 type Pagination struct {
-	// Opaque token for retrieving the next set of results
+	// Opaque pagination token for retrieving the next page of results.
+	// Include this exact value in the cursor field of subsequent requests.
+	// Cursors are temporary and may expire after extended periods.
+	//
 	Cursor *string `json:"cursor,omitempty"`
-	// Indicates if more results exist beyond this page
-	HasMore *bool `json:"hasMore,omitempty"`
+	// Indicates whether additional results exist beyond this page.
+	// When true, use the cursor to fetch the next page.
+	// When false, you have reached the end of the result set.
+	//
+	HasMore bool `json:"hasMore"`
 }
 
 func (o *Pagination) GetCursor() *string {
@@ -16,9 +23,9 @@ func (o *Pagination) GetCursor() *string {
 	return o.Cursor
 }
 
-func (o *Pagination) GetHasMore() *bool {
+func (o *Pagination) GetHasMore() bool {
 	if o == nil {
-		return nil
+		return false
 	}
 	return o.HasMore
 }

@@ -7,110 +7,54 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  Ratelimit,
-  Ratelimit$inboundSchema,
-  Ratelimit$Outbound,
-  Ratelimit$outboundSchema,
-} from "./ratelimit.js";
-
-/**
- * Attach metadata to this identity that you need to have access to when verifying a key.
- *
- * @remarks
- *
- * This will be returned as part of the `verifyKey` response.
- */
-export type V2IdentitiesCreateIdentityRequestBodyMeta = {};
+  RatelimitRequest,
+  RatelimitRequest$inboundSchema,
+  RatelimitRequest$Outbound,
+  RatelimitRequest$outboundSchema,
+} from "./ratelimitrequest.js";
 
 export type V2IdentitiesCreateIdentityRequestBody = {
   /**
-   * The id of this identity in your system.
+   * Creates an identity using your system's unique identifier for a user, organization, or entity.
    *
    * @remarks
+   * Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
+   * This identifier links Unkey identities to your authentication system, database records, or tenant structure.
    *
-   * This usually comes from your authentication provider and could be a userId, organisationId or even an email.
-   * It does not matter what you use, as long as it uniquely identifies something in your application.
-   *
-   * `externalId`s are unique across your workspace and therefore a `CONFLICT` error is returned when you try to create duplicates.
+   * Avoid changing externalIds after creation as this breaks the link between your systems.
+   * Use consistent identifier patterns across your application for easier management and debugging.
+   * Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+   * Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
    */
   externalId: string;
   /**
-   * Attach metadata to this identity that you need to have access to when verifying a key.
+   * Stores arbitrary JSON metadata returned during key verification for contextual information.
    *
    * @remarks
+   * Eliminates additional database lookups during verification, improving performance for stateless services.
+   * Avoid storing sensitive data here as it's returned in verification responses.
    *
-   * This will be returned as part of the `verifyKey` response.
+   * Large metadata objects increase verification latency and should stay under 10KB total size.
+   * Use this for subscription details, feature flags, user preferences, and organization information.
+   * Metadata is returned as-is whenever keys associated with this identity are verified.
    */
-  meta?: V2IdentitiesCreateIdentityRequestBodyMeta | undefined;
+  meta?: { [k: string]: any } | undefined;
   /**
-   * Attach ratelimits to this identity.
+   * Defines shared rate limits that apply to all keys belonging to this identity.
    *
    * @remarks
+   * Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio.
+   * Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.
    *
-   * When verifying keys, you can specify which limits you want to use and all keys attached to this identity, will share the limits.
+   * Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates.
+   * During verification, specify which named limits to check for enforcement.
+   * Identity rate limits supplement any key-specific rate limits that may also be configured.
+   * - Each named limit can have different thresholds and windows
+   *
+   * When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
    */
-  ratelimits?: Array<Ratelimit> | undefined;
+  ratelimits?: Array<RatelimitRequest> | undefined;
 };
-
-/** @internal */
-export const V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema: z.ZodType<
-  V2IdentitiesCreateIdentityRequestBodyMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-/** @internal */
-export type V2IdentitiesCreateIdentityRequestBodyMeta$Outbound = {};
-
-/** @internal */
-export const V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema:
-  z.ZodType<
-    V2IdentitiesCreateIdentityRequestBodyMeta$Outbound,
-    z.ZodTypeDef,
-    V2IdentitiesCreateIdentityRequestBodyMeta
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace V2IdentitiesCreateIdentityRequestBodyMeta$ {
-  /** @deprecated use `V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema` instead. */
-  export const inboundSchema =
-    V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema;
-  /** @deprecated use `V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema` instead. */
-  export const outboundSchema =
-    V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema;
-  /** @deprecated use `V2IdentitiesCreateIdentityRequestBodyMeta$Outbound` instead. */
-  export type Outbound = V2IdentitiesCreateIdentityRequestBodyMeta$Outbound;
-}
-
-export function v2IdentitiesCreateIdentityRequestBodyMetaToJSON(
-  v2IdentitiesCreateIdentityRequestBodyMeta:
-    V2IdentitiesCreateIdentityRequestBodyMeta,
-): string {
-  return JSON.stringify(
-    V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema.parse(
-      v2IdentitiesCreateIdentityRequestBodyMeta,
-    ),
-  );
-}
-
-export function v2IdentitiesCreateIdentityRequestBodyMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  V2IdentitiesCreateIdentityRequestBodyMeta,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'V2IdentitiesCreateIdentityRequestBodyMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const V2IdentitiesCreateIdentityRequestBody$inboundSchema: z.ZodType<
@@ -119,16 +63,15 @@ export const V2IdentitiesCreateIdentityRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   externalId: z.string(),
-  meta: z.lazy(() => V2IdentitiesCreateIdentityRequestBodyMeta$inboundSchema)
-    .optional(),
-  ratelimits: z.array(Ratelimit$inboundSchema).optional(),
+  meta: z.record(z.any()).optional(),
+  ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
 });
 
 /** @internal */
 export type V2IdentitiesCreateIdentityRequestBody$Outbound = {
   externalId: string;
-  meta?: V2IdentitiesCreateIdentityRequestBodyMeta$Outbound | undefined;
-  ratelimits?: Array<Ratelimit$Outbound> | undefined;
+  meta?: { [k: string]: any } | undefined;
+  ratelimits?: Array<RatelimitRequest$Outbound> | undefined;
 };
 
 /** @internal */
@@ -138,9 +81,8 @@ export const V2IdentitiesCreateIdentityRequestBody$outboundSchema: z.ZodType<
   V2IdentitiesCreateIdentityRequestBody
 > = z.object({
   externalId: z.string(),
-  meta: z.lazy(() => V2IdentitiesCreateIdentityRequestBodyMeta$outboundSchema)
-    .optional(),
-  ratelimits: z.array(Ratelimit$outboundSchema).optional(),
+  meta: z.record(z.any()).optional(),
+  ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
 });
 
 /**

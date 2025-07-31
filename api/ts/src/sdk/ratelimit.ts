@@ -12,28 +12,41 @@ import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Ratelimit extends ClientSDK {
-  async limit(
-    request: components.V2RatelimitLimitRequestBody,
+  /**
+   * Delete ratelimit override
+   *
+   * @remarks
+   * Permanently remove a rate limit override. Affected identifiers immediately revert to the namespace default.
+   *
+   * Use this to remove temporary overrides, reset identifiers to standard limits, or clean up outdated rules.
+   *
+   * **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
+   *
+   * **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+   */
+  async deleteOverride(
+    request: components.V2RatelimitDeleteOverrideRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitLimitResponseBody> {
-    return unwrapAsync(ratelimitLimit(
+  ): Promise<components.V2RatelimitDeleteOverrideResponseBody> {
+    return unwrapAsync(ratelimitDeleteOverride(
       this,
       request,
       options,
     ));
   }
 
-  async setOverride(
-    request: components.V2RatelimitSetOverrideRequestBody,
-    options?: RequestOptions,
-  ): Promise<components.V2RatelimitSetOverrideResponseBody> {
-    return unwrapAsync(ratelimitSetOverride(
-      this,
-      request,
-      options,
-    ));
-  }
-
+  /**
+   * Get ratelimit override
+   *
+   * @remarks
+   * Retrieve the configuration of a specific rate limit override by its identifier.
+   *
+   * Use this to inspect override configurations, audit rate limiting policies, or debug rate limiting behavior.
+   *
+   * **Important:** The identifier must match exactly as specified when creating the override, including wildcard patterns.
+   *
+   * **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+   */
   async getOverride(
     request: components.V2RatelimitGetOverrideRequestBody,
     options?: RequestOptions,
@@ -45,6 +58,49 @@ export class Ratelimit extends ClientSDK {
     ));
   }
 
+  /**
+   * Apply rate limiting
+   *
+   * @remarks
+   * Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
+   *
+   * Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
+   *
+   * **Important**: Always returns HTTP 200. Check the `success` field to determine if the request should proceed.
+   *
+   * **Required Permissions**
+   *
+   * Your root key must have one of the following permissions:
+   * - `ratelimit.*.limit` (to check limits in any namespace)
+   * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
+   *
+   * **Side Effects**
+   *
+   * Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
+   */
+  async limit(
+    request: components.V2RatelimitLimitRequestBody,
+    options?: RequestOptions,
+  ): Promise<components.V2RatelimitLimitResponseBody> {
+    return unwrapAsync(ratelimitLimit(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List ratelimit overrides
+   *
+   * @remarks
+   * Retrieve a paginated list of all rate limit overrides in a namespace.
+   *
+   * Use this to audit rate limiting policies, build admin dashboards, or manage override configurations.
+   *
+   * **Important:** Results are paginated. Use the cursor parameter to retrieve additional pages when more results are available.
+   *
+   * **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+   */
   async listOverrides(
     request: components.V2RatelimitListOverridesRequestBody,
     options?: RequestOptions,
@@ -56,11 +112,23 @@ export class Ratelimit extends ClientSDK {
     ));
   }
 
-  async deleteOverride(
-    request: components.V2RatelimitDeleteOverrideRequestBody,
+  /**
+   * Set ratelimit override
+   *
+   * @remarks
+   * Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
+   *
+   * Use this to create premium tiers with higher limits, apply stricter limits to specific users, or implement emergency throttling.
+   *
+   * **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
+   *
+   * **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+   */
+  async setOverride(
+    request: components.V2RatelimitSetOverrideRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitDeleteOverrideResponseBody> {
-    return unwrapAsync(ratelimitDeleteOverride(
+  ): Promise<components.V2RatelimitSetOverrideResponseBody> {
+    return unwrapAsync(ratelimitSetOverride(
       this,
       request,
       options,

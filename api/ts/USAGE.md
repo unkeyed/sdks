@@ -3,18 +3,14 @@
 import { Unkey } from "@unkey/api";
 
 const unkey = new Unkey({
-  rootKey: "UNKEY_ROOT_KEY",
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "sms.sign_up",
-    duration: 711276,
-    identifier: "<value>",
-    limit: 581877,
+  const result = await unkey.apis.createApi({
+    name: "payment-service-production",
   });
 
-  // Handle the result
   console.log(result);
 }
 
