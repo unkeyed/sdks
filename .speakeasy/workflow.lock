@@ -6,6 +6,7 @@ sources:
         sourceBlobDigest: sha256:4c172c8ad7a09aac2d61f896decd51ced672868f9051c226a1615657ade37d98
         tags:
             - latest
+            - speakeasy-sdk-regen-1753948971
             - 2.0.0
 targets:
     api-go:
@@ -14,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:e97dd711ce1c293625651e24a98c36834efd13fed0229a94071b78981d296fcc
         sourceBlobDigest: sha256:4c172c8ad7a09aac2d61f896decd51ced672868f9051c226a1615657ade37d98
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:fb4dab80e3f01a09fda342e685a7e9ca9bd87e85fafa357323a21a8d7a04d731
+        codeSamplesRevisionDigest: sha256:1c0d29f1a8246716b4f5d08cc2ae6579145a25b4d4a45a7f116091e3ea793ce7
     api-py:
         source: api
         sourceNamespace: api
