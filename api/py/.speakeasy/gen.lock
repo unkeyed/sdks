@@ -5,8 +5,8 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.592.2
   generationVersion: 2.668.4
-  releaseVersion: 0.2.1
-  configChecksum: fedc1708640156731d447a2ddfbfe82b
+  releaseVersion: 0.2.2
+  configChecksum: dbc6247fbd9e1876c04bbad5a82eecaf
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
