@@ -23,7 +23,7 @@ generation:
 go:
   version: 2.0.0
   additionalDependencies: {}
-  allowUnknownFieldsInWeakUnions: false
+  allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
@@ -42,7 +42,6 @@ go:
   methodArguments: require-security-and-request
   modulePath: github.com/unkeyed/sdks/api/go
   outputModelSuffix: output
-  packageName: github.com/unkeyed/sdks/api/go
   responseFormat: envelope-http
   sdkPackageAlias: unkey
   sdkPackageName: ""

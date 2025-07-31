@@ -116,7 +116,7 @@ This structure ensures you always have the context needed to debug issues and ta
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/unkeyed/sdks/api/go
+go get github.com/unkeyed/sdks/api/go/v2
 ```
 <!-- End SDK Installation [installation] -->
 
