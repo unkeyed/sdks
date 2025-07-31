@@ -1,15 +1,15 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: d4a691ba1ccf3f0b1987e15169372d52
+  docChecksum: 57456096efbf3ef53c293a0eeaecc28d
   docVersion: 2.0.0
-  speakeasyVersion: 1.592.2
-  generationVersion: 2.668.4
-  releaseVersion: 2.0.8
-  configChecksum: a7fb54c9ae91feea53fbae86a1d486bf
+  speakeasyVersion: 1.593.0
+  generationVersion: 2.669.0
+  releaseVersion: 2.0.0
+  configChecksum: 96f228cae131ece57a91ceb609567b34
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
-  installationURL: https://github.com/unkeyed/sdks/api/go/v2
+  installationURL: https://github.com/unkeyed/sdks/api/go
 features:
   go:
     additionalDependencies: 0.1.0
@@ -27,7 +27,7 @@ features:
     nullables: 0.1.1
     pagination: 2.82.4
     responseFormat: 0.1.2
-    retries: 2.83.3
+    retries: 2.84.0
     sdkHooks: 0.2.0
 generatedFiles:
   - .gitattributes
@@ -634,7 +634,7 @@ examples:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>"}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
     missingPermission:
       requestBody:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}

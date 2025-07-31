@@ -26,7 +26,7 @@ type Role struct {
 	// Permissions can be added or removed from roles without affecting the role's identity or other properties.
 	// Empty array indicates a role with no permissions currently assigned.
 	//
-	Permissions []Permission `json:"permissions"`
+	Permissions []Permission `json:"permissions,omitempty"`
 }
 
 func (o *Role) GetID() string {
@@ -52,7 +52,7 @@ func (o *Role) GetDescription() *string {
 
 func (o *Role) GetPermissions() []Permission {
 	if o == nil {
-		return []Permission{}
+		return nil
 	}
 	return o.Permissions
 }
