@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: d4a691ba1ccf3f0b1987e15169372d52
+  docChecksum: 57456096efbf3ef53c293a0eeaecc28d
   docVersion: 2.0.0
-  speakeasyVersion: 1.592.2
-  generationVersion: 2.668.4
-  releaseVersion: 2.0.0
-  configChecksum: f18b37aad0a6c0ff25122806abd15c8e
+  speakeasyVersion: 1.593.0
+  generationVersion: 2.669.0
+  releaseVersion: 2.0.1
+  configChecksum: b9de0adce123083fb95efb5ad58bf13b
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -677,7 +677,7 @@ examples:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>"}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
     missingPermission:
       requestBody:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}

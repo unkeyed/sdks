@@ -10,7 +10,15 @@ let value: V2KeysVerifyKeyResponseData = {
   code: "INSUFFICIENT_PERMISSIONS",
   identity: {
     externalId: "<id>",
-    ratelimits: [],
+    ratelimits: [
+      {
+        id: "rl_1234567890abcdef",
+        name: "api_requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
   },
   ratelimits: [
     {

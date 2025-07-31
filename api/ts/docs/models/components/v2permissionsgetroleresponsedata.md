@@ -13,7 +13,15 @@ let value: V2PermissionsGetRoleResponseData = {
     name: "support.readonly",
     description:
       "Provides read-only access for customer support representatives to view user accounts and support tickets",
-    permissions: [],
+    permissions: [
+      {
+        id: "perm_1234567890abcdef",
+        name: "users.read",
+        slug: "users-read",
+        description:
+          "Allows reading user profile information and account details",
+      },
+    ],
   },
 };
 ```
