@@ -18,7 +18,9 @@ import { UnkeyContext, unkey } from "@unkey/hono";
 
 const app = new Hono<{ Variables: { unkey: UnkeyContext } }>();
 
-app.use("*", unkey());
+app.use("*", unkey({
+  rootKey: "unkey_xxxxx"
+}));
 
 
 app.get("/somewhere", (c) => {
