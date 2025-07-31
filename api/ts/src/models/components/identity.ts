@@ -27,7 +27,7 @@ export type Identity = {
    * Identity metadata
    */
   meta?: IdentityMeta | undefined;
-  ratelimits: Array<RatelimitResponse>;
+  ratelimits?: Array<RatelimitResponse> | undefined;
   description?: any | undefined;
 };
 
@@ -83,7 +83,7 @@ export const Identity$inboundSchema: z.ZodType<
 > = z.object({
   externalId: z.string(),
   meta: z.lazy(() => IdentityMeta$inboundSchema).optional(),
-  ratelimits: z.array(RatelimitResponse$inboundSchema),
+  ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
   description: z.any().optional(),
 });
 
@@ -91,7 +91,7 @@ export const Identity$inboundSchema: z.ZodType<
 export type Identity$Outbound = {
   externalId: string;
   meta?: IdentityMeta$Outbound | undefined;
-  ratelimits: Array<RatelimitResponse$Outbound>;
+  ratelimits?: Array<RatelimitResponse$Outbound> | undefined;
   description?: any | undefined;
 };
 
@@ -103,7 +103,7 @@ export const Identity$outboundSchema: z.ZodType<
 > = z.object({
   externalId: z.string(),
   meta: z.lazy(() => IdentityMeta$outboundSchema).optional(),
-  ratelimits: z.array(RatelimitResponse$outboundSchema),
+  ratelimits: z.array(RatelimitResponse$outboundSchema).optional(),
   description: z.any().optional(),
 });
 

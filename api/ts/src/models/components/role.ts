@@ -49,7 +49,7 @@ export type Role = {
    * Permissions can be added or removed from roles without affecting the role's identity or other properties.
    * Empty array indicates a role with no permissions currently assigned.
    */
-  permissions: Array<Permission>;
+  permissions?: Array<Permission> | undefined;
 };
 
 /** @internal */
@@ -58,7 +58,7 @@ export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
     id: z.string(),
     name: z.string(),
     description: z.string().optional(),
-    permissions: z.array(Permission$inboundSchema),
+    permissions: z.array(Permission$inboundSchema).optional(),
   });
 
 /** @internal */
@@ -66,7 +66,7 @@ export type Role$Outbound = {
   id: string;
   name: string;
   description?: string | undefined;
-  permissions: Array<Permission$Outbound>;
+  permissions?: Array<Permission$Outbound> | undefined;
 };
 
 /** @internal */
@@ -75,7 +75,7 @@ export const Role$outboundSchema: z.ZodType<Role$Outbound, z.ZodTypeDef, Role> =
     id: z.string(),
     name: z.string(),
     description: z.string().optional(),
-    permissions: z.array(Permission$outboundSchema),
+    permissions: z.array(Permission$outboundSchema).optional(),
   });
 
 /**

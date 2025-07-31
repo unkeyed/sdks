@@ -36,7 +36,15 @@ let value: KeyResponseData = {
   },
   identity: {
     externalId: "<id>",
-    ratelimits: [],
+    ratelimits: [
+      {
+        id: "rl_1234567890abcdef",
+        name: "api_requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
   },
   plaintext: "sk_test_abc123def456",
   ratelimits: [
