@@ -21,19 +21,19 @@ class RoleTypedDict(TypedDict):
     Names must be unique within your workspace to avoid confusion during role assignment.
 
     """
-    permissions: List[PermissionTypedDict]
-    r"""Complete list of permissions currently assigned to this role.
-    Each permission grants specific access rights that will be inherited by any keys or users assigned this role.
-    Use this list to understand the full scope of access provided by this role.
-    Permissions can be added or removed from roles without affecting the role's identity or other properties.
-    Empty array indicates a role with no permissions currently assigned.
-
-    """
     description: NotRequired[str]
     r"""Optional detailed explanation of what this role encompasses and what access it provides.
     Helps team members understand the role's scope, intended use cases, and security implications.
     Include information about what types of users should receive this role and what they can accomplish.
     Not visible to end users - this is for internal documentation and access control audits.
+
+    """
+    permissions: NotRequired[List[PermissionTypedDict]]
+    r"""Complete list of permissions currently assigned to this role.
+    Each permission grants specific access rights that will be inherited by any keys or users assigned this role.
+    Use this list to understand the full scope of access provided by this role.
+    Permissions can be added or removed from roles without affecting the role's identity or other properties.
+    Empty array indicates a role with no permissions currently assigned.
 
     """
 
@@ -54,19 +54,19 @@ class Role(BaseModel):
 
     """
 
-    permissions: List[Permission]
-    r"""Complete list of permissions currently assigned to this role.
-    Each permission grants specific access rights that will be inherited by any keys or users assigned this role.
-    Use this list to understand the full scope of access provided by this role.
-    Permissions can be added or removed from roles without affecting the role's identity or other properties.
-    Empty array indicates a role with no permissions currently assigned.
-
-    """
-
     description: Optional[str] = None
     r"""Optional detailed explanation of what this role encompasses and what access it provides.
     Helps team members understand the role's scope, intended use cases, and security implications.
     Include information about what types of users should receive this role and what they can accomplish.
     Not visible to end users - this is for internal documentation and access control audits.
+
+    """
+
+    permissions: Optional[List[Permission]] = None
+    r"""Complete list of permissions currently assigned to this role.
+    Each permission grants specific access rights that will be inherited by any keys or users assigned this role.
+    Use this list to understand the full scope of access provided by this role.
+    Permissions can be added or removed from roles without affecting the role's identity or other properties.
+    Empty array indicates a role with no permissions currently assigned.
 
     """

@@ -19,9 +19,9 @@ class IdentityMeta(BaseModel):
 class IdentityTypedDict(TypedDict):
     external_id: str
     r"""External identity ID"""
-    ratelimits: List[RatelimitResponseTypedDict]
     meta: NotRequired[IdentityMetaTypedDict]
     r"""Identity metadata"""
+    ratelimits: NotRequired[List[RatelimitResponseTypedDict]]
     description: NotRequired[Any]
 
 
@@ -29,9 +29,9 @@ class Identity(BaseModel):
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""External identity ID"""
 
-    ratelimits: List[RatelimitResponse]
-
     meta: Optional[IdentityMeta] = None
     r"""Identity metadata"""
+
+    ratelimits: Optional[List[RatelimitResponse]] = None
 
     description: Optional[Any] = None

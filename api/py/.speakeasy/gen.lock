@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: d4a691ba1ccf3f0b1987e15169372d52
+  docChecksum: 57456096efbf3ef53c293a0eeaecc28d
   docVersion: 2.0.0
-  speakeasyVersion: 1.592.2
-  generationVersion: 2.668.4
-  releaseVersion: 2.0.0
-  configChecksum: 3866763e2c9114cbff6d1ac5aab9aefa
+  speakeasyVersion: 1.596.0
+  generationVersion: 2.672.0
+  releaseVersion: 2.0.3
+  configChecksum: 2bac8ed3bedd9be8eed328f5dd254c3f
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
@@ -15,7 +15,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.5
+    core: 5.19.6
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -586,7 +586,7 @@ examples:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>"}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
     missingPermission:
       requestBody:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
