@@ -103,9 +103,11 @@ run();
 
 Permanently delete an API namespace and immediately invalidate all associated keys.
 
-Use this for cleaning up development environments, retiring deprecated services, or removing unused resources. All keys in the namespace are immediately marked as deleted and will fail verification with `code=NOT_FOUND`.
+Use this for cleaning up development environments, retiring deprecated services, or removing unused resources.
+All keys in the namespace are immediately marked as deleted and will fail verification with `code=NOT_FOUND`.
 
-**Important**: This operation is immediate and permanent. Verify you have the correct API ID before deletion. If delete protection is enabled, disable it first through the dashboard or API configuration.
+**Important**: This operation is immediate and permanent. Verify you have the correct API ID before deletion.
+If delete protection is enabled, disable it first through the dashboard or API configuration.
 
 **Required Permissions**
 
@@ -310,7 +312,7 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.apis.listKeys({
     apiId: "api_1234abcd",
-    cursor: "cursor_eyJsYXN0S2V5SWQiOiJrZXlfMjNld3MiLCJsYXN0Q3JlYXRlZEF0IjoxNjcyNTI0MjM0MDAwfQ==",
+    cursor: "key_1234abcd",
     externalId: "user_1234abcd",
   });
 
@@ -337,7 +339,7 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await apisListKeys(unkey, {
     apiId: "api_1234abcd",
-    cursor: "cursor_eyJsYXN0S2V5SWQiOiJrZXlfMjNld3MiLCJsYXN0Q3JlYXRlZEF0IjoxNjcyNTI0MjM0MDAwfQ==",
+    cursor: "key_1234abcd",
     externalId: "user_1234abcd",
   });
   if (res.ok) {

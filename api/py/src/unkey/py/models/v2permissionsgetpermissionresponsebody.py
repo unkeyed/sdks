@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 from .meta import Meta, MetaTypedDict
-from .v2permissionsgetpermissionresponsedata import (
-    V2PermissionsGetPermissionResponseData,
-    V2PermissionsGetPermissionResponseDataTypedDict,
-)
+from .permission import Permission, PermissionTypedDict
 from typing_extensions import TypedDict
 from unkey.py.types import BaseModel
 
@@ -13,13 +10,11 @@ from unkey.py.types import BaseModel
 class V2PermissionsGetPermissionResponseBodyTypedDict(TypedDict):
     meta: MetaTypedDict
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-    data: V2PermissionsGetPermissionResponseDataTypedDict
-    r"""Complete permission details including ID, name, and metadata."""
+    data: PermissionTypedDict
 
 
 class V2PermissionsGetPermissionResponseBody(BaseModel):
     meta: Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
-    data: V2PermissionsGetPermissionResponseData
-    r"""Complete permission details including ID, name, and metadata."""
+    data: Permission

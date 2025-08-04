@@ -31,8 +31,8 @@ class Identities(BaseSDK):
 
         Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
-        > **Important**
-        > Requires `identity.*.create_identity` permission
+        **Important**
+        Requires `identity.*.create_identity` permission
 
 
         :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity. Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors. This identifier links Unkey identities to your authentication system, database records, or tenant structure.  Avoid changing externalIds after creation as this breaks the link between your systems. Use consistent identifier patterns across your application for easier management and debugging. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats. Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
@@ -167,8 +167,8 @@ class Identities(BaseSDK):
 
         Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
-        > **Important**
-        > Requires `identity.*.create_identity` permission
+        **Important**
+        Requires `identity.*.create_identity` permission
 
 
         :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity. Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors. This identifier links Unkey identities to your authentication system, database records, or tenant structure.  Avoid changing externalIds after creation as this breaks the link between your systems. Use consistent identifier patterns across your application for easier management and debugging. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats. Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
@@ -1075,7 +1075,7 @@ class Identities(BaseSDK):
     def update_identity(
         self,
         *,
-        external_id: str,
+        identity: str,
         meta: Optional[Dict[str, Any]] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
@@ -1096,7 +1096,7 @@ class Identities(BaseSDK):
         > Rate limit changes propagate within 30 seconds
 
 
-        :param external_id: Specifies which identity to update using your system's identifier from identity creation. Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+        :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
         :param meta: Replaces all existing metadata with this new metadata object. Omitting this field preserves existing metadata, while providing an empty object clears all metadata. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
         :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits. Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits. These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys. Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
         :param retries: Override the default retry configuration for this method
@@ -1115,7 +1115,7 @@ class Identities(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2IdentitiesUpdateIdentityRequestBody(
-            external_id=external_id,
+            identity=identity,
             meta=meta,
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
@@ -1212,7 +1212,7 @@ class Identities(BaseSDK):
     async def update_identity_async(
         self,
         *,
-        external_id: str,
+        identity: str,
         meta: Optional[Dict[str, Any]] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
@@ -1233,7 +1233,7 @@ class Identities(BaseSDK):
         > Rate limit changes propagate within 30 seconds
 
 
-        :param external_id: Specifies which identity to update using your system's identifier from identity creation. Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+        :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
         :param meta: Replaces all existing metadata with this new metadata object. Omitting this field preserves existing metadata, while providing an empty object clears all metadata. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
         :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits. Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits. These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys. Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
         :param retries: Override the default retry configuration for this method
@@ -1252,7 +1252,7 @@ class Identities(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2IdentitiesUpdateIdentityRequestBody(
-            external_id=external_id,
+            identity=identity,
             meta=meta,
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]

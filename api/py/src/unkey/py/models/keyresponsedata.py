@@ -27,8 +27,6 @@ class KeyResponseDataTypedDict(TypedDict):
     r"""Unix timestamp in milliseconds when key was last updated."""
     expires: NotRequired[int]
     r"""Unix timestamp in milliseconds when key expires (if set)."""
-    external_id: NotRequired[str]
-    r"""External identifier linking this key to an entity in your system."""
     permissions: NotRequired[List[str]]
     roles: NotRequired[List[str]]
     credits: NotRequired[KeyCreditsDataTypedDict]
@@ -63,9 +61,6 @@ class KeyResponseData(BaseModel):
 
     expires: Optional[int] = None
     r"""Unix timestamp in milliseconds when key expires (if set)."""
-
-    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
-    r"""External identifier linking this key to an entity in your system."""
 
     permissions: Optional[List[str]] = None
 

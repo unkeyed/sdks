@@ -2,19 +2,14 @@
 
 from __future__ import annotations
 from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
-import pydantic
 from typing import Any, Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 from unkey.py.types import BaseModel
 
 
 class V2IdentitiesUpdateIdentityRequestBodyTypedDict(TypedDict):
-    external_id: str
-    r"""Specifies which identity to update using your system's identifier from identity creation.
-    Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers.
-    Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-
-    """
+    identity: str
+    r"""The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service)."""
     meta: NotRequired[Dict[str, Any]]
     r"""Replaces all existing metadata with this new metadata object.
     Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
@@ -32,12 +27,8 @@ class V2IdentitiesUpdateIdentityRequestBodyTypedDict(TypedDict):
 
 
 class V2IdentitiesUpdateIdentityRequestBody(BaseModel):
-    external_id: Annotated[str, pydantic.Field(alias="externalId")]
-    r"""Specifies which identity to update using your system's identifier from identity creation.
-    Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers.
-    Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-
-    """
+    identity: str
+    r"""The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service)."""
 
     meta: Optional[Dict[str, Any]] = None
     r"""Replaces all existing metadata with this new metadata object.

@@ -39,8 +39,8 @@ func newIdentities(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hoo
 //
 // Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 //
-// > **Important**
-// > Requires `identity.*.create_identity` permission
+// **Important**
+// Requires `identity.*.create_identity` permission
 func (s *Identities) CreateIdentity(ctx context.Context, request components.V2IdentitiesCreateIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesCreateIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

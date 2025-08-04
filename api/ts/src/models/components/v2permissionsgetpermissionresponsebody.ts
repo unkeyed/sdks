@@ -13,21 +13,18 @@ import {
   Meta$outboundSchema,
 } from "./meta.js";
 import {
-  V2PermissionsGetPermissionResponseData,
-  V2PermissionsGetPermissionResponseData$inboundSchema,
-  V2PermissionsGetPermissionResponseData$Outbound,
-  V2PermissionsGetPermissionResponseData$outboundSchema,
-} from "./v2permissionsgetpermissionresponsedata.js";
+  Permission,
+  Permission$inboundSchema,
+  Permission$Outbound,
+  Permission$outboundSchema,
+} from "./permission.js";
 
 export type V2PermissionsGetPermissionResponseBody = {
   /**
    * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
    */
   meta: Meta;
-  /**
-   * Complete permission details including ID, name, and metadata.
-   */
-  data: V2PermissionsGetPermissionResponseData;
+  data: Permission;
 };
 
 /** @internal */
@@ -37,13 +34,13 @@ export const V2PermissionsGetPermissionResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: V2PermissionsGetPermissionResponseData$inboundSchema,
+  data: Permission$inboundSchema,
 });
 
 /** @internal */
 export type V2PermissionsGetPermissionResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: V2PermissionsGetPermissionResponseData$Outbound;
+  data: Permission$Outbound;
 };
 
 /** @internal */
@@ -53,7 +50,7 @@ export const V2PermissionsGetPermissionResponseBody$outboundSchema: z.ZodType<
   V2PermissionsGetPermissionResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: V2PermissionsGetPermissionResponseData$outboundSchema,
+  data: Permission$outboundSchema,
 });
 
 /**

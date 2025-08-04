@@ -7,12 +7,21 @@ type IdentityMeta struct {
 }
 
 type Identity struct {
+	// Identity ID
+	ID string `json:"id"`
 	// External identity ID
 	ExternalID string `json:"externalId"`
 	// Identity metadata
-	Meta        *IdentityMeta       `json:"meta,omitempty"`
-	Ratelimits  []RatelimitResponse `json:"ratelimits,omitempty"`
-	Description any                 `json:"description,omitempty"`
+	Meta *IdentityMeta `json:"meta,omitempty"`
+	// Identity ratelimits
+	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
+}
+
+func (o *Identity) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
 }
 
 func (o *Identity) GetExternalID() string {
@@ -34,11 +43,4 @@ func (o *Identity) GetRatelimits() []RatelimitResponse {
 		return nil
 	}
 	return o.Ratelimits
-}
-
-func (o *Identity) GetDescription() any {
-	if o == nil {
-		return nil
-	}
-	return o.Description
 }

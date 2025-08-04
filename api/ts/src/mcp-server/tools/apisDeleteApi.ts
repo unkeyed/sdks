@@ -16,9 +16,11 @@ export const tool$apisDeleteApi: ToolDefinition<typeof args> = {
 
 Permanently delete an API namespace and immediately invalidate all associated keys.
 
-Use this for cleaning up development environments, retiring deprecated services, or removing unused resources. All keys in the namespace are immediately marked as deleted and will fail verification with \`code=NOT_FOUND\`.
+Use this for cleaning up development environments, retiring deprecated services, or removing unused resources.
+All keys in the namespace are immediately marked as deleted and will fail verification with \`code=NOT_FOUND\`.
 
-**Important**: This operation is immediate and permanent. Verify you have the correct API ID before deletion. If delete protection is enabled, disable it first through the dashboard or API configuration.
+**Important**: This operation is immediate and permanent. Verify you have the correct API ID before deletion.
+If delete protection is enabled, disable it first through the dashboard or API configuration.
 
 **Required Permissions**
 

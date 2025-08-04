@@ -26,7 +26,7 @@ export type Permission = {
    */
   name: string;
   /**
-   * The URL-safe identifier when this permission was created.
+   * The unique URL-safe identifier for this permission.
    */
   slug: string;
   /**

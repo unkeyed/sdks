@@ -13,6 +13,7 @@ let value: V2KeysVerifyKeyResponseBody = {
     valid: true,
     code: "RATE_LIMITED",
     identity: {
+      id: "<id>",
       externalId: "<id>",
       ratelimits: [
         {

@@ -14,7 +14,7 @@ type Permission struct {
 	// Names must be unique within your workspace to avoid confusion and conflicts.
 	//
 	Name string `json:"name"`
-	// The URL-safe identifier when this permission was created.
+	// The unique URL-safe identifier for this permission.
 	Slug string `json:"slug"`
 	// Optional detailed explanation of what this permission grants access to.
 	// Helps team members understand the scope and implications of granting this permission.

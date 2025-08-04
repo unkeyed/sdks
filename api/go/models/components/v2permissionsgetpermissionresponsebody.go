@@ -4,9 +4,8 @@ package components
 
 type V2PermissionsGetPermissionResponseBody struct {
 	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
-	Meta Meta `json:"meta"`
-	// Complete permission details including ID, name, and metadata.
-	Data V2PermissionsGetPermissionResponseData `json:"data"`
+	Meta Meta       `json:"meta"`
+	Data Permission `json:"data"`
 }
 
 func (o *V2PermissionsGetPermissionResponseBody) GetMeta() Meta {
@@ -16,9 +15,9 @@ func (o *V2PermissionsGetPermissionResponseBody) GetMeta() Meta {
 	return o.Meta
 }
 
-func (o *V2PermissionsGetPermissionResponseBody) GetData() V2PermissionsGetPermissionResponseData {
+func (o *V2PermissionsGetPermissionResponseBody) GetData() Permission {
 	if o == nil {
-		return V2PermissionsGetPermissionResponseData{}
+		return Permission{}
 	}
 	return o.Data
 }

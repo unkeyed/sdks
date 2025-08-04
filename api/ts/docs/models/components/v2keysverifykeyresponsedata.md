@@ -9,6 +9,7 @@ let value: V2KeysVerifyKeyResponseData = {
   valid: true,
   code: "INSUFFICIENT_PERMISSIONS",
   identity: {
+    id: "<id>",
     externalId: "<id>",
     ratelimits: [
       {

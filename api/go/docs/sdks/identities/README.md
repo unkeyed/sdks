@@ -19,8 +19,8 @@ Create an identity to group multiple API keys under a single entity. Identities 
 
 Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
-> **Important**  
-> Requires `identity.*.create_identity` permission
+**Important**
+Requires `identity.*.create_identity` permission
 
 
 ### Example Usage
@@ -296,8 +296,8 @@ Update an identity's metadata and rate limits. Only specified fields are modifie
 
 Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
-> **Important**  
-> Requires `identity.*.update_identity` permission  
+> **Important**
+> Requires `identity.*.update_identity` permission
 > Rate limit changes propagate within 30 seconds
 
 
@@ -323,7 +323,7 @@ func main() {
     )
 
     res, err := s.Identities.UpdateIdentity(ctx, components.V2IdentitiesUpdateIdentityRequestBody{
-        ExternalID: "user_123",
+        Identity: "user_123",
         Meta: map[string]any{
             "email": "alice@example.com",
             "name": "Alice Smith",

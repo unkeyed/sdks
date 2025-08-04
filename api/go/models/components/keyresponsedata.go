@@ -18,9 +18,7 @@ type KeyResponseData struct {
 	// Unix timestamp in milliseconds when key was last updated.
 	UpdatedAt *int64 `json:"updatedAt,omitempty"`
 	// Unix timestamp in milliseconds when key expires (if set).
-	Expires *int64 `json:"expires,omitempty"`
-	// External identifier linking this key to an entity in your system.
-	ExternalID  *string  `json:"externalId,omitempty"`
+	Expires     *int64   `json:"expires,omitempty"`
 	Permissions []string `json:"permissions,omitempty"`
 	Roles       []string `json:"roles,omitempty"`
 	// Credit configuration and remaining balance for this key.
@@ -85,13 +83,6 @@ func (o *KeyResponseData) GetExpires() *int64 {
 		return nil
 	}
 	return o.Expires
-}
-
-func (o *KeyResponseData) GetExternalID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.ExternalID
 }
 
 func (o *KeyResponseData) GetPermissions() []string {

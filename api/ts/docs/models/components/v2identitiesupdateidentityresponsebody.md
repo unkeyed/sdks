@@ -7,6 +7,7 @@ import { V2IdentitiesUpdateIdentityResponseBody } from "@unkey/api/models/compon
 
 let value: V2IdentitiesUpdateIdentityResponseBody = {
   data: {
+    id: "<id>",
     externalId: "<id>",
     ratelimits: [
       {

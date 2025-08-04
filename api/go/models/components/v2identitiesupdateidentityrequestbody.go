@@ -3,11 +3,8 @@
 package components
 
 type V2IdentitiesUpdateIdentityRequestBody struct {
-	// Specifies which identity to update using your system's identifier from identity creation.
-	// Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers.
-	// Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-	//
-	ExternalID string `json:"externalId"`
+	// The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
+	Identity string `json:"identity"`
 	// Replaces all existing metadata with this new metadata object.
 	// Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
 	// Avoid storing sensitive data here as it's returned in verification responses.
@@ -22,11 +19,11 @@ type V2IdentitiesUpdateIdentityRequestBody struct {
 	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
 }
 
-func (o *V2IdentitiesUpdateIdentityRequestBody) GetExternalID() string {
+func (o *V2IdentitiesUpdateIdentityRequestBody) GetIdentity() string {
 	if o == nil {
 		return ""
 	}
-	return o.ExternalID
+	return o.Identity
 }
 
 func (o *V2IdentitiesUpdateIdentityRequestBody) GetMeta() map[string]any {

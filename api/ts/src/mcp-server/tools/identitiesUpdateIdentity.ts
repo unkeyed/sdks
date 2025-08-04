@@ -18,8 +18,8 @@ Update an identity's metadata and rate limits. Only specified fields are modifie
 
 Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
-> **Important**  
-> Requires \`identity.*.update_identity\` permission  
+> **Important**
+> Requires \`identity.*.update_identity\` permission
 > Rate limit changes propagate within 30 seconds
 `,
   args,

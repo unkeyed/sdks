@@ -9,7 +9,6 @@ import (
 type GetAPIResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// API information retrieved successfully. Contains the unique API ID and human-readable name.
-	//
 	V2ApisGetAPIResponseBody *components.V2ApisGetAPIResponseBody
 }
 

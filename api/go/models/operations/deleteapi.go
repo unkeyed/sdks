@@ -9,7 +9,6 @@ import (
 type DeleteAPIResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// API namespace deleted successfully. All associated keys are immediately invalidated and will fail verification with `code=NOT_FOUND`.
-	//
 	V2ApisDeleteAPIResponseBody *components.V2ApisDeleteAPIResponseBody
 }
 

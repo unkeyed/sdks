@@ -19,8 +19,8 @@ Create an identity to group multiple API keys under a single entity. Identities 
 
 Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
-> **Important**  
-> Requires `identity.*.create_identity` permission
+**Important**
+Requires `identity.*.create_identity` permission
 
 
 ### Example Usage
@@ -360,8 +360,8 @@ Update an identity's metadata and rate limits. Only specified fields are modifie
 
 Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
-> **Important**  
-> Requires `identity.*.update_identity` permission  
+> **Important**
+> Requires `identity.*.update_identity` permission
 > Rate limit changes propagate within 30 seconds
 
 
@@ -377,7 +377,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.identities.updateIdentity({
-    externalId: "user_123",
+    identity: "user_123",
     meta: {
       "email": "alice@example.com",
       "name": "Alice Smith",
@@ -407,7 +407,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await identitiesUpdateIdentity(unkey, {
-    externalId: "user_123",
+    identity: "user_123",
     meta: {
       "email": "alice@example.com",
       "name": "Alice Smith",

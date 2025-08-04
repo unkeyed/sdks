@@ -17,7 +17,6 @@ let value: KeyResponseData = {
   createdAt: 1701425400000,
   updatedAt: 1701425400000,
   expires: 1735689600000,
-  externalId: "user_12345",
   permissions: [
     "documents.read",
     "documents.write",
@@ -35,6 +34,7 @@ let value: KeyResponseData = {
     },
   },
   identity: {
+    id: "<id>",
     externalId: "<id>",
     ratelimits: [
       {
@@ -71,7 +71,6 @@ let value: KeyResponseData = {
 | `createdAt`                                                                    | *number*                                                                       | :heavy_check_mark:                                                             | Unix timestamp in milliseconds when key was created.                           | 1701425400000                                                                  |
 | `updatedAt`                                                                    | *number*                                                                       | :heavy_minus_sign:                                                             | Unix timestamp in milliseconds when key was last updated.                      | 1701425400000                                                                  |
 | `expires`                                                                      | *number*                                                                       | :heavy_minus_sign:                                                             | Unix timestamp in milliseconds when key expires (if set).                      | 1735689600000                                                                  |
-| `externalId`                                                                   | *string*                                                                       | :heavy_minus_sign:                                                             | External identifier linking this key to an entity in your system.              | user_12345                                                                     |
 | `permissions`                                                                  | *string*[]                                                                     | :heavy_minus_sign:                                                             | N/A                                                                            | [<br/>"documents.read",<br/>"documents.write"<br/>]                            |
 | `roles`                                                                        | *string*[]                                                                     | :heavy_minus_sign:                                                             | N/A                                                                            | [<br/>"editor",<br/>"viewer"<br/>]                                             |
 | `credits`                                                                      | [components.KeyCreditsData](../../models/components/keycreditsdata.md)         | :heavy_minus_sign:                                                             | Credit configuration and remaining balance for this key.                       |                                                                                |

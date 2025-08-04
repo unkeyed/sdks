@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 57456096efbf3ef53c293a0eeaecc28d
+  docChecksum: eadce45d1ce3a18b5cb7ff0efda8c947
   docVersion: 2.0.0
   speakeasyVersion: 1.596.0
   generationVersion: 2.672.0
-  releaseVersion: 2.0.2
-  configChecksum: 35c52ec3010e198ea50bc319245792ee
+  releaseVersion: 2.0.3
+  configChecksum: 2daba8ebe5aa7b2f36d40ee8da1fe7ac
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -76,7 +76,6 @@ generatedFiles:
   - docs/models/components/v2identitiesdeleteidentityresponsebody.md
   - docs/models/components/v2identitiesgetidentityrequestbody.md
   - docs/models/components/v2identitiesgetidentityresponsebody.md
-  - docs/models/components/v2identitiesgetidentityresponsedata.md
   - docs/models/components/v2identitieslistidentitiesrequestbody.md
   - docs/models/components/v2identitieslistidentitiesresponsebody.md
   - docs/models/components/v2identitiesupdateidentityrequestbody.md
@@ -121,10 +120,8 @@ generatedFiles:
   - docs/models/components/v2permissionsdeleteroleresponsebody.md
   - docs/models/components/v2permissionsgetpermissionrequestbody.md
   - docs/models/components/v2permissionsgetpermissionresponsebody.md
-  - docs/models/components/v2permissionsgetpermissionresponsedata.md
   - docs/models/components/v2permissionsgetrolerequestbody.md
   - docs/models/components/v2permissionsgetroleresponsebody.md
-  - docs/models/components/v2permissionsgetroleresponsedata.md
   - docs/models/components/v2permissionslistpermissionsrequestbody.md
   - docs/models/components/v2permissionslistpermissionsresponsebody.md
   - docs/models/components/v2permissionslistrolesrequestbody.md
@@ -304,7 +301,6 @@ generatedFiles:
   - src/models/components/v2identitiesdeleteidentityresponsebody.ts
   - src/models/components/v2identitiesgetidentityrequestbody.ts
   - src/models/components/v2identitiesgetidentityresponsebody.ts
-  - src/models/components/v2identitiesgetidentityresponsedata.ts
   - src/models/components/v2identitieslistidentitiesrequestbody.ts
   - src/models/components/v2identitieslistidentitiesresponsebody.ts
   - src/models/components/v2identitiesupdateidentityrequestbody.ts
@@ -349,10 +345,8 @@ generatedFiles:
   - src/models/components/v2permissionsdeleteroleresponsebody.ts
   - src/models/components/v2permissionsgetpermissionrequestbody.ts
   - src/models/components/v2permissionsgetpermissionresponsebody.ts
-  - src/models/components/v2permissionsgetpermissionresponsedata.ts
   - src/models/components/v2permissionsgetrolerequestbody.ts
   - src/models/components/v2permissionsgetroleresponsebody.ts
-  - src/models/components/v2permissionsgetroleresponsedata.ts
   - src/models/components/v2permissionslistpermissionsrequestbody.ts
   - src/models/components/v2permissionslistpermissionsresponsebody.ts
   - src/models/components/v2permissionslistrolesrequestbody.ts
@@ -492,7 +486,7 @@ examples:
   listKeys:
     speakeasy-default-list-keys:
       requestBody:
-        application/json: {"apiId": "api_1234abcd", "limit": 100, "cursor": "cursor_eyJsYXN0S2V5SWQiOiJrZXlfMjNld3MiLCJsYXN0Q3JlYXRlZEF0IjoxNjcyNTI0MjM0MDAwfQ==", "externalId": "user_1234abcd", "decrypt": false, "revalidateKeysCache": false}
+        application/json: {"apiId": "api_1234abcd", "limit": 100, "cursor": "key_1234abcd", "externalId": "user_1234abcd", "decrypt": false, "revalidateKeysCache": false}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
@@ -614,7 +608,7 @@ examples:
         application/json: {"identity": "user_abc123"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"externalId": "user_abc123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "<id>", "externalId": "user_abc123", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -630,7 +624,7 @@ examples:
         application/json: {"identity": "user_abc123"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"externalId": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
     missingPermission:
       requestBody:
         application/json: {"identity": "user_abc123"}
@@ -649,7 +643,7 @@ examples:
         application/json: {"limit": 50}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": [{"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -663,7 +657,7 @@ examples:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": [{"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -677,7 +671,7 @@ examples:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"externalId": "<id>"}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": [{"id": "<id>", "externalId": "<id>"}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
     missingPermission:
       requestBody:
         application/json: {"limit": 50, "cursor": "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"}
@@ -687,10 +681,10 @@ examples:
   v2.identities.updateIdentity:
     updateMetadata:
       requestBody:
-        application/json: {"externalId": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}}
+        application/json: {"identity": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}}
       responses:
         "200":
-          application/json: {"data": {"externalId": "<id>", "ratelimits": []}, "meta": {"requestId": "req_123"}}
+          application/json: {"data": {"id": "<id>", "externalId": "<id>", "ratelimits": []}, "meta": {"requestId": "req_123"}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -703,13 +697,13 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     missingPermission:
       requestBody:
-        application/json: {"externalId": "user_abc123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
+        application/json: {"identity": "user_123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
       responses:
         "403":
           application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'identity.*.update_identity' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     identityNotFound:
       requestBody:
-        application/json: {"externalId": "user_abc123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
+        application/json: {"identity": "user_123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "Identity with externalId \"user_123\" not found.", "status": 404, "title": "Not Found", "type": "not_found"}}
@@ -787,7 +781,7 @@ examples:
         application/json: {"keyId": "key_1234abcd", "decrypt": false}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "externalId": "user_12345", "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -903,7 +897,7 @@ examples:
         application/json: {"key": "sk_1234abcdef5678"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "externalId": "user_12345", "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"externalId": "<id>", "ratelimits": []}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": []}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -1013,7 +1007,7 @@ examples:
         application/json: {"permission": "perm_1234567890abcdef"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"permission": {"id": "perm_1234567890abcdef", "name": "users.read", "slug": "users-read", "description": "Allows reading user profile information and account details"}}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "perm_1234567890abcdef", "name": "users.read", "slug": "users-read", "description": "Allows reading user profile information and account details"}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -1030,7 +1024,7 @@ examples:
         application/json: {"role": "role_1234567890abcdef"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"role": {"id": "role_1234567890abcdef", "name": "support.readonly", "description": "Provides read-only access for customer support representatives to view user accounts and support tickets", "permissions": [{"id": "perm_1234567890abcdef", "name": "users.read", "slug": "users-read", "description": "Allows reading user profile information and account details"}]}}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "role_1234567890abcdef", "name": "support.readonly", "description": "Provides read-only access for customer support representatives to view user accounts and support tickets", "permissions": [{"id": "perm_1234567890abcdef", "name": "users.read", "slug": "users-read", "description": "Allows reading user profile information and account details"}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":

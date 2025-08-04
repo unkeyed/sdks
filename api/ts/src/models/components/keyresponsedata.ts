@@ -58,10 +58,6 @@ export type KeyResponseData = {
    * Unix timestamp in milliseconds when key expires (if set).
    */
   expires?: number | undefined;
-  /**
-   * External identifier linking this key to an entity in your system.
-   */
-  externalId?: string | undefined;
   permissions?: Array<string> | undefined;
   roles?: Array<string> | undefined;
   /**
@@ -90,7 +86,6 @@ export const KeyResponseData$inboundSchema: z.ZodType<
   createdAt: z.number().int(),
   updatedAt: z.number().int().optional(),
   expires: z.number().int().optional(),
-  externalId: z.string().optional(),
   permissions: z.array(z.string()).optional(),
   roles: z.array(z.string()).optional(),
   credits: KeyCreditsData$inboundSchema.optional(),
@@ -109,7 +104,6 @@ export type KeyResponseData$Outbound = {
   createdAt: number;
   updatedAt?: number | undefined;
   expires?: number | undefined;
-  externalId?: string | undefined;
   permissions?: Array<string> | undefined;
   roles?: Array<string> | undefined;
   credits?: KeyCreditsData$Outbound | undefined;
@@ -132,7 +126,6 @@ export const KeyResponseData$outboundSchema: z.ZodType<
   createdAt: z.number().int(),
   updatedAt: z.number().int().optional(),
   expires: z.number().int().optional(),
-  externalId: z.string().optional(),
   permissions: z.array(z.string()).optional(),
   roles: z.array(z.string()).optional(),
   credits: KeyCreditsData$outboundSchema.optional(),

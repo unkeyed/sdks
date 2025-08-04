@@ -22,7 +22,6 @@ let value: V2KeysWhoamiResponseBody = {
     createdAt: 1701425400000,
     updatedAt: 1701425400000,
     expires: 1735689600000,
-    externalId: "user_12345",
     permissions: [
       "documents.read",
       "documents.write",
@@ -40,6 +39,7 @@ let value: V2KeysWhoamiResponseBody = {
       },
     },
     identity: {
+      id: "<id>",
       externalId: "<id>",
       ratelimits: [
         {

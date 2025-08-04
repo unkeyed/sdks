@@ -15,13 +15,9 @@ import {
 
 export type V2IdentitiesUpdateIdentityRequestBody = {
   /**
-   * Specifies which identity to update using your system's identifier from identity creation.
-   *
-   * @remarks
-   * Use this when you track identities by your own user IDs, organization IDs, or tenant identifiers.
-   * Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+   * The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
    */
-  externalId: string;
+  identity: string;
   /**
    * Replaces all existing metadata with this new metadata object.
    *
@@ -48,14 +44,14 @@ export const V2IdentitiesUpdateIdentityRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  externalId: z.string(),
+  identity: z.string(),
   meta: z.record(z.any()).optional(),
   ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
 });
 
 /** @internal */
 export type V2IdentitiesUpdateIdentityRequestBody$Outbound = {
-  externalId: string;
+  identity: string;
   meta?: { [k: string]: any } | undefined;
   ratelimits?: Array<RatelimitRequest$Outbound> | undefined;
 };
@@ -66,7 +62,7 @@ export const V2IdentitiesUpdateIdentityRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2IdentitiesUpdateIdentityRequestBody
 > = z.object({
-  externalId: z.string(),
+  identity: z.string(),
   meta: z.record(z.any()).optional(),
   ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
 });

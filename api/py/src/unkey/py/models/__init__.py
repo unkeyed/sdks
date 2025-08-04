@@ -108,10 +108,6 @@ if TYPE_CHECKING:
         V2IdentitiesGetIdentityResponseBody,
         V2IdentitiesGetIdentityResponseBodyTypedDict,
     )
-    from .v2identitiesgetidentityresponsedata import (
-        V2IdentitiesGetIdentityResponseData,
-        V2IdentitiesGetIdentityResponseDataTypedDict,
-    )
     from .v2identitieslistidentitiesrequestbody import (
         V2IdentitiesListIdentitiesRequestBody,
         V2IdentitiesListIdentitiesRequestBodyTypedDict,
@@ -290,10 +286,6 @@ if TYPE_CHECKING:
         V2PermissionsGetPermissionResponseBody,
         V2PermissionsGetPermissionResponseBodyTypedDict,
     )
-    from .v2permissionsgetpermissionresponsedata import (
-        V2PermissionsGetPermissionResponseData,
-        V2PermissionsGetPermissionResponseDataTypedDict,
-    )
     from .v2permissionsgetrolerequestbody import (
         V2PermissionsGetRoleRequestBody,
         V2PermissionsGetRoleRequestBodyTypedDict,
@@ -301,10 +293,6 @@ if TYPE_CHECKING:
     from .v2permissionsgetroleresponsebody import (
         V2PermissionsGetRoleResponseBody,
         V2PermissionsGetRoleResponseBodyTypedDict,
-    )
-    from .v2permissionsgetroleresponsedata import (
-        V2PermissionsGetRoleResponseData,
-        V2PermissionsGetRoleResponseDataTypedDict,
     )
     from .v2permissionslistpermissionsrequestbody import (
         V2PermissionsListPermissionsRequestBody,
@@ -456,8 +444,6 @@ __all__ = [
     "V2IdentitiesGetIdentityRequestBodyTypedDict",
     "V2IdentitiesGetIdentityResponseBody",
     "V2IdentitiesGetIdentityResponseBodyTypedDict",
-    "V2IdentitiesGetIdentityResponseData",
-    "V2IdentitiesGetIdentityResponseDataTypedDict",
     "V2IdentitiesListIdentitiesRequestBody",
     "V2IdentitiesListIdentitiesRequestBodyTypedDict",
     "V2IdentitiesListIdentitiesResponseBody",
@@ -546,14 +532,10 @@ __all__ = [
     "V2PermissionsGetPermissionRequestBodyTypedDict",
     "V2PermissionsGetPermissionResponseBody",
     "V2PermissionsGetPermissionResponseBodyTypedDict",
-    "V2PermissionsGetPermissionResponseData",
-    "V2PermissionsGetPermissionResponseDataTypedDict",
     "V2PermissionsGetRoleRequestBody",
     "V2PermissionsGetRoleRequestBodyTypedDict",
     "V2PermissionsGetRoleResponseBody",
     "V2PermissionsGetRoleResponseBodyTypedDict",
-    "V2PermissionsGetRoleResponseData",
-    "V2PermissionsGetRoleResponseDataTypedDict",
     "V2PermissionsListPermissionsRequestBody",
     "V2PermissionsListPermissionsRequestBodyTypedDict",
     "V2PermissionsListPermissionsResponseBody",
@@ -668,8 +650,6 @@ _dynamic_imports: dict[str, str] = {
     "V2IdentitiesGetIdentityRequestBodyTypedDict": ".v2identitiesgetidentityrequestbody",
     "V2IdentitiesGetIdentityResponseBody": ".v2identitiesgetidentityresponsebody",
     "V2IdentitiesGetIdentityResponseBodyTypedDict": ".v2identitiesgetidentityresponsebody",
-    "V2IdentitiesGetIdentityResponseData": ".v2identitiesgetidentityresponsedata",
-    "V2IdentitiesGetIdentityResponseDataTypedDict": ".v2identitiesgetidentityresponsedata",
     "V2IdentitiesListIdentitiesRequestBody": ".v2identitieslistidentitiesrequestbody",
     "V2IdentitiesListIdentitiesRequestBodyTypedDict": ".v2identitieslistidentitiesrequestbody",
     "V2IdentitiesListIdentitiesResponseBody": ".v2identitieslistidentitiesresponsebody",
@@ -760,14 +740,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PermissionsGetPermissionRequestBodyTypedDict": ".v2permissionsgetpermissionrequestbody",
     "V2PermissionsGetPermissionResponseBody": ".v2permissionsgetpermissionresponsebody",
     "V2PermissionsGetPermissionResponseBodyTypedDict": ".v2permissionsgetpermissionresponsebody",
-    "V2PermissionsGetPermissionResponseData": ".v2permissionsgetpermissionresponsedata",
-    "V2PermissionsGetPermissionResponseDataTypedDict": ".v2permissionsgetpermissionresponsedata",
     "V2PermissionsGetRoleRequestBody": ".v2permissionsgetrolerequestbody",
     "V2PermissionsGetRoleRequestBodyTypedDict": ".v2permissionsgetrolerequestbody",
     "V2PermissionsGetRoleResponseBody": ".v2permissionsgetroleresponsebody",
     "V2PermissionsGetRoleResponseBodyTypedDict": ".v2permissionsgetroleresponsebody",
-    "V2PermissionsGetRoleResponseData": ".v2permissionsgetroleresponsedata",
-    "V2PermissionsGetRoleResponseDataTypedDict": ".v2permissionsgetroleresponsedata",
     "V2PermissionsListPermissionsRequestBody": ".v2permissionslistpermissionsrequestbody",
     "V2PermissionsListPermissionsRequestBodyTypedDict": ".v2permissionslistpermissionsrequestbody",
     "V2PermissionsListPermissionsResponseBody": ".v2permissionslistpermissionsresponsebody",

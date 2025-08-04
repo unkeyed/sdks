@@ -6,6 +6,7 @@
 import { Identity } from "@unkey/api/models/components";
 
 let value: Identity = {
+  id: "<id>",
   externalId: "<id>",
   ratelimits: [
     {
@@ -23,7 +24,7 @@ let value: Identity = {
 
 | Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `id`                                                                           | *string*                                                                       | :heavy_check_mark:                                                             | Identity ID                                                                    |
 | `externalId`                                                                   | *string*                                                                       | :heavy_check_mark:                                                             | External identity ID                                                           |
 | `meta`                                                                         | [components.IdentityMeta](../../models/components/identitymeta.md)             | :heavy_minus_sign:                                                             | Identity metadata                                                              |
-| `ratelimits`                                                                   | [components.RatelimitResponse](../../models/components/ratelimitresponse.md)[] | :heavy_minus_sign:                                                             | N/A                                                                            |
-| `description`                                                                  | *any*                                                                          | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `ratelimits`                                                                   | [components.RatelimitResponse](../../models/components/ratelimitresponse.md)[] | :heavy_minus_sign:                                                             | Identity ratelimits                                                            |

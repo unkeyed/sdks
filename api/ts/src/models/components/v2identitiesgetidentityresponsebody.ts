@@ -7,24 +7,24 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  Identity,
+  Identity$inboundSchema,
+  Identity$Outbound,
+  Identity$outboundSchema,
+} from "./identity.js";
+import {
   Meta,
   Meta$inboundSchema,
   Meta$Outbound,
   Meta$outboundSchema,
 } from "./meta.js";
-import {
-  V2IdentitiesGetIdentityResponseData,
-  V2IdentitiesGetIdentityResponseData$inboundSchema,
-  V2IdentitiesGetIdentityResponseData$Outbound,
-  V2IdentitiesGetIdentityResponseData$outboundSchema,
-} from "./v2identitiesgetidentityresponsedata.js";
 
 export type V2IdentitiesGetIdentityResponseBody = {
   /**
    * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
    */
   meta: Meta;
-  data: V2IdentitiesGetIdentityResponseData;
+  data: Identity;
 };
 
 /** @internal */
@@ -34,13 +34,13 @@ export const V2IdentitiesGetIdentityResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   meta: Meta$inboundSchema,
-  data: V2IdentitiesGetIdentityResponseData$inboundSchema,
+  data: Identity$inboundSchema,
 });
 
 /** @internal */
 export type V2IdentitiesGetIdentityResponseBody$Outbound = {
   meta: Meta$Outbound;
-  data: V2IdentitiesGetIdentityResponseData$Outbound;
+  data: Identity$Outbound;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const V2IdentitiesGetIdentityResponseBody$outboundSchema: z.ZodType<
   V2IdentitiesGetIdentityResponseBody
 > = z.object({
   meta: Meta$outboundSchema,
-  data: V2IdentitiesGetIdentityResponseData$outboundSchema,
+  data: Identity$outboundSchema,
 });
 
 /**

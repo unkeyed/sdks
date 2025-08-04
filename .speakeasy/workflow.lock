@@ -2,8 +2,8 @@ speakeasyVersion: 1.596.0
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:c46c7b5cfcced8b2a663d7029883cd791b7fa066753481947e69f61708f2d372
-        sourceBlobDigest: sha256:4374fac9888384537a315ae3e9d9f87be1323215dd67a5a78988dd24ccf86e4b
+        sourceRevisionDigest: sha256:021bf16ce97014d0249bb12134b57db7d276b00bfe3c0caf8505c2f271d61d41
+        sourceBlobDigest: sha256:074d9febddb2fb2b94af093a21095742d57670d77b98934a0fc69091b94187e5
         tags:
             - latest
             - 2.0.0
@@ -11,24 +11,24 @@ targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:c46c7b5cfcced8b2a663d7029883cd791b7fa066753481947e69f61708f2d372
-        sourceBlobDigest: sha256:4374fac9888384537a315ae3e9d9f87be1323215dd67a5a78988dd24ccf86e4b
+        sourceRevisionDigest: sha256:021bf16ce97014d0249bb12134b57db7d276b00bfe3c0caf8505c2f271d61d41
+        sourceBlobDigest: sha256:074d9febddb2fb2b94af093a21095742d57670d77b98934a0fc69091b94187e5
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:fb109468b2d1fa5ab06d027ddf19750e97d463f7da475e8ceef4b11cd7cb3f9f
+        codeSamplesRevisionDigest: sha256:467c2f82d6db9585f3eef20cd732c16944d481e3abd3548ed432c1c5462ccaae
     api-py:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:c46c7b5cfcced8b2a663d7029883cd791b7fa066753481947e69f61708f2d372
-        sourceBlobDigest: sha256:4374fac9888384537a315ae3e9d9f87be1323215dd67a5a78988dd24ccf86e4b
+        sourceRevisionDigest: sha256:021bf16ce97014d0249bb12134b57db7d276b00bfe3c0caf8505c2f271d61d41
+        sourceBlobDigest: sha256:074d9febddb2fb2b94af093a21095742d57670d77b98934a0fc69091b94187e5
         codeSamplesNamespace: api-python-code-samples
-        codeSamplesRevisionDigest: sha256:f0f3a2d06f650b0786a6e7ec63f95342ecb75659ad5595f2d00f967e65278e43
+        codeSamplesRevisionDigest: sha256:8fcae1dce719c23070a087ace9d5a7bf0e514ebf13214e1896873fd00a4b007a
     api-ts:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:c46c7b5cfcced8b2a663d7029883cd791b7fa066753481947e69f61708f2d372
-        sourceBlobDigest: sha256:4374fac9888384537a315ae3e9d9f87be1323215dd67a5a78988dd24ccf86e4b
+        sourceRevisionDigest: sha256:021bf16ce97014d0249bb12134b57db7d276b00bfe3c0caf8505c2f271d61d41
+        sourceBlobDigest: sha256:074d9febddb2fb2b94af093a21095742d57670d77b98934a0fc69091b94187e5
         codeSamplesNamespace: api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:45db0b45091c2b12374f5742ceb3227e4e1a467f97621c9d3f74dbab3ec961ee
+        codeSamplesRevisionDigest: sha256:6e584f967242de1a2b375ef8612005b8378e7b9d4c143bb1003579d8f231d5ca
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

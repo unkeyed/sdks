@@ -18,8 +18,8 @@ Create an identity to group multiple API keys under a single entity. Identities 
 
 Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
-> **Important**  
-> Requires \`identity.*.create_identity\` permission
+**Important**
+Requires \`identity.*.create_identity\` permission
 `,
   args,
   tool: async (client, args, ctx) => {

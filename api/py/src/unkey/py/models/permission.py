@@ -21,7 +21,7 @@ class PermissionTypedDict(TypedDict):
 
     """
     slug: str
-    r"""The URL-safe identifier when this permission was created."""
+    r"""The unique URL-safe identifier for this permission."""
     description: NotRequired[str]
     r"""Optional detailed explanation of what this permission grants access to.
     Helps team members understand the scope and implications of granting this permission.
@@ -48,7 +48,7 @@ class Permission(BaseModel):
     """
 
     slug: str
-    r"""The URL-safe identifier when this permission was created."""
+    r"""The unique URL-safe identifier for this permission."""
 
     description: Optional[str] = None
     r"""Optional detailed explanation of what this permission grants access to.
