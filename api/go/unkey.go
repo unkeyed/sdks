@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.668.4
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.672.0
 
 import (
 	"context"
@@ -218,7 +218,7 @@ func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
 		SDKVersion: "2.0.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.0.0 2.668.4 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.0.0 2.672.0 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
