@@ -1,6 +1,6 @@
 {
   "name": "@unkey/nextjs",
-  "version": "2.0.0-canary.1",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@unkey/api": "^2.0.0"
+    "@unkey/api": "^2.0.3"
   },
   "packageManager": "pnpm@8.14.1+sha256.2df78e65d433d7693b9d3fbdaf431b2d96bb4f96a2ffecd51a50efe16e50a6a8"
 }
