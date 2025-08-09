@@ -59,7 +59,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.3",
+    version: "2.0.4",
   });
 
   const client = new UnkeyCore({
