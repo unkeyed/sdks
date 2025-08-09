@@ -29,7 +29,8 @@ import { Result } from "../types/fp.js";
  * List permissions
  *
  * @remarks
- * Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+ * Retrieve all permissions in your workspace.
+ * Results are paginated and sorted by their id.
  *
  * **Required Permissions**
  *
