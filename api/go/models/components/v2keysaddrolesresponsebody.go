@@ -10,7 +10,6 @@ type V2KeysAddRolesResponseBody struct {
 	// The response includes:
 	// - All roles now assigned to the key (both pre-existing and newly added)
 	// - Both ID and name of each role for easy reference
-	// - Roles sorted alphabetically by name for consistent response format
 	//
 	// Important notes:
 	// - The response shows the complete current state after the addition
