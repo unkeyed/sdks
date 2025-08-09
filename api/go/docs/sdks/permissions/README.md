@@ -426,7 +426,8 @@ func main() {
 
 ## ListPermissions
 
-Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+Retrieve all permissions in your workspace. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 
@@ -492,7 +493,8 @@ func main() {
 
 ## ListRoles
 
-Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+Retrieve all roles in your workspace including their assigned permissions. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 
