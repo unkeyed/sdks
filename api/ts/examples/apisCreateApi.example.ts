@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @unkey/api SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx apisCreateApi.ts
+ * npm run build && npx tsx apisCreateApi.example.ts
  */
 
 import { Unkey } from "@unkey/api";

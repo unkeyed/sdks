@@ -21,7 +21,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.3
+  version: 2.0.4
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -57,4 +57,5 @@ typescript:
   packageName: '@unkey/api'
   responseFormat: flat
   templateVersion: v2
+  usageSDKInitImports: []
   useIndexModules: true

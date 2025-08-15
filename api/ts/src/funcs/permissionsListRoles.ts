@@ -29,7 +29,8 @@ import { Result } from "../types/fp.js";
  * List roles
  *
  * @remarks
- * Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+ * Retrieve all roles in your workspace including their assigned permissions.
+ * Results are paginated and sorted by their id.
  *
  * **Required Permissions**
  *

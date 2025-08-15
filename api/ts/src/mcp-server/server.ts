@@ -29,6 +29,7 @@ import { tool$keysDeleteKey } from "./tools/keysDeleteKey.js";
 import { tool$keysGetKey } from "./tools/keysGetKey.js";
 import { tool$keysRemovePermissions } from "./tools/keysRemovePermissions.js";
 import { tool$keysRemoveRoles } from "./tools/keysRemoveRoles.js";
+import { tool$keysRerollKey } from "./tools/keysRerollKey.js";
 import { tool$keysSetPermissions } from "./tools/keysSetPermissions.js";
 import { tool$keysSetRoles } from "./tools/keysSetRoles.js";
 import { tool$keysUpdateCredits } from "./tools/keysUpdateCredits.js";
@@ -59,7 +60,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.3",
+    version: "2.0.4",
   });
 
   const client = new UnkeyCore({
@@ -105,6 +106,7 @@ export function createMCPServer(deps: {
   tool(tool$keysGetKey);
   tool(tool$keysRemovePermissions);
   tool(tool$keysRemoveRoles);
+  tool(tool$keysRerollKey);
   tool(tool$keysSetPermissions);
   tool(tool$keysSetRoles);
   tool(tool$keysUpdateCredits);
