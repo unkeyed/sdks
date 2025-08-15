@@ -9,7 +9,6 @@ type V2KeysAddPermissionsResponseBody struct {
 	//
 	// This response includes:
 	// - All direct permissions assigned to the key (both pre-existing and newly added)
-	// - Permissions sorted alphabetically by name for consistent response format
 	// - Both the permission ID and name for each permission
 	//
 	// Important notes:
