@@ -14,7 +14,8 @@ export const tool$permissionsListRoles: ToolDefinition<typeof args> = {
   name: "permissions-list-roles",
   description: `List roles
 
-Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+Retrieve all roles in your workspace including their assigned permissions. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 

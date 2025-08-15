@@ -327,6 +327,7 @@ run();
 * [getKey](docs/sdks/keys/README.md#getkey) - Get API key
 * [removePermissions](docs/sdks/keys/README.md#removepermissions) - Remove key permissions
 * [removeRoles](docs/sdks/keys/README.md#removeroles) - Remove key roles
+* [rerollKey](docs/sdks/keys/README.md#rerollkey) - Reroll Key
 * [setPermissions](docs/sdks/keys/README.md#setpermissions) - Set key permissions
 * [setRoles](docs/sdks/keys/README.md#setroles) - Set key roles
 * [updateCredits](docs/sdks/keys/README.md#updatecredits) - Update key credits
@@ -388,6 +389,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`keysGetKey`](docs/sdks/keys/README.md#getkey) - Get API key
 - [`keysRemovePermissions`](docs/sdks/keys/README.md#removepermissions) - Remove key permissions
 - [`keysRemoveRoles`](docs/sdks/keys/README.md#removeroles) - Remove key roles
+- [`keysRerollKey`](docs/sdks/keys/README.md#rerollkey) - Reroll Key
 - [`keysSetPermissions`](docs/sdks/keys/README.md#setpermissions) - Set key permissions
 - [`keysSetRoles`](docs/sdks/keys/README.md#setroles) - Set key roles
 - [`keysUpdateCredits`](docs/sdks/keys/README.md#updatecredits) - Update key credits
@@ -585,8 +587,8 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 35 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 35 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 36 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 36 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
