@@ -231,6 +231,7 @@ func main() {
 * [GetKey](docs/sdks/keys/README.md#getkey) - Get API key
 * [RemovePermissions](docs/sdks/keys/README.md#removepermissions) - Remove key permissions
 * [RemoveRoles](docs/sdks/keys/README.md#removeroles) - Remove key roles
+* [RerollKey](docs/sdks/keys/README.md#rerollkey) - Reroll Key
 * [SetPermissions](docs/sdks/keys/README.md#setpermissions) - Set key permissions
 * [SetRoles](docs/sdks/keys/README.md#setroles) - Set key roles
 * [UpdateCredits](docs/sdks/keys/README.md#updatecredits) - Update key credits

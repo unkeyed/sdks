@@ -10,7 +10,6 @@ type V2KeysRemoveRolesResponseBody struct {
 	// The response includes:
 	// - The remaining roles still assigned to the key (after removing the specified roles)
 	// - Both ID and name for each role for easy reference
-	// - Roles sorted alphabetically by name for consistent response format
 	//
 	// Important notes:
 	// - The response reflects the current state after the removal operation
