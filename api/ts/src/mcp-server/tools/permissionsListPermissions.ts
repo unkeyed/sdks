@@ -14,7 +14,8 @@ export const tool$permissionsListPermissions: ToolDefinition<typeof args> = {
   name: "permissions-list-permissions",
   description: `List permissions
 
-Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+Retrieve all permissions in your workspace. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 

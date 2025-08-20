@@ -14,6 +14,7 @@ API key management operations
 * [GetKey](#getkey) - Get API key
 * [RemovePermissions](#removepermissions) - Remove key permissions
 * [RemoveRoles](#removeroles) - Remove key roles
+* [RerollKey](#rerollkey) - Reroll Key
 * [SetPermissions](#setpermissions) - Set key permissions
 * [SetRoles](#setroles) - Set key roles
 * [UpdateCredits](#updatecredits) - Update key credits
@@ -586,6 +587,99 @@ func main() {
 ### Response
 
 **[*operations.RemoveRolesResponse](../../models/operations/removerolesresponse.md), error**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
+| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
+| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
+| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
+| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
+| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+
+## RerollKey
+
+Generate a new API key while preserving the configuration from an existing key.
+
+This operation creates a fresh key with a new token while maintaining all settings from the original key:
+- Permissions and roles
+- Custom metadata
+- Rate limit configurations
+- Identity associations
+- Remaining credits
+- Recovery settings
+
+**Key Generation:**
+- The system attempts to extract the prefix from the original key
+- If prefix extraction fails, the default API prefix is used
+- Key length follows the API's default byte configuration (or 16 bytes if not specified)
+
+**Original Key Handling:**
+- The original key will be revoked after the duration specified in `expiration`
+- Set `expiration` to 0 to revoke immediately
+- This allows for graceful key rotation with an overlap period
+
+Common use cases include:
+- Rotating keys for security compliance
+- Issuing replacement keys for compromised credentials
+- Creating backup keys with identical permissions
+
+**Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
+
+**Required Permissions**
+
+ Your root key must have:
+ - `api.*.create_key` or `api.<api_id>.create_key`
+ - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="rerollKey" method="post" path="/v2/keys.rerollKey" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Keys.RerollKey(ctx, components.V2KeysRerollKeyRequestBody{
+        KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
+        Expiration: 86400000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2KeysRerollKeyResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [components.V2KeysRerollKeyRequestBody](../../models/components/v2keysrerollkeyrequestbody.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.RerollKeyResponse](../../models/operations/rerollkeyresponse.md), error**
 
 ### Errors
 

@@ -1,6 +1,6 @@
 {
   "name": "@unkey/api",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -52,8 +52,8 @@
     "express": "^4.21.2",
     "globals": "^15.14.0",
     "tshy": "^2.0.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.22.0"
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
     "zod": "^3.20.0"

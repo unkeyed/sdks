@@ -1,15 +1,15 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: eadce45d1ce3a18b5cb7ff0efda8c947
+  docChecksum: 2429216e9412a2205c264a18850bba67
   docVersion: 2.0.0
-  speakeasyVersion: 1.596.0
-  generationVersion: 2.672.0
-  releaseVersion: 2.0.1
-  configChecksum: af15bd104e1d88f0861775a21a501e95
+  speakeasyVersion: 1.604.2
+  generationVersion: 2.683.1
+  releaseVersion: 2.0.2
+  configChecksum: 856bbb55fc7e73845a218e8f3da27b5c
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
-  installationURL: https://github.com/unkeyed/sdks/api/go/v2
+  installationURL: https://github.com/unkeyed/sdks/api/go
 features:
   go:
     additionalDependencies: 0.1.0
@@ -27,7 +27,7 @@ features:
     nullables: 0.1.1
     pagination: 2.82.4
     responseFormat: 0.1.2
-    retries: 2.84.0
+    retries: 2.84.2
     sdkHooks: 0.2.0
 generatedFiles:
   - .gitattributes
@@ -92,6 +92,9 @@ generatedFiles:
   - /models/components/v2keysremovepermissionsresponsebody.go
   - /models/components/v2keysremoverolesrequestbody.go
   - /models/components/v2keysremoverolesresponsebody.go
+  - /models/components/v2keysrerollkeyrequestbody.go
+  - /models/components/v2keysrerollkeyresponsebody.go
+  - /models/components/v2keysrerollkeyresponsedata.go
   - /models/components/v2keyssetpermissionsrequestbody.go
   - /models/components/v2keyssetpermissionsresponsebody.go
   - /models/components/v2keyssetrolesrequestbody.go
@@ -165,6 +168,7 @@ generatedFiles:
   - /models/operations/ratelimitsetoverride.go
   - /models/operations/removepermissions.go
   - /models/operations/removeroles.go
+  - /models/operations/rerollkey.go
   - /models/operations/setpermissions.go
   - /models/operations/setroles.go
   - /models/operations/updatecredits.go
@@ -240,6 +244,9 @@ generatedFiles:
   - docs/models/components/v2keysremovepermissionsresponsebody.md
   - docs/models/components/v2keysremoverolesrequestbody.md
   - docs/models/components/v2keysremoverolesresponsebody.md
+  - docs/models/components/v2keysrerollkeyrequestbody.md
+  - docs/models/components/v2keysrerollkeyresponsebody.md
+  - docs/models/components/v2keysrerollkeyresponsedata.md
   - docs/models/components/v2keyssetpermissionsrequestbody.md
   - docs/models/components/v2keyssetpermissionsresponsebody.md
   - docs/models/components/v2keyssetrolesrequestbody.md
@@ -314,6 +321,7 @@ generatedFiles:
   - docs/models/operations/ratelimitsetoverrideresponse.md
   - docs/models/operations/removepermissionsresponse.md
   - docs/models/operations/removerolesresponse.md
+  - docs/models/operations/rerollkeyresponse.md
   - docs/models/operations/setpermissionsresponse.md
   - docs/models/operations/setrolesresponse.md
   - docs/models/operations/updatecreditsresponse.md
@@ -1265,5 +1273,22 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "This namespace does not exist.", "status": 404, "title": "Not Found", "type": "not_found"}}
+  rerollKey:
+    speakeasy-default-reroll-key:
+      requestBody:
+        application/json: {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "expiration": 86400000}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "key": "prod_2cGKbMxRjIzhCxo1IdjH3arELti7Sdyc8w6XYbvtcyuBowPT"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}

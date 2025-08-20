@@ -27,17 +27,17 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@types/node": "^20.14.9",
+    "@types/node": "^24.2.0",
     "@vitest/ui": "3.2.4",
-    "hono": "^4.6.3",
+    "hono": "^4.8.12",
     "msw": "^2.8.7",
     "tsup": "^8.0.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4",
-    "zod": "^3.23.5"
+    "zod": "^4.0.14"
   },
   "dependencies": {
-    "@unkey/api": "^2.0.0"
+    "@unkey/api": "^2.0.3"
   },
   "peerDependencies": {
     "hono": "^4.6.3"

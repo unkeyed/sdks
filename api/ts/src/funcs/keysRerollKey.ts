@@ -26,27 +26,53 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List permissions
+ * Reroll Key
  *
  * @remarks
- * Retrieve all permissions in your workspace.
- * Results are paginated and sorted by their id.
+ * Generate a new API key while preserving the configuration from an existing key.
+ *
+ * This operation creates a fresh key with a new token while maintaining all settings from the original key:
+ * - Permissions and roles
+ * - Custom metadata
+ * - Rate limit configurations
+ * - Identity associations
+ * - Remaining credits
+ * - Recovery settings
+ *
+ * **Key Generation:**
+ * - The system attempts to extract the prefix from the original key
+ * - If prefix extraction fails, the default API prefix is used
+ * - Key length follows the API's default byte configuration (or 16 bytes if not specified)
+ *
+ * **Original Key Handling:**
+ * - The original key will be revoked after the duration specified in `expiration`
+ * - Set `expiration` to 0 to revoke immediately
+ * - This allows for graceful key rotation with an overlap period
+ *
+ * Common use cases include:
+ * - Rotating keys for security compliance
+ * - Issuing replacement keys for compromised credentials
+ * - Creating backup keys with identical permissions
+ *
+ * **Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
  *
  * **Required Permissions**
  *
- * Your root key must have the following permission:
- * - `rbac.*.read_permission`
+ *  Your root key must have:
+ *  - `api.*.create_key` or `api.<api_id>.create_key`
+ *  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
  */
-export function permissionsListPermissions(
+export function keysRerollKey(
   client: UnkeyCore,
-  request: components.V2PermissionsListPermissionsRequestBody,
+  request: components.V2KeysRerollKeyRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2PermissionsListPermissionsResponseBody,
+    components.V2KeysRerollKeyResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
+    | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -67,15 +93,16 @@ export function permissionsListPermissions(
 
 async function $do(
   client: UnkeyCore,
-  request: components.V2PermissionsListPermissionsRequestBody,
+  request: components.V2KeysRerollKeyRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.V2PermissionsListPermissionsResponseBody,
+      components.V2KeysRerollKeyResponseBody,
       | errors.BadRequestErrorResponse
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
+      | errors.NotFoundErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -92,9 +119,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.V2PermissionsListPermissionsRequestBody$outboundSchema.parse(
-        value,
-      ),
+      components.V2KeysRerollKeyRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -103,7 +128,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/permissions.listPermissions")();
+  const path = pathToFunc("/v2/keys.rerollKey")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -117,7 +142,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listPermissions",
+    operationID: "rerollKey",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -156,7 +181,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -170,10 +195,11 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.V2PermissionsListPermissionsResponseBody,
+    components.V2KeysRerollKeyResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
+    | errors.NotFoundErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -184,13 +210,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      components.V2PermissionsListPermissionsResponseBody$inboundSchema,
-    ),
+    M.json(200, components.V2KeysRerollKeyResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
+    M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

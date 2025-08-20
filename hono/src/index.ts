@@ -75,10 +75,8 @@ export function unkey(config: UnkeyConfig): MiddlewareHandler {
       if (!res.data.valid && config.handleInvalidKey) {
         return config.handleInvalidKey(c, res);
       }
-
       c.set("unkey", res);
     } catch (err) {
-      console.error("OH NO", err);
       if (err instanceof errors.APIError) {
         if (config.onError) {
           return config.onError(c, err);

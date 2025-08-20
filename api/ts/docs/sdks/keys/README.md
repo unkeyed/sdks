@@ -14,6 +14,7 @@ API key management operations
 * [getKey](#getkey) - Get API key
 * [removePermissions](#removepermissions) - Remove key permissions
 * [removeRoles](#removeroles) - Remove key roles
+* [rerollKey](#rerollkey) - Reroll Key
 * [setPermissions](#setpermissions) - Set key permissions
 * [setRoles](#setroles) - Set key roles
 * [updateCredits](#updatecredits) - Update key credits
@@ -768,6 +769,118 @@ run();
 ### Response
 
 **Promise\<[components.V2KeysRemoveRolesResponseBody](../../models/components/v2keysremoverolesresponsebody.md)\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
+## rerollKey
+
+Generate a new API key while preserving the configuration from an existing key.
+
+This operation creates a fresh key with a new token while maintaining all settings from the original key:
+- Permissions and roles
+- Custom metadata
+- Rate limit configurations
+- Identity associations
+- Remaining credits
+- Recovery settings
+
+**Key Generation:**
+- The system attempts to extract the prefix from the original key
+- If prefix extraction fails, the default API prefix is used
+- Key length follows the API's default byte configuration (or 16 bytes if not specified)
+
+**Original Key Handling:**
+- The original key will be revoked after the duration specified in `expiration`
+- Set `expiration` to 0 to revoke immediately
+- This allows for graceful key rotation with an overlap period
+
+Common use cases include:
+- Rotating keys for security compliance
+- Issuing replacement keys for compromised credentials
+- Creating backup keys with identical permissions
+
+**Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
+
+**Required Permissions**
+
+ Your root key must have:
+ - `api.*.create_key` or `api.<api_id>.create_key`
+ - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="rerollKey" method="post" path="/v2/keys.rerollKey" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.keys.rerollKey({
+    keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
+    expiration: 86400000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { keysRerollKey } from "@unkey/api/funcs/keysRerollKey.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await keysRerollKey(unkey, {
+    keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
+    expiration: 86400000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("keysRerollKey failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2KeysRerollKeyRequestBody](../../models/components/v2keysrerollkeyrequestbody.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2KeysRerollKeyResponseBody](../../models/components/v2keysrerollkeyresponsebody.md)\>**
 
 ### Errors
 

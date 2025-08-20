@@ -9,6 +9,7 @@ import { keysDeleteKey } from "../funcs/keysDeleteKey.js";
 import { keysGetKey } from "../funcs/keysGetKey.js";
 import { keysRemovePermissions } from "../funcs/keysRemovePermissions.js";
 import { keysRemoveRoles } from "../funcs/keysRemoveRoles.js";
+import { keysRerollKey } from "../funcs/keysRerollKey.js";
 import { keysSetPermissions } from "../funcs/keysSetPermissions.js";
 import { keysSetRoles } from "../funcs/keysSetRoles.js";
 import { keysUpdateCredits } from "../funcs/keysUpdateCredits.js";
@@ -227,6 +228,54 @@ export class Keys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.V2KeysRemoveRolesResponseBody> {
     return unwrapAsync(keysRemoveRoles(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Reroll Key
+   *
+   * @remarks
+   * Generate a new API key while preserving the configuration from an existing key.
+   *
+   * This operation creates a fresh key with a new token while maintaining all settings from the original key:
+   * - Permissions and roles
+   * - Custom metadata
+   * - Rate limit configurations
+   * - Identity associations
+   * - Remaining credits
+   * - Recovery settings
+   *
+   * **Key Generation:**
+   * - The system attempts to extract the prefix from the original key
+   * - If prefix extraction fails, the default API prefix is used
+   * - Key length follows the API's default byte configuration (or 16 bytes if not specified)
+   *
+   * **Original Key Handling:**
+   * - The original key will be revoked after the duration specified in `expiration`
+   * - Set `expiration` to 0 to revoke immediately
+   * - This allows for graceful key rotation with an overlap period
+   *
+   * Common use cases include:
+   * - Rotating keys for security compliance
+   * - Issuing replacement keys for compromised credentials
+   * - Creating backup keys with identical permissions
+   *
+   * **Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
+   *
+   * **Required Permissions**
+   *
+   *  Your root key must have:
+   *  - `api.*.create_key` or `api.<api_id>.create_key`
+   *  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+   */
+  async rerollKey(
+    request: components.V2KeysRerollKeyRequestBody,
+    options?: RequestOptions,
+  ): Promise<components.V2KeysRerollKeyResponseBody> {
+    return unwrapAsync(keysRerollKey(
       this,
       request,
       options,
