@@ -1,7 +1,6 @@
 import type { Duration } from "./duration";
 
-
-export type Cache = Map<string, RatelimitResponse>
+export type Cache = Map<string, RatelimitResponse>;
 
 export type Limit = {
   /**
