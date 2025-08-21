@@ -226,6 +226,64 @@ describe("Ratelimit Core Functionality", () => {
       // Error handler should not be called for timeout
       expect(errorHandlerCalled).toBe(false);
     });
+
+    test("should use onError handler for API errors like 404", async () => {
+      const { cleanup } = createTestServer([handlers.error(404, "Not Found")]);
+      cleanupFunctions.push(cleanup);
+
+      let errorHandlerCalled = false;
+      let caughtError: any = null;
+
+      const rl = createTestRatelimit({
+        timeout: false,
+        onError: (error: Error, identifier: string) => {
+          errorHandlerCalled = true;
+          caughtError = error;
+          expect(identifier).toBe("api-error-user");
+          return {
+            success: false,
+            limit: 0,
+            remaining: 0,
+            reset: Date.now(),
+          };
+        },
+      });
+
+      const result = await rl.limit("api-error-user");
+
+      expect(errorHandlerCalled).toBe(true);
+      expect(caughtError).toBeTruthy();
+      expect(result.success).toBe(false);
+      expect(result.limit).toBe(0);
+    });
+
+    test("should use onError handler for API errors like 401", async () => {
+      const { cleanup } = createTestServer([
+        handlers.error(401, "Unauthorized"),
+      ]);
+      cleanupFunctions.push(cleanup);
+
+      let errorHandlerCalled = false;
+      const rl = createTestRatelimit({
+        timeout: false,
+        onError: (error: Error, identifier: string) => {
+          errorHandlerCalled = true;
+          expect(error.message).toContain("API error occurred");
+          expect(identifier).toBe("auth-error-user");
+          return {
+            success: false,
+            limit: 0,
+            remaining: 0,
+            reset: Date.now(),
+          };
+        },
+      });
+
+      const result = await rl.limit("auth-error-user");
+
+      expect(errorHandlerCalled).toBe(true);
+      expect(result.success).toBe(false);
+    });
   });
 
   describe("Caching Behavior", () => {

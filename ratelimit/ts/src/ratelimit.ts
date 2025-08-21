@@ -1,5 +1,5 @@
 import { Unkey } from "@unkey/api";
-import { APIError } from "@unkey/api/models/errors";
+import { UnkeyError } from "@unkey/api/models/errors/unkeyerror";
 import { type Duration, ms } from "./duration";
 import type { Ratelimiter } from "./interface";
 import type { Cache, Limit, LimitOptions, RatelimitResponse } from "./types";
@@ -163,22 +163,29 @@ export class Ratelimit implements Ratelimiter {
     opts?: LimitOptions,
   ): Promise<RatelimitResponse> {
     try {
-      return this._limit(
+      return await this._limit(
         identifier,
         opts?.limit?.limit ?? this.config.limit,
         ms(opts?.limit?.duration ?? this.config.duration),
         opts?.cost ?? 1,
       );
     } catch (e) {
-      if (!this.config.onError) {
+      if (typeof this.config.onError !== "function") {
         throw e;
       }
-      const err = e instanceof Error ? e : new Error(String(e));
+
+      const err =
+        e instanceof UnkeyError
+          ? new Error(e.message)
+          : e instanceof Error
+            ? e
+            : new Error(String(e));
 
       return await this.config.onError(err, identifier);
     }
   }
 
+  // _limit just handles the racing and caching. It must not handle errors, those are handled by limit
   private async _limit(
     identifier: string,
     limit: number,
@@ -221,15 +228,6 @@ export class Ratelimit implements Ratelimiter {
           })
           .then(async (res) => {
             return res.data;
-          })
-          .catch((err) => {
-            if (err instanceof APIError) {
-              throw new Error(
-                `Ratelimit failed: [${err.statusCode} - ${err.message}]: ${err.body}`,
-              );
-            }
-
-            throw new Error(`Ratelimit failed: ${err}`);
           }),
       ];
       if (timeout) {
