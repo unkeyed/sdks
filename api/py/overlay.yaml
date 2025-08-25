@@ -6,7 +6,7 @@ info:
 actions:
   - target: $["components"]["schemas"]["V2KeysCreateKeyRequestBody"]["properties"]
     update:
-      keyCredits:
+      remainingCredits:
         "$ref": "#/components/schemas/KeyCreditsData"
         description: |
           Controls usage-based limits through credit consumption with optional automatic refills.
@@ -17,7 +17,7 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["V2KeysUpdateKeyRequestBody"]["properties"]
     update:
-      keyCredits:
+      remainingCredits:
         "$ref": "#/components/schemas/KeyCreditsData"
         description: |
           Controls usage-based limits for this key through credit consumption.
@@ -28,19 +28,19 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["V2KeysVerifyKeyRequestBody"]["properties"]
     update:
-      keyCredits:
+      remainingCredits:
         "$ref": "#/components/schemas/KeysVerifyKeyCredits"
   - target: $["components"]["schemas"]["V2KeysVerifyKeyRequestBody"]["properties"]["credits"]
     remove: true
   - target: $["components"]["schemas"]["KeyResponseData"]["properties"]
     update:
-      keyCredits:
+      remainingCredits:
         "$ref": "#/components/schemas/KeyCreditsData"
   - target: $["components"]["schemas"]["KeyResponseData"]["properties"]["credits"]
     remove: true
   - target: $["components"]["schemas"]["V2KeysVerifyKeyResponseData"]["properties"]
     update:
-      keyCredits:
+      remainingCredits:
         type: integer
         format: int32
         description: |
