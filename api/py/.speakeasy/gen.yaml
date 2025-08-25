@@ -21,7 +21,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.0.4
+  version: 2.1.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -51,6 +51,7 @@ python:
   methodArguments: infer-optional-args
   moduleName: unkey.py
   outputModelSuffix: output
+  packageManager: poetry
   packageName: unkey.py
   pytestFilterWarnings: []
   pytestTimeout: 0

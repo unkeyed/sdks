@@ -1539,7 +1539,8 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsListPermissionsResponseBody:
         r"""List permissions
 
-        Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+        Retrieve all permissions in your workspace.
+        Results are paginated and sorted by their id.
 
         **Required Permissions**
 
@@ -1663,7 +1664,8 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsListPermissionsResponseBody:
         r"""List permissions
 
-        Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+        Retrieve all permissions in your workspace.
+        Results are paginated and sorted by their id.
 
         **Required Permissions**
 
@@ -1787,7 +1789,8 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsListRolesResponseBody:
         r"""List roles
 
-        Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+        Retrieve all roles in your workspace including their assigned permissions.
+        Results are paginated and sorted by their id.
 
         **Required Permissions**
 
@@ -1912,7 +1915,8 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsListRolesResponseBody:
         r"""List roles
 
-        Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+        Retrieve all roles in your workspace including their assigned permissions.
+        Results are paginated and sorted by their id.
 
         **Required Permissions**
 

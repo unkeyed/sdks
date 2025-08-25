@@ -1,4 +1,4 @@
-speakeasyVersion: 1.604.2
+speakeasyVersion: 1.606.3
 sources:
     api:
         sourceNamespace: api
@@ -7,6 +7,14 @@ sources:
         tags:
             - latest
             - speakeasy-sdk-regen-1754353404
+            - 2.0.0
+    api-python:
+        sourceNamespace: api-python
+        sourceRevisionDigest: sha256:502b18a81bbed3cda7e5802276eef07ed34a52b554af045952075b194e112642
+        sourceBlobDigest: sha256:1b1de8688b94deb18ebb7e8e581b2b6b408237ed50e064f72da7c12c9a870ee4
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1756125907
             - 2.0.0
 targets:
     api-go:
@@ -17,12 +25,12 @@ targets:
         codeSamplesNamespace: api-go-code-samples
         codeSamplesRevisionDigest: sha256:b4ffeaa0a6ac670558e26f155c0ed154c29fa2387c999ae94361722b0864d890
     api-py:
-        source: api
-        sourceNamespace: api
-        sourceRevisionDigest: sha256:021bf16ce97014d0249bb12134b57db7d276b00bfe3c0caf8505c2f271d61d41
-        sourceBlobDigest: sha256:074d9febddb2fb2b94af093a21095742d57670d77b98934a0fc69091b94187e5
+        source: api-python
+        sourceNamespace: api-python
+        sourceRevisionDigest: sha256:502b18a81bbed3cda7e5802276eef07ed34a52b554af045952075b194e112642
+        sourceBlobDigest: sha256:1b1de8688b94deb18ebb7e8e581b2b6b408237ed50e064f72da7c12c9a870ee4
         codeSamplesNamespace: api-python-code-samples
-        codeSamplesRevisionDigest: sha256:8fcae1dce719c23070a087ace9d5a7bf0e514ebf13214e1896873fd00a4b007a
+        codeSamplesRevisionDigest: sha256:c0008075cf2acd3e345c4baea5d2c72d735196c4a252ec1a483fa34c858ac274
     api-ts:
         source: api
         sourceNamespace: api
@@ -39,6 +47,13 @@ workflow:
                 - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi-generated.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api
+        api-python:
+            inputs:
+                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi-generated.yaml
+            overlays:
+                - location: ./api/py/overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/unkey/unkey/api-python
     targets:
         api-go:
             target: go
@@ -52,7 +67,7 @@ workflow:
                 blocking: false
         api-py:
             target: python
-            source: api
+            source: api-python
             output: ./api/py
             publish:
                 pypi:

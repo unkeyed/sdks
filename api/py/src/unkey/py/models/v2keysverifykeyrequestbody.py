@@ -6,8 +6,9 @@ from .keysverifykeyratelimit import (
     KeysVerifyKeyRatelimit,
     KeysVerifyKeyRatelimitTypedDict,
 )
+import pydantic
 from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 from unkey.py.types import BaseModel
 
 
@@ -34,17 +35,17 @@ class V2KeysVerifyKeyRequestBodyTypedDict(TypedDict):
     Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
 
     """
-    credits: NotRequired[KeysVerifyKeyCreditsTypedDict]
-    r"""Controls credit consumption for usage-based billing and quota enforcement.
-    Omitting this field uses the default cost of 1 credit per verification.
-    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
-    """
     ratelimits: NotRequired[List[KeysVerifyKeyRatelimitTypedDict]]
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
     Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
     Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+
+    """
+    key_credits: NotRequired[KeysVerifyKeyCreditsTypedDict]
+    r"""Controls credit consumption for usage-based billing and quota enforcement.
+    Omitting this field uses the default cost of 1 credit per verification.
+    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 
     """
 
@@ -75,17 +76,19 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
 
     """
 
-    credits: Optional[KeysVerifyKeyCredits] = None
-    r"""Controls credit consumption for usage-based billing and quota enforcement.
-    Omitting this field uses the default cost of 1 credit per verification.
-    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
-    """
-
     ratelimits: Optional[List[KeysVerifyKeyRatelimit]] = None
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
     Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
     Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+
+    """
+
+    key_credits: Annotated[
+        Optional[KeysVerifyKeyCredits], pydantic.Field(alias="keyCredits")
+    ] = None
+    r"""Controls credit consumption for usage-based billing and quota enforcement.
+    Omitting this field uses the default cost of 1 credit per verification.
+    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 
     """

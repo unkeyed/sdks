@@ -17,7 +17,6 @@ class V2KeysSetPermissionsResponseBodyTypedDict(TypedDict):
     The response includes:
     - The comprehensive, updated set of direct permissions (reflecting the complete replacement)
     - Both ID and name for each permission for easy reference
-    - Permissions sorted alphabetically by name for consistent response format
 
     Important notes:
     - This only shows direct permissions, not those granted through roles
@@ -36,7 +35,6 @@ class V2KeysSetPermissionsResponseBody(BaseModel):
     The response includes:
     - The comprehensive, updated set of direct permissions (reflecting the complete replacement)
     - Both ID and name for each permission for easy reference
-    - Permissions sorted alphabetically by name for consistent response format
 
     Important notes:
     - This only shows direct permissions, not those granted through roles

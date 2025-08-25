@@ -17,7 +17,6 @@ class V2KeysRemoveRolesResponseBodyTypedDict(TypedDict):
     The response includes:
     - The remaining roles still assigned to the key (after removing the specified roles)
     - Both ID and name for each role for easy reference
-    - Roles sorted alphabetically by name for consistent response format
 
     Important notes:
     - The response reflects the current state after the removal operation
@@ -38,7 +37,6 @@ class V2KeysRemoveRolesResponseBody(BaseModel):
     The response includes:
     - The remaining roles still assigned to the key (after removing the specified roles)
     - Both ID and name for each role for easy reference
-    - Roles sorted alphabetically by name for consistent response format
 
     Important notes:
     - The response reflects the current state after the removal operation

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: eadce45d1ce3a18b5cb7ff0efda8c947
+  docChecksum: c4c15d4c9113991050178d12badfbd4e
   docVersion: 2.0.0
-  speakeasyVersion: 1.596.0
-  generationVersion: 2.672.0
-  releaseVersion: 2.0.4
-  configChecksum: da1a27c163de32bd7061ded57688601d
+  speakeasyVersion: 1.606.3
+  generationVersion: 2.687.1
+  releaseVersion: 2.1.0
+  configChecksum: 878fecc4a9137708c1c3a0c45a0be46d
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
@@ -14,8 +14,9 @@ management:
 features:
   python:
     additionalDependencies: 1.0.0
+    configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.5
-    core: 5.19.6
+    core: 5.19.9
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -102,6 +103,9 @@ generatedFiles:
   - docs/models/v2keysremovepermissionsresponsebody.md
   - docs/models/v2keysremoverolesrequestbody.md
   - docs/models/v2keysremoverolesresponsebody.md
+  - docs/models/v2keysrerollkeyrequestbody.md
+  - docs/models/v2keysrerollkeyresponsebody.md
+  - docs/models/v2keysrerollkeyresponsedata.md
   - docs/models/v2keyssetpermissionsrequestbody.md
   - docs/models/v2keyssetpermissionsresponsebody.md
   - docs/models/v2keyssetrolesrequestbody.md
@@ -237,6 +241,9 @@ generatedFiles:
   - src/unkey/py/models/v2keysremovepermissionsresponsebody.py
   - src/unkey/py/models/v2keysremoverolesrequestbody.py
   - src/unkey/py/models/v2keysremoverolesresponsebody.py
+  - src/unkey/py/models/v2keysrerollkeyrequestbody.py
+  - src/unkey/py/models/v2keysrerollkeyresponsebody.py
+  - src/unkey/py/models/v2keysrerollkeyresponsedata.py
   - src/unkey/py/models/v2keyssetpermissionsrequestbody.py
   - src/unkey/py/models/v2keyssetpermissionsresponsebody.py
   - src/unkey/py/models/v2keyssetrolesrequestbody.py
@@ -653,7 +660,7 @@ examples:
   createKey:
     speakeasy-default-create-key:
       requestBody:
-        application/json: {"apiId": "api_1234abcd", "prefix": "prod", "name": "Payment Service Production Key", "byteLength": 24, "externalId": "user_1234abcd", "meta": {"plan": "enterprise", "featureFlags": {"betaAccess": true, "concurrentConnections": 10}, "customerName": "Acme Corp", "billing": {"tier": "premium", "renewal": "2024-12-31"}}, "roles": ["api_admin", "billing_reader"], "permissions": ["documents.read", "documents.write", "settings.view"], "expires": 1704067200000, "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "ratelimits": [{"name": "requests", "limit": 100, "duration": 60000, "autoApply": true}, {"name": "heavy_operations", "limit": 10, "duration": 3600000, "autoApply": false}], "enabled": true, "recoverable": false}
+        application/json: {"apiId": "api_1234abcd", "prefix": "prod", "name": "Payment Service Production Key", "byteLength": 24, "externalId": "user_1234abcd", "meta": {"plan": "enterprise", "featureFlags": {"betaAccess": true, "concurrentConnections": 10}, "customerName": "Acme Corp", "billing": {"tier": "premium", "renewal": "2024-12-31"}}, "roles": ["api_admin", "billing_reader"], "permissions": ["documents.read", "documents.write", "settings.view"], "expires": 1704067200000, "ratelimits": [{"name": "requests", "limit": 100, "duration": 60000, "autoApply": true}, {"name": "heavy_operations", "limit": 10, "duration": 3600000, "autoApply": false}], "enabled": true, "recoverable": false, "keyCredits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "key": "prod_2cGKbMxRjIzhCxo1IdjH3arELti7Sdyc8w6XYbvtcyuBowPT"}}
@@ -690,7 +697,7 @@ examples:
         application/json: {"keyId": "key_1234abcd", "decrypt": false}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>", "key2": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}], "keyCredits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -789,14 +796,14 @@ examples:
   updateKey:
     success:
       requestBody:
-        application/json: {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "name": "Payment Service Production Key", "externalId": "user_912a841d", "meta": {"plan": "enterprise", "limits": {"storage": "500GB", "compute": "1000 minutes/month"}, "features": ["analytics", "exports", "webhooks"], "hasAcceptedTerms": true, "billing": {"cycle": "monthly", "next_billing": "2024-01-15"}, "preferences": {"timezone": "UTC", "notifications": true}, "lastBillingDate": "2023-10-15"}, "expires": 1704067200000, "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "ratelimits": [{"name": "api", "limit": 453542, "duration": 350222, "autoApply": false}], "enabled": true, "roles": ["api_admin", "billing_reader"], "permissions": ["documents.read", "documents.write", "settings.view"]}
+        application/json: {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "name": "Payment Service Production Key", "externalId": "user_912a841d", "meta": {"plan": "enterprise", "limits": {"storage": "500GB", "compute": "1000 minutes/month"}, "features": ["analytics", "exports", "webhooks"], "hasAcceptedTerms": true, "billing": {"cycle": "monthly", "next_billing": "2024-01-15"}, "preferences": {"timezone": "UTC", "notifications": true}, "lastBillingDate": "2023-10-15"}, "expires": 1704067200000, "ratelimits": [{"name": "api", "limit": 453542, "duration": 350222, "autoApply": false}], "enabled": true, "roles": ["api_admin", "billing_reader"], "permissions": ["documents.read", "documents.write", "settings.view"], "keyCredits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQY"}, "data": {}}
   verifyKey:
     permissionsQuerySyntaxError:
       requestBody:
-        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}]}
+        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "keyCredits": {"cost": 5}}
       responses:
         "400":
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "error": {"detail": "Syntax error in permission query: unexpected token 'AND' at position 15. Expected permission name or opening parenthesis.", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/user/bad_request/permissions_query_syntax_error", "errors": [{"location": "body.permissions", "message": "unexpected token 'AND' at position 15", "fix": "Check your query syntax. AND/OR operators must be between permissions, not at the start or end"}]}}
@@ -806,7 +813,7 @@ examples:
         application/json: {"key": "sk_1234abcdef5678"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": []}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": []}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}], "keyCredits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -1217,5 +1224,23 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "This namespace does not exist.", "status": 404, "title": "Not Found", "type": "not_found"}}
+  rerollKey:
+    speakeasy-default-reroll-key:
+      requestBody:
+        application/json: {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "expiration": 86400000}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_2cGKbMxRyIzhCxo1Idjz8q", "key": "prod_2cGKbMxRjIzhCxo1IdjH3arELti7Sdyc8w6XYbvtcyuBowPT"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## SDK Changes Detected:\n* `unkey.apis.list_keys()`:  `response.data.[]` **Changed** **Breaking** :warning:\n* `unkey.keys.create_key()`:  `request` **Changed** **Breaking** :warning:\n* `unkey.keys.get_key()`:  `response.data` **Changed** **Breaking** :warning:\n* `unkey.keys.update_key()`:  `request` **Changed** **Breaking** :warning:\n* `unkey.keys.verify_key()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.data` **Changed** **Breaking** :warning:\n* `unkey.keys.whoami()`:  `response.data` **Changed** **Breaking** :warning:\n* `unkey.keys.reroll_key()`: **Added**\n"
