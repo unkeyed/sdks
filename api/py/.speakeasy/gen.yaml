@@ -49,7 +49,7 @@ python:
   inputModelSuffix: input
   maxMethodParams: 0
   methodArguments: infer-optional-args
-  moduleName: "unkey.py"
+  moduleName: unkey.py
   outputModelSuffix: output
   packageName: unkey.py
   pytestFilterWarnings: []

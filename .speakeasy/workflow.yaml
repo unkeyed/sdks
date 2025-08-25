@@ -6,6 +6,13 @@ sources:
             - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi-generated.yaml
         registry:
             location: registry.speakeasyapi.dev/unkey/unkey/api
+    api-python:
+        inputs:
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/go/apps/api/openapi/openapi-generated.yaml
+        overlays:
+            - location: ./api/py/overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/unkey/unkey/api-python
 targets:
     api-go:
         target: go
@@ -19,7 +26,7 @@ targets:
             blocking: false
     api-py:
         target: python
-        source: api
+        source: api-python
         output: ./api/py
         publish:
             pypi:
