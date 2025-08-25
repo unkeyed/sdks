@@ -555,14 +555,14 @@ class Keys(BaseSDK):
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
         expires: Optional[int] = None,
-        credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = True,
         recoverable: Optional[bool] = False,
+        key_credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -597,10 +597,10 @@ class Keys(BaseSDK):
         :param roles: Assigns existing roles to this key for permission management through role-based access control. Roles must already exist in your workspace before assignment. During verification, all permissions from assigned roles are checked against requested permissions. Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
         :param permissions: Grants specific permissions directly to this key without requiring role membership. Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`. Direct permissions supplement any permissions inherited from assigned roles.
         :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field creates a permanent key that never expires.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Essential for trial periods, temporary access, and security compliance requiring key rotation.
-        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows. Essential for preventing API abuse while maintaining good performance for legitimate usage.
         :param enabled: Controls whether the key is active immediately upon creation. When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`. Useful for pre-creating keys that will be activated later or for keys requiring manual approval. Most keys should be created with `enabled=true` for immediate use.
         :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval. When true, allows recovering the actual key value using keys.getKey with decrypt=true. When false, the key value cannot be retrieved after creation for maximum security. Only enable for development keys or when key recovery is absolutely necessary.
+        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -626,12 +626,14 @@ class Keys(BaseSDK):
             roles=roles,
             permissions=permissions,
             expires=expires,
-            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             recoverable=recoverable,
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeyCreditsData]
+            ),
         )
 
         req = self._build_request(
@@ -727,14 +729,14 @@ class Keys(BaseSDK):
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
         expires: Optional[int] = None,
-        credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = True,
         recoverable: Optional[bool] = False,
+        key_credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -769,10 +771,10 @@ class Keys(BaseSDK):
         :param roles: Assigns existing roles to this key for permission management through role-based access control. Roles must already exist in your workspace before assignment. During verification, all permissions from assigned roles are checked against requested permissions. Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
         :param permissions: Grants specific permissions directly to this key without requiring role membership. Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`. Direct permissions supplement any permissions inherited from assigned roles.
         :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field creates a permanent key that never expires.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Essential for trial periods, temporary access, and security compliance requiring key rotation.
-        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows. Essential for preventing API abuse while maintaining good performance for legitimate usage.
         :param enabled: Controls whether the key is active immediately upon creation. When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`. Useful for pre-creating keys that will be activated later or for keys requiring manual approval. Most keys should be created with `enabled=true` for immediate use.
         :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval. When true, allows recovering the actual key value using keys.getKey with decrypt=true. When false, the key value cannot be retrieved after creation for maximum security. Only enable for development keys or when key recovery is absolutely necessary.
+        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -798,12 +800,14 @@ class Keys(BaseSDK):
             roles=roles,
             permissions=permissions,
             expires=expires,
-            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             recoverable=recoverable,
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeyCreditsData]
+            ),
         )
 
         req = self._build_request_async(
@@ -1941,6 +1945,304 @@ class Keys(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def reroll_key(
+        self,
+        *,
+        key_id: str,
+        expiration: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysRerollKeyResponseBody:
+        r"""Reroll Key
+
+        Generate a new API key while preserving the configuration from an existing key.
+
+        This operation creates a fresh key with a new token while maintaining all settings from the original key:
+        - Permissions and roles
+        - Custom metadata
+        - Rate limit configurations
+        - Identity associations
+        - Remaining credits
+        - Recovery settings
+
+        **Key Generation:**
+        - The system attempts to extract the prefix from the original key
+        - If prefix extraction fails, the default API prefix is used
+        - Key length follows the API's default byte configuration (or 16 bytes if not specified)
+
+        **Original Key Handling:**
+        - The original key will be revoked after the duration specified in `expiration`
+        - Set `expiration` to 0 to revoke immediately
+        - This allows for graceful key rotation with an overlap period
+
+        Common use cases include:
+        - Rotating keys for security compliance
+        - Issuing replacement keys for compromised credentials
+        - Creating backup keys with identical permissions
+
+        **Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
+
+        **Required Permissions**
+
+        Your root key must have:
+        - `api.*.create_key` or `api.<api_id>.create_key`
+        - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+
+
+        :param key_id: The database identifier of the key to reroll.  This is the unique ID returned when creating or listing keys, NOT the actual API key token. You can find this ID in: - The response from `keys.createKey` - Key verification responses - The Unkey dashboard - API key listing endpoints
+        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.  This parameter controls the overlap period for key rotation: - Set to `0` to revoke the original key immediately - Positive values keep the original key active for the specified duration - Allows graceful migration by giving users time to update their credentials  Common overlap periods: - Immediate revocation: 0 - 1 hour grace period: 3600000 - 24 hours grace period: 86400000 - 7 days grace period: 604800000 - 30 days grace period: 2592000000
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2KeysRerollKeyRequestBody(
+            key_id=key_id,
+            expiration=expiration,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/keys.rerollKey",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2KeysRerollKeyRequestBody
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rerollKey",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.V2KeysRerollKeyResponseBody, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def reroll_key_async(
+        self,
+        *,
+        key_id: str,
+        expiration: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysRerollKeyResponseBody:
+        r"""Reroll Key
+
+        Generate a new API key while preserving the configuration from an existing key.
+
+        This operation creates a fresh key with a new token while maintaining all settings from the original key:
+        - Permissions and roles
+        - Custom metadata
+        - Rate limit configurations
+        - Identity associations
+        - Remaining credits
+        - Recovery settings
+
+        **Key Generation:**
+        - The system attempts to extract the prefix from the original key
+        - If prefix extraction fails, the default API prefix is used
+        - Key length follows the API's default byte configuration (or 16 bytes if not specified)
+
+        **Original Key Handling:**
+        - The original key will be revoked after the duration specified in `expiration`
+        - Set `expiration` to 0 to revoke immediately
+        - This allows for graceful key rotation with an overlap period
+
+        Common use cases include:
+        - Rotating keys for security compliance
+        - Issuing replacement keys for compromised credentials
+        - Creating backup keys with identical permissions
+
+        **Important:** Analytics and usage metrics are tracked at both the key level AND identity level. If the original key has an identity, the new key will inherit it, allowing you to track usage across both individual keys and the overall identity.
+
+        **Required Permissions**
+
+        Your root key must have:
+        - `api.*.create_key` or `api.<api_id>.create_key`
+        - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+
+
+        :param key_id: The database identifier of the key to reroll.  This is the unique ID returned when creating or listing keys, NOT the actual API key token. You can find this ID in: - The response from `keys.createKey` - Key verification responses - The Unkey dashboard - API key listing endpoints
+        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.  This parameter controls the overlap period for key rotation: - Set to `0` to revoke the original key immediately - Positive values keep the original key active for the specified duration - Allows graceful migration by giving users time to update their credentials  Common overlap periods: - Immediate revocation: 0 - 1 hour grace period: 3600000 - 24 hours grace period: 86400000 - 7 days grace period: 604800000 - 30 days grace period: 2592000000
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2KeysRerollKeyRequestBody(
+            key_id=key_id,
+            expiration=expiration,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/keys.rerollKey",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2KeysRerollKeyRequestBody
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rerollKey",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.V2KeysRerollKeyResponseBody, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def set_permissions(
         self,
         *,
@@ -2755,15 +3057,15 @@ class Keys(BaseSDK):
         external_id: OptionalNullable[str] = UNSET,
         meta: OptionalNullable[Dict[str, Any]] = UNSET,
         expires: OptionalNullable[int] = UNSET,
-        credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = None,
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
+        key_credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2793,11 +3095,11 @@ class Keys(BaseSDK):
         :param external_id: Links this key to a user or entity in your system for ownership tracking during verification. Omitting this field preserves the current association, while setting null disconnects the key from any identity. Essential for user-specific analytics, billing, and key management across multiple users. Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
         :param meta: Stores arbitrary JSON metadata returned during key verification. Omitting this field preserves existing metadata, while setting null removes all metadata entirely. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
         :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field preserves the current expiration, while setting null makes the key permanent.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Active sessions continue until their next verification attempt after expiry.
-        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Omitting this field preserves existing rate limits, while setting null removes all rate limits. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows.
         :param enabled: Controls whether the key is currently active for verification requests. When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings. Omitting this field preserves the current enabled status. Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
         :param roles:
         :param permissions:
+        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2819,13 +3121,15 @@ class Keys(BaseSDK):
             external_id=external_id,
             meta=meta,
             expires=expires,
-            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=roles,
             permissions=permissions,
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeyCreditsData]
+            ),
         )
 
         req = self._build_request(
@@ -2917,15 +3221,15 @@ class Keys(BaseSDK):
         external_id: OptionalNullable[str] = UNSET,
         meta: OptionalNullable[Dict[str, Any]] = UNSET,
         expires: OptionalNullable[int] = UNSET,
-        credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = None,
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
+        key_credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2955,11 +3259,11 @@ class Keys(BaseSDK):
         :param external_id: Links this key to a user or entity in your system for ownership tracking during verification. Omitting this field preserves the current association, while setting null disconnects the key from any identity. Essential for user-specific analytics, billing, and key management across multiple users. Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
         :param meta: Stores arbitrary JSON metadata returned during key verification. Omitting this field preserves existing metadata, while setting null removes all metadata entirely. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
         :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field preserves the current expiration, while setting null makes the key permanent.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Active sessions continue until their next verification attempt after expiry.
-        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Omitting this field preserves existing rate limits, while setting null removes all rate limits. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows.
         :param enabled: Controls whether the key is currently active for verification requests. When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings. Omitting this field preserves the current enabled status. Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
         :param roles:
         :param permissions:
+        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2981,13 +3285,15 @@ class Keys(BaseSDK):
             external_id=external_id,
             meta=meta,
             expires=expires,
-            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=roles,
             permissions=permissions,
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeyCreditsData]
+            ),
         )
 
         req = self._build_request_async(
@@ -3077,14 +3383,14 @@ class Keys(BaseSDK):
         key: str,
         tags: Optional[List[str]] = None,
         permissions: Optional[str] = None,
-        credits: Optional[
-            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[
                 List[models.KeysVerifyKeyRatelimit],
                 List[models.KeysVerifyKeyRatelimitTypedDict],
             ]
+        ] = None,
+        key_credits: Optional[
+            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -3116,8 +3422,8 @@ class Keys(BaseSDK):
         :param key: The API key to verify, exactly as provided by your user. Include any prefix - even small changes will cause verification to fail.
         :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes. Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions. Use 'key=value' format for compatibility with most analytics tools and clear categorization. Avoid including sensitive data in tags as they may appear in logs and analytics reports.
         :param permissions: Checks if the key has the specified permission(s) using a query syntax. Supports single permissions, logical operators (AND, OR), and parentheses for grouping. Examples: - Single permission: \"documents.read\" - Multiple permissions: \"documents.read AND documents.write\" - Complex queries: \"(documents.read OR documents.write) AND users.view\" Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
-        :param credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage. Omitting this field skips rate limit checks entirely, relying only on configured key rate limits. Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides. Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3137,11 +3443,11 @@ class Keys(BaseSDK):
             key=key,
             tags=tags,
             permissions=permissions,
-            credits=utils.get_pydantic_model(
-                credits, Optional[models.KeysVerifyKeyCredits]
-            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
+            ),
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeysVerifyKeyCredits]
             ),
         )
 
@@ -3232,14 +3538,14 @@ class Keys(BaseSDK):
         key: str,
         tags: Optional[List[str]] = None,
         permissions: Optional[str] = None,
-        credits: Optional[
-            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
-        ] = None,
         ratelimits: Optional[
             Union[
                 List[models.KeysVerifyKeyRatelimit],
                 List[models.KeysVerifyKeyRatelimitTypedDict],
             ]
+        ] = None,
+        key_credits: Optional[
+            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -3271,8 +3577,8 @@ class Keys(BaseSDK):
         :param key: The API key to verify, exactly as provided by your user. Include any prefix - even small changes will cause verification to fail.
         :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes. Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions. Use 'key=value' format for compatibility with most analytics tools and clear categorization. Avoid including sensitive data in tags as they may appear in logs and analytics reports.
         :param permissions: Checks if the key has the specified permission(s) using a query syntax. Supports single permissions, logical operators (AND, OR), and parentheses for grouping. Examples: - Single permission: \"documents.read\" - Multiple permissions: \"documents.read AND documents.write\" - Complex queries: \"(documents.read OR documents.write) AND users.view\" Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
-        :param credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage. Omitting this field skips rate limit checks entirely, relying only on configured key rate limits. Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides. Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3292,11 +3598,11 @@ class Keys(BaseSDK):
             key=key,
             tags=tags,
             permissions=permissions,
-            credits=utils.get_pydantic_model(
-                credits, Optional[models.KeysVerifyKeyCredits]
-            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
+            ),
+            key_credits=utils.get_pydantic_model(
+                key_credits, Optional[models.KeysVerifyKeyCredits]
             ),
         )
 

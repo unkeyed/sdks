@@ -46,8 +46,6 @@ class V2KeysUpdateKeyRequestBodyTypedDict(TypedDict):
     Active sessions continue until their next verification attempt after expiry.
 
     """
-    credits: NotRequired[KeyCreditsDataTypedDict]
-    r"""Credit configuration and remaining balance for this key."""
     ratelimits: NotRequired[List[RatelimitRequestTypedDict]]
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Omitting this field preserves existing rate limits, while setting null removes all rate limits.
@@ -64,6 +62,8 @@ class V2KeysUpdateKeyRequestBodyTypedDict(TypedDict):
     """
     roles: NotRequired[List[str]]
     permissions: NotRequired[List[str]]
+    key_credits: NotRequired[KeyCreditsDataTypedDict]
+    r"""Credit configuration and remaining balance for this key."""
 
 
 class V2KeysUpdateKeyRequestBody(BaseModel):
@@ -109,9 +109,6 @@ class V2KeysUpdateKeyRequestBody(BaseModel):
 
     """
 
-    credits: Optional[KeyCreditsData] = None
-    r"""Credit configuration and remaining balance for this key."""
-
     ratelimits: Optional[List[RatelimitRequest]] = None
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Omitting this field preserves existing rate limits, while setting null removes all rate limits.
@@ -132,6 +129,11 @@ class V2KeysUpdateKeyRequestBody(BaseModel):
 
     permissions: Optional[List[str]] = None
 
+    key_credits: Annotated[
+        Optional[KeyCreditsData], pydantic.Field(alias="keyCredits")
+    ] = None
+    r"""Credit configuration and remaining balance for this key."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -139,11 +141,11 @@ class V2KeysUpdateKeyRequestBody(BaseModel):
             "externalId",
             "meta",
             "expires",
-            "credits",
             "ratelimits",
             "enabled",
             "roles",
             "permissions",
+            "keyCredits",
         ]
         nullable_fields = ["name", "externalId", "meta", "expires"]
         null_default_fields = []

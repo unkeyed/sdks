@@ -76,13 +76,6 @@ class V2KeysVerifyKeyResponseDataTypedDict(TypedDict):
     warn users about upcoming expirations or to understand the validity period.
 
     """
-    credits: NotRequired[int]
-    r"""The number of requests/credits remaining for this key. If null
-    or not present, the key has unlimited usage. This value decreases with
-    each verification (based on the 'cost' parameter) unless explicit credit
-    refills are configured.
-
-    """
     enabled: NotRequired[bool]
     r"""Indicates if the key is currently enabled. Disabled keys will
     always fail verification with `code=DISABLED`. This is useful for implementing
@@ -104,6 +97,13 @@ class V2KeysVerifyKeyResponseDataTypedDict(TypedDict):
     """
     identity: NotRequired[IdentityTypedDict]
     ratelimits: NotRequired[List[VerifyKeyRatelimitDataTypedDict]]
+    key_credits: NotRequired[int]
+    r"""The number of requests/credits remaining for this key. If null
+    or not present, the key has unlimited usage. This value decreases with
+    each verification (based on the 'cost' parameter) unless explicit credit
+    refills are configured.
+
+    """
 
 
 class V2KeysVerifyKeyResponseData(BaseModel):
@@ -154,14 +154,6 @@ class V2KeysVerifyKeyResponseData(BaseModel):
 
     """
 
-    credits: Optional[int] = None
-    r"""The number of requests/credits remaining for this key. If null
-    or not present, the key has unlimited usage. This value decreases with
-    each verification (based on the 'cost' parameter) unless explicit credit
-    refills are configured.
-
-    """
-
     enabled: Optional[bool] = None
     r"""Indicates if the key is currently enabled. Disabled keys will
     always fail verification with `code=DISABLED`. This is useful for implementing
@@ -187,3 +179,11 @@ class V2KeysVerifyKeyResponseData(BaseModel):
     identity: Optional[Identity] = None
 
     ratelimits: Optional[List[VerifyKeyRatelimitData]] = None
+
+    key_credits: Annotated[Optional[int], pydantic.Field(alias="keyCredits")] = None
+    r"""The number of requests/credits remaining for this key. If null
+    or not present, the key has unlimited usage. This value decreases with
+    each verification (based on the 'cost' parameter) unless explicit credit
+    refills are configured.
+
+    """

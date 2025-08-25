@@ -330,7 +330,8 @@ with Unkey(
 
 ## list_permissions
 
-Retrieve all permissions in your workspace. Results are paginated and sorted alphabetically by permission name.
+Retrieve all permissions in your workspace. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 
@@ -380,7 +381,8 @@ with Unkey(
 
 ## list_roles
 
-Retrieve all roles in your workspace including their assigned permissions. Results are paginated and sorted alphabetically by role name.
+Retrieve all roles in your workspace including their assigned permissions. 
+Results are paginated and sorted by their id.
 
 **Required Permissions**
 

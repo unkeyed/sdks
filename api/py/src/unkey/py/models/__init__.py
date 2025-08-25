@@ -184,6 +184,18 @@ if TYPE_CHECKING:
         V2KeysRemoveRolesResponseBody,
         V2KeysRemoveRolesResponseBodyTypedDict,
     )
+    from .v2keysrerollkeyrequestbody import (
+        V2KeysRerollKeyRequestBody,
+        V2KeysRerollKeyRequestBodyTypedDict,
+    )
+    from .v2keysrerollkeyresponsebody import (
+        V2KeysRerollKeyResponseBody,
+        V2KeysRerollKeyResponseBodyTypedDict,
+    )
+    from .v2keysrerollkeyresponsedata import (
+        V2KeysRerollKeyResponseData,
+        V2KeysRerollKeyResponseDataTypedDict,
+    )
     from .v2keyssetpermissionsrequestbody import (
         V2KeysSetPermissionsRequestBody,
         V2KeysSetPermissionsRequestBodyTypedDict,
@@ -482,6 +494,12 @@ __all__ = [
     "V2KeysRemoveRolesRequestBodyTypedDict",
     "V2KeysRemoveRolesResponseBody",
     "V2KeysRemoveRolesResponseBodyTypedDict",
+    "V2KeysRerollKeyRequestBody",
+    "V2KeysRerollKeyRequestBodyTypedDict",
+    "V2KeysRerollKeyResponseBody",
+    "V2KeysRerollKeyResponseBodyTypedDict",
+    "V2KeysRerollKeyResponseData",
+    "V2KeysRerollKeyResponseDataTypedDict",
     "V2KeysSetPermissionsRequestBody",
     "V2KeysSetPermissionsRequestBodyTypedDict",
     "V2KeysSetPermissionsResponseBody",
@@ -688,6 +706,12 @@ _dynamic_imports: dict[str, str] = {
     "V2KeysRemoveRolesRequestBodyTypedDict": ".v2keysremoverolesrequestbody",
     "V2KeysRemoveRolesResponseBody": ".v2keysremoverolesresponsebody",
     "V2KeysRemoveRolesResponseBodyTypedDict": ".v2keysremoverolesresponsebody",
+    "V2KeysRerollKeyRequestBody": ".v2keysrerollkeyrequestbody",
+    "V2KeysRerollKeyRequestBodyTypedDict": ".v2keysrerollkeyrequestbody",
+    "V2KeysRerollKeyResponseBody": ".v2keysrerollkeyresponsebody",
+    "V2KeysRerollKeyResponseBodyTypedDict": ".v2keysrerollkeyresponsebody",
+    "V2KeysRerollKeyResponseData": ".v2keysrerollkeyresponsedata",
+    "V2KeysRerollKeyResponseDataTypedDict": ".v2keysrerollkeyresponsedata",
     "V2KeysSetPermissionsRequestBody": ".v2keyssetpermissionsrequestbody",
     "V2KeysSetPermissionsRequestBodyTypedDict": ".v2keyssetpermissionsrequestbody",
     "V2KeysSetPermissionsResponseBody": ".v2keyssetpermissionsresponsebody",

@@ -17,7 +17,6 @@ class V2KeysSetRolesResponseBodyTypedDict(TypedDict):
     The response includes:
     - The comprehensive, updated set of roles (reflecting the complete replacement)
     - Both ID and name for each role for easy reference
-    - Roles sorted alphabetically by name for consistent response format
 
     Important notes:
     - This response shows the final state after the complete replacement
@@ -38,7 +37,6 @@ class V2KeysSetRolesResponseBody(BaseModel):
     The response includes:
     - The comprehensive, updated set of roles (reflecting the complete replacement)
     - Both ID and name for each role for easy reference
-    - Roles sorted alphabetically by name for consistent response format
 
     Important notes:
     - This response shows the final state after the complete replacement
