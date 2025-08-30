@@ -29,7 +29,7 @@ func (v V2KeysDeleteKeyRequestBody) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2KeysDeleteKeyRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"keyId"}); err != nil {
 		return err
 	}
 	return nil
