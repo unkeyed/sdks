@@ -22,7 +22,7 @@ func (k KeysVerifyKeyRatelimit) MarshalJSON() ([]byte, error) {
 }
 
 func (k *KeysVerifyKeyRatelimit) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &k, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &k, "", false, []string{"name"}); err != nil {
 		return err
 	}
 	return nil
