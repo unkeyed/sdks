@@ -8,7 +8,7 @@ import (
 
 type RatelimitLimitResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Rate limit check completed. Always returns HTTP 200 - check the `success` field to determine if the request is allowed.
+	// Rate limit check completed successfully. Check the `success` field to determine if the request is allowed.
 	//
 	V2RatelimitLimitResponseBody *components.V2RatelimitLimitResponseBody
 }

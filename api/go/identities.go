@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 // Identities - Identity management operations
@@ -1232,6 +1233,9 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.ListIdentities(
