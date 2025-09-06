@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 2429216e9412a2205c264a18850bba67
+  docChecksum: 36b589302f502c3bd846a6a72bccdd3a
   docVersion: 2.0.0
-  speakeasyVersion: 1.604.2
-  generationVersion: 2.683.1
-  releaseVersion: 2.0.4
-  configChecksum: bede24b2fce36096026091f201a18133
+  speakeasyVersion: 1.611.0
+  generationVersion: 2.694.1
+  releaseVersion: 2.0.5
+  configChecksum: a6d4cf654bc10c4f90183767ce8b0c20
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.20
+    core: 3.21.22
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -147,6 +147,7 @@ generatedFiles:
   - docs/models/errors/badrequesterrorresponse.md
   - docs/models/errors/conflicterrorresponse.md
   - docs/models/errors/forbiddenerrorresponse.md
+  - docs/models/errors/goneerrorresponse.md
   - docs/models/errors/internalservererrorresponse.md
   - docs/models/errors/notfounderrorresponse.md
   - docs/models/errors/preconditionfailederrorresponse.md
@@ -378,6 +379,7 @@ generatedFiles:
   - src/models/errors/badrequesterrorresponse.ts
   - src/models/errors/conflicterrorresponse.ts
   - src/models/errors/forbiddenerrorresponse.ts
+  - src/models/errors/goneerrorresponse.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/internalservererrorresponse.ts
@@ -1182,6 +1184,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     ipLimit:
       requestBody:
         application/json: {"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "203.0.113.42", "limit": 5}
@@ -1198,6 +1202,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     weightedCost:
       requestBody:
         application/json: {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_def456", "limit": 50}
@@ -1213,6 +1219,8 @@ examples:
         "404":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     allowed:
       requestBody:
@@ -1335,3 +1343,6 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `unkey.ratelimit.limit()`:  `error.status[410]` **Added**
