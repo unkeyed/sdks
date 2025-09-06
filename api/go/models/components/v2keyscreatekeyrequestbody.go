@@ -87,7 +87,7 @@ func (v V2KeysCreateKeyRequestBody) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2KeysCreateKeyRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiId"}); err != nil {
 		return err
 	}
 	return nil
