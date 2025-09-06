@@ -21,10 +21,13 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.1.0
+  version: 2.2.0
   additionalDependencies:
     dev: {}
     main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
   authors:
     - Speakeasy
   baseErrorName: UnkeyError
