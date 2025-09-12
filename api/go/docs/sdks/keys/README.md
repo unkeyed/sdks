@@ -248,7 +248,7 @@ func main() {
         Credits: &components.KeyCreditsData{
             Remaining: unkey.Int64(1000),
             Refill: &components.KeyCreditsRefill{
-                Interval: components.IntervalDaily,
+                Interval: components.KeyCreditsRefillIntervalDaily,
                 Amount: 1000,
                 RefillDay: unkey.Int64(15),
             },
@@ -994,10 +994,10 @@ func main() {
             "lastBillingDate": "2023-10-15",
         },
         Expires: unkey.Int64(1704067200000),
-        Credits: &components.KeyCreditsData{
+        Credits: &components.UpdateKeyCreditsData{
             Remaining: unkey.Int64(1000),
-            Refill: &components.KeyCreditsRefill{
-                Interval: components.IntervalDaily,
+            Refill: &components.UpdateKeyCreditsRefill{
+                Interval: components.UpdateKeyCreditsRefillIntervalDaily,
                 Amount: 1000,
                 RefillDay: unkey.Int64(15),
             },

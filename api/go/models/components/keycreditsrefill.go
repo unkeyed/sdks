@@ -7,18 +7,18 @@ import (
 	"fmt"
 )
 
-// Interval - How often credits are automatically refilled.
-type Interval string
+// KeyCreditsRefillInterval - How often credits are automatically refilled.
+type KeyCreditsRefillInterval string
 
 const (
-	IntervalDaily   Interval = "daily"
-	IntervalMonthly Interval = "monthly"
+	KeyCreditsRefillIntervalDaily   KeyCreditsRefillInterval = "daily"
+	KeyCreditsRefillIntervalMonthly KeyCreditsRefillInterval = "monthly"
 )
 
-func (e Interval) ToPointer() *Interval {
+func (e KeyCreditsRefillInterval) ToPointer() *KeyCreditsRefillInterval {
 	return &e
 }
-func (e *Interval) UnmarshalJSON(data []byte) error {
+func (e *KeyCreditsRefillInterval) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -27,17 +27,17 @@ func (e *Interval) UnmarshalJSON(data []byte) error {
 	case "daily":
 		fallthrough
 	case "monthly":
-		*e = Interval(v)
+		*e = KeyCreditsRefillInterval(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Interval: %v", v)
+		return fmt.Errorf("invalid value for KeyCreditsRefillInterval: %v", v)
 	}
 }
 
 // KeyCreditsRefill - Configuration for automatic credit refill behavior.
 type KeyCreditsRefill struct {
 	// How often credits are automatically refilled.
-	Interval Interval `json:"interval"`
+	Interval KeyCreditsRefillInterval `json:"interval"`
 	// Number of credits to add during each refill cycle.
 	Amount int64 `json:"amount"`
 	// Day of the month for monthly refills (1-31).
@@ -47,9 +47,9 @@ type KeyCreditsRefill struct {
 	RefillDay *int64 `json:"refillDay,omitempty"`
 }
 
-func (o *KeyCreditsRefill) GetInterval() Interval {
+func (o *KeyCreditsRefill) GetInterval() KeyCreditsRefillInterval {
 	if o == nil {
-		return Interval("")
+		return KeyCreditsRefillInterval("")
 	}
 	return o.Interval
 }
