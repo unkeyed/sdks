@@ -123,7 +123,7 @@ Check and enforce rate limits for any identifier (user ID, IP address, API clien
 
 Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
 
-**Important**: Always returns HTTP 200. Check the `success` field to determine if the request should proceed.
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
 **Required Permissions**
 
@@ -177,6 +177,7 @@ with Unkey(
 | errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
 | errors.ForbiddenErrorResponse      | 403                                | application/json                   |
 | errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.GoneErrorResponse           | 410                                | application/json                   |
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 

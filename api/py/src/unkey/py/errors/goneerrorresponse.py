@@ -9,7 +9,7 @@ from unkey.py.models import baseerror as models_baseerror, meta as models_meta
 from unkey.py.types import BaseModel
 
 
-class ForbiddenErrorResponseData(BaseModel):
+class GoneErrorResponseData(BaseModel):
     meta: models_meta.Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
@@ -18,20 +18,20 @@ class ForbiddenErrorResponseData(BaseModel):
 
 
 @dataclass(frozen=True)
-class ForbiddenErrorResponse(UnkeyError):
-    r"""Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:
-    - The root key doesn't have the required permissions for this endpoint
-    - The operation requires elevated privileges that the current key lacks
-    - Access to the requested resource is restricted based on workspace settings
+class GoneErrorResponse(UnkeyError):
+    r"""Error response when the requested resource has been soft-deleted and is no longer available. This occurs when:
+    - The resource has been marked as deleted but still exists in the database
+    - The resource is intentionally unavailable but could potentially be restored
+    - The resource cannot be restored through the API or dashboard
 
-    To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator.
+    To resolve this error, contact support if you need the resource restored.
     """
 
-    data: ForbiddenErrorResponseData = field(hash=False)
+    data: GoneErrorResponseData = field(hash=False)
 
     def __init__(
         self,
-        data: ForbiddenErrorResponseData,
+        data: GoneErrorResponseData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

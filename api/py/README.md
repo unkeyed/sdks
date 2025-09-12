@@ -444,7 +444,7 @@ with Unkey(
   * [`InternalServerErrorResponse`](./src/unkey/py/errors/internalservererrorresponse.py): Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.  When you encounter this error: - The request ID in the response can help Unkey support investigate the issue - The error is likely temporary and retrying may succeed - If the error persists, contact Unkey support with the request ID. Status code `500`.
   * [`NotFoundErrorResponse`](./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. *
 
-<details><summary>Less common errors (7)</summary>
+<details><summary>Less common errors (8)</summary>
 
 <br />
 
@@ -456,6 +456,7 @@ with Unkey(
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
 * [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 36 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 1 of 36 methods.*
 * [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 36 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 

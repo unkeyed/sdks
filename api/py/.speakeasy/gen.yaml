@@ -16,15 +16,19 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.1.0
+  version: 2.2.0
   additionalDependencies:
     dev: {}
     main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
   authors:
     - Speakeasy
   baseErrorName: UnkeyError
@@ -56,4 +60,5 @@ python:
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
