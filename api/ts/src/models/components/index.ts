@@ -19,6 +19,8 @@ export * from "./ratelimitrequest.js";
 export * from "./ratelimitresponse.js";
 export * from "./role.js";
 export * from "./security.js";
+export * from "./updatekeycreditsdata.js";
+export * from "./updatekeycreditsrefill.js";
 export * from "./v2apiscreateapirequestbody.js";
 export * from "./v2apiscreateapiresponsebody.js";
 export * from "./v2apiscreateapiresponsedata.js";

@@ -1,0 +1,23 @@
+# GoneErrorResponse
+
+Error response when the requested resource has been soft-deleted and is no longer available. This occurs when:
+- The resource has been marked as deleted but still exists in the database
+- The resource is intentionally unavailable but could potentially be restored
+- The resource cannot be restored through the API or dashboard
+
+To resolve this error, contact support if you need the resource restored.
+
+## Example Usage
+
+```typescript
+import { GoneErrorResponse } from "@unkey/api/models/errors";
+
+// No examples available for this model
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta`                                                                                                                                                                                                                                                          | [components.Meta](../../models/components/meta.md)                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                              | Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team. |
+| `error`                                                                                                                                                                                                                                                         | [components.BaseError](../../models/components/baseerror.md)                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                              | Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.                                                                                 |

@@ -11,14 +11,16 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * How often credits are automatically refilled.
  */
-export const Interval = {
+export const KeyCreditsRefillInterval = {
   Daily: "daily",
   Monthly: "monthly",
 } as const;
 /**
  * How often credits are automatically refilled.
  */
-export type Interval = ClosedEnum<typeof Interval>;
+export type KeyCreditsRefillInterval = ClosedEnum<
+  typeof KeyCreditsRefillInterval
+>;
 
 /**
  * Configuration for automatic credit refill behavior.
@@ -27,7 +29,7 @@ export type KeyCreditsRefill = {
   /**
    * How often credits are automatically refilled.
    */
-  interval: Interval;
+  interval: KeyCreditsRefillInterval;
   /**
    * Number of credits to add during each refill cycle.
    */
@@ -43,22 +45,24 @@ export type KeyCreditsRefill = {
 };
 
 /** @internal */
-export const Interval$inboundSchema: z.ZodNativeEnum<typeof Interval> = z
-  .nativeEnum(Interval);
+export const KeyCreditsRefillInterval$inboundSchema: z.ZodNativeEnum<
+  typeof KeyCreditsRefillInterval
+> = z.nativeEnum(KeyCreditsRefillInterval);
 
 /** @internal */
-export const Interval$outboundSchema: z.ZodNativeEnum<typeof Interval> =
-  Interval$inboundSchema;
+export const KeyCreditsRefillInterval$outboundSchema: z.ZodNativeEnum<
+  typeof KeyCreditsRefillInterval
+> = KeyCreditsRefillInterval$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Interval$ {
-  /** @deprecated use `Interval$inboundSchema` instead. */
-  export const inboundSchema = Interval$inboundSchema;
-  /** @deprecated use `Interval$outboundSchema` instead. */
-  export const outboundSchema = Interval$outboundSchema;
+export namespace KeyCreditsRefillInterval$ {
+  /** @deprecated use `KeyCreditsRefillInterval$inboundSchema` instead. */
+  export const inboundSchema = KeyCreditsRefillInterval$inboundSchema;
+  /** @deprecated use `KeyCreditsRefillInterval$outboundSchema` instead. */
+  export const outboundSchema = KeyCreditsRefillInterval$outboundSchema;
 }
 
 /** @internal */
@@ -67,7 +71,7 @@ export const KeyCreditsRefill$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  interval: Interval$inboundSchema,
+  interval: KeyCreditsRefillInterval$inboundSchema,
   amount: z.number().int(),
   refillDay: z.number().int().optional(),
 });
@@ -85,7 +89,7 @@ export const KeyCreditsRefill$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   KeyCreditsRefill
 > = z.object({
-  interval: Interval$outboundSchema,
+  interval: KeyCreditsRefillInterval$outboundSchema,
   amount: z.number().int(),
   refillDay: z.number().int().optional(),
 });
