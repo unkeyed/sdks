@@ -7,17 +7,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  KeyCreditsData,
-  KeyCreditsData$inboundSchema,
-  KeyCreditsData$Outbound,
-  KeyCreditsData$outboundSchema,
-} from "./keycreditsdata.js";
-import {
   RatelimitRequest,
   RatelimitRequest$inboundSchema,
   RatelimitRequest$Outbound,
   RatelimitRequest$outboundSchema,
 } from "./ratelimitrequest.js";
+import {
+  UpdateKeyCreditsData,
+  UpdateKeyCreditsData$inboundSchema,
+  UpdateKeyCreditsData$Outbound,
+  UpdateKeyCreditsData$outboundSchema,
+} from "./updatekeycreditsdata.js";
 
 export type V2KeysUpdateKeyRequestBody = {
   /**
@@ -68,7 +68,7 @@ export type V2KeysUpdateKeyRequestBody = {
   /**
    * Credit configuration and remaining balance for this key.
    */
-  credits?: KeyCreditsData | undefined;
+  credits?: UpdateKeyCreditsData | null | undefined;
   /**
    * Defines time-based rate limits that protect against abuse by controlling request frequency.
    *
@@ -102,7 +102,7 @@ export const V2KeysUpdateKeyRequestBody$inboundSchema: z.ZodType<
   externalId: z.nullable(z.string()).optional(),
   meta: z.nullable(z.record(z.any())).optional(),
   expires: z.nullable(z.number().int()).optional(),
-  credits: KeyCreditsData$inboundSchema.optional(),
+  credits: z.nullable(UpdateKeyCreditsData$inboundSchema).optional(),
   ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
   enabled: z.boolean().optional(),
   roles: z.array(z.string()).optional(),
@@ -116,7 +116,7 @@ export type V2KeysUpdateKeyRequestBody$Outbound = {
   externalId?: string | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   expires?: number | null | undefined;
-  credits?: KeyCreditsData$Outbound | undefined;
+  credits?: UpdateKeyCreditsData$Outbound | null | undefined;
   ratelimits?: Array<RatelimitRequest$Outbound> | undefined;
   enabled?: boolean | undefined;
   roles?: Array<string> | undefined;
@@ -134,7 +134,7 @@ export const V2KeysUpdateKeyRequestBody$outboundSchema: z.ZodType<
   externalId: z.nullable(z.string()).optional(),
   meta: z.nullable(z.record(z.any())).optional(),
   expires: z.nullable(z.number().int()).optional(),
-  credits: KeyCreditsData$outboundSchema.optional(),
+  credits: z.nullable(UpdateKeyCreditsData$outboundSchema).optional(),
   ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
   enabled: z.boolean().optional(),
   roles: z.array(z.string()).optional(),

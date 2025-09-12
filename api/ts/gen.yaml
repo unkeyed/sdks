@@ -16,12 +16,13 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.4
+  version: 2.0.5
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -56,6 +57,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@unkey/api'
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true

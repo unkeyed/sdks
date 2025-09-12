@@ -18,7 +18,7 @@ const unkey = new Unkey({
 });
 
 async function main() {
-  const result = await unkey.createApi({
+  const result = await unkey.apis.createApi({
     name: "payment-service-production",
   });
 

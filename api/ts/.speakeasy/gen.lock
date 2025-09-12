@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 2429216e9412a2205c264a18850bba67
+  docChecksum: 7971b462ec1e4feb676e32f5b3fcf2ff
   docVersion: 2.0.0
-  speakeasyVersion: 1.604.2
-  generationVersion: 2.683.1
-  releaseVersion: 2.0.4
-  configChecksum: bede24b2fce36096026091f201a18133
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 2.0.5
+  configChecksum: 1c18172009ca2d828f8a71563927bb0f
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,11 +15,11 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.20
+    core: 3.21.22
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.13
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
@@ -44,9 +44,9 @@ generatedFiles:
   - docs/models/components/emptyresponse.md
   - docs/models/components/identity.md
   - docs/models/components/identitymeta.md
-  - docs/models/components/interval.md
   - docs/models/components/keycreditsdata.md
   - docs/models/components/keycreditsrefill.md
+  - docs/models/components/keycreditsrefillinterval.md
   - docs/models/components/keyresponsedata.md
   - docs/models/components/keysverifykeycredits.md
   - docs/models/components/keysverifykeyratelimit.md
@@ -59,6 +59,9 @@ generatedFiles:
   - docs/models/components/ratelimitresponse.md
   - docs/models/components/role.md
   - docs/models/components/security.md
+  - docs/models/components/updatekeycreditsdata.md
+  - docs/models/components/updatekeycreditsrefill.md
+  - docs/models/components/updatekeycreditsrefillinterval.md
   - docs/models/components/v2apiscreateapirequestbody.md
   - docs/models/components/v2apiscreateapiresponsebody.md
   - docs/models/components/v2apiscreateapiresponsedata.md
@@ -147,6 +150,7 @@ generatedFiles:
   - docs/models/errors/badrequesterrorresponse.md
   - docs/models/errors/conflicterrorresponse.md
   - docs/models/errors/forbiddenerrorresponse.md
+  - docs/models/errors/goneerrorresponse.md
   - docs/models/errors/internalservererrorresponse.md
   - docs/models/errors/notfounderrorresponse.md
   - docs/models/errors/preconditionfailederrorresponse.md
@@ -289,6 +293,8 @@ generatedFiles:
   - src/models/components/ratelimitresponse.ts
   - src/models/components/role.ts
   - src/models/components/security.ts
+  - src/models/components/updatekeycreditsdata.ts
+  - src/models/components/updatekeycreditsrefill.ts
   - src/models/components/v2apiscreateapirequestbody.ts
   - src/models/components/v2apiscreateapiresponsebody.ts
   - src/models/components/v2apiscreateapiresponsedata.ts
@@ -378,6 +384,7 @@ generatedFiles:
   - src/models/errors/badrequesterrorresponse.ts
   - src/models/errors/conflicterrorresponse.ts
   - src/models/errors/forbiddenerrorresponse.ts
+  - src/models/errors/goneerrorresponse.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/internalservererrorresponse.ts
@@ -1182,6 +1189,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     ipLimit:
       requestBody:
         application/json: {"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "203.0.113.42", "limit": 5}
@@ -1198,6 +1207,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     weightedCost:
       requestBody:
         application/json: {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_def456", "limit": 50}
@@ -1213,6 +1224,8 @@ examples:
         "404":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     allowed:
       requestBody:
@@ -1335,3 +1348,4 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes Detected:\n* `unkey.keys.updateKey()`: \n  *  `request.credits` **Changed**\n* `unkey.ratelimit.limit()`:  `error.status[410]` **Added**\n"
