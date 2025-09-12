@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 2429216e9412a2205c264a18850bba67
+  docChecksum: 7971b462ec1e4feb676e32f5b3fcf2ff
   docVersion: 2.0.0
-  speakeasyVersion: 1.604.2
-  generationVersion: 2.683.1
-  releaseVersion: 2.0.2
-  configChecksum: 856bbb55fc7e73845a218e8f3da27b5c
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 2.0.3
+  configChecksum: 4fa3b6934d12594351db0b124900a874
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -14,10 +14,10 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.9.3
+    core: 3.9.6
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.3
@@ -34,6 +34,7 @@ generatedFiles:
   - /models/apierrors/badrequesterrorresponse.go
   - /models/apierrors/conflicterrorresponse.go
   - /models/apierrors/forbiddenerrorresponse.go
+  - /models/apierrors/goneerrorresponse.go
   - /models/apierrors/internalservererrorresponse.go
   - /models/apierrors/notfounderrorresponse.go
   - /models/apierrors/preconditionfailederrorresponse.go
@@ -56,6 +57,8 @@ generatedFiles:
   - /models/components/ratelimitresponse.go
   - /models/components/role.go
   - /models/components/security.go
+  - /models/components/updatekeycreditsdata.go
+  - /models/components/updatekeycreditsrefill.go
   - /models/components/v2apiscreateapirequestbody.go
   - /models/components/v2apiscreateapiresponsebody.go
   - /models/components/v2apiscreateapiresponsedata.go
@@ -182,6 +185,7 @@ generatedFiles:
   - docs/models/apierrors/badrequesterrorresponse.md
   - docs/models/apierrors/conflicterrorresponse.md
   - docs/models/apierrors/forbiddenerrorresponse.md
+  - docs/models/apierrors/goneerrorresponse.md
   - docs/models/apierrors/internalservererrorresponse.md
   - docs/models/apierrors/notfounderrorresponse.md
   - docs/models/apierrors/preconditionfailederrorresponse.md
@@ -193,9 +197,9 @@ generatedFiles:
   - docs/models/components/httpmetadata.md
   - docs/models/components/identity.md
   - docs/models/components/identitymeta.md
-  - docs/models/components/interval.md
   - docs/models/components/keycreditsdata.md
   - docs/models/components/keycreditsrefill.md
+  - docs/models/components/keycreditsrefillinterval.md
   - docs/models/components/keyresponsedata.md
   - docs/models/components/keysverifykeycredits.md
   - docs/models/components/keysverifykeyratelimit.md
@@ -208,6 +212,9 @@ generatedFiles:
   - docs/models/components/ratelimitresponse.md
   - docs/models/components/role.md
   - docs/models/components/security.md
+  - docs/models/components/updatekeycreditsdata.md
+  - docs/models/components/updatekeycreditsrefill.md
+  - docs/models/components/updatekeycreditsrefillinterval.md
   - docs/models/components/v2apiscreateapirequestbody.md
   - docs/models/components/v2apiscreateapiresponsebody.md
   - docs/models/components/v2apiscreateapiresponsedata.md
@@ -1139,6 +1146,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     ipLimit:
       requestBody:
         application/json: {"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "203.0.113.42", "limit": 5}
@@ -1155,6 +1164,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     weightedCost:
       requestBody:
         application/json: {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_def456", "limit": 50}
@@ -1170,6 +1181,8 @@ examples:
         "404":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     allowed:
       requestBody:
@@ -1292,3 +1305,4 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Unkey.Keys.UpdateKey()`: \n  *  `request.Request.Credits` **Changed**\n* `Unkey.Ratelimit.Limit()`:  `error.status[410]` **Added**\n"

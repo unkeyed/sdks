@@ -41,7 +41,7 @@ func (v V2RatelimitLimitRequestBody) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2RatelimitLimitRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"namespace", "duration", "identifier", "limit"}); err != nil {
 		return err
 	}
 	return nil

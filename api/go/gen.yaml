@@ -16,12 +16,13 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.0.2
+  version: 2.0.3
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -42,6 +43,7 @@ go:
   methodArguments: require-security-and-request
   modulePath: github.com/unkeyed/sdks/api/go
   outputModelSuffix: output
+  respectRequiredFields: false
   responseFormat: envelope-http
   sdkPackageAlias: unkey
   sdkPackageName: ""

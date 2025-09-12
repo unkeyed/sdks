@@ -34,7 +34,7 @@ type V2KeysUpdateKeyRequestBody struct {
 	//
 	Expires *int64 `json:"expires,omitempty"`
 	// Credit configuration and remaining balance for this key.
-	Credits *KeyCreditsData `json:"credits,omitempty"`
+	Credits *UpdateKeyCreditsData `json:"credits,omitempty"`
 	// Defines time-based rate limits that protect against abuse by controlling request frequency.
 	// Omitting this field preserves existing rate limits, while setting null removes all rate limits.
 	// Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -86,7 +86,7 @@ func (o *V2KeysUpdateKeyRequestBody) GetExpires() *int64 {
 	return o.Expires
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetCredits() *KeyCreditsData {
+func (o *V2KeysUpdateKeyRequestBody) GetCredits() *UpdateKeyCreditsData {
 	if o == nil {
 		return nil
 	}
