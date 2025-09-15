@@ -1,5 +1,5 @@
 import { Unkey } from "@unkey/api";
-import { APIError } from "@unkey/api/models/errors";
+import { UnkeyError } from "@unkey/api/models/errors/unkeyerror";
 import { type Duration, ms } from "./duration";
 import type { Ratelimiter } from "./interface";
 import type { Cache, Limit, LimitOptions, RatelimitResponse } from "./types";
@@ -39,83 +39,85 @@ export type RatelimitConfig = Limit & {
    * ```
    */
   timeout?:
-  | {
-    /**
-     * Time in milliseconds until the response is returned
-     */
-    ms: number | Duration;
+    | {
+        /**
+         * Time in milliseconds until the response is returned
+         */
+        ms: number | Duration;
 
-    /**
-     * A custom response to return when the timeout is reached.
-     *
-     * The important bit is the `success` value, choose whether you want to let requests pass or not.
-     *
-     * @example With a static response
-     * ```ts
-     * {
-     *   // 5 seconds
-     *   ms: 5000
-     *   fallback: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
-     * }
-     * ```
-     * @example With a dynamic response
-     * ```ts
-     * {
-     *  // 5 seconds
-     *  ms: 5000
-     *  fallback: (identifier: string) => {
-     *  if (someCheck(identifier)) {
-     *    return { success: false, limit: 0, remaining: 0, reset: 0 }
-     *  }
-     *  return { success: true, limit: 0, remaining: 0, reset: 0 }
-     *  }
-     * }
-     * ```
-     */
-    fallback:
-    | RatelimitResponse
-    | ((identifier: string) => RatelimitResponse | Promise<RatelimitResponse>);
-  }
-  | false;/**
-		 * Configure what happens for unforeseen errors
-		 *
-		 * @example Letting requests pass
-		 * ```ts
-		 *   onError: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
-		 * ```
-		 *
-		 * @example Rejecting the request
-		 * ```ts
-		 *   onError: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
-		 * ```
-		 *
-		 * @example Dynamic response
-		 * ```ts
-		 *   onError: (error, identifier) => {
-		 *     if (someCheck(error, identifier)) {
-		 *       return { success: false, limit: 0, remaining: 0, reset: 0 }
-		 *     }
-		 *     return { success: true, limit: 0, remaining: 0, reset: 0 }
-		 *   }
-		 * ```
-		 */
+        /**
+         * A custom response to return when the timeout is reached.
+         *
+         * The important bit is the `success` value, choose whether you want to let requests pass or not.
+         *
+         * @example With a static response
+         * ```ts
+         * {
+         *   // 5 seconds
+         *   ms: 5000
+         *   fallback: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
+         * }
+         * ```
+         * @example With a dynamic response
+         * ```ts
+         * {
+         *  // 5 seconds
+         *  ms: 5000
+         *  fallback: (identifier: string) => {
+         *  if (someCheck(identifier)) {
+         *    return { success: false, limit: 0, remaining: 0, reset: 0 }
+         *  }
+         *  return { success: true, limit: 0, remaining: 0, reset: 0 }
+         *  }
+         * }
+         * ```
+         */
+        fallback:
+          | RatelimitResponse
+          | ((
+              identifier: string,
+            ) => RatelimitResponse | Promise<RatelimitResponse>);
+      }
+    | false /**
+   * Configure what happens for unforeseen errors
+   *
+   * @example Letting requests pass
+   * ```ts
+   *   onError: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
+   * ```
+   *
+   * @example Rejecting the request
+   * ```ts
+   *   onError: () => ({ success: true, limit: 0, remaining: 0, reset: 0 })
+   * ```
+   *
+   * @example Dynamic response
+   * ```ts
+   *   onError: (error, identifier) => {
+   *     if (someCheck(error, identifier)) {
+   *       return { success: false, limit: 0, remaining: 0, reset: 0 }
+   *     }
+   *     return { success: true, limit: 0, remaining: 0, reset: 0 }
+   *   }
+   * ```
+   */;
   onError?: (
     err: Error,
     identifier: string,
   ) => RatelimitResponse | Promise<RatelimitResponse> /**
-		 * Cache abusive identifiers and block them immediately without a network request.
-		 *
-		 * ```ts
-		 * // in global scope
-		 * const cache = new Map()
-		 *
-		 * const unkey = new Ratelimit({
-		 *   // ...
-		 *   cache: cache,
-		 * })
-		 * ````
-		 */
-  cache?: Cache
+   * Cache abusive identifiers and block them immediately without a network request.
+   *
+   * ```ts
+   * // in global scope
+   * const cache = new Map()
+   *
+   * const unkey = new Ratelimit({
+   *   // ...
+   *   cache: cache,
+   * })
+   * ````
+   */;
+  cache?: Cache;
 
   /**
    *
@@ -130,7 +132,7 @@ export type RatelimitConfig = Limit & {
 export class Ratelimit implements Ratelimiter {
   private readonly config: RatelimitConfig;
   private readonly unkey: Unkey;
-  private readonly cache: Cache
+  private readonly cache: Cache;
 
   constructor(config: RatelimitConfig) {
     this.config = config;
@@ -140,7 +142,6 @@ export class Ratelimit implements Ratelimiter {
     });
     this.cache = config.cache ?? new Map();
   }
-
 
   /**
    * Limit a specific identifier, you can override a lot of things about this specific request using
@@ -157,43 +158,62 @@ export class Ratelimit implements Ratelimiter {
    * // handle request
    * ```
    */
-  public async limit(identifier: string, opts?: LimitOptions): Promise<RatelimitResponse> {
+  public async limit(
+    identifier: string,
+    opts?: LimitOptions,
+  ): Promise<RatelimitResponse> {
     try {
-      return this._limit(
+      return await this._limit(
         identifier,
         opts?.limit?.limit ?? this.config.limit,
         ms(opts?.limit?.duration ?? this.config.duration),
-        opts?.cost ?? 1);
+        opts?.cost ?? 1,
+      );
     } catch (e) {
-      if (!this.config.onError) {
+      if (typeof this.config.onError !== "function") {
         throw e;
       }
-      const err = e instanceof Error ? e : new Error(String(e));
+
+      const err =
+        e instanceof UnkeyError
+          ? new Error(e.message)
+          : e instanceof Error
+            ? e
+            : new Error(String(e));
 
       return await this.config.onError(err, identifier);
     }
   }
 
-
-  private async _limit(identifier: string, limit: number, duration: number, cost: number): Promise<RatelimitResponse> {
+  // _limit just handles the racing and caching. It must not handle errors, those are handled by limit
+  private async _limit(
+    identifier: string,
+    limit: number,
+    duration: number,
+    cost: number,
+  ): Promise<RatelimitResponse> {
     const cacheKey = `${this.config.namespace}:${identifier}:${limit}:${duration}`;
-    const naughty = this.cache.get(cacheKey)
+    const naughty = this.cache.get(cacheKey);
     if (naughty) {
       if (naughty.reset > Date.now()) {
-        return naughty
+        return naughty;
       } else {
-        this.cache.delete(cacheKey)
+        this.cache.delete(cacheKey);
       }
-
     }
 
     const timeout =
       this.config.timeout === false
         ? null
         : (this.config.timeout ?? {
-          ms: 5000,
-          fallback: () => ({ success: false, limit: 0, remaining: 0, reset: Date.now() }),
-        });
+            ms: 5000,
+            fallback: () => ({
+              success: false,
+              limit: 0,
+              remaining: 0,
+              reset: Date.now(),
+            }),
+          });
 
     let timeoutId: any = null;
     try {
@@ -208,15 +228,6 @@ export class Ratelimit implements Ratelimiter {
           })
           .then(async (res) => {
             return res.data;
-          })
-          .catch((err) => {
-            if (err instanceof APIError) {
-              throw new Error(
-                `Ratelimit failed: [${err.statusCode} - ${err.message}]: ${err.body}`,
-              );
-            }
-
-            throw new Error(`Ratelimit failed: ${err}`);
           }),
       ];
       if (timeout) {
@@ -235,10 +246,10 @@ export class Ratelimit implements Ratelimiter {
 
       const res = await Promise.race(ps);
       if (!res.success) {
-        this.cache.set(cacheKey, res)
+        this.cache.set(cacheKey, res);
       }
 
-      return res
+      return res;
     } finally {
       if (timeoutId) {
         clearTimeout(timeoutId);
