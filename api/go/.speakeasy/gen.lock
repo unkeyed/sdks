@@ -5,8 +5,8 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 2.0.3
-  configChecksum: 4fa3b6934d12594351db0b124900a874
+  releaseVersion: 2.0.9
+  configChecksum: 073f75c1ca28933e772bcda4a0701e6d
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -1305,4 +1305,3 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Unkey.Keys.UpdateKey()`: \n  *  `request.Request.Credits` **Changed**\n* `Unkey.Ratelimit.Limit()`:  `error.status[410]` **Added**\n"
