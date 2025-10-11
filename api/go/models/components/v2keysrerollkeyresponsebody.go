@@ -8,16 +8,16 @@ type V2KeysRerollKeyResponseBody struct {
 	Data V2KeysRerollKeyResponseData `json:"data"`
 }
 
-func (o *V2KeysRerollKeyResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysRerollKeyResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysRerollKeyResponseBody) GetData() V2KeysRerollKeyResponseData {
-	if o == nil {
+func (v *V2KeysRerollKeyResponseBody) GetData() V2KeysRerollKeyResponseData {
+	if v == nil {
 		return V2KeysRerollKeyResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

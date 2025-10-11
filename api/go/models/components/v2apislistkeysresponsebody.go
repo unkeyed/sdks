@@ -11,23 +11,23 @@ type V2ApisListKeysResponseBody struct {
 	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
-func (o *V2ApisListKeysResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2ApisListKeysResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2ApisListKeysResponseBody) GetData() []KeyResponseData {
-	if o == nil {
+func (v *V2ApisListKeysResponseBody) GetData() []KeyResponseData {
+	if v == nil {
 		return []KeyResponseData{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2ApisListKeysResponseBody) GetPagination() *Pagination {
-	if o == nil {
+func (v *V2ApisListKeysResponseBody) GetPagination() *Pagination {
+	if v == nil {
 		return nil
 	}
-	return o.Pagination
+	return v.Pagination
 }

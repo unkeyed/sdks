@@ -11,9 +11,9 @@ type V2ApisDeleteAPIRequestBody struct {
 	APIID string `json:"apiId"`
 }
 
-func (o *V2ApisDeleteAPIRequestBody) GetAPIID() string {
-	if o == nil {
+func (v *V2ApisDeleteAPIRequestBody) GetAPIID() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIID
+	return v.APIID
 }

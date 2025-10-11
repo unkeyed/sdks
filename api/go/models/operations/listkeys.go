@@ -13,16 +13,16 @@ type ListKeysResponse struct {
 	V2ApisListKeysResponseBody *components.V2ApisListKeysResponseBody
 }
 
-func (o *ListKeysResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListKeysResponse) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListKeysResponse) GetV2ApisListKeysResponseBody() *components.V2ApisListKeysResponseBody {
-	if o == nil {
+func (l *ListKeysResponse) GetV2ApisListKeysResponseBody() *components.V2ApisListKeysResponseBody {
+	if l == nil {
 		return nil
 	}
-	return o.V2ApisListKeysResponseBody
+	return l.V2ApisListKeysResponseBody
 }

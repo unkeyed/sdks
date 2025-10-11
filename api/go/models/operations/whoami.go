@@ -13,16 +13,16 @@ type WhoamiResponse struct {
 	V2KeysWhoamiResponseBody *components.V2KeysWhoamiResponseBody
 }
 
-func (o *WhoamiResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WhoamiResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WhoamiResponse) GetV2KeysWhoamiResponseBody() *components.V2KeysWhoamiResponseBody {
-	if o == nil {
+func (w *WhoamiResponse) GetV2KeysWhoamiResponseBody() *components.V2KeysWhoamiResponseBody {
+	if w == nil {
 		return nil
 	}
-	return o.V2KeysWhoamiResponseBody
+	return w.V2KeysWhoamiResponseBody
 }

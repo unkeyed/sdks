@@ -245,7 +245,7 @@ func main() {
     )
 
     res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
-        Limit: unkey.Int64(50),
+        Limit: unkey.Pointer[int64](50),
     })
     if err != nil {
         log.Fatal(err)

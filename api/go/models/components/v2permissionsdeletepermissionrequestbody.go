@@ -21,9 +21,9 @@ type V2PermissionsDeletePermissionRequestBody struct {
 	Permission string `json:"permission"`
 }
 
-func (o *V2PermissionsDeletePermissionRequestBody) GetPermission() string {
-	if o == nil {
+func (v *V2PermissionsDeletePermissionRequestBody) GetPermission() string {
+	if v == nil {
 		return ""
 	}
-	return o.Permission
+	return v.Permission
 }

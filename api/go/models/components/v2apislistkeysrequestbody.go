@@ -50,44 +50,44 @@ func (v *V2ApisListKeysRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2ApisListKeysRequestBody) GetAPIID() string {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetAPIID() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIID
+	return v.APIID
 }
 
-func (o *V2ApisListKeysRequestBody) GetLimit() *int64 {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetLimit() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Limit
+	return v.Limit
 }
 
-func (o *V2ApisListKeysRequestBody) GetCursor() *string {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ApisListKeysRequestBody) GetExternalID() *string {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetExternalID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.ExternalID
+	return v.ExternalID
 }
 
-func (o *V2ApisListKeysRequestBody) GetDecrypt() *bool {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetDecrypt() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Decrypt
+	return v.Decrypt
 }
 
-func (o *V2ApisListKeysRequestBody) GetRevalidateKeysCache() *bool {
-	if o == nil {
+func (v *V2ApisListKeysRequestBody) GetRevalidateKeysCache() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.RevalidateKeysCache
+	return v.RevalidateKeysCache
 }

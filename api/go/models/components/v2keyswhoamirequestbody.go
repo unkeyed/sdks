@@ -10,9 +10,9 @@ type V2KeysWhoamiRequestBody struct {
 	Key string `json:"key"`
 }
 
-func (o *V2KeysWhoamiRequestBody) GetKey() string {
-	if o == nil {
+func (v *V2KeysWhoamiRequestBody) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }

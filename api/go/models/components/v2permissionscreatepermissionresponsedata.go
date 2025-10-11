@@ -11,9 +11,9 @@ type V2PermissionsCreatePermissionResponseData struct {
 	PermissionID string `json:"permissionId"`
 }
 
-func (o *V2PermissionsCreatePermissionResponseData) GetPermissionID() string {
-	if o == nil {
+func (v *V2PermissionsCreatePermissionResponseData) GetPermissionID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PermissionID
+	return v.PermissionID
 }

@@ -7,9 +7,9 @@ type V2IdentitiesDeleteIdentityRequestBody struct {
 	Identity string `json:"identity"`
 }
 
-func (o *V2IdentitiesDeleteIdentityRequestBody) GetIdentity() string {
-	if o == nil {
+func (v *V2IdentitiesDeleteIdentityRequestBody) GetIdentity() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identity
+	return v.Identity
 }

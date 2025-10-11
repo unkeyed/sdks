@@ -7,9 +7,9 @@ type V2IdentitiesCreateIdentityResponseData struct {
 	IdentityID string `json:"identityId"`
 }
 
-func (o *V2IdentitiesCreateIdentityResponseData) GetIdentityID() string {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityResponseData) GetIdentityID() string {
+	if v == nil {
 		return ""
 	}
-	return o.IdentityID
+	return v.IdentityID
 }

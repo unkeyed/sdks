@@ -39,37 +39,37 @@ type V2RatelimitLimitResponseData struct {
 	OverrideID *string `json:"overrideId,omitempty"`
 }
 
-func (o *V2RatelimitLimitResponseData) GetLimit() int64 {
-	if o == nil {
+func (v *V2RatelimitLimitResponseData) GetLimit() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Limit
+	return v.Limit
 }
 
-func (o *V2RatelimitLimitResponseData) GetRemaining() int64 {
-	if o == nil {
+func (v *V2RatelimitLimitResponseData) GetRemaining() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Remaining
+	return v.Remaining
 }
 
-func (o *V2RatelimitLimitResponseData) GetReset() int64 {
-	if o == nil {
+func (v *V2RatelimitLimitResponseData) GetReset() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Reset
+	return v.Reset
 }
 
-func (o *V2RatelimitLimitResponseData) GetSuccess() bool {
-	if o == nil {
+func (v *V2RatelimitLimitResponseData) GetSuccess() bool {
+	if v == nil {
 		return false
 	}
-	return o.Success
+	return v.Success
 }
 
-func (o *V2RatelimitLimitResponseData) GetOverrideID() *string {
-	if o == nil {
+func (v *V2RatelimitLimitResponseData) GetOverrideID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.OverrideID
+	return v.OverrideID
 }

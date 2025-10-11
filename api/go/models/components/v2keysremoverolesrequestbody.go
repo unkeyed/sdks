@@ -18,16 +18,16 @@ type V2KeysRemoveRolesRequestBody struct {
 	Roles []string `json:"roles"`
 }
 
-func (o *V2KeysRemoveRolesRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysRemoveRolesRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysRemoveRolesRequestBody) GetRoles() []string {
-	if o == nil {
+func (v *V2KeysRemoveRolesRequestBody) GetRoles() []string {
+	if v == nil {
 		return []string{}
 	}
-	return o.Roles
+	return v.Roles
 }

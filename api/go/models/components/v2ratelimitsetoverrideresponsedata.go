@@ -14,9 +14,9 @@ type V2RatelimitSetOverrideResponseData struct {
 	OverrideID string `json:"overrideId"`
 }
 
-func (o *V2RatelimitSetOverrideResponseData) GetOverrideID() string {
-	if o == nil {
+func (v *V2RatelimitSetOverrideResponseData) GetOverrideID() string {
+	if v == nil {
 		return ""
 	}
-	return o.OverrideID
+	return v.OverrideID
 }

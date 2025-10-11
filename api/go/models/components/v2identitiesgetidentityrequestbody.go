@@ -7,9 +7,9 @@ type V2IdentitiesGetIdentityRequestBody struct {
 	Identity string `json:"identity"`
 }
 
-func (o *V2IdentitiesGetIdentityRequestBody) GetIdentity() string {
-	if o == nil {
+func (v *V2IdentitiesGetIdentityRequestBody) GetIdentity() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identity
+	return v.Identity
 }

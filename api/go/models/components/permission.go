@@ -24,30 +24,30 @@ type Permission struct {
 	Description *string `json:"description,omitempty"`
 }
 
-func (o *Permission) GetID() string {
-	if o == nil {
+func (p *Permission) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *Permission) GetName() string {
-	if o == nil {
+func (p *Permission) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *Permission) GetSlug() string {
-	if o == nil {
+func (p *Permission) GetSlug() string {
+	if p == nil {
 		return ""
 	}
-	return o.Slug
+	return p.Slug
 }
 
-func (o *Permission) GetDescription() *string {
-	if o == nil {
+func (p *Permission) GetDescription() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Description
+	return p.Description
 }

@@ -51,72 +51,72 @@ type V2KeysUpdateKeyRequestBody struct {
 	Permissions []string `json:"permissions,omitempty"`
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetName() *string {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetExternalID() *string {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetExternalID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.ExternalID
+	return v.ExternalID
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetMeta() map[string]any {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetMeta() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetExpires() *int64 {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetExpires() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Expires
+	return v.Expires
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetCredits() *UpdateKeyCreditsData {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetCredits() *UpdateKeyCreditsData {
+	if v == nil {
 		return nil
 	}
-	return o.Credits
+	return v.Credits
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetRatelimits() []RatelimitRequest {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetRatelimits() []RatelimitRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetEnabled() *bool {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetEnabled() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Enabled
+	return v.Enabled
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetRoles() []string {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetRoles() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Roles
+	return v.Roles
 }
 
-func (o *V2KeysUpdateKeyRequestBody) GetPermissions() []string {
-	if o == nil {
+func (v *V2KeysUpdateKeyRequestBody) GetPermissions() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Permissions
+	return v.Permissions
 }

@@ -52,30 +52,30 @@ func (r *RatelimitRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *RatelimitRequest) GetName() string {
-	if o == nil {
+func (r *RatelimitRequest) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *RatelimitRequest) GetLimit() int64 {
-	if o == nil {
+func (r *RatelimitRequest) GetLimit() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Limit
+	return r.Limit
 }
 
-func (o *RatelimitRequest) GetDuration() int64 {
-	if o == nil {
+func (r *RatelimitRequest) GetDuration() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Duration
+	return r.Duration
 }
 
-func (o *RatelimitRequest) GetAutoApply() *bool {
-	if o == nil {
+func (r *RatelimitRequest) GetAutoApply() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.AutoApply
+	return r.AutoApply
 }

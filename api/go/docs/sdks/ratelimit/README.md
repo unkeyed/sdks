@@ -191,7 +191,7 @@ func main() {
 
     res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
         Namespace: "api.requests",
-        Cost: unkey.Int64(5),
+        Cost: unkey.Pointer[int64](5),
         Duration: 60000,
         Identifier: "user_abc123",
         Limit: 100,
@@ -263,7 +263,7 @@ func main() {
 
     res, err := s.Ratelimit.ListOverrides(ctx, components.V2RatelimitListOverridesRequestBody{
         Namespace: "<value>",
-        Limit: unkey.Int64(20),
+        Limit: unkey.Pointer[int64](20),
     })
     if err != nil {
         log.Fatal(err)

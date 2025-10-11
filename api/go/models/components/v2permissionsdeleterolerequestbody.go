@@ -20,9 +20,9 @@ type V2PermissionsDeleteRoleRequestBody struct {
 	Role string `json:"role"`
 }
 
-func (o *V2PermissionsDeleteRoleRequestBody) GetRole() string {
-	if o == nil {
+func (v *V2PermissionsDeleteRoleRequestBody) GetRole() string {
+	if v == nil {
 		return ""
 	}
-	return o.Role
+	return v.Role
 }

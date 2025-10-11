@@ -12,16 +12,16 @@ type ListPermissionsResponse struct {
 	V2PermissionsListPermissionsResponseBody *components.V2PermissionsListPermissionsResponseBody
 }
 
-func (o *ListPermissionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListPermissionsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListPermissionsResponse) GetV2PermissionsListPermissionsResponseBody() *components.V2PermissionsListPermissionsResponseBody {
-	if o == nil {
+func (l *ListPermissionsResponse) GetV2PermissionsListPermissionsResponseBody() *components.V2PermissionsListPermissionsResponseBody {
+	if l == nil {
 		return nil
 	}
-	return o.V2PermissionsListPermissionsResponseBody
+	return l.V2PermissionsListPermissionsResponseBody
 }
