@@ -28,30 +28,30 @@ func (k *KeysVerifyKeyRatelimit) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *KeysVerifyKeyRatelimit) GetName() string {
-	if o == nil {
+func (k *KeysVerifyKeyRatelimit) GetName() string {
+	if k == nil {
 		return ""
 	}
-	return o.Name
+	return k.Name
 }
 
-func (o *KeysVerifyKeyRatelimit) GetCost() *int64 {
-	if o == nil {
+func (k *KeysVerifyKeyRatelimit) GetCost() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.Cost
+	return k.Cost
 }
 
-func (o *KeysVerifyKeyRatelimit) GetLimit() *int64 {
-	if o == nil {
+func (k *KeysVerifyKeyRatelimit) GetLimit() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.Limit
+	return k.Limit
 }
 
-func (o *KeysVerifyKeyRatelimit) GetDuration() *int64 {
-	if o == nil {
+func (k *KeysVerifyKeyRatelimit) GetDuration() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.Duration
+	return k.Duration
 }

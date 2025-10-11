@@ -12,16 +12,16 @@ type CreateRoleResponse struct {
 	V2PermissionsCreateRoleResponseBody *components.V2PermissionsCreateRoleResponseBody
 }
 
-func (o *CreateRoleResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (c *CreateRoleResponse) GetHTTPMeta() components.HTTPMetadata {
+	if c == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return c.HTTPMeta
 }
 
-func (o *CreateRoleResponse) GetV2PermissionsCreateRoleResponseBody() *components.V2PermissionsCreateRoleResponseBody {
-	if o == nil {
+func (c *CreateRoleResponse) GetV2PermissionsCreateRoleResponseBody() *components.V2PermissionsCreateRoleResponseBody {
+	if c == nil {
 		return nil
 	}
-	return o.V2PermissionsCreateRoleResponseBody
+	return c.V2PermissionsCreateRoleResponseBody
 }

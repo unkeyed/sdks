@@ -268,8 +268,8 @@ func main() {
 
     res, err := s.Apis.ListKeys(ctx, components.V2ApisListKeysRequestBody{
         APIID: "api_1234abcd",
-        Cursor: unkey.String("key_1234abcd"),
-        ExternalID: unkey.String("user_1234abcd"),
+        Cursor: unkey.Pointer("key_1234abcd"),
+        ExternalID: unkey.Pointer("user_1234abcd"),
     })
     if err != nil {
         log.Fatal(err)

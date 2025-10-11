@@ -13,16 +13,16 @@ type UpdateKeyResponse struct {
 	V2KeysUpdateKeyResponseBody *components.V2KeysUpdateKeyResponseBody
 }
 
-func (o *UpdateKeyResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (u *UpdateKeyResponse) GetHTTPMeta() components.HTTPMetadata {
+	if u == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return u.HTTPMeta
 }
 
-func (o *UpdateKeyResponse) GetV2KeysUpdateKeyResponseBody() *components.V2KeysUpdateKeyResponseBody {
-	if o == nil {
+func (u *UpdateKeyResponse) GetV2KeysUpdateKeyResponseBody() *components.V2KeysUpdateKeyResponseBody {
+	if u == nil {
 		return nil
 	}
-	return o.V2KeysUpdateKeyResponseBody
+	return u.V2KeysUpdateKeyResponseBody
 }

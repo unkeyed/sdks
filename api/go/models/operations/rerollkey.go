@@ -12,16 +12,16 @@ type RerollKeyResponse struct {
 	V2KeysRerollKeyResponseBody *components.V2KeysRerollKeyResponseBody
 }
 
-func (o *RerollKeyResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (r *RerollKeyResponse) GetHTTPMeta() components.HTTPMetadata {
+	if r == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return r.HTTPMeta
 }
 
-func (o *RerollKeyResponse) GetV2KeysRerollKeyResponseBody() *components.V2KeysRerollKeyResponseBody {
-	if o == nil {
+func (r *RerollKeyResponse) GetV2KeysRerollKeyResponseBody() *components.V2KeysRerollKeyResponseBody {
+	if r == nil {
 		return nil
 	}
-	return o.V2KeysRerollKeyResponseBody
+	return r.V2KeysRerollKeyResponseBody
 }

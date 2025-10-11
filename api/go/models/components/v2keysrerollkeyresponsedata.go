@@ -32,16 +32,16 @@ type V2KeysRerollKeyResponseData struct {
 	Key string `json:"key"`
 }
 
-func (o *V2KeysRerollKeyResponseData) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysRerollKeyResponseData) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysRerollKeyResponseData) GetKey() string {
-	if o == nil {
+func (v *V2KeysRerollKeyResponseData) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }

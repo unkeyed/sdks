@@ -19,16 +19,16 @@ type V2KeysSetRolesRequestBody struct {
 	Roles []string `json:"roles"`
 }
 
-func (o *V2KeysSetRolesRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysSetRolesRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysSetRolesRequestBody) GetRoles() []string {
-	if o == nil {
+func (v *V2KeysSetRolesRequestBody) GetRoles() []string {
+	if v == nil {
 		return []string{}
 	}
-	return o.Roles
+	return v.Roles
 }

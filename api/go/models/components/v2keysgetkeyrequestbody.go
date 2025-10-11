@@ -35,16 +35,16 @@ func (v *V2KeysGetKeyRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2KeysGetKeyRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysGetKeyRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysGetKeyRequestBody) GetDecrypt() *bool {
-	if o == nil {
+func (v *V2KeysGetKeyRequestBody) GetDecrypt() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Decrypt
+	return v.Decrypt
 }

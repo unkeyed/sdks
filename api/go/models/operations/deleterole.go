@@ -12,16 +12,16 @@ type DeleteRoleResponse struct {
 	V2PermissionsDeleteRoleResponseBody *components.V2PermissionsDeleteRoleResponseBody
 }
 
-func (o *DeleteRoleResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (d *DeleteRoleResponse) GetHTTPMeta() components.HTTPMetadata {
+	if d == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return d.HTTPMeta
 }
 
-func (o *DeleteRoleResponse) GetV2PermissionsDeleteRoleResponseBody() *components.V2PermissionsDeleteRoleResponseBody {
-	if o == nil {
+func (d *DeleteRoleResponse) GetV2PermissionsDeleteRoleResponseBody() *components.V2PermissionsDeleteRoleResponseBody {
+	if d == nil {
 		return nil
 	}
-	return o.V2PermissionsDeleteRoleResponseBody
+	return d.V2PermissionsDeleteRoleResponseBody
 }

@@ -30,30 +30,30 @@ type RatelimitOverride struct {
 	Limit int64 `json:"limit"`
 }
 
-func (o *RatelimitOverride) GetOverrideID() string {
-	if o == nil {
+func (r *RatelimitOverride) GetOverrideID() string {
+	if r == nil {
 		return ""
 	}
-	return o.OverrideID
+	return r.OverrideID
 }
 
-func (o *RatelimitOverride) GetDuration() int64 {
-	if o == nil {
+func (r *RatelimitOverride) GetDuration() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Duration
+	return r.Duration
 }
 
-func (o *RatelimitOverride) GetIdentifier() string {
-	if o == nil {
+func (r *RatelimitOverride) GetIdentifier() string {
+	if r == nil {
 		return ""
 	}
-	return o.Identifier
+	return r.Identifier
 }
 
-func (o *RatelimitOverride) GetLimit() int64 {
-	if o == nil {
+func (r *RatelimitOverride) GetLimit() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Limit
+	return r.Limit
 }

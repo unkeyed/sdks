@@ -22,7 +22,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.0.9
+  version: 2.1.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -42,6 +42,7 @@ go:
   maxMethodParams: 1
   methodArguments: require-security-and-request
   modulePath: github.com/unkeyed/sdks/api/go
+  nullableOptionalWrapper: false
   outputModelSuffix: output
   respectRequiredFields: false
   responseFormat: envelope-http

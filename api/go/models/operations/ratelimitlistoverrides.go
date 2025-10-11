@@ -12,16 +12,16 @@ type RatelimitListOverridesResponse struct {
 	V2RatelimitListOverridesResponseBody *components.V2RatelimitListOverridesResponseBody
 }
 
-func (o *RatelimitListOverridesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (r *RatelimitListOverridesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if r == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return r.HTTPMeta
 }
 
-func (o *RatelimitListOverridesResponse) GetV2RatelimitListOverridesResponseBody() *components.V2RatelimitListOverridesResponseBody {
-	if o == nil {
+func (r *RatelimitListOverridesResponse) GetV2RatelimitListOverridesResponseBody() *components.V2RatelimitListOverridesResponseBody {
+	if r == nil {
 		return nil
 	}
-	return o.V2RatelimitListOverridesResponseBody
+	return r.V2RatelimitListOverridesResponseBody
 }

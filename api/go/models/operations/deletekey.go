@@ -13,16 +13,16 @@ type DeleteKeyResponse struct {
 	V2KeysDeleteKeyResponseBody *components.V2KeysDeleteKeyResponseBody
 }
 
-func (o *DeleteKeyResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (d *DeleteKeyResponse) GetHTTPMeta() components.HTTPMetadata {
+	if d == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return d.HTTPMeta
 }
 
-func (o *DeleteKeyResponse) GetV2KeysDeleteKeyResponseBody() *components.V2KeysDeleteKeyResponseBody {
-	if o == nil {
+func (d *DeleteKeyResponse) GetV2KeysDeleteKeyResponseBody() *components.V2KeysDeleteKeyResponseBody {
+	if d == nil {
 		return nil
 	}
-	return o.V2KeysDeleteKeyResponseBody
+	return d.V2KeysDeleteKeyResponseBody
 }

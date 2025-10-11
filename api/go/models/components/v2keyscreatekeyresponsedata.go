@@ -10,16 +10,16 @@ type V2KeysCreateKeyResponseData struct {
 	Key string `json:"key"`
 }
 
-func (o *V2KeysCreateKeyResponseData) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysCreateKeyResponseData) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysCreateKeyResponseData) GetKey() string {
-	if o == nil {
+func (v *V2KeysCreateKeyResponseData) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }

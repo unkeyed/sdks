@@ -11,23 +11,23 @@ type V2PermissionsListPermissionsResponseBody struct {
 	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
-func (o *V2PermissionsListPermissionsResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2PermissionsListPermissionsResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2PermissionsListPermissionsResponseBody) GetData() []Permission {
-	if o == nil {
+func (v *V2PermissionsListPermissionsResponseBody) GetData() []Permission {
+	if v == nil {
 		return []Permission{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2PermissionsListPermissionsResponseBody) GetPagination() *Pagination {
-	if o == nil {
+func (v *V2PermissionsListPermissionsResponseBody) GetPagination() *Pagination {
+	if v == nil {
 		return nil
 	}
-	return o.Pagination
+	return v.Pagination
 }

@@ -23,58 +23,58 @@ type VerifyKeyRatelimitData struct {
 	AutoApply bool `json:"autoApply"`
 }
 
-func (o *VerifyKeyRatelimitData) GetExceeded() bool {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetExceeded() bool {
+	if v == nil {
 		return false
 	}
-	return o.Exceeded
+	return v.Exceeded
 }
 
-func (o *VerifyKeyRatelimitData) GetID() string {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *VerifyKeyRatelimitData) GetName() string {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *VerifyKeyRatelimitData) GetLimit() int64 {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetLimit() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Limit
+	return v.Limit
 }
 
-func (o *VerifyKeyRatelimitData) GetDuration() int64 {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetDuration() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Duration
+	return v.Duration
 }
 
-func (o *VerifyKeyRatelimitData) GetReset() int64 {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetReset() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Reset
+	return v.Reset
 }
 
-func (o *VerifyKeyRatelimitData) GetRemaining() int64 {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetRemaining() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Remaining
+	return v.Remaining
 }
 
-func (o *VerifyKeyRatelimitData) GetAutoApply() bool {
-	if o == nil {
+func (v *VerifyKeyRatelimitData) GetAutoApply() bool {
+	if v == nil {
 		return false
 	}
-	return o.AutoApply
+	return v.AutoApply
 }

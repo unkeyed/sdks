@@ -12,16 +12,16 @@ type DeleteAPIResponse struct {
 	V2ApisDeleteAPIResponseBody *components.V2ApisDeleteAPIResponseBody
 }
 
-func (o *DeleteAPIResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (d *DeleteAPIResponse) GetHTTPMeta() components.HTTPMetadata {
+	if d == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return d.HTTPMeta
 }
 
-func (o *DeleteAPIResponse) GetV2ApisDeleteAPIResponseBody() *components.V2ApisDeleteAPIResponseBody {
-	if o == nil {
+func (d *DeleteAPIResponse) GetV2ApisDeleteAPIResponseBody() *components.V2ApisDeleteAPIResponseBody {
+	if d == nil {
 		return nil
 	}
-	return o.V2ApisDeleteAPIResponseBody
+	return d.V2ApisDeleteAPIResponseBody
 }

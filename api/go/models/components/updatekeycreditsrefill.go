@@ -47,23 +47,23 @@ type UpdateKeyCreditsRefill struct {
 	RefillDay *int64 `json:"refillDay,omitempty"`
 }
 
-func (o *UpdateKeyCreditsRefill) GetInterval() UpdateKeyCreditsRefillInterval {
-	if o == nil {
+func (u *UpdateKeyCreditsRefill) GetInterval() UpdateKeyCreditsRefillInterval {
+	if u == nil {
 		return UpdateKeyCreditsRefillInterval("")
 	}
-	return o.Interval
+	return u.Interval
 }
 
-func (o *UpdateKeyCreditsRefill) GetAmount() int64 {
-	if o == nil {
+func (u *UpdateKeyCreditsRefill) GetAmount() int64 {
+	if u == nil {
 		return 0
 	}
-	return o.Amount
+	return u.Amount
 }
 
-func (o *UpdateKeyCreditsRefill) GetRefillDay() *int64 {
-	if o == nil {
+func (u *UpdateKeyCreditsRefill) GetRefillDay() *int64 {
+	if u == nil {
 		return nil
 	}
-	return o.RefillDay
+	return u.RefillDay
 }

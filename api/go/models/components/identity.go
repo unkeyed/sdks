@@ -17,30 +17,30 @@ type Identity struct {
 	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
 }
 
-func (o *Identity) GetID() string {
-	if o == nil {
+func (i *Identity) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *Identity) GetExternalID() string {
-	if o == nil {
+func (i *Identity) GetExternalID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ExternalID
+	return i.ExternalID
 }
 
-func (o *Identity) GetMeta() *IdentityMeta {
-	if o == nil {
+func (i *Identity) GetMeta() *IdentityMeta {
+	if i == nil {
 		return nil
 	}
-	return o.Meta
+	return i.Meta
 }
 
-func (o *Identity) GetRatelimits() []RatelimitResponse {
-	if o == nil {
+func (i *Identity) GetRatelimits() []RatelimitResponse {
+	if i == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return i.Ratelimits
 }

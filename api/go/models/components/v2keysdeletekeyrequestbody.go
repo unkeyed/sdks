@@ -35,16 +35,16 @@ func (v *V2KeysDeleteKeyRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2KeysDeleteKeyRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysDeleteKeyRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysDeleteKeyRequestBody) GetPermanent() *bool {
-	if o == nil {
+func (v *V2KeysDeleteKeyRequestBody) GetPermanent() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Permanent
+	return v.Permanent
 }

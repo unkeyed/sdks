@@ -14,16 +14,16 @@ type IdentitiesListIdentitiesResponse struct {
 	Next func() (*IdentitiesListIdentitiesResponse, error)
 }
 
-func (o *IdentitiesListIdentitiesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (i *IdentitiesListIdentitiesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if i == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return i.HTTPMeta
 }
 
-func (o *IdentitiesListIdentitiesResponse) GetV2IdentitiesListIdentitiesResponseBody() *components.V2IdentitiesListIdentitiesResponseBody {
-	if o == nil {
+func (i *IdentitiesListIdentitiesResponse) GetV2IdentitiesListIdentitiesResponseBody() *components.V2IdentitiesListIdentitiesResponseBody {
+	if i == nil {
 		return nil
 	}
-	return o.V2IdentitiesListIdentitiesResponseBody
+	return i.V2IdentitiesListIdentitiesResponseBody
 }

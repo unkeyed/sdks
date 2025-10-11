@@ -11,9 +11,9 @@ type V2PermissionsCreateRoleResponseData struct {
 	RoleID string `json:"roleId"`
 }
 
-func (o *V2PermissionsCreateRoleResponseData) GetRoleID() string {
-	if o == nil {
+func (v *V2PermissionsCreateRoleResponseData) GetRoleID() string {
+	if v == nil {
 		return ""
 	}
-	return o.RoleID
+	return v.RoleID
 }

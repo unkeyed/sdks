@@ -17,16 +17,16 @@ type V2ApisGetAPIResponseData struct {
 	Name string `json:"name"`
 }
 
-func (o *V2ApisGetAPIResponseData) GetID() string {
-	if o == nil {
+func (v *V2ApisGetAPIResponseData) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2ApisGetAPIResponseData) GetName() string {
-	if o == nil {
+func (v *V2ApisGetAPIResponseData) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

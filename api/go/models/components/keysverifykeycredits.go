@@ -14,9 +14,9 @@ type KeysVerifyKeyCredits struct {
 	Cost int `json:"cost"`
 }
 
-func (o *KeysVerifyKeyCredits) GetCost() int {
-	if o == nil {
+func (k *KeysVerifyKeyCredits) GetCost() int {
+	if k == nil {
 		return 0
 	}
-	return o.Cost
+	return k.Cost
 }

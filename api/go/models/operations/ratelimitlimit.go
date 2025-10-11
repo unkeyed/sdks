@@ -13,16 +13,16 @@ type RatelimitLimitResponse struct {
 	V2RatelimitLimitResponseBody *components.V2RatelimitLimitResponseBody
 }
 
-func (o *RatelimitLimitResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (r *RatelimitLimitResponse) GetHTTPMeta() components.HTTPMetadata {
+	if r == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return r.HTTPMeta
 }
 
-func (o *RatelimitLimitResponse) GetV2RatelimitLimitResponseBody() *components.V2RatelimitLimitResponseBody {
-	if o == nil {
+func (r *RatelimitLimitResponse) GetV2RatelimitLimitResponseBody() *components.V2RatelimitLimitResponseBody {
+	if r == nil {
 		return nil
 	}
-	return o.V2RatelimitLimitResponseBody
+	return r.V2RatelimitLimitResponseBody
 }

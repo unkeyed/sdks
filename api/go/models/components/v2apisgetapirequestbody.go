@@ -9,9 +9,9 @@ type V2ApisGetAPIRequestBody struct {
 	APIID string `json:"apiId"`
 }
 
-func (o *V2ApisGetAPIRequestBody) GetAPIID() string {
-	if o == nil {
+func (v *V2ApisGetAPIRequestBody) GetAPIID() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIID
+	return v.APIID
 }
