@@ -17,7 +17,7 @@ class ConflictErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ConflictErrorResponse(UnkeyError):
     r"""Error response when the request conflicts with the current state of the resource. This occurs when:
     - Attempting to create a resource that already exists

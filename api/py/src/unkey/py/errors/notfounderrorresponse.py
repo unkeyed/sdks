@@ -17,7 +17,7 @@ class NotFoundErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class NotFoundErrorResponse(UnkeyError):
     r"""Error response when the requested resource cannot be found. This occurs when:
     - The specified resource ID doesn't exist in your workspace

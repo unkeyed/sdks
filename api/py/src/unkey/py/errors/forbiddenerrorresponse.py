@@ -17,7 +17,7 @@ class ForbiddenErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ForbiddenErrorResponse(UnkeyError):
     r"""Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:
     - The root key doesn't have the required permissions for this endpoint

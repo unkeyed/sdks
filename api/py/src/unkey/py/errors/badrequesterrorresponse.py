@@ -20,7 +20,7 @@ class BadRequestErrorResponseData(BaseModel):
     r"""Extended error details specifically for bad request (400) errors. This builds on the BaseError structure by adding an array of individual validation errors, making it easy to identify and fix multiple issues at once."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class BadRequestErrorResponse(UnkeyError):
     r"""Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying."""
 

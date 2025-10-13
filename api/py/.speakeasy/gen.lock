@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: a103c0ece7f5bdccecdcdd977a651567
+  docChecksum: 841ecf953a69f4da864a4f64bd201e87
   docVersion: 2.0.0
-  speakeasyVersion: 1.615.2
-  generationVersion: 2.698.4
-  releaseVersion: 2.2.0
-  configChecksum: 88865573707c536f69aeec38ae5dc809
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 2.3.0
+  configChecksum: dcd1f431d03b0d7536e5e1678fe127b2
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.5
-    core: 5.20.4
+    core: 5.22.1
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -29,7 +29,7 @@ features:
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.1
-    pagination: 3.0.5
+    pagination: 3.0.7
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
@@ -51,7 +51,6 @@ generatedFiles:
   - docs/models/emptyresponse.md
   - docs/models/identitieslistidentitiesresponse.md
   - docs/models/identity.md
-  - docs/models/identitymeta.md
   - docs/models/interval.md
   - docs/models/keycreditsdata.md
   - docs/models/keycreditsrefill.md
@@ -158,7 +157,6 @@ generatedFiles:
   - docs/sdks/keys/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/ratelimit/README.md
-  - docs/sdks/unkey/README.md
   - poetry.toml
   - py.typed
   - pylintrc
@@ -542,7 +540,7 @@ examples:
         application/json: {"identity": "user_abc123"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
     missingPermission:
       requestBody:
         application/json: {"identity": "user_abc123"}
@@ -1253,4 +1251,10 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes Detected:
-  * `unkey.ratelimit.limit()`:  `error.status[410]` **Added**
+  * `unkey.apis.list_keys()`:  `response.data.[].identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.get_identity()`:  `response.data.meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.list_identities()`:  `response.data.[].meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.update_identity()`:  `response.data.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.get_key()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.verify_key()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.whoami()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
