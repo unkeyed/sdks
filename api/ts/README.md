@@ -140,10 +140,7 @@ bun add @unkey/api
 ### Yarn
 
 ```bash
-yarn add @unkey/api zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add @unkey/api
 ```
 
 > [!NOTE]
@@ -353,7 +350,6 @@ run();
 * [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [listOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 * [setOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
-
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -669,7 +665,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Unkey({ httpClient });
+const sdk = new Unkey({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

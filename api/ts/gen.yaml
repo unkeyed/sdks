@@ -22,7 +22,8 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.5
+  version: 2.0.6
+  acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -53,6 +54,7 @@ typescript:
   jsonpath: rfc9535
   maxMethodParams: 0
   methodArguments: require-security-and-request
+  modelPropertyCasing: camel
   moduleFormat: dual
   outputModelSuffix: output
   packageName: '@unkey/api'

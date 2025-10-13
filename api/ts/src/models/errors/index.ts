@@ -14,3 +14,4 @@ export * from "./preconditionfailederrorresponse.js";
 export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
 export * from "./unauthorizederrorresponse.js";
+export * from "./unkeyerror.js";

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 7971b462ec1e4feb676e32f5b3fcf2ff
+  docChecksum: 325f5f52486df37a314c5d3fbeab0a23
   docVersion: 2.0.0
-  speakeasyVersion: 1.615.2
-  generationVersion: 2.698.4
-  releaseVersion: 2.0.5
-  configChecksum: 1c18172009ca2d828f8a71563927bb0f
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 2.0.6
+  configChecksum: b1b40725158ed6497856330b3e210fa4
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.22
+    core: 3.21.26
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -43,7 +43,6 @@ generatedFiles:
   - docs/models/components/code.md
   - docs/models/components/emptyresponse.md
   - docs/models/components/identity.md
-  - docs/models/components/identitymeta.md
   - docs/models/components/keycreditsdata.md
   - docs/models/components/keycreditsrefill.md
   - docs/models/components/keycreditsrefillinterval.md
@@ -161,7 +160,6 @@ generatedFiles:
   - docs/sdks/keys/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/ratelimit/README.md
-  - docs/sdks/unkey/README.md
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
@@ -639,7 +637,7 @@ examples:
         application/json: {"identity": "user_abc123"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
     missingPermission:
       requestBody:
         application/json: {"identity": "user_abc123"}
@@ -1348,4 +1346,12 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `unkey.keys.updateKey()`: \n  *  `request.credits` **Changed**\n* `unkey.ratelimit.limit()`:  `error.status[410]` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `unkey.apis.listKeys()`:  `response.data.[].identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.getIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.listIdentities()`:  `response.data.[].meta` **Changed** **Breaking** :warning:
+  * `unkey.identities.updateIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.getKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.verifyKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.keys.whoami()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
