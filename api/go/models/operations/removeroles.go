@@ -12,16 +12,16 @@ type RemoveRolesResponse struct {
 	V2KeysRemoveRolesResponseBody *components.V2KeysRemoveRolesResponseBody
 }
 
-func (o *RemoveRolesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (r *RemoveRolesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if r == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return r.HTTPMeta
 }
 
-func (o *RemoveRolesResponse) GetV2KeysRemoveRolesResponseBody() *components.V2KeysRemoveRolesResponseBody {
-	if o == nil {
+func (r *RemoveRolesResponse) GetV2KeysRemoveRolesResponseBody() *components.V2KeysRemoveRolesResponseBody {
+	if r == nil {
 		return nil
 	}
-	return o.V2KeysRemoveRolesResponseBody
+	return r.V2KeysRemoveRolesResponseBody
 }

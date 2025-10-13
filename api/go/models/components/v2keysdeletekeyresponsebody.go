@@ -9,16 +9,16 @@ type V2KeysDeleteKeyResponseBody struct {
 	Data EmptyResponse `json:"data"`
 }
 
-func (o *V2KeysDeleteKeyResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysDeleteKeyResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysDeleteKeyResponseBody) GetData() EmptyResponse {
-	if o == nil {
+func (v *V2KeysDeleteKeyResponseBody) GetData() EmptyResponse {
+	if v == nil {
 		return EmptyResponse{}
 	}
-	return o.Data
+	return v.Data
 }

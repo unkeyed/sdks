@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 7971b462ec1e4feb676e32f5b3fcf2ff
+  docChecksum: 325f5f52486df37a314c5d3fbeab0a23
   docVersion: 2.0.0
-  speakeasyVersion: 1.615.2
-  generationVersion: 2.698.4
-  releaseVersion: 2.0.9
-  configChecksum: 073f75c1ca28933e772bcda4a0701e6d
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 2.1.0
+  configChecksum: f354b33cbceacbda44e03c3f8429c0bb
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -14,7 +14,7 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.9.6
+    core: 3.11.1
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
     globalSecurity: 2.82.12
@@ -24,7 +24,7 @@ features:
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.1.1
+    nullables: 0.2.1
     pagination: 2.82.4
     responseFormat: 0.1.2
     retries: 2.84.2
@@ -196,7 +196,6 @@ generatedFiles:
   - docs/models/components/emptyresponse.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/identity.md
-  - docs/models/components/identitymeta.md
   - docs/models/components/keycreditsdata.md
   - docs/models/components/keycreditsrefill.md
   - docs/models/components/keycreditsrefillinterval.md
@@ -342,7 +341,6 @@ generatedFiles:
   - docs/sdks/keys/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/ratelimit/README.md
-  - docs/sdks/unkey/README.md
   - go.mod
   - identities.go
   - internal/config/sdkconfiguration.go
@@ -361,13 +359,14 @@ generatedFiles:
   - keys.go
   - models/apierrors/apierror.go
   - models/operations/options.go
+  - optionalnullable/optionalnullable.go
+  - optionalnullable/optionalnullable_test.go
   - permissions.go
   - ratelimit.go
   - retry/config.go
   - types/bigint.go
   - types/date.go
   - types/datetime.go
-  - types/decimal.go
   - types/pointers.go
   - unkey.go
 examples:
@@ -596,7 +595,7 @@ examples:
         application/json: {"identity": "user_abc123"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"id": "id_1234567890abcdef", "externalId": "user_123", "meta": {"email": "alice@example.com", "name": "Alice Smith", "plan": "premium"}, "ratelimits": [{"id": "rl_1234567890abcdef", "name": "requests", "limit": 1000, "duration": 60000, "autoApply": true}]}}
     missingPermission:
       requestBody:
         application/json: {"identity": "user_abc123"}
@@ -1305,3 +1304,12 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Go SDK Changes Detected:
+  * `Unkey.Apis.ListKeys()`:  `response.Data.[].Identity.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Identities.GetIdentity()`:  `response.Data.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Identities.ListIdentities()`:  `response.Data.[].Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Identities.UpdateIdentity()`:  `response.Data.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Keys.GetKey()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Keys.VerifyKey()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Keys.Whoami()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:

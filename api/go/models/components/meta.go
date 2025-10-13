@@ -8,9 +8,9 @@ type Meta struct {
 	RequestID string `json:"requestId"`
 }
 
-func (o *Meta) GetRequestID() string {
-	if o == nil {
+func (m *Meta) GetRequestID() string {
+	if m == nil {
 		return ""
 	}
-	return o.RequestID
+	return m.RequestID
 }

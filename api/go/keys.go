@@ -78,7 +78,7 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "addPermissions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -416,7 +416,7 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "addRoles",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -755,7 +755,7 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1089,7 +1089,7 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1426,7 +1426,7 @@ func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyReques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1764,7 +1764,7 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "removePermissions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -2102,7 +2102,7 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "removeRoles",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -2457,7 +2457,7 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "rerollKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -2795,7 +2795,7 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "setPermissions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -3133,7 +3133,7 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "setRoles",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -3471,7 +3471,7 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateCredits",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -3809,7 +3809,7 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -4150,7 +4150,7 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "verifyKey",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -4482,7 +4482,7 @@ func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiReques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "whoami",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)

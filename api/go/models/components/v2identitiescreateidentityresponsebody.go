@@ -8,16 +8,16 @@ type V2IdentitiesCreateIdentityResponseBody struct {
 	Data V2IdentitiesCreateIdentityResponseData `json:"data"`
 }
 
-func (o *V2IdentitiesCreateIdentityResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2IdentitiesCreateIdentityResponseBody) GetData() V2IdentitiesCreateIdentityResponseData {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityResponseBody) GetData() V2IdentitiesCreateIdentityResponseData {
+	if v == nil {
 		return V2IdentitiesCreateIdentityResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

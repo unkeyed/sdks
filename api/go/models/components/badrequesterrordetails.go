@@ -16,37 +16,37 @@ type BadRequestErrorDetails struct {
 	Errors []ValidationError `json:"errors"`
 }
 
-func (o *BadRequestErrorDetails) GetDetail() string {
-	if o == nil {
+func (b *BadRequestErrorDetails) GetDetail() string {
+	if b == nil {
 		return ""
 	}
-	return o.Detail
+	return b.Detail
 }
 
-func (o *BadRequestErrorDetails) GetStatus() int64 {
-	if o == nil {
+func (b *BadRequestErrorDetails) GetStatus() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.Status
+	return b.Status
 }
 
-func (o *BadRequestErrorDetails) GetTitle() string {
-	if o == nil {
+func (b *BadRequestErrorDetails) GetTitle() string {
+	if b == nil {
 		return ""
 	}
-	return o.Title
+	return b.Title
 }
 
-func (o *BadRequestErrorDetails) GetType() string {
-	if o == nil {
+func (b *BadRequestErrorDetails) GetType() string {
+	if b == nil {
 		return ""
 	}
-	return o.Type
+	return b.Type
 }
 
-func (o *BadRequestErrorDetails) GetErrors() []ValidationError {
-	if o == nil {
+func (b *BadRequestErrorDetails) GetErrors() []ValidationError {
+	if b == nil {
 		return []ValidationError{}
 	}
-	return o.Errors
+	return b.Errors
 }

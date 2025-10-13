@@ -15,37 +15,37 @@ type RatelimitResponse struct {
 	AutoApply bool `json:"autoApply"`
 }
 
-func (o *RatelimitResponse) GetID() string {
-	if o == nil {
+func (r *RatelimitResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *RatelimitResponse) GetName() string {
-	if o == nil {
+func (r *RatelimitResponse) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *RatelimitResponse) GetLimit() int64 {
-	if o == nil {
+func (r *RatelimitResponse) GetLimit() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Limit
+	return r.Limit
 }
 
-func (o *RatelimitResponse) GetDuration() int64 {
-	if o == nil {
+func (r *RatelimitResponse) GetDuration() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Duration
+	return r.Duration
 }
 
-func (o *RatelimitResponse) GetAutoApply() bool {
-	if o == nil {
+func (r *RatelimitResponse) GetAutoApply() bool {
+	if r == nil {
 		return false
 	}
-	return o.AutoApply
+	return r.AutoApply
 }

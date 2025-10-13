@@ -8,16 +8,16 @@ type V2ApisGetAPIResponseBody struct {
 	Data V2ApisGetAPIResponseData `json:"data"`
 }
 
-func (o *V2ApisGetAPIResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2ApisGetAPIResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2ApisGetAPIResponseBody) GetData() V2ApisGetAPIResponseData {
-	if o == nil {
+func (v *V2ApisGetAPIResponseBody) GetData() V2ApisGetAPIResponseData {
+	if v == nil {
 		return V2ApisGetAPIResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

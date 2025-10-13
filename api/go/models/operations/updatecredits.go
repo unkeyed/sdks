@@ -13,16 +13,16 @@ type UpdateCreditsResponse struct {
 	V2KeysUpdateCreditsResponseBody *components.V2KeysUpdateCreditsResponseBody
 }
 
-func (o *UpdateCreditsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (u *UpdateCreditsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if u == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return u.HTTPMeta
 }
 
-func (o *UpdateCreditsResponse) GetV2KeysUpdateCreditsResponseBody() *components.V2KeysUpdateCreditsResponseBody {
-	if o == nil {
+func (u *UpdateCreditsResponse) GetV2KeysUpdateCreditsResponseBody() *components.V2KeysUpdateCreditsResponseBody {
+	if u == nil {
 		return nil
 	}
-	return o.V2KeysUpdateCreditsResponseBody
+	return u.V2KeysUpdateCreditsResponseBody
 }

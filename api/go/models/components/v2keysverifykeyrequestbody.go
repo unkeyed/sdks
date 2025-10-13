@@ -35,37 +35,37 @@ type V2KeysVerifyKeyRequestBody struct {
 	Ratelimits []KeysVerifyKeyRatelimit `json:"ratelimits,omitempty"`
 }
 
-func (o *V2KeysVerifyKeyRequestBody) GetKey() string {
-	if o == nil {
+func (v *V2KeysVerifyKeyRequestBody) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }
 
-func (o *V2KeysVerifyKeyRequestBody) GetTags() []string {
-	if o == nil {
+func (v *V2KeysVerifyKeyRequestBody) GetTags() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Tags
+	return v.Tags
 }
 
-func (o *V2KeysVerifyKeyRequestBody) GetPermissions() *string {
-	if o == nil {
+func (v *V2KeysVerifyKeyRequestBody) GetPermissions() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Permissions
+	return v.Permissions
 }
 
-func (o *V2KeysVerifyKeyRequestBody) GetCredits() *KeysVerifyKeyCredits {
-	if o == nil {
+func (v *V2KeysVerifyKeyRequestBody) GetCredits() *KeysVerifyKeyCredits {
+	if v == nil {
 		return nil
 	}
-	return o.Credits
+	return v.Credits
 }
 
-func (o *V2KeysVerifyKeyRequestBody) GetRatelimits() []KeysVerifyKeyRatelimit {
-	if o == nil {
+func (v *V2KeysVerifyKeyRequestBody) GetRatelimits() []KeysVerifyKeyRatelimit {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }

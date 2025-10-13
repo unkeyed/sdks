@@ -46,30 +46,30 @@ type V2RatelimitSetOverrideRequestBody struct {
 	Limit int64 `json:"limit"`
 }
 
-func (o *V2RatelimitSetOverrideRequestBody) GetNamespace() string {
-	if o == nil {
+func (v *V2RatelimitSetOverrideRequestBody) GetNamespace() string {
+	if v == nil {
 		return ""
 	}
-	return o.Namespace
+	return v.Namespace
 }
 
-func (o *V2RatelimitSetOverrideRequestBody) GetDuration() int64 {
-	if o == nil {
+func (v *V2RatelimitSetOverrideRequestBody) GetDuration() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Duration
+	return v.Duration
 }
 
-func (o *V2RatelimitSetOverrideRequestBody) GetIdentifier() string {
-	if o == nil {
+func (v *V2RatelimitSetOverrideRequestBody) GetIdentifier() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identifier
+	return v.Identifier
 }
 
-func (o *V2RatelimitSetOverrideRequestBody) GetLimit() int64 {
-	if o == nil {
+func (v *V2RatelimitSetOverrideRequestBody) GetLimit() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Limit
+	return v.Limit
 }

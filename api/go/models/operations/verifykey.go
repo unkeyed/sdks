@@ -19,16 +19,16 @@ type VerifyKeyResponse struct {
 	V2KeysVerifyKeyResponseBody *components.V2KeysVerifyKeyResponseBody
 }
 
-func (o *VerifyKeyResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (v *VerifyKeyResponse) GetHTTPMeta() components.HTTPMetadata {
+	if v == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return v.HTTPMeta
 }
 
-func (o *VerifyKeyResponse) GetV2KeysVerifyKeyResponseBody() *components.V2KeysVerifyKeyResponseBody {
-	if o == nil {
+func (v *VerifyKeyResponse) GetV2KeysVerifyKeyResponseBody() *components.V2KeysVerifyKeyResponseBody {
+	if v == nil {
 		return nil
 	}
-	return o.V2KeysVerifyKeyResponseBody
+	return v.V2KeysVerifyKeyResponseBody
 }

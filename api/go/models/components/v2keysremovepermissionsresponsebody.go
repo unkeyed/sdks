@@ -16,16 +16,16 @@ type V2KeysRemovePermissionsResponseBody struct {
 	Data []Permission `json:"data"`
 }
 
-func (o *V2KeysRemovePermissionsResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysRemovePermissionsResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysRemovePermissionsResponseBody) GetData() []Permission {
-	if o == nil {
+func (v *V2KeysRemovePermissionsResponseBody) GetData() []Permission {
+	if v == nil {
 		return []Permission{}
 	}
-	return o.Data
+	return v.Data
 }

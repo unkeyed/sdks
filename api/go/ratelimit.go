@@ -70,7 +70,7 @@ func (s *Ratelimit) DeleteOverride(ctx context.Context, request components.V2Rat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ratelimit.deleteOverride",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -400,7 +400,7 @@ func (s *Ratelimit) GetOverride(ctx context.Context, request components.V2Rateli
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ratelimit.getOverride",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -738,7 +738,7 @@ func (s *Ratelimit) Limit(ctx context.Context, request components.V2RatelimitLim
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ratelimit.limit",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1089,7 +1089,7 @@ func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2Rate
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ratelimit.listOverrides",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1419,7 +1419,7 @@ func (s *Ratelimit) SetOverride(ctx context.Context, request components.V2Rateli
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ratelimit.setOverride",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)

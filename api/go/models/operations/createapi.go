@@ -13,16 +13,16 @@ type CreateAPIResponse struct {
 	V2ApisCreateAPIResponseBody *components.V2ApisCreateAPIResponseBody
 }
 
-func (o *CreateAPIResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (c *CreateAPIResponse) GetHTTPMeta() components.HTTPMetadata {
+	if c == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return c.HTTPMeta
 }
 
-func (o *CreateAPIResponse) GetV2ApisCreateAPIResponseBody() *components.V2ApisCreateAPIResponseBody {
-	if o == nil {
+func (c *CreateAPIResponse) GetV2ApisCreateAPIResponseBody() *components.V2ApisCreateAPIResponseBody {
+	if c == nil {
 		return nil
 	}
-	return o.V2ApisCreateAPIResponseBody
+	return c.V2ApisCreateAPIResponseBody
 }

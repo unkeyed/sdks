@@ -19,23 +19,23 @@ type V2IdentitiesUpdateIdentityRequestBody struct {
 	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
 }
 
-func (o *V2IdentitiesUpdateIdentityRequestBody) GetIdentity() string {
-	if o == nil {
+func (v *V2IdentitiesUpdateIdentityRequestBody) GetIdentity() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identity
+	return v.Identity
 }
 
-func (o *V2IdentitiesUpdateIdentityRequestBody) GetMeta() map[string]any {
-	if o == nil {
+func (v *V2IdentitiesUpdateIdentityRequestBody) GetMeta() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2IdentitiesUpdateIdentityRequestBody) GetRatelimits() []RatelimitRequest {
-	if o == nil {
+func (v *V2IdentitiesUpdateIdentityRequestBody) GetRatelimits() []RatelimitRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }

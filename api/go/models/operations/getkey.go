@@ -13,16 +13,16 @@ type GetKeyResponse struct {
 	V2KeysGetKeyResponseBody *components.V2KeysGetKeyResponseBody
 }
 
-func (o *GetKeyResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetKeyResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetKeyResponse) GetV2KeysGetKeyResponseBody() *components.V2KeysGetKeyResponseBody {
-	if o == nil {
+func (g *GetKeyResponse) GetV2KeysGetKeyResponseBody() *components.V2KeysGetKeyResponseBody {
+	if g == nil {
 		return nil
 	}
-	return o.V2KeysGetKeyResponseBody
+	return g.V2KeysGetKeyResponseBody
 }

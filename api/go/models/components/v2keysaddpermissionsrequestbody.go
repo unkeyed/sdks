@@ -17,16 +17,16 @@ type V2KeysAddPermissionsRequestBody struct {
 	Permissions []string `json:"permissions"`
 }
 
-func (o *V2KeysAddPermissionsRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysAddPermissionsRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysAddPermissionsRequestBody) GetPermissions() []string {
-	if o == nil {
+func (v *V2KeysAddPermissionsRequestBody) GetPermissions() []string {
+	if v == nil {
 		return []string{}
 	}
-	return o.Permissions
+	return v.Permissions
 }

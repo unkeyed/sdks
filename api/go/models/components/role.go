@@ -29,30 +29,30 @@ type Role struct {
 	Permissions []Permission `json:"permissions,omitempty"`
 }
 
-func (o *Role) GetID() string {
-	if o == nil {
+func (r *Role) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *Role) GetName() string {
-	if o == nil {
+func (r *Role) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *Role) GetDescription() *string {
-	if o == nil {
+func (r *Role) GetDescription() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Description
+	return r.Description
 }
 
-func (o *Role) GetPermissions() []Permission {
-	if o == nil {
+func (r *Role) GetPermissions() []Permission {
+	if r == nil {
 		return nil
 	}
-	return o.Permissions
+	return r.Permissions
 }

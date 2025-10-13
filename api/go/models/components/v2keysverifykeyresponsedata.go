@@ -122,86 +122,86 @@ type V2KeysVerifyKeyResponseData struct {
 	Ratelimits []VerifyKeyRatelimitData `json:"ratelimits,omitempty"`
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetValid() bool {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetValid() bool {
+	if v == nil {
 		return false
 	}
-	return o.Valid
+	return v.Valid
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetCode() Code {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetCode() Code {
+	if v == nil {
 		return Code("")
 	}
-	return o.Code
+	return v.Code
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetKeyID() *string {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetKeyID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetName() *string {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetMeta() map[string]any {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetMeta() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetExpires() *int64 {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetExpires() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Expires
+	return v.Expires
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetCredits() *int {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetCredits() *int {
+	if v == nil {
 		return nil
 	}
-	return o.Credits
+	return v.Credits
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetEnabled() *bool {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetEnabled() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Enabled
+	return v.Enabled
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetPermissions() []string {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetPermissions() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Permissions
+	return v.Permissions
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetRoles() []string {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetRoles() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Roles
+	return v.Roles
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetIdentity() *Identity {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetIdentity() *Identity {
+	if v == nil {
 		return nil
 	}
-	return o.Identity
+	return v.Identity
 }
 
-func (o *V2KeysVerifyKeyResponseData) GetRatelimits() []VerifyKeyRatelimitData {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseData) GetRatelimits() []VerifyKeyRatelimitData {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }

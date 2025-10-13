@@ -9,16 +9,16 @@ type V2KeysUpdateCreditsResponseBody struct {
 	Data KeyCreditsData `json:"data"`
 }
 
-func (o *V2KeysUpdateCreditsResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysUpdateCreditsResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysUpdateCreditsResponseBody) GetData() KeyCreditsData {
-	if o == nil {
+func (v *V2KeysUpdateCreditsResponseBody) GetData() KeyCreditsData {
+	if v == nil {
 		return KeyCreditsData{}
 	}
-	return o.Data
+	return v.Data
 }

@@ -73,7 +73,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createApi",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -388,7 +388,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteApi",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -741,7 +741,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getApi",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1081,7 +1081,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listKeys",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)

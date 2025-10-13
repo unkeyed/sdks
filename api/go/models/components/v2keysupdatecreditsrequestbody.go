@@ -52,23 +52,23 @@ type V2KeysUpdateCreditsRequestBody struct {
 	Operation Operation `json:"operation"`
 }
 
-func (o *V2KeysUpdateCreditsRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysUpdateCreditsRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysUpdateCreditsRequestBody) GetValue() *int64 {
-	if o == nil {
+func (v *V2KeysUpdateCreditsRequestBody) GetValue() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Value
+	return v.Value
 }
 
-func (o *V2KeysUpdateCreditsRequestBody) GetOperation() Operation {
-	if o == nil {
+func (v *V2KeysUpdateCreditsRequestBody) GetOperation() Operation {
+	if v == nil {
 		return Operation("")
 	}
-	return o.Operation
+	return v.Operation
 }

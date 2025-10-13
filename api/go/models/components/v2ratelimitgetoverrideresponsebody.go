@@ -8,16 +8,16 @@ type V2RatelimitGetOverrideResponseBody struct {
 	Data RatelimitOverride `json:"data"`
 }
 
-func (o *V2RatelimitGetOverrideResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2RatelimitGetOverrideResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2RatelimitGetOverrideResponseBody) GetData() RatelimitOverride {
-	if o == nil {
+func (v *V2RatelimitGetOverrideResponseBody) GetData() RatelimitOverride {
+	if v == nil {
 		return RatelimitOverride{}
 	}
-	return o.Data
+	return v.Data
 }

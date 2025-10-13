@@ -29,100 +29,100 @@ type KeyResponseData struct {
 	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
 }
 
-func (o *KeyResponseData) GetKeyID() string {
-	if o == nil {
+func (k *KeyResponseData) GetKeyID() string {
+	if k == nil {
 		return ""
 	}
-	return o.KeyID
+	return k.KeyID
 }
 
-func (o *KeyResponseData) GetStart() string {
-	if o == nil {
+func (k *KeyResponseData) GetStart() string {
+	if k == nil {
 		return ""
 	}
-	return o.Start
+	return k.Start
 }
 
-func (o *KeyResponseData) GetEnabled() bool {
-	if o == nil {
+func (k *KeyResponseData) GetEnabled() bool {
+	if k == nil {
 		return false
 	}
-	return o.Enabled
+	return k.Enabled
 }
 
-func (o *KeyResponseData) GetName() *string {
-	if o == nil {
+func (k *KeyResponseData) GetName() *string {
+	if k == nil {
 		return nil
 	}
-	return o.Name
+	return k.Name
 }
 
-func (o *KeyResponseData) GetMeta() map[string]any {
-	if o == nil {
+func (k *KeyResponseData) GetMeta() map[string]any {
+	if k == nil {
 		return nil
 	}
-	return o.Meta
+	return k.Meta
 }
 
-func (o *KeyResponseData) GetCreatedAt() int64 {
-	if o == nil {
+func (k *KeyResponseData) GetCreatedAt() int64 {
+	if k == nil {
 		return 0
 	}
-	return o.CreatedAt
+	return k.CreatedAt
 }
 
-func (o *KeyResponseData) GetUpdatedAt() *int64 {
-	if o == nil {
+func (k *KeyResponseData) GetUpdatedAt() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return k.UpdatedAt
 }
 
-func (o *KeyResponseData) GetExpires() *int64 {
-	if o == nil {
+func (k *KeyResponseData) GetExpires() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.Expires
+	return k.Expires
 }
 
-func (o *KeyResponseData) GetPermissions() []string {
-	if o == nil {
+func (k *KeyResponseData) GetPermissions() []string {
+	if k == nil {
 		return nil
 	}
-	return o.Permissions
+	return k.Permissions
 }
 
-func (o *KeyResponseData) GetRoles() []string {
-	if o == nil {
+func (k *KeyResponseData) GetRoles() []string {
+	if k == nil {
 		return nil
 	}
-	return o.Roles
+	return k.Roles
 }
 
-func (o *KeyResponseData) GetCredits() *KeyCreditsData {
-	if o == nil {
+func (k *KeyResponseData) GetCredits() *KeyCreditsData {
+	if k == nil {
 		return nil
 	}
-	return o.Credits
+	return k.Credits
 }
 
-func (o *KeyResponseData) GetIdentity() *Identity {
-	if o == nil {
+func (k *KeyResponseData) GetIdentity() *Identity {
+	if k == nil {
 		return nil
 	}
-	return o.Identity
+	return k.Identity
 }
 
-func (o *KeyResponseData) GetPlaintext() *string {
-	if o == nil {
+func (k *KeyResponseData) GetPlaintext() *string {
+	if k == nil {
 		return nil
 	}
-	return o.Plaintext
+	return k.Plaintext
 }
 
-func (o *KeyResponseData) GetRatelimits() []RatelimitResponse {
-	if o == nil {
+func (k *KeyResponseData) GetRatelimits() []RatelimitResponse {
+	if k == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return k.Ratelimits
 }

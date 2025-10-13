@@ -8,16 +8,16 @@ type V2PermissionsCreateRoleResponseBody struct {
 	Data V2PermissionsCreateRoleResponseData `json:"data"`
 }
 
-func (o *V2PermissionsCreateRoleResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2PermissionsCreateRoleResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2PermissionsCreateRoleResponseBody) GetData() V2PermissionsCreateRoleResponseData {
-	if o == nil {
+func (v *V2PermissionsCreateRoleResponseBody) GetData() V2PermissionsCreateRoleResponseData {
+	if v == nil {
 		return V2PermissionsCreateRoleResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

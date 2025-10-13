@@ -10,23 +10,23 @@ type V2RatelimitListOverridesResponseBody struct {
 	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
-func (o *V2RatelimitListOverridesResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2RatelimitListOverridesResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2RatelimitListOverridesResponseBody) GetData() []RatelimitOverride {
-	if o == nil {
+func (v *V2RatelimitListOverridesResponseBody) GetData() []RatelimitOverride {
+	if v == nil {
 		return []RatelimitOverride{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2RatelimitListOverridesResponseBody) GetPagination() *Pagination {
-	if o == nil {
+func (v *V2RatelimitListOverridesResponseBody) GetPagination() *Pagination {
+	if v == nil {
 		return nil
 	}
-	return o.Pagination
+	return v.Pagination
 }

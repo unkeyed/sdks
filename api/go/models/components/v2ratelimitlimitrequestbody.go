@@ -47,37 +47,37 @@ func (v *V2RatelimitLimitRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2RatelimitLimitRequestBody) GetNamespace() string {
-	if o == nil {
+func (v *V2RatelimitLimitRequestBody) GetNamespace() string {
+	if v == nil {
 		return ""
 	}
-	return o.Namespace
+	return v.Namespace
 }
 
-func (o *V2RatelimitLimitRequestBody) GetCost() *int64 {
-	if o == nil {
+func (v *V2RatelimitLimitRequestBody) GetCost() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Cost
+	return v.Cost
 }
 
-func (o *V2RatelimitLimitRequestBody) GetDuration() int64 {
-	if o == nil {
+func (v *V2RatelimitLimitRequestBody) GetDuration() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Duration
+	return v.Duration
 }
 
-func (o *V2RatelimitLimitRequestBody) GetIdentifier() string {
-	if o == nil {
+func (v *V2RatelimitLimitRequestBody) GetIdentifier() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identifier
+	return v.Identifier
 }
 
-func (o *V2RatelimitLimitRequestBody) GetLimit() int64 {
-	if o == nil {
+func (v *V2RatelimitLimitRequestBody) GetLimit() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Limit
+	return v.Limit
 }
