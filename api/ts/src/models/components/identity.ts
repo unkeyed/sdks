@@ -13,11 +13,6 @@ import {
   RatelimitResponse$outboundSchema,
 } from "./ratelimitresponse.js";
 
-/**
- * Identity metadata
- */
-export type IdentityMeta = {};
-
 export type Identity = {
   /**
    * Identity ID
@@ -30,56 +25,12 @@ export type Identity = {
   /**
    * Identity metadata
    */
-  meta?: IdentityMeta | undefined;
+  meta?: { [k: string]: any } | undefined;
   /**
    * Identity ratelimits
    */
   ratelimits?: Array<RatelimitResponse> | undefined;
 };
-
-/** @internal */
-export const IdentityMeta$inboundSchema: z.ZodType<
-  IdentityMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-/** @internal */
-export type IdentityMeta$Outbound = {};
-
-/** @internal */
-export const IdentityMeta$outboundSchema: z.ZodType<
-  IdentityMeta$Outbound,
-  z.ZodTypeDef,
-  IdentityMeta
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IdentityMeta$ {
-  /** @deprecated use `IdentityMeta$inboundSchema` instead. */
-  export const inboundSchema = IdentityMeta$inboundSchema;
-  /** @deprecated use `IdentityMeta$outboundSchema` instead. */
-  export const outboundSchema = IdentityMeta$outboundSchema;
-  /** @deprecated use `IdentityMeta$Outbound` instead. */
-  export type Outbound = IdentityMeta$Outbound;
-}
-
-export function identityMetaToJSON(identityMeta: IdentityMeta): string {
-  return JSON.stringify(IdentityMeta$outboundSchema.parse(identityMeta));
-}
-
-export function identityMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<IdentityMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => IdentityMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IdentityMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const Identity$inboundSchema: z.ZodType<
@@ -89,7 +40,7 @@ export const Identity$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   externalId: z.string(),
-  meta: z.lazy(() => IdentityMeta$inboundSchema).optional(),
+  meta: z.record(z.any()).optional(),
   ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
 });
 
@@ -97,7 +48,7 @@ export const Identity$inboundSchema: z.ZodType<
 export type Identity$Outbound = {
   id: string;
   externalId: string;
-  meta?: IdentityMeta$Outbound | undefined;
+  meta?: { [k: string]: any } | undefined;
   ratelimits?: Array<RatelimitResponse$Outbound> | undefined;
 };
 
@@ -109,7 +60,7 @@ export const Identity$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   externalId: z.string(),
-  meta: z.lazy(() => IdentityMeta$outboundSchema).optional(),
+  meta: z.record(z.any()).optional(),
   ratelimits: z.array(RatelimitResponse$outboundSchema).optional(),
 });
 
