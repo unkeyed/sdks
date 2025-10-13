@@ -73,7 +73,7 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createPermission",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -404,7 +404,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createRole",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -735,7 +735,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deletePermission",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1066,7 +1066,7 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteRole",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1374,7 +1374,7 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPermission",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1703,7 +1703,7 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getRole",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -2033,7 +2033,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listPermissions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -2342,7 +2342,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listRoles",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)

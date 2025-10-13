@@ -54,7 +54,7 @@ func main() {
     res, err := s.Permissions.CreatePermission(ctx, components.V2PermissionsCreatePermissionRequestBody{
         Name: "users.read",
         Slug: "users-read",
-        Description: unkey.String("Grants read-only access to user profile information, account settings, and subscription status."),
+        Description: unkey.Pointer("Grants read-only access to user profile information, account settings, and subscription status."),
     })
     if err != nil {
         log.Fatal(err)
@@ -123,7 +123,7 @@ func main() {
 
     res, err := s.Permissions.CreateRole(ctx, components.V2PermissionsCreateRoleRequestBody{
         Name: "content.editor",
-        Description: unkey.String("Can read and write content"),
+        Description: unkey.Pointer("Can read and write content"),
     })
     if err != nil {
         log.Fatal(err)
@@ -457,8 +457,8 @@ func main() {
     )
 
     res, err := s.Permissions.ListPermissions(ctx, components.V2PermissionsListPermissionsRequestBody{
-        Cursor: unkey.String("eyJrZXkiOiJwZXJtXzEyMzQifQ=="),
-        Limit: unkey.Int64(50),
+        Cursor: unkey.Pointer("eyJrZXkiOiJwZXJtXzEyMzQifQ=="),
+        Limit: unkey.Pointer[int64](50),
     })
     if err != nil {
         log.Fatal(err)
@@ -524,8 +524,8 @@ func main() {
     )
 
     res, err := s.Permissions.ListRoles(ctx, components.V2PermissionsListRolesRequestBody{
-        Limit: unkey.Int64(50),
-        Cursor: unkey.String("eyJrZXkiOiJyb2xlXzEyMzQifQ=="),
+        Limit: unkey.Pointer[int64](50),
+        Cursor: unkey.Pointer("eyJrZXkiOiJyb2xlXzEyMzQifQ=="),
     })
     if err != nil {
         log.Fatal(err)

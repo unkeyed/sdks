@@ -9,16 +9,16 @@ type V2PermissionsDeleteRoleResponseBody struct {
 	Data EmptyResponse `json:"data"`
 }
 
-func (o *V2PermissionsDeleteRoleResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2PermissionsDeleteRoleResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2PermissionsDeleteRoleResponseBody) GetData() EmptyResponse {
-	if o == nil {
+func (v *V2PermissionsDeleteRoleResponseBody) GetData() EmptyResponse {
+	if v == nil {
 		return EmptyResponse{}
 	}
-	return o.Data
+	return v.Data
 }

@@ -72,7 +72,7 @@ func (s *Identities) CreateIdentity(ctx context.Context, request components.V2Id
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "identities.createIdentity",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -403,7 +403,7 @@ func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2Id
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2.identities.deleteIdentity",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -732,7 +732,7 @@ func (s *Identities) GetIdentity(ctx context.Context, request components.V2Ident
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "identities.getIdentity",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1061,7 +1061,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "identities.listIdentities",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1416,7 +1416,7 @@ func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2Id
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2.identities.updateIdentity",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)

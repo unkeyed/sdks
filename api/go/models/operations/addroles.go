@@ -12,16 +12,16 @@ type AddRolesResponse struct {
 	V2KeysAddRolesResponseBody *components.V2KeysAddRolesResponseBody
 }
 
-func (o *AddRolesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (a *AddRolesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if a == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return a.HTTPMeta
 }
 
-func (o *AddRolesResponse) GetV2KeysAddRolesResponseBody() *components.V2KeysAddRolesResponseBody {
-	if o == nil {
+func (a *AddRolesResponse) GetV2KeysAddRolesResponseBody() *components.V2KeysAddRolesResponseBody {
+	if a == nil {
 		return nil
 	}
-	return o.V2KeysAddRolesResponseBody
+	return a.V2KeysAddRolesResponseBody
 }

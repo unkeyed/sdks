@@ -32,16 +32,16 @@ func (v *V2PermissionsListRolesRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2PermissionsListRolesRequestBody) GetLimit() *int64 {
-	if o == nil {
+func (v *V2PermissionsListRolesRequestBody) GetLimit() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Limit
+	return v.Limit
 }
 
-func (o *V2PermissionsListRolesRequestBody) GetCursor() *string {
-	if o == nil {
+func (v *V2PermissionsListRolesRequestBody) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }

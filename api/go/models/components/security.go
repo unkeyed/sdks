@@ -6,9 +6,9 @@ type Security struct {
 	RootKey *string `security:"scheme,type=http,subtype=bearer,name=Authorization,env=unkey_root_key"`
 }
 
-func (o *Security) GetRootKey() *string {
-	if o == nil {
+func (s *Security) GetRootKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.RootKey
+	return s.RootKey
 }

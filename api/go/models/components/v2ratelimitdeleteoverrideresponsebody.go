@@ -9,16 +9,16 @@ type V2RatelimitDeleteOverrideResponseBody struct {
 	Data V2RatelimitDeleteOverrideResponseData `json:"data"`
 }
 
-func (o *V2RatelimitDeleteOverrideResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2RatelimitDeleteOverrideResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2RatelimitDeleteOverrideResponseBody) GetData() V2RatelimitDeleteOverrideResponseData {
-	if o == nil {
+func (v *V2RatelimitDeleteOverrideResponseBody) GetData() V2RatelimitDeleteOverrideResponseData {
+	if v == nil {
 		return V2RatelimitDeleteOverrideResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

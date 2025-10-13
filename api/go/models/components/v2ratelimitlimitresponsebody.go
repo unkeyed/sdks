@@ -8,16 +8,16 @@ type V2RatelimitLimitResponseBody struct {
 	Data V2RatelimitLimitResponseData `json:"data"`
 }
 
-func (o *V2RatelimitLimitResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2RatelimitLimitResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2RatelimitLimitResponseBody) GetData() V2RatelimitLimitResponseData {
-	if o == nil {
+func (v *V2RatelimitLimitResponseBody) GetData() V2RatelimitLimitResponseData {
+	if v == nil {
 		return V2RatelimitLimitResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

@@ -18,9 +18,9 @@ type V2ApisCreateAPIResponseData struct {
 	APIID string `json:"apiId"`
 }
 
-func (o *V2ApisCreateAPIResponseData) GetAPIID() string {
-	if o == nil {
+func (v *V2ApisCreateAPIResponseData) GetAPIID() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIID
+	return v.APIID
 }

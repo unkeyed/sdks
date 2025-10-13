@@ -12,16 +12,16 @@ type RemovePermissionsResponse struct {
 	V2KeysRemovePermissionsResponseBody *components.V2KeysRemovePermissionsResponseBody
 }
 
-func (o *RemovePermissionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (r *RemovePermissionsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if r == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return r.HTTPMeta
 }
 
-func (o *RemovePermissionsResponse) GetV2KeysRemovePermissionsResponseBody() *components.V2KeysRemovePermissionsResponseBody {
-	if o == nil {
+func (r *RemovePermissionsResponse) GetV2KeysRemovePermissionsResponseBody() *components.V2KeysRemovePermissionsResponseBody {
+	if r == nil {
 		return nil
 	}
-	return o.V2KeysRemovePermissionsResponseBody
+	return r.V2KeysRemovePermissionsResponseBody
 }

@@ -10,16 +10,16 @@ type KeyCreditsData struct {
 	Refill *KeyCreditsRefill `json:"refill,omitempty"`
 }
 
-func (o *KeyCreditsData) GetRemaining() *int64 {
-	if o == nil {
+func (k *KeyCreditsData) GetRemaining() *int64 {
+	if k == nil {
 		return nil
 	}
-	return o.Remaining
+	return k.Remaining
 }
 
-func (o *KeyCreditsData) GetRefill() *KeyCreditsRefill {
-	if o == nil {
+func (k *KeyCreditsData) GetRefill() *KeyCreditsRefill {
+	if k == nil {
 		return nil
 	}
-	return o.Refill
+	return k.Refill
 }

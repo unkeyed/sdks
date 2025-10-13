@@ -8,9 +8,9 @@ type V2IdentitiesDeleteIdentityResponseBody struct {
 	Meta Meta `json:"meta"`
 }
 
-func (o *V2IdentitiesDeleteIdentityResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2IdentitiesDeleteIdentityResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }

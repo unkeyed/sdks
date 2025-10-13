@@ -36,23 +36,23 @@ type V2IdentitiesCreateIdentityRequestBody struct {
 	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
 }
 
-func (o *V2IdentitiesCreateIdentityRequestBody) GetExternalID() string {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityRequestBody) GetExternalID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ExternalID
+	return v.ExternalID
 }
 
-func (o *V2IdentitiesCreateIdentityRequestBody) GetMeta() map[string]any {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityRequestBody) GetMeta() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2IdentitiesCreateIdentityRequestBody) GetRatelimits() []RatelimitRequest {
-	if o == nil {
+func (v *V2IdentitiesCreateIdentityRequestBody) GetRatelimits() []RatelimitRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }

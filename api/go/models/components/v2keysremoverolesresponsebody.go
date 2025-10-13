@@ -20,16 +20,16 @@ type V2KeysRemoveRolesResponseBody struct {
 	Data []Role `json:"data"`
 }
 
-func (o *V2KeysRemoveRolesResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysRemoveRolesResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysRemoveRolesResponseBody) GetData() []Role {
-	if o == nil {
+func (v *V2KeysRemoveRolesResponseBody) GetData() []Role {
+	if v == nil {
 		return []Role{}
 	}
-	return o.Data
+	return v.Data
 }

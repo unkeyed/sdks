@@ -12,16 +12,16 @@ type V2IdentitiesUpdateIdentityResponse struct {
 	V2IdentitiesUpdateIdentityResponseBody *components.V2IdentitiesUpdateIdentityResponseBody
 }
 
-func (o *V2IdentitiesUpdateIdentityResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (v *V2IdentitiesUpdateIdentityResponse) GetHTTPMeta() components.HTTPMetadata {
+	if v == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return v.HTTPMeta
 }
 
-func (o *V2IdentitiesUpdateIdentityResponse) GetV2IdentitiesUpdateIdentityResponseBody() *components.V2IdentitiesUpdateIdentityResponseBody {
-	if o == nil {
+func (v *V2IdentitiesUpdateIdentityResponse) GetV2IdentitiesUpdateIdentityResponseBody() *components.V2IdentitiesUpdateIdentityResponseBody {
+	if v == nil {
 		return nil
 	}
-	return o.V2IdentitiesUpdateIdentityResponseBody
+	return v.V2IdentitiesUpdateIdentityResponseBody
 }

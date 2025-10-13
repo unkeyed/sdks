@@ -9,9 +9,9 @@ type V2ApisCreateAPIRequestBody struct {
 	Name string `json:"name"`
 }
 
-func (o *V2ApisCreateAPIRequestBody) GetName() string {
-	if o == nil {
+func (v *V2ApisCreateAPIRequestBody) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

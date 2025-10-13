@@ -30,16 +30,16 @@ type V2KeysRerollKeyRequestBody struct {
 	Expiration int64 `json:"expiration"`
 }
 
-func (o *V2KeysRerollKeyRequestBody) GetKeyID() string {
-	if o == nil {
+func (v *V2KeysRerollKeyRequestBody) GetKeyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.KeyID
+	return v.KeyID
 }
 
-func (o *V2KeysRerollKeyRequestBody) GetExpiration() int64 {
-	if o == nil {
+func (v *V2KeysRerollKeyRequestBody) GetExpiration() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Expiration
+	return v.Expiration
 }

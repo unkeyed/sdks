@@ -11,23 +11,23 @@ type V2IdentitiesListIdentitiesResponseBody struct {
 	Pagination Pagination `json:"pagination"`
 }
 
-func (o *V2IdentitiesListIdentitiesResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2IdentitiesListIdentitiesResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2IdentitiesListIdentitiesResponseBody) GetData() []Identity {
-	if o == nil {
+func (v *V2IdentitiesListIdentitiesResponseBody) GetData() []Identity {
+	if v == nil {
 		return []Identity{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2IdentitiesListIdentitiesResponseBody) GetPagination() Pagination {
-	if o == nil {
+func (v *V2IdentitiesListIdentitiesResponseBody) GetPagination() Pagination {
+	if v == nil {
 		return Pagination{}
 	}
-	return o.Pagination
+	return v.Pagination
 }

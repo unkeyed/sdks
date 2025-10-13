@@ -17,23 +17,23 @@ type ValidationError struct {
 	Fix *string `json:"fix,omitempty"`
 }
 
-func (o *ValidationError) GetLocation() string {
-	if o == nil {
+func (v *ValidationError) GetLocation() string {
+	if v == nil {
 		return ""
 	}
-	return o.Location
+	return v.Location
 }
 
-func (o *ValidationError) GetMessage() string {
-	if o == nil {
+func (v *ValidationError) GetMessage() string {
+	if v == nil {
 		return ""
 	}
-	return o.Message
+	return v.Message
 }
 
-func (o *ValidationError) GetFix() *string {
-	if o == nil {
+func (v *ValidationError) GetFix() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Fix
+	return v.Fix
 }

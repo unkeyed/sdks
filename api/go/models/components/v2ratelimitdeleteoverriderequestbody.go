@@ -26,16 +26,16 @@ type V2RatelimitDeleteOverrideRequestBody struct {
 	Identifier string `json:"identifier"`
 }
 
-func (o *V2RatelimitDeleteOverrideRequestBody) GetNamespace() string {
-	if o == nil {
+func (v *V2RatelimitDeleteOverrideRequestBody) GetNamespace() string {
+	if v == nil {
 		return ""
 	}
-	return o.Namespace
+	return v.Namespace
 }
 
-func (o *V2RatelimitDeleteOverrideRequestBody) GetIdentifier() string {
-	if o == nil {
+func (v *V2RatelimitDeleteOverrideRequestBody) GetIdentifier() string {
+	if v == nil {
 		return ""
 	}
-	return o.Identifier
+	return v.Identifier
 }

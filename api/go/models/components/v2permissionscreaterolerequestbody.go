@@ -23,16 +23,16 @@ type V2PermissionsCreateRoleRequestBody struct {
 	Description *string `json:"description,omitempty"`
 }
 
-func (o *V2PermissionsCreateRoleRequestBody) GetName() string {
-	if o == nil {
+func (v *V2PermissionsCreateRoleRequestBody) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2PermissionsCreateRoleRequestBody) GetDescription() *string {
-	if o == nil {
+func (v *V2PermissionsCreateRoleRequestBody) GetDescription() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Description
+	return v.Description
 }

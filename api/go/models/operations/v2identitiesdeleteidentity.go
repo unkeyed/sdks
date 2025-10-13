@@ -12,16 +12,16 @@ type V2IdentitiesDeleteIdentityResponse struct {
 	V2IdentitiesDeleteIdentityResponseBody *components.V2IdentitiesDeleteIdentityResponseBody
 }
 
-func (o *V2IdentitiesDeleteIdentityResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (v *V2IdentitiesDeleteIdentityResponse) GetHTTPMeta() components.HTTPMetadata {
+	if v == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return v.HTTPMeta
 }
 
-func (o *V2IdentitiesDeleteIdentityResponse) GetV2IdentitiesDeleteIdentityResponseBody() *components.V2IdentitiesDeleteIdentityResponseBody {
-	if o == nil {
+func (v *V2IdentitiesDeleteIdentityResponse) GetV2IdentitiesDeleteIdentityResponseBody() *components.V2IdentitiesDeleteIdentityResponseBody {
+	if v == nil {
 		return nil
 	}
-	return o.V2IdentitiesDeleteIdentityResponseBody
+	return v.V2IdentitiesDeleteIdentityResponseBody
 }

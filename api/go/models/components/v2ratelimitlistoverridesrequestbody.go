@@ -32,23 +32,23 @@ func (v *V2RatelimitListOverridesRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2RatelimitListOverridesRequestBody) GetNamespace() string {
-	if o == nil {
+func (v *V2RatelimitListOverridesRequestBody) GetNamespace() string {
+	if v == nil {
 		return ""
 	}
-	return o.Namespace
+	return v.Namespace
 }
 
-func (o *V2RatelimitListOverridesRequestBody) GetCursor() *string {
-	if o == nil {
+func (v *V2RatelimitListOverridesRequestBody) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2RatelimitListOverridesRequestBody) GetLimit() *int64 {
-	if o == nil {
+func (v *V2RatelimitListOverridesRequestBody) GetLimit() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Limit
+	return v.Limit
 }

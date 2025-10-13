@@ -34,23 +34,23 @@ type V2PermissionsCreatePermissionRequestBody struct {
 	Description *string `json:"description,omitempty"`
 }
 
-func (o *V2PermissionsCreatePermissionRequestBody) GetName() string {
-	if o == nil {
+func (v *V2PermissionsCreatePermissionRequestBody) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2PermissionsCreatePermissionRequestBody) GetSlug() string {
-	if o == nil {
+func (v *V2PermissionsCreatePermissionRequestBody) GetSlug() string {
+	if v == nil {
 		return ""
 	}
-	return o.Slug
+	return v.Slug
 }
 
-func (o *V2PermissionsCreatePermissionRequestBody) GetDescription() *string {
-	if o == nil {
+func (v *V2PermissionsCreatePermissionRequestBody) GetDescription() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Description
+	return v.Description
 }

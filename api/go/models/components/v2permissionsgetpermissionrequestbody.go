@@ -8,9 +8,9 @@ type V2PermissionsGetPermissionRequestBody struct {
 	Permission string `json:"permission"`
 }
 
-func (o *V2PermissionsGetPermissionRequestBody) GetPermission() string {
-	if o == nil {
+func (v *V2PermissionsGetPermissionRequestBody) GetPermission() string {
+	if v == nil {
 		return ""
 	}
-	return o.Permission
+	return v.Permission
 }

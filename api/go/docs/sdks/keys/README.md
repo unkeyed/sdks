@@ -219,10 +219,10 @@ func main() {
 
     res, err := s.Keys.CreateKey(ctx, components.V2KeysCreateKeyRequestBody{
         APIID: "api_1234abcd",
-        Prefix: unkey.String("prod"),
-        Name: unkey.String("Payment Service Production Key"),
-        ByteLength: unkey.Int64(24),
-        ExternalID: unkey.String("user_1234abcd"),
+        Prefix: unkey.Pointer("prod"),
+        Name: unkey.Pointer("Payment Service Production Key"),
+        ByteLength: unkey.Pointer[int64](24),
+        ExternalID: unkey.Pointer("user_1234abcd"),
         Meta: map[string]any{
             "plan": "enterprise",
             "featureFlags": map[string]any{
@@ -244,13 +244,13 @@ func main() {
             "documents.write",
             "settings.view",
         },
-        Expires: unkey.Int64(1704067200000),
+        Expires: unkey.Pointer[int64](1704067200000),
         Credits: &components.KeyCreditsData{
-            Remaining: unkey.Int64(1000),
+            Remaining: unkey.Pointer[int64](1000),
             Refill: &components.KeyCreditsRefill{
                 Interval: components.KeyCreditsRefillIntervalDaily,
                 Amount: 1000,
-                RefillDay: unkey.Int64(15),
+                RefillDay: unkey.Pointer[int64](15),
             },
         },
         Ratelimits: []components.RatelimitRequest{
@@ -258,7 +258,7 @@ func main() {
                 Name: "requests",
                 Limit: 100,
                 Duration: 60000,
-                AutoApply: unkey.Bool(true),
+                AutoApply: unkey.Pointer(true),
             },
             components.RatelimitRequest{
                 Name: "heavy_operations",
@@ -892,7 +892,7 @@ func main() {
 
     res, err := s.Keys.UpdateCredits(ctx, components.V2KeysUpdateCreditsRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Value: unkey.Int64(1000),
+        Value: unkey.Pointer[int64](1000),
         Operation: components.OperationSet,
     })
     if err != nil {
@@ -969,8 +969,8 @@ func main() {
 
     res, err := s.Keys.UpdateKey(ctx, components.V2KeysUpdateKeyRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Name: unkey.String("Payment Service Production Key"),
-        ExternalID: unkey.String("user_912a841d"),
+        Name: unkey.Pointer("Payment Service Production Key"),
+        ExternalID: unkey.Pointer("user_912a841d"),
         Meta: map[string]any{
             "plan": "enterprise",
             "limits": map[string]any{
@@ -993,13 +993,13 @@ func main() {
             },
             "lastBillingDate": "2023-10-15",
         },
-        Expires: unkey.Int64(1704067200000),
+        Expires: unkey.Pointer[int64](1704067200000),
         Credits: &components.UpdateKeyCreditsData{
-            Remaining: unkey.Int64(1000),
+            Remaining: unkey.Pointer[int64](1000),
             Refill: &components.UpdateKeyCreditsRefill{
                 Interval: components.UpdateKeyCreditsRefillIntervalDaily,
                 Amount: 1000,
-                RefillDay: unkey.Int64(15),
+                RefillDay: unkey.Pointer[int64](15),
             },
         },
         Ratelimits: []components.RatelimitRequest{
@@ -1009,7 +1009,7 @@ func main() {
                 Duration: 350222,
             },
         },
-        Enabled: unkey.Bool(true),
+        Enabled: unkey.Pointer(true),
         Roles: []string{
             "api_admin",
             "billing_reader",
@@ -1104,16 +1104,16 @@ func main() {
             "clientVersion=2.3.0",
             "feature=premium",
         },
-        Permissions: unkey.String("documents.read AND users.view"),
+        Permissions: unkey.Pointer("documents.read AND users.view"),
         Credits: &components.KeysVerifyKeyCredits{
             Cost: 5,
         },
         Ratelimits: []components.KeysVerifyKeyRatelimit{
             components.KeysVerifyKeyRatelimit{
                 Name: "tokens",
-                Cost: unkey.Int64(2),
-                Limit: unkey.Int64(50),
-                Duration: unkey.Int64(600000),
+                Cost: unkey.Pointer[int64](2),
+                Limit: unkey.Pointer[int64](50),
+                Duration: unkey.Pointer[int64](600000),
             },
         },
     })

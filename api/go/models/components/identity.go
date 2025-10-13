@@ -2,45 +2,41 @@
 
 package components
 
-// IdentityMeta - Identity metadata
-type IdentityMeta struct {
-}
-
 type Identity struct {
 	// Identity ID
 	ID string `json:"id"`
 	// External identity ID
 	ExternalID string `json:"externalId"`
 	// Identity metadata
-	Meta *IdentityMeta `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitempty"`
 	// Identity ratelimits
 	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
 }
 
-func (o *Identity) GetID() string {
-	if o == nil {
+func (i *Identity) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *Identity) GetExternalID() string {
-	if o == nil {
+func (i *Identity) GetExternalID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ExternalID
+	return i.ExternalID
 }
 
-func (o *Identity) GetMeta() *IdentityMeta {
-	if o == nil {
+func (i *Identity) GetMeta() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.Meta
+	return i.Meta
 }
 
-func (o *Identity) GetRatelimits() []RatelimitResponse {
-	if o == nil {
+func (i *Identity) GetRatelimits() []RatelimitResponse {
+	if i == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return i.Ratelimits
 }

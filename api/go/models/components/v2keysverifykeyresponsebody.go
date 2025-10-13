@@ -8,16 +8,16 @@ type V2KeysVerifyKeyResponseBody struct {
 	Data V2KeysVerifyKeyResponseData `json:"data"`
 }
 
-func (o *V2KeysVerifyKeyResponseBody) GetMeta() Meta {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseBody) GetMeta() Meta {
+	if v == nil {
 		return Meta{}
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysVerifyKeyResponseBody) GetData() V2KeysVerifyKeyResponseData {
-	if o == nil {
+func (v *V2KeysVerifyKeyResponseBody) GetData() V2KeysVerifyKeyResponseData {
+	if v == nil {
 		return V2KeysVerifyKeyResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

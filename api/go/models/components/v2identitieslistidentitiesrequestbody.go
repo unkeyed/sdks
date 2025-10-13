@@ -24,16 +24,16 @@ func (v *V2IdentitiesListIdentitiesRequestBody) UnmarshalJSON(data []byte) error
 	return nil
 }
 
-func (o *V2IdentitiesListIdentitiesRequestBody) GetLimit() *int64 {
-	if o == nil {
+func (v *V2IdentitiesListIdentitiesRequestBody) GetLimit() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Limit
+	return v.Limit
 }
 
-func (o *V2IdentitiesListIdentitiesRequestBody) GetCursor() *string {
-	if o == nil {
+func (v *V2IdentitiesListIdentitiesRequestBody) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }

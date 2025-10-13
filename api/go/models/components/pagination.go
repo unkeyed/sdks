@@ -16,16 +16,16 @@ type Pagination struct {
 	HasMore bool `json:"hasMore"`
 }
 
-func (o *Pagination) GetCursor() *string {
-	if o == nil {
+func (p *Pagination) GetCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Cursor
+	return p.Cursor
 }
 
-func (o *Pagination) GetHasMore() bool {
-	if o == nil {
+func (p *Pagination) GetHasMore() bool {
+	if p == nil {
 		return false
 	}
-	return o.HasMore
+	return p.HasMore
 }

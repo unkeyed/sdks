@@ -93,93 +93,93 @@ func (v *V2KeysCreateKeyRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetAPIID() string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetAPIID() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIID
+	return v.APIID
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetPrefix() *string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetPrefix() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Prefix
+	return v.Prefix
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetName() *string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetByteLength() *int64 {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetByteLength() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.ByteLength
+	return v.ByteLength
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetExternalID() *string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetExternalID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.ExternalID
+	return v.ExternalID
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetMeta() map[string]any {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetMeta() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Meta
+	return v.Meta
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetRoles() []string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetRoles() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Roles
+	return v.Roles
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetPermissions() []string {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetPermissions() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Permissions
+	return v.Permissions
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetExpires() *int64 {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetExpires() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.Expires
+	return v.Expires
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetCredits() *KeyCreditsData {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetCredits() *KeyCreditsData {
+	if v == nil {
 		return nil
 	}
-	return o.Credits
+	return v.Credits
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetRatelimits() []RatelimitRequest {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetRatelimits() []RatelimitRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Ratelimits
+	return v.Ratelimits
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetEnabled() *bool {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetEnabled() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Enabled
+	return v.Enabled
 }
 
-func (o *V2KeysCreateKeyRequestBody) GetRecoverable() *bool {
-	if o == nil {
+func (v *V2KeysCreateKeyRequestBody) GetRecoverable() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Recoverable
+	return v.Recoverable
 }
