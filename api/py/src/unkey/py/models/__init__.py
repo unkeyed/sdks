@@ -16,12 +16,7 @@ if TYPE_CHECKING:
         IdentitiesListIdentitiesResponse,
         IdentitiesListIdentitiesResponseTypedDict,
     )
-    from .identity import (
-        Identity,
-        IdentityMeta,
-        IdentityMetaTypedDict,
-        IdentityTypedDict,
-    )
+    from .identity import Identity, IdentityTypedDict
     from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
     from .keycreditsrefill import Interval, KeyCreditsRefill, KeyCreditsRefillTypedDict
     from .keyresponsedata import KeyResponseData, KeyResponseDataTypedDict
@@ -392,8 +387,6 @@ __all__ = [
     "IdentitiesListIdentitiesResponse",
     "IdentitiesListIdentitiesResponseTypedDict",
     "Identity",
-    "IdentityMeta",
-    "IdentityMetaTypedDict",
     "IdentityTypedDict",
     "Interval",
     "KeyCreditsData",
@@ -605,8 +598,6 @@ _dynamic_imports: dict[str, str] = {
     "IdentitiesListIdentitiesResponse": ".identities_listidentitiesop",
     "IdentitiesListIdentitiesResponseTypedDict": ".identities_listidentitiesop",
     "Identity": ".identity",
-    "IdentityMeta": ".identity",
-    "IdentityMetaTypedDict": ".identity",
     "IdentityTypedDict": ".identity",
     "KeyCreditsData": ".keycreditsdata",
     "KeyCreditsDataTypedDict": ".keycreditsdata",

@@ -9,7 +9,7 @@ from unkey.py.errors import UnkeyError
 MAX_MESSAGE_LEN = 10_000
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class APIError(UnkeyError):
     """The fallback error class if no more specific error class is matched."""
 

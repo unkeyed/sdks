@@ -17,7 +17,7 @@ class InternalServerErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class InternalServerErrorResponse(UnkeyError):
     r"""Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.
 

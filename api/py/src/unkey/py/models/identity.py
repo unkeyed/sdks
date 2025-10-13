@@ -3,17 +3,9 @@
 from __future__ import annotations
 from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
 import pydantic
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 from unkey.py.types import BaseModel
-
-
-class IdentityMetaTypedDict(TypedDict):
-    r"""Identity metadata"""
-
-
-class IdentityMeta(BaseModel):
-    r"""Identity metadata"""
 
 
 class IdentityTypedDict(TypedDict):
@@ -21,7 +13,7 @@ class IdentityTypedDict(TypedDict):
     r"""Identity ID"""
     external_id: str
     r"""External identity ID"""
-    meta: NotRequired[IdentityMetaTypedDict]
+    meta: NotRequired[Dict[str, Any]]
     r"""Identity metadata"""
     ratelimits: NotRequired[List[RatelimitResponseTypedDict]]
     r"""Identity ratelimits"""
@@ -34,7 +26,7 @@ class Identity(BaseModel):
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""External identity ID"""
 
-    meta: Optional[IdentityMeta] = None
+    meta: Optional[Dict[str, Any]] = None
     r"""Identity metadata"""
 
     ratelimits: Optional[List[RatelimitResponse]] = None

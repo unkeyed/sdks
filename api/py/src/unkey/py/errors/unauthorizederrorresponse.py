@@ -17,7 +17,7 @@ class UnauthorizedErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UnauthorizedErrorResponse(UnkeyError):
     r"""Error response when authentication has failed or credentials are missing. This occurs when:
     - No authentication token is provided in the request

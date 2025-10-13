@@ -17,7 +17,7 @@ class PreconditionFailedErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class PreconditionFailedErrorResponse(UnkeyError):
     r"""Error response when one or more conditions specified in the request headers are not met. This typically occurs when:
     - Using conditional requests with If-Match or If-None-Match headers

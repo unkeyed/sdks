@@ -17,7 +17,7 @@ class GoneErrorResponseData(BaseModel):
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class GoneErrorResponse(UnkeyError):
     r"""Error response when the requested resource has been soft-deleted and is no longer available. This occurs when:
     - The resource has been marked as deleted but still exists in the database
