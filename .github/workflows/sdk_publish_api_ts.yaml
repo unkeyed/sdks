@@ -20,5 +20,23 @@ jobs:
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       npm_token: ${{ secrets.NPM_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
       slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+
+  publish-jsr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        working-directory: api/ts
+        run: npm install
+      - name: Publish to JSR
+        working-directory: api/ts
+        run: npx jsr publish
