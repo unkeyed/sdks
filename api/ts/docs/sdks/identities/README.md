@@ -205,7 +205,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.identities.getIdentity({
-    identity: "user_abc123",
+    identity: "user_123",
   });
 
   console.log(result);
@@ -230,7 +230,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await identitiesGetIdentity(unkey, {
-    identity: "user_abc123",
+    identity: "user_123",
   });
   if (res.ok) {
     const { value: result } = res;
