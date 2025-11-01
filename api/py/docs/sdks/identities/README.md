@@ -144,7 +144,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.identities.get_identity(identity="user_abc123")
+    res = unkey.identities.get_identity(identity="user_123")
 
     # Handle response
     print(res)
