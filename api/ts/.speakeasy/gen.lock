@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 325f5f52486df37a314c5d3fbeab0a23
+  docChecksum: b1610912c4e3edb72f8218c20d704650
   docVersion: 2.0.0
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 2.0.6
-  configChecksum: b1b40725158ed6497856330b3e210fa4
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 2.1.0
+  configChecksum: d4359b3d308a44bcca688542c9bc92c6
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,14 +15,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.26
+    core: 3.24.2
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.5
+    globalServerURLs: 2.83.0
     ignores: 2.81.1
     mcpServer: 0.9.3
     nameOverrides: 2.81.2
@@ -618,7 +618,7 @@ examples:
   identities.getIdentity:
     basic:
       requestBody:
-        application/json: {"identity": "user_abc123"}
+        application/json: {"identity": "user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "<id>", "externalId": "user_abc123", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
@@ -1346,12 +1346,3 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes Detected:
-  * `unkey.apis.listKeys()`:  `response.data.[].identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.getIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.listIdentities()`:  `response.data.[].meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.updateIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.getKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.verifyKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.whoami()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
