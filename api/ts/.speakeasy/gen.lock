@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 325f5f52486df37a314c5d3fbeab0a23
+  docChecksum: 43d19e1850df2187a7e5f3ad5e4faff0
   docVersion: 2.0.0
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 2.0.6
-  configChecksum: b1b40725158ed6497856330b3e210fa4
+  speakeasyVersion: 1.650.1
+  generationVersion: 2.743.9
+  releaseVersion: 2.1.0
+  configChecksum: 1c2d345fa1d20b7ec1e2023f1cd37fcd
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,14 +15,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.26
+    core: 3.26.3
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.5
+    globalServerURLs: 2.83.0
     ignores: 2.81.1
     mcpServer: 0.9.3
     nameOverrides: 2.81.2
@@ -61,6 +61,8 @@ generatedFiles:
   - docs/models/components/updatekeycreditsdata.md
   - docs/models/components/updatekeycreditsrefill.md
   - docs/models/components/updatekeycreditsrefillinterval.md
+  - docs/models/components/v2analyticsgetverificationsrequestbody.md
+  - docs/models/components/v2analyticsgetverificationsresponsebody.md
   - docs/models/components/v2apiscreateapirequestbody.md
   - docs/models/components/v2apiscreateapiresponsebody.md
   - docs/models/components/v2apiscreateapiresponsedata.md
@@ -153,8 +155,12 @@ generatedFiles:
   - docs/models/errors/internalservererrorresponse.md
   - docs/models/errors/notfounderrorresponse.md
   - docs/models/errors/preconditionfailederrorresponse.md
+  - docs/models/errors/serviceunavailableerrorresponse.md
+  - docs/models/errors/toomanyrequestserrorresponse.md
   - docs/models/errors/unauthorizederrorresponse.md
+  - docs/models/errors/unprocessableentityerrorresponse.md
   - docs/models/operations/identitieslistidentitiesresponse.md
+  - docs/sdks/analytics/README.md
   - docs/sdks/apis/README.md
   - docs/sdks/identities/README.md
   - docs/sdks/keys/README.md
@@ -163,11 +169,12 @@ generatedFiles:
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
-  - examples/apisCreateApi.example.ts
+  - examples/analyticsGetVerifications.example.ts
   - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/analyticsGetVerifications.ts
   - src/funcs/apisCreateApi.ts
   - src/funcs/apisDeleteApi.ts
   - src/funcs/apisGetApi.ts
@@ -237,6 +244,7 @@ generatedFiles:
   - src/mcp-server/server.ts
   - src/mcp-server/shared.ts
   - src/mcp-server/tools.ts
+  - src/mcp-server/tools/analyticsGetVerifications.ts
   - src/mcp-server/tools/apisCreateApi.ts
   - src/mcp-server/tools/apisDeleteApi.ts
   - src/mcp-server/tools/apisGetApi.ts
@@ -293,6 +301,8 @@ generatedFiles:
   - src/models/components/security.ts
   - src/models/components/updatekeycreditsdata.ts
   - src/models/components/updatekeycreditsrefill.ts
+  - src/models/components/v2analyticsgetverificationsrequestbody.ts
+  - src/models/components/v2analyticsgetverificationsresponsebody.ts
   - src/models/components/v2apiscreateapirequestbody.ts
   - src/models/components/v2apiscreateapiresponsebody.ts
   - src/models/components/v2apiscreateapiresponsedata.ts
@@ -390,10 +400,14 @@ generatedFiles:
   - src/models/errors/preconditionfailederrorresponse.ts
   - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/serviceunavailableerrorresponse.ts
+  - src/models/errors/toomanyrequestserrorresponse.ts
   - src/models/errors/unauthorizederrorresponse.ts
   - src/models/errors/unkeyerror.ts
+  - src/models/errors/unprocessableentityerrorresponse.ts
   - src/models/operations/identitieslistidentities.ts
   - src/models/operations/index.ts
+  - src/sdk/analytics.ts
   - src/sdk/apis.ts
   - src/sdk/identities.ts
   - src/sdk/index.ts
@@ -618,7 +632,7 @@ examples:
   identities.getIdentity:
     basic:
       requestBody:
-        application/json: {"identity": "user_abc123"}
+        application/json: {"identity": "user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "<id>", "externalId": "user_abc123", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
@@ -1344,14 +1358,31 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  analytics.getVerifications:
+    speakeasy-default-analytics-get-verifications:
+      requestBody:
+        application/json: {"query": "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"outcome": "VALID", "count": 1234, "time": 1696118400000}, {"outcome": "RATE_LIMITED", "count": 56, "time": 1696118400000}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes Detected:
-  * `unkey.apis.listKeys()`:  `response.data.[].identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.getIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.listIdentities()`:  `response.data.[].meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.updateIdentity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.getKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.verifyKey()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.whoami()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.analytics.getVerifications()`: **Added**

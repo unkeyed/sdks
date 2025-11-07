@@ -13,5 +13,8 @@ export * from "./notfounderrorresponse.js";
 export * from "./preconditionfailederrorresponse.js";
 export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
+export * from "./serviceunavailableerrorresponse.js";
+export * from "./toomanyrequestserrorresponse.js";
 export * from "./unauthorizederrorresponse.js";
 export * from "./unkeyerror.js";
+export * from "./unprocessableentityerrorresponse.js";

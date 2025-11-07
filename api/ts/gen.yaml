@@ -17,18 +17,23 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
     hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.6
+  version: 2.1.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
+  additionalScripts: {}
+  alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
   baseErrorName: UnkeyError
   clientServerStatusCodesAsErrors: true
@@ -39,6 +44,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: UNKEY
+  exportZodModelNamespace: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   generateExamples: true
@@ -63,3 +69,4 @@ typescript:
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true
+  zodVersion: v3
