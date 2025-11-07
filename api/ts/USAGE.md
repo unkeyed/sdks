@@ -7,8 +7,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.apis.createApi({
-    name: "payment-service-production",
+  const result = await unkey.analytics.getVerifications({
+    query:
+      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
   });
 
   console.log(result);

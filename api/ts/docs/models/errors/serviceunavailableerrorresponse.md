@@ -1,0 +1,24 @@
+# ServiceUnavailableErrorResponse
+
+Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.
+
+When you encounter this error:
+- The service is likely experiencing temporary issues
+- Retrying the request after a short delay may succeed
+- If the error persists, the service may be undergoing maintenance
+- Contact Unkey support if the issue continues
+
+## Example Usage
+
+```typescript
+import { ServiceUnavailableErrorResponse } from "@unkey/api/models/errors";
+
+// No examples available for this model
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta`                                                                                                                                                                                                                                                          | [components.Meta](../../models/components/meta.md)                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                              | Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team. |
+| `error`                                                                                                                                                                                                                                                         | [components.BaseError](../../models/components/baseerror.md)                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                              | Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content.                                                                                 |

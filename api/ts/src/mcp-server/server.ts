@@ -13,6 +13,7 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$analyticsGetVerifications } from "./tools/analyticsGetVerifications.js";
 import { tool$apisCreateApi } from "./tools/apisCreateApi.js";
 import { tool$apisDeleteApi } from "./tools/apisDeleteApi.js";
 import { tool$apisGetApi } from "./tools/apisGetApi.js";
@@ -60,7 +61,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.0.6",
+    version: "2.1.0",
   });
 
   const client = new UnkeyCore({
@@ -90,6 +91,7 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$analyticsGetVerifications);
   tool(tool$apisCreateApi);
   tool(tool$apisDeleteApi);
   tool(tool$apisGetApi);

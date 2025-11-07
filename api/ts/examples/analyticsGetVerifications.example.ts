@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @unkey/api SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx apisCreateApi.example.ts
+ * npm run build && npx tsx analyticsGetVerifications.example.ts
  */
 
 import { Unkey } from "@unkey/api";
@@ -18,8 +18,9 @@ const unkey = new Unkey({
 });
 
 async function main() {
-  const result = await unkey.apis.createApi({
-    name: "payment-service-production",
+  const result = await unkey.analytics.getVerifications({
+    query:
+      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
   });
 
   console.log(result);
