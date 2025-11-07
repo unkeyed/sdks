@@ -3,6 +3,10 @@
 {
   "name": "@unkey/api",
   "version": "2.1.0",
+  "imports": {
+    "zod": "npm:zod@>=3.25.0",
+    "zod/v3": "npm:zod@>=3.25.0"
+  },
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    
