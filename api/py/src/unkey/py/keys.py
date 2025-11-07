@@ -40,8 +40,16 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: Grants additional permissions to the key through direct assignment or automatic creation. Duplicate permissions are ignored automatically, making this operation idempotent.  Adding permissions never removes existing permissions or role-based permissions.  Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: Grants additional permissions to the key through direct assignment or automatic creation.
+            Duplicate permissions are ignored automatically, making this operation idempotent.
+
+            Adding permissions never removes existing permissions or role-based permissions.
+
+            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -174,8 +182,16 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: Grants additional permissions to the key through direct assignment or automatic creation. Duplicate permissions are ignored automatically, making this operation idempotent.  Adding permissions never removes existing permissions or role-based permissions.  Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: Grants additional permissions to the key through direct assignment or automatic creation.
+            Duplicate permissions are ignored automatically, making this operation idempotent.
+
+            Adding permissions never removes existing permissions or role-based permissions.
+
+            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -308,8 +324,17 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests. Added roles supplement existing roles and permissions without replacing them. Role assignments take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Assigns additional roles to the key through direct assignment to existing workspace roles. Operations are idempotent - adding existing roles has no effect and causes no errors.  All roles must already exist in the workspace - roles cannot be created automatically. Invalid roles cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Added roles supplement existing roles and permissions without replacing them.
+            Role assignments take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Assigns additional roles to the key through direct assignment to existing workspace roles.
+            Operations are idempotent - adding existing roles has no effect and causes no errors.
+
+            All roles must already exist in the workspace - roles cannot be created automatically.
+            Invalid roles cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -440,8 +465,17 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests. Added roles supplement existing roles and permissions without replacing them. Role assignments take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Assigns additional roles to the key through direct assignment to existing workspace roles. Operations are idempotent - adding existing roles has no effect and causes no errors.  All roles must already exist in the workspace - roles cannot be created automatically. Invalid roles cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Added roles supplement existing roles and permissions without replacing them.
+            Role assignments take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Assigns additional roles to the key through direct assignment to existing workspace roles.
+            Operations are idempotent - adding existing roles has no effect and causes no errors.
+
+            All roles must already exist in the workspace - roles cannot be created automatically.
+            Invalid roles cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -588,18 +622,65 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (create keys in specific API)
 
 
-        :param api_id: The API namespace this key belongs to. Keys from different APIs cannot access each other.
-        :param prefix: Adds a visual identifier to the beginning of the generated key for easier recognition in logs and dashboards. The prefix becomes part of the actual key string (e.g., `prod_xxxxxxxxx`). Avoid using sensitive information in prefixes as they may appear in logs and error messages.
-        :param name: Sets a human-readable identifier for internal organization and dashboard display. Never exposed to end users, only visible in management interfaces and API responses. Avoid generic names like \"API Key\" when managing multiple keys for the same user or service.
-        :param byte_length: Controls the cryptographic strength of the generated key in bytes. Higher values increase security but result in longer keys that may be more annoying to handle. The default 16 bytes provides 2^128 possible combinations, sufficient for most applications. Consider 32 bytes for highly sensitive APIs, but avoid values above 64 bytes unless specifically required.
-        :param external_id: Links this key to a user or entity in your system using your own identifier. Returned during verification to identify the key owner without additional database lookups. Essential for user-specific analytics, billing, and multi-tenant key management. Use your primary user ID, organization ID, or tenant ID for best results. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information. Eliminates additional database lookups during verification, improving performance for stateless services. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param roles: Assigns existing roles to this key for permission management through role-based access control. Roles must already exist in your workspace before assignment. During verification, all permissions from assigned roles are checked against requested permissions. Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
-        :param permissions: Grants specific permissions directly to this key without requiring role membership. Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`. Direct permissions supplement any permissions inherited from assigned roles.
-        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field creates a permanent key that never expires.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Essential for trial periods, temporary access, and security compliance requiring key rotation.
-        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows. Essential for preventing API abuse while maintaining good performance for legitimate usage.
-        :param enabled: Controls whether the key is active immediately upon creation. When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`. Useful for pre-creating keys that will be activated later or for keys requiring manual approval. Most keys should be created with `enabled=true` for immediate use.
-        :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval. When true, allows recovering the actual key value using keys.getKey with decrypt=true. When false, the key value cannot be retrieved after creation for maximum security. Only enable for development keys or when key recovery is absolutely necessary.
+        :param api_id: The API namespace this key belongs to.
+            Keys from different APIs cannot access each other.
+
+        :param prefix: Adds a visual identifier to the beginning of the generated key for easier recognition in logs and dashboards.
+            The prefix becomes part of the actual key string (e.g., `prod_xxxxxxxxx`).
+            Avoid using sensitive information in prefixes as they may appear in logs and error messages.
+
+        :param name: Sets a human-readable identifier for internal organization and dashboard display.
+            Never exposed to end users, only visible in management interfaces and API responses.
+            Avoid generic names like \"API Key\" when managing multiple keys for the same user or service.
+
+        :param byte_length: Controls the cryptographic strength of the generated key in bytes.
+            Higher values increase security but result in longer keys that may be more annoying to handle.
+            The default 16 bytes provides 2^128 possible combinations, sufficient for most applications.
+            Consider 32 bytes for highly sensitive APIs, but avoid values above 64 bytes unless specifically required.
+
+        :param external_id: Links this key to a user or entity in your system using your own identifier.
+            Returned during verification to identify the key owner without additional database lookups.
+            Essential for user-specific analytics, billing, and multi-tenant key management.
+            Use your primary user ID, organization ID, or tenant ID for best results.
+            Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information.
+            Eliminates additional database lookups during verification, improving performance for stateless services.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param roles: Assigns existing roles to this key for permission management through role-based access control.
+            Roles must already exist in your workspace before assignment.
+            During verification, all permissions from assigned roles are checked against requested permissions.
+            Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
+
+        :param permissions: Grants specific permissions directly to this key without requiring role membership.
+            Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`.
+            Direct permissions supplement any permissions inherited from assigned roles.
+
+        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds.
+            Verification fails with code=EXPIRED immediately after this time passes.
+            Omitting this field creates a permanent key that never expires.
+
+            Avoid setting timestamps in the past as they immediately invalidate the key.
+            Keys expire based on server time, not client time, which prevents timezone-related issues.
+            Essential for trial periods, temporary access, and security compliance requiring key rotation.
+
+        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
+            Unlike credits which track total usage, rate limits reset automatically after each window expires.
+            Multiple rate limits can control different operation types with separate thresholds and windows.
+            Essential for preventing API abuse while maintaining good performance for legitimate usage.
+
+        :param enabled: Controls whether the key is active immediately upon creation.
+            When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`.
+            Useful for pre-creating keys that will be activated later or for keys requiring manual approval.
+            Most keys should be created with `enabled=true` for immediate use.
+
+        :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval.
+            When true, allows recovering the actual key value using keys.getKey with decrypt=true.
+            When false, the key value cannot be retrieved after creation for maximum security.
+            Only enable for development keys or when key recovery is absolutely necessary.
+
         :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -762,18 +843,65 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (create keys in specific API)
 
 
-        :param api_id: The API namespace this key belongs to. Keys from different APIs cannot access each other.
-        :param prefix: Adds a visual identifier to the beginning of the generated key for easier recognition in logs and dashboards. The prefix becomes part of the actual key string (e.g., `prod_xxxxxxxxx`). Avoid using sensitive information in prefixes as they may appear in logs and error messages.
-        :param name: Sets a human-readable identifier for internal organization and dashboard display. Never exposed to end users, only visible in management interfaces and API responses. Avoid generic names like \"API Key\" when managing multiple keys for the same user or service.
-        :param byte_length: Controls the cryptographic strength of the generated key in bytes. Higher values increase security but result in longer keys that may be more annoying to handle. The default 16 bytes provides 2^128 possible combinations, sufficient for most applications. Consider 32 bytes for highly sensitive APIs, but avoid values above 64 bytes unless specifically required.
-        :param external_id: Links this key to a user or entity in your system using your own identifier. Returned during verification to identify the key owner without additional database lookups. Essential for user-specific analytics, billing, and multi-tenant key management. Use your primary user ID, organization ID, or tenant ID for best results. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information. Eliminates additional database lookups during verification, improving performance for stateless services. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param roles: Assigns existing roles to this key for permission management through role-based access control. Roles must already exist in your workspace before assignment. During verification, all permissions from assigned roles are checked against requested permissions. Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
-        :param permissions: Grants specific permissions directly to this key without requiring role membership. Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`. Direct permissions supplement any permissions inherited from assigned roles.
-        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field creates a permanent key that never expires.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Essential for trial periods, temporary access, and security compliance requiring key rotation.
-        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows. Essential for preventing API abuse while maintaining good performance for legitimate usage.
-        :param enabled: Controls whether the key is active immediately upon creation. When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`. Useful for pre-creating keys that will be activated later or for keys requiring manual approval. Most keys should be created with `enabled=true` for immediate use.
-        :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval. When true, allows recovering the actual key value using keys.getKey with decrypt=true. When false, the key value cannot be retrieved after creation for maximum security. Only enable for development keys or when key recovery is absolutely necessary.
+        :param api_id: The API namespace this key belongs to.
+            Keys from different APIs cannot access each other.
+
+        :param prefix: Adds a visual identifier to the beginning of the generated key for easier recognition in logs and dashboards.
+            The prefix becomes part of the actual key string (e.g., `prod_xxxxxxxxx`).
+            Avoid using sensitive information in prefixes as they may appear in logs and error messages.
+
+        :param name: Sets a human-readable identifier for internal organization and dashboard display.
+            Never exposed to end users, only visible in management interfaces and API responses.
+            Avoid generic names like \"API Key\" when managing multiple keys for the same user or service.
+
+        :param byte_length: Controls the cryptographic strength of the generated key in bytes.
+            Higher values increase security but result in longer keys that may be more annoying to handle.
+            The default 16 bytes provides 2^128 possible combinations, sufficient for most applications.
+            Consider 32 bytes for highly sensitive APIs, but avoid values above 64 bytes unless specifically required.
+
+        :param external_id: Links this key to a user or entity in your system using your own identifier.
+            Returned during verification to identify the key owner without additional database lookups.
+            Essential for user-specific analytics, billing, and multi-tenant key management.
+            Use your primary user ID, organization ID, or tenant ID for best results.
+            Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information.
+            Eliminates additional database lookups during verification, improving performance for stateless services.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param roles: Assigns existing roles to this key for permission management through role-based access control.
+            Roles must already exist in your workspace before assignment.
+            During verification, all permissions from assigned roles are checked against requested permissions.
+            Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
+
+        :param permissions: Grants specific permissions directly to this key without requiring role membership.
+            Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`.
+            Direct permissions supplement any permissions inherited from assigned roles.
+
+        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds.
+            Verification fails with code=EXPIRED immediately after this time passes.
+            Omitting this field creates a permanent key that never expires.
+
+            Avoid setting timestamps in the past as they immediately invalidate the key.
+            Keys expire based on server time, not client time, which prevents timezone-related issues.
+            Essential for trial periods, temporary access, and security compliance requiring key rotation.
+
+        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
+            Unlike credits which track total usage, rate limits reset automatically after each window expires.
+            Multiple rate limits can control different operation types with separate thresholds and windows.
+            Essential for preventing API abuse while maintaining good performance for legitimate usage.
+
+        :param enabled: Controls whether the key is active immediately upon creation.
+            When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`.
+            Useful for pre-creating keys that will be activated later or for keys requiring manual approval.
+            Most keys should be created with `enabled=true` for immediate use.
+
+        :param recoverable: Controls whether the plaintext key is stored in an encrypted vault for later retrieval.
+            When true, allows recovering the actual key value using keys.getKey with decrypt=true.
+            When false, the key value cannot be retrieved after creation for maximum security.
+            Only enable for development keys or when key recovery is absolutely necessary.
+
         :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -916,8 +1044,19 @@ class Keys(BaseSDK):
         - `api.<api_id>.delete_key` (to delete keys in a specific API)
 
 
-        :param key_id: Specifies which key to delete using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests. Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`. Key deletion triggers cache invalidation across all regions but may take up to 30 seconds to fully propagate.
-        :param permanent: Controls deletion behavior between recoverable soft-deletion and irreversible permanent erasure. Soft deletion (default) preserves key data for potential recovery through direct database operations. Permanent deletion completely removes all traces including hash values and metadata with no recovery option.  Use permanent deletion only for regulatory compliance (GDPR), resolving hash collisions, or when reusing identical key strings. Permanent deletion cannot be undone and may affect analytics data that references the deleted key. Most applications should use soft deletion to maintain audit trails and prevent accidental data loss.
+        :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`.
+            Key deletion triggers cache invalidation across all regions but may take up to 30 seconds to fully propagate.
+
+        :param permanent: Controls deletion behavior between recoverable soft-deletion and irreversible permanent erasure.
+            Soft deletion (default) preserves key data for potential recovery through direct database operations.
+            Permanent deletion completely removes all traces including hash values and metadata with no recovery option.
+
+            Use permanent deletion only for regulatory compliance (GDPR), resolving hash collisions, or when reusing identical key strings.
+            Permanent deletion cannot be undone and may affect analytics data that references the deleted key.
+            Most applications should use soft deletion to maintain audit trails and prevent accidental data loss.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1044,8 +1183,19 @@ class Keys(BaseSDK):
         - `api.<api_id>.delete_key` (to delete keys in a specific API)
 
 
-        :param key_id: Specifies which key to delete using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests. Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`. Key deletion triggers cache invalidation across all regions but may take up to 30 seconds to fully propagate.
-        :param permanent: Controls deletion behavior between recoverable soft-deletion and irreversible permanent erasure. Soft deletion (default) preserves key data for potential recovery through direct database operations. Permanent deletion completely removes all traces including hash values and metadata with no recovery option.  Use permanent deletion only for regulatory compliance (GDPR), resolving hash collisions, or when reusing identical key strings. Permanent deletion cannot be undone and may affect analytics data that references the deleted key. Most applications should use soft deletion to maintain audit trails and prevent accidental data loss.
+        :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`.
+            Key deletion triggers cache invalidation across all regions but may take up to 30 seconds to fully propagate.
+
+        :param permanent: Controls deletion behavior between recoverable soft-deletion and irreversible permanent erasure.
+            Soft deletion (default) preserves key data for potential recovery through direct database operations.
+            Permanent deletion completely removes all traces including hash values and metadata with no recovery option.
+
+            Use permanent deletion only for regulatory compliance (GDPR), resolving hash collisions, or when reusing identical key strings.
+            Permanent deletion cannot be undone and may affect analytics data that references the deleted key.
+            Most applications should use soft deletion to maintain audit trails and prevent accidental data loss.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1175,8 +1325,19 @@ class Keys(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests. Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`. Find this ID in creation responses, key listings, dashboard, or verification responses.
-        :param decrypt: Controls whether to include the plaintext key value in the response for recovery purposes. Only works for keys created with `recoverable=true` and requires the `decrypt_key` permission. Returned keys must be handled securely, never logged, cached, or stored insecurely.  Use only for legitimate recovery scenarios like user password resets or emergency access. Most applications should keep this false to maintain security best practices and avoid accidental key exposure. Decryption requests are audited and may trigger security alerts in enterprise environments.
+        :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`.
+            Find this ID in creation responses, key listings, dashboard, or verification responses.
+
+        :param decrypt: Controls whether to include the plaintext key value in the response for recovery purposes.
+            Only works for keys created with `recoverable=true` and requires the `decrypt_key` permission.
+            Returned keys must be handled securely, never logged, cached, or stored insecurely.
+
+            Use only for legitimate recovery scenarios like user password resets or emergency access.
+            Most applications should keep this false to maintain security best practices and avoid accidental key exposure.
+            Decryption requests are audited and may trigger security alerts in enterprise environments.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1306,8 +1467,19 @@ class Keys(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests. Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`. Find this ID in creation responses, key listings, dashboard, or verification responses.
-        :param decrypt: Controls whether to include the plaintext key value in the response for recovery purposes. Only works for keys created with `recoverable=true` and requires the `decrypt_key` permission. Returned keys must be handled securely, never logged, cached, or stored insecurely.  Use only for legitimate recovery scenarios like user password resets or emergency access. Most applications should keep this false to maintain security best practices and avoid accidental key exposure. Decryption requests are audited and may trigger security alerts in enterprise environments.
+        :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+            Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`.
+            Find this ID in creation responses, key listings, dashboard, or verification responses.
+
+        :param decrypt: Controls whether to include the plaintext key value in the response for recovery purposes.
+            Only works for keys created with `recoverable=true` and requires the `decrypt_key` permission.
+            Returned keys must be handled securely, never logged, cached, or stored insecurely.
+
+            Use only for legitimate recovery scenarios like user password resets or emergency access.
+            Most applications should keep this false to maintain security best practices and avoid accidental key exposure.
+            Decryption requests are audited and may trigger security alerts in enterprise environments.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1438,8 +1610,15 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: Removes direct permissions from the key without affecting role-based permissions.  You can either use a permission slug, or the permission ID.  After removal, verification checks for these permissions will fail unless granted through roles.
+        :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: Removes direct permissions from the key without affecting role-based permissions.
+
+            You can either use a permission slug, or the permission ID.
+
+            After removal, verification checks for these permissions will fail unless granted through roles.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1572,8 +1751,15 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: Removes direct permissions from the key without affecting role-based permissions.  You can either use a permission slug, or the permission ID.  After removal, verification checks for these permissions will fail unless granted through roles.
+        :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: Removes direct permissions from the key without affecting role-based permissions.
+
+            You can either use a permission slug, or the permission ID.
+
+            After removal, verification checks for these permissions will fail unless granted through roles.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1706,8 +1892,17 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key loses the roles using the database identifier returned from createKey. Do not confuse this with the actual API key string that users include in requests. Removing roles only affects direct assignments, not permissions inherited from other sources. Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Removes direct role assignments from the key without affecting other role sources or permissions. Operations are idempotent - removing non-assigned roles has no effect and causes no errors.  After removal, the key loses access to permissions that were only granted through these roles. Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key loses the roles using the database identifier returned from createKey.
+            Do not confuse this with the actual API key string that users include in requests.
+            Removing roles only affects direct assignments, not permissions inherited from other sources.
+            Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Removes direct role assignments from the key without affecting other role sources or permissions.
+            Operations are idempotent - removing non-assigned roles has no effect and causes no errors.
+
+            After removal, the key loses access to permissions that were only granted through these roles.
+            Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1840,8 +2035,17 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key loses the roles using the database identifier returned from createKey. Do not confuse this with the actual API key string that users include in requests. Removing roles only affects direct assignments, not permissions inherited from other sources. Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Removes direct role assignments from the key without affecting other role sources or permissions. Operations are idempotent - removing non-assigned roles has no effect and causes no errors.  After removal, the key loses access to permissions that were only granted through these roles. Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key loses the roles using the database identifier returned from createKey.
+            Do not confuse this with the actual API key string that users include in requests.
+            Removing roles only affects direct assignments, not permissions inherited from other sources.
+            Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Removes direct role assignments from the key without affecting other role sources or permissions.
+            Operations are idempotent - removing non-assigned roles has no effect and causes no errors.
+
+            After removal, the key loses access to permissions that were only granted through these roles.
+            Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1991,8 +2195,29 @@ class Keys(BaseSDK):
         - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
 
 
-        :param key_id: The database identifier of the key to reroll.  This is the unique ID returned when creating or listing keys, NOT the actual API key token. You can find this ID in: - The response from `keys.createKey` - Key verification responses - The Unkey dashboard - API key listing endpoints
-        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.  This parameter controls the overlap period for key rotation: - Set to `0` to revoke the original key immediately - Positive values keep the original key active for the specified duration - Allows graceful migration by giving users time to update their credentials  Common overlap periods: - Immediate revocation: 0 - 1 hour grace period: 3600000 - 24 hours grace period: 86400000 - 7 days grace period: 604800000 - 30 days grace period: 2592000000
+        :param key_id: The database identifier of the key to reroll.
+
+            This is the unique ID returned when creating or listing keys, NOT the actual API key token.
+            You can find this ID in:
+            - The response from `keys.createKey`
+            - Key verification responses
+            - The Unkey dashboard
+            - API key listing endpoints
+
+        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
+
+            This parameter controls the overlap period for key rotation:
+            - Set to `0` to revoke the original key immediately
+            - Positive values keep the original key active for the specified duration
+            - Allows graceful migration by giving users time to update their credentials
+
+            Common overlap periods:
+            - Immediate revocation: 0
+            - 1 hour grace period: 3600000
+            - 24 hours grace period: 86400000
+            - 7 days grace period: 604800000
+            - 30 days grace period: 2592000000
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2140,8 +2365,29 @@ class Keys(BaseSDK):
         - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
 
 
-        :param key_id: The database identifier of the key to reroll.  This is the unique ID returned when creating or listing keys, NOT the actual API key token. You can find this ID in: - The response from `keys.createKey` - Key verification responses - The Unkey dashboard - API key listing endpoints
-        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.  This parameter controls the overlap period for key rotation: - Set to `0` to revoke the original key immediately - Positive values keep the original key active for the specified duration - Allows graceful migration by giving users time to update their credentials  Common overlap periods: - Immediate revocation: 0 - 1 hour grace period: 3600000 - 24 hours grace period: 86400000 - 7 days grace period: 604800000 - 30 days grace period: 2592000000
+        :param key_id: The database identifier of the key to reroll.
+
+            This is the unique ID returned when creating or listing keys, NOT the actual API key token.
+            You can find this ID in:
+            - The response from `keys.createKey`
+            - Key verification responses
+            - The Unkey dashboard
+            - API key listing endpoints
+
+        :param expiration: Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
+
+            This parameter controls the overlap period for key rotation:
+            - Set to `0` to revoke the original key immediately
+            - Positive values keep the original key active for the specified duration
+            - Allows graceful migration by giving users time to update their credentials
+
+            Common overlap periods:
+            - Immediate revocation: 0
+            - 1 hour grace period: 3600000
+            - 24 hours grace period: 86400000
+            - 7 days grace period: 604800000
+            - 30 days grace period: 2592000000
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2272,8 +2518,19 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: The permissions to set for this key.  This is a complete replacement operation - it overwrites all existing direct permissions with this new set.  Key behaviors: - Providing an empty array removes all direct permissions from the key - This only affects direct permissions - permissions granted through roles are not affected - All existing direct permissions not included in this list will be removed  Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: The permissions to set for this key.
+
+            This is a complete replacement operation - it overwrites all existing direct permissions with this new set.
+
+            Key behaviors:
+            - Providing an empty array removes all direct permissions from the key
+            - This only affects direct permissions - permissions granted through roles are not affected
+            - All existing direct permissions not included in this list will be removed
+
+            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2406,8 +2663,19 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param permissions: The permissions to set for this key.  This is a complete replacement operation - it overwrites all existing direct permissions with this new set.  Key behaviors: - Providing an empty array removes all direct permissions from the key - This only affects direct permissions - permissions granted through roles are not affected - All existing direct permissions not included in this list will be removed  Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+        :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param permissions: The permissions to set for this key.
+
+            This is a complete replacement operation - it overwrites all existing direct permissions with this new set.
+
+            Key behaviors:
+            - Providing an empty array removes all direct permissions from the key
+            - This only affects direct permissions - permissions granted through roles are not affected
+            - All existing direct permissions not included in this list will be removed
+
+            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2540,8 +2808,18 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey. Do not confuse this with the actual API key string that users include in requests. This is a wholesale replacement operation that removes all existing roles not included in the request. Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Replaces all existing role assignments with this complete list of roles. This is a wholesale replacement operation, not an incremental update like add/remove operations.  Providing an empty array removes all direct role assignments from the key. All roles must already exist in the workspace - roles cannot be created automatically. Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey.
+            Do not confuse this with the actual API key string that users include in requests.
+            This is a wholesale replacement operation that removes all existing roles not included in the request.
+            Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Replaces all existing role assignments with this complete list of roles.
+            This is a wholesale replacement operation, not an incremental update like add/remove operations.
+
+            Providing an empty array removes all direct role assignments from the key.
+            All roles must already exist in the workspace - roles cannot be created automatically.
+            Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2672,8 +2950,18 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
-        :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey. Do not confuse this with the actual API key string that users include in requests. This is a wholesale replacement operation that removes all existing roles not included in the request. Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
-        :param roles: Replaces all existing role assignments with this complete list of roles. This is a wholesale replacement operation, not an incremental update like add/remove operations.  Providing an empty array removes all direct role assignments from the key. All roles must already exist in the workspace - roles cannot be created automatically. Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+        :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey.
+            Do not confuse this with the actual API key string that users include in requests.
+            This is a wholesale replacement operation that removes all existing roles not included in the request.
+            Role changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
+        :param roles: Replaces all existing role assignments with this complete list of roles.
+            This is a wholesale replacement operation, not an incremental update like add/remove operations.
+
+            Providing an empty array removes all direct role assignments from the key.
+            All roles must already exist in the workspace - roles cannot be created automatically.
+            Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2807,7 +3095,13 @@ class Keys(BaseSDK):
 
         :param key_id: The ID of the key to update (begins with `key_`). This is the database reference ID for the key, not the actual API key string that users authenticate with. This ID uniquely identifies which key's credits will be updated.
         :param operation: Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
-        :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.  Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.  Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
+
+        :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
+
+            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+
+            Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2944,7 +3238,13 @@ class Keys(BaseSDK):
 
         :param key_id: The ID of the key to update (begins with `key_`). This is the database reference ID for the key, not the actual API key string that users authenticate with. This ID uniquely identifies which key's credits will be updated.
         :param operation: Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
-        :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.  Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.  Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
+
+        :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
+
+            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+
+            Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3090,13 +3390,41 @@ class Keys(BaseSDK):
         If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
 
 
-        :param key_id: Specifies which key to update using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param name: Sets a human-readable name for internal organization and identification. Omitting this field leaves the current name unchanged, while setting null removes it entirely. Avoid generic names like \"API Key\" when managing multiple keys per user or service.
-        :param external_id: Links this key to a user or entity in your system for ownership tracking during verification. Omitting this field preserves the current association, while setting null disconnects the key from any identity. Essential for user-specific analytics, billing, and key management across multiple users. Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-        :param meta: Stores arbitrary JSON metadata returned during key verification. Omitting this field preserves existing metadata, while setting null removes all metadata entirely. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field preserves the current expiration, while setting null makes the key permanent.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Active sessions continue until their next verification attempt after expiry.
-        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Omitting this field preserves existing rate limits, while setting null removes all rate limits. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows.
-        :param enabled: Controls whether the key is currently active for verification requests. When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings. Omitting this field preserves the current enabled status. Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
+        :param key_id: Specifies which key to update using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param name: Sets a human-readable name for internal organization and identification.
+            Omitting this field leaves the current name unchanged, while setting null removes it entirely.
+            Avoid generic names like \"API Key\" when managing multiple keys per user or service.
+
+        :param external_id: Links this key to a user or entity in your system for ownership tracking during verification.
+            Omitting this field preserves the current association, while setting null disconnects the key from any identity.
+            Essential for user-specific analytics, billing, and key management across multiple users.
+            Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification.
+            Omitting this field preserves existing metadata, while setting null removes all metadata entirely.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds.
+            Verification fails with code=EXPIRED immediately after this time passes.
+            Omitting this field preserves the current expiration, while setting null makes the key permanent.
+
+            Avoid setting timestamps in the past as they immediately invalidate the key.
+            Keys expire based on server time, not client time, which prevents timezone-related issues.
+            Active sessions continue until their next verification attempt after expiry.
+
+        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
+            Omitting this field preserves existing rate limits, while setting null removes all rate limits.
+            Unlike credits which track total usage, rate limits reset automatically after each window expires.
+            Multiple rate limits can control different operation types with separate thresholds and windows.
+
+        :param enabled: Controls whether the key is currently active for verification requests.
+            When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings.
+            Omitting this field preserves the current enabled status.
+            Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
+
         :param roles:
         :param permissions:
         :param key_credits: Credit configuration and remaining balance for this key.
@@ -3254,13 +3582,41 @@ class Keys(BaseSDK):
         If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
 
 
-        :param key_id: Specifies which key to update using the database identifier returned from `createKey`. Do not confuse this with the actual API key string that users include in requests.
-        :param name: Sets a human-readable name for internal organization and identification. Omitting this field leaves the current name unchanged, while setting null removes it entirely. Avoid generic names like \"API Key\" when managing multiple keys per user or service.
-        :param external_id: Links this key to a user or entity in your system for ownership tracking during verification. Omitting this field preserves the current association, while setting null disconnects the key from any identity. Essential for user-specific analytics, billing, and key management across multiple users. Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
-        :param meta: Stores arbitrary JSON metadata returned during key verification. Omitting this field preserves existing metadata, while setting null removes all metadata entirely. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds. Verification fails with code=EXPIRED immediately after this time passes. Omitting this field preserves the current expiration, while setting null makes the key permanent.  Avoid setting timestamps in the past as they immediately invalidate the key. Keys expire based on server time, not client time, which prevents timezone-related issues. Active sessions continue until their next verification attempt after expiry.
-        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency. Omitting this field preserves existing rate limits, while setting null removes all rate limits. Unlike credits which track total usage, rate limits reset automatically after each window expires. Multiple rate limits can control different operation types with separate thresholds and windows.
-        :param enabled: Controls whether the key is currently active for verification requests. When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings. Omitting this field preserves the current enabled status. Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
+        :param key_id: Specifies which key to update using the database identifier returned from `createKey`.
+            Do not confuse this with the actual API key string that users include in requests.
+
+        :param name: Sets a human-readable name for internal organization and identification.
+            Omitting this field leaves the current name unchanged, while setting null removes it entirely.
+            Avoid generic names like \"API Key\" when managing multiple keys per user or service.
+
+        :param external_id: Links this key to a user or entity in your system for ownership tracking during verification.
+            Omitting this field preserves the current association, while setting null disconnects the key from any identity.
+            Essential for user-specific analytics, billing, and key management across multiple users.
+            Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification.
+            Omitting this field preserves existing metadata, while setting null removes all metadata entirely.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param expires: Sets when this key automatically expires as a Unix timestamp in milliseconds.
+            Verification fails with code=EXPIRED immediately after this time passes.
+            Omitting this field preserves the current expiration, while setting null makes the key permanent.
+
+            Avoid setting timestamps in the past as they immediately invalidate the key.
+            Keys expire based on server time, not client time, which prevents timezone-related issues.
+            Active sessions continue until their next verification attempt after expiry.
+
+        :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
+            Omitting this field preserves existing rate limits, while setting null removes all rate limits.
+            Unlike credits which track total usage, rate limits reset automatically after each window expires.
+            Multiple rate limits can control different operation types with separate thresholds and windows.
+
+        :param enabled: Controls whether the key is currently active for verification requests.
+            When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings.
+            Omitting this field preserves the current enabled status.
+            Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
+
         :param roles:
         :param permissions:
         :param key_credits: Credit configuration and remaining balance for this key.
@@ -3419,11 +3775,31 @@ class Keys(BaseSDK):
         If you are getting a NOT_FOUND error, ensure your root key has the required verify key permissions.
 
 
-        :param key: The API key to verify, exactly as provided by your user. Include any prefix - even small changes will cause verification to fail.
-        :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes. Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions. Use 'key=value' format for compatibility with most analytics tools and clear categorization. Avoid including sensitive data in tags as they may appear in logs and analytics reports.
-        :param permissions: Checks if the key has the specified permission(s) using a query syntax. Supports single permissions, logical operators (AND, OR), and parentheses for grouping. Examples: - Single permission: \"documents.read\" - Multiple permissions: \"documents.read AND documents.write\" - Complex queries: \"(documents.read OR documents.write) AND users.view\" Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
-        :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage. Omitting this field skips rate limit checks entirely, relying only on configured key rate limits. Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides. Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
-        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+        :param key: The API key to verify, exactly as provided by your user.
+            Include any prefix - even small changes will cause verification to fail.
+
+        :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes.
+            Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions.
+            Use 'key=value' format for compatibility with most analytics tools and clear categorization.
+            Avoid including sensitive data in tags as they may appear in logs and analytics reports.
+
+        :param permissions: Checks if the key has the specified permission(s) using a query syntax.
+            Supports single permissions, logical operators (AND, OR), and parentheses for grouping.
+            Examples:
+            - Single permission: \"documents.read\"
+            - Multiple permissions: \"documents.read AND documents.write\"
+            - Complex queries: \"(documents.read OR documents.write) AND users.view\"
+            Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
+
+        :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
+            Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
+            Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
+            Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+
+        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
+            Omitting this field uses the default cost of 1 credit per verification.
+            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3574,11 +3950,31 @@ class Keys(BaseSDK):
         If you are getting a NOT_FOUND error, ensure your root key has the required verify key permissions.
 
 
-        :param key: The API key to verify, exactly as provided by your user. Include any prefix - even small changes will cause verification to fail.
-        :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes. Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions. Use 'key=value' format for compatibility with most analytics tools and clear categorization. Avoid including sensitive data in tags as they may appear in logs and analytics reports.
-        :param permissions: Checks if the key has the specified permission(s) using a query syntax. Supports single permissions, logical operators (AND, OR), and parentheses for grouping. Examples: - Single permission: \"documents.read\" - Multiple permissions: \"documents.read AND documents.write\" - Complex queries: \"(documents.read OR documents.write) AND users.view\" Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
-        :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage. Omitting this field skips rate limit checks entirely, relying only on configured key rate limits. Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides. Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
-        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement. Omitting this field uses the default cost of 1 credit per verification. Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+        :param key: The API key to verify, exactly as provided by your user.
+            Include any prefix - even small changes will cause verification to fail.
+
+        :param tags: Attaches metadata tags for analytics and monitoring without affecting verification outcomes.
+            Enables segmentation of API usage in dashboards by endpoint, client version, region, or custom dimensions.
+            Use 'key=value' format for compatibility with most analytics tools and clear categorization.
+            Avoid including sensitive data in tags as they may appear in logs and analytics reports.
+
+        :param permissions: Checks if the key has the specified permission(s) using a query syntax.
+            Supports single permissions, logical operators (AND, OR), and parentheses for grouping.
+            Examples:
+            - Single permission: \"documents.read\"
+            - Multiple permissions: \"documents.read AND documents.write\"
+            - Complex queries: \"(documents.read OR documents.write) AND users.view\"
+            Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
+
+        :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
+            Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
+            Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
+            Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
+
+        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
+            Omitting this field uses the default cost of 1 credit per verification.
+            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3709,7 +4105,10 @@ class Keys(BaseSDK):
         If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
 
 
-        :param key: The complete API key string provided by you, including any prefix. Never log, cache, or store API keys in your system as they provide full access to user resources. Include the full key exactly as provided - even minor modifications will cause a not found error.
+        :param key: The complete API key string provided by you, including any prefix.
+            Never log, cache, or store API keys in your system as they provide full access to user resources.
+            Include the full key exactly as provided - even minor modifications will cause a not found error.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3832,7 +4231,10 @@ class Keys(BaseSDK):
         If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
 
 
-        :param key: The complete API key string provided by you, including any prefix. Never log, cache, or store API keys in your system as they provide full access to user resources. Include the full key exactly as provided - even minor modifications will cause a not found error.
+        :param key: The complete API key string provided by you, including any prefix.
+            Never log, cache, or store API keys in your system as they provide full access to user resources.
+            Include the full key exactly as provided - even minor modifications will cause a not found error.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

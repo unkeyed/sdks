@@ -8,7 +8,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apis.create_api(name="payment-service-production")
+    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
 
     # Handle response
     print(res)
@@ -29,7 +29,7 @@ async def main():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.apis.create_api_async(name="payment-service-production")
+        res = await unkey.analytics.get_verifications_async(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
 
         # Handle response
         print(res)

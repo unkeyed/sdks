@@ -33,7 +33,14 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace containing the override.
-        :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.  Important notes: - This is case-sensitive and must match exactly - Include any wildcards (*) that were part of the original pattern - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID  After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
+        :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
+
+            Important notes:
+            - This is case-sensitive and must match exactly
+            - Include any wildcards (*) that were part of the original pattern
+            - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID
+
+            After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -163,7 +170,14 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace containing the override.
-        :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.  Important notes: - This is case-sensitive and must match exactly - Include any wildcards (*) that were part of the original pattern - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID  After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
+        :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
+
+            Important notes:
+            - This is case-sensitive and must match exactly
+            - Include any wildcards (*) that were part of the original pattern
+            - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID
+
+            After deletion, any identifiers previously affected by this override will immediately revert to using the default rate limit for the namespace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -293,7 +307,14 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace containing the override.
-        :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.  Important notes: - This is case-sensitive and must match exactly - Include any wildcards (*) that were part of the original pattern - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'  This field is used to look up the specific override configuration for this pattern.
+        :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
+
+            Important notes:
+            - This is case-sensitive and must match exactly
+            - Include any wildcards (*) that were part of the original pattern
+            - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'
+
+            This field is used to look up the specific override configuration for this pattern.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -419,7 +440,14 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace containing the override.
-        :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.  Important notes: - This is case-sensitive and must match exactly - Include any wildcards (*) that were part of the original pattern - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'  This field is used to look up the specific override configuration for this pattern.
+        :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
+
+            Important notes:
+            - This is case-sensitive and must match exactly
+            - Include any wildcards (*) that were part of the original pattern
+            - For example, if the override was created for 'premium_*', you must use 'premium_*' here, not a specific ID like 'premium_user1'
+
+            This field is used to look up the specific override configuration for this pattern.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -556,10 +584,27 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace.
-        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets. Shorter durations enable faster recovery but may be less effective against sustained abuse. Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours). Balance user experience with protection needs when choosing window sizes.
-        :param identifier: Defines the scope of rate limiting by identifying the entity being limited. Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits. Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats. The same identifier can be used across different namespaces to apply multiple rate limit types. Choose identifiers that provide appropriate granularity for your rate limiting strategy.
-        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected. When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets. Balance user experience with resource protection when setting limits for different user tiers. Consider system capacity, business requirements, and fair usage policies in limit determination.
-        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting. Use higher values for resource-intensive operations and 0 for tracking without limiting. When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected. Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
+        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
+            Shorter durations enable faster recovery but may be less effective against sustained abuse.
+            Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
+            Balance user experience with protection needs when choosing window sizes.
+
+        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
+            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
+            Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.
+            The same identifier can be used across different namespaces to apply multiple rate limit types.
+            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
+
+        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected.
+            When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
+            Balance user experience with resource protection when setting limits for different user tiers.
+            Consider system capacity, business requirements, and fair usage policies in limit determination.
+
+        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
+            Use higher values for resource-intensive operations and 0 for tracking without limiting.
+            When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.
+            Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -704,10 +749,27 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The id or name of the namespace.
-        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets. Shorter durations enable faster recovery but may be less effective against sustained abuse. Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours). Balance user experience with protection needs when choosing window sizes.
-        :param identifier: Defines the scope of rate limiting by identifying the entity being limited. Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits. Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats. The same identifier can be used across different namespaces to apply multiple rate limit types. Choose identifiers that provide appropriate granularity for your rate limiting strategy.
-        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected. When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets. Balance user experience with resource protection when setting limits for different user tiers. Consider system capacity, business requirements, and fair usage policies in limit determination.
-        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting. Use higher values for resource-intensive operations and 0 for tracking without limiting. When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected. Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
+        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
+            Shorter durations enable faster recovery but may be less effective against sustained abuse.
+            Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
+            Balance user experience with protection needs when choosing window sizes.
+
+        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
+            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
+            Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.
+            The same identifier can be used across different namespaces to apply multiple rate limit types.
+            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
+
+        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected.
+            When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
+            Balance user experience with resource protection when setting limits for different user tiers.
+            Consider system capacity, business requirements, and fair usage policies in limit determination.
+
+        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
+            Use higher values for resource-intensive operations and 0 for tracking without limiting.
+            When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.
+            Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -843,7 +905,13 @@ class Ratelimit(BaseSDK):
 
         :param namespace: The id or name of the rate limit namespace to list overrides for.
         :param cursor: Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
-        :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.  - Lower values (10-20): Better for UI displays and faster response times - Higher values (50-100): Better for data exports or bulk operations - Default (10): Suitable for most dashboard views  Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
+        :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
+
+            - Lower values (10-20): Better for UI displays and faster response times
+            - Higher values (50-100): Better for data exports or bulk operations
+            - Default (10): Suitable for most dashboard views
+
+            Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -976,7 +1044,13 @@ class Ratelimit(BaseSDK):
 
         :param namespace: The id or name of the rate limit namespace to list overrides for.
         :param cursor: Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
-        :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.  - Lower values (10-20): Better for UI displays and faster response times - Higher values (50-100): Better for data exports or bulk operations - Default (10): Suitable for most dashboard views  Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
+        :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
+
+            - Lower values (10-20): Better for UI displays and faster response times
+            - Higher values (50-100): Better for data exports or bulk operations
+            - Default (10): Suitable for most dashboard views
+
+            Results exceeding this limit will be paginated, with a cursor provided for fetching subsequent pages.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1109,9 +1183,34 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The ID or name of the rate limit namespace.
-        :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.  Considerations: - This can differ from the default duration for the namespace - Longer durations create stricter limits that take longer to reset - Shorter durations allow more frequent bursts of activity - Common values: 60000 (1 minute), 3600000 (1 hour), 86400000 (1 day)
-        :param identifier: Identifier of the entity receiving this custom rate limit. This can be:  - A specific user ID for individual custom limits - An IP address for location-based rules - An email domain for organization-wide policies - Any other string that identifies the target entity  Wildcards (*) can be used to create pattern-matching rules that apply to multiple identifiers. For example: - 'premium_*' would match all identifiers starting with 'premium_' - '*_admin' would match all identifiers ending with '_admin' - '*suspicious*' would match any identifier containing 'suspicious'  More detailed information on wildcard pattern rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
-        :param limit: The maximum number of requests allowed for this override. This defines the custom quota for the specified identifier(s).  Special values: - Higher than default: For premium or trusted entities - Lower than default: For suspicious or abusive entities - 0: To completely block access (useful for ban implementation)  This limit entirely replaces the default limit for matching identifiers.
+        :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.
+
+            Considerations:
+            - This can differ from the default duration for the namespace
+            - Longer durations create stricter limits that take longer to reset
+            - Shorter durations allow more frequent bursts of activity
+            - Common values: 60000 (1 minute), 3600000 (1 hour), 86400000 (1 day)
+        :param identifier: Identifier of the entity receiving this custom rate limit. This can be:
+
+            - A specific user ID for individual custom limits
+            - An IP address for location-based rules
+            - An email domain for organization-wide policies
+            - Any other string that identifies the target entity
+
+            Wildcards (*) can be used to create pattern-matching rules that apply to multiple identifiers. For example:
+            - 'premium_*' would match all identifiers starting with 'premium_'
+            - '*_admin' would match all identifiers ending with '_admin'
+            - '*suspicious*' would match any identifier containing 'suspicious'
+
+            More detailed information on wildcard pattern rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+        :param limit: The maximum number of requests allowed for this override. This defines the custom quota for the specified identifier(s).
+
+            Special values:
+            - Higher than default: For premium or trusted entities
+            - Lower than default: For suspicious or abusive entities
+            - 0: To completely block access (useful for ban implementation)
+
+            This limit entirely replaces the default limit for matching identifiers.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1241,9 +1340,34 @@ class Ratelimit(BaseSDK):
 
 
         :param namespace: The ID or name of the rate limit namespace.
-        :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.  Considerations: - This can differ from the default duration for the namespace - Longer durations create stricter limits that take longer to reset - Shorter durations allow more frequent bursts of activity - Common values: 60000 (1 minute), 3600000 (1 hour), 86400000 (1 day)
-        :param identifier: Identifier of the entity receiving this custom rate limit. This can be:  - A specific user ID for individual custom limits - An IP address for location-based rules - An email domain for organization-wide policies - Any other string that identifies the target entity  Wildcards (*) can be used to create pattern-matching rules that apply to multiple identifiers. For example: - 'premium_*' would match all identifiers starting with 'premium_' - '*_admin' would match all identifiers ending with '_admin' - '*suspicious*' would match any identifier containing 'suspicious'  More detailed information on wildcard pattern rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
-        :param limit: The maximum number of requests allowed for this override. This defines the custom quota for the specified identifier(s).  Special values: - Higher than default: For premium or trusted entities - Lower than default: For suspicious or abusive entities - 0: To completely block access (useful for ban implementation)  This limit entirely replaces the default limit for matching identifiers.
+        :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.
+
+            Considerations:
+            - This can differ from the default duration for the namespace
+            - Longer durations create stricter limits that take longer to reset
+            - Shorter durations allow more frequent bursts of activity
+            - Common values: 60000 (1 minute), 3600000 (1 hour), 86400000 (1 day)
+        :param identifier: Identifier of the entity receiving this custom rate limit. This can be:
+
+            - A specific user ID for individual custom limits
+            - An IP address for location-based rules
+            - An email domain for organization-wide policies
+            - Any other string that identifies the target entity
+
+            Wildcards (*) can be used to create pattern-matching rules that apply to multiple identifiers. For example:
+            - 'premium_*' would match all identifiers starting with 'premium_'
+            - '*_admin' would match all identifiers ending with '_admin'
+            - '*suspicious*' would match any identifier containing 'suspicious'
+
+            More detailed information on wildcard pattern rules is available at https://www.unkey.com/docs/ratelimiting/overrides#wildcard-rules
+        :param limit: The maximum number of requests allowed for this override. This defines the custom quota for the specified identifier(s).
+
+            Special values:
+            - Higher than default: For premium or trusted entities
+            - Lower than default: For suspicious or abusive entities
+            - 0: To completely block access (useful for ban implementation)
+
+            This limit entirely replaces the default limit for matching identifiers.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
