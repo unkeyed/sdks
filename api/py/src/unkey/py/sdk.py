@@ -15,6 +15,7 @@ from unkey.py.types import OptionalNullable, UNSET
 import weakref
 
 if TYPE_CHECKING:
+    from unkey.py.analytics import Analytics
     from unkey.py.apis import Apis
     from unkey.py.identities import Identities
     from unkey.py.keys import Keys
@@ -101,6 +102,8 @@ class Unkey(BaseSDK):
     This structure ensures you always have the context needed to debug issues and take corrective action.
     """
 
+    analytics: "Analytics"
+    r"""Analytics query operations"""
     apis: "Apis"
     r"""API management operations"""
     identities: "Identities"
@@ -112,6 +115,7 @@ class Unkey(BaseSDK):
     ratelimit: "Ratelimit"
     r"""Rate limiting operations"""
     _sub_sdk_map = {
+        "analytics": ("unkey.py.analytics", "Analytics"),
         "apis": ("unkey.py.apis", "Apis"),
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),

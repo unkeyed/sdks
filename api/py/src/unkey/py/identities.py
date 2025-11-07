@@ -35,9 +35,34 @@ class Identities(BaseSDK):
         Requires `identity.*.create_identity` permission
 
 
-        :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity. Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors. This identifier links Unkey identities to your authentication system, database records, or tenant structure.  Avoid changing externalIds after creation as this breaks the link between your systems. Use consistent identifier patterns across your application for easier management and debugging. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats. Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
-        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information. Eliminates additional database lookups during verification, improving performance for stateless services. Avoid storing sensitive data here as it's returned in verification responses.  Large metadata objects increase verification latency and should stay under 10KB total size. Use this for subscription details, feature flags, user preferences, and organization information. Metadata is returned as-is whenever keys associated with this identity are verified.
-        :param ratelimits: Defines shared rate limits that apply to all keys belonging to this identity. Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio. Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.  Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates. During verification, specify which named limits to check for enforcement. Identity rate limits supplement any key-specific rate limits that may also be configured. - Each named limit can have different thresholds and windows  When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
+        :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity.
+            Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
+            This identifier links Unkey identities to your authentication system, database records, or tenant structure.
+
+            Avoid changing externalIds after creation as this breaks the link between your systems.
+            Use consistent identifier patterns across your application for easier management and debugging.
+            Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+            Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information.
+            Eliminates additional database lookups during verification, improving performance for stateless services.
+            Avoid storing sensitive data here as it's returned in verification responses.
+
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+            Use this for subscription details, feature flags, user preferences, and organization information.
+            Metadata is returned as-is whenever keys associated with this identity are verified.
+
+        :param ratelimits: Defines shared rate limits that apply to all keys belonging to this identity.
+            Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio.
+            Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.
+
+            Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates.
+            During verification, specify which named limits to check for enforcement.
+            Identity rate limits supplement any key-specific rate limits that may also be configured.
+            - Each named limit can have different thresholds and windows
+
+            When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -171,9 +196,34 @@ class Identities(BaseSDK):
         Requires `identity.*.create_identity` permission
 
 
-        :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity. Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors. This identifier links Unkey identities to your authentication system, database records, or tenant structure.  Avoid changing externalIds after creation as this breaks the link between your systems. Use consistent identifier patterns across your application for easier management and debugging. Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats. Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
-        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information. Eliminates additional database lookups during verification, improving performance for stateless services. Avoid storing sensitive data here as it's returned in verification responses.  Large metadata objects increase verification latency and should stay under 10KB total size. Use this for subscription details, feature flags, user preferences, and organization information. Metadata is returned as-is whenever keys associated with this identity are verified.
-        :param ratelimits: Defines shared rate limits that apply to all keys belonging to this identity. Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio. Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.  Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates. During verification, specify which named limits to check for enforcement. Identity rate limits supplement any key-specific rate limits that may also be configured. - Each named limit can have different thresholds and windows  When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
+        :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity.
+            Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
+            This identifier links Unkey identities to your authentication system, database records, or tenant structure.
+
+            Avoid changing externalIds after creation as this breaks the link between your systems.
+            Use consistent identifier patterns across your application for easier management and debugging.
+            Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
+            Essential for implementing proper multi-tenant isolation and user-specific rate limiting.
+
+        :param meta: Stores arbitrary JSON metadata returned during key verification for contextual information.
+            Eliminates additional database lookups during verification, improving performance for stateless services.
+            Avoid storing sensitive data here as it's returned in verification responses.
+
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+            Use this for subscription details, feature flags, user preferences, and organization information.
+            Metadata is returned as-is whenever keys associated with this identity are verified.
+
+        :param ratelimits: Defines shared rate limits that apply to all keys belonging to this identity.
+            Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio.
+            Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.
+
+            Rate limit counters are shared across all keys with this identity, regardless of how many keys the user creates.
+            During verification, specify which named limits to check for enforcement.
+            Identity rate limits supplement any key-specific rate limits that may also be configured.
+            - Each named limit can have different thresholds and windows
+
+            When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1097,8 +1147,16 @@ class Identities(BaseSDK):
 
 
         :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
-        :param meta: Replaces all existing metadata with this new metadata object. Omitting this field preserves existing metadata, while providing an empty object clears all metadata. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits. Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits. These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys. Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+        :param meta: Replaces all existing metadata with this new metadata object.
+            Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits.
+            Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits.
+            These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys.
+            Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1234,8 +1292,16 @@ class Identities(BaseSDK):
 
 
         :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
-        :param meta: Replaces all existing metadata with this new metadata object. Omitting this field preserves existing metadata, while providing an empty object clears all metadata. Avoid storing sensitive data here as it's returned in verification responses. Large metadata objects increase verification latency and should stay under 10KB total size.
-        :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits. Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits. These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys. Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+        :param meta: Replaces all existing metadata with this new metadata object.
+            Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
+            Avoid storing sensitive data here as it's returned in verification responses.
+            Large metadata objects increase verification latency and should stay under 10KB total size.
+
+        :param ratelimits: Replaces all existing identity rate limits with this complete list of rate limits.
+            Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits.
+            These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys.
+            Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

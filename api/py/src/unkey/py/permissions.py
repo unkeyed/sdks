@@ -36,9 +36,32 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
-        :param name: Creates a permission with this human-readable name that describes its purpose. Names must be unique within your workspace to prevent conflicts during assignment. Use clear, semantic names that developers can easily understand when building authorization logic. Consider using hierarchical naming conventions like 'resource.action' for better organization.  Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'
-        :param slug: Creates a URL-safe identifier for this permission that can be used in APIs and integrations. Must start with a letter and contain only letters, numbers, periods, underscores, and hyphens. Slugs are often used in REST endpoints, configuration files, and external integrations. Should closely match the name but in a format suitable for technical usage. Must be unique within your workspace to ensure reliable permission lookups.  Keep slugs concise but descriptive for better developer experience.
-        :param description: Provides detailed documentation of what this permission grants access to. Include information about affected resources, allowed actions, and any important limitations. This internal documentation helps team members understand permission scope and security implications. Not visible to end users - designed for development teams and security audits.  Consider documenting: - What resources can be accessed - What operations are permitted - Any conditions or limitations - Related permissions that might be needed
+        :param name: Creates a permission with this human-readable name that describes its purpose.
+            Names must be unique within your workspace to prevent conflicts during assignment.
+            Use clear, semantic names that developers can easily understand when building authorization logic.
+            Consider using hierarchical naming conventions like 'resource.action' for better organization.
+
+            Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'
+
+        :param slug: Creates a URL-safe identifier for this permission that can be used in APIs and integrations.
+            Must start with a letter and contain only letters, numbers, periods, underscores, and hyphens.
+            Slugs are often used in REST endpoints, configuration files, and external integrations.
+            Should closely match the name but in a format suitable for technical usage.
+            Must be unique within your workspace to ensure reliable permission lookups.
+
+            Keep slugs concise but descriptive for better developer experience.
+
+        :param description: Provides detailed documentation of what this permission grants access to.
+            Include information about affected resources, allowed actions, and any important limitations.
+            This internal documentation helps team members understand permission scope and security implications.
+            Not visible to end users - designed for development teams and security audits.
+
+            Consider documenting:
+            - What resources can be accessed
+            - What operations are permitted
+            - Any conditions or limitations
+            - Related permissions that might be needed
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -172,9 +195,32 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
-        :param name: Creates a permission with this human-readable name that describes its purpose. Names must be unique within your workspace to prevent conflicts during assignment. Use clear, semantic names that developers can easily understand when building authorization logic. Consider using hierarchical naming conventions like 'resource.action' for better organization.  Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'
-        :param slug: Creates a URL-safe identifier for this permission that can be used in APIs and integrations. Must start with a letter and contain only letters, numbers, periods, underscores, and hyphens. Slugs are often used in REST endpoints, configuration files, and external integrations. Should closely match the name but in a format suitable for technical usage. Must be unique within your workspace to ensure reliable permission lookups.  Keep slugs concise but descriptive for better developer experience.
-        :param description: Provides detailed documentation of what this permission grants access to. Include information about affected resources, allowed actions, and any important limitations. This internal documentation helps team members understand permission scope and security implications. Not visible to end users - designed for development teams and security audits.  Consider documenting: - What resources can be accessed - What operations are permitted - Any conditions or limitations - Related permissions that might be needed
+        :param name: Creates a permission with this human-readable name that describes its purpose.
+            Names must be unique within your workspace to prevent conflicts during assignment.
+            Use clear, semantic names that developers can easily understand when building authorization logic.
+            Consider using hierarchical naming conventions like 'resource.action' for better organization.
+
+            Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'
+
+        :param slug: Creates a URL-safe identifier for this permission that can be used in APIs and integrations.
+            Must start with a letter and contain only letters, numbers, periods, underscores, and hyphens.
+            Slugs are often used in REST endpoints, configuration files, and external integrations.
+            Should closely match the name but in a format suitable for technical usage.
+            Must be unique within your workspace to ensure reliable permission lookups.
+
+            Keep slugs concise but descriptive for better developer experience.
+
+        :param description: Provides detailed documentation of what this permission grants access to.
+            Include information about affected resources, allowed actions, and any important limitations.
+            This internal documentation helps team members understand permission scope and security implications.
+            Not visible to end users - designed for development teams and security audits.
+
+            Consider documenting:
+            - What resources can be accessed
+            - What operations are permitted
+            - Any conditions or limitations
+            - Related permissions that might be needed
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -305,8 +351,22 @@ class Permissions(BaseSDK):
         - `rbac.*.create_role`
 
 
-        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.  Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
-        :param description: Provides comprehensive documentation of what this role encompasses and what access it grants. Include information about the intended use case, what permissions should be assigned, and any important considerations. This internal documentation helps team members understand role boundaries and security implications. Not visible to end users - designed for administration teams and access control audits.  Consider documenting: - The role's intended purpose and scope - What types of users should receive this role - What permissions are typically associated with it - Any security considerations or limitations - Related roles that might be used together
+        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+
+            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+
+        :param description: Provides comprehensive documentation of what this role encompasses and what access it grants.
+            Include information about the intended use case, what permissions should be assigned, and any important considerations.
+            This internal documentation helps team members understand role boundaries and security implications.
+            Not visible to end users - designed for administration teams and access control audits.
+
+            Consider documenting:
+            - The role's intended purpose and scope
+            - What types of users should receive this role
+            - What permissions are typically associated with it
+            - Any security considerations or limitations
+            - Related roles that might be used together
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -432,8 +492,22 @@ class Permissions(BaseSDK):
         - `rbac.*.create_role`
 
 
-        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.  Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
-        :param description: Provides comprehensive documentation of what this role encompasses and what access it grants. Include information about the intended use case, what permissions should be assigned, and any important considerations. This internal documentation helps team members understand role boundaries and security implications. Not visible to end users - designed for administration teams and access control audits.  Consider documenting: - The role's intended purpose and scope - What types of users should receive this role - What permissions are typically associated with it - Any security considerations or limitations - Related roles that might be used together
+        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+
+            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+
+        :param description: Provides comprehensive documentation of what this role encompasses and what access it grants.
+            Include information about the intended use case, what permissions should be assigned, and any important considerations.
+            This internal documentation helps team members understand role boundaries and security implications.
+            Not visible to end users - designed for administration teams and access control audits.
+
+            Consider documenting:
+            - The role's intended purpose and scope
+            - What types of users should receive this role
+            - What permissions are typically associated with it
+            - Any security considerations or limitations
+            - Related roles that might be used together
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -558,7 +632,21 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_permission`
 
 
-        :param permission: Specifies which permission to permanently delete from your workspace.  This can be a permission ID or a permission slug.  WARNING: Deleting a permission has immediate and irreversible consequences: - All API keys with this permission will lose that access immediately - All roles containing this permission will have it removed - Any verification requests checking for this permission will fail - This action cannot be undone  Before deletion, ensure you: - Have updated any keys or roles that depend on this permission - Have migrated to alternative permissions if needed - Have notified affected users about the access changes
+        :param permission: Specifies which permission to permanently delete from your workspace.
+
+            This can be a permission ID or a permission slug.
+
+            WARNING: Deleting a permission has immediate and irreversible consequences:
+            - All API keys with this permission will lose that access immediately
+            - All roles containing this permission will have it removed
+            - Any verification requests checking for this permission will fail
+            - This action cannot be undone
+
+            Before deletion, ensure you:
+            - Have updated any keys or roles that depend on this permission
+            - Have migrated to alternative permissions if needed
+            - Have notified affected users about the access changes
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -686,7 +774,21 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_permission`
 
 
-        :param permission: Specifies which permission to permanently delete from your workspace.  This can be a permission ID or a permission slug.  WARNING: Deleting a permission has immediate and irreversible consequences: - All API keys with this permission will lose that access immediately - All roles containing this permission will have it removed - Any verification requests checking for this permission will fail - This action cannot be undone  Before deletion, ensure you: - Have updated any keys or roles that depend on this permission - Have migrated to alternative permissions if needed - Have notified affected users about the access changes
+        :param permission: Specifies which permission to permanently delete from your workspace.
+
+            This can be a permission ID or a permission slug.
+
+            WARNING: Deleting a permission has immediate and irreversible consequences:
+            - All API keys with this permission will lose that access immediately
+            - All roles containing this permission will have it removed
+            - Any verification requests checking for this permission will fail
+            - This action cannot be undone
+
+            Before deletion, ensure you:
+            - Have updated any keys or roles that depend on this permission
+            - Have migrated to alternative permissions if needed
+            - Have notified affected users about the access changes
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -814,7 +916,20 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_role`
 
 
-        :param role: Unique identifier of the role to permanently delete from your workspace. Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.  WARNING: Deletion is immediate and irreversible with significant consequences: - All API keys assigned this role will lose the associated permissions - Access to resources protected by this role's permissions will be denied - Any authorization logic depending on this role will start failing - Historical analytics referencing this role remain intact  Before deletion, ensure: - You've updated any dependent authorization logic or code - You've migrated any keys to use alternative roles or direct permissions - You've notified relevant team members of the access changes
+        :param role: Unique identifier of the role to permanently delete from your workspace.
+            Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
+
+            WARNING: Deletion is immediate and irreversible with significant consequences:
+            - All API keys assigned this role will lose the associated permissions
+            - Access to resources protected by this role's permissions will be denied
+            - Any authorization logic depending on this role will start failing
+            - Historical analytics referencing this role remain intact
+
+            Before deletion, ensure:
+            - You've updated any dependent authorization logic or code
+            - You've migrated any keys to use alternative roles or direct permissions
+            - You've notified relevant team members of the access changes
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -933,7 +1048,20 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_role`
 
 
-        :param role: Unique identifier of the role to permanently delete from your workspace. Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.  WARNING: Deletion is immediate and irreversible with significant consequences: - All API keys assigned this role will lose the associated permissions - Access to resources protected by this role's permissions will be denied - Any authorization logic depending on this role will start failing - Historical analytics referencing this role remain intact  Before deletion, ensure: - You've updated any dependent authorization logic or code - You've migrated any keys to use alternative roles or direct permissions - You've notified relevant team members of the access changes
+        :param role: Unique identifier of the role to permanently delete from your workspace.
+            Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
+
+            WARNING: Deletion is immediate and irreversible with significant consequences:
+            - All API keys assigned this role will lose the associated permissions
+            - Access to resources protected by this role's permissions will be denied
+            - Any authorization logic depending on this role will start failing
+            - Historical analytics referencing this role remain intact
+
+            Before deletion, ensure:
+            - You've updated any dependent authorization logic or code
+            - You've migrated any keys to use alternative roles or direct permissions
+            - You've notified relevant team members of the access changes
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1051,6 +1179,7 @@ class Permissions(BaseSDK):
 
 
         :param permission: The unique identifier of the permission to retrieve. Must be a valid permission ID that begins with 'perm_' and exists within your workspace.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1177,6 +1306,7 @@ class Permissions(BaseSDK):
 
 
         :param permission: The unique identifier of the permission to retrieve. Must be a valid permission ID that begins with 'perm_' and exists within your workspace.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1302,7 +1432,12 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
-        :param role: Unique identifier of the role to permanently delete from your workspace. Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.  Use this endpoint to verify role details, check its current permissions, or retrieve metadata. Returns complete role information including all assigned permissions for comprehensive access review.
+        :param role: Unique identifier of the role to permanently delete from your workspace.
+            Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
+
+            Use this endpoint to verify role details, check its current permissions, or retrieve metadata.
+            Returns complete role information including all assigned permissions for comprehensive access review.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1424,7 +1559,12 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
-        :param role: Unique identifier of the role to permanently delete from your workspace. Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.  Use this endpoint to verify role details, check its current permissions, or retrieve metadata. Returns complete role information including all assigned permissions for comprehensive access review.
+        :param role: Unique identifier of the role to permanently delete from your workspace.
+            Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
+
+            Use this endpoint to verify role details, check its current permissions, or retrieve metadata.
+            Returns complete role information including all assigned permissions for comprehensive access review.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1548,7 +1688,13 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
-        :param cursor: Pagination cursor from a previous response to fetch the next page of permissions. Include this value when you need to retrieve additional permissions beyond the initial response. Each response containing more results than the requested limit includes a cursor for subsequent pages.  Leave empty or omit this field to start from the beginning of the permission list. Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
+        :param cursor: Pagination cursor from a previous response to fetch the next page of permissions.
+            Include this value when you need to retrieve additional permissions beyond the initial response.
+            Each response containing more results than the requested limit includes a cursor for subsequent pages.
+
+            Leave empty or omit this field to start from the beginning of the permission list.
+            Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
+
         :param limit: Maximum number of permissions to return in a single response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1673,7 +1819,13 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
-        :param cursor: Pagination cursor from a previous response to fetch the next page of permissions. Include this value when you need to retrieve additional permissions beyond the initial response. Each response containing more results than the requested limit includes a cursor for subsequent pages.  Leave empty or omit this field to start from the beginning of the permission list. Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
+        :param cursor: Pagination cursor from a previous response to fetch the next page of permissions.
+            Include this value when you need to retrieve additional permissions beyond the initial response.
+            Each response containing more results than the requested limit includes a cursor for subsequent pages.
+
+            Leave empty or omit this field to start from the beginning of the permission list.
+            Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
+
         :param limit: Maximum number of permissions to return in a single response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1798,8 +1950,16 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
-        :param limit: Maximum number of roles to return in a single response. Use smaller values for faster response times and better UI performance. Use larger values when you need to process many roles efficiently. Results exceeding this limit will be paginated with a cursor for continuation.
-        :param cursor: Pagination cursor from a previous response to fetch the next page of roles. Include this when you need to retrieve additional roles beyond the first page. Each response containing more results will include a cursor value that can be used here. Leave empty or omit this field to start from the beginning of the role list.
+        :param limit: Maximum number of roles to return in a single response.
+            Use smaller values for faster response times and better UI performance.
+            Use larger values when you need to process many roles efficiently.
+            Results exceeding this limit will be paginated with a cursor for continuation.
+
+        :param cursor: Pagination cursor from a previous response to fetch the next page of roles.
+            Include this when you need to retrieve additional roles beyond the first page.
+            Each response containing more results will include a cursor value that can be used here.
+            Leave empty or omit this field to start from the beginning of the role list.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1924,8 +2084,16 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
-        :param limit: Maximum number of roles to return in a single response. Use smaller values for faster response times and better UI performance. Use larger values when you need to process many roles efficiently. Results exceeding this limit will be paginated with a cursor for continuation.
-        :param cursor: Pagination cursor from a previous response to fetch the next page of roles. Include this when you need to retrieve additional roles beyond the first page. Each response containing more results will include a cursor value that can be used here. Leave empty or omit this field to start from the beginning of the role list.
+        :param limit: Maximum number of roles to return in a single response.
+            Use smaller values for faster response times and better UI performance.
+            Use larger values when you need to process many roles efficiently.
+            Results exceeding this limit will be paginated with a cursor for continuation.
+
+        :param cursor: Pagination cursor from a previous response to fetch the next page of roles.
+            Include this when you need to retrieve additional roles beyond the first page.
+            Each response containing more results will include a cursor value that can be used here.
+            Leave empty or omit this field to start from the beginning of the role list.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

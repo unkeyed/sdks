@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: 841ecf953a69f4da864a4f64bd201e87
+  docChecksum: 96156192a3b1383b722f3d2ee84d6886
   docVersion: 2.0.0
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 2.3.0
-  configChecksum: dcd1f431d03b0d7536e5e1678fe127b2
+  speakeasyVersion: 1.650.1
+  generationVersion: 2.743.9
+  releaseVersion: 2.4.0
+  configChecksum: d4c7ce9c96b0ecd0c4d1e4bd6e4e6ea9
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.5
-    core: 5.22.1
+    core: 5.23.5
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -24,7 +24,7 @@ features:
     globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.1.1
+    globalServerURLs: 3.2.0
     ignores: 3.0.1
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
@@ -44,7 +44,10 @@ generatedFiles:
   - docs/errors/internalservererrorresponse.md
   - docs/errors/notfounderrorresponse.md
   - docs/errors/preconditionfailederrorresponse.md
+  - docs/errors/serviceunavailableerrorresponse.md
+  - docs/errors/toomanyrequestserrorresponse.md
   - docs/errors/unauthorizederrorresponse.md
+  - docs/errors/unprocessableentityerrorresponse.md
   - docs/models/badrequesterrordetails.md
   - docs/models/baseerror.md
   - docs/models/code.md
@@ -67,6 +70,8 @@ generatedFiles:
   - docs/models/role.md
   - docs/models/security.md
   - docs/models/utils/retryconfig.md
+  - docs/models/v2analyticsgetverificationsrequestbody.md
+  - docs/models/v2analyticsgetverificationsresponsebody.md
   - docs/models/v2apiscreateapirequestbody.md
   - docs/models/v2apiscreateapiresponsebody.md
   - docs/models/v2apiscreateapiresponsedata.md
@@ -152,6 +157,7 @@ generatedFiles:
   - docs/models/v2ratelimitsetoverrideresponsedata.md
   - docs/models/validationerror.md
   - docs/models/verifykeyratelimitdata.md
+  - docs/sdks/analytics/README.md
   - docs/sdks/apis/README.md
   - docs/sdks/identities/README.md
   - docs/sdks/keys/README.md
@@ -168,6 +174,7 @@ generatedFiles:
   - src/unkey/py/_hooks/sdkhooks.py
   - src/unkey/py/_hooks/types.py
   - src/unkey/py/_version.py
+  - src/unkey/py/analytics.py
   - src/unkey/py/apis.py
   - src/unkey/py/basesdk.py
   - src/unkey/py/errors/__init__.py
@@ -181,8 +188,11 @@ generatedFiles:
   - src/unkey/py/errors/notfounderrorresponse.py
   - src/unkey/py/errors/preconditionfailederrorresponse.py
   - src/unkey/py/errors/responsevalidationerror.py
+  - src/unkey/py/errors/serviceunavailableerrorresponse.py
+  - src/unkey/py/errors/toomanyrequestserrorresponse.py
   - src/unkey/py/errors/unauthorizederrorresponse.py
   - src/unkey/py/errors/unkeyerror.py
+  - src/unkey/py/errors/unprocessableentityerrorresponse.py
   - src/unkey/py/httpclient.py
   - src/unkey/py/identities.py
   - src/unkey/py/keys.py
@@ -205,6 +215,8 @@ generatedFiles:
   - src/unkey/py/models/ratelimitresponse.py
   - src/unkey/py/models/role.py
   - src/unkey/py/models/security.py
+  - src/unkey/py/models/v2analyticsgetverificationsrequestbody.py
+  - src/unkey/py/models/v2analyticsgetverificationsresponsebody.py
   - src/unkey/py/models/v2apiscreateapirequestbody.py
   - src/unkey/py/models/v2apiscreateapiresponsebody.py
   - src/unkey/py/models/v2apiscreateapiresponsedata.py
@@ -521,7 +533,7 @@ examples:
   identities.getIdentity:
     basic:
       requestBody:
-        application/json: {"identity": "user_abc123"}
+        application/json: {"identity": "user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "<id>", "externalId": "user_abc123", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
@@ -1247,14 +1259,31 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  analytics.getVerifications:
+    speakeasy-default-analytics-get-verifications:
+      requestBody:
+        application/json: {"query": "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"outcome": "VALID", "count": 1234, "time": 1696118400000}, {"outcome": "RATE_LIMITED", "count": 56, "time": 1696118400000}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes Detected:
-  * `unkey.apis.list_keys()`:  `response.data.[].identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.get_identity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.list_identities()`:  `response.data.[].meta` **Changed** **Breaking** :warning:
-  * `unkey.identities.update_identity()`:  `response.data.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.get_key()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.verify_key()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
-  * `unkey.keys.whoami()`:  `response.data.identity.meta` **Changed** **Breaking** :warning:
+  * `unkey.analytics.get_verifications()`: **Added**

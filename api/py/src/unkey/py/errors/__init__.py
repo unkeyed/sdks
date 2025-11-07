@@ -29,9 +29,21 @@ if TYPE_CHECKING:
         PreconditionFailedErrorResponseData,
     )
     from .responsevalidationerror import ResponseValidationError
+    from .serviceunavailableerrorresponse import (
+        ServiceUnavailableErrorResponse,
+        ServiceUnavailableErrorResponseData,
+    )
+    from .toomanyrequestserrorresponse import (
+        TooManyRequestsErrorResponse,
+        TooManyRequestsErrorResponseData,
+    )
     from .unauthorizederrorresponse import (
         UnauthorizedErrorResponse,
         UnauthorizedErrorResponseData,
+    )
+    from .unprocessableentityerrorresponse import (
+        UnprocessableEntityErrorResponse,
+        UnprocessableEntityErrorResponseData,
     )
 
 __all__ = [
@@ -52,9 +64,15 @@ __all__ = [
     "PreconditionFailedErrorResponse",
     "PreconditionFailedErrorResponseData",
     "ResponseValidationError",
+    "ServiceUnavailableErrorResponse",
+    "ServiceUnavailableErrorResponseData",
+    "TooManyRequestsErrorResponse",
+    "TooManyRequestsErrorResponseData",
     "UnauthorizedErrorResponse",
     "UnauthorizedErrorResponseData",
     "UnkeyError",
+    "UnprocessableEntityErrorResponse",
+    "UnprocessableEntityErrorResponseData",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -75,8 +93,14 @@ _dynamic_imports: dict[str, str] = {
     "PreconditionFailedErrorResponse": ".preconditionfailederrorresponse",
     "PreconditionFailedErrorResponseData": ".preconditionfailederrorresponse",
     "ResponseValidationError": ".responsevalidationerror",
+    "ServiceUnavailableErrorResponse": ".serviceunavailableerrorresponse",
+    "ServiceUnavailableErrorResponseData": ".serviceunavailableerrorresponse",
+    "TooManyRequestsErrorResponse": ".toomanyrequestserrorresponse",
+    "TooManyRequestsErrorResponseData": ".toomanyrequestserrorresponse",
     "UnauthorizedErrorResponse": ".unauthorizederrorresponse",
     "UnauthorizedErrorResponseData": ".unauthorizederrorresponse",
+    "UnprocessableEntityErrorResponse": ".unprocessableentityerrorresponse",
+    "UnprocessableEntityErrorResponseData": ".unprocessableentityerrorresponse",
 }
 
 

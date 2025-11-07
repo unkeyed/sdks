@@ -34,7 +34,9 @@ class Apis(BaseSDK):
         - `api.*.create_api` (to create APIs in any workspace)
 
 
-        :param name: Unique identifier for this API namespace within your workspace. Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+        :param name: Unique identifier for this API namespace within your workspace.
+            Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -153,7 +155,9 @@ class Apis(BaseSDK):
         - `api.*.create_api` (to create APIs in any workspace)
 
 
-        :param name: Unique identifier for this API namespace within your workspace. Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+        :param name: Unique identifier for this API namespace within your workspace.
+            Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -275,7 +279,11 @@ class Apis(BaseSDK):
         - `api.<api_id>.delete_api` (to delete a specific API)
 
 
-        :param api_id: Specifies which API namespace to permanently delete from your workspace. Must be a valid API ID that begins with 'api_' and exists within your workspace.  Before proceeding, ensure you have the correct API ID and understand that this action cannot be undone. If you need to migrate functionality, create replacement keys in a new API namespace and update client applications before deletion.
+        :param api_id: Specifies which API namespace to permanently delete from your workspace.
+            Must be a valid API ID that begins with 'api_' and exists within your workspace.
+
+            Before proceeding, ensure you have the correct API ID and understand that this action cannot be undone. If you need to migrate functionality, create replacement keys in a new API namespace and update client applications before deletion.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -407,7 +415,11 @@ class Apis(BaseSDK):
         - `api.<api_id>.delete_api` (to delete a specific API)
 
 
-        :param api_id: Specifies which API namespace to permanently delete from your workspace. Must be a valid API ID that begins with 'api_' and exists within your workspace.  Before proceeding, ensure you have the correct API ID and understand that this action cannot be undone. If you need to migrate functionality, create replacement keys in a new API namespace and update client applications before deletion.
+        :param api_id: Specifies which API namespace to permanently delete from your workspace.
+            Must be a valid API ID that begins with 'api_' and exists within your workspace.
+
+            Before proceeding, ensure you have the correct API ID and understand that this action cannot be undone. If you need to migrate functionality, create replacement keys in a new API namespace and update client applications before deletion.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -535,7 +547,9 @@ class Apis(BaseSDK):
         - `api.<api_id>.read_api` (to read a specific API)
 
 
-        :param api_id: Specifies which API to retrieve by its unique identifier. Must be a valid API ID that begins with 'api_' and exists within your workspace.
+        :param api_id: Specifies which API to retrieve by its unique identifier.
+            Must be a valid API ID that begins with 'api_' and exists within your workspace.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -658,7 +672,9 @@ class Apis(BaseSDK):
         - `api.<api_id>.read_api` (to read a specific API)
 
 
-        :param api_id: Specifies which API to retrieve by its unique identifier. Must be a valid API ID that begins with 'api_' and exists within your workspace.
+        :param api_id: Specifies which API to retrieve by its unique identifier.
+            Must be a valid API ID that begins with 'api_' and exists within your workspace.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -794,12 +810,30 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        :param api_id: The API namespace whose keys you want to list. Returns all keys in this API, subject to pagination and filters.
-        :param limit: Maximum number of keys to return per request. Balance between response size and number of pagination calls needed.
-        :param cursor: Pagination cursor from previous response to fetch next page. Use when `hasMore: true` in previous response.
-        :param external_id: Filter keys by external ID to find keys for a specific user or entity. Must exactly match the externalId set during key creation.
-        :param decrypt: When true, attempts to include the plaintext key value in the response. SECURITY WARNING: - This requires special permissions on the calling root key - Only works for keys created with 'recoverable: true' - Exposes sensitive key material in the response - Should only be used in secure administrative contexts - Never enable this in user-facing applications
-        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when: - You've just created a key and need to display it immediately - You need absolute certainty about the current key state - You're debugging cache consistency issues  This parameter comes with a performance cost and should be used sparingly.
+        :param api_id: The API namespace whose keys you want to list.
+            Returns all keys in this API, subject to pagination and filters.
+
+        :param limit: Maximum number of keys to return per request.
+            Balance between response size and number of pagination calls needed.
+
+        :param cursor: Pagination cursor from previous response to fetch next page.
+            Use when `hasMore: true` in previous response.
+
+        :param external_id: Filter keys by external ID to find keys for a specific user or entity.
+            Must exactly match the externalId set during key creation.
+
+        :param decrypt: When true, attempts to include the plaintext key value in the response. SECURITY WARNING:
+            - This requires special permissions on the calling root key
+            - Only works for keys created with 'recoverable: true'
+            - Exposes sensitive key material in the response
+            - Should only be used in secure administrative contexts
+            - Never enable this in user-facing applications
+        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
+            - You've just created a key and need to display it immediately
+            - You need absolute certainty about the current key state
+            - You're debugging cache consistency issues
+
+            This parameter comes with a performance cost and should be used sparingly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -940,12 +974,30 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        :param api_id: The API namespace whose keys you want to list. Returns all keys in this API, subject to pagination and filters.
-        :param limit: Maximum number of keys to return per request. Balance between response size and number of pagination calls needed.
-        :param cursor: Pagination cursor from previous response to fetch next page. Use when `hasMore: true` in previous response.
-        :param external_id: Filter keys by external ID to find keys for a specific user or entity. Must exactly match the externalId set during key creation.
-        :param decrypt: When true, attempts to include the plaintext key value in the response. SECURITY WARNING: - This requires special permissions on the calling root key - Only works for keys created with 'recoverable: true' - Exposes sensitive key material in the response - Should only be used in secure administrative contexts - Never enable this in user-facing applications
-        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when: - You've just created a key and need to display it immediately - You need absolute certainty about the current key state - You're debugging cache consistency issues  This parameter comes with a performance cost and should be used sparingly.
+        :param api_id: The API namespace whose keys you want to list.
+            Returns all keys in this API, subject to pagination and filters.
+
+        :param limit: Maximum number of keys to return per request.
+            Balance between response size and number of pagination calls needed.
+
+        :param cursor: Pagination cursor from previous response to fetch next page.
+            Use when `hasMore: true` in previous response.
+
+        :param external_id: Filter keys by external ID to find keys for a specific user or entity.
+            Must exactly match the externalId set during key creation.
+
+        :param decrypt: When true, attempts to include the plaintext key value in the response. SECURITY WARNING:
+            - This requires special permissions on the calling root key
+            - Only works for keys created with 'recoverable: true'
+            - Exposes sensitive key material in the response
+            - Should only be used in secure administrative contexts
+            - Never enable this in user-facing applications
+        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
+            - You've just created a key and need to display it immediately
+            - You need absolute certainty about the current key state
+            - You're debugging cache consistency issues
+
+            This parameter comes with a performance cost and should be used sparingly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
