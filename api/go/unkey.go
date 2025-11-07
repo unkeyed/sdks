@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.723.11
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.743.9
 
 import (
 	"context"
@@ -130,6 +130,8 @@ func Pointer[T any](v T) *T { return &v }
 // This structure ensures you always have the context needed to debug issues and take corrective action.
 type Unkey struct {
 	SDKVersion string
+	// Analytics query operations
+	Analytics *Analytics
 	// API management operations
 	Apis *Apis
 	// Identity management operations
@@ -216,9 +218,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.1.0",
+		SDKVersion: "2.2.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.1.0 2.723.11 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.2.0 2.743.9 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -246,6 +248,7 @@ func New(opts ...SDKOption) *Unkey {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
+	sdk.Analytics = newAnalytics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Apis = newApis(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)

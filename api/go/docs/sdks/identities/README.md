@@ -179,7 +179,7 @@ func main() {
     )
 
     res, err := s.Identities.GetIdentity(ctx, components.V2IdentitiesGetIdentityRequestBody{
-        Identity: "user_abc123",
+        Identity: "user_123",
     })
     if err != nil {
         log.Fatal(err)
