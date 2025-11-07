@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 325f5f52486df37a314c5d3fbeab0a23
+  docChecksum: 43d19e1850df2187a7e5f3ad5e4faff0
   docVersion: 2.0.0
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 2.1.0
-  configChecksum: f354b33cbceacbda44e03c3f8429c0bb
+  speakeasyVersion: 1.650.1
+  generationVersion: 2.743.9
+  releaseVersion: 2.2.0
+  configChecksum: 68022e97481f3a2793ebc005766f0b67
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -14,18 +14,18 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.11.1
+    core: 3.13.1
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.3
+    globalServerURLs: 2.83.0
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
     nullables: 0.2.1
-    pagination: 2.82.4
+    pagination: 2.82.5
     responseFormat: 0.1.2
     retries: 2.84.2
     sdkHooks: 0.2.0
@@ -38,7 +38,10 @@ generatedFiles:
   - /models/apierrors/internalservererrorresponse.go
   - /models/apierrors/notfounderrorresponse.go
   - /models/apierrors/preconditionfailederrorresponse.go
+  - /models/apierrors/serviceunavailableerrorresponse.go
+  - /models/apierrors/toomanyrequestserrorresponse.go
   - /models/apierrors/unauthorizederrorresponse.go
+  - /models/apierrors/unprocessableentityerrorresponse.go
   - /models/components/badrequesterrordetails.go
   - /models/components/baseerror.go
   - /models/components/emptyresponse.go
@@ -59,6 +62,8 @@ generatedFiles:
   - /models/components/security.go
   - /models/components/updatekeycreditsdata.go
   - /models/components/updatekeycreditsrefill.go
+  - /models/components/v2analyticsgetverificationsrequestbody.go
+  - /models/components/v2analyticsgetverificationsresponsebody.go
   - /models/components/v2apiscreateapirequestbody.go
   - /models/components/v2apiscreateapiresponsebody.go
   - /models/components/v2apiscreateapiresponsedata.go
@@ -146,6 +151,7 @@ generatedFiles:
   - /models/components/verifykeyratelimitdata.go
   - /models/operations/addpermissions.go
   - /models/operations/addroles.go
+  - /models/operations/analyticsgetverifications.go
   - /models/operations/createapi.go
   - /models/operations/createkey.go
   - /models/operations/createpermission.go
@@ -181,6 +187,7 @@ generatedFiles:
   - /models/operations/verifykey.go
   - /models/operations/whoami.go
   - USAGE.md
+  - analytics.go
   - apis.go
   - docs/models/apierrors/badrequesterrorresponse.md
   - docs/models/apierrors/conflicterrorresponse.md
@@ -189,7 +196,10 @@ generatedFiles:
   - docs/models/apierrors/internalservererrorresponse.md
   - docs/models/apierrors/notfounderrorresponse.md
   - docs/models/apierrors/preconditionfailederrorresponse.md
+  - docs/models/apierrors/serviceunavailableerrorresponse.md
+  - docs/models/apierrors/toomanyrequestserrorresponse.md
   - docs/models/apierrors/unauthorizederrorresponse.md
+  - docs/models/apierrors/unprocessableentityerrorresponse.md
   - docs/models/components/badrequesterrordetails.md
   - docs/models/components/baseerror.md
   - docs/models/components/code.md
@@ -214,6 +224,8 @@ generatedFiles:
   - docs/models/components/updatekeycreditsdata.md
   - docs/models/components/updatekeycreditsrefill.md
   - docs/models/components/updatekeycreditsrefillinterval.md
+  - docs/models/components/v2analyticsgetverificationsrequestbody.md
+  - docs/models/components/v2analyticsgetverificationsresponsebody.md
   - docs/models/components/v2apiscreateapirequestbody.md
   - docs/models/components/v2apiscreateapiresponsebody.md
   - docs/models/components/v2apiscreateapiresponsedata.md
@@ -301,6 +313,7 @@ generatedFiles:
   - docs/models/components/verifykeyratelimitdata.md
   - docs/models/operations/addpermissionsresponse.md
   - docs/models/operations/addrolesresponse.md
+  - docs/models/operations/analyticsgetverificationsresponse.md
   - docs/models/operations/createapiresponse.md
   - docs/models/operations/createkeyresponse.md
   - docs/models/operations/createpermissionresponse.md
@@ -336,6 +349,7 @@ generatedFiles:
   - docs/models/operations/v2identitiesupdateidentityresponse.md
   - docs/models/operations/verifykeyresponse.md
   - docs/models/operations/whoamiresponse.md
+  - docs/sdks/analytics/README.md
   - docs/sdks/apis/README.md
   - docs/sdks/identities/README.md
   - docs/sdks/keys/README.md
@@ -576,7 +590,7 @@ examples:
   identities.getIdentity:
     basic:
       requestBody:
-        application/json: {"identity": "user_abc123"}
+        application/json: {"identity": "user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "<id>", "externalId": "user_abc123", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
@@ -1302,14 +1316,31 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  analytics.getVerifications:
+    speakeasy-default-analytics-get-verifications:
+      requestBody:
+        application/json: {"query": "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"outcome": "VALID", "count": 1234, "time": 1696118400000}, {"outcome": "RATE_LIMITED", "count": 56, "time": 1696118400000}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes Detected:
-  * `Unkey.Apis.ListKeys()`:  `response.Data.[].Identity.Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Identities.GetIdentity()`:  `response.Data.Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Identities.ListIdentities()`:  `response.Data.[].Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Identities.UpdateIdentity()`:  `response.Data.Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Keys.GetKey()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Keys.VerifyKey()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:
-  * `Unkey.Keys.Whoami()`:  `response.Data.Identity.Meta` **Changed** **Breaking** :warning:
+  * `Unkey.Analytics.GetVerifications()`: **Added**

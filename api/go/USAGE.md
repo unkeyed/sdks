@@ -17,13 +17,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Apis.CreateAPI(ctx, components.V2ApisCreateAPIRequestBody{
-		Name: "payment-service-production",
+	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
+		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2ApisCreateAPIResponseBody != nil {
+	if res.V2AnalyticsGetVerificationsResponseBody != nil {
 		// handle response
 	}
 }

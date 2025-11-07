@@ -17,12 +17,15 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
     hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.1.0
+  version: 2.2.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -38,6 +41,7 @@ go:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
+  includeEmptyObjects: false
   inputModelSuffix: input
   maxMethodParams: 1
   methodArguments: require-security-and-request
@@ -48,3 +52,4 @@ go:
   responseFormat: envelope-http
   sdkPackageAlias: unkey
   sdkPackageName: ""
+  unionDeserializationStrategy: left-to-right
