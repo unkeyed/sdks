@@ -65,6 +65,10 @@ export type V2KeysVerifyKeyRequestBody = {
    * Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
    */
   ratelimits?: Array<KeysVerifyKeyRatelimit> | undefined;
+  /**
+   * Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
+   */
+  migrationId?: string | undefined;
 };
 
 /** @internal */
@@ -78,6 +82,7 @@ export const V2KeysVerifyKeyRequestBody$inboundSchema: z.ZodType<
   permissions: z.string().optional(),
   credits: KeysVerifyKeyCredits$inboundSchema.optional(),
   ratelimits: z.array(KeysVerifyKeyRatelimit$inboundSchema).optional(),
+  migrationId: z.string().optional(),
 });
 /** @internal */
 export type V2KeysVerifyKeyRequestBody$Outbound = {
@@ -86,6 +91,7 @@ export type V2KeysVerifyKeyRequestBody$Outbound = {
   permissions?: string | undefined;
   credits?: KeysVerifyKeyCredits$Outbound | undefined;
   ratelimits?: Array<KeysVerifyKeyRatelimit$Outbound> | undefined;
+  migrationId?: string | undefined;
 };
 
 /** @internal */
@@ -99,6 +105,7 @@ export const V2KeysVerifyKeyRequestBody$outboundSchema: z.ZodType<
   permissions: z.string().optional(),
   credits: KeysVerifyKeyCredits$outboundSchema.optional(),
   ratelimits: z.array(KeysVerifyKeyRatelimit$outboundSchema).optional(),
+  migrationId: z.string().optional(),
 });
 
 export function v2KeysVerifyKeyRequestBodyToJSON(

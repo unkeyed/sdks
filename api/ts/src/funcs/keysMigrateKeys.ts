@@ -26,33 +26,27 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Apply rate limiting
+ * Migrate API key(s)
  *
  * @remarks
- * Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
- *
- * Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
- *
- * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+ * Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
  *
  * **Required Permissions**
- *
- * Your root key must have one of the following permissions:
- * - `ratelimit.*.limit` (to check limits in any namespace)
- * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
+ * Your root key must have one of the following permissions for basic key information:
+ * - `api.*.create_key` (to migrate keys to any API)
+ * - `api.<api_id>.create_key` (to migrate keys to a specific API)
  */
-export function ratelimitLimit(
+export function keysMigrateKeys(
   client: UnkeyCore,
-  request: components.V2RatelimitLimitRequestBody,
+  request: components.V2KeysMigrateKeysRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2RatelimitLimitResponseBody,
+    components.V2KeysMigrateKeysResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
-    | errors.GoneErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -73,17 +67,16 @@ export function ratelimitLimit(
 
 async function $do(
   client: UnkeyCore,
-  request: components.V2RatelimitLimitRequestBody,
+  request: components.V2KeysMigrateKeysRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.V2RatelimitLimitResponseBody,
+      components.V2KeysMigrateKeysResponseBody,
       | errors.BadRequestErrorResponse
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
-      | errors.GoneErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -100,7 +93,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.V2RatelimitLimitRequestBody$outboundSchema.parse(value),
+      components.V2KeysMigrateKeysRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -109,7 +102,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/ratelimit.limit")();
+  const path = pathToFunc("/v2/keys.migrateKeys")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -123,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "ratelimit.limit",
+    operationID: "migrateKeys",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -162,7 +155,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -176,12 +169,11 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.V2RatelimitLimitResponseBody,
+    components.V2KeysMigrateKeysResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
-    | errors.GoneErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -192,12 +184,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.V2RatelimitLimitResponseBody$inboundSchema),
+    M.json(200, components.V2KeysMigrateKeysResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
-    M.jsonErr(410, errors.GoneErrorResponse$inboundSchema),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

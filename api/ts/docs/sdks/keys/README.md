@@ -12,6 +12,7 @@ API key management operations
 * [createKey](#createkey) - Create API key
 * [deleteKey](#deletekey) - Delete API keys
 * [getKey](#getkey) - Get API key
+* [migrateKeys](#migratekeys) - Migrate API key(s)
 * [removePermissions](#removepermissions) - Remove key permissions
 * [removeRoles](#removeroles) - Remove key roles
 * [rerollKey](#rerollkey) - Reroll Key
@@ -573,6 +574,94 @@ run();
 ### Response
 
 **Promise\<[components.V2KeysGetKeyResponseBody](../../models/components/v2keysgetkeyresponsebody.md)\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
+## migrateKeys
+
+Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
+
+**Required Permissions**
+Your root key must have one of the following permissions for basic key information:
+- `api.*.create_key` (to migrate keys to any API)
+- `api.<api_id>.create_key` (to migrate keys to a specific API)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.keys.migrateKeys({
+    migrationId: "your_company",
+    apiId: "api_123456789",
+    keys: [],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { keysMigrateKeys } from "@unkey/api/funcs/keysMigrateKeys.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await keysMigrateKeys(unkey, {
+    migrationId: "your_company",
+    apiId: "api_123456789",
+    keys: [],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("keysMigrateKeys failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2KeysMigrateKeysRequestBody](../../models/components/v2keysmigratekeysrequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2KeysMigrateKeysResponseBody](../../models/components/v2keysmigratekeysresponsebody.md)\>**
 
 ### Errors
 
@@ -1439,6 +1528,7 @@ async function run() {
         duration: 600000,
       },
     ],
+    migrationId: "m_1234abcd",
   });
 
   console.log(result);
@@ -1483,6 +1573,7 @@ async function run() {
         duration: 600000,
       },
     ],
+    migrationId: "m_1234abcd",
   });
   if (res.ok) {
     const { value: result } = res;
