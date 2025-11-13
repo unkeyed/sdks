@@ -72,7 +72,7 @@ class V2KeysVerifyKeyResponseDataTypedDict(TypedDict):
     """
     expires: NotRequired[int]
     r"""Unix timestamp (in milliseconds) when the key will expire.
-    If null or not present, the key has no expiration. You can use this to
+    If omitted, the key has no expiration. You can use this to
     warn users about upcoming expirations or to understand the validity period.
 
     """
@@ -149,7 +149,7 @@ class V2KeysVerifyKeyResponseData(BaseModel):
 
     expires: Optional[int] = None
     r"""Unix timestamp (in milliseconds) when the key will expire.
-    If null or not present, the key has no expiration. You can use this to
+    If omitted, the key has no expiration. You can use this to
     warn users about upcoming expirations or to understand the validity period.
 
     """

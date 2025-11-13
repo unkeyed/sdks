@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "unkey.py"
-__version__: str = "2.4.0"
+__version__: str = "2.4.1"
 __openapi_doc_version__: str = "2.0.0"
-__gen_version__: str = "2.743.9"
-__user_agent__: str = "speakeasy-sdk/python 2.4.0 2.743.9 2.0.0 unkey.py"
+__gen_version__: str = "2.753.1"
+__user_agent__: str = "speakeasy-sdk/python 2.4.1 2.753.1 2.0.0 unkey.py"
 
 try:
     if __package__ is not None:

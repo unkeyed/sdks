@@ -11,6 +11,7 @@ Rate limiting operations
 * [get_override](#get_override) - Get ratelimit override
 * [limit](#limit) - Apply rate limiting
 * [list_overrides](#list_overrides) - List ratelimit overrides
+* [multi_limit](#multi_limit) - Apply multiple rate limit checks
 * [set_override](#set_override) - Set ratelimit override
 
 ## delete_override
@@ -35,7 +36,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.delete_override(namespace="<value>", identifier="premium_user_123")
+    res = unkey.ratelimit.delete_override(namespace="api.requests", identifier="premium_user_123")
 
     # Handle response
     print(res)
@@ -87,7 +88,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.get_override(namespace="<value>", identifier="premium_user_123")
+    res = unkey.ratelimit.get_override(namespace="api.requests", identifier="premium_user_123")
 
     # Handle response
     print(res)
@@ -130,10 +131,6 @@ Use this for rate limiting beyond API keys - limit users by ID, IPs by address, 
 Your root key must have one of the following permissions:
 - `ratelimit.*.limit` (to check limits in any namespace)
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-**Side Effects**
-
-Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
 
 
 ### Example Usage
@@ -203,7 +200,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.list_overrides(namespace="<value>", limit=20)
+    res = unkey.ratelimit.list_overrides(namespace="api.requests", limit=20)
 
     # Handle response
     print(res)
@@ -234,6 +231,77 @@ with Unkey(
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
+## multi_limit
+
+Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
+
+Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `ratelimit.*.limit` (to check limits in any namespace)
+- `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "auth.login",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "limit": 10,
+        },
+        {
+            "namespace": "api.requests",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_def456",
+            "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [List[models.V2RatelimitLimitRequestBody]](../../models/.md)        | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.V2RatelimitMultiLimitResponseBody](../../models/v2ratelimitmultilimitresponsebody.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.GoneErrorResponse           | 410                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
 ## set_override
 
 Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
@@ -256,7 +324,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.ratelimit.set_override(namespace="<value>", duration=60000, identifier="premium_user_123", limit=1000)
+    res = unkey.ratelimit.set_override(namespace="api.requests", duration=60000, identifier="premium_user_123", limit=1000)
 
     # Handle response
     print(res)

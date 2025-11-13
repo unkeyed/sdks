@@ -172,6 +172,26 @@ if TYPE_CHECKING:
         V2KeysGetKeyResponseBody,
         V2KeysGetKeyResponseBodyTypedDict,
     )
+    from .v2keysmigratekeydata import (
+        V2KeysMigrateKeyData,
+        V2KeysMigrateKeyDataTypedDict,
+    )
+    from .v2keysmigratekeysmigration import (
+        V2KeysMigrateKeysMigration,
+        V2KeysMigrateKeysMigrationTypedDict,
+    )
+    from .v2keysmigratekeysrequestbody import (
+        V2KeysMigrateKeysRequestBody,
+        V2KeysMigrateKeysRequestBodyTypedDict,
+    )
+    from .v2keysmigratekeysresponsebody import (
+        V2KeysMigrateKeysResponseBody,
+        V2KeysMigrateKeysResponseBodyTypedDict,
+    )
+    from .v2keysmigratekeysresponsedata import (
+        V2KeysMigrateKeysResponseData,
+        V2KeysMigrateKeysResponseDataTypedDict,
+    )
     from .v2keysremovepermissionsrequestbody import (
         V2KeysRemovePermissionsRequestBody,
         V2KeysRemovePermissionsRequestBodyTypedDict,
@@ -366,6 +386,18 @@ if TYPE_CHECKING:
         V2RatelimitListOverridesResponseBody,
         V2RatelimitListOverridesResponseBodyTypedDict,
     )
+    from .v2ratelimitmultilimitcheck import (
+        V2RatelimitMultiLimitCheck,
+        V2RatelimitMultiLimitCheckTypedDict,
+    )
+    from .v2ratelimitmultilimitresponsebody import (
+        V2RatelimitMultiLimitResponseBody,
+        V2RatelimitMultiLimitResponseBodyTypedDict,
+    )
+    from .v2ratelimitmultilimitresponsedata import (
+        V2RatelimitMultiLimitResponseData,
+        V2RatelimitMultiLimitResponseDataTypedDict,
+    )
     from .v2ratelimitsetoverriderequestbody import (
         V2RatelimitSetOverrideRequestBody,
         V2RatelimitSetOverrideRequestBodyTypedDict,
@@ -492,6 +524,16 @@ __all__ = [
     "V2KeysGetKeyRequestBodyTypedDict",
     "V2KeysGetKeyResponseBody",
     "V2KeysGetKeyResponseBodyTypedDict",
+    "V2KeysMigrateKeyData",
+    "V2KeysMigrateKeyDataTypedDict",
+    "V2KeysMigrateKeysMigration",
+    "V2KeysMigrateKeysMigrationTypedDict",
+    "V2KeysMigrateKeysRequestBody",
+    "V2KeysMigrateKeysRequestBodyTypedDict",
+    "V2KeysMigrateKeysResponseBody",
+    "V2KeysMigrateKeysResponseBodyTypedDict",
+    "V2KeysMigrateKeysResponseData",
+    "V2KeysMigrateKeysResponseDataTypedDict",
     "V2KeysRemovePermissionsRequestBody",
     "V2KeysRemovePermissionsRequestBodyTypedDict",
     "V2KeysRemovePermissionsResponseBody",
@@ -588,6 +630,12 @@ __all__ = [
     "V2RatelimitListOverridesRequestBodyTypedDict",
     "V2RatelimitListOverridesResponseBody",
     "V2RatelimitListOverridesResponseBodyTypedDict",
+    "V2RatelimitMultiLimitCheck",
+    "V2RatelimitMultiLimitCheckTypedDict",
+    "V2RatelimitMultiLimitResponseBody",
+    "V2RatelimitMultiLimitResponseBodyTypedDict",
+    "V2RatelimitMultiLimitResponseData",
+    "V2RatelimitMultiLimitResponseDataTypedDict",
     "V2RatelimitSetOverrideRequestBody",
     "V2RatelimitSetOverrideRequestBodyTypedDict",
     "V2RatelimitSetOverrideResponseBody",
@@ -706,6 +754,16 @@ _dynamic_imports: dict[str, str] = {
     "V2KeysGetKeyRequestBodyTypedDict": ".v2keysgetkeyrequestbody",
     "V2KeysGetKeyResponseBody": ".v2keysgetkeyresponsebody",
     "V2KeysGetKeyResponseBodyTypedDict": ".v2keysgetkeyresponsebody",
+    "V2KeysMigrateKeyData": ".v2keysmigratekeydata",
+    "V2KeysMigrateKeyDataTypedDict": ".v2keysmigratekeydata",
+    "V2KeysMigrateKeysMigration": ".v2keysmigratekeysmigration",
+    "V2KeysMigrateKeysMigrationTypedDict": ".v2keysmigratekeysmigration",
+    "V2KeysMigrateKeysRequestBody": ".v2keysmigratekeysrequestbody",
+    "V2KeysMigrateKeysRequestBodyTypedDict": ".v2keysmigratekeysrequestbody",
+    "V2KeysMigrateKeysResponseBody": ".v2keysmigratekeysresponsebody",
+    "V2KeysMigrateKeysResponseBodyTypedDict": ".v2keysmigratekeysresponsebody",
+    "V2KeysMigrateKeysResponseData": ".v2keysmigratekeysresponsedata",
+    "V2KeysMigrateKeysResponseDataTypedDict": ".v2keysmigratekeysresponsedata",
     "V2KeysRemovePermissionsRequestBody": ".v2keysremovepermissionsrequestbody",
     "V2KeysRemovePermissionsRequestBodyTypedDict": ".v2keysremovepermissionsrequestbody",
     "V2KeysRemovePermissionsResponseBody": ".v2keysremovepermissionsresponsebody",
@@ -804,6 +862,12 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitListOverridesRequestBodyTypedDict": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesResponseBody": ".v2ratelimitlistoverridesresponsebody",
     "V2RatelimitListOverridesResponseBodyTypedDict": ".v2ratelimitlistoverridesresponsebody",
+    "V2RatelimitMultiLimitCheck": ".v2ratelimitmultilimitcheck",
+    "V2RatelimitMultiLimitCheckTypedDict": ".v2ratelimitmultilimitcheck",
+    "V2RatelimitMultiLimitResponseBody": ".v2ratelimitmultilimitresponsebody",
+    "V2RatelimitMultiLimitResponseBodyTypedDict": ".v2ratelimitmultilimitresponsebody",
+    "V2RatelimitMultiLimitResponseData": ".v2ratelimitmultilimitresponsedata",
+    "V2RatelimitMultiLimitResponseDataTypedDict": ".v2ratelimitmultilimitresponsedata",
     "V2RatelimitSetOverrideRequestBody": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideRequestBodyTypedDict": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideResponseBody": ".v2ratelimitsetoverrideresponsebody",

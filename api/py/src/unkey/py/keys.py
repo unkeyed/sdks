@@ -1581,6 +1581,268 @@ class Keys(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def migrate_keys(
+        self,
+        *,
+        migration_id: str,
+        api_id: str,
+        keys: Union[
+            List[models.V2KeysMigrateKeyData],
+            List[models.V2KeysMigrateKeyDataTypedDict],
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysMigrateKeysResponseBody:
+        r"""Migrate API key(s)
+
+        Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
+
+        **Required Permissions**
+        Your root key must have one of the following permissions for basic key information:
+        - `api.*.create_key` (to migrate keys to any API)
+        - `api.<api_id>.create_key` (to migrate keys to a specific API)
+
+
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param api_id: The ID of the API that the keys should be inserted into
+        :param keys:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2KeysMigrateKeysRequestBody(
+            migration_id=migration_id,
+            api_id=api_id,
+            keys=utils.get_pydantic_model(keys, List[models.V2KeysMigrateKeyData]),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/keys.migrateKeys",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2KeysMigrateKeysRequestBody
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="migrateKeys",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2KeysMigrateKeysResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def migrate_keys_async(
+        self,
+        *,
+        migration_id: str,
+        api_id: str,
+        keys: Union[
+            List[models.V2KeysMigrateKeyData],
+            List[models.V2KeysMigrateKeyDataTypedDict],
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysMigrateKeysResponseBody:
+        r"""Migrate API key(s)
+
+        Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
+
+        **Required Permissions**
+        Your root key must have one of the following permissions for basic key information:
+        - `api.*.create_key` (to migrate keys to any API)
+        - `api.<api_id>.create_key` (to migrate keys to a specific API)
+
+
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param api_id: The ID of the API that the keys should be inserted into
+        :param keys:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2KeysMigrateKeysRequestBody(
+            migration_id=migration_id,
+            api_id=api_id,
+            keys=utils.get_pydantic_model(keys, List[models.V2KeysMigrateKeyData]),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/keys.migrateKeys",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2KeysMigrateKeysRequestBody
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="migrateKeys",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2KeysMigrateKeysResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def remove_permissions(
         self,
         *,
@@ -3745,6 +4007,7 @@ class Keys(BaseSDK):
                 List[models.KeysVerifyKeyRatelimitTypedDict],
             ]
         ] = None,
+        migration_id: Optional[str] = None,
         key_credits: Optional[
             Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
@@ -3796,6 +4059,7 @@ class Keys(BaseSDK):
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
             Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
+        :param migration_id: Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
         :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
             Omitting this field uses the default cost of 1 credit per verification.
             Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
@@ -3822,6 +4086,7 @@ class Keys(BaseSDK):
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),
+            migration_id=migration_id,
             key_credits=utils.get_pydantic_model(
                 key_credits, Optional[models.KeysVerifyKeyCredits]
             ),
@@ -3920,6 +4185,7 @@ class Keys(BaseSDK):
                 List[models.KeysVerifyKeyRatelimitTypedDict],
             ]
         ] = None,
+        migration_id: Optional[str] = None,
         key_credits: Optional[
             Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
@@ -3971,6 +4237,7 @@ class Keys(BaseSDK):
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
             Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
+        :param migration_id: Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
         :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
             Omitting this field uses the default cost of 1 credit per verification.
             Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
@@ -3997,6 +4264,7 @@ class Keys(BaseSDK):
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),
+            migration_id=migration_id,
             key_credits=utils.get_pydantic_model(
                 key_credits, Optional[models.KeysVerifyKeyCredits]
             ),
