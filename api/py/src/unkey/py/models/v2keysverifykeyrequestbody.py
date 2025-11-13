@@ -42,6 +42,8 @@ class V2KeysVerifyKeyRequestBodyTypedDict(TypedDict):
     Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
     """
+    migration_id: NotRequired[str]
+    r"""Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev"""
     key_credits: NotRequired[KeysVerifyKeyCreditsTypedDict]
     r"""Controls credit consumption for usage-based billing and quota enforcement.
     Omitting this field uses the default cost of 1 credit per verification.
@@ -83,6 +85,9 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
     Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
     """
+
+    migration_id: Annotated[Optional[str], pydantic.Field(alias="migrationId")] = None
+    r"""Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev"""
 
     key_credits: Annotated[
         Optional[KeysVerifyKeyCredits], pydantic.Field(alias="keyCredits")
