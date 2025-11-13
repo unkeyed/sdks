@@ -11,6 +11,7 @@ Rate limiting operations
 * [GetOverride](#getoverride) - Get ratelimit override
 * [Limit](#limit) - Apply rate limiting
 * [ListOverrides](#listoverrides) - List ratelimit overrides
+* [MultiLimit](#multilimit) - Apply multiple rate limit checks
 * [SetOverride](#setoverride) - Set ratelimit override
 
 ## DeleteOverride
@@ -46,7 +47,7 @@ func main() {
     )
 
     res, err := s.Ratelimit.DeleteOverride(ctx, components.V2RatelimitDeleteOverrideRequestBody{
-        Namespace: "<value>",
+        Namespace: "api.requests",
         Identifier: "premium_user_123",
     })
     if err != nil {
@@ -114,7 +115,7 @@ func main() {
     )
 
     res, err := s.Ratelimit.GetOverride(ctx, components.V2RatelimitGetOverrideRequestBody{
-        Namespace: "<value>",
+        Namespace: "api.requests",
         Identifier: "premium_user_123",
     })
     if err != nil {
@@ -162,10 +163,6 @@ Use this for rate limiting beyond API keys - limit users by ID, IPs by address, 
 Your root key must have one of the following permissions:
 - `ratelimit.*.limit` (to check limits in any namespace)
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-**Side Effects**
-
-Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
 
 
 ### Example Usage
@@ -262,7 +259,7 @@ func main() {
     )
 
     res, err := s.Ratelimit.ListOverrides(ctx, components.V2RatelimitListOverridesRequestBody{
-        Namespace: "<value>",
+        Namespace: "api.requests",
         Limit: unkey.Pointer[int64](20),
     })
     if err != nil {
@@ -294,6 +291,91 @@ func main() {
 | apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
 | apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
 | apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
+| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
+| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+
+## MultiLimit
+
+Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
+
+Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `ratelimit.*.limit` (to check limits in any namespace)
+- `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "auth.login",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            Limit: 10,
+        },
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "api.requests",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 3600000,
+            Identifier: "user_def456",
+            Limit: 1000,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `request`                                                | [[]components.V2RatelimitLimitRequestBody](../../.md)    | :heavy_check_mark:                                       | The request object to use for the request.               |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.RatelimitMultiLimitResponse](../../models/operations/ratelimitmultilimitresponse.md), error**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
+| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
+| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
+| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
+| apierrors.GoneErrorResponse           | 410                                   | application/json                      |
 | apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
 | apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
 
@@ -330,7 +412,7 @@ func main() {
     )
 
     res, err := s.Ratelimit.SetOverride(ctx, components.V2RatelimitSetOverrideRequestBody{
-        Namespace: "<value>",
+        Namespace: "api.requests",
         Duration: 60000,
         Identifier: "premium_user_123",
         Limit: 1000,

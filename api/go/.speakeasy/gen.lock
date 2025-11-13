@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 43d19e1850df2187a7e5f3ad5e4faff0
+  docChecksum: 8d35fef1351853740e7b80d1f7517b40
   docVersion: 2.0.0
-  speakeasyVersion: 1.650.1
-  generationVersion: 2.743.9
-  releaseVersion: 2.2.0
-  configChecksum: 68022e97481f3a2793ebc005766f0b67
+  speakeasyVersion: 1.656.1
+  generationVersion: 2.753.1
+  releaseVersion: 2.2.1
+  configChecksum: ff16744de97dc17505cd7eaeec958d5d
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -14,7 +14,7 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.13.1
+    core: 3.13.2
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
     globalSecurity: 2.82.12
@@ -144,6 +144,9 @@ generatedFiles:
   - /models/components/v2ratelimitlimitresponsedata.go
   - /models/components/v2ratelimitlistoverridesrequestbody.go
   - /models/components/v2ratelimitlistoverridesresponsebody.go
+  - /models/components/v2ratelimitmultilimitcheck.go
+  - /models/components/v2ratelimitmultilimitresponsebody.go
+  - /models/components/v2ratelimitmultilimitresponsedata.go
   - /models/components/v2ratelimitsetoverriderequestbody.go
   - /models/components/v2ratelimitsetoverrideresponsebody.go
   - /models/components/v2ratelimitsetoverrideresponsedata.go
@@ -174,6 +177,7 @@ generatedFiles:
   - /models/operations/ratelimitgetoverride.go
   - /models/operations/ratelimitlimit.go
   - /models/operations/ratelimitlistoverrides.go
+  - /models/operations/ratelimitmultilimit.go
   - /models/operations/ratelimitsetoverride.go
   - /models/operations/removepermissions.go
   - /models/operations/removeroles.go
@@ -306,6 +310,9 @@ generatedFiles:
   - docs/models/components/v2ratelimitlimitresponsedata.md
   - docs/models/components/v2ratelimitlistoverridesrequestbody.md
   - docs/models/components/v2ratelimitlistoverridesresponsebody.md
+  - docs/models/components/v2ratelimitmultilimitcheck.md
+  - docs/models/components/v2ratelimitmultilimitresponsebody.md
+  - docs/models/components/v2ratelimitmultilimitresponsedata.md
   - docs/models/components/v2ratelimitsetoverriderequestbody.md
   - docs/models/components/v2ratelimitsetoverrideresponsebody.md
   - docs/models/components/v2ratelimitsetoverrideresponsedata.md
@@ -337,6 +344,7 @@ generatedFiles:
   - docs/models/operations/ratelimitgetoverrideresponse.md
   - docs/models/operations/ratelimitlimitresponse.md
   - docs/models/operations/ratelimitlistoverridesresponse.md
+  - docs/models/operations/ratelimitmultilimitresponse.md
   - docs/models/operations/ratelimitsetoverrideresponse.md
   - docs/models/operations/removepermissionsresponse.md
   - docs/models/operations/removerolesresponse.md
@@ -1055,7 +1063,7 @@ examples:
   ratelimit.deleteOverride:
     specific:
       requestBody:
-        application/json: {"namespace": "<value>", "identifier": "premium_user_123"}
+        application/json: {"namespace": "api.requests", "identifier": "premium_user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {}}
@@ -1071,7 +1079,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     wildcard:
       requestBody:
-        application/json: {"namespace": "<value>", "identifier": "premium_*"}
+        application/json: {"namespace": "api.requests", "identifier": "premium_*"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {}}
@@ -1100,7 +1108,7 @@ examples:
   ratelimit.getOverride:
     specific:
       requestBody:
-        application/json: {"namespace": "<value>", "identifier": "premium_user_123"}
+        application/json: {"namespace": "api.requests", "identifier": "premium_user_123"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>", "duration": 632319, "identifier": "<value>", "limit": 573177}}
@@ -1116,7 +1124,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     wildcard:
       requestBody:
-        application/json: {"namespace": "<value>", "identifier": "premium_*"}
+        application/json: {"namespace": "api.requests", "identifier": "premium_*"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>", "duration": 632319, "identifier": "<value>", "limit": 573177}}
@@ -1218,7 +1226,7 @@ examples:
   ratelimit.listOverrides:
     basic:
       requestBody:
-        application/json: {"namespace": "<value>", "limit": 20}
+        application/json: {"namespace": "api.requests", "limit": 20}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": [{"overrideId": "<id>", "duration": 669136, "identifier": "<value>", "limit": 84483}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
@@ -1234,7 +1242,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     pagination:
       requestBody:
-        application/json: {"namespace": "<value>", "cursor": "cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9", "limit": 10}
+        application/json: {"namespace": "api.requests", "cursor": "cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9", "limit": 10}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": [{"overrideId": "<id>", "duration": 669136, "identifier": "<value>", "limit": 84483}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
@@ -1257,7 +1265,7 @@ examples:
   ratelimit.setOverride:
     premium:
       requestBody:
-        application/json: {"namespace": "<value>", "duration": 60000, "identifier": "premium_user_123", "limit": 1000}
+        application/json: {"namespace": "api.requests", "duration": 60000, "identifier": "premium_user_123", "limit": 1000}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>"}}
@@ -1273,7 +1281,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     wildcard:
       requestBody:
-        application/json: {"namespace": "<value>", "duration": 60000, "identifier": "premium_*", "limit": 500}
+        application/json: {"namespace": "api.requests", "duration": 60000, "identifier": "premium_*", "limit": 500}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>"}}
@@ -1339,8 +1347,81 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "503":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  ratelimit.multiLimit:
+    ipHashAndUserLimits:
+      requestBody:
+        application/json: [{"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4", "limit": 10}, {"namespace": "api.requests", "cost": 5, "duration": 3600000, "identifier": "user_def456", "limit": 1000}]
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"passed": false, "limits": []}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    multipleChecks:
+      requestBody:
+        application/json: [{"namespace": "api.requests", "cost": 5, "duration": 60000, "identifier": "user_abc123", "limit": 100}, {"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "user_abc123", "limit": 5}]
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"passed": false, "limits": []}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    withWeightedCost:
+      requestBody:
+        application/json: [{"namespace": "api.light_operations", "cost": 1, "duration": 60000, "identifier": "user_xyz789", "limit": 100}, {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_xyz789", "limit": 50}]
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"passed": false, "limits": []}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "410":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    allAllowed:
+      requestBody:
+        application/json: []
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"passed": true, "limits": [{"namespace": "api.requests", "identifier": "user_abc123", "limit": 100, "remaining": 99, "reset": 1714582980000, "passed": false}, {"namespace": "auth.login", "identifier": "user_abc123", "limit": 5, "remaining": 4, "reset": 1714582980000, "passed": true}]}}
+    mixedResults:
+      requestBody:
+        application/json: []
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQY"}, "data": {"passed": false, "limits": [{"namespace": "auth.login", "identifier": "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4", "limit": 10, "remaining": 5, "reset": 1714582980000, "passed": false}, {"namespace": "api.requests", "identifier": "user_def456", "limit": 1000, "remaining": 0, "reset": 1714583040000, "passed": false}]}}
+    withOverride:
+      requestBody:
+        application/json: [{"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "limit": 1000}]
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes Detected:
-  * `Unkey.Analytics.GetVerifications()`: **Added**
+  * `Unkey.Ratelimit.MultiLimit()`: **Added**

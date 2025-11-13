@@ -260,6 +260,7 @@ func main() {
 * [GetOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 * [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
+* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 
 </details>
