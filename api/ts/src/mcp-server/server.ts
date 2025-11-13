@@ -49,6 +49,7 @@ import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
 import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
 import { tool$ratelimitListOverrides } from "./tools/ratelimitListOverrides.js";
+import { tool$ratelimitMultiLimit } from "./tools/ratelimitMultiLimit.js";
 import { tool$ratelimitSetOverride } from "./tools/ratelimitSetOverride.js";
 
 export function createMCPServer(deps: {
@@ -61,7 +62,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.1.0",
+    version: "2.1.1",
   });
 
   const client = new UnkeyCore({
@@ -127,6 +128,7 @@ export function createMCPServer(deps: {
   tool(tool$ratelimitGetOverride);
   tool(tool$ratelimitLimit);
   tool(tool$ratelimitListOverrides);
+  tool(tool$ratelimitMultiLimit);
   tool(tool$ratelimitSetOverride);
 
   return server;

@@ -103,15 +103,15 @@ export type V2KeysVerifyKeyResponseData = {
    * Unix timestamp (in milliseconds) when the key will expire.
    *
    * @remarks
-   * If null or not present, the key has no expiration. You can use this to
+   * If omitted, the key has no expiration. You can use this to
    * warn users about upcoming expirations or to understand the validity period.
    */
   expires?: number | undefined;
   /**
-   * The number of requests/credits remaining for this key. If null
+   * The number of requests/credits remaining for this key. If omitted,
    *
    * @remarks
-   * or not present, the key has unlimited usage. This value decreases with
+   * the key has unlimited usage. This value decreases with
    * each verification (based on the 'cost' parameter) unless explicit credit
    * refills are configured.
    */
