@@ -12,6 +12,7 @@ API key management operations
 * [CreateKey](#createkey) - Create API key
 * [DeleteKey](#deletekey) - Delete API keys
 * [GetKey](#getkey) - Get API key
+* [MigrateKeys](#migratekeys) - Migrate API key(s)
 * [RemovePermissions](#removepermissions) - Remove key permissions
 * [RemoveRoles](#removeroles) - Remove key roles
 * [RerollKey](#rerollkey) - Reroll Key
@@ -432,6 +433,74 @@ func main() {
 ### Response
 
 **[*operations.GetKeyResponse](../../models/operations/getkeyresponse.md), error**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
+| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
+| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
+| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
+| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
+| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+
+## MigrateKeys
+
+Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
+
+**Required Permissions**
+Your root key must have one of the following permissions for basic key information:
+- `api.*.create_key` (to migrate keys to any API)
+- `api.<api_id>.create_key` (to migrate keys to a specific API)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Keys.MigrateKeys(ctx, components.V2KeysMigrateKeysRequestBody{
+        MigrationID: "your_company",
+        APIID: "api_123456789",
+        Keys: []components.V2KeysMigrateKeyData{},
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2KeysMigrateKeysResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [components.V2KeysMigrateKeysRequestBody](../../models/components/v2keysmigratekeysrequestbody.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.MigrateKeysResponse](../../models/operations/migratekeysresponse.md), error**
 
 ### Errors
 
@@ -1116,6 +1185,7 @@ func main() {
                 Duration: unkey.Pointer[int64](600000),
             },
         },
+        MigrationID: unkey.Pointer("m_1234abcd"),
     })
     if err != nil {
         log.Fatal(err)

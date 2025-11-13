@@ -33,6 +33,8 @@ type V2KeysVerifyKeyRequestBody struct {
 	// Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 	//
 	Ratelimits []KeysVerifyKeyRatelimit `json:"ratelimits,omitempty"`
+	// Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
+	MigrationID *string `json:"migrationId,omitempty"`
 }
 
 func (v *V2KeysVerifyKeyRequestBody) GetKey() string {
@@ -68,4 +70,11 @@ func (v *V2KeysVerifyKeyRequestBody) GetRatelimits() []KeysVerifyKeyRatelimit {
 		return nil
 	}
 	return v.Ratelimits
+}
+
+func (v *V2KeysVerifyKeyRequestBody) GetMigrationID() *string {
+	if v == nil {
+		return nil
+	}
+	return v.MigrationID
 }
