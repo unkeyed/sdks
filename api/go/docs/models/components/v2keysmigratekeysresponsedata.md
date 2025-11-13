@@ -1,0 +1,9 @@
+# V2KeysMigrateKeysResponseData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Migrated`                                                                                       | [][components.V2KeysMigrateKeysMigration](../../models/components/v2keysmigratekeysmigration.md) | :heavy_check_mark:                                                                               | Successfully migrated keys with their hash and generated keyId                                   |
+| `Failed`                                                                                         | []*string*                                                                                       | :heavy_check_mark:                                                                               | Hashes that could not be migrated (e.g., already exist in the system)                            |

@@ -233,6 +233,7 @@ func main() {
 * [CreateKey](docs/sdks/keys/README.md#createkey) - Create API key
 * [DeleteKey](docs/sdks/keys/README.md#deletekey) - Delete API keys
 * [GetKey](docs/sdks/keys/README.md#getkey) - Get API key
+* [MigrateKeys](docs/sdks/keys/README.md#migratekeys) - Migrate API key(s)
 * [RemovePermissions](docs/sdks/keys/README.md#removepermissions) - Remove key permissions
 * [RemoveRoles](docs/sdks/keys/README.md#removeroles) - Remove key roles
 * [RerollKey](docs/sdks/keys/README.md#rerollkey) - Reroll Key
@@ -260,6 +261,7 @@ func main() {
 * [GetOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 * [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
+* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 
 </details>
