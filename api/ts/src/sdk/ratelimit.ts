@@ -6,6 +6,7 @@ import { ratelimitDeleteOverride } from "../funcs/ratelimitDeleteOverride.js";
 import { ratelimitGetOverride } from "../funcs/ratelimitGetOverride.js";
 import { ratelimitLimit } from "../funcs/ratelimitLimit.js";
 import { ratelimitListOverrides } from "../funcs/ratelimitListOverrides.js";
+import { ratelimitMultiLimit } from "../funcs/ratelimitMultiLimit.js";
 import { ratelimitSetOverride } from "../funcs/ratelimitSetOverride.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -73,10 +74,6 @@ export class Ratelimit extends ClientSDK {
    * Your root key must have one of the following permissions:
    * - `ratelimit.*.limit` (to check limits in any namespace)
    * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-   *
-   * **Side Effects**
-   *
-   * Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
    */
   async limit(
     request: components.V2RatelimitLimitRequestBody,
@@ -106,6 +103,33 @@ export class Ratelimit extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.V2RatelimitListOverridesResponseBody> {
     return unwrapAsync(ratelimitListOverrides(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Apply multiple rate limit checks
+   *
+   * @remarks
+   * Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
+   *
+   * Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
+   *
+   * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+   *
+   * **Required Permissions**
+   *
+   * Your root key must have one of the following permissions:
+   * - `ratelimit.*.limit` (to check limits in any namespace)
+   * - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+   */
+  async multiLimit(
+    request: Array<components.V2RatelimitLimitRequestBody>,
+    options?: RequestOptions,
+  ): Promise<components.V2RatelimitMultiLimitResponseBody> {
+    return unwrapAsync(ratelimitMultiLimit(
       this,
       request,
       options,

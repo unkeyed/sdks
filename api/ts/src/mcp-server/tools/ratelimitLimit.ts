@@ -25,10 +25,6 @@ Use this for rate limiting beyond API keys - limit users by ID, IPs by address, 
 Your root key must have one of the following permissions:
 - \`ratelimit.*.limit\` (to check limits in any namespace)
 - \`ratelimit.<namespace_id>.limit\` (to check limits in a specific namespace)
-
-**Side Effects**
-
-Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
 `,
   args,
   tool: async (client, args, ctx) => {

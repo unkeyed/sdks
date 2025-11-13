@@ -28,6 +28,7 @@ import { tool$keysAddRoles } from "./tools/keysAddRoles.js";
 import { tool$keysCreateKey } from "./tools/keysCreateKey.js";
 import { tool$keysDeleteKey } from "./tools/keysDeleteKey.js";
 import { tool$keysGetKey } from "./tools/keysGetKey.js";
+import { tool$keysMigrateKeys } from "./tools/keysMigrateKeys.js";
 import { tool$keysRemovePermissions } from "./tools/keysRemovePermissions.js";
 import { tool$keysRemoveRoles } from "./tools/keysRemoveRoles.js";
 import { tool$keysRerollKey } from "./tools/keysRerollKey.js";
@@ -49,6 +50,7 @@ import { tool$ratelimitDeleteOverride } from "./tools/ratelimitDeleteOverride.js
 import { tool$ratelimitGetOverride } from "./tools/ratelimitGetOverride.js";
 import { tool$ratelimitLimit } from "./tools/ratelimitLimit.js";
 import { tool$ratelimitListOverrides } from "./tools/ratelimitListOverrides.js";
+import { tool$ratelimitMultiLimit } from "./tools/ratelimitMultiLimit.js";
 import { tool$ratelimitSetOverride } from "./tools/ratelimitSetOverride.js";
 
 export function createMCPServer(deps: {
@@ -61,7 +63,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Unkey",
-    version: "2.1.0",
+    version: "2.1.1",
   });
 
   const client = new UnkeyCore({
@@ -106,6 +108,7 @@ export function createMCPServer(deps: {
   tool(tool$keysCreateKey);
   tool(tool$keysDeleteKey);
   tool(tool$keysGetKey);
+  tool(tool$keysMigrateKeys);
   tool(tool$keysRemovePermissions);
   tool(tool$keysRemoveRoles);
   tool(tool$keysRerollKey);
@@ -127,6 +130,7 @@ export function createMCPServer(deps: {
   tool(tool$ratelimitGetOverride);
   tool(tool$ratelimitLimit);
   tool(tool$ratelimitListOverrides);
+  tool(tool$ratelimitMultiLimit);
   tool(tool$ratelimitSetOverride);
 
   return server;

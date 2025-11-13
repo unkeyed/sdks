@@ -7,6 +7,7 @@ import { keysAddRoles } from "../funcs/keysAddRoles.js";
 import { keysCreateKey } from "../funcs/keysCreateKey.js";
 import { keysDeleteKey } from "../funcs/keysDeleteKey.js";
 import { keysGetKey } from "../funcs/keysGetKey.js";
+import { keysMigrateKeys } from "../funcs/keysMigrateKeys.js";
 import { keysRemovePermissions } from "../funcs/keysRemovePermissions.js";
 import { keysRemoveRoles } from "../funcs/keysRemoveRoles.js";
 import { keysRerollKey } from "../funcs/keysRerollKey.js";
@@ -166,6 +167,28 @@ export class Keys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.V2KeysGetKeyResponseBody> {
     return unwrapAsync(keysGetKey(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Migrate API key(s)
+   *
+   * @remarks
+   * Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
+   *
+   * **Required Permissions**
+   * Your root key must have one of the following permissions for basic key information:
+   * - `api.*.create_key` (to migrate keys to any API)
+   * - `api.<api_id>.create_key` (to migrate keys to a specific API)
+   */
+  async migrateKeys(
+    request: components.V2KeysMigrateKeysRequestBody,
+    options?: RequestOptions,
+  ): Promise<components.V2KeysMigrateKeysResponseBody> {
+    return unwrapAsync(keysMigrateKeys(
       this,
       request,
       options,

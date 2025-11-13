@@ -11,6 +11,7 @@ Rate limiting operations
 * [getOverride](#getoverride) - Get ratelimit override
 * [limit](#limit) - Apply rate limiting
 * [listOverrides](#listoverrides) - List ratelimit overrides
+* [multiLimit](#multilimit) - Apply multiple rate limit checks
 * [setOverride](#setoverride) - Set ratelimit override
 
 ## deleteOverride
@@ -36,7 +37,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.ratelimit.deleteOverride({
-    namespace: "<value>",
+    namespace: "api.requests",
     identifier: "premium_user_123",
   });
 
@@ -62,7 +63,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await ratelimitDeleteOverride(unkey, {
-    namespace: "<value>",
+    namespace: "api.requests",
     identifier: "premium_user_123",
   });
   if (res.ok) {
@@ -123,7 +124,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.ratelimit.getOverride({
-    namespace: "<value>",
+    namespace: "api.requests",
     identifier: "premium_user_123",
   });
 
@@ -149,7 +150,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await ratelimitGetOverride(unkey, {
-    namespace: "<value>",
+    namespace: "api.requests",
     identifier: "premium_user_123",
   });
   if (res.ok) {
@@ -200,10 +201,6 @@ Use this for rate limiting beyond API keys - limit users by ID, IPs by address, 
 Your root key must have one of the following permissions:
 - `ratelimit.*.limit` (to check limits in any namespace)
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-**Side Effects**
-
-Records rate limit metrics for analytics and monitoring, updates rate limit counters with sliding window algorithm, and optionally triggers override matching for custom limits.
 
 
 ### Example Usage
@@ -312,7 +309,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.ratelimit.listOverrides({
-    namespace: "<value>",
+    namespace: "api.requests",
     limit: 20,
   });
 
@@ -338,7 +335,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await ratelimitListOverrides(unkey, {
-    namespace: "<value>",
+    namespace: "api.requests",
     limit: 20,
   });
   if (res.ok) {
@@ -376,6 +373,122 @@ run();
 | errors.InternalServerErrorResponse | 500                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
+## multiLimit
+
+Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
+
+Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `ratelimit.*.limit` (to check limits in any namespace)
+- `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      limit: 10,
+    },
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_def456",
+      limit: 1000,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      limit: 10,
+    },
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_def456",
+      limit: 1000,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitLimitRequestBody[]](../../models/.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2RatelimitMultiLimitResponseBody](../../models/components/v2ratelimitmultilimitresponsebody.md)\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestErrorResponse     | 400                                | application/json                   |
+| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
+| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
+| errors.NotFoundErrorResponse       | 404                                | application/json                   |
+| errors.GoneErrorResponse           | 410                                | application/json                   |
+| errors.InternalServerErrorResponse | 500                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
 ## setOverride
 
 Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
@@ -399,7 +512,7 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.ratelimit.setOverride({
-    namespace: "<value>",
+    namespace: "api.requests",
     duration: 60000,
     identifier: "premium_user_123",
     limit: 1000,
@@ -427,7 +540,7 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await ratelimitSetOverride(unkey, {
-    namespace: "<value>",
+    namespace: "api.requests",
     duration: 60000,
     identifier: "premium_user_123",
     limit: 1000,
