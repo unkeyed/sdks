@@ -366,6 +366,18 @@ if TYPE_CHECKING:
         V2RatelimitListOverridesResponseBody,
         V2RatelimitListOverridesResponseBodyTypedDict,
     )
+    from .v2ratelimitmultilimitcheck import (
+        V2RatelimitMultiLimitCheck,
+        V2RatelimitMultiLimitCheckTypedDict,
+    )
+    from .v2ratelimitmultilimitresponsebody import (
+        V2RatelimitMultiLimitResponseBody,
+        V2RatelimitMultiLimitResponseBodyTypedDict,
+    )
+    from .v2ratelimitmultilimitresponsedata import (
+        V2RatelimitMultiLimitResponseData,
+        V2RatelimitMultiLimitResponseDataTypedDict,
+    )
     from .v2ratelimitsetoverriderequestbody import (
         V2RatelimitSetOverrideRequestBody,
         V2RatelimitSetOverrideRequestBodyTypedDict,
@@ -588,6 +600,12 @@ __all__ = [
     "V2RatelimitListOverridesRequestBodyTypedDict",
     "V2RatelimitListOverridesResponseBody",
     "V2RatelimitListOverridesResponseBodyTypedDict",
+    "V2RatelimitMultiLimitCheck",
+    "V2RatelimitMultiLimitCheckTypedDict",
+    "V2RatelimitMultiLimitResponseBody",
+    "V2RatelimitMultiLimitResponseBodyTypedDict",
+    "V2RatelimitMultiLimitResponseData",
+    "V2RatelimitMultiLimitResponseDataTypedDict",
     "V2RatelimitSetOverrideRequestBody",
     "V2RatelimitSetOverrideRequestBodyTypedDict",
     "V2RatelimitSetOverrideResponseBody",
@@ -804,6 +822,12 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitListOverridesRequestBodyTypedDict": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesResponseBody": ".v2ratelimitlistoverridesresponsebody",
     "V2RatelimitListOverridesResponseBodyTypedDict": ".v2ratelimitlistoverridesresponsebody",
+    "V2RatelimitMultiLimitCheck": ".v2ratelimitmultilimitcheck",
+    "V2RatelimitMultiLimitCheckTypedDict": ".v2ratelimitmultilimitcheck",
+    "V2RatelimitMultiLimitResponseBody": ".v2ratelimitmultilimitresponsebody",
+    "V2RatelimitMultiLimitResponseBodyTypedDict": ".v2ratelimitmultilimitresponsebody",
+    "V2RatelimitMultiLimitResponseData": ".v2ratelimitmultilimitresponsedata",
+    "V2RatelimitMultiLimitResponseDataTypedDict": ".v2ratelimitmultilimitresponsedata",
     "V2RatelimitSetOverrideRequestBody": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideRequestBodyTypedDict": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideResponseBody": ".v2ratelimitsetoverrideresponsebody",
