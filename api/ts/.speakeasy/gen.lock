@@ -3,10 +3,10 @@ id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
   docChecksum: c7b94f9f85e6d333f2125e291a9f8a46
   docVersion: 2.0.0
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 2.1.1
-  configChecksum: f53e428d8f05e6cf46e9c89c39e3f232
+  speakeasyVersion: 1.656.2
+  generationVersion: 2.753.6
+  releaseVersion: 2.1.2
+  configChecksum: d9cab7ff81a1961173978d01a597b37c
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -1493,4 +1493,3 @@ examples:
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `unkey.keys.migrateKeys()`: **Added**\n* `unkey.ratelimit.multiLimit()`: **Added**\n* `unkey.keys.verifyKey()`: \n  *  `request.migrationId` **Added**\n"
