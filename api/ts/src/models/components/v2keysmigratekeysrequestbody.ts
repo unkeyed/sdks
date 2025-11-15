@@ -15,7 +15,7 @@ import {
 
 export type V2KeysMigrateKeysRequestBody = {
   /**
-   * Identifier of the configured migration provider/strategy to use (e.g., "your_company").
+   * Identifier of the configured migration provider/strategy to use (e.g., "your_company"). You will receive this from Unkey's support staff.
    */
   migrationId: string;
   /**
