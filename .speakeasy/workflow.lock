@@ -1,12 +1,12 @@
-speakeasyVersion: 1.656.2
+speakeasyVersion: 1.657.0
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:d53696d49e82e71398423026b7805b3b786556aeeaa23651d4795ab441bb3146
-        sourceBlobDigest: sha256:ea16672bb25c37b64f5960f85e644921e95e47a9f8cac39629e4ea503018a775
+        sourceRevisionDigest: sha256:10b8a048055dfc9d58ac623b9b90d278c66d00da8010213fd3d440a4ca5fba49
+        sourceBlobDigest: sha256:14e05bc1fd79c31e33dfca1d363b1be532c37dffae7aed2b82440d95ff4f0cf4
         tags:
             - latest
-            - speakeasy-sdk-regen-1763115221
+            - speakeasy-sdk-regen-1763166057
             - 2.0.0
     api-python:
         sourceNamespace: api-python
@@ -20,10 +20,10 @@ targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:d53696d49e82e71398423026b7805b3b786556aeeaa23651d4795ab441bb3146
-        sourceBlobDigest: sha256:ea16672bb25c37b64f5960f85e644921e95e47a9f8cac39629e4ea503018a775
+        sourceRevisionDigest: sha256:10b8a048055dfc9d58ac623b9b90d278c66d00da8010213fd3d440a4ca5fba49
+        sourceBlobDigest: sha256:14e05bc1fd79c31e33dfca1d363b1be532c37dffae7aed2b82440d95ff4f0cf4
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:9075467a18b0c1cfbc5300ab088d5a664a531a02315239d41dc6449380ba4cae
+        codeSamplesRevisionDigest: sha256:82612fa821de3e33d1e1e5e0e1d5ce7cc5f440e22db39bdd84ee7d0cd345982c
     api-py:
         source: api-python
         sourceNamespace: api-python
