@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: c7b94f9f85e6d333f2125e291a9f8a46
+  docChecksum: b0dbcae9e0c8da864b56796c04a937cd
   docVersion: 2.0.0
-  speakeasyVersion: 1.656.2
-  generationVersion: 2.753.6
-  releaseVersion: 2.1.2
-  configChecksum: d9cab7ff81a1961173978d01a597b37c
+  speakeasyVersion: 1.658.1
+  generationVersion: 2.755.6
+  releaseVersion: 2.1.3
+  configChecksum: 5eed0cb47acb764aa6e3599ffb85fab0
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.6
+    core: 3.26.7
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
