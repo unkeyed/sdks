@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: 23a4f0ead8714bb15bcf06764ae48082
+  docChecksum: 8388ffbaa32e619e98b667fe18a2a462
   docVersion: 2.0.0
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 2.4.1
-  configChecksum: a30148b8fc9f1b92b7803e71a559e981
+  speakeasyVersion: 1.658.1
+  generationVersion: 2.755.6
+  releaseVersion: 2.4.2
+  configChecksum: 978c990b5cc9e41e80b79ac55e78af27
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.5
-    core: 5.23.6
+    core: 5.23.8
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -1390,8 +1390,3 @@ examples:
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `unkey.keys.migrate_keys()`: **Added**
-  * `unkey.ratelimit.multi_limit()`: **Added**
-  * `unkey.keys.verify_key()`:  `request.migration_id` **Added**

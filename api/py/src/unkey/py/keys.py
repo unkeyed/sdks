@@ -1605,7 +1605,7 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
-        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
         :param retries: Override the default retry configuration for this method
@@ -1736,7 +1736,7 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
-        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
         :param retries: Override the default retry configuration for this method
