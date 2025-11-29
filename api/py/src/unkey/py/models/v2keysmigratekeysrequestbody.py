@@ -10,7 +10,7 @@ from unkey.py.types import BaseModel
 
 class V2KeysMigrateKeysRequestBodyTypedDict(TypedDict):
     migration_id: str
-    r"""Identifier of the configured migration provider/strategy to use (e.g., \"your_company\")."""
+    r"""Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff."""
     api_id: str
     r"""The ID of the API that the keys should be inserted into"""
     keys: List[V2KeysMigrateKeyDataTypedDict]
@@ -18,7 +18,7 @@ class V2KeysMigrateKeysRequestBodyTypedDict(TypedDict):
 
 class V2KeysMigrateKeysRequestBody(BaseModel):
     migration_id: Annotated[str, pydantic.Field(alias="migrationId")]
-    r"""Identifier of the configured migration provider/strategy to use (e.g., \"your_company\")."""
+    r"""Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff."""
 
     api_id: Annotated[str, pydantic.Field(alias="apiId")]
     r"""The ID of the API that the keys should be inserted into"""
