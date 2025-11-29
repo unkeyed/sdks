@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: c7b94f9f85e6d333f2125e291a9f8a46
+  docChecksum: b0dbcae9e0c8da864b56796c04a937cd
   docVersion: 2.0.0
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 2.2.1
-  configChecksum: ff16744de97dc17505cd7eaeec958d5d
+  speakeasyVersion: 1.665.0
+  generationVersion: 2.767.2
+  releaseVersion: 2.3.0
+  configChecksum: 83f6520e862506b8fa1b9d7e6464c254
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
@@ -14,7 +14,7 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.13.2
+    core: 3.13.5
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
     globalSecurity: 2.82.12
@@ -28,7 +28,7 @@ features:
     pagination: 2.82.5
     responseFormat: 0.1.2
     retries: 2.84.2
-    sdkHooks: 0.2.0
+    sdkHooks: 0.3.0
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go
@@ -1451,4 +1451,3 @@ examples:
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Unkey.Keys.MigrateKeys()`: **Added**\n* `Unkey.Ratelimit.MultiLimit()`: **Added**\n* `Unkey.Keys.VerifyKey()`: \n  *  `request.Request.MigrationId` **Added**\n"
