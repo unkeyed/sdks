@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
   V2RatelimitLimitResponseData,
   V2RatelimitLimitResponseData$inboundSchema,
-  V2RatelimitLimitResponseData$Outbound,
-  V2RatelimitLimitResponseData$outboundSchema,
 } from "./v2ratelimitlimitresponsedata.js";
 
 export type V2RatelimitLimitResponseBody = {
@@ -36,31 +29,7 @@ export const V2RatelimitLimitResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: V2RatelimitLimitResponseData$inboundSchema,
 });
-/** @internal */
-export type V2RatelimitLimitResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: V2RatelimitLimitResponseData$Outbound;
-};
 
-/** @internal */
-export const V2RatelimitLimitResponseBody$outboundSchema: z.ZodType<
-  V2RatelimitLimitResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitLimitResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: V2RatelimitLimitResponseData$outboundSchema,
-});
-
-export function v2RatelimitLimitResponseBodyToJSON(
-  v2RatelimitLimitResponseBody: V2RatelimitLimitResponseBody,
-): string {
-  return JSON.stringify(
-    V2RatelimitLimitResponseBody$outboundSchema.parse(
-      v2RatelimitLimitResponseBody,
-    ),
-  );
-}
 export function v2RatelimitLimitResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitLimitResponseBody, SDKValidationError> {

@@ -76,37 +76,7 @@ export const V2RatelimitLimitResponseData$inboundSchema: z.ZodType<
   success: z.boolean(),
   overrideId: z.string().optional(),
 });
-/** @internal */
-export type V2RatelimitLimitResponseData$Outbound = {
-  limit: number;
-  remaining: number;
-  reset: number;
-  success: boolean;
-  overrideId?: string | undefined;
-};
 
-/** @internal */
-export const V2RatelimitLimitResponseData$outboundSchema: z.ZodType<
-  V2RatelimitLimitResponseData$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitLimitResponseData
-> = z.object({
-  limit: z.number().int(),
-  remaining: z.number().int(),
-  reset: z.number().int(),
-  success: z.boolean(),
-  overrideId: z.string().optional(),
-});
-
-export function v2RatelimitLimitResponseDataToJSON(
-  v2RatelimitLimitResponseData: V2RatelimitLimitResponseData,
-): string {
-  return JSON.stringify(
-    V2RatelimitLimitResponseData$outboundSchema.parse(
-      v2RatelimitLimitResponseData,
-    ),
-  );
-}
 export function v2RatelimitLimitResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitLimitResponseData, SDKValidationError> {

@@ -40,29 +40,7 @@ export const BaseError$inboundSchema: z.ZodType<
   title: z.string(),
   type: z.string(),
 });
-/** @internal */
-export type BaseError$Outbound = {
-  detail: string;
-  status: number;
-  title: string;
-  type: string;
-};
 
-/** @internal */
-export const BaseError$outboundSchema: z.ZodType<
-  BaseError$Outbound,
-  z.ZodTypeDef,
-  BaseError
-> = z.object({
-  detail: z.string(),
-  status: z.number().int(),
-  title: z.string(),
-  type: z.string(),
-});
-
-export function baseErrorToJSON(baseError: BaseError): string {
-  return JSON.stringify(BaseError$outboundSchema.parse(baseError));
-}
 export function baseErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<BaseError, SDKValidationError> {

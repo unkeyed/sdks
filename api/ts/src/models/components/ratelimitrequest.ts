@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RatelimitRequest = {
   /**
@@ -57,17 +54,6 @@ export type RatelimitRequest = {
 };
 
 /** @internal */
-export const RatelimitRequest$inboundSchema: z.ZodType<
-  RatelimitRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  limit: z.number().int(),
-  duration: z.number().int(),
-  autoApply: z.boolean().default(false),
-});
-/** @internal */
 export type RatelimitRequest$Outbound = {
   name: string;
   limit: number;
@@ -92,14 +78,5 @@ export function ratelimitRequestToJSON(
 ): string {
   return JSON.stringify(
     RatelimitRequest$outboundSchema.parse(ratelimitRequest),
-  );
-}
-export function ratelimitRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RatelimitRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RatelimitRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RatelimitRequest' from JSON`,
   );
 }

@@ -34,29 +34,7 @@ export const V2ApisCreateApiResponseData$inboundSchema: z.ZodType<
 > = z.object({
   apiId: z.string(),
 });
-/** @internal */
-export type V2ApisCreateApiResponseData$Outbound = {
-  apiId: string;
-};
 
-/** @internal */
-export const V2ApisCreateApiResponseData$outboundSchema: z.ZodType<
-  V2ApisCreateApiResponseData$Outbound,
-  z.ZodTypeDef,
-  V2ApisCreateApiResponseData
-> = z.object({
-  apiId: z.string(),
-});
-
-export function v2ApisCreateApiResponseDataToJSON(
-  v2ApisCreateApiResponseData: V2ApisCreateApiResponseData,
-): string {
-  return JSON.stringify(
-    V2ApisCreateApiResponseData$outboundSchema.parse(
-      v2ApisCreateApiResponseData,
-    ),
-  );
-}
 export function v2ApisCreateApiResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2ApisCreateApiResponseData, SDKValidationError> {

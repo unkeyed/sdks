@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Sets a new or overwrites an existing rate limit override. Overrides allow you to apply special rate limit rules to specific identifiers, providing custom limits that differ from the default.
@@ -70,17 +67,6 @@ export type V2RatelimitSetOverrideRequestBody = {
 };
 
 /** @internal */
-export const V2RatelimitSetOverrideRequestBody$inboundSchema: z.ZodType<
-  V2RatelimitSetOverrideRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  namespace: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
-});
-/** @internal */
 export type V2RatelimitSetOverrideRequestBody$Outbound = {
   namespace: string;
   duration: number;
@@ -107,14 +93,5 @@ export function v2RatelimitSetOverrideRequestBodyToJSON(
     V2RatelimitSetOverrideRequestBody$outboundSchema.parse(
       v2RatelimitSetOverrideRequestBody,
     ),
-  );
-}
-export function v2RatelimitSetOverrideRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2RatelimitSetOverrideRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2RatelimitSetOverrideRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitSetOverrideRequestBody' from JSON`,
   );
 }

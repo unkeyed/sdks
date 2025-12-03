@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 export type V2PermissionsGetRoleResponseBody = {
   /**
@@ -36,31 +26,7 @@ export const V2PermissionsGetRoleResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: Role$inboundSchema,
 });
-/** @internal */
-export type V2PermissionsGetRoleResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Role$Outbound;
-};
 
-/** @internal */
-export const V2PermissionsGetRoleResponseBody$outboundSchema: z.ZodType<
-  V2PermissionsGetRoleResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2PermissionsGetRoleResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: Role$outboundSchema,
-});
-
-export function v2PermissionsGetRoleResponseBodyToJSON(
-  v2PermissionsGetRoleResponseBody: V2PermissionsGetRoleResponseBody,
-): string {
-  return JSON.stringify(
-    V2PermissionsGetRoleResponseBody$outboundSchema.parse(
-      v2PermissionsGetRoleResponseBody,
-    ),
-  );
-}
 export function v2PermissionsGetRoleResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2PermissionsGetRoleResponseBody, SDKValidationError> {

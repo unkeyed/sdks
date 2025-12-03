@@ -25,33 +25,7 @@ export const IdentitiesListIdentitiesResponse$inboundSchema: z.ZodType<
     "Result": "result",
   });
 });
-/** @internal */
-export type IdentitiesListIdentitiesResponse$Outbound = {
-  Result: components.V2IdentitiesListIdentitiesResponseBody$Outbound;
-};
 
-/** @internal */
-export const IdentitiesListIdentitiesResponse$outboundSchema: z.ZodType<
-  IdentitiesListIdentitiesResponse$Outbound,
-  z.ZodTypeDef,
-  IdentitiesListIdentitiesResponse
-> = z.object({
-  result: components.V2IdentitiesListIdentitiesResponseBody$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
-
-export function identitiesListIdentitiesResponseToJSON(
-  identitiesListIdentitiesResponse: IdentitiesListIdentitiesResponse,
-): string {
-  return JSON.stringify(
-    IdentitiesListIdentitiesResponse$outboundSchema.parse(
-      identitiesListIdentitiesResponse,
-    ),
-  );
-}
 export function identitiesListIdentitiesResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<IdentitiesListIdentitiesResponse, SDKValidationError> {

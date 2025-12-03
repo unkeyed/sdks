@@ -27,29 +27,7 @@ export const V2PermissionsCreateRoleResponseData$inboundSchema: z.ZodType<
 > = z.object({
   roleId: z.string(),
 });
-/** @internal */
-export type V2PermissionsCreateRoleResponseData$Outbound = {
-  roleId: string;
-};
 
-/** @internal */
-export const V2PermissionsCreateRoleResponseData$outboundSchema: z.ZodType<
-  V2PermissionsCreateRoleResponseData$Outbound,
-  z.ZodTypeDef,
-  V2PermissionsCreateRoleResponseData
-> = z.object({
-  roleId: z.string(),
-});
-
-export function v2PermissionsCreateRoleResponseDataToJSON(
-  v2PermissionsCreateRoleResponseData: V2PermissionsCreateRoleResponseData,
-): string {
-  return JSON.stringify(
-    V2PermissionsCreateRoleResponseData$outboundSchema.parse(
-      v2PermissionsCreateRoleResponseData,
-    ),
-  );
-}
 export function v2PermissionsCreateRoleResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2PermissionsCreateRoleResponseData, SDKValidationError> {

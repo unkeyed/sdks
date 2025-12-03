@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RatelimitRequest,
-  RatelimitRequest$inboundSchema,
   RatelimitRequest$Outbound,
   RatelimitRequest$outboundSchema,
 } from "./ratelimitrequest.js";
@@ -39,16 +35,6 @@ export type V2IdentitiesUpdateIdentityRequestBody = {
 };
 
 /** @internal */
-export const V2IdentitiesUpdateIdentityRequestBody$inboundSchema: z.ZodType<
-  V2IdentitiesUpdateIdentityRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  identity: z.string(),
-  meta: z.record(z.any()).optional(),
-  ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
-});
-/** @internal */
 export type V2IdentitiesUpdateIdentityRequestBody$Outbound = {
   identity: string;
   meta?: { [k: string]: any } | undefined;
@@ -73,15 +59,5 @@ export function v2IdentitiesUpdateIdentityRequestBodyToJSON(
     V2IdentitiesUpdateIdentityRequestBody$outboundSchema.parse(
       v2IdentitiesUpdateIdentityRequestBody,
     ),
-  );
-}
-export function v2IdentitiesUpdateIdentityRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2IdentitiesUpdateIdentityRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2IdentitiesUpdateIdentityRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2IdentitiesUpdateIdentityRequestBody' from JSON`,
   );
 }

@@ -22,20 +22,7 @@ export const Meta$inboundSchema: z.ZodType<Meta, z.ZodTypeDef, unknown> = z
   .object({
     requestId: z.string(),
   });
-/** @internal */
-export type Meta$Outbound = {
-  requestId: string;
-};
 
-/** @internal */
-export const Meta$outboundSchema: z.ZodType<Meta$Outbound, z.ZodTypeDef, Meta> =
-  z.object({
-    requestId: z.string(),
-  });
-
-export function metaToJSON(meta: Meta): string {
-  return JSON.stringify(Meta$outboundSchema.parse(meta));
-}
 export function metaFromJSON(
   jsonString: string,
 ): SafeParseResult<Meta, SDKValidationError> {

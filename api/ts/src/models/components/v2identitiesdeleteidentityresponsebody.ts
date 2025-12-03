@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 /**
  * Empty response object. A successful response indicates the identity was deleted successfully.
@@ -31,30 +26,7 @@ export const V2IdentitiesDeleteIdentityResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   meta: Meta$inboundSchema,
 });
-/** @internal */
-export type V2IdentitiesDeleteIdentityResponseBody$Outbound = {
-  meta: Meta$Outbound;
-};
 
-/** @internal */
-export const V2IdentitiesDeleteIdentityResponseBody$outboundSchema: z.ZodType<
-  V2IdentitiesDeleteIdentityResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2IdentitiesDeleteIdentityResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-});
-
-export function v2IdentitiesDeleteIdentityResponseBodyToJSON(
-  v2IdentitiesDeleteIdentityResponseBody:
-    V2IdentitiesDeleteIdentityResponseBody,
-): string {
-  return JSON.stringify(
-    V2IdentitiesDeleteIdentityResponseBody$outboundSchema.parse(
-      v2IdentitiesDeleteIdentityResponseBody,
-    ),
-  );
-}
 export function v2IdentitiesDeleteIdentityResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2IdentitiesDeleteIdentityResponseBody, SDKValidationError> {

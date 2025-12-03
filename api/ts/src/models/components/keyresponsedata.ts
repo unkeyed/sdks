@@ -6,23 +6,14 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Identity,
-  Identity$inboundSchema,
-  Identity$Outbound,
-  Identity$outboundSchema,
-} from "./identity.js";
+import { Identity, Identity$inboundSchema } from "./identity.js";
 import {
   KeyCreditsData,
   KeyCreditsData$inboundSchema,
-  KeyCreditsData$Outbound,
-  KeyCreditsData$outboundSchema,
 } from "./keycreditsdata.js";
 import {
   RatelimitResponse,
   RatelimitResponse$inboundSchema,
-  RatelimitResponse$Outbound,
-  RatelimitResponse$outboundSchema,
 } from "./ratelimitresponse.js";
 
 export type KeyResponseData = {
@@ -93,51 +84,7 @@ export const KeyResponseData$inboundSchema: z.ZodType<
   plaintext: z.string().optional(),
   ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
 });
-/** @internal */
-export type KeyResponseData$Outbound = {
-  keyId: string;
-  start: string;
-  enabled: boolean;
-  name?: string | undefined;
-  meta?: { [k: string]: any } | undefined;
-  createdAt: number;
-  updatedAt?: number | undefined;
-  expires?: number | undefined;
-  permissions?: Array<string> | undefined;
-  roles?: Array<string> | undefined;
-  credits?: KeyCreditsData$Outbound | undefined;
-  identity?: Identity$Outbound | undefined;
-  plaintext?: string | undefined;
-  ratelimits?: Array<RatelimitResponse$Outbound> | undefined;
-};
 
-/** @internal */
-export const KeyResponseData$outboundSchema: z.ZodType<
-  KeyResponseData$Outbound,
-  z.ZodTypeDef,
-  KeyResponseData
-> = z.object({
-  keyId: z.string(),
-  start: z.string(),
-  enabled: z.boolean(),
-  name: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int().optional(),
-  expires: z.number().int().optional(),
-  permissions: z.array(z.string()).optional(),
-  roles: z.array(z.string()).optional(),
-  credits: KeyCreditsData$outboundSchema.optional(),
-  identity: Identity$outboundSchema.optional(),
-  plaintext: z.string().optional(),
-  ratelimits: z.array(RatelimitResponse$outboundSchema).optional(),
-});
-
-export function keyResponseDataToJSON(
-  keyResponseData: KeyResponseData,
-): string {
-  return JSON.stringify(KeyResponseData$outboundSchema.parse(keyResponseData));
-}
 export function keyResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<KeyResponseData, SDKValidationError> {

@@ -18,25 +18,7 @@ export const V2RatelimitDeleteOverrideResponseData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-/** @internal */
-export type V2RatelimitDeleteOverrideResponseData$Outbound = {};
 
-/** @internal */
-export const V2RatelimitDeleteOverrideResponseData$outboundSchema: z.ZodType<
-  V2RatelimitDeleteOverrideResponseData$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitDeleteOverrideResponseData
-> = z.object({});
-
-export function v2RatelimitDeleteOverrideResponseDataToJSON(
-  v2RatelimitDeleteOverrideResponseData: V2RatelimitDeleteOverrideResponseData,
-): string {
-  return JSON.stringify(
-    V2RatelimitDeleteOverrideResponseData$outboundSchema.parse(
-      v2RatelimitDeleteOverrideResponseData,
-    ),
-  );
-}
 export function v2RatelimitDeleteOverrideResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitDeleteOverrideResponseData, SDKValidationError> {

@@ -85,21 +85,3 @@ export const NotFoundErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type NotFoundErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const NotFoundErrorResponse$outboundSchema: z.ZodType<
-  NotFoundErrorResponse$Outbound,
-  z.ZodTypeDef,
-  NotFoundErrorResponse
-> = z.instanceof(NotFoundErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

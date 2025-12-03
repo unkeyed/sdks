@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
   RatelimitOverride,
   RatelimitOverride$inboundSchema,
-  RatelimitOverride$Outbound,
-  RatelimitOverride$outboundSchema,
 } from "./ratelimitoverride.js";
 
 export type V2RatelimitGetOverrideResponseBody = {
@@ -36,31 +29,7 @@ export const V2RatelimitGetOverrideResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: RatelimitOverride$inboundSchema,
 });
-/** @internal */
-export type V2RatelimitGetOverrideResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: RatelimitOverride$Outbound;
-};
 
-/** @internal */
-export const V2RatelimitGetOverrideResponseBody$outboundSchema: z.ZodType<
-  V2RatelimitGetOverrideResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitGetOverrideResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: RatelimitOverride$outboundSchema,
-});
-
-export function v2RatelimitGetOverrideResponseBodyToJSON(
-  v2RatelimitGetOverrideResponseBody: V2RatelimitGetOverrideResponseBody,
-): string {
-  return JSON.stringify(
-    V2RatelimitGetOverrideResponseBody$outboundSchema.parse(
-      v2RatelimitGetOverrideResponseBody,
-    ),
-  );
-}
 export function v2RatelimitGetOverrideResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitGetOverrideResponseBody, SDKValidationError> {

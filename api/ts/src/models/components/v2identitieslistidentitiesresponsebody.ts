@@ -6,24 +6,9 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Identity,
-  Identity$inboundSchema,
-  Identity$Outbound,
-  Identity$outboundSchema,
-} from "./identity.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Pagination,
-  Pagination$inboundSchema,
-  Pagination$Outbound,
-  Pagination$outboundSchema,
-} from "./pagination.js";
+import { Identity, Identity$inboundSchema } from "./identity.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Pagination, Pagination$inboundSchema } from "./pagination.js";
 
 export type V2IdentitiesListIdentitiesResponseBody = {
   /**
@@ -50,34 +35,7 @@ export const V2IdentitiesListIdentitiesResponseBody$inboundSchema: z.ZodType<
   data: z.array(Identity$inboundSchema),
   pagination: Pagination$inboundSchema,
 });
-/** @internal */
-export type V2IdentitiesListIdentitiesResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Identity$Outbound>;
-  pagination: Pagination$Outbound;
-};
 
-/** @internal */
-export const V2IdentitiesListIdentitiesResponseBody$outboundSchema: z.ZodType<
-  V2IdentitiesListIdentitiesResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2IdentitiesListIdentitiesResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Identity$outboundSchema),
-  pagination: Pagination$outboundSchema,
-});
-
-export function v2IdentitiesListIdentitiesResponseBodyToJSON(
-  v2IdentitiesListIdentitiesResponseBody:
-    V2IdentitiesListIdentitiesResponseBody,
-): string {
-  return JSON.stringify(
-    V2IdentitiesListIdentitiesResponseBody$outboundSchema.parse(
-      v2IdentitiesListIdentitiesResponseBody,
-    ),
-  );
-}
 export function v2IdentitiesListIdentitiesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2IdentitiesListIdentitiesResponseBody, SDKValidationError> {

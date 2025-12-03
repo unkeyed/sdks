@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2PermissionsGetRoleRequestBody = {
   /**
@@ -20,14 +17,6 @@ export type V2PermissionsGetRoleRequestBody = {
   role: string;
 };
 
-/** @internal */
-export const V2PermissionsGetRoleRequestBody$inboundSchema: z.ZodType<
-  V2PermissionsGetRoleRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.string(),
-});
 /** @internal */
 export type V2PermissionsGetRoleRequestBody$Outbound = {
   role: string;
@@ -49,14 +38,5 @@ export function v2PermissionsGetRoleRequestBodyToJSON(
     V2PermissionsGetRoleRequestBody$outboundSchema.parse(
       v2PermissionsGetRoleRequestBody,
     ),
-  );
-}
-export function v2PermissionsGetRoleRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2PermissionsGetRoleRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2PermissionsGetRoleRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2PermissionsGetRoleRequestBody' from JSON`,
   );
 }

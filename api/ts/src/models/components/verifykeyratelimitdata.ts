@@ -60,41 +60,7 @@ export const VerifyKeyRatelimitData$inboundSchema: z.ZodType<
   remaining: z.number().int(),
   autoApply: z.boolean(),
 });
-/** @internal */
-export type VerifyKeyRatelimitData$Outbound = {
-  exceeded: boolean;
-  id: string;
-  name: string;
-  limit: number;
-  duration: number;
-  reset: number;
-  remaining: number;
-  autoApply: boolean;
-};
 
-/** @internal */
-export const VerifyKeyRatelimitData$outboundSchema: z.ZodType<
-  VerifyKeyRatelimitData$Outbound,
-  z.ZodTypeDef,
-  VerifyKeyRatelimitData
-> = z.object({
-  exceeded: z.boolean(),
-  id: z.string(),
-  name: z.string(),
-  limit: z.number().int(),
-  duration: z.number().int(),
-  reset: z.number().int(),
-  remaining: z.number().int(),
-  autoApply: z.boolean(),
-});
-
-export function verifyKeyRatelimitDataToJSON(
-  verifyKeyRatelimitData: VerifyKeyRatelimitData,
-): string {
-  return JSON.stringify(
-    VerifyKeyRatelimitData$outboundSchema.parse(verifyKeyRatelimitData),
-  );
-}
 export function verifyKeyRatelimitDataFromJSON(
   jsonString: string,
 ): SafeParseResult<VerifyKeyRatelimitData, SDKValidationError> {

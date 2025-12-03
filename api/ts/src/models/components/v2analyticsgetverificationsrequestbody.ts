@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2AnalyticsGetVerificationsRequestBody = {
   /**
@@ -17,14 +14,6 @@ export type V2AnalyticsGetVerificationsRequestBody = {
   query: string;
 };
 
-/** @internal */
-export const V2AnalyticsGetVerificationsRequestBody$inboundSchema: z.ZodType<
-  V2AnalyticsGetVerificationsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  query: z.string(),
-});
 /** @internal */
 export type V2AnalyticsGetVerificationsRequestBody$Outbound = {
   query: string;
@@ -47,15 +36,5 @@ export function v2AnalyticsGetVerificationsRequestBodyToJSON(
     V2AnalyticsGetVerificationsRequestBody$outboundSchema.parse(
       v2AnalyticsGetVerificationsRequestBody,
     ),
-  );
-}
-export function v2AnalyticsGetVerificationsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2AnalyticsGetVerificationsRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2AnalyticsGetVerificationsRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2AnalyticsGetVerificationsRequestBody' from JSON`,
   );
 }

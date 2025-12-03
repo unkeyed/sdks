@@ -85,21 +85,3 @@ export const InternalServerErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type InternalServerErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const InternalServerErrorResponse$outboundSchema: z.ZodType<
-  InternalServerErrorResponse$Outbound,
-  z.ZodTypeDef,
-  InternalServerErrorResponse
-> = z.instanceof(InternalServerErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

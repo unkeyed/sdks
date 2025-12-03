@@ -87,21 +87,3 @@ export const ServiceUnavailableErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type ServiceUnavailableErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const ServiceUnavailableErrorResponse$outboundSchema: z.ZodType<
-  ServiceUnavailableErrorResponse$Outbound,
-  z.ZodTypeDef,
-  ServiceUnavailableErrorResponse
-> = z.instanceof(ServiceUnavailableErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

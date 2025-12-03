@@ -27,29 +27,7 @@ export const V2KeysMigrateKeysMigration$inboundSchema: z.ZodType<
   hash: z.string(),
   keyId: z.string(),
 });
-/** @internal */
-export type V2KeysMigrateKeysMigration$Outbound = {
-  hash: string;
-  keyId: string;
-};
 
-/** @internal */
-export const V2KeysMigrateKeysMigration$outboundSchema: z.ZodType<
-  V2KeysMigrateKeysMigration$Outbound,
-  z.ZodTypeDef,
-  V2KeysMigrateKeysMigration
-> = z.object({
-  hash: z.string(),
-  keyId: z.string(),
-});
-
-export function v2KeysMigrateKeysMigrationToJSON(
-  v2KeysMigrateKeysMigration: V2KeysMigrateKeysMigration,
-): string {
-  return JSON.stringify(
-    V2KeysMigrateKeysMigration$outboundSchema.parse(v2KeysMigrateKeysMigration),
-  );
-}
 export function v2KeysMigrateKeysMigrationFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysMigrateKeysMigration, SDKValidationError> {

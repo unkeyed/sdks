@@ -9,15 +9,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeyResponseData,
   KeyResponseData$inboundSchema,
-  KeyResponseData$Outbound,
-  KeyResponseData$outboundSchema,
 } from "./keyresponsedata.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2KeysWhoamiResponseBody = {
   /**
@@ -36,29 +29,7 @@ export const V2KeysWhoamiResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: KeyResponseData$inboundSchema,
 });
-/** @internal */
-export type V2KeysWhoamiResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: KeyResponseData$Outbound;
-};
 
-/** @internal */
-export const V2KeysWhoamiResponseBody$outboundSchema: z.ZodType<
-  V2KeysWhoamiResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysWhoamiResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: KeyResponseData$outboundSchema,
-});
-
-export function v2KeysWhoamiResponseBodyToJSON(
-  v2KeysWhoamiResponseBody: V2KeysWhoamiResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysWhoamiResponseBody$outboundSchema.parse(v2KeysWhoamiResponseBody),
-  );
-}
 export function v2KeysWhoamiResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysWhoamiResponseBody, SDKValidationError> {

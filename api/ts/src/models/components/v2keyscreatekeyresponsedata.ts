@@ -30,31 +30,7 @@ export const V2KeysCreateKeyResponseData$inboundSchema: z.ZodType<
   keyId: z.string(),
   key: z.string(),
 });
-/** @internal */
-export type V2KeysCreateKeyResponseData$Outbound = {
-  keyId: string;
-  key: string;
-};
 
-/** @internal */
-export const V2KeysCreateKeyResponseData$outboundSchema: z.ZodType<
-  V2KeysCreateKeyResponseData$Outbound,
-  z.ZodTypeDef,
-  V2KeysCreateKeyResponseData
-> = z.object({
-  keyId: z.string(),
-  key: z.string(),
-});
-
-export function v2KeysCreateKeyResponseDataToJSON(
-  v2KeysCreateKeyResponseData: V2KeysCreateKeyResponseData,
-): string {
-  return JSON.stringify(
-    V2KeysCreateKeyResponseData$outboundSchema.parse(
-      v2KeysCreateKeyResponseData,
-    ),
-  );
-}
 export function v2KeysCreateKeyResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysCreateKeyResponseData, SDKValidationError> {

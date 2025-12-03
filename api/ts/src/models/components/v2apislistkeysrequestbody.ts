@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2ApisListKeysRequestBody = {
   /**
@@ -61,19 +58,6 @@ export type V2ApisListKeysRequestBody = {
 };
 
 /** @internal */
-export const V2ApisListKeysRequestBody$inboundSchema: z.ZodType<
-  V2ApisListKeysRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  apiId: z.string(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  externalId: z.string().optional(),
-  decrypt: z.boolean().default(false),
-  revalidateKeysCache: z.boolean().default(false),
-});
-/** @internal */
 export type V2ApisListKeysRequestBody$Outbound = {
   apiId: string;
   limit: number;
@@ -102,14 +86,5 @@ export function v2ApisListKeysRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     V2ApisListKeysRequestBody$outboundSchema.parse(v2ApisListKeysRequestBody),
-  );
-}
-export function v2ApisListKeysRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2ApisListKeysRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2ApisListKeysRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2ApisListKeysRequestBody' from JSON`,
   );
 }

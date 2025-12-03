@@ -27,31 +27,7 @@ export const V2PermissionsCreatePermissionResponseData$inboundSchema: z.ZodType<
 > = z.object({
   permissionId: z.string(),
 });
-/** @internal */
-export type V2PermissionsCreatePermissionResponseData$Outbound = {
-  permissionId: string;
-};
 
-/** @internal */
-export const V2PermissionsCreatePermissionResponseData$outboundSchema:
-  z.ZodType<
-    V2PermissionsCreatePermissionResponseData$Outbound,
-    z.ZodTypeDef,
-    V2PermissionsCreatePermissionResponseData
-  > = z.object({
-    permissionId: z.string(),
-  });
-
-export function v2PermissionsCreatePermissionResponseDataToJSON(
-  v2PermissionsCreatePermissionResponseData:
-    V2PermissionsCreatePermissionResponseData,
-): string {
-  return JSON.stringify(
-    V2PermissionsCreatePermissionResponseData$outboundSchema.parse(
-      v2PermissionsCreatePermissionResponseData,
-    ),
-  );
-}
 export function v2PermissionsCreatePermissionResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<

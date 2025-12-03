@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 export type V2KeysAddRolesResponseBody = {
   /**
@@ -51,29 +41,7 @@ export const V2KeysAddRolesResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: z.array(Role$inboundSchema),
 });
-/** @internal */
-export type V2KeysAddRolesResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Role$Outbound>;
-};
 
-/** @internal */
-export const V2KeysAddRolesResponseBody$outboundSchema: z.ZodType<
-  V2KeysAddRolesResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysAddRolesResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Role$outboundSchema),
-});
-
-export function v2KeysAddRolesResponseBodyToJSON(
-  v2KeysAddRolesResponseBody: V2KeysAddRolesResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysAddRolesResponseBody$outboundSchema.parse(v2KeysAddRolesResponseBody),
-  );
-}
 export function v2KeysAddRolesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysAddRolesResponseBody, SDKValidationError> {

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2KeysRemoveRolesRequestBody = {
   /**
@@ -30,15 +27,6 @@ export type V2KeysRemoveRolesRequestBody = {
 };
 
 /** @internal */
-export const V2KeysRemoveRolesRequestBody$inboundSchema: z.ZodType<
-  V2KeysRemoveRolesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  keyId: z.string(),
-  roles: z.array(z.string()),
-});
-/** @internal */
 export type V2KeysRemoveRolesRequestBody$Outbound = {
   keyId: string;
   roles: Array<string>;
@@ -61,14 +49,5 @@ export function v2KeysRemoveRolesRequestBodyToJSON(
     V2KeysRemoveRolesRequestBody$outboundSchema.parse(
       v2KeysRemoveRolesRequestBody,
     ),
-  );
-}
-export function v2KeysRemoveRolesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysRemoveRolesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysRemoveRolesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysRemoveRolesRequestBody' from JSON`,
   );
 }

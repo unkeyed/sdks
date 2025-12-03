@@ -42,35 +42,7 @@ export const RatelimitResponse$inboundSchema: z.ZodType<
   duration: z.number().int(),
   autoApply: z.boolean(),
 });
-/** @internal */
-export type RatelimitResponse$Outbound = {
-  id: string;
-  name: string;
-  limit: number;
-  duration: number;
-  autoApply: boolean;
-};
 
-/** @internal */
-export const RatelimitResponse$outboundSchema: z.ZodType<
-  RatelimitResponse$Outbound,
-  z.ZodTypeDef,
-  RatelimitResponse
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  limit: z.number().int(),
-  duration: z.number().int(),
-  autoApply: z.boolean(),
-});
-
-export function ratelimitResponseToJSON(
-  ratelimitResponse: RatelimitResponse,
-): string {
-  return JSON.stringify(
-    RatelimitResponse$outboundSchema.parse(ratelimitResponse),
-  );
-}
 export function ratelimitResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<RatelimitResponse, SDKValidationError> {

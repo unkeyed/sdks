@@ -7,17 +7,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Identity,
-  Identity$inboundSchema,
-  Identity$Outbound,
-  Identity$outboundSchema,
-} from "./identity.js";
+import { Identity, Identity$inboundSchema } from "./identity.js";
 import {
   VerifyKeyRatelimitData,
   VerifyKeyRatelimitData$inboundSchema,
-  VerifyKeyRatelimitData$Outbound,
-  VerifyKeyRatelimitData$outboundSchema,
 } from "./verifykeyratelimitdata.js";
 
 /**
@@ -149,9 +142,6 @@ export type V2KeysVerifyKeyResponseData = {
 export const Code$inboundSchema: z.ZodNativeEnum<typeof Code> = z.nativeEnum(
   Code,
 );
-/** @internal */
-export const Code$outboundSchema: z.ZodNativeEnum<typeof Code> =
-  Code$inboundSchema;
 
 /** @internal */
 export const V2KeysVerifyKeyResponseData$inboundSchema: z.ZodType<
@@ -172,51 +162,7 @@ export const V2KeysVerifyKeyResponseData$inboundSchema: z.ZodType<
   identity: Identity$inboundSchema.optional(),
   ratelimits: z.array(VerifyKeyRatelimitData$inboundSchema).optional(),
 });
-/** @internal */
-export type V2KeysVerifyKeyResponseData$Outbound = {
-  valid: boolean;
-  code: string;
-  keyId?: string | undefined;
-  name?: string | undefined;
-  meta?: { [k: string]: any } | undefined;
-  expires?: number | undefined;
-  credits?: number | undefined;
-  enabled?: boolean | undefined;
-  permissions?: Array<string> | undefined;
-  roles?: Array<string> | undefined;
-  identity?: Identity$Outbound | undefined;
-  ratelimits?: Array<VerifyKeyRatelimitData$Outbound> | undefined;
-};
 
-/** @internal */
-export const V2KeysVerifyKeyResponseData$outboundSchema: z.ZodType<
-  V2KeysVerifyKeyResponseData$Outbound,
-  z.ZodTypeDef,
-  V2KeysVerifyKeyResponseData
-> = z.object({
-  valid: z.boolean(),
-  code: Code$outboundSchema,
-  keyId: z.string().optional(),
-  name: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  expires: z.number().int().optional(),
-  credits: z.number().int().optional(),
-  enabled: z.boolean().optional(),
-  permissions: z.array(z.string()).optional(),
-  roles: z.array(z.string()).optional(),
-  identity: Identity$outboundSchema.optional(),
-  ratelimits: z.array(VerifyKeyRatelimitData$outboundSchema).optional(),
-});
-
-export function v2KeysVerifyKeyResponseDataToJSON(
-  v2KeysVerifyKeyResponseData: V2KeysVerifyKeyResponseData,
-): string {
-  return JSON.stringify(
-    V2KeysVerifyKeyResponseData$outboundSchema.parse(
-      v2KeysVerifyKeyResponseData,
-    ),
-  );
-}
 export function v2KeysVerifyKeyResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysVerifyKeyResponseData, SDKValidationError> {

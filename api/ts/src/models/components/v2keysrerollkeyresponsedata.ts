@@ -52,31 +52,7 @@ export const V2KeysRerollKeyResponseData$inboundSchema: z.ZodType<
   keyId: z.string(),
   key: z.string(),
 });
-/** @internal */
-export type V2KeysRerollKeyResponseData$Outbound = {
-  keyId: string;
-  key: string;
-};
 
-/** @internal */
-export const V2KeysRerollKeyResponseData$outboundSchema: z.ZodType<
-  V2KeysRerollKeyResponseData$Outbound,
-  z.ZodTypeDef,
-  V2KeysRerollKeyResponseData
-> = z.object({
-  keyId: z.string(),
-  key: z.string(),
-});
-
-export function v2KeysRerollKeyResponseDataToJSON(
-  v2KeysRerollKeyResponseData: V2KeysRerollKeyResponseData,
-): string {
-  return JSON.stringify(
-    V2KeysRerollKeyResponseData$outboundSchema.parse(
-      v2KeysRerollKeyResponseData,
-    ),
-  );
-}
 export function v2KeysRerollKeyResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysRerollKeyResponseData, SDKValidationError> {

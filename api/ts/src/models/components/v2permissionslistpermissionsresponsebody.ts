@@ -6,24 +6,9 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Pagination,
-  Pagination$inboundSchema,
-  Pagination$Outbound,
-  Pagination$outboundSchema,
-} from "./pagination.js";
-import {
-  Permission,
-  Permission$inboundSchema,
-  Permission$Outbound,
-  Permission$outboundSchema,
-} from "./permission.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Pagination, Pagination$inboundSchema } from "./pagination.js";
+import { Permission, Permission$inboundSchema } from "./permission.js";
 
 export type V2PermissionsListPermissionsResponseBody = {
   /**
@@ -50,34 +35,7 @@ export const V2PermissionsListPermissionsResponseBody$inboundSchema: z.ZodType<
   data: z.array(Permission$inboundSchema),
   pagination: Pagination$inboundSchema.optional(),
 });
-/** @internal */
-export type V2PermissionsListPermissionsResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Permission$Outbound>;
-  pagination?: Pagination$Outbound | undefined;
-};
 
-/** @internal */
-export const V2PermissionsListPermissionsResponseBody$outboundSchema: z.ZodType<
-  V2PermissionsListPermissionsResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2PermissionsListPermissionsResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Permission$outboundSchema),
-  pagination: Pagination$outboundSchema.optional(),
-});
-
-export function v2PermissionsListPermissionsResponseBodyToJSON(
-  v2PermissionsListPermissionsResponseBody:
-    V2PermissionsListPermissionsResponseBody,
-): string {
-  return JSON.stringify(
-    V2PermissionsListPermissionsResponseBody$outboundSchema.parse(
-      v2PermissionsListPermissionsResponseBody,
-    ),
-  );
-}
 export function v2PermissionsListPermissionsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EmptyResponse,
-  EmptyResponse$inboundSchema,
-  EmptyResponse$Outbound,
-  EmptyResponse$outboundSchema,
-} from "./emptyresponse.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2KeysUpdateKeyResponseBody = {
   /**
@@ -39,31 +29,7 @@ export const V2KeysUpdateKeyResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: EmptyResponse$inboundSchema,
 });
-/** @internal */
-export type V2KeysUpdateKeyResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: EmptyResponse$Outbound;
-};
 
-/** @internal */
-export const V2KeysUpdateKeyResponseBody$outboundSchema: z.ZodType<
-  V2KeysUpdateKeyResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysUpdateKeyResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: EmptyResponse$outboundSchema,
-});
-
-export function v2KeysUpdateKeyResponseBodyToJSON(
-  v2KeysUpdateKeyResponseBody: V2KeysUpdateKeyResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysUpdateKeyResponseBody$outboundSchema.parse(
-      v2KeysUpdateKeyResponseBody,
-    ),
-  );
-}
 export function v2KeysUpdateKeyResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysUpdateKeyResponseBody, SDKValidationError> {

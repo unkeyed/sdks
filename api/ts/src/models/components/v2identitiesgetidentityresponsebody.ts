@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Identity,
-  Identity$inboundSchema,
-  Identity$Outbound,
-  Identity$outboundSchema,
-} from "./identity.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Identity, Identity$inboundSchema } from "./identity.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2IdentitiesGetIdentityResponseBody = {
   /**
@@ -36,31 +26,7 @@ export const V2IdentitiesGetIdentityResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: Identity$inboundSchema,
 });
-/** @internal */
-export type V2IdentitiesGetIdentityResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Identity$Outbound;
-};
 
-/** @internal */
-export const V2IdentitiesGetIdentityResponseBody$outboundSchema: z.ZodType<
-  V2IdentitiesGetIdentityResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2IdentitiesGetIdentityResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: Identity$outboundSchema,
-});
-
-export function v2IdentitiesGetIdentityResponseBodyToJSON(
-  v2IdentitiesGetIdentityResponseBody: V2IdentitiesGetIdentityResponseBody,
-): string {
-  return JSON.stringify(
-    V2IdentitiesGetIdentityResponseBody$outboundSchema.parse(
-      v2IdentitiesGetIdentityResponseBody,
-    ),
-  );
-}
 export function v2IdentitiesGetIdentityResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2IdentitiesGetIdentityResponseBody, SDKValidationError> {

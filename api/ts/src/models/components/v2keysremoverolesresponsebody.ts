@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 export type V2KeysRemoveRolesResponseBody = {
   /**
@@ -52,31 +42,7 @@ export const V2KeysRemoveRolesResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: z.array(Role$inboundSchema),
 });
-/** @internal */
-export type V2KeysRemoveRolesResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Role$Outbound>;
-};
 
-/** @internal */
-export const V2KeysRemoveRolesResponseBody$outboundSchema: z.ZodType<
-  V2KeysRemoveRolesResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysRemoveRolesResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Role$outboundSchema),
-});
-
-export function v2KeysRemoveRolesResponseBodyToJSON(
-  v2KeysRemoveRolesResponseBody: V2KeysRemoveRolesResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysRemoveRolesResponseBody$outboundSchema.parse(
-      v2KeysRemoveRolesResponseBody,
-    ),
-  );
-}
 export function v2KeysRemoveRolesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysRemoveRolesResponseBody, SDKValidationError> {
