@@ -40,7 +40,7 @@ typescript:
   constFieldsAlwaysOptional: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
-  enableMCPServer: true
+  enableMCPServer: false
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: UNKEY
