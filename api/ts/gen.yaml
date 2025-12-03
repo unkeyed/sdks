@@ -29,7 +29,8 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
-    devDependencies: {}
+    devDependencies:
+      "@types/node": "^22"
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}
