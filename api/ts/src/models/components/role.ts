@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Permission,
-  Permission$inboundSchema,
-  Permission$Outbound,
-  Permission$outboundSchema,
-} from "./permission.js";
+import { Permission, Permission$inboundSchema } from "./permission.js";
 
 export type Role = {
   /**
@@ -60,26 +55,7 @@ export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
     description: z.string().optional(),
     permissions: z.array(Permission$inboundSchema).optional(),
   });
-/** @internal */
-export type Role$Outbound = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  permissions?: Array<Permission$Outbound> | undefined;
-};
 
-/** @internal */
-export const Role$outboundSchema: z.ZodType<Role$Outbound, z.ZodTypeDef, Role> =
-  z.object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string().optional(),
-    permissions: z.array(Permission$outboundSchema).optional(),
-  });
-
-export function roleToJSON(role: Role): string {
-  return JSON.stringify(Role$outboundSchema.parse(role));
-}
 export function roleFromJSON(
   jsonString: string,
 ): SafeParseResult<Role, SDKValidationError> {

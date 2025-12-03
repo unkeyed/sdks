@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RatelimitResponse,
   RatelimitResponse$inboundSchema,
-  RatelimitResponse$Outbound,
-  RatelimitResponse$outboundSchema,
 } from "./ratelimitresponse.js";
 
 export type Identity = {
@@ -43,29 +41,7 @@ export const Identity$inboundSchema: z.ZodType<
   meta: z.record(z.any()).optional(),
   ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
 });
-/** @internal */
-export type Identity$Outbound = {
-  id: string;
-  externalId: string;
-  meta?: { [k: string]: any } | undefined;
-  ratelimits?: Array<RatelimitResponse$Outbound> | undefined;
-};
 
-/** @internal */
-export const Identity$outboundSchema: z.ZodType<
-  Identity$Outbound,
-  z.ZodTypeDef,
-  Identity
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  meta: z.record(z.any()).optional(),
-  ratelimits: z.array(RatelimitResponse$outboundSchema).optional(),
-});
-
-export function identityToJSON(identity: Identity): string {
-  return JSON.stringify(Identity$outboundSchema.parse(identity));
-}
 export function identityFromJSON(
   jsonString: string,
 ): SafeParseResult<Identity, SDKValidationError> {

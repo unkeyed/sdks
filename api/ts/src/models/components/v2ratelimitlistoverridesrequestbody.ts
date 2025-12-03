@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2RatelimitListOverridesRequestBody = {
   /**
@@ -31,16 +28,6 @@ export type V2RatelimitListOverridesRequestBody = {
 };
 
 /** @internal */
-export const V2RatelimitListOverridesRequestBody$inboundSchema: z.ZodType<
-  V2RatelimitListOverridesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  namespace: z.string(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(10),
-});
-/** @internal */
 export type V2RatelimitListOverridesRequestBody$Outbound = {
   namespace: string;
   cursor?: string | undefined;
@@ -65,15 +52,5 @@ export function v2RatelimitListOverridesRequestBodyToJSON(
     V2RatelimitListOverridesRequestBody$outboundSchema.parse(
       v2RatelimitListOverridesRequestBody,
     ),
-  );
-}
-export function v2RatelimitListOverridesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2RatelimitListOverridesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2RatelimitListOverridesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitListOverridesRequestBody' from JSON`,
   );
 }

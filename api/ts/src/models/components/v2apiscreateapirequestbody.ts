@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2ApisCreateApiRequestBody = {
   /**
@@ -17,14 +14,6 @@ export type V2ApisCreateApiRequestBody = {
   name: string;
 };
 
-/** @internal */
-export const V2ApisCreateApiRequestBody$inboundSchema: z.ZodType<
-  V2ApisCreateApiRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-});
 /** @internal */
 export type V2ApisCreateApiRequestBody$Outbound = {
   name: string;
@@ -44,14 +33,5 @@ export function v2ApisCreateApiRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     V2ApisCreateApiRequestBody$outboundSchema.parse(v2ApisCreateApiRequestBody),
-  );
-}
-export function v2ApisCreateApiRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2ApisCreateApiRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2ApisCreateApiRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2ApisCreateApiRequestBody' from JSON`,
   );
 }

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   V2KeysMigrateKeyData,
-  V2KeysMigrateKeyData$inboundSchema,
   V2KeysMigrateKeyData$Outbound,
   V2KeysMigrateKeyData$outboundSchema,
 } from "./v2keysmigratekeydata.js";
@@ -25,16 +21,6 @@ export type V2KeysMigrateKeysRequestBody = {
   keys: Array<V2KeysMigrateKeyData>;
 };
 
-/** @internal */
-export const V2KeysMigrateKeysRequestBody$inboundSchema: z.ZodType<
-  V2KeysMigrateKeysRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  migrationId: z.string(),
-  apiId: z.string(),
-  keys: z.array(V2KeysMigrateKeyData$inboundSchema),
-});
 /** @internal */
 export type V2KeysMigrateKeysRequestBody$Outbound = {
   migrationId: string;
@@ -60,14 +46,5 @@ export function v2KeysMigrateKeysRequestBodyToJSON(
     V2KeysMigrateKeysRequestBody$outboundSchema.parse(
       v2KeysMigrateKeysRequestBody,
     ),
-  );
-}
-export function v2KeysMigrateKeysRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysMigrateKeysRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysMigrateKeysRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysMigrateKeysRequestBody' from JSON`,
   );
 }

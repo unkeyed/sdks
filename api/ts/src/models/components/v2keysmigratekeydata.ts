@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeyCreditsData,
-  KeyCreditsData$inboundSchema,
   KeyCreditsData$Outbound,
   KeyCreditsData$outboundSchema,
 } from "./keycreditsdata.js";
 import {
   RatelimitRequest,
-  RatelimitRequest$inboundSchema,
   RatelimitRequest$Outbound,
   RatelimitRequest$outboundSchema,
 } from "./ratelimitrequest.js";
@@ -105,23 +100,6 @@ export type V2KeysMigrateKeyData = {
 };
 
 /** @internal */
-export const V2KeysMigrateKeyData$inboundSchema: z.ZodType<
-  V2KeysMigrateKeyData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hash: z.string(),
-  name: z.string().optional(),
-  externalId: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  roles: z.array(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  expires: z.number().int().optional(),
-  enabled: z.boolean().default(true),
-  credits: KeyCreditsData$inboundSchema.optional(),
-  ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
-});
-/** @internal */
 export type V2KeysMigrateKeyData$Outbound = {
   hash: string;
   name?: string | undefined;
@@ -158,14 +136,5 @@ export function v2KeysMigrateKeyDataToJSON(
 ): string {
   return JSON.stringify(
     V2KeysMigrateKeyData$outboundSchema.parse(v2KeysMigrateKeyData),
-  );
-}
-export function v2KeysMigrateKeyDataFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysMigrateKeyData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysMigrateKeyData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysMigrateKeyData' from JSON`,
   );
 }

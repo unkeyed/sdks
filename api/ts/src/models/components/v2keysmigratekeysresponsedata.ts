@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   V2KeysMigrateKeysMigration,
   V2KeysMigrateKeysMigration$inboundSchema,
-  V2KeysMigrateKeysMigration$Outbound,
-  V2KeysMigrateKeysMigration$outboundSchema,
 } from "./v2keysmigratekeysmigration.js";
 
 export type V2KeysMigrateKeysResponseData = {
@@ -33,31 +31,7 @@ export const V2KeysMigrateKeysResponseData$inboundSchema: z.ZodType<
   migrated: z.array(V2KeysMigrateKeysMigration$inboundSchema),
   failed: z.array(z.string()),
 });
-/** @internal */
-export type V2KeysMigrateKeysResponseData$Outbound = {
-  migrated: Array<V2KeysMigrateKeysMigration$Outbound>;
-  failed: Array<string>;
-};
 
-/** @internal */
-export const V2KeysMigrateKeysResponseData$outboundSchema: z.ZodType<
-  V2KeysMigrateKeysResponseData$Outbound,
-  z.ZodTypeDef,
-  V2KeysMigrateKeysResponseData
-> = z.object({
-  migrated: z.array(V2KeysMigrateKeysMigration$outboundSchema),
-  failed: z.array(z.string()),
-});
-
-export function v2KeysMigrateKeysResponseDataToJSON(
-  v2KeysMigrateKeysResponseData: V2KeysMigrateKeysResponseData,
-): string {
-  return JSON.stringify(
-    V2KeysMigrateKeysResponseData$outboundSchema.parse(
-      v2KeysMigrateKeysResponseData,
-    ),
-  );
-}
 export function v2KeysMigrateKeysResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysMigrateKeysResponseData, SDKValidationError> {

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type KeysVerifyKeyRatelimit = {
   /**
@@ -26,17 +23,6 @@ export type KeysVerifyKeyRatelimit = {
   duration?: number | undefined;
 };
 
-/** @internal */
-export const KeysVerifyKeyRatelimit$inboundSchema: z.ZodType<
-  KeysVerifyKeyRatelimit,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  cost: z.number().int().default(1),
-  limit: z.number().int().optional(),
-  duration: z.number().int().optional(),
-});
 /** @internal */
 export type KeysVerifyKeyRatelimit$Outbound = {
   name: string;
@@ -62,14 +48,5 @@ export function keysVerifyKeyRatelimitToJSON(
 ): string {
   return JSON.stringify(
     KeysVerifyKeyRatelimit$outboundSchema.parse(keysVerifyKeyRatelimit),
-  );
-}
-export function keysVerifyKeyRatelimitFromJSON(
-  jsonString: string,
-): SafeParseResult<KeysVerifyKeyRatelimit, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KeysVerifyKeyRatelimit$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KeysVerifyKeyRatelimit' from JSON`,
   );
 }

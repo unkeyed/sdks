@@ -31,29 +31,7 @@ export const V2RatelimitSetOverrideResponseData$inboundSchema: z.ZodType<
 > = z.object({
   overrideId: z.string(),
 });
-/** @internal */
-export type V2RatelimitSetOverrideResponseData$Outbound = {
-  overrideId: string;
-};
 
-/** @internal */
-export const V2RatelimitSetOverrideResponseData$outboundSchema: z.ZodType<
-  V2RatelimitSetOverrideResponseData$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitSetOverrideResponseData
-> = z.object({
-  overrideId: z.string(),
-});
-
-export function v2RatelimitSetOverrideResponseDataToJSON(
-  v2RatelimitSetOverrideResponseData: V2RatelimitSetOverrideResponseData,
-): string {
-  return JSON.stringify(
-    V2RatelimitSetOverrideResponseData$outboundSchema.parse(
-      v2RatelimitSetOverrideResponseData,
-    ),
-  );
-}
 export function v2RatelimitSetOverrideResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitSetOverrideResponseData, SDKValidationError> {

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ValidationError,
   ValidationError$inboundSchema,
-  ValidationError$Outbound,
-  ValidationError$outboundSchema,
 } from "./validationerror.js";
 
 /**
@@ -51,35 +49,7 @@ export const BadRequestErrorDetails$inboundSchema: z.ZodType<
   type: z.string(),
   errors: z.array(ValidationError$inboundSchema),
 });
-/** @internal */
-export type BadRequestErrorDetails$Outbound = {
-  detail: string;
-  status: number;
-  title: string;
-  type: string;
-  errors: Array<ValidationError$Outbound>;
-};
 
-/** @internal */
-export const BadRequestErrorDetails$outboundSchema: z.ZodType<
-  BadRequestErrorDetails$Outbound,
-  z.ZodTypeDef,
-  BadRequestErrorDetails
-> = z.object({
-  detail: z.string(),
-  status: z.number().int(),
-  title: z.string(),
-  type: z.string(),
-  errors: z.array(ValidationError$outboundSchema),
-});
-
-export function badRequestErrorDetailsToJSON(
-  badRequestErrorDetails: BadRequestErrorDetails,
-): string {
-  return JSON.stringify(
-    BadRequestErrorDetails$outboundSchema.parse(badRequestErrorDetails),
-  );
-}
 export function badRequestErrorDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<BadRequestErrorDetails, SDKValidationError> {

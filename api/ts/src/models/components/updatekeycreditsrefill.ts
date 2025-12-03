@@ -3,10 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * How often credits are automatically refilled.
@@ -45,24 +42,10 @@ export type UpdateKeyCreditsRefill = {
 };
 
 /** @internal */
-export const UpdateKeyCreditsRefillInterval$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateKeyCreditsRefillInterval
-> = z.nativeEnum(UpdateKeyCreditsRefillInterval);
-/** @internal */
 export const UpdateKeyCreditsRefillInterval$outboundSchema: z.ZodNativeEnum<
   typeof UpdateKeyCreditsRefillInterval
-> = UpdateKeyCreditsRefillInterval$inboundSchema;
+> = z.nativeEnum(UpdateKeyCreditsRefillInterval);
 
-/** @internal */
-export const UpdateKeyCreditsRefill$inboundSchema: z.ZodType<
-  UpdateKeyCreditsRefill,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  interval: UpdateKeyCreditsRefillInterval$inboundSchema,
-  amount: z.number().int(),
-  refillDay: z.number().int().optional(),
-});
 /** @internal */
 export type UpdateKeyCreditsRefill$Outbound = {
   interval: string;
@@ -86,14 +69,5 @@ export function updateKeyCreditsRefillToJSON(
 ): string {
   return JSON.stringify(
     UpdateKeyCreditsRefill$outboundSchema.parse(updateKeyCreditsRefill),
-  );
-}
-export function updateKeyCreditsRefillFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateKeyCreditsRefill, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateKeyCreditsRefill$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKeyCreditsRefill' from JSON`,
   );
 }

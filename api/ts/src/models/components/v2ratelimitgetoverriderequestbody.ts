@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Gets the configuration of an existing rate limit override. Use this to retrieve details about custom rate limit rules that have been created for specific identifiers within a namespace.
@@ -40,15 +37,6 @@ export type V2RatelimitGetOverrideRequestBody = {
 };
 
 /** @internal */
-export const V2RatelimitGetOverrideRequestBody$inboundSchema: z.ZodType<
-  V2RatelimitGetOverrideRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  namespace: z.string(),
-  identifier: z.string(),
-});
-/** @internal */
 export type V2RatelimitGetOverrideRequestBody$Outbound = {
   namespace: string;
   identifier: string;
@@ -71,14 +59,5 @@ export function v2RatelimitGetOverrideRequestBodyToJSON(
     V2RatelimitGetOverrideRequestBody$outboundSchema.parse(
       v2RatelimitGetOverrideRequestBody,
     ),
-  );
-}
-export function v2RatelimitGetOverrideRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2RatelimitGetOverrideRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2RatelimitGetOverrideRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitGetOverrideRequestBody' from JSON`,
   );
 }

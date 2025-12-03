@@ -85,21 +85,3 @@ export const PreconditionFailedErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type PreconditionFailedErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const PreconditionFailedErrorResponse$outboundSchema: z.ZodType<
-  PreconditionFailedErrorResponse$Outbound,
-  z.ZodTypeDef,
-  PreconditionFailedErrorResponse
-> = z.instanceof(PreconditionFailedErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

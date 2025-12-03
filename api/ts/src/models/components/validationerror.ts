@@ -42,29 +42,7 @@ export const ValidationError$inboundSchema: z.ZodType<
   message: z.string(),
   fix: z.string().optional(),
 });
-/** @internal */
-export type ValidationError$Outbound = {
-  location: string;
-  message: string;
-  fix?: string | undefined;
-};
 
-/** @internal */
-export const ValidationError$outboundSchema: z.ZodType<
-  ValidationError$Outbound,
-  z.ZodTypeDef,
-  ValidationError
-> = z.object({
-  location: z.string(),
-  message: z.string(),
-  fix: z.string().optional(),
-});
-
-export function validationErrorToJSON(
-  validationError: ValidationError,
-): string {
-  return JSON.stringify(ValidationError$outboundSchema.parse(validationError));
-}
 export function validationErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<ValidationError, SDKValidationError> {

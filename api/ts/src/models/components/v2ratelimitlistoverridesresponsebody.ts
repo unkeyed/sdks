@@ -6,23 +6,11 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Pagination,
-  Pagination$inboundSchema,
-  Pagination$Outbound,
-  Pagination$outboundSchema,
-} from "./pagination.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Pagination, Pagination$inboundSchema } from "./pagination.js";
 import {
   RatelimitOverride,
   RatelimitOverride$inboundSchema,
-  RatelimitOverride$Outbound,
-  RatelimitOverride$outboundSchema,
 } from "./ratelimitoverride.js";
 
 export type V2RatelimitListOverridesResponseBody = {
@@ -47,33 +35,7 @@ export const V2RatelimitListOverridesResponseBody$inboundSchema: z.ZodType<
   data: z.array(RatelimitOverride$inboundSchema),
   pagination: Pagination$inboundSchema.optional(),
 });
-/** @internal */
-export type V2RatelimitListOverridesResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<RatelimitOverride$Outbound>;
-  pagination?: Pagination$Outbound | undefined;
-};
 
-/** @internal */
-export const V2RatelimitListOverridesResponseBody$outboundSchema: z.ZodType<
-  V2RatelimitListOverridesResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitListOverridesResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(RatelimitOverride$outboundSchema),
-  pagination: Pagination$outboundSchema.optional(),
-});
-
-export function v2RatelimitListOverridesResponseBodyToJSON(
-  v2RatelimitListOverridesResponseBody: V2RatelimitListOverridesResponseBody,
-): string {
-  return JSON.stringify(
-    V2RatelimitListOverridesResponseBody$outboundSchema.parse(
-      v2RatelimitListOverridesResponseBody,
-    ),
-  );
-}
 export function v2RatelimitListOverridesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitListOverridesResponseBody, SDKValidationError> {

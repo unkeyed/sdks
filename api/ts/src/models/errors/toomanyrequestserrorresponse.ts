@@ -87,21 +87,3 @@ export const TooManyRequestsErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type TooManyRequestsErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const TooManyRequestsErrorResponse$outboundSchema: z.ZodType<
-  TooManyRequestsErrorResponse$Outbound,
-  z.ZodTypeDef,
-  TooManyRequestsErrorResponse
-> = z.instanceof(TooManyRequestsErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

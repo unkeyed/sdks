@@ -38,25 +38,7 @@ export const Pagination$inboundSchema: z.ZodType<
   cursor: z.string().optional(),
   hasMore: z.boolean(),
 });
-/** @internal */
-export type Pagination$Outbound = {
-  cursor?: string | undefined;
-  hasMore: boolean;
-};
 
-/** @internal */
-export const Pagination$outboundSchema: z.ZodType<
-  Pagination$Outbound,
-  z.ZodTypeDef,
-  Pagination
-> = z.object({
-  cursor: z.string().optional(),
-  hasMore: z.boolean(),
-});
-
-export function paginationToJSON(pagination: Pagination): string {
-  return JSON.stringify(Pagination$outboundSchema.parse(pagination));
-}
 export function paginationFromJSON(
   jsonString: string,
 ): SafeParseResult<Pagination, SDKValidationError> {

@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeyCreditsData,
-  KeyCreditsData$inboundSchema,
   KeyCreditsData$Outbound,
   KeyCreditsData$outboundSchema,
 } from "./keycreditsdata.js";
 import {
   RatelimitRequest,
-  RatelimitRequest$inboundSchema,
   RatelimitRequest$Outbound,
   RatelimitRequest$outboundSchema,
 } from "./ratelimitrequest.js";
@@ -134,26 +129,6 @@ export type V2KeysCreateKeyRequestBody = {
 };
 
 /** @internal */
-export const V2KeysCreateKeyRequestBody$inboundSchema: z.ZodType<
-  V2KeysCreateKeyRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  apiId: z.string(),
-  prefix: z.string().optional(),
-  name: z.string().optional(),
-  byteLength: z.number().int().default(16),
-  externalId: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  roles: z.array(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  expires: z.number().int().optional(),
-  credits: KeyCreditsData$inboundSchema.optional(),
-  ratelimits: z.array(RatelimitRequest$inboundSchema).optional(),
-  enabled: z.boolean().default(true),
-  recoverable: z.boolean().default(false),
-});
-/** @internal */
 export type V2KeysCreateKeyRequestBody$Outbound = {
   apiId: string;
   prefix?: string | undefined;
@@ -196,14 +171,5 @@ export function v2KeysCreateKeyRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     V2KeysCreateKeyRequestBody$outboundSchema.parse(v2KeysCreateKeyRequestBody),
-  );
-}
-export function v2KeysCreateKeyRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysCreateKeyRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysCreateKeyRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysCreateKeyRequestBody' from JSON`,
   );
 }

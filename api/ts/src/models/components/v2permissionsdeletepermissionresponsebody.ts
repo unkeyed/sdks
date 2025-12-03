@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EmptyResponse,
-  EmptyResponse$inboundSchema,
-  EmptyResponse$Outbound,
-  EmptyResponse$outboundSchema,
-} from "./emptyresponse.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2PermissionsDeletePermissionResponseBody = {
   /**
@@ -39,33 +29,7 @@ export const V2PermissionsDeletePermissionResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: EmptyResponse$inboundSchema,
 });
-/** @internal */
-export type V2PermissionsDeletePermissionResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: EmptyResponse$Outbound;
-};
 
-/** @internal */
-export const V2PermissionsDeletePermissionResponseBody$outboundSchema:
-  z.ZodType<
-    V2PermissionsDeletePermissionResponseBody$Outbound,
-    z.ZodTypeDef,
-    V2PermissionsDeletePermissionResponseBody
-  > = z.object({
-    meta: Meta$outboundSchema,
-    data: EmptyResponse$outboundSchema,
-  });
-
-export function v2PermissionsDeletePermissionResponseBodyToJSON(
-  v2PermissionsDeletePermissionResponseBody:
-    V2PermissionsDeletePermissionResponseBody,
-): string {
-  return JSON.stringify(
-    V2PermissionsDeletePermissionResponseBody$outboundSchema.parse(
-      v2PermissionsDeletePermissionResponseBody,
-    ),
-  );
-}
 export function v2PermissionsDeletePermissionResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<

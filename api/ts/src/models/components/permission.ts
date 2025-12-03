@@ -51,29 +51,7 @@ export const Permission$inboundSchema: z.ZodType<
   slug: z.string(),
   description: z.string().optional(),
 });
-/** @internal */
-export type Permission$Outbound = {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string | undefined;
-};
 
-/** @internal */
-export const Permission$outboundSchema: z.ZodType<
-  Permission$Outbound,
-  z.ZodTypeDef,
-  Permission
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  description: z.string().optional(),
-});
-
-export function permissionToJSON(permission: Permission): string {
-  return JSON.stringify(Permission$outboundSchema.parse(permission));
-}
 export function permissionFromJSON(
   jsonString: string,
 ): SafeParseResult<Permission, SDKValidationError> {

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UpdateKeyCreditsRefill,
-  UpdateKeyCreditsRefill$inboundSchema,
   UpdateKeyCreditsRefill$Outbound,
   UpdateKeyCreditsRefill$outboundSchema,
 } from "./updatekeycreditsrefill.js";
@@ -27,15 +23,6 @@ export type UpdateKeyCreditsData = {
   refill?: UpdateKeyCreditsRefill | null | undefined;
 };
 
-/** @internal */
-export const UpdateKeyCreditsData$inboundSchema: z.ZodType<
-  UpdateKeyCreditsData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  remaining: z.nullable(z.number().int()).optional(),
-  refill: z.nullable(UpdateKeyCreditsRefill$inboundSchema).optional(),
-});
 /** @internal */
 export type UpdateKeyCreditsData$Outbound = {
   remaining?: number | null | undefined;
@@ -57,14 +44,5 @@ export function updateKeyCreditsDataToJSON(
 ): string {
   return JSON.stringify(
     UpdateKeyCreditsData$outboundSchema.parse(updateKeyCreditsData),
-  );
-}
-export function updateKeyCreditsDataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateKeyCreditsData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateKeyCreditsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKeyCreditsData' from JSON`,
   );
 }

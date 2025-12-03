@@ -22,30 +22,7 @@ export const V2IdentitiesCreateIdentityResponseData$inboundSchema: z.ZodType<
 > = z.object({
   identityId: z.string(),
 });
-/** @internal */
-export type V2IdentitiesCreateIdentityResponseData$Outbound = {
-  identityId: string;
-};
 
-/** @internal */
-export const V2IdentitiesCreateIdentityResponseData$outboundSchema: z.ZodType<
-  V2IdentitiesCreateIdentityResponseData$Outbound,
-  z.ZodTypeDef,
-  V2IdentitiesCreateIdentityResponseData
-> = z.object({
-  identityId: z.string(),
-});
-
-export function v2IdentitiesCreateIdentityResponseDataToJSON(
-  v2IdentitiesCreateIdentityResponseData:
-    V2IdentitiesCreateIdentityResponseData,
-): string {
-  return JSON.stringify(
-    V2IdentitiesCreateIdentityResponseData$outboundSchema.parse(
-      v2IdentitiesCreateIdentityResponseData,
-    ),
-  );
-}
 export function v2IdentitiesCreateIdentityResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2IdentitiesCreateIdentityResponseData, SDKValidationError> {

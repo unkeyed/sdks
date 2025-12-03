@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   V2RatelimitMultiLimitCheck,
   V2RatelimitMultiLimitCheck$inboundSchema,
-  V2RatelimitMultiLimitCheck$Outbound,
-  V2RatelimitMultiLimitCheck$outboundSchema,
 } from "./v2ratelimitmultilimitcheck.js";
 
 /**
@@ -40,31 +38,7 @@ export const V2RatelimitMultiLimitResponseData$inboundSchema: z.ZodType<
   passed: z.boolean(),
   limits: z.array(V2RatelimitMultiLimitCheck$inboundSchema),
 });
-/** @internal */
-export type V2RatelimitMultiLimitResponseData$Outbound = {
-  passed: boolean;
-  limits: Array<V2RatelimitMultiLimitCheck$Outbound>;
-};
 
-/** @internal */
-export const V2RatelimitMultiLimitResponseData$outboundSchema: z.ZodType<
-  V2RatelimitMultiLimitResponseData$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitMultiLimitResponseData
-> = z.object({
-  passed: z.boolean(),
-  limits: z.array(V2RatelimitMultiLimitCheck$outboundSchema),
-});
-
-export function v2RatelimitMultiLimitResponseDataToJSON(
-  v2RatelimitMultiLimitResponseData: V2RatelimitMultiLimitResponseData,
-): string {
-  return JSON.stringify(
-    V2RatelimitMultiLimitResponseData$outboundSchema.parse(
-      v2RatelimitMultiLimitResponseData,
-    ),
-  );
-}
 export function v2RatelimitMultiLimitResponseDataFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitMultiLimitResponseData, SDKValidationError> {

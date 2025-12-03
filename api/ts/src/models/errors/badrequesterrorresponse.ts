@@ -71,21 +71,3 @@ export const BadRequestErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type BadRequestErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BadRequestErrorDetails$Outbound;
-};
-
-/** @internal */
-export const BadRequestErrorResponse$outboundSchema: z.ZodType<
-  BadRequestErrorResponse$Outbound,
-  z.ZodTypeDef,
-  BadRequestErrorResponse
-> = z.instanceof(BadRequestErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BadRequestErrorDetails$outboundSchema,
-  }));

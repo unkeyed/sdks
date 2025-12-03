@@ -87,21 +87,3 @@ export const UnprocessableEntityErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UnprocessableEntityErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const UnprocessableEntityErrorResponse$outboundSchema: z.ZodType<
-  UnprocessableEntityErrorResponse$Outbound,
-  z.ZodTypeDef,
-  UnprocessableEntityErrorResponse
-> = z.instanceof(UnprocessableEntityErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

@@ -18,19 +18,7 @@ export const EmptyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-/** @internal */
-export type EmptyResponse$Outbound = {};
 
-/** @internal */
-export const EmptyResponse$outboundSchema: z.ZodType<
-  EmptyResponse$Outbound,
-  z.ZodTypeDef,
-  EmptyResponse
-> = z.object({});
-
-export function emptyResponseToJSON(emptyResponse: EmptyResponse): string {
-  return JSON.stringify(EmptyResponse$outboundSchema.parse(emptyResponse));
-}
 export function emptyResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<EmptyResponse, SDKValidationError> {

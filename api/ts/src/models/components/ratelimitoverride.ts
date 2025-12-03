@@ -58,33 +58,7 @@ export const RatelimitOverride$inboundSchema: z.ZodType<
   identifier: z.string(),
   limit: z.number().int(),
 });
-/** @internal */
-export type RatelimitOverride$Outbound = {
-  overrideId: string;
-  duration: number;
-  identifier: string;
-  limit: number;
-};
 
-/** @internal */
-export const RatelimitOverride$outboundSchema: z.ZodType<
-  RatelimitOverride$Outbound,
-  z.ZodTypeDef,
-  RatelimitOverride
-> = z.object({
-  overrideId: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
-});
-
-export function ratelimitOverrideToJSON(
-  ratelimitOverride: RatelimitOverride,
-): string {
-  return JSON.stringify(
-    RatelimitOverride$outboundSchema.parse(ratelimitOverride),
-  );
-}
 export function ratelimitOverrideFromJSON(
   jsonString: string,
 ): SafeParseResult<RatelimitOverride, SDKValidationError> {

@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
   V2KeysMigrateKeysResponseData,
   V2KeysMigrateKeysResponseData$inboundSchema,
-  V2KeysMigrateKeysResponseData$Outbound,
-  V2KeysMigrateKeysResponseData$outboundSchema,
 } from "./v2keysmigratekeysresponsedata.js";
 
 export type V2KeysMigrateKeysResponseBody = {
@@ -36,31 +29,7 @@ export const V2KeysMigrateKeysResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: V2KeysMigrateKeysResponseData$inboundSchema,
 });
-/** @internal */
-export type V2KeysMigrateKeysResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: V2KeysMigrateKeysResponseData$Outbound;
-};
 
-/** @internal */
-export const V2KeysMigrateKeysResponseBody$outboundSchema: z.ZodType<
-  V2KeysMigrateKeysResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysMigrateKeysResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: V2KeysMigrateKeysResponseData$outboundSchema,
-});
-
-export function v2KeysMigrateKeysResponseBodyToJSON(
-  v2KeysMigrateKeysResponseBody: V2KeysMigrateKeysResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysMigrateKeysResponseBody$outboundSchema.parse(
-      v2KeysMigrateKeysResponseBody,
-    ),
-  );
-}
 export function v2KeysMigrateKeysResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysMigrateKeysResponseBody, SDKValidationError> {

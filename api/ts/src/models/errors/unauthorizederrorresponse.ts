@@ -85,21 +85,3 @@ export const UnauthorizedErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UnauthorizedErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const UnauthorizedErrorResponse$outboundSchema: z.ZodType<
-  UnauthorizedErrorResponse$Outbound,
-  z.ZodTypeDef,
-  UnauthorizedErrorResponse
-> = z.instanceof(UnauthorizedErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));

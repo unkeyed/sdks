@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeysVerifyKeyCredits,
-  KeysVerifyKeyCredits$inboundSchema,
   KeysVerifyKeyCredits$Outbound,
   KeysVerifyKeyCredits$outboundSchema,
 } from "./keysverifykeycredits.js";
 import {
   KeysVerifyKeyRatelimit,
-  KeysVerifyKeyRatelimit$inboundSchema,
   KeysVerifyKeyRatelimit$Outbound,
   KeysVerifyKeyRatelimit$outboundSchema,
 } from "./keysverifykeyratelimit.js";
@@ -72,19 +67,6 @@ export type V2KeysVerifyKeyRequestBody = {
 };
 
 /** @internal */
-export const V2KeysVerifyKeyRequestBody$inboundSchema: z.ZodType<
-  V2KeysVerifyKeyRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  tags: z.array(z.string()).optional(),
-  permissions: z.string().optional(),
-  credits: KeysVerifyKeyCredits$inboundSchema.optional(),
-  ratelimits: z.array(KeysVerifyKeyRatelimit$inboundSchema).optional(),
-  migrationId: z.string().optional(),
-});
-/** @internal */
 export type V2KeysVerifyKeyRequestBody$Outbound = {
   key: string;
   tags?: Array<string> | undefined;
@@ -113,14 +95,5 @@ export function v2KeysVerifyKeyRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     V2KeysVerifyKeyRequestBody$outboundSchema.parse(v2KeysVerifyKeyRequestBody),
-  );
-}
-export function v2KeysVerifyKeyRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysVerifyKeyRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysVerifyKeyRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysVerifyKeyRequestBody' from JSON`,
   );
 }

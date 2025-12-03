@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EmptyResponse,
-  EmptyResponse$inboundSchema,
-  EmptyResponse$Outbound,
-  EmptyResponse$outboundSchema,
-} from "./emptyresponse.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2KeysDeleteKeyResponseBody = {
   /**
@@ -39,31 +29,7 @@ export const V2KeysDeleteKeyResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: EmptyResponse$inboundSchema,
 });
-/** @internal */
-export type V2KeysDeleteKeyResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: EmptyResponse$Outbound;
-};
 
-/** @internal */
-export const V2KeysDeleteKeyResponseBody$outboundSchema: z.ZodType<
-  V2KeysDeleteKeyResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysDeleteKeyResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: EmptyResponse$outboundSchema,
-});
-
-export function v2KeysDeleteKeyResponseBodyToJSON(
-  v2KeysDeleteKeyResponseBody: V2KeysDeleteKeyResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysDeleteKeyResponseBody$outboundSchema.parse(
-      v2KeysDeleteKeyResponseBody,
-    ),
-  );
-}
 export function v2KeysDeleteKeyResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysDeleteKeyResponseBody, SDKValidationError> {

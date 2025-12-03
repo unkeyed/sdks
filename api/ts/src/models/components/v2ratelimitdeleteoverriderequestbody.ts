@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Deletes an existing rate limit override. This permanently removes a custom rate limit rule, reverting affected identifiers back to the default rate limits for the namespace.
@@ -42,15 +39,6 @@ export type V2RatelimitDeleteOverrideRequestBody = {
 };
 
 /** @internal */
-export const V2RatelimitDeleteOverrideRequestBody$inboundSchema: z.ZodType<
-  V2RatelimitDeleteOverrideRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  namespace: z.string(),
-  identifier: z.string(),
-});
-/** @internal */
 export type V2RatelimitDeleteOverrideRequestBody$Outbound = {
   namespace: string;
   identifier: string;
@@ -73,15 +61,5 @@ export function v2RatelimitDeleteOverrideRequestBodyToJSON(
     V2RatelimitDeleteOverrideRequestBody$outboundSchema.parse(
       v2RatelimitDeleteOverrideRequestBody,
     ),
-  );
-}
-export function v2RatelimitDeleteOverrideRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2RatelimitDeleteOverrideRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2RatelimitDeleteOverrideRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitDeleteOverrideRequestBody' from JSON`,
   );
 }

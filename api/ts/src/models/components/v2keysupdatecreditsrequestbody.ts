@@ -3,10 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
@@ -49,22 +46,9 @@ export type V2KeysUpdateCreditsRequestBody = {
 };
 
 /** @internal */
-export const Operation$inboundSchema: z.ZodNativeEnum<typeof Operation> = z
+export const Operation$outboundSchema: z.ZodNativeEnum<typeof Operation> = z
   .nativeEnum(Operation);
-/** @internal */
-export const Operation$outboundSchema: z.ZodNativeEnum<typeof Operation> =
-  Operation$inboundSchema;
 
-/** @internal */
-export const V2KeysUpdateCreditsRequestBody$inboundSchema: z.ZodType<
-  V2KeysUpdateCreditsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  keyId: z.string(),
-  value: z.nullable(z.number().int()).optional(),
-  operation: Operation$inboundSchema,
-});
 /** @internal */
 export type V2KeysUpdateCreditsRequestBody$Outbound = {
   keyId: string;
@@ -90,14 +74,5 @@ export function v2KeysUpdateCreditsRequestBodyToJSON(
     V2KeysUpdateCreditsRequestBody$outboundSchema.parse(
       v2KeysUpdateCreditsRequestBody,
     ),
-  );
-}
-export function v2KeysUpdateCreditsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysUpdateCreditsRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysUpdateCreditsRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysUpdateCreditsRequestBody' from JSON`,
   );
 }

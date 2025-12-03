@@ -9,15 +9,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeyCreditsData,
   KeyCreditsData$inboundSchema,
-  KeyCreditsData$Outbound,
-  KeyCreditsData$outboundSchema,
 } from "./keycreditsdata.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2KeysUpdateCreditsResponseBody = {
   /**
@@ -39,31 +32,7 @@ export const V2KeysUpdateCreditsResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: KeyCreditsData$inboundSchema,
 });
-/** @internal */
-export type V2KeysUpdateCreditsResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: KeyCreditsData$Outbound;
-};
 
-/** @internal */
-export const V2KeysUpdateCreditsResponseBody$outboundSchema: z.ZodType<
-  V2KeysUpdateCreditsResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysUpdateCreditsResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: KeyCreditsData$outboundSchema,
-});
-
-export function v2KeysUpdateCreditsResponseBodyToJSON(
-  v2KeysUpdateCreditsResponseBody: V2KeysUpdateCreditsResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysUpdateCreditsResponseBody$outboundSchema.parse(
-      v2KeysUpdateCreditsResponseBody,
-    ),
-  );
-}
 export function v2KeysUpdateCreditsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysUpdateCreditsResponseBody, SDKValidationError> {

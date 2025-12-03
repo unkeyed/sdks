@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
   V2KeysRerollKeyResponseData,
   V2KeysRerollKeyResponseData$inboundSchema,
-  V2KeysRerollKeyResponseData$Outbound,
-  V2KeysRerollKeyResponseData$outboundSchema,
 } from "./v2keysrerollkeyresponsedata.js";
 
 export type V2KeysRerollKeyResponseBody = {
@@ -36,31 +29,7 @@ export const V2KeysRerollKeyResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: V2KeysRerollKeyResponseData$inboundSchema,
 });
-/** @internal */
-export type V2KeysRerollKeyResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: V2KeysRerollKeyResponseData$Outbound;
-};
 
-/** @internal */
-export const V2KeysRerollKeyResponseBody$outboundSchema: z.ZodType<
-  V2KeysRerollKeyResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysRerollKeyResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: V2KeysRerollKeyResponseData$outboundSchema,
-});
-
-export function v2KeysRerollKeyResponseBodyToJSON(
-  v2KeysRerollKeyResponseBody: V2KeysRerollKeyResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysRerollKeyResponseBody$outboundSchema.parse(
-      v2KeysRerollKeyResponseBody,
-    ),
-  );
-}
 export function v2KeysRerollKeyResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysRerollKeyResponseBody, SDKValidationError> {

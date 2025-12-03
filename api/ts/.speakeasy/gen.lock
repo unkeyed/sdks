@@ -3,10 +3,10 @@ id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
   docChecksum: b0dbcae9e0c8da864b56796c04a937cd
   docVersion: 2.0.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 2.1.4
-  configChecksum: 93649bce9425f22551758581b9158d51
+  speakeasyVersion: 1.666.2
+  generationVersion: 2.768.1
+  releaseVersion: 2.2.0
+  configChecksum: 3bba607e5d3eab2c0881f029ce0985c7
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.7
+    core: 3.26.14
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -24,13 +24,12 @@ features:
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.83.0
     ignores: 2.81.1
-    mcpServer: 0.9.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
     pagination: 2.83.0
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.3.0
+    sdkHooks: 0.4.0
 generatedFiles:
   - .gitattributes
   - .npmignore
@@ -241,58 +240,6 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/mcp-server/build.mts
-  - src/mcp-server/cli.ts
-  - src/mcp-server/cli/start/command.ts
-  - src/mcp-server/cli/start/impl.ts
-  - src/mcp-server/console-logger.ts
-  - src/mcp-server/extensions.ts
-  - src/mcp-server/mcp-server.ts
-  - src/mcp-server/prompts.ts
-  - src/mcp-server/resources.ts
-  - src/mcp-server/scopes.ts
-  - src/mcp-server/server.ts
-  - src/mcp-server/shared.ts
-  - src/mcp-server/tools.ts
-  - src/mcp-server/tools/analyticsGetVerifications.ts
-  - src/mcp-server/tools/apisCreateApi.ts
-  - src/mcp-server/tools/apisDeleteApi.ts
-  - src/mcp-server/tools/apisGetApi.ts
-  - src/mcp-server/tools/apisListKeys.ts
-  - src/mcp-server/tools/identitiesCreateIdentity.ts
-  - src/mcp-server/tools/identitiesDeleteIdentity.ts
-  - src/mcp-server/tools/identitiesGetIdentity.ts
-  - src/mcp-server/tools/identitiesListIdentities.ts
-  - src/mcp-server/tools/identitiesUpdateIdentity.ts
-  - src/mcp-server/tools/keysAddPermissions.ts
-  - src/mcp-server/tools/keysAddRoles.ts
-  - src/mcp-server/tools/keysCreateKey.ts
-  - src/mcp-server/tools/keysDeleteKey.ts
-  - src/mcp-server/tools/keysGetKey.ts
-  - src/mcp-server/tools/keysMigrateKeys.ts
-  - src/mcp-server/tools/keysRemovePermissions.ts
-  - src/mcp-server/tools/keysRemoveRoles.ts
-  - src/mcp-server/tools/keysRerollKey.ts
-  - src/mcp-server/tools/keysSetPermissions.ts
-  - src/mcp-server/tools/keysSetRoles.ts
-  - src/mcp-server/tools/keysUpdateCredits.ts
-  - src/mcp-server/tools/keysUpdateKey.ts
-  - src/mcp-server/tools/keysVerifyKey.ts
-  - src/mcp-server/tools/keysWhoami.ts
-  - src/mcp-server/tools/permissionsCreatePermission.ts
-  - src/mcp-server/tools/permissionsCreateRole.ts
-  - src/mcp-server/tools/permissionsDeletePermission.ts
-  - src/mcp-server/tools/permissionsDeleteRole.ts
-  - src/mcp-server/tools/permissionsGetPermission.ts
-  - src/mcp-server/tools/permissionsGetRole.ts
-  - src/mcp-server/tools/permissionsListPermissions.ts
-  - src/mcp-server/tools/permissionsListRoles.ts
-  - src/mcp-server/tools/ratelimitDeleteOverride.ts
-  - src/mcp-server/tools/ratelimitGetOverride.ts
-  - src/mcp-server/tools/ratelimitLimit.ts
-  - src/mcp-server/tools/ratelimitListOverrides.ts
-  - src/mcp-server/tools/ratelimitMultiLimit.ts
-  - src/mcp-server/tools/ratelimitSetOverride.ts
   - src/models/components/badrequesterrordetails.ts
   - src/models/components/baseerror.ts
   - src/models/components/emptyresponse.ts
@@ -444,6 +391,7 @@ generatedFiles:
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
+  - src/types/unrecognized.ts
   - tsconfig.json
 examples:
   chproxyMetrics:

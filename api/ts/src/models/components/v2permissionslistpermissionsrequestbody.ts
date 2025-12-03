@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2PermissionsListPermissionsRequestBody = {
   /**
@@ -25,15 +22,6 @@ export type V2PermissionsListPermissionsRequestBody = {
   limit?: number | undefined;
 };
 
-/** @internal */
-export const V2PermissionsListPermissionsRequestBody$inboundSchema: z.ZodType<
-  V2PermissionsListPermissionsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().int().default(100),
-});
 /** @internal */
 export type V2PermissionsListPermissionsRequestBody$Outbound = {
   cursor?: string | undefined;
@@ -58,20 +46,5 @@ export function v2PermissionsListPermissionsRequestBodyToJSON(
     V2PermissionsListPermissionsRequestBody$outboundSchema.parse(
       v2PermissionsListPermissionsRequestBody,
     ),
-  );
-}
-export function v2PermissionsListPermissionsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  V2PermissionsListPermissionsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      V2PermissionsListPermissionsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'V2PermissionsListPermissionsRequestBody' from JSON`,
   );
 }

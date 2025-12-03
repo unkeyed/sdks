@@ -9,21 +9,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   KeyResponseData,
   KeyResponseData$inboundSchema,
-  KeyResponseData$Outbound,
-  KeyResponseData$outboundSchema,
 } from "./keyresponsedata.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Pagination,
-  Pagination$inboundSchema,
-  Pagination$Outbound,
-  Pagination$outboundSchema,
-} from "./pagination.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Pagination, Pagination$inboundSchema } from "./pagination.js";
 
 export type V2ApisListKeysResponseBody = {
   /**
@@ -50,31 +38,7 @@ export const V2ApisListKeysResponseBody$inboundSchema: z.ZodType<
   data: z.array(KeyResponseData$inboundSchema),
   pagination: Pagination$inboundSchema.optional(),
 });
-/** @internal */
-export type V2ApisListKeysResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<KeyResponseData$Outbound>;
-  pagination?: Pagination$Outbound | undefined;
-};
 
-/** @internal */
-export const V2ApisListKeysResponseBody$outboundSchema: z.ZodType<
-  V2ApisListKeysResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2ApisListKeysResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(KeyResponseData$outboundSchema),
-  pagination: Pagination$outboundSchema.optional(),
-});
-
-export function v2ApisListKeysResponseBodyToJSON(
-  v2ApisListKeysResponseBody: V2ApisListKeysResponseBody,
-): string {
-  return JSON.stringify(
-    V2ApisListKeysResponseBody$outboundSchema.parse(v2ApisListKeysResponseBody),
-  );
-}
 export function v2ApisListKeysResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2ApisListKeysResponseBody, SDKValidationError> {

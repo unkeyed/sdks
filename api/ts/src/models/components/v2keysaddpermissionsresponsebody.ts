@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Permission,
-  Permission$inboundSchema,
-  Permission$Outbound,
-  Permission$outboundSchema,
-} from "./permission.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Permission, Permission$inboundSchema } from "./permission.js";
 
 export type V2KeysAddPermissionsResponseBody = {
   /**
@@ -50,31 +40,7 @@ export const V2KeysAddPermissionsResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: z.array(Permission$inboundSchema),
 });
-/** @internal */
-export type V2KeysAddPermissionsResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Permission$Outbound>;
-};
 
-/** @internal */
-export const V2KeysAddPermissionsResponseBody$outboundSchema: z.ZodType<
-  V2KeysAddPermissionsResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2KeysAddPermissionsResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Permission$outboundSchema),
-});
-
-export function v2KeysAddPermissionsResponseBodyToJSON(
-  v2KeysAddPermissionsResponseBody: V2KeysAddPermissionsResponseBody,
-): string {
-  return JSON.stringify(
-    V2KeysAddPermissionsResponseBody$outboundSchema.parse(
-      v2KeysAddPermissionsResponseBody,
-    ),
-  );
-}
 export function v2KeysAddPermissionsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2KeysAddPermissionsResponseBody, SDKValidationError> {

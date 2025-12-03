@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2KeysRerollKeyRequestBody = {
   /**
@@ -42,15 +39,6 @@ export type V2KeysRerollKeyRequestBody = {
 };
 
 /** @internal */
-export const V2KeysRerollKeyRequestBody$inboundSchema: z.ZodType<
-  V2KeysRerollKeyRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  keyId: z.string(),
-  expiration: z.number().int(),
-});
-/** @internal */
 export type V2KeysRerollKeyRequestBody$Outbound = {
   keyId: string;
   expiration: number;
@@ -71,14 +59,5 @@ export function v2KeysRerollKeyRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     V2KeysRerollKeyRequestBody$outboundSchema.parse(v2KeysRerollKeyRequestBody),
-  );
-}
-export function v2KeysRerollKeyRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2KeysRerollKeyRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2KeysRerollKeyRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2KeysRerollKeyRequestBody' from JSON`,
   );
 }

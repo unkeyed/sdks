@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type V2RatelimitLimitRequestBody = {
   /**
@@ -52,18 +49,6 @@ export type V2RatelimitLimitRequestBody = {
 };
 
 /** @internal */
-export const V2RatelimitLimitRequestBody$inboundSchema: z.ZodType<
-  V2RatelimitLimitRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  namespace: z.string(),
-  cost: z.number().int().default(1),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
-});
-/** @internal */
 export type V2RatelimitLimitRequestBody$Outbound = {
   namespace: string;
   cost: number;
@@ -92,14 +77,5 @@ export function v2RatelimitLimitRequestBodyToJSON(
     V2RatelimitLimitRequestBody$outboundSchema.parse(
       v2RatelimitLimitRequestBody,
     ),
-  );
-}
-export function v2RatelimitLimitRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<V2RatelimitLimitRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => V2RatelimitLimitRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitLimitRequestBody' from JSON`,
   );
 }

@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EmptyResponse,
-  EmptyResponse$inboundSchema,
-  EmptyResponse$Outbound,
-  EmptyResponse$outboundSchema,
-} from "./emptyresponse.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2ApisDeleteApiResponseBody = {
   /**
@@ -39,31 +29,7 @@ export const V2ApisDeleteApiResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: EmptyResponse$inboundSchema,
 });
-/** @internal */
-export type V2ApisDeleteApiResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: EmptyResponse$Outbound;
-};
 
-/** @internal */
-export const V2ApisDeleteApiResponseBody$outboundSchema: z.ZodType<
-  V2ApisDeleteApiResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2ApisDeleteApiResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: EmptyResponse$outboundSchema,
-});
-
-export function v2ApisDeleteApiResponseBodyToJSON(
-  v2ApisDeleteApiResponseBody: V2ApisDeleteApiResponseBody,
-): string {
-  return JSON.stringify(
-    V2ApisDeleteApiResponseBody$outboundSchema.parse(
-      v2ApisDeleteApiResponseBody,
-    ),
-  );
-}
 export function v2ApisDeleteApiResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2ApisDeleteApiResponseBody, SDKValidationError> {

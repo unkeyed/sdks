@@ -86,39 +86,7 @@ export const V2RatelimitMultiLimitCheck$inboundSchema: z.ZodType<
   passed: z.boolean(),
   overrideId: z.string().optional(),
 });
-/** @internal */
-export type V2RatelimitMultiLimitCheck$Outbound = {
-  namespace: string;
-  identifier: string;
-  limit: number;
-  remaining: number;
-  reset: number;
-  passed: boolean;
-  overrideId?: string | undefined;
-};
 
-/** @internal */
-export const V2RatelimitMultiLimitCheck$outboundSchema: z.ZodType<
-  V2RatelimitMultiLimitCheck$Outbound,
-  z.ZodTypeDef,
-  V2RatelimitMultiLimitCheck
-> = z.object({
-  namespace: z.string(),
-  identifier: z.string(),
-  limit: z.number().int(),
-  remaining: z.number().int(),
-  reset: z.number().int(),
-  passed: z.boolean(),
-  overrideId: z.string().optional(),
-});
-
-export function v2RatelimitMultiLimitCheckToJSON(
-  v2RatelimitMultiLimitCheck: V2RatelimitMultiLimitCheck,
-): string {
-  return JSON.stringify(
-    V2RatelimitMultiLimitCheck$outboundSchema.parse(v2RatelimitMultiLimitCheck),
-  );
-}
 export function v2RatelimitMultiLimitCheckFromJSON(
   jsonString: string,
 ): SafeParseResult<V2RatelimitMultiLimitCheck, SDKValidationError> {

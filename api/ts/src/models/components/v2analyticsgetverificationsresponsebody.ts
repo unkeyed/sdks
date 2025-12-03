@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 
 export type V2AnalyticsGetVerificationsResponseBody = {
   /**
@@ -33,32 +28,7 @@ export const V2AnalyticsGetVerificationsResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: z.array(z.record(z.any())),
 });
-/** @internal */
-export type V2AnalyticsGetVerificationsResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<{ [k: string]: any }>;
-};
 
-/** @internal */
-export const V2AnalyticsGetVerificationsResponseBody$outboundSchema: z.ZodType<
-  V2AnalyticsGetVerificationsResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2AnalyticsGetVerificationsResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(z.record(z.any())),
-});
-
-export function v2AnalyticsGetVerificationsResponseBodyToJSON(
-  v2AnalyticsGetVerificationsResponseBody:
-    V2AnalyticsGetVerificationsResponseBody,
-): string {
-  return JSON.stringify(
-    V2AnalyticsGetVerificationsResponseBody$outboundSchema.parse(
-      v2AnalyticsGetVerificationsResponseBody,
-    ),
-  );
-}
 export function v2AnalyticsGetVerificationsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -25,12 +25,12 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.1.4
+  version: 2.2.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies:
-      "@types/node": "^22"
+      '@types/node': ^22
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}
@@ -38,7 +38,7 @@ typescript:
   author: Speakeasy
   baseErrorName: UnkeyError
   clientServerStatusCodesAsErrors: true
-  constFieldsAlwaysOptional: true
+  constFieldsAlwaysOptional: false
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableMCPServer: false
@@ -48,6 +48,9 @@ typescript:
   exportZodModelNamespace: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  formStringArrayEncodeMode: encoded-string
+  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: "false"
   generateExamples: true
   imports:
     option: openapi
@@ -57,14 +60,18 @@ typescript:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
+  inferUnionDiscriminators: true
   inputModelSuffix: input
   jsonpath: rfc9535
+  laxMode: strict
   maxMethodParams: 0
   methodArguments: require-security-and-request
   modelPropertyCasing: camel
   moduleFormat: dual
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@unkey/api'
+  preApplyUnionDiscriminators: true
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

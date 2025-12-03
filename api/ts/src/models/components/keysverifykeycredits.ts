@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Controls credit consumption for usage-based billing and quota enforcement.
@@ -27,14 +24,6 @@ export type KeysVerifyKeyCredits = {
 };
 
 /** @internal */
-export const KeysVerifyKeyCredits$inboundSchema: z.ZodType<
-  KeysVerifyKeyCredits,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cost: z.number().int(),
-});
-/** @internal */
 export type KeysVerifyKeyCredits$Outbound = {
   cost: number;
 };
@@ -53,14 +42,5 @@ export function keysVerifyKeyCreditsToJSON(
 ): string {
   return JSON.stringify(
     KeysVerifyKeyCredits$outboundSchema.parse(keysVerifyKeyCredits),
-  );
-}
-export function keysVerifyKeyCreditsFromJSON(
-  jsonString: string,
-): SafeParseResult<KeysVerifyKeyCredits, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KeysVerifyKeyCredits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KeysVerifyKeyCredits' from JSON`,
   );
 }

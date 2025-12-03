@@ -6,24 +6,9 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
-import {
-  Pagination,
-  Pagination$inboundSchema,
-  Pagination$Outbound,
-  Pagination$outboundSchema,
-} from "./pagination.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
+import { Pagination, Pagination$inboundSchema } from "./pagination.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 export type V2PermissionsListRolesResponseBody = {
   /**
@@ -50,33 +35,7 @@ export const V2PermissionsListRolesResponseBody$inboundSchema: z.ZodType<
   data: z.array(Role$inboundSchema),
   pagination: Pagination$inboundSchema.optional(),
 });
-/** @internal */
-export type V2PermissionsListRolesResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: Array<Role$Outbound>;
-  pagination?: Pagination$Outbound | undefined;
-};
 
-/** @internal */
-export const V2PermissionsListRolesResponseBody$outboundSchema: z.ZodType<
-  V2PermissionsListRolesResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2PermissionsListRolesResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: z.array(Role$outboundSchema),
-  pagination: Pagination$outboundSchema.optional(),
-});
-
-export function v2PermissionsListRolesResponseBodyToJSON(
-  v2PermissionsListRolesResponseBody: V2PermissionsListRolesResponseBody,
-): string {
-  return JSON.stringify(
-    V2PermissionsListRolesResponseBody$outboundSchema.parse(
-      v2PermissionsListRolesResponseBody,
-    ),
-  );
-}
 export function v2PermissionsListRolesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2PermissionsListRolesResponseBody, SDKValidationError> {

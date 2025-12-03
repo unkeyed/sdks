@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Meta,
-  Meta$inboundSchema,
-  Meta$Outbound,
-  Meta$outboundSchema,
-} from "./meta.js";
+import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
   V2ApisCreateApiResponseData,
   V2ApisCreateApiResponseData$inboundSchema,
-  V2ApisCreateApiResponseData$Outbound,
-  V2ApisCreateApiResponseData$outboundSchema,
 } from "./v2apiscreateapiresponsedata.js";
 
 export type V2ApisCreateApiResponseBody = {
@@ -36,31 +29,7 @@ export const V2ApisCreateApiResponseBody$inboundSchema: z.ZodType<
   meta: Meta$inboundSchema,
   data: V2ApisCreateApiResponseData$inboundSchema,
 });
-/** @internal */
-export type V2ApisCreateApiResponseBody$Outbound = {
-  meta: Meta$Outbound;
-  data: V2ApisCreateApiResponseData$Outbound;
-};
 
-/** @internal */
-export const V2ApisCreateApiResponseBody$outboundSchema: z.ZodType<
-  V2ApisCreateApiResponseBody$Outbound,
-  z.ZodTypeDef,
-  V2ApisCreateApiResponseBody
-> = z.object({
-  meta: Meta$outboundSchema,
-  data: V2ApisCreateApiResponseData$outboundSchema,
-});
-
-export function v2ApisCreateApiResponseBodyToJSON(
-  v2ApisCreateApiResponseBody: V2ApisCreateApiResponseBody,
-): string {
-  return JSON.stringify(
-    V2ApisCreateApiResponseBody$outboundSchema.parse(
-      v2ApisCreateApiResponseBody,
-    ),
-  );
-}
 export function v2ApisCreateApiResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<V2ApisCreateApiResponseBody, SDKValidationError> {

@@ -85,21 +85,3 @@ export const ConflictErrorResponse$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type ConflictErrorResponse$Outbound = {
-  meta: components.Meta$Outbound;
-  error: components.BaseError$Outbound;
-};
-
-/** @internal */
-export const ConflictErrorResponse$outboundSchema: z.ZodType<
-  ConflictErrorResponse$Outbound,
-  z.ZodTypeDef,
-  ConflictErrorResponse
-> = z.instanceof(ConflictErrorResponse)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    meta: components.Meta$outboundSchema,
-    error: components.BaseError$outboundSchema,
-  }));
