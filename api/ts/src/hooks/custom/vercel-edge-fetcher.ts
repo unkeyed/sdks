@@ -4,7 +4,11 @@ import type { SDKInitHook, SDKInitOptions } from "../types.js";
 function isVercelEdgeRuntime(): boolean {
   // https://vercel.com/docs/functions/runtimes/edge#check-if-you're-running-on-the-edge-runtime
   if ("EdgeRuntime" in globalThis) return true;
-  if (process.env["NEXT_RUNTIME"] === "edge") return true;
+  if (
+    typeof process !== "undefined" &&
+    process.env?.["NEXT_RUNTIME"] === "edge"
+  )
+    return true;
   return false;
 }
 
