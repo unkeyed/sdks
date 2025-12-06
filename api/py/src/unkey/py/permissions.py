@@ -103,6 +103,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsCreatePermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -262,6 +263,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsCreatePermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -403,6 +405,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsCreateRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -544,6 +547,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsCreateRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -686,6 +690,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsDeletePermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -828,6 +833,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsDeletePermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -965,6 +971,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsDeleteRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1097,6 +1104,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsDeleteRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1219,6 +1227,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsGetPermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1346,6 +1355,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsGetPermissionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1473,6 +1483,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsGetRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1600,6 +1611,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsGetRoleRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1736,6 +1748,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsListPermissionsRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1867,6 +1880,7 @@ class Permissions(BaseSDK):
                 "json",
                 models.V2PermissionsListPermissionsRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1996,6 +2010,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsListRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2130,6 +2145,7 @@ class Permissions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2PermissionsListRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
