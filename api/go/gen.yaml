@@ -20,12 +20,13 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.2.1
+  version: 2.3.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -42,14 +43,16 @@ go:
       shared: models/components
       webhooks: models/webhooks
   includeEmptyObjects: false
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 1
   methodArguments: require-security-and-request
   modulePath: github.com/unkeyed/sdks/api/go
+  multipartArrayFormat: legacy
   nullableOptionalWrapper: false
   outputModelSuffix: output
   respectRequiredFields: false
   responseFormat: envelope-http
   sdkPackageAlias: unkey
   sdkPackageName: ""
-  unionDeserializationStrategy: left-to-right
+  unionStrategy: left-to-right
