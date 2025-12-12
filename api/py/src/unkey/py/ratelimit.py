@@ -81,6 +81,7 @@ class Ratelimit(BaseSDK):
                 "json",
                 models.V2RatelimitDeleteOverrideRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -218,6 +219,7 @@ class Ratelimit(BaseSDK):
                 "json",
                 models.V2RatelimitDeleteOverrideRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -351,6 +353,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitGetOverrideRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -484,6 +487,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitGetOverrideRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -640,6 +644,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitLimitRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -801,6 +806,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitLimitRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -945,6 +951,7 @@ class Ratelimit(BaseSDK):
                 "json",
                 models.V2RatelimitListOverridesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1084,6 +1091,7 @@ class Ratelimit(BaseSDK):
                 "json",
                 models.V2RatelimitListOverridesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1214,6 +1222,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1349,6 +1358,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1511,6 +1521,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitSetOverrideRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1668,6 +1679,7 @@ class Ratelimit(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2RatelimitSetOverrideRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
