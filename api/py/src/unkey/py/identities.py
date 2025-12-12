@@ -106,6 +106,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesCreateIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -267,6 +268,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesCreateIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -395,6 +397,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesDeleteIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -523,6 +526,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesDeleteIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -645,6 +649,7 @@ class Identities(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2IdentitiesGetIdentityRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -767,6 +772,7 @@ class Identities(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2IdentitiesGetIdentityRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -896,6 +902,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesListIdentitiesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1040,6 +1047,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesListIdentitiesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1200,6 +1208,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesUpdateIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1345,6 +1354,7 @@ class Identities(BaseSDK):
                 "json",
                 models.V2IdentitiesUpdateIdentityRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

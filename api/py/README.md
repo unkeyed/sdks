@@ -268,18 +268,18 @@ with Unkey(
 <details open>
 <summary>Available methods</summary>
 
-### [analytics](docs/sdks/analytics/README.md)
+### [Analytics](docs/sdks/analytics/README.md)
 
 * [get_verifications](docs/sdks/analytics/README.md#get_verifications) - Query key verification data
 
-### [apis](docs/sdks/apis/README.md)
+### [Apis](docs/sdks/apis/README.md)
 
 * [create_api](docs/sdks/apis/README.md#create_api) - Create API namespace
 * [delete_api](docs/sdks/apis/README.md#delete_api) - Delete API namespace
 * [get_api](docs/sdks/apis/README.md#get_api) - Get API namespace
 * [list_keys](docs/sdks/apis/README.md#list_keys) - List API keys
 
-### [identities](docs/sdks/identities/README.md)
+### [Identities](docs/sdks/identities/README.md)
 
 * [create_identity](docs/sdks/identities/README.md#create_identity) - Create Identity
 * [delete_identity](docs/sdks/identities/README.md#delete_identity) - Delete Identity
@@ -287,7 +287,7 @@ with Unkey(
 * [list_identities](docs/sdks/identities/README.md#list_identities) - List Identities
 * [update_identity](docs/sdks/identities/README.md#update_identity) - Update Identity
 
-### [keys](docs/sdks/keys/README.md)
+### [Keys](docs/sdks/keys/README.md)
 
 * [add_permissions](docs/sdks/keys/README.md#add_permissions) - Add key permissions
 * [add_roles](docs/sdks/keys/README.md#add_roles) - Add key roles
@@ -305,7 +305,7 @@ with Unkey(
 * [verify_key](docs/sdks/keys/README.md#verify_key) - Verify API key
 * [whoami](docs/sdks/keys/README.md#whoami) - Get API key by hash
 
-### [permissions](docs/sdks/permissions/README.md)
+### [Permissions](docs/sdks/permissions/README.md)
 
 * [create_permission](docs/sdks/permissions/README.md#create_permission) - Create permission
 * [create_role](docs/sdks/permissions/README.md#create_role) - Create role
@@ -316,7 +316,7 @@ with Unkey(
 * [list_permissions](docs/sdks/permissions/README.md#list_permissions) - List permissions
 * [list_roles](docs/sdks/permissions/README.md#list_roles) - List roles
 
-### [ratelimit](docs/sdks/ratelimit/README.md)
+### [Ratelimit](docs/sdks/ratelimit/README.md)
 
 * [delete_override](docs/sdks/ratelimit/README.md#delete_override) - Delete ratelimit override
 * [get_override](docs/sdks/ratelimit/README.md#get_override) - Get ratelimit override

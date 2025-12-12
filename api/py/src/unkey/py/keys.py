@@ -86,6 +86,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysAddPermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -228,6 +229,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysAddPermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -371,6 +373,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysAddRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -512,6 +515,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysAddRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -733,6 +737,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysCreateKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -954,6 +959,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysCreateKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1093,6 +1099,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysDeleteKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1232,6 +1239,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysDeleteKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1374,6 +1382,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysGetKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1516,6 +1525,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysGetKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1605,7 +1615,7 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
-        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
         :param retries: Override the default retry configuration for this method
@@ -1645,6 +1655,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysMigrateKeysRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1736,7 +1747,7 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
-        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\").
+        :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
         :param retries: Override the default retry configuration for this method
@@ -1776,6 +1787,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysMigrateKeysRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1917,6 +1929,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRemovePermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2058,6 +2071,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRemovePermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2201,6 +2215,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRemoveRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2344,6 +2359,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRemoveRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2516,6 +2532,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRerollKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2686,6 +2703,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysRerollKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2829,6 +2847,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysSetPermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2974,6 +2993,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysSetPermissionsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3118,6 +3138,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysSetRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3260,6 +3281,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysSetRolesRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3401,6 +3423,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysUpdateCreditsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3544,6 +3567,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysUpdateCreditsRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3738,6 +3762,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysUpdateKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3930,6 +3955,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysUpdateKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -4035,7 +4061,7 @@ class Keys(BaseSDK):
         - `api.*.verify_key` (verify keys in any API)
         - `api.<api_id>.verify_key` (verify keys in specific API)
 
-        If you are getting a NOT_FOUND error, ensure your root key has the required verify key permissions.
+        **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
 
 
         :param key: The API key to verify, exactly as provided by your user.
@@ -4108,6 +4134,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysVerifyKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -4213,7 +4240,7 @@ class Keys(BaseSDK):
         - `api.*.verify_key` (verify keys in any API)
         - `api.<api_id>.verify_key` (verify keys in specific API)
 
-        If you are getting a NOT_FOUND error, ensure your root key has the required verify key permissions.
+        **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
 
 
         :param key: The API key to verify, exactly as provided by your user.
@@ -4286,6 +4313,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysVerifyKeyRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -4412,6 +4440,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysWhoamiRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -4538,6 +4567,7 @@ class Keys(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.V2KeysWhoamiRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

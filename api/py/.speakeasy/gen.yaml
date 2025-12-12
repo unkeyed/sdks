@@ -20,12 +20,13 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.4.1
+  version: 2.5.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -54,14 +55,18 @@ python:
       operations: ""
       shared: ""
       webhooks: ""
+  inferUnionDiscriminators: true
   inputModelSuffix: input
   legacyPyright: false
+  license: ""
   maxMethodParams: 0
   methodArguments: infer-optional-args
   moduleName: unkey.py
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageManager: poetry
   packageName: unkey.py
+  preApplyUnionDiscriminators: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
