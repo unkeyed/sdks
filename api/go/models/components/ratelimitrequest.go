@@ -46,7 +46,7 @@ func (r RatelimitRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RatelimitRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"name", "limit", "duration"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

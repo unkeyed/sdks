@@ -3,7 +3,7 @@
 package components
 
 type V2KeysMigrateKeysRequestBody struct {
-	// Identifier of the configured migration provider/strategy to use (e.g., "your_company").
+	// Identifier of the configured migration provider/strategy to use (e.g., "your_company"). You will receive this from Unkey's support staff.
 	MigrationID string `json:"migrationId"`
 	// The ID of the API that the keys should be inserted into
 	APIID string                 `json:"apiId"`

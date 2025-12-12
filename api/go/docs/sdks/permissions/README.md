@@ -1,5 +1,4 @@
 # Permissions
-(*Permissions*)
 
 ## Overview
 

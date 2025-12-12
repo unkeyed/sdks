@@ -1,20 +1,24 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: c7b94f9f85e6d333f2125e291a9f8a46
+  docChecksum: 2de4305ab15e2f97fe0e1045a6560056
   docVersion: 2.0.0
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 2.2.1
-  configChecksum: ff16744de97dc17505cd7eaeec958d5d
+  speakeasyVersion: 1.675.4
+  generationVersion: 2.779.2
+  releaseVersion: 2.3.0
+  configChecksum: 03eb2cbe0caa2237b9b2ede785156f73
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
+persistentEdits:
+  generation_id: 1553dd3f-f991-4527-bba1-e4fcf4262d34
+  pristine_commit_hash: 45364c1c614dee2434f639a4c788dabcd0984c41
+  pristine_tree_hash: 305f8e2b9e5dddf35bcee31c1c5399fbc2c75f0c
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.13.2
+    core: 3.13.6
     defaultEnabledRetries: 0.2.0
     envVarSecurityUsage: 0.3.2
     globalSecurity: 2.82.12
@@ -28,381 +32,1508 @@ features:
     pagination: 2.82.5
     responseFormat: 0.1.2
     retries: 2.84.2
-    sdkHooks: 0.2.0
-generatedFiles:
-  - .gitattributes
-  - /models/apierrors/badrequesterrorresponse.go
-  - /models/apierrors/conflicterrorresponse.go
-  - /models/apierrors/forbiddenerrorresponse.go
-  - /models/apierrors/goneerrorresponse.go
-  - /models/apierrors/internalservererrorresponse.go
-  - /models/apierrors/notfounderrorresponse.go
-  - /models/apierrors/preconditionfailederrorresponse.go
-  - /models/apierrors/serviceunavailableerrorresponse.go
-  - /models/apierrors/toomanyrequestserrorresponse.go
-  - /models/apierrors/unauthorizederrorresponse.go
-  - /models/apierrors/unprocessableentityerrorresponse.go
-  - /models/components/badrequesterrordetails.go
-  - /models/components/baseerror.go
-  - /models/components/emptyresponse.go
-  - /models/components/httpmetadata.go
-  - /models/components/identity.go
-  - /models/components/keycreditsdata.go
-  - /models/components/keycreditsrefill.go
-  - /models/components/keyresponsedata.go
-  - /models/components/keysverifykeycredits.go
-  - /models/components/keysverifykeyratelimit.go
-  - /models/components/meta.go
-  - /models/components/pagination.go
-  - /models/components/permission.go
-  - /models/components/ratelimitoverride.go
-  - /models/components/ratelimitrequest.go
-  - /models/components/ratelimitresponse.go
-  - /models/components/role.go
-  - /models/components/security.go
-  - /models/components/updatekeycreditsdata.go
-  - /models/components/updatekeycreditsrefill.go
-  - /models/components/v2analyticsgetverificationsrequestbody.go
-  - /models/components/v2analyticsgetverificationsresponsebody.go
-  - /models/components/v2apiscreateapirequestbody.go
-  - /models/components/v2apiscreateapiresponsebody.go
-  - /models/components/v2apiscreateapiresponsedata.go
-  - /models/components/v2apisdeleteapirequestbody.go
-  - /models/components/v2apisdeleteapiresponsebody.go
-  - /models/components/v2apisgetapirequestbody.go
-  - /models/components/v2apisgetapiresponsebody.go
-  - /models/components/v2apisgetapiresponsedata.go
-  - /models/components/v2apislistkeysrequestbody.go
-  - /models/components/v2apislistkeysresponsebody.go
-  - /models/components/v2identitiescreateidentityrequestbody.go
-  - /models/components/v2identitiescreateidentityresponsebody.go
-  - /models/components/v2identitiescreateidentityresponsedata.go
-  - /models/components/v2identitiesdeleteidentityrequestbody.go
-  - /models/components/v2identitiesdeleteidentityresponsebody.go
-  - /models/components/v2identitiesgetidentityrequestbody.go
-  - /models/components/v2identitiesgetidentityresponsebody.go
-  - /models/components/v2identitieslistidentitiesrequestbody.go
-  - /models/components/v2identitieslistidentitiesresponsebody.go
-  - /models/components/v2identitiesupdateidentityrequestbody.go
-  - /models/components/v2identitiesupdateidentityresponsebody.go
-  - /models/components/v2keysaddpermissionsrequestbody.go
-  - /models/components/v2keysaddpermissionsresponsebody.go
-  - /models/components/v2keysaddrolesrequestbody.go
-  - /models/components/v2keysaddrolesresponsebody.go
-  - /models/components/v2keyscreatekeyrequestbody.go
-  - /models/components/v2keyscreatekeyresponsebody.go
-  - /models/components/v2keyscreatekeyresponsedata.go
-  - /models/components/v2keysdeletekeyrequestbody.go
-  - /models/components/v2keysdeletekeyresponsebody.go
-  - /models/components/v2keysgetkeyrequestbody.go
-  - /models/components/v2keysgetkeyresponsebody.go
-  - /models/components/v2keysmigratekeydata.go
-  - /models/components/v2keysmigratekeysmigration.go
-  - /models/components/v2keysmigratekeysrequestbody.go
-  - /models/components/v2keysmigratekeysresponsebody.go
-  - /models/components/v2keysmigratekeysresponsedata.go
-  - /models/components/v2keysremovepermissionsrequestbody.go
-  - /models/components/v2keysremovepermissionsresponsebody.go
-  - /models/components/v2keysremoverolesrequestbody.go
-  - /models/components/v2keysremoverolesresponsebody.go
-  - /models/components/v2keysrerollkeyrequestbody.go
-  - /models/components/v2keysrerollkeyresponsebody.go
-  - /models/components/v2keysrerollkeyresponsedata.go
-  - /models/components/v2keyssetpermissionsrequestbody.go
-  - /models/components/v2keyssetpermissionsresponsebody.go
-  - /models/components/v2keyssetrolesrequestbody.go
-  - /models/components/v2keyssetrolesresponsebody.go
-  - /models/components/v2keysupdatecreditsrequestbody.go
-  - /models/components/v2keysupdatecreditsresponsebody.go
-  - /models/components/v2keysupdatekeyrequestbody.go
-  - /models/components/v2keysupdatekeyresponsebody.go
-  - /models/components/v2keysverifykeyrequestbody.go
-  - /models/components/v2keysverifykeyresponsebody.go
-  - /models/components/v2keysverifykeyresponsedata.go
-  - /models/components/v2keyswhoamirequestbody.go
-  - /models/components/v2keyswhoamiresponsebody.go
-  - /models/components/v2permissionscreatepermissionrequestbody.go
-  - /models/components/v2permissionscreatepermissionresponsebody.go
-  - /models/components/v2permissionscreatepermissionresponsedata.go
-  - /models/components/v2permissionscreaterolerequestbody.go
-  - /models/components/v2permissionscreateroleresponsebody.go
-  - /models/components/v2permissionscreateroleresponsedata.go
-  - /models/components/v2permissionsdeletepermissionrequestbody.go
-  - /models/components/v2permissionsdeletepermissionresponsebody.go
-  - /models/components/v2permissionsdeleterolerequestbody.go
-  - /models/components/v2permissionsdeleteroleresponsebody.go
-  - /models/components/v2permissionsgetpermissionrequestbody.go
-  - /models/components/v2permissionsgetpermissionresponsebody.go
-  - /models/components/v2permissionsgetrolerequestbody.go
-  - /models/components/v2permissionsgetroleresponsebody.go
-  - /models/components/v2permissionslistpermissionsrequestbody.go
-  - /models/components/v2permissionslistpermissionsresponsebody.go
-  - /models/components/v2permissionslistrolesrequestbody.go
-  - /models/components/v2permissionslistrolesresponsebody.go
-  - /models/components/v2ratelimitdeleteoverriderequestbody.go
-  - /models/components/v2ratelimitdeleteoverrideresponsebody.go
-  - /models/components/v2ratelimitdeleteoverrideresponsedata.go
-  - /models/components/v2ratelimitgetoverriderequestbody.go
-  - /models/components/v2ratelimitgetoverrideresponsebody.go
-  - /models/components/v2ratelimitlimitrequestbody.go
-  - /models/components/v2ratelimitlimitresponsebody.go
-  - /models/components/v2ratelimitlimitresponsedata.go
-  - /models/components/v2ratelimitlistoverridesrequestbody.go
-  - /models/components/v2ratelimitlistoverridesresponsebody.go
-  - /models/components/v2ratelimitmultilimitcheck.go
-  - /models/components/v2ratelimitmultilimitresponsebody.go
-  - /models/components/v2ratelimitmultilimitresponsedata.go
-  - /models/components/v2ratelimitsetoverriderequestbody.go
-  - /models/components/v2ratelimitsetoverrideresponsebody.go
-  - /models/components/v2ratelimitsetoverrideresponsedata.go
-  - /models/components/validationerror.go
-  - /models/components/verifykeyratelimitdata.go
-  - /models/operations/addpermissions.go
-  - /models/operations/addroles.go
-  - /models/operations/analyticsgetverifications.go
-  - /models/operations/createapi.go
-  - /models/operations/createkey.go
-  - /models/operations/createpermission.go
-  - /models/operations/createrole.go
-  - /models/operations/deleteapi.go
-  - /models/operations/deletekey.go
-  - /models/operations/deletepermission.go
-  - /models/operations/deleterole.go
-  - /models/operations/getapi.go
-  - /models/operations/getkey.go
-  - /models/operations/getpermission.go
-  - /models/operations/getrole.go
-  - /models/operations/identitiescreateidentity.go
-  - /models/operations/identitiesgetidentity.go
-  - /models/operations/identitieslistidentities.go
-  - /models/operations/listkeys.go
-  - /models/operations/listpermissions.go
-  - /models/operations/listroles.go
-  - /models/operations/migratekeys.go
-  - /models/operations/ratelimitdeleteoverride.go
-  - /models/operations/ratelimitgetoverride.go
-  - /models/operations/ratelimitlimit.go
-  - /models/operations/ratelimitlistoverrides.go
-  - /models/operations/ratelimitmultilimit.go
-  - /models/operations/ratelimitsetoverride.go
-  - /models/operations/removepermissions.go
-  - /models/operations/removeroles.go
-  - /models/operations/rerollkey.go
-  - /models/operations/setpermissions.go
-  - /models/operations/setroles.go
-  - /models/operations/updatecredits.go
-  - /models/operations/updatekey.go
-  - /models/operations/v2identitiesdeleteidentity.go
-  - /models/operations/v2identitiesupdateidentity.go
-  - /models/operations/verifykey.go
-  - /models/operations/whoami.go
-  - USAGE.md
-  - analytics.go
-  - apis.go
-  - docs/models/apierrors/badrequesterrorresponse.md
-  - docs/models/apierrors/conflicterrorresponse.md
-  - docs/models/apierrors/forbiddenerrorresponse.md
-  - docs/models/apierrors/goneerrorresponse.md
-  - docs/models/apierrors/internalservererrorresponse.md
-  - docs/models/apierrors/notfounderrorresponse.md
-  - docs/models/apierrors/preconditionfailederrorresponse.md
-  - docs/models/apierrors/serviceunavailableerrorresponse.md
-  - docs/models/apierrors/toomanyrequestserrorresponse.md
-  - docs/models/apierrors/unauthorizederrorresponse.md
-  - docs/models/apierrors/unprocessableentityerrorresponse.md
-  - docs/models/components/badrequesterrordetails.md
-  - docs/models/components/baseerror.md
-  - docs/models/components/code.md
-  - docs/models/components/emptyresponse.md
-  - docs/models/components/httpmetadata.md
-  - docs/models/components/identity.md
-  - docs/models/components/keycreditsdata.md
-  - docs/models/components/keycreditsrefill.md
-  - docs/models/components/keycreditsrefillinterval.md
-  - docs/models/components/keyresponsedata.md
-  - docs/models/components/keysverifykeycredits.md
-  - docs/models/components/keysverifykeyratelimit.md
-  - docs/models/components/meta.md
-  - docs/models/components/operation.md
-  - docs/models/components/pagination.md
-  - docs/models/components/permission.md
-  - docs/models/components/ratelimitoverride.md
-  - docs/models/components/ratelimitrequest.md
-  - docs/models/components/ratelimitresponse.md
-  - docs/models/components/role.md
-  - docs/models/components/security.md
-  - docs/models/components/updatekeycreditsdata.md
-  - docs/models/components/updatekeycreditsrefill.md
-  - docs/models/components/updatekeycreditsrefillinterval.md
-  - docs/models/components/v2analyticsgetverificationsrequestbody.md
-  - docs/models/components/v2analyticsgetverificationsresponsebody.md
-  - docs/models/components/v2apiscreateapirequestbody.md
-  - docs/models/components/v2apiscreateapiresponsebody.md
-  - docs/models/components/v2apiscreateapiresponsedata.md
-  - docs/models/components/v2apisdeleteapirequestbody.md
-  - docs/models/components/v2apisdeleteapiresponsebody.md
-  - docs/models/components/v2apisgetapirequestbody.md
-  - docs/models/components/v2apisgetapiresponsebody.md
-  - docs/models/components/v2apisgetapiresponsedata.md
-  - docs/models/components/v2apislistkeysrequestbody.md
-  - docs/models/components/v2apislistkeysresponsebody.md
-  - docs/models/components/v2identitiescreateidentityrequestbody.md
-  - docs/models/components/v2identitiescreateidentityresponsebody.md
-  - docs/models/components/v2identitiescreateidentityresponsedata.md
-  - docs/models/components/v2identitiesdeleteidentityrequestbody.md
-  - docs/models/components/v2identitiesdeleteidentityresponsebody.md
-  - docs/models/components/v2identitiesgetidentityrequestbody.md
-  - docs/models/components/v2identitiesgetidentityresponsebody.md
-  - docs/models/components/v2identitieslistidentitiesrequestbody.md
-  - docs/models/components/v2identitieslistidentitiesresponsebody.md
-  - docs/models/components/v2identitiesupdateidentityrequestbody.md
-  - docs/models/components/v2identitiesupdateidentityresponsebody.md
-  - docs/models/components/v2keysaddpermissionsrequestbody.md
-  - docs/models/components/v2keysaddpermissionsresponsebody.md
-  - docs/models/components/v2keysaddrolesrequestbody.md
-  - docs/models/components/v2keysaddrolesresponsebody.md
-  - docs/models/components/v2keyscreatekeyrequestbody.md
-  - docs/models/components/v2keyscreatekeyresponsebody.md
-  - docs/models/components/v2keyscreatekeyresponsedata.md
-  - docs/models/components/v2keysdeletekeyrequestbody.md
-  - docs/models/components/v2keysdeletekeyresponsebody.md
-  - docs/models/components/v2keysgetkeyrequestbody.md
-  - docs/models/components/v2keysgetkeyresponsebody.md
-  - docs/models/components/v2keysmigratekeydata.md
-  - docs/models/components/v2keysmigratekeysmigration.md
-  - docs/models/components/v2keysmigratekeysrequestbody.md
-  - docs/models/components/v2keysmigratekeysresponsebody.md
-  - docs/models/components/v2keysmigratekeysresponsedata.md
-  - docs/models/components/v2keysremovepermissionsrequestbody.md
-  - docs/models/components/v2keysremovepermissionsresponsebody.md
-  - docs/models/components/v2keysremoverolesrequestbody.md
-  - docs/models/components/v2keysremoverolesresponsebody.md
-  - docs/models/components/v2keysrerollkeyrequestbody.md
-  - docs/models/components/v2keysrerollkeyresponsebody.md
-  - docs/models/components/v2keysrerollkeyresponsedata.md
-  - docs/models/components/v2keyssetpermissionsrequestbody.md
-  - docs/models/components/v2keyssetpermissionsresponsebody.md
-  - docs/models/components/v2keyssetrolesrequestbody.md
-  - docs/models/components/v2keyssetrolesresponsebody.md
-  - docs/models/components/v2keysupdatecreditsrequestbody.md
-  - docs/models/components/v2keysupdatecreditsresponsebody.md
-  - docs/models/components/v2keysupdatekeyrequestbody.md
-  - docs/models/components/v2keysupdatekeyresponsebody.md
-  - docs/models/components/v2keysverifykeyrequestbody.md
-  - docs/models/components/v2keysverifykeyresponsebody.md
-  - docs/models/components/v2keysverifykeyresponsedata.md
-  - docs/models/components/v2keyswhoamirequestbody.md
-  - docs/models/components/v2keyswhoamiresponsebody.md
-  - docs/models/components/v2permissionscreatepermissionrequestbody.md
-  - docs/models/components/v2permissionscreatepermissionresponsebody.md
-  - docs/models/components/v2permissionscreatepermissionresponsedata.md
-  - docs/models/components/v2permissionscreaterolerequestbody.md
-  - docs/models/components/v2permissionscreateroleresponsebody.md
-  - docs/models/components/v2permissionscreateroleresponsedata.md
-  - docs/models/components/v2permissionsdeletepermissionrequestbody.md
-  - docs/models/components/v2permissionsdeletepermissionresponsebody.md
-  - docs/models/components/v2permissionsdeleterolerequestbody.md
-  - docs/models/components/v2permissionsdeleteroleresponsebody.md
-  - docs/models/components/v2permissionsgetpermissionrequestbody.md
-  - docs/models/components/v2permissionsgetpermissionresponsebody.md
-  - docs/models/components/v2permissionsgetrolerequestbody.md
-  - docs/models/components/v2permissionsgetroleresponsebody.md
-  - docs/models/components/v2permissionslistpermissionsrequestbody.md
-  - docs/models/components/v2permissionslistpermissionsresponsebody.md
-  - docs/models/components/v2permissionslistrolesrequestbody.md
-  - docs/models/components/v2permissionslistrolesresponsebody.md
-  - docs/models/components/v2ratelimitdeleteoverriderequestbody.md
-  - docs/models/components/v2ratelimitdeleteoverrideresponsebody.md
-  - docs/models/components/v2ratelimitdeleteoverrideresponsedata.md
-  - docs/models/components/v2ratelimitgetoverriderequestbody.md
-  - docs/models/components/v2ratelimitgetoverrideresponsebody.md
-  - docs/models/components/v2ratelimitlimitrequestbody.md
-  - docs/models/components/v2ratelimitlimitresponsebody.md
-  - docs/models/components/v2ratelimitlimitresponsedata.md
-  - docs/models/components/v2ratelimitlistoverridesrequestbody.md
-  - docs/models/components/v2ratelimitlistoverridesresponsebody.md
-  - docs/models/components/v2ratelimitmultilimitcheck.md
-  - docs/models/components/v2ratelimitmultilimitresponsebody.md
-  - docs/models/components/v2ratelimitmultilimitresponsedata.md
-  - docs/models/components/v2ratelimitsetoverriderequestbody.md
-  - docs/models/components/v2ratelimitsetoverrideresponsebody.md
-  - docs/models/components/v2ratelimitsetoverrideresponsedata.md
-  - docs/models/components/validationerror.md
-  - docs/models/components/verifykeyratelimitdata.md
-  - docs/models/operations/addpermissionsresponse.md
-  - docs/models/operations/addrolesresponse.md
-  - docs/models/operations/analyticsgetverificationsresponse.md
-  - docs/models/operations/createapiresponse.md
-  - docs/models/operations/createkeyresponse.md
-  - docs/models/operations/createpermissionresponse.md
-  - docs/models/operations/createroleresponse.md
-  - docs/models/operations/deleteapiresponse.md
-  - docs/models/operations/deletekeyresponse.md
-  - docs/models/operations/deletepermissionresponse.md
-  - docs/models/operations/deleteroleresponse.md
-  - docs/models/operations/getapiresponse.md
-  - docs/models/operations/getkeyresponse.md
-  - docs/models/operations/getpermissionresponse.md
-  - docs/models/operations/getroleresponse.md
-  - docs/models/operations/identitiescreateidentityresponse.md
-  - docs/models/operations/identitiesgetidentityresponse.md
-  - docs/models/operations/identitieslistidentitiesresponse.md
-  - docs/models/operations/listkeysresponse.md
-  - docs/models/operations/listpermissionsresponse.md
-  - docs/models/operations/listrolesresponse.md
-  - docs/models/operations/migratekeysresponse.md
-  - docs/models/operations/option.md
-  - docs/models/operations/ratelimitdeleteoverrideresponse.md
-  - docs/models/operations/ratelimitgetoverrideresponse.md
-  - docs/models/operations/ratelimitlimitresponse.md
-  - docs/models/operations/ratelimitlistoverridesresponse.md
-  - docs/models/operations/ratelimitmultilimitresponse.md
-  - docs/models/operations/ratelimitsetoverrideresponse.md
-  - docs/models/operations/removepermissionsresponse.md
-  - docs/models/operations/removerolesresponse.md
-  - docs/models/operations/rerollkeyresponse.md
-  - docs/models/operations/setpermissionsresponse.md
-  - docs/models/operations/setrolesresponse.md
-  - docs/models/operations/updatecreditsresponse.md
-  - docs/models/operations/updatekeyresponse.md
-  - docs/models/operations/v2identitiesdeleteidentityresponse.md
-  - docs/models/operations/v2identitiesupdateidentityresponse.md
-  - docs/models/operations/verifykeyresponse.md
-  - docs/models/operations/whoamiresponse.md
-  - docs/sdks/analytics/README.md
-  - docs/sdks/apis/README.md
-  - docs/sdks/identities/README.md
-  - docs/sdks/keys/README.md
-  - docs/sdks/permissions/README.md
-  - docs/sdks/ratelimit/README.md
-  - go.mod
-  - identities.go
-  - internal/config/sdkconfiguration.go
-  - internal/hooks/hooks.go
-  - internal/utils/contenttype.go
-  - internal/utils/env.go
-  - internal/utils/form.go
-  - internal/utils/headers.go
-  - internal/utils/json.go
-  - internal/utils/pathparams.go
-  - internal/utils/queryparams.go
-  - internal/utils/requestbody.go
-  - internal/utils/retries.go
-  - internal/utils/security.go
-  - internal/utils/utils.go
-  - keys.go
-  - models/apierrors/apierror.go
-  - models/operations/options.go
-  - optionalnullable/optionalnullable.go
-  - optionalnullable/optionalnullable_test.go
-  - permissions.go
-  - ratelimit.go
-  - retry/config.go
-  - types/bigint.go
-  - types/date.go
-  - types/datetime.go
-  - types/pointers.go
-  - unkey.go
+    sdkHooks: 0.3.0
+trackedFiles:
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:84b0115789fc3ea52e31df701d8a27f76077e29f
+    pristine_git_object: e6a994416d0f527912d2d272e2583458f4fc9bcb
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:3294637f9812d3ad1b77ae5210d7c5585da34058
+    pristine_git_object: c8f16866bc3e6f3b362cf1dd3931483ac35fb2b6
+  analytics.go:
+    id: c71afdf2c49d
+    last_write_checksum: sha1:059b6bf8a2a4bf332bb474c598c877057bd624a4
+    pristine_git_object: 7fab6df8708ab070d6f2d3efe2f25faa7f4668d9
+  apis.go:
+    id: eaaeac15a75e
+    last_write_checksum: sha1:a465283c299230ccd9780a09d1d0dd7f0b99233b
+    pristine_git_object: 3e08fe8a59088a4af340921c10380732de191daa
+  docs/models/apierrors/badrequesterrorresponse.md:
+    id: 63d1eac23098
+    last_write_checksum: sha1:9cf805c81e8d8f33fc4e3b5e34e9df8f4e1810cb
+    pristine_git_object: 58c14c21380a91e0cb17f79c428441da90ca335b
+  docs/models/apierrors/conflicterrorresponse.md:
+    id: 8039c4885661
+    last_write_checksum: sha1:6388c5dc50f1268e48a3c1622cc5184984669193
+    pristine_git_object: e159fc1e66dc6c428a21de2975eab274bf82e34b
+  docs/models/apierrors/forbiddenerrorresponse.md:
+    id: 70d8b103bd37
+    last_write_checksum: sha1:7ef48dd4a9529818346ca7324107670f33e27bb7
+    pristine_git_object: e64f1f8991c2c33f5ab8f8f12671b65edf7c7579
+  docs/models/apierrors/goneerrorresponse.md:
+    id: 17b3fb9a2775
+    last_write_checksum: sha1:6f654c10b727fe9ef1f73b78dce4cd39e231a1eb
+    pristine_git_object: c6134384021b125b88dd48235c752531084cf0e9
+  docs/models/apierrors/internalservererrorresponse.md:
+    id: 794d48f25b6d
+    last_write_checksum: sha1:5c6f051995a5adfa91b7b23f98cf94b4aaf4ba0c
+    pristine_git_object: 216175bf67ac2e8628dff9f06c9c24e918e59f58
+  docs/models/apierrors/notfounderrorresponse.md:
+    id: b620ac4780f4
+    last_write_checksum: sha1:f042add9a71eab1dacaae15278ac3a63043d768e
+    pristine_git_object: 27a04651e8fb6c2b81fa5b65fd9ab9a51e4240d4
+  docs/models/apierrors/preconditionfailederrorresponse.md:
+    id: 77ad3db4aeaa
+    last_write_checksum: sha1:1c594e8da3da85fa5c46588d89986c01b314494a
+    pristine_git_object: bc5329cd1d78011339acb107179a9700f3d18582
+  docs/models/apierrors/serviceunavailableerrorresponse.md:
+    id: 2528869a2700
+    last_write_checksum: sha1:7001891163196d433cd2e28d4c879bff7c9ed8b4
+    pristine_git_object: d21743d91f1aec865bcb8893bb6c189e414cd910
+  docs/models/apierrors/toomanyrequestserrorresponse.md:
+    id: aa2feb49349f
+    last_write_checksum: sha1:e78e938a4d9a0ce1f176ad0315759703b704a1fd
+    pristine_git_object: 55b802a09788fb35cb601dde3da8a30a3ac2c72d
+  docs/models/apierrors/unauthorizederrorresponse.md:
+    id: 1208e814e844
+    last_write_checksum: sha1:e0db024f01f4847ae969109f118f0b8abb6674cc
+    pristine_git_object: 5a191c41c94bc2cec6e731b6aa1a8dbda72ae1bb
+  docs/models/apierrors/unprocessableentityerrorresponse.md:
+    id: 6abf008329c1
+    last_write_checksum: sha1:e07a13a2435ccde41b07c7e593f24d9f8be08c11
+    pristine_git_object: 4b2b3e016299995b32ec5dc38738054b16e0d9bf
+  docs/models/components/badrequesterrordetails.md:
+    id: 735a46302ed7
+    last_write_checksum: sha1:23f542648fa2ac6a353d092f03473abfc9a6a0db
+    pristine_git_object: a73744cb4ab05c739b11cbe4800d50fc06ae31ed
+  docs/models/components/baseerror.md:
+    id: a442e32247ee
+    last_write_checksum: sha1:9e26a7848ef36a1847df7f39aff65f396075b6aa
+    pristine_git_object: d26d3003aef443aa0821c949360a18baa84684b7
+  docs/models/components/code.md:
+    id: ee3d6f2d513e
+    last_write_checksum: sha1:262e214234678a104c620ba32618a9b5b11200a3
+    pristine_git_object: b690e059ee5dc2719ecb420174ecc6497711d258
+  docs/models/components/emptyresponse.md:
+    id: 058494548c6c
+    last_write_checksum: sha1:868dd998e03e8e5ea1e1e6738e1bd6f0508ff89a
+    pristine_git_object: 1915db5c52be9eb267cddf60dd7b0cc43e4dcefb
+  docs/models/components/httpmetadata.md:
+    id: 728948c70168
+    last_write_checksum: sha1:7c40945dac218ce5e5e11e7c907d27a3ea14c417
+    pristine_git_object: df1fdd59f3c85e4ba70573ff7954b12ac1d33d08
+  docs/models/components/identity.md:
+    id: 982cc5ab59ee
+    last_write_checksum: sha1:84a39c8f6fd888c815c2377aea0074db22728d66
+    pristine_git_object: 8b980ceaf4de5fc1e2d45cce35b60303fac00401
+  docs/models/components/keycreditsdata.md:
+    id: 156adc9ede72
+    last_write_checksum: sha1:51f63bbc53ca75380a68afe07764344ec8eb3830
+    pristine_git_object: 3310cd37256547774f2365e609e54ce0ee7e8633
+  docs/models/components/keycreditsrefill.md:
+    id: 6dcbbcb184b9
+    last_write_checksum: sha1:74f74489d70b5135d148f5cbc066e62ab43e7c57
+    pristine_git_object: e5aa12cf204ed1c0a3a45e4fcd122ca1cdbfe3f9
+  docs/models/components/keycreditsrefillinterval.md:
+    id: be849e9e0fd5
+    last_write_checksum: sha1:33966e33414f1bd65067a33a12c7132093f58e4e
+    pristine_git_object: cc883a586514d6ec28a93ef8f8ed47eb054fc39d
+  docs/models/components/keyresponsedata.md:
+    id: d5018289f515
+    last_write_checksum: sha1:5cec5d779ebd08a7f839cfcb8b3642f526571248
+    pristine_git_object: a503177357e860ba37e085a49283bf257cc293dc
+  docs/models/components/keysverifykeycredits.md:
+    id: b87d4b64c82e
+    last_write_checksum: sha1:28b7e89fd9294192c0d207e842defa28c9ba99f5
+    pristine_git_object: 5e4f110407da36d1315a4583cf611b7f610e965c
+  docs/models/components/keysverifykeyratelimit.md:
+    id: ac34558d97d4
+    last_write_checksum: sha1:ed520ac033501797fd541219586bd12b62f1bab1
+    pristine_git_object: acffc1635dd7a481324536692bc4d428992da36d
+  docs/models/components/meta.md:
+    id: 61a561a63c6e
+    last_write_checksum: sha1:31abc08225a36c929f04aaee3e167be9f14be0c5
+    pristine_git_object: 3e6bc9786eeaebea767a8e7807e61b10dfbddc2c
+  docs/models/components/operation.md:
+    id: cf56bc24045c
+    last_write_checksum: sha1:a241fc4d58e9137a12b03ae8f8ec1471a3b39b19
+    pristine_git_object: b8a777eecbcaa9a023ff1cdff11eab8933f0c8ab
+  docs/models/components/pagination.md:
+    id: c63182f7c460
+    last_write_checksum: sha1:cf83766cbcfa1d941cbe6f9ac2af485bc3f93451
+    pristine_git_object: ac9fe2ad1ae9e8f7494d709c641a325de810a95d
+  docs/models/components/permission.md:
+    id: 1627c686fe0e
+    last_write_checksum: sha1:28ec49ced2cac543cc8ca7520878fa65a781f1c9
+    pristine_git_object: b78f5fc33aea93cbbc2a49bcfb6629e6ce291d72
+  docs/models/components/ratelimitoverride.md:
+    id: a5d79f2a2458
+    last_write_checksum: sha1:9cfdcde34a0032ffc5bef04832a521218f02c23c
+    pristine_git_object: db1c48f63ccf15007864f4e9541ea4c990d6dbc4
+  docs/models/components/ratelimitrequest.md:
+    id: 1624f02518ae
+    last_write_checksum: sha1:b56b08184c77e99e34db6d12dde64d4f7c9b94aa
+    pristine_git_object: 608062323ddea734dfe9f2b7dac508c55bffa955
+  docs/models/components/ratelimitresponse.md:
+    id: 1f4df5cccded
+    last_write_checksum: sha1:d1b6194dc1cd0e7018732a7f91bc1ae93a011044
+    pristine_git_object: a50d9452ea783132622624e445cf670da7a4cc36
+  docs/models/components/role.md:
+    id: ab26d0e394ad
+    last_write_checksum: sha1:ef6785ec2d41b14ccfa853d4982902e13bd40a25
+    pristine_git_object: 692a61d3b913aa5199fe311e8b7970b8e0e83015
+  docs/models/components/security.md:
+    id: 54906b49ea28
+    last_write_checksum: sha1:2a97702bdbd9fa606cc5fbcb7dd55a8c0e2d3373
+    pristine_git_object: c7fbb62f503dcfd1f3c54c011865b79b06c65c4c
+  docs/models/components/updatekeycreditsdata.md:
+    id: 116788edee66
+    last_write_checksum: sha1:106ed156f7534b34e27afe3c32b54cd011e6fcc5
+    pristine_git_object: 33830518dc25048b65c47fe4e07d426f26c97c87
+  docs/models/components/updatekeycreditsrefill.md:
+    id: 56978bc7b70f
+    last_write_checksum: sha1:85398017536297e80eb328ea13ab87e09a7acd4e
+    pristine_git_object: b3a0f7c8b42cc44afdc6552e13092988f836bb86
+  docs/models/components/updatekeycreditsrefillinterval.md:
+    id: 99cdf9265a42
+    last_write_checksum: sha1:2d07c1b85ffc99dd9aa2b5ef2a3c8cc3c6170f31
+    pristine_git_object: a751fa72cf89cf65b0cf9049a041ba05f874d0e1
+  docs/models/components/v2analyticsgetverificationsrequestbody.md:
+    id: 8b4bc4329a6d
+    last_write_checksum: sha1:ab1dcc2fab770db2fbbaa6eabfbf5d14568bc45b
+    pristine_git_object: caa29200d08d51f111f1fd0d7a456e59ecc7a1a4
+  docs/models/components/v2analyticsgetverificationsresponsebody.md:
+    id: ef98f9209b54
+    last_write_checksum: sha1:8a6a454509748349b2f9887eb59e3d46f10d6ae7
+    pristine_git_object: e790c1ca7fbc31d66a7e31ff965582532f90dee6
+  docs/models/components/v2apiscreateapirequestbody.md:
+    id: c2459665a2e6
+    last_write_checksum: sha1:11e69447b4d5b788acc40e6157da7c502ec46caa
+    pristine_git_object: aacac9860f31d16f1f6a9a82d747bbc40a8100c3
+  docs/models/components/v2apiscreateapiresponsebody.md:
+    id: 7ca37a74a0b1
+    last_write_checksum: sha1:670518f9e566fc3c4a12d376554866dfb98f8452
+    pristine_git_object: 0d7943ac813bc56811ad5cfeb0050714e29321aa
+  docs/models/components/v2apiscreateapiresponsedata.md:
+    id: 95860a1bb41f
+    last_write_checksum: sha1:3e5431c75875056617a9bc957e808561761e413a
+    pristine_git_object: 4e547695403c4cdf68664738cca00dcb82cda962
+  docs/models/components/v2apisdeleteapirequestbody.md:
+    id: b34c787d9370
+    last_write_checksum: sha1:2b90fdfe9db982ff89e62557cb7a5612e8d70e36
+    pristine_git_object: bdd69b52f14286652f1f47bc3c76c9a2c0724bf5
+  docs/models/components/v2apisdeleteapiresponsebody.md:
+    id: 71233bb7b075
+    last_write_checksum: sha1:6957177578ba1a9ddc239acd8efa1eb34951453f
+    pristine_git_object: 794ece404c427ceb57b09dcb97f82734b1d1a663
+  docs/models/components/v2apisgetapirequestbody.md:
+    id: e1f8f4fac67c
+    last_write_checksum: sha1:285abb2cbf421e2c7c386cad4b68e1a860c285b0
+    pristine_git_object: afa61b01e5d2b11ec51bd5dbe5cb7c9af3ea92b6
+  docs/models/components/v2apisgetapiresponsebody.md:
+    id: 5f8ff70796e9
+    last_write_checksum: sha1:fb8086d9cf9e012f9aca656a941d5a6d6722f2a7
+    pristine_git_object: b384ad8b477d196a0cc2c209d6aabb09e8817de4
+  docs/models/components/v2apisgetapiresponsedata.md:
+    id: 8e5c88ff3ccf
+    last_write_checksum: sha1:b65ae1296d91df219407912e41197651276dbd70
+    pristine_git_object: 2577acc9633804c084e1565180fb79088fa61220
+  docs/models/components/v2apislistkeysrequestbody.md:
+    id: 673e82698fb4
+    last_write_checksum: sha1:7d4471a740d43bf3944d71cad8641b38f258cb7b
+    pristine_git_object: 08bbe878e5b23a785171ba6bf7a576517ab476d2
+  docs/models/components/v2apislistkeysresponsebody.md:
+    id: a31f7ed47554
+    last_write_checksum: sha1:37cd3d5c1f3a4ab2521ea4171ec30c9c2dce326e
+    pristine_git_object: 3d54f802f1d18bfe7895ff2ae702ebdad5bc05b2
+  docs/models/components/v2identitiescreateidentityrequestbody.md:
+    id: e96707bce666
+    last_write_checksum: sha1:d4b68348dce8af3a9ac5f06aed0019156ee81730
+    pristine_git_object: 7fb06ea6aa8981eab4076d07bd5c95ede8d4b9c0
+  docs/models/components/v2identitiescreateidentityresponsebody.md:
+    id: 71fec9ac6261
+    last_write_checksum: sha1:549a6cf7aa75436a11a43a619fcd742ee4ade99d
+    pristine_git_object: 37835bf1652cb54747d437781dc55c38891f1348
+  docs/models/components/v2identitiescreateidentityresponsedata.md:
+    id: 051dc65468ab
+    last_write_checksum: sha1:1ffcdc9044631cdcd09479f001134a783c5fa29d
+    pristine_git_object: 77d4262382399d01d68176bcb28f6278ff1d9231
+  docs/models/components/v2identitiesdeleteidentityrequestbody.md:
+    id: 2eb73d5fd5c0
+    last_write_checksum: sha1:8089c2ff94e12e3d1152c0ea10b32e075b2507ff
+    pristine_git_object: 8d5d3945becd8e063134f335553007f884670913
+  docs/models/components/v2identitiesdeleteidentityresponsebody.md:
+    id: 03f5423b985b
+    last_write_checksum: sha1:dadd8124c05699bda4cd0deed1b2c9dcb4508e8f
+    pristine_git_object: 685e00dfbaf18b51d3a9ca87a879a5ca031346fc
+  docs/models/components/v2identitiesgetidentityrequestbody.md:
+    id: 45a86420dbcd
+    last_write_checksum: sha1:6afadac56baaa3120b9d49c12ccb254f294745ca
+    pristine_git_object: a91134daefb13f843afb34f11bb5b6cc251e6093
+  docs/models/components/v2identitiesgetidentityresponsebody.md:
+    id: 94f7796736a1
+    last_write_checksum: sha1:2a87abc3dd730dd2fe1c85d865a7c28b89efd1a5
+    pristine_git_object: 517766e230acae5e7274d19aaca83cd9be594116
+  docs/models/components/v2identitieslistidentitiesrequestbody.md:
+    id: 4df0a15971dc
+    last_write_checksum: sha1:6a7e14c6e8cd02f050774a7e21c2408cdc63e9fe
+    pristine_git_object: f6d0d869bf3b02aef4444de192033ec48f5c995e
+  docs/models/components/v2identitieslistidentitiesresponsebody.md:
+    id: ea1958a5dc31
+    last_write_checksum: sha1:1cbe2a6171c6847b0723c649a8904f1242476b09
+    pristine_git_object: 26d624fb62a00b5fe3522ea3ebe9cfe8ec49ec08
+  docs/models/components/v2identitiesupdateidentityrequestbody.md:
+    id: a5fa0fe70a33
+    last_write_checksum: sha1:230ac3c1a84e6ef724f5f8b0fe243ce26f98c197
+    pristine_git_object: 381492edf04bb6a0536242a5db7c52cedb19495d
+  docs/models/components/v2identitiesupdateidentityresponsebody.md:
+    id: cd1f76aa1f0a
+    last_write_checksum: sha1:40b66aa0ddcb71543b6a04cfc98a57915c834d23
+    pristine_git_object: 28ca48ad9466d05b8ac2c9c643d7279884abc27d
+  docs/models/components/v2keysaddpermissionsrequestbody.md:
+    id: 229de51ea7ce
+    last_write_checksum: sha1:7907866273890ebe78023402affc405ce7117adb
+    pristine_git_object: 1ee7acb6d28c9b9af54ed598777faf5721399938
+  docs/models/components/v2keysaddpermissionsresponsebody.md:
+    id: 7ec5584af6e7
+    last_write_checksum: sha1:dbbfa962ea873fc976f5f611699e847292260fb2
+    pristine_git_object: cfbc82c9b2976074ba53e423241ce5c119ee5d98
+  docs/models/components/v2keysaddrolesrequestbody.md:
+    id: 3288c1d63f9f
+    last_write_checksum: sha1:7ca063bb02cbbb361b3131eb87f496784b948982
+    pristine_git_object: 3a3dd820cb09181a80e78e9898002fb7af5934f6
+  docs/models/components/v2keysaddrolesresponsebody.md:
+    id: 5e5aa7066519
+    last_write_checksum: sha1:f396b0648862fd1391a3c96526ce0f7ff41c0be2
+    pristine_git_object: 7e61cbac84f314a37cb7572df52a52abc9c1471a
+  docs/models/components/v2keyscreatekeyrequestbody.md:
+    id: f3f0b3a43307
+    last_write_checksum: sha1:aaa502e16ccec8dea89e1d6a9148044611d5263d
+    pristine_git_object: 9379d84b47b51ab9ddc5e47c991aa643a35ced69
+  docs/models/components/v2keyscreatekeyresponsebody.md:
+    id: cd31bc64a9e6
+    last_write_checksum: sha1:a03a34d55baf3add88f51021bda23364a193ac91
+    pristine_git_object: 86c7af4af343f8728c3b179a2df9c624d775d691
+  docs/models/components/v2keyscreatekeyresponsedata.md:
+    id: 5d4a86412a18
+    last_write_checksum: sha1:21baa62018b8594db4a2b29cf514b9621239e222
+    pristine_git_object: 705ee7374c458d0b6f315b337d090c5957251212
+  docs/models/components/v2keysdeletekeyrequestbody.md:
+    id: 9119baa8a55a
+    last_write_checksum: sha1:2666645e5ba565493830774370f96b4f7e3bd1b7
+    pristine_git_object: af5547cdbabef896b84408579d96867bd8376520
+  docs/models/components/v2keysdeletekeyresponsebody.md:
+    id: fd172405cd65
+    last_write_checksum: sha1:99cce4e70bfd208cc724e848d468e0197a3eb2ae
+    pristine_git_object: e33932943b632b291d57824aac557e8146f47549
+  docs/models/components/v2keysgetkeyrequestbody.md:
+    id: 3589510f188f
+    last_write_checksum: sha1:06055ffd1bdd75b70b711f4ec0d68b6caed6287a
+    pristine_git_object: 1f0af997920360febcda874e4bb80af1803c2f48
+  docs/models/components/v2keysgetkeyresponsebody.md:
+    id: 7689c75142d1
+    last_write_checksum: sha1:e30ef92153c35f74845adada67f545ed3863d474
+    pristine_git_object: bc0705be19a7a8a7cc53632b6339a4ff92716954
+  docs/models/components/v2keysmigratekeydata.md:
+    id: 2063234960a5
+    last_write_checksum: sha1:e4656efa30d076b326362f1d3a69d4ed7170c41f
+    pristine_git_object: 0de06f2dc3365de31921f9cd74db58ac8d80ef08
+  docs/models/components/v2keysmigratekeysmigration.md:
+    id: 508599b41f4b
+    last_write_checksum: sha1:06163ae52b78a4dfa8429509800ac6b6bd4398b8
+    pristine_git_object: 14b53050caa04715f76ce121dba897c3610630c8
+  docs/models/components/v2keysmigratekeysrequestbody.md:
+    id: 9d33bb01024b
+    last_write_checksum: sha1:36207897ea6d9d50ff6a9a1ba4d3ed95e72d82d3
+    pristine_git_object: 5670ce5af2a9c58051b3bfa2c33881079196a747
+  docs/models/components/v2keysmigratekeysresponsebody.md:
+    id: ff787a71488e
+    last_write_checksum: sha1:cc44588b65ee34e233f6b378381a984f91e8c484
+    pristine_git_object: 1b740ee93f78bf25fc89428bf90bb3d20365df05
+  docs/models/components/v2keysmigratekeysresponsedata.md:
+    id: d8460bedc632
+    last_write_checksum: sha1:54ad2e40684c780620482ba4029205f179b9ca9c
+    pristine_git_object: 778d05a478af4a689646860ee0972e1a775b27cb
+  docs/models/components/v2keysremovepermissionsrequestbody.md:
+    id: 49d1d952571e
+    last_write_checksum: sha1:469836dc517fd5fd1ac29d292dcde417c4e68491
+    pristine_git_object: b40653458951ce03cc1df9a517844ef582771222
+  docs/models/components/v2keysremovepermissionsresponsebody.md:
+    id: 4722a7e8e25a
+    last_write_checksum: sha1:97047ce444d4dc8baf7c4bfa71c05291097e8e00
+    pristine_git_object: 65bcbd80a3609f0f18f07f698d9e410995e089b8
+  docs/models/components/v2keysremoverolesrequestbody.md:
+    id: ebf866954087
+    last_write_checksum: sha1:829fdd1194e10d9d82d9096158ce534e86a856b5
+    pristine_git_object: 53ee5227b15d99670ca5f637d9591ec750031dfe
+  docs/models/components/v2keysremoverolesresponsebody.md:
+    id: 231b6995357b
+    last_write_checksum: sha1:122c21433f2ce9210f19e94a9eea7ec10d0f30d9
+    pristine_git_object: 8624214ab5b4765e4a04ff8808b8809f44e605b8
+  docs/models/components/v2keysrerollkeyrequestbody.md:
+    id: ec1b24ea8afe
+    last_write_checksum: sha1:7185f44e741fe975fa1f0ee4a19bbc0b3ae56e36
+    pristine_git_object: 630261ea7764a724030b6ac7273dcec3e5f1eea4
+  docs/models/components/v2keysrerollkeyresponsebody.md:
+    id: 6020e73a2cda
+    last_write_checksum: sha1:0edc678c882714a078158fa12a707eb6f642bb63
+    pristine_git_object: 57511656d33a30c46f0db3261ae747eb36fea828
+  docs/models/components/v2keysrerollkeyresponsedata.md:
+    id: 5616b0934e58
+    last_write_checksum: sha1:684893a123e33abba616f8e1d80a8a0027052678
+    pristine_git_object: 40f39263fe9e2a64e6f41eebc6b38ac4058d1c39
+  docs/models/components/v2keyssetpermissionsrequestbody.md:
+    id: 219ba57341d9
+    last_write_checksum: sha1:f02c0615a83f6828349145420527dcb878c7d048
+    pristine_git_object: 0e7d6a9d80d092a1506d4d26a5d294327301d759
+  docs/models/components/v2keyssetpermissionsresponsebody.md:
+    id: 7234f8ec72f0
+    last_write_checksum: sha1:7afb0856d8d7a43e0506c08b3869393be07280a0
+    pristine_git_object: c818d06ea79cbb938e56585331892e8c0e119b99
+  docs/models/components/v2keyssetrolesrequestbody.md:
+    id: 6282a7b46c7e
+    last_write_checksum: sha1:58f14c85445a0be2828174003dda32570e0e383b
+    pristine_git_object: 04a6143470641e2995ebe06f43e70629b23b9934
+  docs/models/components/v2keyssetrolesresponsebody.md:
+    id: 766c5975344f
+    last_write_checksum: sha1:a60a8568d99e683e32ab23775b3a5dc19f374139
+    pristine_git_object: e839f1cfc75e0e97e8488a90b5578df7e339486e
+  docs/models/components/v2keysupdatecreditsrequestbody.md:
+    id: ad3d0d108e4f
+    last_write_checksum: sha1:9da5e3e314f72a0085422a76eeb570899b51aada
+    pristine_git_object: 1df056d19e4a5f078875ccf064d45ce97fc769ef
+  docs/models/components/v2keysupdatecreditsresponsebody.md:
+    id: 60f53ebac4a7
+    last_write_checksum: sha1:7c9fb92b630513d1182fbbd384a8575d92b796cd
+    pristine_git_object: acfb55efb4695a49efe31aac5e632f7f1c89226f
+  docs/models/components/v2keysupdatekeyrequestbody.md:
+    id: a715f4066f46
+    last_write_checksum: sha1:d1f384f166e8c5bcdca8fd7421a03f78066c9e5c
+    pristine_git_object: 68e0f9ce2a6e1765fa807b3538cc7b988ced8508
+  docs/models/components/v2keysupdatekeyresponsebody.md:
+    id: 5411a765e6b0
+    last_write_checksum: sha1:07087e4265117d39656819fb0e33723f7308f19a
+    pristine_git_object: a4191409d43d434463bcd646224ca245a7058245
+  docs/models/components/v2keysverifykeyrequestbody.md:
+    id: 5a5042d886c7
+    last_write_checksum: sha1:203be2938079b07d30c19a0544a57e2e90d2af9c
+    pristine_git_object: f4cde0ba20612c0684827b3b54389753434dacd6
+  docs/models/components/v2keysverifykeyresponsebody.md:
+    id: c6acbb885ae6
+    last_write_checksum: sha1:803a935e9354f22693b4071f2eb1dc0a67b9538c
+    pristine_git_object: ea5bc2a3741e367e2b8783553b11ee6065367e71
+  docs/models/components/v2keysverifykeyresponsedata.md:
+    id: 4ea1b7e9c35b
+    last_write_checksum: sha1:4e13c269648ce7a9435948e1a48ec6e9def084dd
+    pristine_git_object: 27be1ce5d72221a531917afa5133aebfb17a1c45
+  docs/models/components/v2keyswhoamirequestbody.md:
+    id: f2a5c55ba882
+    last_write_checksum: sha1:a31f0dae648361307ced62fd2ceed4b0939ce5e9
+    pristine_git_object: 05acba9b75c8dae228a806059f4565eecaff3926
+  docs/models/components/v2keyswhoamiresponsebody.md:
+    id: e95e510cdbeb
+    last_write_checksum: sha1:9e472f0141f5b0e78bd6d603cec39a784f57021b
+    pristine_git_object: e6aa22af475f2b993da8753b60c005df8a1cdfe6
+  docs/models/components/v2permissionscreatepermissionrequestbody.md:
+    id: f52515943c12
+    last_write_checksum: sha1:013a0f5353f03b7d050311df358c5877f289a2d1
+    pristine_git_object: 9edf20bb8a6c9001a821416812a6211521168516
+  docs/models/components/v2permissionscreatepermissionresponsebody.md:
+    id: 97868327642f
+    last_write_checksum: sha1:7f4bdb2b52e1aef69d3e8923260f510bc44655b5
+    pristine_git_object: e1fa374583e99ee5d0199936fbb6b2a47fca7659
+  docs/models/components/v2permissionscreatepermissionresponsedata.md:
+    id: bac5dc1369dd
+    last_write_checksum: sha1:89da391d492e4c68d1186ec00979a23e3a3cacde
+    pristine_git_object: 597f800d2eec98c73b6f3a19bb4ed09bed48b763
+  docs/models/components/v2permissionscreaterolerequestbody.md:
+    id: d01a83ec3670
+    last_write_checksum: sha1:b0e09f06a7bf2c556e31df9749387b787b572aee
+    pristine_git_object: b60835508c27e47919d985e31e3157fbf85aa4d7
+  docs/models/components/v2permissionscreateroleresponsebody.md:
+    id: f5c1580ffe50
+    last_write_checksum: sha1:ecde3d4d3fe4ffa16853223a005ced0cd00e2136
+    pristine_git_object: f67eae733f824395d2029983b0972a1055642be1
+  docs/models/components/v2permissionscreateroleresponsedata.md:
+    id: 1315a10b1912
+    last_write_checksum: sha1:7adfdc0857ff545062f2eca0bd1cf5d0f09c0ea8
+    pristine_git_object: 8ec824201b4cfbcb7739cfc525655c2f30dc654e
+  docs/models/components/v2permissionsdeletepermissionrequestbody.md:
+    id: b2c556861741
+    last_write_checksum: sha1:61c62a8b895259454e589736030b528e85a7b6fd
+    pristine_git_object: 03ab8936203dd20e54d57981ca7d82de57cf00d4
+  docs/models/components/v2permissionsdeletepermissionresponsebody.md:
+    id: b6fa07e1c595
+    last_write_checksum: sha1:ac7d09994953499f7a1c31c834ea59b7772730a3
+    pristine_git_object: dd38be4356284c27b3d8dd9226340bddcd3a2255
+  docs/models/components/v2permissionsdeleterolerequestbody.md:
+    id: a06d8f2ef242
+    last_write_checksum: sha1:446e461336fe1dd39c82f333b8effe066399cfad
+    pristine_git_object: e29bb1bd5669ffa761f6ff4ec97941b206648d84
+  docs/models/components/v2permissionsdeleteroleresponsebody.md:
+    id: 8b7fb8db047e
+    last_write_checksum: sha1:85c6d645045c41fc388542ae2340cf716b324fc2
+    pristine_git_object: 567571bf9a55518996e21999a26ba7dba37a7602
+  docs/models/components/v2permissionsgetpermissionrequestbody.md:
+    id: 475fb2088537
+    last_write_checksum: sha1:710476179dc1a457ebebe72bf7c5ef5f0aa91f28
+    pristine_git_object: a565528671e059cbfb4f6f2b9f7535f958702277
+  docs/models/components/v2permissionsgetpermissionresponsebody.md:
+    id: 6f8f6ea4189d
+    last_write_checksum: sha1:36d612830065bf8a2be27b8434da6c1e3de092f9
+    pristine_git_object: dad9a930e673695f03833ba6fe1e0948bae55324
+  docs/models/components/v2permissionsgetrolerequestbody.md:
+    id: 605131c7a1a8
+    last_write_checksum: sha1:cf9e5be5a3c4b0315264cd4974983cad98fa1298
+    pristine_git_object: ee58d9519a89b0c39f7f01bd5eb21bba8534bba2
+  docs/models/components/v2permissionsgetroleresponsebody.md:
+    id: c6c313f32c2e
+    last_write_checksum: sha1:6aec0d6f19d3adff3a2bf486567224ed32a55ac2
+    pristine_git_object: c92d3760ddfff2f130f3b99f4e44aaad2816a66f
+  docs/models/components/v2permissionslistpermissionsrequestbody.md:
+    id: c71dee0582f8
+    last_write_checksum: sha1:f806c35dfade74b60e4e79891f526b4bda87216e
+    pristine_git_object: 4f0a5ddf91e39f702673b08cd5e9fafc7f716799
+  docs/models/components/v2permissionslistpermissionsresponsebody.md:
+    id: da1704f6b325
+    last_write_checksum: sha1:8bd6baada0055328e966a99e3b66be0212802a67
+    pristine_git_object: 2315d759519d8ef25033cf157c84514eec11892f
+  docs/models/components/v2permissionslistrolesrequestbody.md:
+    id: 4d00e6445d4f
+    last_write_checksum: sha1:58396393eda95181f7a813caeb3281857a24867d
+    pristine_git_object: 47ef813d17c344e613aec8e9998cbad59aa4d898
+  docs/models/components/v2permissionslistrolesresponsebody.md:
+    id: 2a718d6740b3
+    last_write_checksum: sha1:780b062351c6e2b2d2eb8f3eba1b45b5bb56a420
+    pristine_git_object: 6dc3aa755077408bd9906b83bddc5cb732b64d07
+  docs/models/components/v2ratelimitdeleteoverriderequestbody.md:
+    id: 27743a6adcdd
+    last_write_checksum: sha1:6bded5076b81b62bda061555bf40ab12f7514e83
+    pristine_git_object: 8b0b3ea0f4a73839cc2ee4f839a7ff6ad753da87
+  docs/models/components/v2ratelimitdeleteoverrideresponsebody.md:
+    id: dccbccabba91
+    last_write_checksum: sha1:7dbe35735dbf6db45df0b30d30c1179b9b63da78
+    pristine_git_object: a4660d5720ef007cd576f2d03a65676ec5e6a7de
+  docs/models/components/v2ratelimitdeleteoverrideresponsedata.md:
+    id: 84137e763ae7
+    last_write_checksum: sha1:582a94c936c4aaf110df731348e0ed5205ec1b22
+    pristine_git_object: 306ba59749e40f918244d65ae6849a8127e6652b
+  docs/models/components/v2ratelimitgetoverriderequestbody.md:
+    id: fdefebb2985b
+    last_write_checksum: sha1:adf24d0132a65732f0f3f4ca9d385c4d806e1272
+    pristine_git_object: 545eb4948620b76e8878102e2272366c20c49651
+  docs/models/components/v2ratelimitgetoverrideresponsebody.md:
+    id: c944480f95a8
+    last_write_checksum: sha1:384cdc12de20289b6e8fd1efef6d1af1a295cb63
+    pristine_git_object: 9c7232fff0417fdead2d3ce67cd1095ba245266c
+  docs/models/components/v2ratelimitlimitrequestbody.md:
+    id: b7be205c0a75
+    last_write_checksum: sha1:78f6d867a2578e03dee97adaefcfc3f5e17d16af
+    pristine_git_object: 7e43d4bd6de4e3a3caafa27349eeee25193e2781
+  docs/models/components/v2ratelimitlimitresponsebody.md:
+    id: 70f9e7f7126d
+    last_write_checksum: sha1:5c1c2a8c98e8818674b2836968e8e3ed1b5de27d
+    pristine_git_object: adaf10b6336e1afe56b724eae98c8e97bb4d26fb
+  docs/models/components/v2ratelimitlimitresponsedata.md:
+    id: b9f3101479f1
+    last_write_checksum: sha1:d5f36f61458edf68e449b0d244c46c2c9d47a5a9
+    pristine_git_object: 0be932f322eb8c49c2691ad57da375f053f52e71
+  docs/models/components/v2ratelimitlistoverridesrequestbody.md:
+    id: dfe45edc5e9b
+    last_write_checksum: sha1:89ef722c3b38671413a8b9396ce9b62872f8d693
+    pristine_git_object: 0cf777494b8b31a519b7a517f8734e10f02efdc5
+  docs/models/components/v2ratelimitlistoverridesresponsebody.md:
+    id: 1ead4c8a08d5
+    last_write_checksum: sha1:74c7929d2c1ec09e7a7ebf2a6c8fe2b2bbd37f9a
+    pristine_git_object: f4f803e09aa9d79de732c98d3aeea441b3995631
+  docs/models/components/v2ratelimitmultilimitcheck.md:
+    id: 668059ee677c
+    last_write_checksum: sha1:1fac973362d386f7ba2bbee7ea2e9375df60380f
+    pristine_git_object: fd9ff41542a912fe5fb23bd2f7c27d90246c33e8
+  docs/models/components/v2ratelimitmultilimitresponsebody.md:
+    id: 8d292623a26c
+    last_write_checksum: sha1:3e6855d6284ebeffb8a9223c1c4b91848f7b94a7
+    pristine_git_object: 400deddb8e72b433cf766f944783d7836056d40c
+  docs/models/components/v2ratelimitmultilimitresponsedata.md:
+    id: 0b3b40e49ad3
+    last_write_checksum: sha1:e67a52daf20c82e47bf3ae9854a43f3a648441b9
+    pristine_git_object: d13dfaa6b58f9ba7ad53a5b1e6d969dd1709ccae
+  docs/models/components/v2ratelimitsetoverriderequestbody.md:
+    id: 97a891c0f0c2
+    last_write_checksum: sha1:1daedfe5f3441b1e9eebd6ead8c3500ad702daaa
+    pristine_git_object: a20042cbd8d0c59f6a5d242296593a170862912f
+  docs/models/components/v2ratelimitsetoverrideresponsebody.md:
+    id: c48cc6bca631
+    last_write_checksum: sha1:d370c61c4c6da545fc1c6e999594118f0f0ab686
+    pristine_git_object: 6be5904a89ab8dd4c8acd277c5c36a150468b716
+  docs/models/components/v2ratelimitsetoverrideresponsedata.md:
+    id: 75942f64d168
+    last_write_checksum: sha1:754c822b40a633f5cde3191d49b1a6ee344b077b
+    pristine_git_object: 2e1b40ec0d680b2aae1a0f9b640c32722b400d0d
+  docs/models/components/validationerror.md:
+    id: 23910fc567b1
+    last_write_checksum: sha1:d1b0ab2eb88c031936457ff3884b508af7269fa4
+    pristine_git_object: 0fa5188ed62ccc838d0abb97e2539bd07d524dd4
+  docs/models/components/verifykeyratelimitdata.md:
+    id: bdd6b45eb451
+    last_write_checksum: sha1:ce7b9c6678d0cbba50b8bd2d852f5cb61b0e533a
+    pristine_git_object: 87ccaf14e01cb7a733f9272d28df296881512953
+  docs/models/operations/addpermissionsresponse.md:
+    id: cd4bd1171703
+    last_write_checksum: sha1:6d64608fd9267cc5ec749e77a5079c4a902515ee
+    pristine_git_object: a73939227c53d4f617a6a5651d6ecc29d9d225be
+  docs/models/operations/addrolesresponse.md:
+    id: 1523b985105c
+    last_write_checksum: sha1:8ec274b25277d2b202d128a3391cd708638a9d8a
+    pristine_git_object: acc58b55fb1146288a2e17020b1b0ad18415975b
+  docs/models/operations/analyticsgetverificationsresponse.md:
+    id: 0acf5b077b96
+    last_write_checksum: sha1:92136be8a0fdcc0c456a40bf82f9faabd86afb1c
+    pristine_git_object: b732e512deddac4b1db4c2f6eb83c3a6614b3446
+  docs/models/operations/createapiresponse.md:
+    id: fa4bbc32e3eb
+    last_write_checksum: sha1:78d1e9cb2886b06446e706c4bf6dc73248fa099f
+    pristine_git_object: a40794fa916fdf7102a8090e7deaa5d38faa103f
+  docs/models/operations/createkeyresponse.md:
+    id: b342c5ae1bd8
+    last_write_checksum: sha1:f5b9ddb9d2ef42d823cf95f270e325abd5bac749
+    pristine_git_object: d1cec52448dadd5eef8e967aa70bb9718aa25c32
+  docs/models/operations/createpermissionresponse.md:
+    id: 7177187ccbae
+    last_write_checksum: sha1:723443d49546a06b3e48fa19d372dfec682d89d0
+    pristine_git_object: 3b5f168efdfe9a5f3c6c36f57a3f41b79d6440e3
+  docs/models/operations/createroleresponse.md:
+    id: 8632fb7390ab
+    last_write_checksum: sha1:ef30fc029a111a800bc740d020b6220df37aaacc
+    pristine_git_object: 46d3fc6427fb71d67d3c8ac9a72d318da732bc8f
+  docs/models/operations/deleteapiresponse.md:
+    id: 58dcc4111538
+    last_write_checksum: sha1:32f97f742e07c375e01a91d45721ec59e06526f9
+    pristine_git_object: d24d74a5b4003a5e0884d163712819c8c47a975a
+  docs/models/operations/deletekeyresponse.md:
+    id: 3647d62e4302
+    last_write_checksum: sha1:fe30ed49b45faabad30b612ae26d1c3032da20b2
+    pristine_git_object: 5cdbce7e04ad0eba70ea7a6d60f5fd50aa7087dc
+  docs/models/operations/deletepermissionresponse.md:
+    id: 5c9dbe8992ef
+    last_write_checksum: sha1:0e83c6031d2111f8449b0e25bf95a0a439f195af
+    pristine_git_object: 122519cb002ed8e8e5a39295af6195798d8aaf33
+  docs/models/operations/deleteroleresponse.md:
+    id: ea893ff09369
+    last_write_checksum: sha1:999011f8026224ecd2207ace2471a2540f279579
+    pristine_git_object: c310630fe0bbc45caab7996c24d6495c97eae61f
+  docs/models/operations/getapiresponse.md:
+    id: 39885c256cf8
+    last_write_checksum: sha1:1f5ee7f30748cc087771b42db5bac00e98c7544b
+    pristine_git_object: 9c60ceeb2654cf9ffc78d1ace49371799d431997
+  docs/models/operations/getkeyresponse.md:
+    id: f5617e59330f
+    last_write_checksum: sha1:9bc0ff8218d4d62ab4b5c164a80c44d45639c420
+    pristine_git_object: 2d35c491b49b3559fcd3589805e9de742a9a015d
+  docs/models/operations/getpermissionresponse.md:
+    id: d1b1d5c86645
+    last_write_checksum: sha1:d3d23137fc10b9991706b1a1e6f23e15f03e33bb
+    pristine_git_object: 3b26ea160a9d4ef02fcf2b9eb9093a36b6d8e2e3
+  docs/models/operations/getroleresponse.md:
+    id: 73e61f420aca
+    last_write_checksum: sha1:dd5a5bd37f926c41a3ef488e9b80e73303c2cd5a
+    pristine_git_object: f7cdb1ba1b5259c19a60148b824a65f1c092c227
+  docs/models/operations/identitiescreateidentityresponse.md:
+    id: 9d43ee0e4e08
+    last_write_checksum: sha1:0a755000064836e54c17a59dff952b9bf8f97094
+    pristine_git_object: 02f585e40b98610f893c3b34e93901b04d1c23cc
+  docs/models/operations/identitiesgetidentityresponse.md:
+    id: 49cb6211c439
+    last_write_checksum: sha1:e08f644e5cac5dd9125e4307d4116b57669d8e29
+    pristine_git_object: c6d245aa3e8d115955ea87ea6df68a4636130e76
+  docs/models/operations/identitieslistidentitiesresponse.md:
+    id: 7f1676432a5f
+    last_write_checksum: sha1:45b110b8ac3f6d4e526e870ee0f18a25c5996b35
+    pristine_git_object: 17a6b0783cbd69f1a150bda7484cade2b4b76c4b
+  docs/models/operations/listkeysresponse.md:
+    id: 89b543a87673
+    last_write_checksum: sha1:0246e1703a307f52f768cd7b68fe4a61674fff90
+    pristine_git_object: fe5d35314e0dd6d0d4e44ccbb60093cc5dd54ca4
+  docs/models/operations/listpermissionsresponse.md:
+    id: 68808730cb42
+    last_write_checksum: sha1:b3f58cefc32b36feec4e9c3f16a698f96e34c1cd
+    pristine_git_object: b9c0fef2914472b5897d863c0e013e83875646e8
+  docs/models/operations/listrolesresponse.md:
+    id: bad37d9a22a0
+    last_write_checksum: sha1:aad5691b7a2e459d202dd013ff9419620ed538b3
+    pristine_git_object: 2c3a686196007ae32d095f84c268bda2573f8fa4
+  docs/models/operations/migratekeysresponse.md:
+    id: 436c841169a0
+    last_write_checksum: sha1:6cc91c523311cef9b36ce0bbcfcf40dd77ab1d85
+    pristine_git_object: 1fc005902aa01a1ec49632d2a5caa49ccedcf254
+  docs/models/operations/option.md:
+    id: 2ac1bd52a5fb
+    last_write_checksum: sha1:08cfee5d266c9d82987e448f6c98a143aa42c5f8
+    pristine_git_object: 35d8a1e2ad48a64702c6a654ac8880dabec053b0
+  docs/models/operations/ratelimitdeleteoverrideresponse.md:
+    id: b18479169175
+    last_write_checksum: sha1:bbbb10ba10393a4e4c55e21d68b1acd2fbb0f55b
+    pristine_git_object: edafbd357d6bf7095a0b4f7d3b983a9661835747
+  docs/models/operations/ratelimitgetoverrideresponse.md:
+    id: 2f81850c985a
+    last_write_checksum: sha1:3316ad2b44a7ae96a360dbe0684ae558f754ca35
+    pristine_git_object: 8cea899a6bbcdf28a961bb5e71b5f799b1a966bc
+  docs/models/operations/ratelimitlimitresponse.md:
+    id: 9010a115b7f1
+    last_write_checksum: sha1:52424e853f7558df121a084a613c7120d948e452
+    pristine_git_object: 4e4a8fd0d3babaf1ba033770bef79889962f2837
+  docs/models/operations/ratelimitlistoverridesresponse.md:
+    id: c7c93b7c1a5e
+    last_write_checksum: sha1:ea6ca73a4f7f35dd3fd9f706cf3414871b50da79
+    pristine_git_object: d1c5c0012d87a98957be67f0713ed70380067ac9
+  docs/models/operations/ratelimitmultilimitresponse.md:
+    id: a5c11f2c5b30
+    last_write_checksum: sha1:5000e71d572d3762e557d36b0f6df01975351cd2
+    pristine_git_object: 59b3edba28b382a0bed9fb9cf97f5156eea4811d
+  docs/models/operations/ratelimitsetoverrideresponse.md:
+    id: 846657862ba6
+    last_write_checksum: sha1:d550eec630378f255140eb9dbc7c139be0fe9d04
+    pristine_git_object: 4b1d23ab115550f3b1512abe23abe754bb8561c0
+  docs/models/operations/removepermissionsresponse.md:
+    id: a668e2c23f8e
+    last_write_checksum: sha1:14e7273338638c313cda5b48e720512f416e053a
+    pristine_git_object: 5f1d6956f32c339df83abd94ec0036a74abb06d1
+  docs/models/operations/removerolesresponse.md:
+    id: 4f8a238cb7f6
+    last_write_checksum: sha1:85a18650fa6335e1ed666592f5cd5a7bb791b200
+    pristine_git_object: 798bc4456b0cd8d4fa160f1aeb0741b2df867d53
+  docs/models/operations/rerollkeyresponse.md:
+    id: f296979e9669
+    last_write_checksum: sha1:642c8b610f7bfb4da44cab1dfe046fb7e425a892
+    pristine_git_object: 52366a792b2bb75effc7c247eb87ff4c7e82e189
+  docs/models/operations/setpermissionsresponse.md:
+    id: ad2d5be1c3b0
+    last_write_checksum: sha1:46fa97ef84da6a831408df8f5c628cb52f0c8789
+    pristine_git_object: 77ca4a48251af1cb19fdc3eaef5b1501b5e4b772
+  docs/models/operations/setrolesresponse.md:
+    id: d1c86216388b
+    last_write_checksum: sha1:712cf52c48208cebb517c996a6f2368ab6bd1189
+    pristine_git_object: ce814dde75705c7b250eed22bbf0f72bca577b8b
+  docs/models/operations/updatecreditsresponse.md:
+    id: b2f75d7ef5ed
+    last_write_checksum: sha1:b26c65f9295732d74b204ea508f0f75471a4c4b9
+    pristine_git_object: 63e604cc3869e579dd51c9db7b6b31830b10f8ec
+  docs/models/operations/updatekeyresponse.md:
+    id: 2b0947d4243f
+    last_write_checksum: sha1:4679bf2ea7a8557b58f2d57420765dda2c16e45b
+    pristine_git_object: 07c22fce9a97e6621f49cff4270bd05a24660c59
+  docs/models/operations/v2identitiesdeleteidentityresponse.md:
+    id: 5b4f9e9f4d86
+    last_write_checksum: sha1:b03ffaed67fe7d7dc5dd154ccdf4a3ea5b1a75a4
+    pristine_git_object: dd6dd7e44b5b174f2b73ae67d080f300e27a5064
+  docs/models/operations/v2identitiesupdateidentityresponse.md:
+    id: 2a94da935b26
+    last_write_checksum: sha1:563fa50d59fcd267318b75cbf06c348b7fa5fb67
+    pristine_git_object: 9aa7bff031833227e9f9faa43dbaad86a82eb2a7
+  docs/models/operations/verifykeyresponse.md:
+    id: 486ab7826c41
+    last_write_checksum: sha1:f0264c13b4226377ea6506d9638ba5e980b75f10
+    pristine_git_object: 89a7b3040fbe20d94ee494c98cbf23d336ae4036
+  docs/models/operations/whoamiresponse.md:
+    id: 3128d08b34d2
+    last_write_checksum: sha1:e5d3aa1ad34ed1ca3445adf731b4a20c48a0c515
+    pristine_git_object: 2a1f441f6157beccc1375127c5917ca88ecf0b85
+  docs/sdks/analytics/README.md:
+    id: 4c84abb05030
+    last_write_checksum: sha1:aa3930ed918fcb565d0730dbd38da16ba7c5edd0
+    pristine_git_object: f71c3c0ad96ddebc129d3b95ab2971ff2d7b87ba
+  docs/sdks/apis/README.md:
+    id: 23f09d8da686
+    last_write_checksum: sha1:6b9ce415dce6e499806f894e03848d608e419033
+    pristine_git_object: 8634258bb0c432630e1a1695a9b1ea835137c642
+  docs/sdks/identities/README.md:
+    id: 751b50358a28
+    last_write_checksum: sha1:b3f14a0daa7f4c9435c0ff7c2ee5d0260fb64ae9
+    pristine_git_object: d57931d264735bf3a9918a1a7e9730f0bb1bc36c
+  docs/sdks/keys/README.md:
+    id: 9a567cd0daf2
+    last_write_checksum: sha1:56658c069d4e49db5f4208d561e09651ff1f74c2
+    pristine_git_object: d9d6b0a4f24c6458addad74fd435c81180de698a
+  docs/sdks/permissions/README.md:
+    id: 2e4061ce50d4
+    last_write_checksum: sha1:02fc03e47d77ba68dc786f44a3737ed1899b0c35
+    pristine_git_object: 28220697b139e1916e4eda9aaeb1527acabf9671
+  docs/sdks/ratelimit/README.md:
+    id: b2f3b80218aa
+    last_write_checksum: sha1:5cecfa4a1ff0b8370d865270a8bb4389bf50da44
+    pristine_git_object: 1b1aaea6dbd3d309c746c9f35d123fbd6be1112e
+  go.mod:
+    id: c47645c391ad
+    last_write_checksum: sha1:71a7dbe8bdaf1d9b022c9ab3c3a0976abc5dccb3
+    pristine_git_object: 30053a71b982c07eacbb48bcbbf53c510bba44da
+  identities.go:
+    id: 55f83ce2dd53
+    last_write_checksum: sha1:e7f2cfb1efecece4e1e3f691de3b1e9508afffd1
+    pristine_git_object: 05e02a5293d9f1ca9c52f3e1ee55486df6c1e43a
+  internal/config/sdkconfiguration.go:
+    id: 33b8bfac5265
+    last_write_checksum: sha1:636a0ef708c8851fa92eb931b3555b884118b66b
+    pristine_git_object: ba7e7e9a579e42dec6ef426e89a5a4f913e1a1c2
+  internal/hooks/hooks.go:
+    id: 336be70ed5c0
+    last_write_checksum: sha1:faf2371c4dcb872d317fe0ae6fbb46fd931876fe
+    pristine_git_object: 720e1e7dd1736937fe7bd67d98548dd3412de0d4
+  internal/utils/contenttype.go:
+    id: 928a56fe6755
+    last_write_checksum: sha1:ab5cfd860d02c6e6a37f89e2b5649a9859947fb1
+    pristine_git_object: f6487e01eb987c0aa49e7aa50b5ff24830314c63
+  internal/utils/env.go:
+    id: ac8bab30c73d
+    last_write_checksum: sha1:1e0bcb2d2caed9f3657f1dbc99b55811bed0298c
+    pristine_git_object: 110d464eacf2387b347bad1cb903666354a339e9
+  internal/utils/form.go:
+    id: 8ea133d76535
+    last_write_checksum: sha1:65ff5fa2f299e5826f0360e94cdc50e5acaa2394
+    pristine_git_object: 6772eb85579fa0d83a2dc12065948b0845f69cf6
+  internal/utils/headers.go:
+    id: 90d4f18d4adf
+    last_write_checksum: sha1:19d658e4e0c38907627a5172597b789047d33529
+    pristine_git_object: 38b8c92b7423f2e7445e6571e3176e4cc87926b3
+  internal/utils/json.go:
+    id: ad03e3c502d8
+    last_write_checksum: sha1:8779d470634444694e5f0b6937aa5f5f18ecfa0b
+    pristine_git_object: 703d2778cde054da6b744c4c05ebc41d73104d8e
+  internal/utils/pathparams.go:
+    id: 1f3e0c30fd90
+    last_write_checksum: sha1:409d6b801647aced248329ba2982f3fe75eddfb7
+    pristine_git_object: 0acb1cce31ecac2b580368d5140d2a6743800839
+  internal/utils/queryparams.go:
+    id: e7f604e65a58
+    last_write_checksum: sha1:f5a797cdc7e4d0b0bed2fffdfb37172e180bdaab
+    pristine_git_object: 39695be598df5b063eeb8c96ba4eee951897d702
+  internal/utils/requestbody.go:
+    id: 22445ec1c044
+    last_write_checksum: sha1:9844c7d1937ad5c525daafc12fa6eb1ed5ab80bb
+    pristine_git_object: 592422da00fc62860529427d07126f72c29a912c
+  internal/utils/retries.go:
+    id: b5e011d15c2d
+    last_write_checksum: sha1:5d01879861185422ae19f0c962c9f5d1fef4473f
+    pristine_git_object: 5b92a033a0ab6c6796f4741dd1fee3da119eac2b
+  internal/utils/security.go:
+    id: eeb54c55241b
+    last_write_checksum: sha1:451524017dfed1da96bdd9bc1749546f8d2aa110
+    pristine_git_object: 99e1f672792b3230f0fee185681847bac3aca6c2
+  internal/utils/union.go:
+    id: db86c85746b6
+    last_write_checksum: sha1:1d7a94ba6f0b73851694e76e76fc396e494211a9
+    pristine_git_object: 1f98be73fa7e29b56bed5f37e830e0b8837028f9
+  internal/utils/union_test.go:
+    id: 4b56247171bd
+    last_write_checksum: sha1:83ac73c1901de4c6db90f65cf5879163f3d47a00
+    pristine_git_object: f66814c73ace94d8e71d785fd6161fb405745754
+  internal/utils/utils.go:
+    id: 1133b2a27019
+    last_write_checksum: sha1:66b0ef3c302e2edad3496775a6e5b452caceefd6
+    pristine_git_object: ee4300f7b7469c4e66572ada7b95f7ff7f2e506a
+  keys.go:
+    id: 4740030dadc9
+    last_write_checksum: sha1:f1bc3383cdb848943645be8c968dd6232bd79d36
+    pristine_git_object: 756b78c9bcc3735f4da3b795fca5feb94e92a59a
+  models/apierrors/apierror.go:
+    id: 4cecf27a5a54
+    last_write_checksum: sha1:e699d3325ea82ea2b0d29656396210f0513c3391
+    pristine_git_object: 61a9628a6533548245be5af929f1d4f96dd780b5
+  models/apierrors/badrequesterrorresponse.go:
+    id: f15a8d9f3096
+    last_write_checksum: sha1:846274535797abf8ab21821d2365ee4f540b1cb6
+    pristine_git_object: affdde6d4e1e7516483354ac72dc8b5ed9179a79
+  models/apierrors/conflicterrorresponse.go:
+    id: 9f51be6b0311
+    last_write_checksum: sha1:14b100ad698fb4e0b429e6c5517a54bdcd7dc74b
+    pristine_git_object: a1f0a0f3bb46cf2b5385e49859f0d9d2836f4ad2
+  models/apierrors/forbiddenerrorresponse.go:
+    id: 6b8666a1498a
+    last_write_checksum: sha1:2e9afb5f9332bf1658e104302d4c9a8bf364d4b8
+    pristine_git_object: d08a89e456cb615574dab25aff945adcef3e5320
+  models/apierrors/goneerrorresponse.go:
+    id: 80622c1e9873
+    last_write_checksum: sha1:bee32ae9b75ecfa296bb852890c6b502d55d4272
+    pristine_git_object: 72f90ea88b88aa08911ef6b457cbccd67521e590
+  models/apierrors/internalservererrorresponse.go:
+    id: f874eada1543
+    last_write_checksum: sha1:ed0162b87f4c3de94605b4181d3336c12a494591
+    pristine_git_object: dc4d59c57cbc02fa81e271ec2f695b290b19894b
+  models/apierrors/notfounderrorresponse.go:
+    id: 960488b003b6
+    last_write_checksum: sha1:27b9245c70732fe18c43a859b877012688ce777a
+    pristine_git_object: 5e5ee7d06ac614351c92bc298a3c42f71191b2a0
+  models/apierrors/preconditionfailederrorresponse.go:
+    id: c87d37820f80
+    last_write_checksum: sha1:5c755b7c4d2cb806f79c7f3aace0110364091e62
+    pristine_git_object: c886b83053b7b8984aecb2ae658ef9139ba353f8
+  models/apierrors/serviceunavailableerrorresponse.go:
+    id: 000ea3b72cbd
+    last_write_checksum: sha1:2bc363eda192c86a02b1ecbf3af0ecef56451369
+    pristine_git_object: f68c135daa014bf3443aeb6d0d51aa80446c4f11
+  models/apierrors/toomanyrequestserrorresponse.go:
+    id: 0f5a13b77512
+    last_write_checksum: sha1:d1d35f9f0a400767d23104fb3754453e8eb60921
+    pristine_git_object: 8ff716ceea54a6ac7878ad5d67a4ef1bb9ecb459
+  models/apierrors/unauthorizederrorresponse.go:
+    id: 4683414b39ca
+    last_write_checksum: sha1:01b27a5b4680b808e8ce121570c487beeaeae1c8
+    pristine_git_object: 72947a2b582246147093d8597ce74f39528a9e4b
+  models/apierrors/unprocessableentityerrorresponse.go:
+    id: 72e8194b8d07
+    last_write_checksum: sha1:5910751ffabc8a7ed1b88b0927b3a4a3075aa94f
+    pristine_git_object: 0e1a12e8d7e3fc230dfb5f4029e4ddfd4612673e
+  models/components/badrequesterrordetails.go:
+    id: 3ba19da421dc
+    last_write_checksum: sha1:35769a7dfcdb99fcab507ed8a589321fcb4a40b6
+    pristine_git_object: bcd098569d292efbeb2d191832a7dfab93a3bd6b
+  models/components/baseerror.go:
+    id: ceb6efe61149
+    last_write_checksum: sha1:f58f09e30054a000aade81fdd0d446a9b1f5ce38
+    pristine_git_object: 69e943cd127ab65b82847b8ad0bd61df9d1a7643
+  models/components/emptyresponse.go:
+    id: 1c8645e9d6a5
+    last_write_checksum: sha1:44cb220377f8dc697f6835954cc42a58ab3a036d
+    pristine_git_object: 567af55422fe57839d930782540eab1c12a383a9
+  models/components/httpmetadata.go:
+    id: 790bad4a7abb
+    last_write_checksum: sha1:01a20fcff33179809ff9920ee431c7adabbd98f1
+    pristine_git_object: 148ec47fb2dea6c188ec68eb3532d93169608168
+  models/components/identity.go:
+    id: 02b69e83b30f
+    last_write_checksum: sha1:f0015b2d6fd0108d1c29198ecc4ab46408995caa
+    pristine_git_object: 29eaf3aba34a9e8c52c044d7806055b114e64146
+  models/components/keycreditsdata.go:
+    id: e3dab19febf0
+    last_write_checksum: sha1:017b7068c98d7e92c8619fe5f06159c51eb704cb
+    pristine_git_object: 2c9d0ec29080d0707edb7a5fd2d5f76fc148a5f1
+  models/components/keycreditsrefill.go:
+    id: c8aa62aa3d37
+    last_write_checksum: sha1:a87d50a74311cfac65eef6b5cf57bb286f2b0fe0
+    pristine_git_object: 9f08c153f3049794e57c406bdc5c55b8a2db5879
+  models/components/keyresponsedata.go:
+    id: 4f59e3838d9a
+    last_write_checksum: sha1:d568794cd3b85009543c14ca3fd867d554e60a86
+    pristine_git_object: 6873281a81d36b7692ded0ae4057596c74649097
+  models/components/keysverifykeycredits.go:
+    id: e523c6c022e2
+    last_write_checksum: sha1:bed9e8250921cd68b8fb1439a8bf441103f638bd
+    pristine_git_object: 402cc793bae39b4fd0657a8b4b506925bce569c3
+  models/components/keysverifykeyratelimit.go:
+    id: c423c6908fc6
+    last_write_checksum: sha1:10eb0ef301845527ac593132c6cb6e2e516afeba
+    pristine_git_object: edc25ca49a3f35bba80159b11476bb977ded9d03
+  models/components/meta.go:
+    id: c6effd210ef5
+    last_write_checksum: sha1:3adefe4223b96666af74ca40ff1bec59a40d986c
+    pristine_git_object: e372d7dad706e868352d6afe9a5885c241498bd2
+  models/components/pagination.go:
+    id: 01d7fa832c95
+    last_write_checksum: sha1:c570c1225cf98caeb390c825effb65a1153a0672
+    pristine_git_object: 06c7c5f4d262661851e0ff28a6707276c632e1f3
+  models/components/permission.go:
+    id: 0482a4a8ece4
+    last_write_checksum: sha1:9ded6ddc498d47cc3475ed720d73dbca46370d77
+    pristine_git_object: 687084f4ad38bda814a35e43a0ad526b91656662
+  models/components/ratelimitoverride.go:
+    id: 4ee089c4811e
+    last_write_checksum: sha1:c65234f34e46501b339d9c111186396ec5bd6a7e
+    pristine_git_object: d9be9566448306895fd7b3a1b98aa9322e9e206a
+  models/components/ratelimitrequest.go:
+    id: daac76b7c69c
+    last_write_checksum: sha1:5d5fe662f54811f8419e056d843a89ee301c68a7
+    pristine_git_object: 85bc8760b3541bed91bd239a5050ebdbf5156a78
+  models/components/ratelimitresponse.go:
+    id: f7dda3bbafe8
+    last_write_checksum: sha1:6dfd72d7555a19acd952bad7967f897d3742557c
+    pristine_git_object: 8db8d1bb9412c53596e2cad0aec9968319d1cad2
+  models/components/role.go:
+    id: 11301c7b0524
+    last_write_checksum: sha1:ca881aa085e880f55f3fe80a9459dc5d469f4fd4
+    pristine_git_object: cdb0a2ad222d654205c73f6099379d4f3ed295f2
+  models/components/security.go:
+    id: 3a5eba5fe9e0
+    last_write_checksum: sha1:bba88e192d03fbc198246c4d74d6f52f289fc915
+    pristine_git_object: 277026b0fe1ea63dc045421006ff28b4df4d91e0
+  models/components/updatekeycreditsdata.go:
+    id: 495215fbc451
+    last_write_checksum: sha1:6c9d69d45119f402ed7956da3d68b4cb52b1c8a2
+    pristine_git_object: aa89e24d733aac2e9f06179d2819206cf1b19845
+  models/components/updatekeycreditsrefill.go:
+    id: edc25620d48c
+    last_write_checksum: sha1:c7665666351a7f71d2e13e54a2fa1fee6dbafc1d
+    pristine_git_object: 007d673233a5b00f5452d283c1ea24f29120d920
+  models/components/v2analyticsgetverificationsrequestbody.go:
+    id: 246aaf057c8c
+    last_write_checksum: sha1:c766f96714cefbe366cdf648bf4c4a303b3686cc
+    pristine_git_object: 71d736d6d54a9b8e596d6a3fc69fcdc7aa59b6ff
+  models/components/v2analyticsgetverificationsresponsebody.go:
+    id: fc7022b1f897
+    last_write_checksum: sha1:8add96125e67793b376261c1c51787c0226ae156
+    pristine_git_object: 0bb0a1be2b58d4994837ab9bf4c4d4cc02bc42b0
+  models/components/v2apiscreateapirequestbody.go:
+    id: 062b678f4d5f
+    last_write_checksum: sha1:e49790d190b9c23d42ed5a30551d78d99e49a245
+    pristine_git_object: 06ef49cd3934b8cccb81041225780e0d83ad53e3
+  models/components/v2apiscreateapiresponsebody.go:
+    id: b7a8a94005a1
+    last_write_checksum: sha1:271fe0dde6d612015b6d210bbd5d79d85d90cd4c
+    pristine_git_object: 4fd594ccdc7150fbc0ae47c3314d534270a73f64
+  models/components/v2apiscreateapiresponsedata.go:
+    id: 32e49703f8bc
+    last_write_checksum: sha1:2c3b2d4fe5b924423add5d6a9c3a259fe2e1e148
+    pristine_git_object: 0561735d51deb653387fa7e330679a3b25096aab
+  models/components/v2apisdeleteapirequestbody.go:
+    id: f465e799b790
+    last_write_checksum: sha1:4e3c4ff29ba5f61cf17c997bca52249c98fccc4b
+    pristine_git_object: 68b7d17b1b33b000de951f549456e0f94b4d9f98
+  models/components/v2apisdeleteapiresponsebody.go:
+    id: 3645a9e7a6b2
+    last_write_checksum: sha1:96010eae4aa9e7a0dd086e9d66f92c41d1927527
+    pristine_git_object: 913746fb23f8d211c3e01ed9f73f29e10a9f6256
+  models/components/v2apisgetapirequestbody.go:
+    id: c1dd7433ec7c
+    last_write_checksum: sha1:5da10a307f4efe554eb78b3d293c84c93c5f6fea
+    pristine_git_object: 9e8a32cc518820863bcb0d5ff27ada830ab2cfec
+  models/components/v2apisgetapiresponsebody.go:
+    id: 2ca79cb96ac0
+    last_write_checksum: sha1:d605f1c1612a899a1e121fd4f3808bbe47159d30
+    pristine_git_object: d622d2d599c0b5db0d55ab3bb78723171aebe635
+  models/components/v2apisgetapiresponsedata.go:
+    id: f57bc1012341
+    last_write_checksum: sha1:0987fce956192cbe78dcbaf019d6bba5955bcd85
+    pristine_git_object: 2112a71b8d4393924a7c7c15ae0ce694c63904df
+  models/components/v2apislistkeysrequestbody.go:
+    id: d5b8f1211c1e
+    last_write_checksum: sha1:d3062a4054e662c9c70f053d73bd785b0c7dafba
+    pristine_git_object: 7d17909f3c31364953593564bef4b647547872a8
+  models/components/v2apislistkeysresponsebody.go:
+    id: 76b8044cb3dd
+    last_write_checksum: sha1:769ead4b123998f5c4d1acbf4874ea4fc0299cc5
+    pristine_git_object: ae34a6182ca70178e452f01e1a78d60dad6f8447
+  models/components/v2identitiescreateidentityrequestbody.go:
+    id: 35422fc609c4
+    last_write_checksum: sha1:b656cc05ecf52cc38a05f3d99008af0b8f11c120
+    pristine_git_object: fffcf8fd9713a922f86727c799fad96931a84758
+  models/components/v2identitiescreateidentityresponsebody.go:
+    id: 651c091f2f01
+    last_write_checksum: sha1:7aa2089ea7c4ce30a75d71fe0934c8e6d8f6bd69
+    pristine_git_object: ac785023d482d281971df0d9fc646f0a0ac5aa4a
+  models/components/v2identitiescreateidentityresponsedata.go:
+    id: 95f3f70335a2
+    last_write_checksum: sha1:f8bd08da03af02e1d2a043abe4f786158e2f1c68
+    pristine_git_object: 6c213f31ac66866406557d074da3ab1c8bf3a683
+  models/components/v2identitiesdeleteidentityrequestbody.go:
+    id: 150028ad487c
+    last_write_checksum: sha1:f1ad1670c96c3fc83ac4831fff241c6cab1e010f
+    pristine_git_object: 82693b5b565c7b6a8a8b331caf278d8f81f4ec13
+  models/components/v2identitiesdeleteidentityresponsebody.go:
+    id: 138784746d5e
+    last_write_checksum: sha1:55f4c0b1828b1ade383237f1d345425fccb4c99f
+    pristine_git_object: 69d7c33662f62f44670591675910c3a98c18f88b
+  models/components/v2identitiesgetidentityrequestbody.go:
+    id: 7d97c8e06daf
+    last_write_checksum: sha1:a3a2d753cd476c9b77b0366f10659538765250ee
+    pristine_git_object: cb9f023eb8a1edd0a0934f64f3e206f618fb5f4e
+  models/components/v2identitiesgetidentityresponsebody.go:
+    id: f35209c7eae3
+    last_write_checksum: sha1:aa3514b29e5385da53aa4dc59665ca8e6abc01b2
+    pristine_git_object: 8e016ab92eba92928c6b2a87e307aa5b99020048
+  models/components/v2identitieslistidentitiesrequestbody.go:
+    id: 77bc8a6369a3
+    last_write_checksum: sha1:08a2a55901d3a1f56c9c1327bc3ec25d7457cbfd
+    pristine_git_object: 650d6ee34cef79b316d2f4de89af97813586a400
+  models/components/v2identitieslistidentitiesresponsebody.go:
+    id: 7acf65eba014
+    last_write_checksum: sha1:5fa21b9b4528f020a9aa420b59804d64d80ad149
+    pristine_git_object: 9d7bb106c99f8432b0ab5396142623f9ec27fcc8
+  models/components/v2identitiesupdateidentityrequestbody.go:
+    id: c72b4ed30b10
+    last_write_checksum: sha1:0bcd6de38d02ddeb5deea318e94bf4fb237117b9
+    pristine_git_object: 5b95b64ec5d42ef3d7c0f96fac178abfd1101f67
+  models/components/v2identitiesupdateidentityresponsebody.go:
+    id: 65284560fd70
+    last_write_checksum: sha1:43465f0987264fd55b6da942fd3e92fcb0fafb93
+    pristine_git_object: 26281808ceac87be1ed3f9675c1cd9fb48fdfd3f
+  models/components/v2keysaddpermissionsrequestbody.go:
+    id: 68eb81d1f357
+    last_write_checksum: sha1:9b47b6d8cfa3ed173699dd5599a680195bec1774
+    pristine_git_object: 8f412cb9e6173f9137fa615c2da92372695867c4
+  models/components/v2keysaddpermissionsresponsebody.go:
+    id: 83393b6f6b35
+    last_write_checksum: sha1:f5513211f18613715667f2dd2c5218a1c38bba1a
+    pristine_git_object: e53ff8eb1e5183c9293ab0b64c489927c9e740b0
+  models/components/v2keysaddrolesrequestbody.go:
+    id: d25c2ba702a2
+    last_write_checksum: sha1:a950e9d3d9c7630b37c2e93ab908dfc41609ee30
+    pristine_git_object: 88da92dee86065fe724f469852610ce9a9188e4b
+  models/components/v2keysaddrolesresponsebody.go:
+    id: f910a4e1a1a1
+    last_write_checksum: sha1:b396d4e5d19477a3bbdd9f7dc39a87f32813b023
+    pristine_git_object: bfafd6001e0fe8d2fb9b6f31bbccf44a2724b52d
+  models/components/v2keyscreatekeyrequestbody.go:
+    id: d6fd231f8e1b
+    last_write_checksum: sha1:8a08dc1a8a351311b004fb5a7930e123a215a740
+    pristine_git_object: 311b84dacfbdf9c496e0cd1c653000bae1ecbaac
+  models/components/v2keyscreatekeyresponsebody.go:
+    id: 0997aa2de5e0
+    last_write_checksum: sha1:6b7dd9328fe6d73fe3bf084ecab2aa4c13fd1cef
+    pristine_git_object: 1e0ac222823f216a2dc98c01689bf55456101a64
+  models/components/v2keyscreatekeyresponsedata.go:
+    id: 334611ebf403
+    last_write_checksum: sha1:b69eddbef905768096bdbf781ea9a2dce9b5ce68
+    pristine_git_object: 8fc555c8a2f0af591a53e669cec17c0306afee84
+  models/components/v2keysdeletekeyrequestbody.go:
+    id: e02bfc4bb7ba
+    last_write_checksum: sha1:fe5dd76fe35e8ab8152694a0ce11d2d1be54f0d9
+    pristine_git_object: 56c67751c025139b1e72832957c07811f4b8431a
+  models/components/v2keysdeletekeyresponsebody.go:
+    id: f9ae65e2242d
+    last_write_checksum: sha1:1a3d995cffee66578e46328316aeeffccbdc25e3
+    pristine_git_object: e843b74a49b29eab653f4af2f7ae6fdd0dc9aae0
+  models/components/v2keysgetkeyrequestbody.go:
+    id: a9f2235f9c22
+    last_write_checksum: sha1:9e3b23778dc71cb56b271ca5a19466d4f5678bca
+    pristine_git_object: 74ccfa98855e9ebb94b8aeecb51e5bc643fef049
+  models/components/v2keysgetkeyresponsebody.go:
+    id: c9427dbe54a6
+    last_write_checksum: sha1:0eed4eefd62132aee964269ce33650bca06febcb
+    pristine_git_object: 61e746029dea85b08e3a109f4d5cfd39f5061ad4
+  models/components/v2keysmigratekeydata.go:
+    id: 5e553f674727
+    last_write_checksum: sha1:80a8b40d80ba80c6ad71ed978727a0f8ad69e645
+    pristine_git_object: 689edbbc66d123ff7ecb90fb0e0953d1d73685fb
+  models/components/v2keysmigratekeysmigration.go:
+    id: 5a94ded1eb16
+    last_write_checksum: sha1:fdb2dae063ac0a14ab4599549f3f068c3995f5dc
+    pristine_git_object: 2ada20ef8c0310f9291f3a8c762a819424fcf800
+  models/components/v2keysmigratekeysrequestbody.go:
+    id: 0c731091771a
+    last_write_checksum: sha1:bc8aa496b69622daa779bed7b89e134d7858e953
+    pristine_git_object: 1e09e1c27699efe80d9fed38b1b33475602b841d
+  models/components/v2keysmigratekeysresponsebody.go:
+    id: 25afc0e44a97
+    last_write_checksum: sha1:ebd721dd67fdd9426ae7dfb31876617b09f5df14
+    pristine_git_object: fbb538f539baf63b644ea0d0f8ce3bff628734f3
+  models/components/v2keysmigratekeysresponsedata.go:
+    id: b2aeed814c5e
+    last_write_checksum: sha1:348e1d27043435432a6265a011dcaf3741afee1f
+    pristine_git_object: 4e6c18a4e39911ef7f136b7269fa13cb48ebdf09
+  models/components/v2keysremovepermissionsrequestbody.go:
+    id: 947f3bf1358f
+    last_write_checksum: sha1:e8ed22b12bea9416b866e52354c4e0b2e798ff54
+    pristine_git_object: 4766d572a01a4ca929536ba63c3b52e705d98cba
+  models/components/v2keysremovepermissionsresponsebody.go:
+    id: 37e642f6ea63
+    last_write_checksum: sha1:ecd1d12213ea5b307bde168021404757cf4e1fd9
+    pristine_git_object: f19007d9193961f4c00fcf452430d356fccd9115
+  models/components/v2keysremoverolesrequestbody.go:
+    id: 073c4bb80553
+    last_write_checksum: sha1:b518b6732d70de5991e7c05b68992fcd5afaba04
+    pristine_git_object: ebb0b1b873b6f1e20cd8da6a3d4c9ae4a7585b2a
+  models/components/v2keysremoverolesresponsebody.go:
+    id: 486b71b740f5
+    last_write_checksum: sha1:89c634ddf72ec947b3878773bd9dec3d8380c72d
+    pristine_git_object: 679089c36e3e0c901428bb1673a2d3c584f72f89
+  models/components/v2keysrerollkeyrequestbody.go:
+    id: 1501f50b1d29
+    last_write_checksum: sha1:e271575741f360ca7e982d2f51cb7b00f35fe5e6
+    pristine_git_object: 64a305ec8b332cefd225690fafff0cdc45222ced
+  models/components/v2keysrerollkeyresponsebody.go:
+    id: 7538bea0fa80
+    last_write_checksum: sha1:b8864eed14a7f31598b7dd6558426a208440a8a1
+    pristine_git_object: e275b9cdf2c96d1517c0f3c75e9e153dd2bab28c
+  models/components/v2keysrerollkeyresponsedata.go:
+    id: 1e4136205225
+    last_write_checksum: sha1:46e6ec7ad8ba38ebd984d0ff93c4ea30d3949204
+    pristine_git_object: 9aafa54ae6c17b5882e6cfefd102a4f357a1f3cd
+  models/components/v2keyssetpermissionsrequestbody.go:
+    id: 5bb699edce98
+    last_write_checksum: sha1:49f7d45c76a4dbed93a545019d065f65d5fed613
+    pristine_git_object: 6f1ccbde31abc3b0b997d0cd08b16da169ed40c4
+  models/components/v2keyssetpermissionsresponsebody.go:
+    id: c19b3d28cd62
+    last_write_checksum: sha1:1efd93d5046fb279ffc77756086783ca666917eb
+    pristine_git_object: 8ccdae133e7673b973f84a8f50bc7b0009d88cc8
+  models/components/v2keyssetrolesrequestbody.go:
+    id: 1a1f4d46f2a4
+    last_write_checksum: sha1:91619804a98e57d1be28f50f0c9412365a832bfc
+    pristine_git_object: 8da5563d5b23df410e5b8b0b099ac660d82ad618
+  models/components/v2keyssetrolesresponsebody.go:
+    id: 3301a5af0384
+    last_write_checksum: sha1:23008b67c2c541eccf6514f44c034740abf0f25f
+    pristine_git_object: e8a858a46fa2a5124fd55caab2b9916951e4d676
+  models/components/v2keysupdatecreditsrequestbody.go:
+    id: 615bcac59442
+    last_write_checksum: sha1:3bbf42765cf7de663238f101c63f317ff90edcb9
+    pristine_git_object: e6a5669b32e51ef7d67a896baed70a4d8eb808c9
+  models/components/v2keysupdatecreditsresponsebody.go:
+    id: 8ad8f8301ffd
+    last_write_checksum: sha1:41f0251f0addb8275e1a30174e5a8d7b0b03d9ca
+    pristine_git_object: 825fee9b4808fe60e21b8df91c7324baca159fa9
+  models/components/v2keysupdatekeyrequestbody.go:
+    id: 8ee054daba19
+    last_write_checksum: sha1:a09285232599561fe252ab709230766e8d82bbb6
+    pristine_git_object: d630b90321c702cbc6b23850bbcab8b944a286c0
+  models/components/v2keysupdatekeyresponsebody.go:
+    id: e763779e8119
+    last_write_checksum: sha1:d3d96b664af959d63f56588de1cab321d3f24360
+    pristine_git_object: 7d90fbc13407dd9dbb2637ca4ac5cef135acc534
+  models/components/v2keysverifykeyrequestbody.go:
+    id: ef3c69e937af
+    last_write_checksum: sha1:e08bd460a243f35853d693347e9933827836c921
+    pristine_git_object: bc09d546583579118f0efda284ec2d20102df27b
+  models/components/v2keysverifykeyresponsebody.go:
+    id: b34406c2c8f4
+    last_write_checksum: sha1:8d4c9d7909c8cb6a045ba6a7061449b3b9cd074d
+    pristine_git_object: 1fd66887f3d6508db52648adf5b129b5487f3cea
+  models/components/v2keysverifykeyresponsedata.go:
+    id: c87f1bbd63c4
+    last_write_checksum: sha1:6cb1ac62b29b3ab6e1c29b725bb241342ca5bb5c
+    pristine_git_object: e3ee67d02cb66bf463c5f60a1dd5d44b880adc98
+  models/components/v2keyswhoamirequestbody.go:
+    id: 8dbef28b7f7c
+    last_write_checksum: sha1:a7afbe8797bfafecac347b62010f396fca25ca11
+    pristine_git_object: b51e45761540261f22e506510f2286d48b6315ee
+  models/components/v2keyswhoamiresponsebody.go:
+    id: b34764438e26
+    last_write_checksum: sha1:27250617c7acebcdee66d1acc4cc4cd0c8f35189
+    pristine_git_object: e0b2fdf9cf283e6eb2be52185ef65b08d77ca346
+  models/components/v2permissionscreatepermissionrequestbody.go:
+    id: 29caddec42f5
+    last_write_checksum: sha1:194b7de60054036ad50cab3474b66752578cbdcb
+    pristine_git_object: 79ab3ea7d9b40e50687953e89a013ec17cc10ff9
+  models/components/v2permissionscreatepermissionresponsebody.go:
+    id: 1b8fb1a033a3
+    last_write_checksum: sha1:100c77fd2866844dd6fcb4f67af9ae322f2ada79
+    pristine_git_object: 50be222efec49f8c6722a6e559f313be4558c7ab
+  models/components/v2permissionscreatepermissionresponsedata.go:
+    id: b9ed5a15a728
+    last_write_checksum: sha1:36ee502fd664326f6102eb673cd4a6251d952ce8
+    pristine_git_object: 1019a58d315d725d3ca400b7d6fb1614997af8ee
+  models/components/v2permissionscreaterolerequestbody.go:
+    id: 0931453fce20
+    last_write_checksum: sha1:57142be4821e38e6a57f6f2b3a9ab6da568e228b
+    pristine_git_object: 6afb3b5d00fba856b4d2156572e87214b02e7fa7
+  models/components/v2permissionscreateroleresponsebody.go:
+    id: eeb3d292db8f
+    last_write_checksum: sha1:a7c2febf8342ab7107693ea9942d4587b1580507
+    pristine_git_object: a308c2245baa5c8943691a8db6752df774b040d5
+  models/components/v2permissionscreateroleresponsedata.go:
+    id: 566090b4ad6d
+    last_write_checksum: sha1:d50f6ad8972ce7e095b47a5498964da18f8b61c4
+    pristine_git_object: bd6ab6df7c15edda42390dd5af60fc1539a97284
+  models/components/v2permissionsdeletepermissionrequestbody.go:
+    id: c432d0ae2e4b
+    last_write_checksum: sha1:881a000c08c12d2a6b920d063d97c4d7e62a4588
+    pristine_git_object: 986a2cfc5e05661d43abc244334f7040c25c72ed
+  models/components/v2permissionsdeletepermissionresponsebody.go:
+    id: 143aa4cd3cd3
+    last_write_checksum: sha1:f0a2b45ea2c9451363b6abc6c0e1aa0256e4ed62
+    pristine_git_object: 6b073fe6ef3ec9f1f8b999963898807607d02a3a
+  models/components/v2permissionsdeleterolerequestbody.go:
+    id: e4b96995e03c
+    last_write_checksum: sha1:ce3478ac519209e90fb3faf08560cc4bf24ab705
+    pristine_git_object: 8a5622cff758b11be43d3a117a60bffe12092db8
+  models/components/v2permissionsdeleteroleresponsebody.go:
+    id: d32c32017568
+    last_write_checksum: sha1:590676a80af96d4c81218edafa219946fa7fd56f
+    pristine_git_object: 1fc979bed9b695059308be6fdc1534359376db0a
+  models/components/v2permissionsgetpermissionrequestbody.go:
+    id: 96a6cc688277
+    last_write_checksum: sha1:50078ae2134fb0c4bd74e31c24b45c9b6152ce48
+    pristine_git_object: 4e09aceb25bdad88d09f0debbf68c11146a1455e
+  models/components/v2permissionsgetpermissionresponsebody.go:
+    id: fc0c46c32238
+    last_write_checksum: sha1:491c6bbb4be8c913250cde901bf36dc45d3fef65
+    pristine_git_object: e21f35a66b4f47d59362359e0e80db8c5dbfbbfd
+  models/components/v2permissionsgetrolerequestbody.go:
+    id: af1bf61a122e
+    last_write_checksum: sha1:94739c23a7b9e0238aa81d6fbab887dd3eb7dea8
+    pristine_git_object: 00c3e297c62ed1ee04d3e0964103bf1ed33d6f83
+  models/components/v2permissionsgetroleresponsebody.go:
+    id: 54d9ab9fdac4
+    last_write_checksum: sha1:679f86a02e9e688ca34674d1df4e03752a844049
+    pristine_git_object: b7c839522c1a24236c042176b53128f88a76973a
+  models/components/v2permissionslistpermissionsrequestbody.go:
+    id: a52dcfa8a3bd
+    last_write_checksum: sha1:61b164eeaec8ac3057b7c8245f8ce4b1cf86df0a
+    pristine_git_object: cda2b68b6e515208e2d246e86fbaba82649249f9
+  models/components/v2permissionslistpermissionsresponsebody.go:
+    id: 4093bbf3af73
+    last_write_checksum: sha1:82be8e846c7917c09221135daa54cb006e6630bc
+    pristine_git_object: a87d97a32ebababf0f7ce6068b770fecca5b12a7
+  models/components/v2permissionslistrolesrequestbody.go:
+    id: aaca186c27e8
+    last_write_checksum: sha1:625258c810dbbd65879ae06730e3947b2a0dcee6
+    pristine_git_object: f07351d02d2b2a687af5af1318dce381bdf521ed
+  models/components/v2permissionslistrolesresponsebody.go:
+    id: 33f29a5282d0
+    last_write_checksum: sha1:4c02dfb0e039aba065e0d62500c0f46d1e582c35
+    pristine_git_object: 67ad03e26b52f96307272697f9f7d915f2a9789a
+  models/components/v2ratelimitdeleteoverriderequestbody.go:
+    id: e95523e95c48
+    last_write_checksum: sha1:2fabc30daa218693a2fc0b0f824fca593d56c032
+    pristine_git_object: c7aab9efc015c81afa4a50a4649c2cb09d07e035
+  models/components/v2ratelimitdeleteoverrideresponsebody.go:
+    id: 6b9df5b4c103
+    last_write_checksum: sha1:e7ccef9e2f3cb4bd262a8c20a3733bde83f66d74
+    pristine_git_object: 4605a9ccb924805631fdb97d43b1e210bd79e199
+  models/components/v2ratelimitdeleteoverrideresponsedata.go:
+    id: 243134a4029d
+    last_write_checksum: sha1:7c6787dce369eb926260ff3663aef7c2036159df
+    pristine_git_object: da1751c8ee6510c3e92afce5e176bdd0eb82601c
+  models/components/v2ratelimitgetoverriderequestbody.go:
+    id: 28fe4c235d4e
+    last_write_checksum: sha1:11a944d5ba6971d0133f560b3f26303ef26d76e5
+    pristine_git_object: f45af5404535d960db401f7b80313be7ed9762ee
+  models/components/v2ratelimitgetoverrideresponsebody.go:
+    id: f7053341cd04
+    last_write_checksum: sha1:086ec19d517badf42d8208be1ed9ec01d2a38f3a
+    pristine_git_object: 6b2f65014260afaf97b8c73e97f4e2dcff260fac
+  models/components/v2ratelimitlimitrequestbody.go:
+    id: 9156385cbca9
+    last_write_checksum: sha1:5d33d49fe3072cdfee1543ea48875496156acfbe
+    pristine_git_object: 23b97069ba5b80c930c43ce52004164e7d7d2d9c
+  models/components/v2ratelimitlimitresponsebody.go:
+    id: 8b89d973a172
+    last_write_checksum: sha1:f3d104ee5b73438750d717dff705a49203d182de
+    pristine_git_object: 2aca1c7811ae0aafcce8e1dd35d4feba9f4be591
+  models/components/v2ratelimitlimitresponsedata.go:
+    id: b99a1f116e4c
+    last_write_checksum: sha1:b25446e05abd2d101101dbd7a98779f54e3cab52
+    pristine_git_object: cc6c9fb3596aa8e987ec8146cc83bd0df176904d
+  models/components/v2ratelimitlistoverridesrequestbody.go:
+    id: da51f3196e5a
+    last_write_checksum: sha1:6c9500749ba6f9ce1430dc3d5d2ae62009f70f91
+    pristine_git_object: f50979fd942e673f20b99832a3cc42521c378b2b
+  models/components/v2ratelimitlistoverridesresponsebody.go:
+    id: c61ab4c5981e
+    last_write_checksum: sha1:28eb6967ff8c052135879830b6d7fa0e740e903c
+    pristine_git_object: c96df173e1a57b43406323efa990a7a2a5e8823a
+  models/components/v2ratelimitmultilimitcheck.go:
+    id: b150dabf2a24
+    last_write_checksum: sha1:0850e81191e7c1c97bb43b9610c6168aa7645ab0
+    pristine_git_object: 01d98ac4b305a3164e0874495887e763bfaf0017
+  models/components/v2ratelimitmultilimitresponsebody.go:
+    id: 7c4e507567f3
+    last_write_checksum: sha1:4b0e06444117d20d638cc9a0d2fb847c18b1bbef
+    pristine_git_object: dc66895f31ebcc0e417936059af94bc2d8fbad67
+  models/components/v2ratelimitmultilimitresponsedata.go:
+    id: 34fff1fac137
+    last_write_checksum: sha1:dcffed1d3fbbdc249865daa71968ecd1a47c0514
+    pristine_git_object: 61dfa9022b78ef226ff9e28a72dfd27b2f36878e
+  models/components/v2ratelimitsetoverriderequestbody.go:
+    id: a8b8393c6eb4
+    last_write_checksum: sha1:7bcd2bd73b6bbd573a8d7f7464b491597132844a
+    pristine_git_object: 92be4fd476a0f777a6439312efc6463076c2845e
+  models/components/v2ratelimitsetoverrideresponsebody.go:
+    id: 4611590bb0f4
+    last_write_checksum: sha1:1bf80d1ce8b786639880a05f5326a01d5edc6f06
+    pristine_git_object: 22ffee577a326240dbf62c6ef82aaec4190cf7fa
+  models/components/v2ratelimitsetoverrideresponsedata.go:
+    id: 767536c08aeb
+    last_write_checksum: sha1:4c685afe8de31f12be958b3e3483f1c153e8a573
+    pristine_git_object: 49ab54701016ed66bdc36144286138fc7718c848
+  models/components/validationerror.go:
+    id: f7f14895a76c
+    last_write_checksum: sha1:5881bd4f96802f3bd30136802b71f75bc7ce7011
+    pristine_git_object: 7171292ec6168055c8fef5b53e35c319ea8bd2e2
+  models/components/verifykeyratelimitdata.go:
+    id: be9af1795cdc
+    last_write_checksum: sha1:b54c492f7e89e3afbbfa1c3d094cbef1d9edf6ef
+    pristine_git_object: 8a926059a1e5e7d873fc400947b150b88c5a356a
+  models/operations/addpermissions.go:
+    id: d44671ab95fd
+    last_write_checksum: sha1:3ec3e303de5deebb49c0a7ab1092dd84b9913391
+    pristine_git_object: e2a605bf3a9b006459c241930cb5a8887de0521a
+  models/operations/addroles.go:
+    id: b61bf21e44b9
+    last_write_checksum: sha1:e0694f15276f846364f71c74c082a5aab45f7d31
+    pristine_git_object: 24d2ea4bd2bc92c48105cc90718dc7aeed4dc1b8
+  models/operations/analyticsgetverifications.go:
+    id: 86a549d78d54
+    last_write_checksum: sha1:ddaa16c7b32ff1a7ca1c02fbd51a1977f6961e31
+    pristine_git_object: cd3bc3edff65ad9001f68119c8c6fff1356d0b8c
+  models/operations/createapi.go:
+    id: 8b6f75fd92e2
+    last_write_checksum: sha1:1dfdae961b061fa913be93128202ff5b4a7cbc89
+    pristine_git_object: 7ce2ad427e330b12f380bea8e4a13cdb23db9ffd
+  models/operations/createkey.go:
+    id: eb39a3d89992
+    last_write_checksum: sha1:d9a4b9329192d8f4ab08242133eef03f12a62f35
+    pristine_git_object: b85aa1481093533aa6b1471a33a0c0655bde24fa
+  models/operations/createpermission.go:
+    id: 0f798e4e40be
+    last_write_checksum: sha1:595d73665d3d51adb82aacb91bb87ee2c9ec6dcf
+    pristine_git_object: 2e9325f60a0d5f4d043243a8f9eaa05c9878dfb0
+  models/operations/createrole.go:
+    id: 13790cce6cf1
+    last_write_checksum: sha1:5ecc8cfa164602ee48b4af6e440b5b5a4b3e5b4c
+    pristine_git_object: d538e6889eb51e2e1eed089809d24bdca62e9360
+  models/operations/deleteapi.go:
+    id: 37733108de03
+    last_write_checksum: sha1:c76769a53b0b53aec26146da86f51ddd14510b34
+    pristine_git_object: a16c45a5c4d5bddbb2378610ede654406791e7a9
+  models/operations/deletekey.go:
+    id: c30dc6c61fd5
+    last_write_checksum: sha1:6c31dc0a2546bd103dea5616c9fa74f0b9cee8ae
+    pristine_git_object: eeef8f323f358dc38505c43f512b6dbd51c2117e
+  models/operations/deletepermission.go:
+    id: 75a7118c9792
+    last_write_checksum: sha1:917064ff42c3c2cf326ef616b07aa85a61980c58
+    pristine_git_object: dfa98e5ce671caeb5a6fb33a19079a1d1b03504c
+  models/operations/deleterole.go:
+    id: fcf841341708
+    last_write_checksum: sha1:fb67d74d2644b15f6a499528dabfd6df4583cae0
+    pristine_git_object: 43bdb1eac58ddcca260396e4869afda9f7073e87
+  models/operations/getapi.go:
+    id: d1fe0fa0feae
+    last_write_checksum: sha1:0cfdb0b8889b38138774d5983a6bd0b516ee7a4c
+    pristine_git_object: 20e147074329aba28b14e58bb4798c3e74e6f9e2
+  models/operations/getkey.go:
+    id: 69bc377378e8
+    last_write_checksum: sha1:be1d1d7cdee5665f67b09cd1317821d4a150f27b
+    pristine_git_object: fb7d6157eab6b2b58241ff8ee208040f4b3f67b6
+  models/operations/getpermission.go:
+    id: 128e86ff0d18
+    last_write_checksum: sha1:07f24f1172db64c27fc67d13d5234d788b02056f
+    pristine_git_object: d9c14545b255d1cc6a866d33f87f1b4ab3a753bd
+  models/operations/getrole.go:
+    id: 6f57f9a26cef
+    last_write_checksum: sha1:ec62dd6671db0a6efd8d213500aa8099ae1f9829
+    pristine_git_object: 87ad2893ff38b52e028326a72dd82d249277a236
+  models/operations/identitiescreateidentity.go:
+    id: 911cf3779a59
+    last_write_checksum: sha1:29bbb5cf7f9d68090ac6a6d4cd27a715cde68853
+    pristine_git_object: 0b953879efefae20e05b824a2c8be91a28ad36a4
+  models/operations/identitiesgetidentity.go:
+    id: 6d7fbd982f81
+    last_write_checksum: sha1:0afbad572b7a8a425182cc3a3018b18bc9d4faa8
+    pristine_git_object: 8f2714d24ac99348cd47fa2a3f10956d4259ebfe
+  models/operations/identitieslistidentities.go:
+    id: 658e769ca457
+    last_write_checksum: sha1:266e1cbe908c5538daeea1af097112baf9eee97b
+    pristine_git_object: 2a2524c13b5927734b71375b973dbbd75818dcde
+  models/operations/listkeys.go:
+    id: cba036561e50
+    last_write_checksum: sha1:457acc47a83fd90e8e34f4c5ed256165ef857b8b
+    pristine_git_object: eb2b93df681892823a01a2acfd78fe7de2b61ff8
+  models/operations/listpermissions.go:
+    id: 6bd9808e3633
+    last_write_checksum: sha1:691af2cde7e019256cb611a441d1b8dd35d0cb9d
+    pristine_git_object: 3280c6377148ba0b656d4d6a37b08919847d4560
+  models/operations/listroles.go:
+    id: 0aaadd6b1c41
+    last_write_checksum: sha1:eba37a052f08d04cb0f0c3a6aeb89b2b68f3f54d
+    pristine_git_object: 9d55d464cd8e36711bfe6f65628f75c10d915154
+  models/operations/migratekeys.go:
+    id: efc58ec33acb
+    last_write_checksum: sha1:7ec2c8060b5dcccb71aa9e1640f6256c8fe4cda5
+    pristine_git_object: 26ab520f9ff85d228f05183d8d3dd8303d9b914c
+  models/operations/options.go:
+    id: d20dd4db9865
+    last_write_checksum: sha1:a81d3d7fc2d114c1a10744aafcea379762d067e3
+    pristine_git_object: 45d0a60d8509c32453e6e80eaf027aa969536e03
+  models/operations/ratelimitdeleteoverride.go:
+    id: 8f2ecbb8c9ca
+    last_write_checksum: sha1:5b4cc1ea34fbdea29c71d085c0e5c1ebc47aa381
+    pristine_git_object: 6916b5b61f224e1e17a457bdb365e01f650f3ec5
+  models/operations/ratelimitgetoverride.go:
+    id: 3e96ae30a632
+    last_write_checksum: sha1:50311b69ad4c728c4eb9934e06c4196cca78366d
+    pristine_git_object: 6d20c21c1aea301d81f0af9efd17a00e5bfbe9ca
+  models/operations/ratelimitlimit.go:
+    id: d585bfba34e0
+    last_write_checksum: sha1:b2d0efe04db2784210d1f3c18333b91f927fd268
+    pristine_git_object: 46eaefb189ccaf24745fd89b3e58a98da4341a38
+  models/operations/ratelimitlistoverrides.go:
+    id: 5aef1c624ee7
+    last_write_checksum: sha1:8cc6a4e62f9b684876e526aed2ad0dbd4aad64e2
+    pristine_git_object: 1e1e5f65f875be855591752b9b226426245fc01e
+  models/operations/ratelimitmultilimit.go:
+    id: 6a44fa684338
+    last_write_checksum: sha1:2e4c16806d8fea13c525a924e4c0c6d67f204ced
+    pristine_git_object: 82c7b65cc0fa3145e4debcb51937924968a88ac7
+  models/operations/ratelimitsetoverride.go:
+    id: 9eb49ec4586b
+    last_write_checksum: sha1:9e83484a9875762eca8e093333bac7ddd847a9e6
+    pristine_git_object: e447fe88b90e3890d0951bfc2f40663febf6adae
+  models/operations/removepermissions.go:
+    id: 16b0f3990469
+    last_write_checksum: sha1:c1437307daa195d8a958d9a5a29c377944c456fd
+    pristine_git_object: 49fd93121e1d2b9d982d9f701d056e3ced6a0f46
+  models/operations/removeroles.go:
+    id: 319f2db79ac9
+    last_write_checksum: sha1:760b5a132fd947a81b2d289ce84afbf3be4feef0
+    pristine_git_object: ce8afe15f633fb58593aa45e3ebe0f3d72927ee4
+  models/operations/rerollkey.go:
+    id: d5d24b44fd79
+    last_write_checksum: sha1:0557fc62c01d22721a47c301a98b3062158f712e
+    pristine_git_object: 4dc84d5e52422e38f6ebc6214e380f3c85068e06
+  models/operations/setpermissions.go:
+    id: 750e3fbe19cf
+    last_write_checksum: sha1:7a4aba6eca24edba29df4e2a5e85ea0a470b271a
+    pristine_git_object: ee9d048aeaf587d1e21f49cf5c26bd831e0ec48b
+  models/operations/setroles.go:
+    id: 6bcb0ad0b2c7
+    last_write_checksum: sha1:49f15d1101a797a9aeba6fd82521f6f81964d7d8
+    pristine_git_object: ede0bed2afcf0ec2803165dd9ac3fd3aec90cf4d
+  models/operations/updatecredits.go:
+    id: 70fdf9f7f55f
+    last_write_checksum: sha1:c8ec68ea78204094c09cd23c3b8b604dd5450f2e
+    pristine_git_object: ab4778cb19a2363623bcac959ca8748be06914ec
+  models/operations/updatekey.go:
+    id: 41df9f7e9d1c
+    last_write_checksum: sha1:56f115d58cb32efa3b36f9181ac0c4a00dc0cbe6
+    pristine_git_object: a4c1e433cbae656b02f13def42efe48ec2eb3164
+  models/operations/v2identitiesdeleteidentity.go:
+    id: c207544ff408
+    last_write_checksum: sha1:a410091d61720b2c9e834f66d1b4006aa81d00c6
+    pristine_git_object: c03b9e09cbe093eb938f1e88af04ab0c2cb113d6
+  models/operations/v2identitiesupdateidentity.go:
+    id: a2fbb3e16449
+    last_write_checksum: sha1:115c3c4ee7c1d7cee631b5b910235a10f6ea32e1
+    pristine_git_object: bd1303e2260e7596ed114b98f3bf881f6800fbea
+  models/operations/verifykey.go:
+    id: 90516f012b37
+    last_write_checksum: sha1:e9a97e6a1d80653e75de7e1834be40bec7968d66
+    pristine_git_object: 48646808ee41eee852abdf94df1c835820dfe863
+  models/operations/whoami.go:
+    id: 3f894b758986
+    last_write_checksum: sha1:983754c2912f0451ebb7c9a8d164e4b26767aa2c
+    pristine_git_object: 1dcb1adbac4a7e2ca72b2a3f1b04b425ebe54665
+  optionalnullable/optionalnullable.go:
+    id: ce60f259ead3
+    last_write_checksum: sha1:d6aff1a420c31e025ea21d46cf056e305ae76fe8
+    pristine_git_object: c6739be0619b6726565e0f11855ffe44b0e5607e
+  optionalnullable/optionalnullable_test.go:
+    id: ad67101ebca3
+    last_write_checksum: sha1:2e9433eff1651ac77d6678ea76880d9a4980cbc2
+    pristine_git_object: e6e5a01c6e721e879e24a38a1f97e3e27d4686d4
+  permissions.go:
+    id: 24d6fe5c456e
+    last_write_checksum: sha1:a9efe9c7bc4741cc186e4887aea4b104cb55f20d
+    pristine_git_object: 53e3e5a295841e6f0c00a287017af09bc5b07392
+  ratelimit.go:
+    id: 480e0ac1bd3e
+    last_write_checksum: sha1:3b44b6aa7b54826f6eca83d2a2820f2d3ca3a823
+    pristine_git_object: a3e75089edeb7795045d4e83bb36617bab7d3db8
+  retry/config.go:
+    id: 82d673cb0389
+    last_write_checksum: sha1:f565273be789ffe0e3c160de1ac72a63cfe67fbe
+    pristine_git_object: aa809fccb3445b1e2530a979dad620512f50e70f
+  types/bigint.go:
+    id: 6f911e1a03c3
+    last_write_checksum: sha1:49b004005d0461fb04b846eca062b070b0360b31
+    pristine_git_object: 9c6a086d51595888a6ff787ebcb8693559afee95
+  types/date.go:
+    id: 231a623ce1b7
+    last_write_checksum: sha1:3036a2e1ed15a1d484c093367eba000c38f384d0
+    pristine_git_object: 5b2782f219efe6bfbce46fc2dec68998eb759438
+  types/datetime.go:
+    id: 5023aac30a47
+    last_write_checksum: sha1:196d050af6450669214e9ae4fd28e56263ae2b5d
+    pristine_git_object: 3eff332daa04e34cec5ffb10add670bafd8ac454
+  types/pointers.go:
+    id: 6d0d0a6cb6f3
+    last_write_checksum: sha1:fc2275ea006257ba9ba4ff6f2a2cdb6205371eef
+    pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
+  unkey.go:
+    id: e17c3d20e92b
+    last_write_checksum: sha1:ae6024da32723bac06c758581521c63a6564d45c
+    pristine_git_object: 28fbf37d32da99f1550cd1b4510a83ce1610abd8
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -1451,4 +2582,377 @@ examples:
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Unkey.Keys.MigrateKeys()`: **Added**\n* `Unkey.Ratelimit.MultiLimit()`: **Added**\n* `Unkey.Keys.VerifyKey()`: \n  *  `request.Request.MigrationId` **Added**\n"
+generatedFiles:
+  - .gitattributes
+  - /models/apierrors/badrequesterrorresponse.go
+  - /models/apierrors/conflicterrorresponse.go
+  - /models/apierrors/forbiddenerrorresponse.go
+  - /models/apierrors/goneerrorresponse.go
+  - /models/apierrors/internalservererrorresponse.go
+  - /models/apierrors/notfounderrorresponse.go
+  - /models/apierrors/preconditionfailederrorresponse.go
+  - /models/apierrors/serviceunavailableerrorresponse.go
+  - /models/apierrors/toomanyrequestserrorresponse.go
+  - /models/apierrors/unauthorizederrorresponse.go
+  - /models/apierrors/unprocessableentityerrorresponse.go
+  - /models/components/badrequesterrordetails.go
+  - /models/components/baseerror.go
+  - /models/components/emptyresponse.go
+  - /models/components/httpmetadata.go
+  - /models/components/identity.go
+  - /models/components/keycreditsdata.go
+  - /models/components/keycreditsrefill.go
+  - /models/components/keyresponsedata.go
+  - /models/components/keysverifykeycredits.go
+  - /models/components/keysverifykeyratelimit.go
+  - /models/components/meta.go
+  - /models/components/pagination.go
+  - /models/components/permission.go
+  - /models/components/ratelimitoverride.go
+  - /models/components/ratelimitrequest.go
+  - /models/components/ratelimitresponse.go
+  - /models/components/role.go
+  - /models/components/security.go
+  - /models/components/updatekeycreditsdata.go
+  - /models/components/updatekeycreditsrefill.go
+  - /models/components/v2analyticsgetverificationsrequestbody.go
+  - /models/components/v2analyticsgetverificationsresponsebody.go
+  - /models/components/v2apiscreateapirequestbody.go
+  - /models/components/v2apiscreateapiresponsebody.go
+  - /models/components/v2apiscreateapiresponsedata.go
+  - /models/components/v2apisdeleteapirequestbody.go
+  - /models/components/v2apisdeleteapiresponsebody.go
+  - /models/components/v2apisgetapirequestbody.go
+  - /models/components/v2apisgetapiresponsebody.go
+  - /models/components/v2apisgetapiresponsedata.go
+  - /models/components/v2apislistkeysrequestbody.go
+  - /models/components/v2apislistkeysresponsebody.go
+  - /models/components/v2identitiescreateidentityrequestbody.go
+  - /models/components/v2identitiescreateidentityresponsebody.go
+  - /models/components/v2identitiescreateidentityresponsedata.go
+  - /models/components/v2identitiesdeleteidentityrequestbody.go
+  - /models/components/v2identitiesdeleteidentityresponsebody.go
+  - /models/components/v2identitiesgetidentityrequestbody.go
+  - /models/components/v2identitiesgetidentityresponsebody.go
+  - /models/components/v2identitieslistidentitiesrequestbody.go
+  - /models/components/v2identitieslistidentitiesresponsebody.go
+  - /models/components/v2identitiesupdateidentityrequestbody.go
+  - /models/components/v2identitiesupdateidentityresponsebody.go
+  - /models/components/v2keysaddpermissionsrequestbody.go
+  - /models/components/v2keysaddpermissionsresponsebody.go
+  - /models/components/v2keysaddrolesrequestbody.go
+  - /models/components/v2keysaddrolesresponsebody.go
+  - /models/components/v2keyscreatekeyrequestbody.go
+  - /models/components/v2keyscreatekeyresponsebody.go
+  - /models/components/v2keyscreatekeyresponsedata.go
+  - /models/components/v2keysdeletekeyrequestbody.go
+  - /models/components/v2keysdeletekeyresponsebody.go
+  - /models/components/v2keysgetkeyrequestbody.go
+  - /models/components/v2keysgetkeyresponsebody.go
+  - /models/components/v2keysmigratekeydata.go
+  - /models/components/v2keysmigratekeysmigration.go
+  - /models/components/v2keysmigratekeysrequestbody.go
+  - /models/components/v2keysmigratekeysresponsebody.go
+  - /models/components/v2keysmigratekeysresponsedata.go
+  - /models/components/v2keysremovepermissionsrequestbody.go
+  - /models/components/v2keysremovepermissionsresponsebody.go
+  - /models/components/v2keysremoverolesrequestbody.go
+  - /models/components/v2keysremoverolesresponsebody.go
+  - /models/components/v2keysrerollkeyrequestbody.go
+  - /models/components/v2keysrerollkeyresponsebody.go
+  - /models/components/v2keysrerollkeyresponsedata.go
+  - /models/components/v2keyssetpermissionsrequestbody.go
+  - /models/components/v2keyssetpermissionsresponsebody.go
+  - /models/components/v2keyssetrolesrequestbody.go
+  - /models/components/v2keyssetrolesresponsebody.go
+  - /models/components/v2keysupdatecreditsrequestbody.go
+  - /models/components/v2keysupdatecreditsresponsebody.go
+  - /models/components/v2keysupdatekeyrequestbody.go
+  - /models/components/v2keysupdatekeyresponsebody.go
+  - /models/components/v2keysverifykeyrequestbody.go
+  - /models/components/v2keysverifykeyresponsebody.go
+  - /models/components/v2keysverifykeyresponsedata.go
+  - /models/components/v2keyswhoamirequestbody.go
+  - /models/components/v2keyswhoamiresponsebody.go
+  - /models/components/v2permissionscreatepermissionrequestbody.go
+  - /models/components/v2permissionscreatepermissionresponsebody.go
+  - /models/components/v2permissionscreatepermissionresponsedata.go
+  - /models/components/v2permissionscreaterolerequestbody.go
+  - /models/components/v2permissionscreateroleresponsebody.go
+  - /models/components/v2permissionscreateroleresponsedata.go
+  - /models/components/v2permissionsdeletepermissionrequestbody.go
+  - /models/components/v2permissionsdeletepermissionresponsebody.go
+  - /models/components/v2permissionsdeleterolerequestbody.go
+  - /models/components/v2permissionsdeleteroleresponsebody.go
+  - /models/components/v2permissionsgetpermissionrequestbody.go
+  - /models/components/v2permissionsgetpermissionresponsebody.go
+  - /models/components/v2permissionsgetrolerequestbody.go
+  - /models/components/v2permissionsgetroleresponsebody.go
+  - /models/components/v2permissionslistpermissionsrequestbody.go
+  - /models/components/v2permissionslistpermissionsresponsebody.go
+  - /models/components/v2permissionslistrolesrequestbody.go
+  - /models/components/v2permissionslistrolesresponsebody.go
+  - /models/components/v2ratelimitdeleteoverriderequestbody.go
+  - /models/components/v2ratelimitdeleteoverrideresponsebody.go
+  - /models/components/v2ratelimitdeleteoverrideresponsedata.go
+  - /models/components/v2ratelimitgetoverriderequestbody.go
+  - /models/components/v2ratelimitgetoverrideresponsebody.go
+  - /models/components/v2ratelimitlimitrequestbody.go
+  - /models/components/v2ratelimitlimitresponsebody.go
+  - /models/components/v2ratelimitlimitresponsedata.go
+  - /models/components/v2ratelimitlistoverridesrequestbody.go
+  - /models/components/v2ratelimitlistoverridesresponsebody.go
+  - /models/components/v2ratelimitmultilimitcheck.go
+  - /models/components/v2ratelimitmultilimitresponsebody.go
+  - /models/components/v2ratelimitmultilimitresponsedata.go
+  - /models/components/v2ratelimitsetoverriderequestbody.go
+  - /models/components/v2ratelimitsetoverrideresponsebody.go
+  - /models/components/v2ratelimitsetoverrideresponsedata.go
+  - /models/components/validationerror.go
+  - /models/components/verifykeyratelimitdata.go
+  - /models/operations/addpermissions.go
+  - /models/operations/addroles.go
+  - /models/operations/analyticsgetverifications.go
+  - /models/operations/createapi.go
+  - /models/operations/createkey.go
+  - /models/operations/createpermission.go
+  - /models/operations/createrole.go
+  - /models/operations/deleteapi.go
+  - /models/operations/deletekey.go
+  - /models/operations/deletepermission.go
+  - /models/operations/deleterole.go
+  - /models/operations/getapi.go
+  - /models/operations/getkey.go
+  - /models/operations/getpermission.go
+  - /models/operations/getrole.go
+  - /models/operations/identitiescreateidentity.go
+  - /models/operations/identitiesgetidentity.go
+  - /models/operations/identitieslistidentities.go
+  - /models/operations/listkeys.go
+  - /models/operations/listpermissions.go
+  - /models/operations/listroles.go
+  - /models/operations/migratekeys.go
+  - /models/operations/ratelimitdeleteoverride.go
+  - /models/operations/ratelimitgetoverride.go
+  - /models/operations/ratelimitlimit.go
+  - /models/operations/ratelimitlistoverrides.go
+  - /models/operations/ratelimitmultilimit.go
+  - /models/operations/ratelimitsetoverride.go
+  - /models/operations/removepermissions.go
+  - /models/operations/removeroles.go
+  - /models/operations/rerollkey.go
+  - /models/operations/setpermissions.go
+  - /models/operations/setroles.go
+  - /models/operations/updatecredits.go
+  - /models/operations/updatekey.go
+  - /models/operations/v2identitiesdeleteidentity.go
+  - /models/operations/v2identitiesupdateidentity.go
+  - /models/operations/verifykey.go
+  - /models/operations/whoami.go
+  - USAGE.md
+  - analytics.go
+  - apis.go
+  - docs/models/apierrors/badrequesterrorresponse.md
+  - docs/models/apierrors/conflicterrorresponse.md
+  - docs/models/apierrors/forbiddenerrorresponse.md
+  - docs/models/apierrors/goneerrorresponse.md
+  - docs/models/apierrors/internalservererrorresponse.md
+  - docs/models/apierrors/notfounderrorresponse.md
+  - docs/models/apierrors/preconditionfailederrorresponse.md
+  - docs/models/apierrors/serviceunavailableerrorresponse.md
+  - docs/models/apierrors/toomanyrequestserrorresponse.md
+  - docs/models/apierrors/unauthorizederrorresponse.md
+  - docs/models/apierrors/unprocessableentityerrorresponse.md
+  - docs/models/components/badrequesterrordetails.md
+  - docs/models/components/baseerror.md
+  - docs/models/components/code.md
+  - docs/models/components/emptyresponse.md
+  - docs/models/components/httpmetadata.md
+  - docs/models/components/identity.md
+  - docs/models/components/keycreditsdata.md
+  - docs/models/components/keycreditsrefill.md
+  - docs/models/components/keycreditsrefillinterval.md
+  - docs/models/components/keyresponsedata.md
+  - docs/models/components/keysverifykeycredits.md
+  - docs/models/components/keysverifykeyratelimit.md
+  - docs/models/components/meta.md
+  - docs/models/components/operation.md
+  - docs/models/components/pagination.md
+  - docs/models/components/permission.md
+  - docs/models/components/ratelimitoverride.md
+  - docs/models/components/ratelimitrequest.md
+  - docs/models/components/ratelimitresponse.md
+  - docs/models/components/role.md
+  - docs/models/components/security.md
+  - docs/models/components/updatekeycreditsdata.md
+  - docs/models/components/updatekeycreditsrefill.md
+  - docs/models/components/updatekeycreditsrefillinterval.md
+  - docs/models/components/v2analyticsgetverificationsrequestbody.md
+  - docs/models/components/v2analyticsgetverificationsresponsebody.md
+  - docs/models/components/v2apiscreateapirequestbody.md
+  - docs/models/components/v2apiscreateapiresponsebody.md
+  - docs/models/components/v2apiscreateapiresponsedata.md
+  - docs/models/components/v2apisdeleteapirequestbody.md
+  - docs/models/components/v2apisdeleteapiresponsebody.md
+  - docs/models/components/v2apisgetapirequestbody.md
+  - docs/models/components/v2apisgetapiresponsebody.md
+  - docs/models/components/v2apisgetapiresponsedata.md
+  - docs/models/components/v2apislistkeysrequestbody.md
+  - docs/models/components/v2apislistkeysresponsebody.md
+  - docs/models/components/v2identitiescreateidentityrequestbody.md
+  - docs/models/components/v2identitiescreateidentityresponsebody.md
+  - docs/models/components/v2identitiescreateidentityresponsedata.md
+  - docs/models/components/v2identitiesdeleteidentityrequestbody.md
+  - docs/models/components/v2identitiesdeleteidentityresponsebody.md
+  - docs/models/components/v2identitiesgetidentityrequestbody.md
+  - docs/models/components/v2identitiesgetidentityresponsebody.md
+  - docs/models/components/v2identitieslistidentitiesrequestbody.md
+  - docs/models/components/v2identitieslistidentitiesresponsebody.md
+  - docs/models/components/v2identitiesupdateidentityrequestbody.md
+  - docs/models/components/v2identitiesupdateidentityresponsebody.md
+  - docs/models/components/v2keysaddpermissionsrequestbody.md
+  - docs/models/components/v2keysaddpermissionsresponsebody.md
+  - docs/models/components/v2keysaddrolesrequestbody.md
+  - docs/models/components/v2keysaddrolesresponsebody.md
+  - docs/models/components/v2keyscreatekeyrequestbody.md
+  - docs/models/components/v2keyscreatekeyresponsebody.md
+  - docs/models/components/v2keyscreatekeyresponsedata.md
+  - docs/models/components/v2keysdeletekeyrequestbody.md
+  - docs/models/components/v2keysdeletekeyresponsebody.md
+  - docs/models/components/v2keysgetkeyrequestbody.md
+  - docs/models/components/v2keysgetkeyresponsebody.md
+  - docs/models/components/v2keysmigratekeydata.md
+  - docs/models/components/v2keysmigratekeysmigration.md
+  - docs/models/components/v2keysmigratekeysrequestbody.md
+  - docs/models/components/v2keysmigratekeysresponsebody.md
+  - docs/models/components/v2keysmigratekeysresponsedata.md
+  - docs/models/components/v2keysremovepermissionsrequestbody.md
+  - docs/models/components/v2keysremovepermissionsresponsebody.md
+  - docs/models/components/v2keysremoverolesrequestbody.md
+  - docs/models/components/v2keysremoverolesresponsebody.md
+  - docs/models/components/v2keysrerollkeyrequestbody.md
+  - docs/models/components/v2keysrerollkeyresponsebody.md
+  - docs/models/components/v2keysrerollkeyresponsedata.md
+  - docs/models/components/v2keyssetpermissionsrequestbody.md
+  - docs/models/components/v2keyssetpermissionsresponsebody.md
+  - docs/models/components/v2keyssetrolesrequestbody.md
+  - docs/models/components/v2keyssetrolesresponsebody.md
+  - docs/models/components/v2keysupdatecreditsrequestbody.md
+  - docs/models/components/v2keysupdatecreditsresponsebody.md
+  - docs/models/components/v2keysupdatekeyrequestbody.md
+  - docs/models/components/v2keysupdatekeyresponsebody.md
+  - docs/models/components/v2keysverifykeyrequestbody.md
+  - docs/models/components/v2keysverifykeyresponsebody.md
+  - docs/models/components/v2keysverifykeyresponsedata.md
+  - docs/models/components/v2keyswhoamirequestbody.md
+  - docs/models/components/v2keyswhoamiresponsebody.md
+  - docs/models/components/v2permissionscreatepermissionrequestbody.md
+  - docs/models/components/v2permissionscreatepermissionresponsebody.md
+  - docs/models/components/v2permissionscreatepermissionresponsedata.md
+  - docs/models/components/v2permissionscreaterolerequestbody.md
+  - docs/models/components/v2permissionscreateroleresponsebody.md
+  - docs/models/components/v2permissionscreateroleresponsedata.md
+  - docs/models/components/v2permissionsdeletepermissionrequestbody.md
+  - docs/models/components/v2permissionsdeletepermissionresponsebody.md
+  - docs/models/components/v2permissionsdeleterolerequestbody.md
+  - docs/models/components/v2permissionsdeleteroleresponsebody.md
+  - docs/models/components/v2permissionsgetpermissionrequestbody.md
+  - docs/models/components/v2permissionsgetpermissionresponsebody.md
+  - docs/models/components/v2permissionsgetrolerequestbody.md
+  - docs/models/components/v2permissionsgetroleresponsebody.md
+  - docs/models/components/v2permissionslistpermissionsrequestbody.md
+  - docs/models/components/v2permissionslistpermissionsresponsebody.md
+  - docs/models/components/v2permissionslistrolesrequestbody.md
+  - docs/models/components/v2permissionslistrolesresponsebody.md
+  - docs/models/components/v2ratelimitdeleteoverriderequestbody.md
+  - docs/models/components/v2ratelimitdeleteoverrideresponsebody.md
+  - docs/models/components/v2ratelimitdeleteoverrideresponsedata.md
+  - docs/models/components/v2ratelimitgetoverriderequestbody.md
+  - docs/models/components/v2ratelimitgetoverrideresponsebody.md
+  - docs/models/components/v2ratelimitlimitrequestbody.md
+  - docs/models/components/v2ratelimitlimitresponsebody.md
+  - docs/models/components/v2ratelimitlimitresponsedata.md
+  - docs/models/components/v2ratelimitlistoverridesrequestbody.md
+  - docs/models/components/v2ratelimitlistoverridesresponsebody.md
+  - docs/models/components/v2ratelimitmultilimitcheck.md
+  - docs/models/components/v2ratelimitmultilimitresponsebody.md
+  - docs/models/components/v2ratelimitmultilimitresponsedata.md
+  - docs/models/components/v2ratelimitsetoverriderequestbody.md
+  - docs/models/components/v2ratelimitsetoverrideresponsebody.md
+  - docs/models/components/v2ratelimitsetoverrideresponsedata.md
+  - docs/models/components/validationerror.md
+  - docs/models/components/verifykeyratelimitdata.md
+  - docs/models/operations/addpermissionsresponse.md
+  - docs/models/operations/addrolesresponse.md
+  - docs/models/operations/analyticsgetverificationsresponse.md
+  - docs/models/operations/createapiresponse.md
+  - docs/models/operations/createkeyresponse.md
+  - docs/models/operations/createpermissionresponse.md
+  - docs/models/operations/createroleresponse.md
+  - docs/models/operations/deleteapiresponse.md
+  - docs/models/operations/deletekeyresponse.md
+  - docs/models/operations/deletepermissionresponse.md
+  - docs/models/operations/deleteroleresponse.md
+  - docs/models/operations/getapiresponse.md
+  - docs/models/operations/getkeyresponse.md
+  - docs/models/operations/getpermissionresponse.md
+  - docs/models/operations/getroleresponse.md
+  - docs/models/operations/identitiescreateidentityresponse.md
+  - docs/models/operations/identitiesgetidentityresponse.md
+  - docs/models/operations/identitieslistidentitiesresponse.md
+  - docs/models/operations/listkeysresponse.md
+  - docs/models/operations/listpermissionsresponse.md
+  - docs/models/operations/listrolesresponse.md
+  - docs/models/operations/migratekeysresponse.md
+  - docs/models/operations/option.md
+  - docs/models/operations/ratelimitdeleteoverrideresponse.md
+  - docs/models/operations/ratelimitgetoverrideresponse.md
+  - docs/models/operations/ratelimitlimitresponse.md
+  - docs/models/operations/ratelimitlistoverridesresponse.md
+  - docs/models/operations/ratelimitmultilimitresponse.md
+  - docs/models/operations/ratelimitsetoverrideresponse.md
+  - docs/models/operations/removepermissionsresponse.md
+  - docs/models/operations/removerolesresponse.md
+  - docs/models/operations/rerollkeyresponse.md
+  - docs/models/operations/setpermissionsresponse.md
+  - docs/models/operations/setrolesresponse.md
+  - docs/models/operations/updatecreditsresponse.md
+  - docs/models/operations/updatekeyresponse.md
+  - docs/models/operations/v2identitiesdeleteidentityresponse.md
+  - docs/models/operations/v2identitiesupdateidentityresponse.md
+  - docs/models/operations/verifykeyresponse.md
+  - docs/models/operations/whoamiresponse.md
+  - docs/sdks/analytics/README.md
+  - docs/sdks/apis/README.md
+  - docs/sdks/identities/README.md
+  - docs/sdks/keys/README.md
+  - docs/sdks/permissions/README.md
+  - docs/sdks/ratelimit/README.md
+  - go.mod
+  - identities.go
+  - internal/config/sdkconfiguration.go
+  - internal/hooks/hooks.go
+  - internal/utils/contenttype.go
+  - internal/utils/env.go
+  - internal/utils/form.go
+  - internal/utils/headers.go
+  - internal/utils/json.go
+  - internal/utils/pathparams.go
+  - internal/utils/queryparams.go
+  - internal/utils/requestbody.go
+  - internal/utils/retries.go
+  - internal/utils/security.go
+  - internal/utils/utils.go
+  - keys.go
+  - models/apierrors/apierror.go
+  - models/operations/options.go
+  - optionalnullable/optionalnullable.go
+  - optionalnullable/optionalnullable_test.go
+  - permissions.go
+  - ratelimit.go
+  - retry/config.go
+  - types/bigint.go
+  - types/date.go
+  - types/datetime.go
+  - types/pointers.go
+  - unkey.go
