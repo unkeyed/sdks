@@ -46,7 +46,7 @@ import { Result } from "../types/fp.js";
  * - `api.*.verify_key` (verify keys in any API)
  * - `api.<api_id>.verify_key` (verify keys in specific API)
  *
- * If you are getting a NOT_FOUND error, ensure your root key has the required verify key permissions.
+ * **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
  */
 export function keysVerifyKey(
   client: UnkeyCore,
