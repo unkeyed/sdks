@@ -26,7 +26,7 @@ func (v V2RatelimitListOverridesRequestBody) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2RatelimitListOverridesRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"namespace"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil

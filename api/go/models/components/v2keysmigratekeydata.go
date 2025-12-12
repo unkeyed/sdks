@@ -68,7 +68,7 @@ func (v V2KeysMigrateKeyData) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2KeysMigrateKeyData) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"hash"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil

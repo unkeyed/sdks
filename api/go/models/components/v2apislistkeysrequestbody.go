@@ -44,7 +44,7 @@ func (v V2ApisListKeysRequestBody) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ApisListKeysRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
