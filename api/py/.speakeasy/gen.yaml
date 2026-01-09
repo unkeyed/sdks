@@ -33,6 +33,7 @@ python:
   allowedRedefinedBuiltins:
     - id
     - object
+    - credits
   asyncMode: both
   authors:
     - Speakeasy
