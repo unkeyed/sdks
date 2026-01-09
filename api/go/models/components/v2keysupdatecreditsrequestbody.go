@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Operation - Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 type Operation string
 
@@ -19,22 +14,16 @@ const (
 func (e Operation) ToPointer() *Operation {
 	return &e
 }
-func (e *Operation) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Operation) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "set", "increment", "decrement":
+			return true
+		}
 	}
-	switch v {
-	case "set":
-		fallthrough
-	case "increment":
-		fallthrough
-	case "decrement":
-		*e = Operation(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Operation: %v", v)
-	}
+	return false
 }
 
 type V2KeysUpdateCreditsRequestBody struct {
@@ -42,7 +31,7 @@ type V2KeysUpdateCreditsRequestBody struct {
 	KeyID string `json:"keyId"`
 	// The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 	//
-	// Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+	// Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
 	//
 	// Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 	//
