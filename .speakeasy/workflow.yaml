@@ -9,8 +9,6 @@ sources:
     api-python:
         inputs:
             - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
-        overlays:
-            - location: ./api/py/overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/unkey/unkey/api-python
 targets:

@@ -26,13 +26,14 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.5.0
+  version: 2.6.0
   additionalDependencies:
     dev: {}
     main: {}
   allowedRedefinedBuiltins:
     - id
     - object
+    - credits
   asyncMode: both
   authors:
     - Speakeasy
