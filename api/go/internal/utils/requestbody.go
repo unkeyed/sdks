@@ -25,7 +25,7 @@ const (
 )
 
 var (
-	jsonEncodingRegex       = regexp.MustCompile(`(application|text)\/.*?\+*json.*`)
+	jsonEncodingRegex       = regexp.MustCompile(`(application|text)\/([^+]+\+)*json.*`)
 	multipartEncodingRegex  = regexp.MustCompile(`multipart\/.*`)
 	urlEncodedEncodingRegex = regexp.MustCompile(`application\/x-www-form-urlencoded.*`)
 )

@@ -26,7 +26,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.3.0
+  version: 2.4.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -34,6 +34,7 @@ go:
   defaultErrorName: APIError
   envVarPrefix: UNKEY
   flattenGlobalSecurity: true
+  forwardCompatibleEnumsByDefault: false
   imports:
     option: openapi
     paths:

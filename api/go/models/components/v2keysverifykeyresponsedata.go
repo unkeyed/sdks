@@ -2,16 +2,10 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Code - A machine-readable code indicating the verification status
 // or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
 // exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-// (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-// (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+// (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
 // `EXPIRED` (key has passed its expiration date).
 type Code string
 
@@ -20,7 +14,6 @@ const (
 	CodeNotFound                Code = "NOT_FOUND"
 	CodeForbidden               Code = "FORBIDDEN"
 	CodeInsufficientPermissions Code = "INSUFFICIENT_PERMISSIONS"
-	CodeInsufficientCredits     Code = "INSUFFICIENT_CREDITS"
 	CodeUsageExceeded           Code = "USAGE_EXCEEDED"
 	CodeRateLimited             Code = "RATE_LIMITED"
 	CodeDisabled                Code = "DISABLED"
@@ -30,34 +23,16 @@ const (
 func (e Code) ToPointer() *Code {
 	return &e
 }
-func (e *Code) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Code) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "VALID", "NOT_FOUND", "FORBIDDEN", "INSUFFICIENT_PERMISSIONS", "USAGE_EXCEEDED", "RATE_LIMITED", "DISABLED", "EXPIRED":
+			return true
+		}
 	}
-	switch v {
-	case "VALID":
-		fallthrough
-	case "NOT_FOUND":
-		fallthrough
-	case "FORBIDDEN":
-		fallthrough
-	case "INSUFFICIENT_PERMISSIONS":
-		fallthrough
-	case "INSUFFICIENT_CREDITS":
-		fallthrough
-	case "USAGE_EXCEEDED":
-		fallthrough
-	case "RATE_LIMITED":
-		fallthrough
-	case "DISABLED":
-		fallthrough
-	case "EXPIRED":
-		*e = Code(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Code: %v", v)
-	}
+	return false
 }
 
 type V2KeysVerifyKeyResponseData struct {
@@ -69,8 +44,7 @@ type V2KeysVerifyKeyResponseData struct {
 	// A machine-readable code indicating the verification status
 	// or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
 	// exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-	// (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-	// (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+	// (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
 	// `EXPIRED` (key has passed its expiration date).
 	//
 	Code Code `json:"code"`

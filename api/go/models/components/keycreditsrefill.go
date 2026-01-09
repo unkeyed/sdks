@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // KeyCreditsRefillInterval - How often credits are automatically refilled.
 type KeyCreditsRefillInterval string
 
@@ -18,20 +13,16 @@ const (
 func (e KeyCreditsRefillInterval) ToPointer() *KeyCreditsRefillInterval {
 	return &e
 }
-func (e *KeyCreditsRefillInterval) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *KeyCreditsRefillInterval) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "daily", "monthly":
+			return true
+		}
 	}
-	switch v {
-	case "daily":
-		fallthrough
-	case "monthly":
-		*e = KeyCreditsRefillInterval(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for KeyCreditsRefillInterval: %v", v)
-	}
+	return false
 }
 
 // KeyCreditsRefill - Configuration for automatic credit refill behavior.
