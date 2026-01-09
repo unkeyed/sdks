@@ -1,4 +1,4 @@
-speakeasyVersion: 1.675.4
+speakeasyVersion: 1.683.1
 sources:
     api:
         sourceNamespace: api
@@ -10,11 +10,11 @@ sources:
             - 2.0.0
     api-python:
         sourceNamespace: api-python
-        sourceRevisionDigest: sha256:062ef06656957f937b5cf8de963ce24b732d2209656a710ec0cdb8f63deb4f1a
-        sourceBlobDigest: sha256:4577a8e4b12cf786ac8ed09bc6e5009621547cca7fe475b300646248aa04f8d9
+        sourceRevisionDigest: sha256:b0e69ed8927edbff4fc9a289f504ec5dd3ed69e8128500b4930a1326825ee560
+        sourceBlobDigest: sha256:37a91fcebfc1225ee617663bf403e94cd3e639748936c55fd07f139cc1236048
         tags:
             - latest
-            - speakeasy-sdk-regen-1763376252
+            - speakeasy-sdk-regen-fix-python-sdk-1767960112
             - 2.0.0
 targets:
     api-go:
@@ -27,10 +27,10 @@ targets:
     api-py:
         source: api-python
         sourceNamespace: api-python
-        sourceRevisionDigest: sha256:062ef06656957f937b5cf8de963ce24b732d2209656a710ec0cdb8f63deb4f1a
-        sourceBlobDigest: sha256:4577a8e4b12cf786ac8ed09bc6e5009621547cca7fe475b300646248aa04f8d9
+        sourceRevisionDigest: sha256:b0e69ed8927edbff4fc9a289f504ec5dd3ed69e8128500b4930a1326825ee560
+        sourceBlobDigest: sha256:37a91fcebfc1225ee617663bf403e94cd3e639748936c55fd07f139cc1236048
         codeSamplesNamespace: api-python-code-samples
-        codeSamplesRevisionDigest: sha256:ba680222796f32e6f916500bb6373f377491b39fbc083e725576080fde0cadf5
+        codeSamplesRevisionDigest: sha256:8897fc85f95b01bb301b5dfa255ea7533679f3164268087f6b352dd76f78032a
     api-ts:
         source: api
         sourceNamespace: api
@@ -50,8 +50,6 @@ workflow:
         api-python:
             inputs:
                 - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
-            overlays:
-                - location: ./api/py/overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-python
     targets:

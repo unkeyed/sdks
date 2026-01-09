@@ -35,6 +35,12 @@ class V2KeysVerifyKeyRequestBodyTypedDict(TypedDict):
     Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
 
     """
+    credits: NotRequired[KeysVerifyKeyCreditsTypedDict]
+    r"""Controls credit consumption for usage-based billing and quota enforcement.
+    Omitting this field uses the default cost of 1 credit per verification.
+    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
+    """
     ratelimits: NotRequired[List[KeysVerifyKeyRatelimitTypedDict]]
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
@@ -44,12 +50,6 @@ class V2KeysVerifyKeyRequestBodyTypedDict(TypedDict):
     """
     migration_id: NotRequired[str]
     r"""Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev"""
-    key_credits: NotRequired[KeysVerifyKeyCreditsTypedDict]
-    r"""Controls credit consumption for usage-based billing and quota enforcement.
-    Omitting this field uses the default cost of 1 credit per verification.
-    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
-    """
 
 
 class V2KeysVerifyKeyRequestBody(BaseModel):
@@ -78,6 +78,13 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
 
     """
 
+    credits: Optional[KeysVerifyKeyCredits] = None
+    r"""Controls credit consumption for usage-based billing and quota enforcement.
+    Omitting this field uses the default cost of 1 credit per verification.
+    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
+    """
+
     ratelimits: Optional[List[KeysVerifyKeyRatelimit]] = None
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
@@ -88,12 +95,3 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
 
     migration_id: Annotated[Optional[str], pydantic.Field(alias="migrationId")] = None
     r"""Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev"""
-
-    key_credits: Annotated[
-        Optional[KeysVerifyKeyCredits], pydantic.Field(alias="keyCredits")
-    ] = None
-    r"""Controls credit consumption for usage-based billing and quota enforcement.
-    Omitting this field uses the default cost of 1 credit per verification.
-    Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
-    """

@@ -3,12 +3,13 @@
 from __future__ import annotations
 from enum import Enum
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
+from unkey.py import models, utils
 from unkey.py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 
 
-class Operation(str, Enum):
+class Operation(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations."""
 
     SET = "set"
@@ -26,7 +27,7 @@ class V2KeysUpdateCreditsRequestBodyTypedDict(TypedDict):
     value: NotRequired[Nullable[int]]
     r"""The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
-    Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+    Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
 
     Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 
@@ -45,11 +46,20 @@ class V2KeysUpdateCreditsRequestBody(BaseModel):
     value: OptionalNullable[int] = UNSET
     r"""The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
-    Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+    Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
 
     Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 
     """
+
+    @field_serializer("operation")
+    def serialize_operation(self, value):
+        if isinstance(value, str):
+            try:
+                return models.Operation(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

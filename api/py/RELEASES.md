@@ -59,3 +59,13 @@ Based on:
 - [python v2.5.0] api/py
 ### Releases
 - [PyPI v2.5.0] https://pypi.org/project/unkey.py/2.5.0 - api/py
+
+## 2026-01-09 12:28:20
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.683.1 (2.792.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v2.6.0] api/py
+### Releases
+- [PyPI v2.6.0] https://pypi.org/project/unkey.py/2.6.0 - api/py

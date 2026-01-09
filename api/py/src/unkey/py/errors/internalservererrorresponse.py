@@ -12,7 +12,6 @@ from unkey.py.types import BaseModel
 class InternalServerErrorResponseData(BaseModel):
     meta: models_meta.Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-
     error: models_baseerror.BaseError
     r"""Base error structure following Problem Details for HTTP APIs (RFC 7807). This provides a standardized way to carry machine-readable details of errors in HTTP response content."""
 

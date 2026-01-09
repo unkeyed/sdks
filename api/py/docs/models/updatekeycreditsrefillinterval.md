@@ -1,4 +1,4 @@
-# Interval
+# UpdateKeyCreditsRefillInterval
 
 How often credits are automatically refilled.
 

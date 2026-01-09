@@ -10,17 +10,17 @@ from unkey.py import models, utils
 from unkey.py.types import BaseModel
 
 
-class KeyCreditsRefillInterval(str, Enum, metaclass=utils.OpenEnumMeta):
+class UpdateKeyCreditsRefillInterval(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""How often credits are automatically refilled."""
 
     DAILY = "daily"
     MONTHLY = "monthly"
 
 
-class KeyCreditsRefillTypedDict(TypedDict):
+class UpdateKeyCreditsRefillTypedDict(TypedDict):
     r"""Configuration for automatic credit refill behavior."""
 
-    interval: KeyCreditsRefillInterval
+    interval: UpdateKeyCreditsRefillInterval
     r"""How often credits are automatically refilled."""
     amount: int
     r"""Number of credits to add during each refill cycle."""
@@ -32,10 +32,10 @@ class KeyCreditsRefillTypedDict(TypedDict):
     """
 
 
-class KeyCreditsRefill(BaseModel):
+class UpdateKeyCreditsRefill(BaseModel):
     r"""Configuration for automatic credit refill behavior."""
 
-    interval: KeyCreditsRefillInterval
+    interval: UpdateKeyCreditsRefillInterval
     r"""How often credits are automatically refilled."""
 
     amount: int
@@ -52,7 +52,7 @@ class KeyCreditsRefill(BaseModel):
     def serialize_interval(self, value):
         if isinstance(value, str):
             try:
-                return models.KeyCreditsRefillInterval(value)
+                return models.UpdateKeyCreditsRefillInterval(value)
             except ValueError:
                 return value
         return value

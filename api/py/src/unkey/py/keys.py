@@ -593,14 +593,14 @@ class Keys(BaseSDK):
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
         expires: Optional[int] = None,
+        credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = True,
         recoverable: Optional[bool] = False,
-        key_credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -670,6 +670,7 @@ class Keys(BaseSDK):
             Keys expire based on server time, not client time, which prevents timezone-related issues.
             Essential for trial periods, temporary access, and security compliance requiring key rotation.
 
+        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
             Unlike credits which track total usage, rate limits reset automatically after each window expires.
             Multiple rate limits can control different operation types with separate thresholds and windows.
@@ -685,7 +686,6 @@ class Keys(BaseSDK):
             When false, the key value cannot be retrieved after creation for maximum security.
             Only enable for development keys or when key recovery is absolutely necessary.
 
-        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -711,14 +711,12 @@ class Keys(BaseSDK):
             roles=roles,
             permissions=permissions,
             expires=expires,
+            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             recoverable=recoverable,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeyCreditsData]
-            ),
         )
 
         req = self._build_request(
@@ -815,14 +813,14 @@ class Keys(BaseSDK):
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
         expires: Optional[int] = None,
+        credits: Optional[
+            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
+        ] = None,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = True,
         recoverable: Optional[bool] = False,
-        key_credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -892,6 +890,7 @@ class Keys(BaseSDK):
             Keys expire based on server time, not client time, which prevents timezone-related issues.
             Essential for trial periods, temporary access, and security compliance requiring key rotation.
 
+        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
             Unlike credits which track total usage, rate limits reset automatically after each window expires.
             Multiple rate limits can control different operation types with separate thresholds and windows.
@@ -907,7 +906,6 @@ class Keys(BaseSDK):
             When false, the key value cannot be retrieved after creation for maximum security.
             Only enable for development keys or when key recovery is absolutely necessary.
 
-        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -933,14 +931,12 @@ class Keys(BaseSDK):
             roles=roles,
             permissions=permissions,
             expires=expires,
+            credits=utils.get_pydantic_model(credits, Optional[models.KeyCreditsData]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             recoverable=recoverable,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeyCreditsData]
-            ),
         )
 
         req = self._build_request_async(
@@ -3382,7 +3378,7 @@ class Keys(BaseSDK):
 
         :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
-            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
 
             Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 
@@ -3526,7 +3522,7 @@ class Keys(BaseSDK):
 
         :param value: The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
-            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+            Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
 
             Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 
@@ -3643,15 +3639,15 @@ class Keys(BaseSDK):
         external_id: OptionalNullable[str] = UNSET,
         meta: OptionalNullable[Dict[str, Any]] = UNSET,
         expires: OptionalNullable[int] = UNSET,
+        credits: OptionalNullable[
+            Union[models.UpdateKeyCreditsData, models.UpdateKeyCreditsDataTypedDict]
+        ] = UNSET,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = None,
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
-        key_credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3701,6 +3697,7 @@ class Keys(BaseSDK):
             Keys expire based on server time, not client time, which prevents timezone-related issues.
             Active sessions continue until their next verification attempt after expiry.
 
+        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
             Omitting this field preserves existing rate limits, while setting null removes all rate limits.
             Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -3713,7 +3710,6 @@ class Keys(BaseSDK):
 
         :param roles:
         :param permissions:
-        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3735,15 +3731,15 @@ class Keys(BaseSDK):
             external_id=external_id,
             meta=meta,
             expires=expires,
+            credits=utils.get_pydantic_model(
+                credits, OptionalNullable[models.UpdateKeyCreditsData]
+            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=roles,
             permissions=permissions,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeyCreditsData]
-            ),
         )
 
         req = self._build_request(
@@ -3836,15 +3832,15 @@ class Keys(BaseSDK):
         external_id: OptionalNullable[str] = UNSET,
         meta: OptionalNullable[Dict[str, Any]] = UNSET,
         expires: OptionalNullable[int] = UNSET,
+        credits: OptionalNullable[
+            Union[models.UpdateKeyCreditsData, models.UpdateKeyCreditsDataTypedDict]
+        ] = UNSET,
         ratelimits: Optional[
             Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
         ] = None,
         enabled: Optional[bool] = None,
         roles: Optional[List[str]] = None,
         permissions: Optional[List[str]] = None,
-        key_credits: Optional[
-            Union[models.KeyCreditsData, models.KeyCreditsDataTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3894,6 +3890,7 @@ class Keys(BaseSDK):
             Keys expire based on server time, not client time, which prevents timezone-related issues.
             Active sessions continue until their next verification attempt after expiry.
 
+        :param credits: Credit configuration and remaining balance for this key.
         :param ratelimits: Defines time-based rate limits that protect against abuse by controlling request frequency.
             Omitting this field preserves existing rate limits, while setting null removes all rate limits.
             Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -3906,7 +3903,6 @@ class Keys(BaseSDK):
 
         :param roles:
         :param permissions:
-        :param key_credits: Credit configuration and remaining balance for this key.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3928,15 +3924,15 @@ class Keys(BaseSDK):
             external_id=external_id,
             meta=meta,
             expires=expires,
+            credits=utils.get_pydantic_model(
+                credits, OptionalNullable[models.UpdateKeyCreditsData]
+            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=roles,
             permissions=permissions,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeyCreditsData]
-            ),
         )
 
         req = self._build_request_async(
@@ -4027,6 +4023,9 @@ class Keys(BaseSDK):
         key: str,
         tags: Optional[List[str]] = None,
         permissions: Optional[str] = None,
+        credits: Optional[
+            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
+        ] = None,
         ratelimits: Optional[
             Union[
                 List[models.KeysVerifyKeyRatelimit],
@@ -4034,9 +4033,6 @@ class Keys(BaseSDK):
             ]
         ] = None,
         migration_id: Optional[str] = None,
-        key_credits: Optional[
-            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4080,16 +4076,16 @@ class Keys(BaseSDK):
             - Complex queries: \"(documents.read OR documents.write) AND users.view\"
             Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
 
+        :param credits: Controls credit consumption for usage-based billing and quota enforcement.
+            Omitting this field uses the default cost of 1 credit per verification.
+            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
             Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
             Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
         :param migration_id: Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
-        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
-            Omitting this field uses the default cost of 1 credit per verification.
-            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4109,13 +4105,13 @@ class Keys(BaseSDK):
             key=key,
             tags=tags,
             permissions=permissions,
+            credits=utils.get_pydantic_model(
+                credits, Optional[models.KeysVerifyKeyCredits]
+            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),
             migration_id=migration_id,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeysVerifyKeyCredits]
-            ),
         )
 
         req = self._build_request(
@@ -4206,6 +4202,9 @@ class Keys(BaseSDK):
         key: str,
         tags: Optional[List[str]] = None,
         permissions: Optional[str] = None,
+        credits: Optional[
+            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
+        ] = None,
         ratelimits: Optional[
             Union[
                 List[models.KeysVerifyKeyRatelimit],
@@ -4213,9 +4212,6 @@ class Keys(BaseSDK):
             ]
         ] = None,
         migration_id: Optional[str] = None,
-        key_credits: Optional[
-            Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4259,16 +4255,16 @@ class Keys(BaseSDK):
             - Complex queries: \"(documents.read OR documents.write) AND users.view\"
             Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
 
+        :param credits: Controls credit consumption for usage-based billing and quota enforcement.
+            Omitting this field uses the default cost of 1 credit per verification.
+            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
+
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
             Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
             Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 
         :param migration_id: Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
-        :param key_credits: Controls credit consumption for usage-based billing and quota enforcement.
-            Omitting this field uses the default cost of 1 credit per verification.
-            Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
-
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4288,13 +4284,13 @@ class Keys(BaseSDK):
             key=key,
             tags=tags,
             permissions=permissions,
+            credits=utils.get_pydantic_model(
+                credits, Optional[models.KeysVerifyKeyCredits]
+            ),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),
             migration_id=migration_id,
-            key_credits=utils.get_pydantic_model(
-                key_credits, Optional[models.KeysVerifyKeyCredits]
-            ),
         )
 
         req = self._build_request_async(
