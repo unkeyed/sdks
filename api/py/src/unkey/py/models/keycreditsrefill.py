@@ -3,12 +3,14 @@
 from __future__ import annotations
 from enum import Enum
 import pydantic
+from pydantic import field_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+from unkey.py import models, utils
 from unkey.py.types import BaseModel
 
 
-class Interval(str, Enum):
+class Interval(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""How often credits are automatically refilled."""
 
     DAILY = "daily"
@@ -45,3 +47,12 @@ class KeyCreditsRefill(BaseModel):
     For days beyond the month's length, refill occurs on the last day of the month.
 
     """
+
+    @field_serializer("interval")
+    def serialize_interval(self, value):
+        if isinstance(value, str):
+            try:
+                return models.Interval(value)
+            except ValueError:
+                return value
+        return value

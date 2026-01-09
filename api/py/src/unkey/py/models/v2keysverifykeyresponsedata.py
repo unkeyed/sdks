@@ -8,17 +8,18 @@ from .verifykeyratelimitdata import (
 )
 from enum import Enum
 import pydantic
+from pydantic import field_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+from unkey.py import models, utils
 from unkey.py.types import BaseModel
 
 
-class Code(str, Enum):
+class Code(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""A machine-readable code indicating the verification status
     or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
     exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-    (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-    (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+    (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
     `EXPIRED` (key has passed its expiration date).
 
     """
@@ -27,7 +28,6 @@ class Code(str, Enum):
     NOT_FOUND = "NOT_FOUND"
     FORBIDDEN = "FORBIDDEN"
     INSUFFICIENT_PERMISSIONS = "INSUFFICIENT_PERMISSIONS"
-    INSUFFICIENT_CREDITS = "INSUFFICIENT_CREDITS"
     USAGE_EXCEEDED = "USAGE_EXCEEDED"
     RATE_LIMITED = "RATE_LIMITED"
     DISABLED = "DISABLED"
@@ -45,8 +45,7 @@ class V2KeysVerifyKeyResponseDataTypedDict(TypedDict):
     r"""A machine-readable code indicating the verification status
     or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
     exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-    (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-    (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+    (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
     `EXPIRED` (key has passed its expiration date).
 
     """
@@ -118,8 +117,7 @@ class V2KeysVerifyKeyResponseData(BaseModel):
     r"""A machine-readable code indicating the verification status
     or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
     exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-    (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-    (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+    (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
     `EXPIRED` (key has passed its expiration date).
 
     """
@@ -187,3 +185,12 @@ class V2KeysVerifyKeyResponseData(BaseModel):
     refills are configured.
 
     """
+
+    @field_serializer("code")
+    def serialize_code(self, value):
+        if isinstance(value, str):
+            try:
+                return models.Code(value)
+            except ValueError:
+                return value
+        return value
