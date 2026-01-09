@@ -72,6 +72,8 @@ class V2KeysCreateKeyRequestBodyTypedDict(TypedDict):
     Essential for trial periods, temporary access, and security compliance requiring key rotation.
 
     """
+    credits: NotRequired[KeyCreditsDataTypedDict]
+    r"""Credit configuration and remaining balance for this key."""
     ratelimits: NotRequired[List[RatelimitRequestTypedDict]]
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -93,8 +95,6 @@ class V2KeysCreateKeyRequestBodyTypedDict(TypedDict):
     Only enable for development keys or when key recovery is absolutely necessary.
 
     """
-    key_credits: NotRequired[KeyCreditsDataTypedDict]
-    r"""Credit configuration and remaining balance for this key."""
 
 
 class V2KeysCreateKeyRequestBody(BaseModel):
@@ -169,6 +169,9 @@ class V2KeysCreateKeyRequestBody(BaseModel):
 
     """
 
+    credits: Optional[KeyCreditsData] = None
+    r"""Credit configuration and remaining balance for this key."""
+
     ratelimits: Optional[List[RatelimitRequest]] = None
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -192,8 +195,3 @@ class V2KeysCreateKeyRequestBody(BaseModel):
     Only enable for development keys or when key recovery is absolutely necessary.
 
     """
-
-    key_credits: Annotated[
-        Optional[KeyCreditsData], pydantic.Field(alias="keyCredits")
-    ] = None
-    r"""Credit configuration and remaining balance for this key."""

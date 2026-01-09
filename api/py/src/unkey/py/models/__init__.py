@@ -18,7 +18,11 @@ if TYPE_CHECKING:
     )
     from .identity import Identity, IdentityTypedDict
     from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
-    from .keycreditsrefill import Interval, KeyCreditsRefill, KeyCreditsRefillTypedDict
+    from .keycreditsrefill import (
+        KeyCreditsRefill,
+        KeyCreditsRefillInterval,
+        KeyCreditsRefillTypedDict,
+    )
     from .keyresponsedata import KeyResponseData, KeyResponseDataTypedDict
     from .keysverifykeycredits import (
         KeysVerifyKeyCredits,
@@ -36,6 +40,15 @@ if TYPE_CHECKING:
     from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
     from .role import Role, RoleTypedDict
     from .security import Security, SecurityTypedDict
+    from .updatekeycreditsdata import (
+        UpdateKeyCreditsData,
+        UpdateKeyCreditsDataTypedDict,
+    )
+    from .updatekeycreditsrefill import (
+        UpdateKeyCreditsRefill,
+        UpdateKeyCreditsRefillInterval,
+        UpdateKeyCreditsRefillTypedDict,
+    )
     from .v2analyticsgetverificationsrequestbody import (
         V2AnalyticsGetVerificationsRequestBody,
         V2AnalyticsGetVerificationsRequestBodyTypedDict,
@@ -428,10 +441,10 @@ __all__ = [
     "IdentitiesListIdentitiesResponseTypedDict",
     "Identity",
     "IdentityTypedDict",
-    "Interval",
     "KeyCreditsData",
     "KeyCreditsDataTypedDict",
     "KeyCreditsRefill",
+    "KeyCreditsRefillInterval",
     "KeyCreditsRefillTypedDict",
     "KeyResponseData",
     "KeyResponseDataTypedDict",
@@ -456,6 +469,11 @@ __all__ = [
     "RoleTypedDict",
     "Security",
     "SecurityTypedDict",
+    "UpdateKeyCreditsData",
+    "UpdateKeyCreditsDataTypedDict",
+    "UpdateKeyCreditsRefill",
+    "UpdateKeyCreditsRefillInterval",
+    "UpdateKeyCreditsRefillTypedDict",
     "V2AnalyticsGetVerificationsRequestBody",
     "V2AnalyticsGetVerificationsRequestBodyTypedDict",
     "V2AnalyticsGetVerificationsResponseBody",
@@ -661,8 +679,8 @@ _dynamic_imports: dict[str, str] = {
     "IdentityTypedDict": ".identity",
     "KeyCreditsData": ".keycreditsdata",
     "KeyCreditsDataTypedDict": ".keycreditsdata",
-    "Interval": ".keycreditsrefill",
     "KeyCreditsRefill": ".keycreditsrefill",
+    "KeyCreditsRefillInterval": ".keycreditsrefill",
     "KeyCreditsRefillTypedDict": ".keycreditsrefill",
     "KeyResponseData": ".keyresponsedata",
     "KeyResponseDataTypedDict": ".keyresponsedata",
@@ -686,6 +704,11 @@ _dynamic_imports: dict[str, str] = {
     "RoleTypedDict": ".role",
     "Security": ".security",
     "SecurityTypedDict": ".security",
+    "UpdateKeyCreditsData": ".updatekeycreditsdata",
+    "UpdateKeyCreditsDataTypedDict": ".updatekeycreditsdata",
+    "UpdateKeyCreditsRefill": ".updatekeycreditsrefill",
+    "UpdateKeyCreditsRefillInterval": ".updatekeycreditsrefill",
+    "UpdateKeyCreditsRefillTypedDict": ".updatekeycreditsrefill",
     "V2AnalyticsGetVerificationsRequestBody": ".v2analyticsgetverificationsrequestbody",
     "V2AnalyticsGetVerificationsRequestBodyTypedDict": ".v2analyticsgetverificationsrequestbody",
     "V2AnalyticsGetVerificationsResponseBody": ".v2analyticsgetverificationsresponsebody",

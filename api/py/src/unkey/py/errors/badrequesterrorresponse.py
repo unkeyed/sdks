@@ -15,7 +15,6 @@ from unkey.py.types import BaseModel
 class BadRequestErrorResponseData(BaseModel):
     meta: models_meta.Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-
     error: models_badrequesterrordetails.BadRequestErrorDetails
     r"""Extended error details specifically for bad request (400) errors. This builds on the BaseError structure by adding an array of individual validation errors, making it easy to identify and fix multiple issues at once."""
 

@@ -29,12 +29,12 @@ class KeyResponseDataTypedDict(TypedDict):
     r"""Unix timestamp in milliseconds when key expires (if set)."""
     permissions: NotRequired[List[str]]
     roles: NotRequired[List[str]]
+    credits: NotRequired[KeyCreditsDataTypedDict]
+    r"""Credit configuration and remaining balance for this key."""
     identity: NotRequired[IdentityTypedDict]
     plaintext: NotRequired[str]
     r"""Decrypted key value (only when decrypt=true)."""
     ratelimits: NotRequired[List[RatelimitResponseTypedDict]]
-    key_credits: NotRequired[KeyCreditsDataTypedDict]
-    r"""Credit configuration and remaining balance for this key."""
 
 
 class KeyResponseData(BaseModel):
@@ -66,14 +66,12 @@ class KeyResponseData(BaseModel):
 
     roles: Optional[List[str]] = None
 
+    credits: Optional[KeyCreditsData] = None
+    r"""Credit configuration and remaining balance for this key."""
+
     identity: Optional[Identity] = None
 
     plaintext: Optional[str] = None
     r"""Decrypted key value (only when decrypt=true)."""
 
     ratelimits: Optional[List[RatelimitResponse]] = None
-
-    key_credits: Annotated[
-        Optional[KeyCreditsData], pydantic.Field(alias="keyCredits")
-    ] = None
-    r"""Credit configuration and remaining balance for this key."""
