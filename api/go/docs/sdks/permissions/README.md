@@ -31,7 +31,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="createPermission" method="post" path="/v2/permissions.createPermission" -->
+<!-- UsageSnippet language="go" operationID="permissions.createPermission" method="post" path="/v2/permissions.createPermission" -->
 ```go
 package main
 
@@ -74,7 +74,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePermissionResponse](../../models/operations/createpermissionresponse.md), error**
+**[*operations.PermissionsCreatePermissionResponse](../../models/operations/permissionscreatepermissionresponse.md), error**
 
 ### Errors
 
@@ -101,7 +101,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="createRole" method="post" path="/v2/permissions.createRole" -->
+<!-- UsageSnippet language="go" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" -->
 ```go
 package main
 
@@ -143,7 +143,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateRoleResponse](../../models/operations/createroleresponse.md), error**
+**[*operations.PermissionsCreateRoleResponse](../../models/operations/permissionscreateroleresponse.md), error**
 
 ### Errors
 
@@ -170,7 +170,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="deletePermission" method="post" path="/v2/permissions.deletePermission" -->
+<!-- UsageSnippet language="go" operationID="permissions.deletePermission" method="post" path="/v2/permissions.deletePermission" -->
 ```go
 package main
 
@@ -211,7 +211,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePermissionResponse](../../models/operations/deletepermissionresponse.md), error**
+**[*operations.PermissionsDeletePermissionResponse](../../models/operations/permissionsdeletepermissionresponse.md), error**
 
 ### Errors
 
@@ -238,7 +238,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="deleteRole" method="post" path="/v2/permissions.deleteRole" -->
+<!-- UsageSnippet language="go" operationID="permissions.deleteRole" method="post" path="/v2/permissions.deleteRole" -->
 ```go
 package main
 
@@ -279,7 +279,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteRoleResponse](../../models/operations/deleteroleresponse.md), error**
+**[*operations.PermissionsDeleteRoleResponse](../../models/operations/permissionsdeleteroleresponse.md), error**
 
 ### Errors
 
@@ -303,7 +303,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getPermission" method="post" path="/v2/permissions.getPermission" -->
+<!-- UsageSnippet language="go" operationID="permissions.getPermission" method="post" path="/v2/permissions.getPermission" -->
 ```go
 package main
 
@@ -344,7 +344,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetPermissionResponse](../../models/operations/getpermissionresponse.md), error**
+**[*operations.PermissionsGetPermissionResponse](../../models/operations/permissionsgetpermissionresponse.md), error**
 
 ### Errors
 
@@ -369,7 +369,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getRole" method="post" path="/v2/permissions.getRole" -->
+<!-- UsageSnippet language="go" operationID="permissions.getRole" method="post" path="/v2/permissions.getRole" -->
 ```go
 package main
 
@@ -410,7 +410,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetRoleResponse](../../models/operations/getroleresponse.md), error**
+**[*operations.PermissionsGetRoleResponse](../../models/operations/permissionsgetroleresponse.md), error**
 
 ### Errors
 
@@ -436,7 +436,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="listPermissions" method="post" path="/v2/permissions.listPermissions" -->
+<!-- UsageSnippet language="go" operationID="permissions.listPermissions" method="post" path="/v2/permissions.listPermissions" -->
 ```go
 package main
 
@@ -478,7 +478,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListPermissionsResponse](../../models/operations/listpermissionsresponse.md), error**
+**[*operations.PermissionsListPermissionsResponse](../../models/operations/permissionslistpermissionsresponse.md), error**
 
 ### Errors
 
@@ -503,7 +503,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="listRoles" method="post" path="/v2/permissions.listRoles" -->
+<!-- UsageSnippet language="go" operationID="permissions.listRoles" method="post" path="/v2/permissions.listRoles" -->
 ```go
 package main
 
@@ -545,7 +545,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListRolesResponse](../../models/operations/listrolesresponse.md), error**
+**[*operations.PermissionsListRolesResponse](../../models/operations/permissionslistrolesresponse.md), error**
 
 ### Errors
 

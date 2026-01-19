@@ -1,9 +1,0 @@
-# RerollKeyResponse
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `V2KeysRerollKeyResponseBody`                                                                     | [*components.V2KeysRerollKeyResponseBody](../../models/components/v2keysrerollkeyresponsebody.md) | :heavy_minus_sign:                                                                                | Key rerolled successfully.                                                                        |

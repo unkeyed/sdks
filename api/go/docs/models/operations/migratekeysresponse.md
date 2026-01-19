@@ -1,9 +1,0 @@
-# MigrateKeysResponse
-
-
-## Fields
-
-| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                    | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
-| `V2KeysMigrateKeysResponseBody`                                                                       | [*components.V2KeysMigrateKeysResponseBody](../../models/components/v2keysmigratekeysresponsebody.md) | :heavy_minus_sign:                                                                                    | Successfully migrated keys.                                                                           |

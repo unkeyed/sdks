@@ -226,6 +226,12 @@ func main() {
 * [ListIdentities](docs/sdks/identities/README.md#listidentities) - List Identities
 * [UpdateIdentity](docs/sdks/identities/README.md#updateidentity) - Update Identity
 
+### [Internal](docs/sdks/internal/README.md)
+
+* [CreateDeployment](docs/sdks/internal/README.md#createdeployment) - Create deployment
+* [GenerateUploadURL](docs/sdks/internal/README.md#generateuploadurl) - Generate upload URL
+* [GetDeployment](docs/sdks/internal/README.md#getdeployment) - Get deployment
+
 ### [Keys](docs/sdks/keys/README.md)
 
 * [AddPermissions](docs/sdks/keys/README.md#addpermissions) - Add key permissions

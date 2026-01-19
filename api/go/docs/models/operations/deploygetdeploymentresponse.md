@@ -1,0 +1,9 @@
+# DeployGetDeploymentResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2DeployGetDeploymentResponseBody`                                                                           | [*components.V2DeployGetDeploymentResponseBody](../../models/components/v2deploygetdeploymentresponsebody.md) | :heavy_minus_sign:                                                                                            | Deployment retrieved successfully                                                                             |

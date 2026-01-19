@@ -48,7 +48,7 @@ func newKeys(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
-func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddPermissionsRequestBody, opts ...operations.Option) (*operations.AddPermissionsResponse, error) {
+func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddPermissionsRequestBody, opts ...operations.Option) (*operations.KeysAddPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -77,7 +77,7 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "addPermissions",
+		OperationID:      "keys.addPermissions",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -212,7 +212,7 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 		}
 	}
 
-	res := &operations.AddPermissionsResponse{
+	res := &operations.KeysAddPermissionsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -386,7 +386,7 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
-func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRequestBody, opts ...operations.Option) (*operations.AddRolesResponse, error) {
+func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRequestBody, opts ...operations.Option) (*operations.KeysAddRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -415,7 +415,7 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "addRoles",
+		OperationID:      "keys.addRoles",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -550,7 +550,7 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 		}
 	}
 
-	res := &operations.AddRolesResponse{
+	res := &operations.KeysAddRolesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -725,7 +725,7 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 // Your root key needs one of:
 // - `api.*.create_key` (create keys in any API)
 // - `api.<api_id>.create_key` (create keys in specific API)
-func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKeyRequestBody, opts ...operations.Option) (*operations.CreateKeyResponse, error) {
+func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKeyRequestBody, opts ...operations.Option) (*operations.KeysCreateKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -754,7 +754,7 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "createKey",
+		OperationID:      "keys.createKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -889,7 +889,7 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 		}
 	}
 
-	res := &operations.CreateKeyResponse{
+	res := &operations.KeysCreateKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1059,7 +1059,7 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 // Your root key must have one of the following permissions:
 // - `api.*.delete_key` (to delete keys in any API)
 // - `api.<api_id>.delete_key` (to delete keys in a specific API)
-func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKeyRequestBody, opts ...operations.Option) (*operations.DeleteKeyResponse, error) {
+func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKeyRequestBody, opts ...operations.Option) (*operations.KeysDeleteKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1088,7 +1088,7 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "deleteKey",
+		OperationID:      "keys.deleteKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1223,7 +1223,7 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 		}
 	}
 
-	res := &operations.DeleteKeyResponse{
+	res := &operations.KeysDeleteKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1396,7 +1396,7 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 //
 // Additional permission required for decrypt functionality:
 // - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyRequestBody, opts ...operations.Option) (*operations.GetKeyResponse, error) {
+func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyRequestBody, opts ...operations.Option) (*operations.KeysGetKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1425,7 +1425,7 @@ func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyReques
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getKey",
+		OperationID:      "keys.getKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1560,7 +1560,7 @@ func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyReques
 		}
 	}
 
-	res := &operations.GetKeyResponse{
+	res := &operations.KeysGetKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1725,7 +1725,7 @@ func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyReques
 // Your root key must have one of the following permissions for basic key information:
 // - `api.*.create_key` (to migrate keys to any API)
 // - `api.<api_id>.create_key` (to migrate keys to a specific API)
-func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrateKeysRequestBody, opts ...operations.Option) (*operations.MigrateKeysResponse, error) {
+func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrateKeysRequestBody, opts ...operations.Option) (*operations.KeysMigrateKeysResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1754,7 +1754,7 @@ func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrate
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "migrateKeys",
+		OperationID:      "keys.migrateKeys",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1889,7 +1889,7 @@ func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrate
 		}
 	}
 
-	res := &operations.MigrateKeysResponse{
+	res := &operations.KeysMigrateKeysResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -2063,7 +2063,7 @@ func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrate
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysRemovePermissionsRequestBody, opts ...operations.Option) (*operations.RemovePermissionsResponse, error) {
+func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysRemovePermissionsRequestBody, opts ...operations.Option) (*operations.KeysRemovePermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2092,7 +2092,7 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "removePermissions",
+		OperationID:      "keys.removePermissions",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2227,7 +2227,7 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 		}
 	}
 
-	res := &operations.RemovePermissionsResponse{
+	res := &operations.KeysRemovePermissionsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -2401,7 +2401,7 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveRolesRequestBody, opts ...operations.Option) (*operations.RemoveRolesResponse, error) {
+func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveRolesRequestBody, opts ...operations.Option) (*operations.KeysRemoveRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2430,7 +2430,7 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "removeRoles",
+		OperationID:      "keys.removeRoles",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2565,7 +2565,7 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 		}
 	}
 
-	res := &operations.RemoveRolesResponse{
+	res := &operations.KeysRemoveRolesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -2756,7 +2756,7 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 //	Your root key must have:
 //	- `api.*.create_key` or `api.<api_id>.create_key`
 //	- `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKeyRequestBody, opts ...operations.Option) (*operations.RerollKeyResponse, error) {
+func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKeyRequestBody, opts ...operations.Option) (*operations.KeysRerollKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2785,7 +2785,7 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "rerollKey",
+		OperationID:      "keys.rerollKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2920,7 +2920,7 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 		}
 	}
 
-	res := &operations.RerollKeyResponse{
+	res := &operations.KeysRerollKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -3094,7 +3094,7 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetPermissionsRequestBody, opts ...operations.Option) (*operations.SetPermissionsResponse, error) {
+func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetPermissionsRequestBody, opts ...operations.Option) (*operations.KeysSetPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3123,7 +3123,7 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "setPermissions",
+		OperationID:      "keys.setPermissions",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -3258,7 +3258,7 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 		}
 	}
 
-	res := &operations.SetPermissionsResponse{
+	res := &operations.KeysSetPermissionsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -3432,7 +3432,7 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRequestBody, opts ...operations.Option) (*operations.SetRolesResponse, error) {
+func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRequestBody, opts ...operations.Option) (*operations.KeysSetRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3461,7 +3461,7 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "setRoles",
+		OperationID:      "keys.setRoles",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -3596,7 +3596,7 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 		}
 	}
 
-	res := &operations.SetRolesResponse{
+	res := &operations.KeysSetRolesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -3770,7 +3770,7 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 // **Side Effects**
 //
 // Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
-func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdateCreditsRequestBody, opts ...operations.Option) (*operations.UpdateCreditsResponse, error) {
+func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdateCreditsRequestBody, opts ...operations.Option) (*operations.KeysUpdateCreditsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3799,7 +3799,7 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "updateCredits",
+		OperationID:      "keys.updateCredits",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -3934,7 +3934,7 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 		}
 	}
 
-	res := &operations.UpdateCreditsResponse{
+	res := &operations.KeysUpdateCreditsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -4108,7 +4108,7 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 // **Side Effects**
 //
 // If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
-func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKeyRequestBody, opts ...operations.Option) (*operations.UpdateKeyResponse, error) {
+func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKeyRequestBody, opts ...operations.Option) (*operations.KeysUpdateKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4137,7 +4137,7 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "updateKey",
+		OperationID:      "keys.updateKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -4272,7 +4272,7 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 		}
 	}
 
-	res := &operations.UpdateKeyResponse{
+	res := &operations.KeysUpdateKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -4449,7 +4449,7 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 // - `api.<api_id>.verify_key` (verify keys in specific API)
 //
 // **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
-func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKeyRequestBody, opts ...operations.Option) (*operations.VerifyKeyResponse, error) {
+func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKeyRequestBody, opts ...operations.Option) (*operations.KeysVerifyKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4478,7 +4478,7 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "verifyKey",
+		OperationID:      "keys.verifyKey",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -4613,7 +4613,7 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 		}
 	}
 
-	res := &operations.VerifyKeyResponse{
+	res := &operations.KeysVerifyKeyResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -4781,7 +4781,7 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 // - `api.<api_id>.read_key` (to read keys from a specific API)
 //
 // If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
-func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiRequestBody, opts ...operations.Option) (*operations.WhoamiResponse, error) {
+func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiRequestBody, opts ...operations.Option) (*operations.KeysWhoamiResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4810,7 +4810,7 @@ func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiReques
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "whoami",
+		OperationID:      "keys.whoami",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -4945,7 +4945,7 @@ func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiReques
 		}
 	}
 
-	res := &operations.WhoamiResponse{
+	res := &operations.KeysWhoamiResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,

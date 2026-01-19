@@ -43,7 +43,7 @@ func newPermissions(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *ho
 //
 // Your root key must have the following permission:
 // - `rbac.*.create_permission`
-func (s *Permissions) CreatePermission(ctx context.Context, request components.V2PermissionsCreatePermissionRequestBody, opts ...operations.Option) (*operations.CreatePermissionResponse, error) {
+func (s *Permissions) CreatePermission(ctx context.Context, request components.V2PermissionsCreatePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsCreatePermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -72,7 +72,7 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "createPermission",
+		OperationID:      "permissions.createPermission",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -207,7 +207,7 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 		}
 	}
 
-	res := &operations.CreatePermissionResponse{
+	res := &operations.PermissionsCreatePermissionResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -374,7 +374,7 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 //
 // Your root key must have the following permission:
 // - `rbac.*.create_role`
-func (s *Permissions) CreateRole(ctx context.Context, request components.V2PermissionsCreateRoleRequestBody, opts ...operations.Option) (*operations.CreateRoleResponse, error) {
+func (s *Permissions) CreateRole(ctx context.Context, request components.V2PermissionsCreateRoleRequestBody, opts ...operations.Option) (*operations.PermissionsCreateRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -403,7 +403,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "createRole",
+		OperationID:      "permissions.createRole",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -538,7 +538,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 		}
 	}
 
-	res := &operations.CreateRoleResponse{
+	res := &operations.PermissionsCreateRoleResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -705,7 +705,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 //
 // Your root key must have the following permission:
 // - `rbac.*.delete_permission`
-func (s *Permissions) DeletePermission(ctx context.Context, request components.V2PermissionsDeletePermissionRequestBody, opts ...operations.Option) (*operations.DeletePermissionResponse, error) {
+func (s *Permissions) DeletePermission(ctx context.Context, request components.V2PermissionsDeletePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsDeletePermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -734,7 +734,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "deletePermission",
+		OperationID:      "permissions.deletePermission",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -869,7 +869,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 		}
 	}
 
-	res := &operations.DeletePermissionResponse{
+	res := &operations.PermissionsDeletePermissionResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1036,7 +1036,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 //
 // Your root key must have the following permission:
 // - `rbac.*.delete_role`
-func (s *Permissions) DeleteRole(ctx context.Context, request components.V2PermissionsDeleteRoleRequestBody, opts ...operations.Option) (*operations.DeleteRoleResponse, error) {
+func (s *Permissions) DeleteRole(ctx context.Context, request components.V2PermissionsDeleteRoleRequestBody, opts ...operations.Option) (*operations.PermissionsDeleteRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1065,7 +1065,7 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "deleteRole",
+		OperationID:      "permissions.deleteRole",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1200,7 +1200,7 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 		}
 	}
 
-	res := &operations.DeleteRoleResponse{
+	res := &operations.PermissionsDeleteRoleResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1344,7 +1344,7 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_permission`
-func (s *Permissions) GetPermission(ctx context.Context, request components.V2PermissionsGetPermissionRequestBody, opts ...operations.Option) (*operations.GetPermissionResponse, error) {
+func (s *Permissions) GetPermission(ctx context.Context, request components.V2PermissionsGetPermissionRequestBody, opts ...operations.Option) (*operations.PermissionsGetPermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1373,7 +1373,7 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getPermission",
+		OperationID:      "permissions.getPermission",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1508,7 +1508,7 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 		}
 	}
 
-	res := &operations.GetPermissionResponse{
+	res := &operations.PermissionsGetPermissionResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1673,7 +1673,7 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_role`
-func (s *Permissions) GetRole(ctx context.Context, request components.V2PermissionsGetRoleRequestBody, opts ...operations.Option) (*operations.GetRoleResponse, error) {
+func (s *Permissions) GetRole(ctx context.Context, request components.V2PermissionsGetRoleRequestBody, opts ...operations.Option) (*operations.PermissionsGetRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1702,7 +1702,7 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getRole",
+		OperationID:      "permissions.getRole",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1837,7 +1837,7 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 		}
 	}
 
-	res := &operations.GetRoleResponse{
+	res := &operations.PermissionsGetRoleResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -2003,7 +2003,7 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_permission`
-func (s *Permissions) ListPermissions(ctx context.Context, request components.V2PermissionsListPermissionsRequestBody, opts ...operations.Option) (*operations.ListPermissionsResponse, error) {
+func (s *Permissions) ListPermissions(ctx context.Context, request components.V2PermissionsListPermissionsRequestBody, opts ...operations.Option) (*operations.PermissionsListPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2032,7 +2032,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "listPermissions",
+		OperationID:      "permissions.listPermissions",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2167,7 +2167,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 		}
 	}
 
-	res := &operations.ListPermissionsResponse{
+	res := &operations.PermissionsListPermissionsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -2312,7 +2312,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_role`
-func (s *Permissions) ListRoles(ctx context.Context, request components.V2PermissionsListRolesRequestBody, opts ...operations.Option) (*operations.ListRolesResponse, error) {
+func (s *Permissions) ListRoles(ctx context.Context, request components.V2PermissionsListRolesRequestBody, opts ...operations.Option) (*operations.PermissionsListRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2341,7 +2341,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "listRoles",
+		OperationID:      "permissions.listRoles",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2476,7 +2476,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 		}
 	}
 
-	res := &operations.ListRolesResponse{
+	res := &operations.PermissionsListRolesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,

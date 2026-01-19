@@ -373,7 +373,7 @@ func (s *Identities) CreateIdentity(ctx context.Context, request components.V2Id
 // > Requires `identity.*.delete_identity` permission
 // > Associated API keys remain functional but lose shared resources
 // > External ID becomes available for reuse immediately
-func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2IdentitiesDeleteIdentityRequestBody, opts ...operations.Option) (*operations.V2IdentitiesDeleteIdentityResponse, error) {
+func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2IdentitiesDeleteIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesDeleteIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -402,7 +402,7 @@ func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2Id
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "v2.identities.deleteIdentity",
+		OperationID:      "identities.deleteIdentity",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -537,7 +537,7 @@ func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2Id
 		}
 	}
 
-	res := &operations.V2IdentitiesDeleteIdentityResponse{
+	res := &operations.IdentitiesDeleteIdentityResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1386,7 +1386,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 // > **Important**
 // > Requires `identity.*.update_identity` permission
 // > Rate limit changes propagate within 30 seconds
-func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2IdentitiesUpdateIdentityRequestBody, opts ...operations.Option) (*operations.V2IdentitiesUpdateIdentityResponse, error) {
+func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2IdentitiesUpdateIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesUpdateIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1415,7 +1415,7 @@ func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2Id
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "v2.identities.updateIdentity",
+		OperationID:      "identities.updateIdentity",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1550,7 +1550,7 @@ func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2Id
 		}
 	}
 
-	res := &operations.V2IdentitiesUpdateIdentityResponse{
+	res := &operations.IdentitiesUpdateIdentityResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
