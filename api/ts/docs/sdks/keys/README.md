@@ -43,7 +43,7 @@ Invalidates the key cache for immediate effect, and makes permissions available 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="addPermissions" method="post" path="/v2/keys.addPermissions" -->
+<!-- UsageSnippet language="typescript" operationID="keys.addPermissions" method="post" path="/v2/keys.addPermissions" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -54,7 +54,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.keys.addPermissions({
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    permissions: [],
+    permissions: [
+      "<value 1>",
+    ],
   });
 
   console.log(result);
@@ -80,7 +82,9 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await keysAddPermissions(unkey, {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    permissions: [],
+    permissions: [
+      "<value 1>",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -138,7 +142,7 @@ Invalidates the key cache for immediate effect, and makes role assignments avail
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="addRoles" method="post" path="/v2/keys.addRoles" -->
+<!-- UsageSnippet language="typescript" operationID="keys.addRoles" method="post" path="/v2/keys.addRoles" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -151,6 +155,8 @@ async function run() {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
     roles: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
   });
 
@@ -179,6 +185,8 @@ async function run() {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
     roles: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
   });
   if (res.ok) {
@@ -238,7 +246,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createKey" method="post" path="/v2/keys.createKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.createKey" method="post" path="/v2/keys.createKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -421,7 +429,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deleteKey" method="post" path="/v2/keys.deleteKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.deleteKey" method="post" path="/v2/keys.deleteKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -513,7 +521,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getKey" method="post" path="/v2/keys.getKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.getKey" method="post" path="/v2/keys.getKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -597,7 +605,7 @@ Your root key must have one of the following permissions for basic key informati
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
+<!-- UsageSnippet language="typescript" operationID="keys.migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -609,7 +617,55 @@ async function run() {
   const result = await unkey.keys.migrateKeys({
     migrationId: "your_company",
     apiId: "api_123456789",
-    keys: [],
+    keys: [
+      {
+        hash: "your_already_hashed_key",
+        name: "Payment Service Production Key",
+        externalId: "user_1234abcd",
+        meta: {
+          "plan": "enterprise",
+          "featureFlags": {
+            "betaAccess": true,
+            "concurrentConnections": 10,
+          },
+          "customerName": "Acme Corp",
+          "billing": {
+            "tier": "premium",
+            "renewal": "2024-12-31",
+          },
+        },
+        roles: [
+          "api_admin",
+          "billing_reader",
+        ],
+        permissions: [
+          "documents.read",
+          "documents.write",
+          "settings.view",
+        ],
+        credits: {
+          remaining: 1000,
+          refill: {
+            interval: "daily",
+            amount: 1000,
+            refillDay: 15,
+          },
+        },
+        ratelimits: [
+          {
+            name: "requests",
+            limit: 100,
+            duration: 60000,
+            autoApply: true,
+          },
+          {
+            name: "heavy_operations",
+            limit: 10,
+            duration: 3600000,
+          },
+        ],
+      },
+    ],
   });
 
   console.log(result);
@@ -636,7 +692,55 @@ async function run() {
   const res = await keysMigrateKeys(unkey, {
     migrationId: "your_company",
     apiId: "api_123456789",
-    keys: [],
+    keys: [
+      {
+        hash: "your_already_hashed_key",
+        name: "Payment Service Production Key",
+        externalId: "user_1234abcd",
+        meta: {
+          "plan": "enterprise",
+          "featureFlags": {
+            "betaAccess": true,
+            "concurrentConnections": 10,
+          },
+          "customerName": "Acme Corp",
+          "billing": {
+            "tier": "premium",
+            "renewal": "2024-12-31",
+          },
+        },
+        roles: [
+          "api_admin",
+          "billing_reader",
+        ],
+        permissions: [
+          "documents.read",
+          "documents.write",
+          "settings.view",
+        ],
+        credits: {
+          remaining: 1000,
+          refill: {
+            interval: "daily",
+            amount: 1000,
+            refillDay: 15,
+          },
+        },
+        ratelimits: [
+          {
+            name: "requests",
+            limit: 100,
+            duration: 60000,
+            autoApply: true,
+          },
+          {
+            name: "heavy_operations",
+            limit: 10,
+            duration: 3600000,
+          },
+        ],
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -694,7 +798,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="removePermissions" method="post" path="/v2/keys.removePermissions" -->
+<!-- UsageSnippet language="typescript" operationID="keys.removePermissions" method="post" path="/v2/keys.removePermissions" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -789,7 +893,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="removeRoles" method="post" path="/v2/keys.removeRoles" -->
+<!-- UsageSnippet language="typescript" operationID="keys.removeRoles" method="post" path="/v2/keys.removeRoles" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -800,10 +904,7 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.keys.removeRoles({
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    roles: [
-      "<value 1>",
-      "<value 2>",
-    ],
+    roles: [],
   });
 
   console.log(result);
@@ -829,10 +930,7 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await keysRemoveRoles(unkey, {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    roles: [
-      "<value 1>",
-      "<value 2>",
-    ],
+    roles: [],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -907,7 +1005,7 @@ Common use cases include:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="rerollKey" method="post" path="/v2/keys.rerollKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.rerollKey" method="post" path="/v2/keys.rerollKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1002,7 +1100,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="setPermissions" method="post" path="/v2/keys.setPermissions" -->
+<!-- UsageSnippet language="typescript" operationID="keys.setPermissions" method="post" path="/v2/keys.setPermissions" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1015,6 +1113,8 @@ async function run() {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
     permissions: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
   });
 
@@ -1043,6 +1143,8 @@ async function run() {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
     permissions: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
   });
   if (res.ok) {
@@ -1101,7 +1203,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="setRoles" method="post" path="/v2/keys.setRoles" -->
+<!-- UsageSnippet language="typescript" operationID="keys.setRoles" method="post" path="/v2/keys.setRoles" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1112,11 +1214,7 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.keys.setRoles({
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    roles: [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
+    roles: [],
   });
 
   console.log(result);
@@ -1142,11 +1240,7 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await keysSetRoles(unkey, {
     keyId: "key_2cGKbMxRyIzhCxo1Idjz8q",
-    roles: [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
+    roles: [],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1204,7 +1298,7 @@ Credit updates remove the key from cache immediately. Setting credits to unlimit
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateCredits" method="post" path="/v2/keys.updateCredits" -->
+<!-- UsageSnippet language="typescript" operationID="keys.updateCredits" method="post" path="/v2/keys.updateCredits" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1301,7 +1395,7 @@ If you specify an `externalId` that doesn't exist, a new identity will be automa
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateKey" method="post" path="/v2/keys.updateKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1348,8 +1442,8 @@ async function run() {
     ratelimits: [
       {
         name: "api",
-        limit: 453542,
-        duration: 350222,
+        limit: 738192,
+        duration: 167910,
       },
     ],
     enabled: true,
@@ -1423,8 +1517,8 @@ async function run() {
     ratelimits: [
       {
         name: "api",
-        limit: 453542,
-        duration: 350222,
+        limit: 738192,
+        duration: 167910,
       },
     ],
     enabled: true,
@@ -1497,7 +1591,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="verifyKey" method="post" path="/v2/keys.verifyKey" -->
+<!-- UsageSnippet language="typescript" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -1624,7 +1718,7 @@ If your rootkey lacks permissions but the key exists, we may return a 404 status
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="whoami" method="post" path="/v2/keys.whoami" -->
+<!-- UsageSnippet language="typescript" operationID="keys.whoami" method="post" path="/v2/keys.whoami" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
