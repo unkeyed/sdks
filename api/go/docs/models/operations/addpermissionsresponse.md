@@ -1,9 +1,0 @@
-# AddPermissionsResponse
-
-
-## Fields
-
-| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
-| `V2KeysAddPermissionsResponseBody`                                                                          | [*components.V2KeysAddPermissionsResponseBody](../../models/components/v2keysaddpermissionsresponsebody.md) | :heavy_minus_sign:                                                                                          | Permissions added successfully. Returns all permissions currently assigned to the key.                      |

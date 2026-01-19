@@ -1,9 +1,0 @@
-# RemovePermissionsResponse
-
-
-## Fields
-
-| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `V2KeysRemovePermissionsResponseBody`                                                                             | [*components.V2KeysRemovePermissionsResponseBody](../../models/components/v2keysremovepermissionsresponsebody.md) | :heavy_minus_sign:                                                                                                | Permissions removed successfully. Returns all permissions currently assigned to the key.                          |

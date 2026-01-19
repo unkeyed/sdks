@@ -43,7 +43,7 @@ Invalidates the key cache for immediate effect, and makes permissions available 
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="addPermissions" method="post" path="/v2/keys.addPermissions" -->
+<!-- UsageSnippet language="go" operationID="keys.addPermissions" method="post" path="/v2/keys.addPermissions" -->
 ```go
 package main
 
@@ -64,7 +64,9 @@ func main() {
 
     res, err := s.Keys.AddPermissions(ctx, components.V2KeysAddPermissionsRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Permissions: []string{},
+        Permissions: []string{
+            "<value 1>",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -85,7 +87,7 @@ func main() {
 
 ### Response
 
-**[*operations.AddPermissionsResponse](../../models/operations/addpermissionsresponse.md), error**
+**[*operations.KeysAddPermissionsResponse](../../models/operations/keysaddpermissionsresponse.md), error**
 
 ### Errors
 
@@ -119,7 +121,7 @@ Invalidates the key cache for immediate effect, and makes role assignments avail
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="addRoles" method="post" path="/v2/keys.addRoles" -->
+<!-- UsageSnippet language="go" operationID="keys.addRoles" method="post" path="/v2/keys.addRoles" -->
 ```go
 package main
 
@@ -142,6 +144,8 @@ func main() {
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
         Roles: []string{
             "<value 1>",
+            "<value 2>",
+            "<value 3>",
         },
     })
     if err != nil {
@@ -163,7 +167,7 @@ func main() {
 
 ### Response
 
-**[*operations.AddRolesResponse](../../models/operations/addrolesresponse.md), error**
+**[*operations.KeysAddRolesResponse](../../models/operations/keysaddrolesresponse.md), error**
 
 ### Errors
 
@@ -198,7 +202,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="createKey" method="post" path="/v2/keys.createKey" -->
+<!-- UsageSnippet language="go" operationID="keys.createKey" method="post" path="/v2/keys.createKey" -->
 ```go
 package main
 
@@ -286,7 +290,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateKeyResponse](../../models/operations/createkeyresponse.md), error**
+**[*operations.KeysCreateKeyResponse](../../models/operations/keyscreatekeyresponse.md), error**
 
 ### Errors
 
@@ -316,7 +320,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="deleteKey" method="post" path="/v2/keys.deleteKey" -->
+<!-- UsageSnippet language="go" operationID="keys.deleteKey" method="post" path="/v2/keys.deleteKey" -->
 ```go
 package main
 
@@ -357,7 +361,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteKeyResponse](../../models/operations/deletekeyresponse.md), error**
+**[*operations.KeysDeleteKeyResponse](../../models/operations/keysdeletekeyresponse.md), error**
 
 ### Errors
 
@@ -390,7 +394,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getKey" method="post" path="/v2/keys.getKey" -->
+<!-- UsageSnippet language="go" operationID="keys.getKey" method="post" path="/v2/keys.getKey" -->
 ```go
 package main
 
@@ -431,7 +435,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetKeyResponse](../../models/operations/getkeyresponse.md), error**
+**[*operations.KeysGetKeyResponse](../../models/operations/keysgetkeyresponse.md), error**
 
 ### Errors
 
@@ -456,7 +460,7 @@ Your root key must have one of the following permissions for basic key informati
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
+<!-- UsageSnippet language="go" operationID="keys.migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
 ```go
 package main
 
@@ -478,7 +482,55 @@ func main() {
     res, err := s.Keys.MigrateKeys(ctx, components.V2KeysMigrateKeysRequestBody{
         MigrationID: "your_company",
         APIID: "api_123456789",
-        Keys: []components.V2KeysMigrateKeyData{},
+        Keys: []components.V2KeysMigrateKeyData{
+            components.V2KeysMigrateKeyData{
+                Hash: "your_already_hashed_key",
+                Name: unkey.Pointer("Payment Service Production Key"),
+                ExternalID: unkey.Pointer("user_1234abcd"),
+                Meta: map[string]any{
+                    "plan": "enterprise",
+                    "featureFlags": map[string]any{
+                        "betaAccess": true,
+                        "concurrentConnections": 10,
+                    },
+                    "customerName": "Acme Corp",
+                    "billing": map[string]any{
+                        "tier": "premium",
+                        "renewal": "2024-12-31",
+                    },
+                },
+                Roles: []string{
+                    "api_admin",
+                    "billing_reader",
+                },
+                Permissions: []string{
+                    "documents.read",
+                    "documents.write",
+                    "settings.view",
+                },
+                Credits: &components.KeyCreditsData{
+                    Remaining: unkey.Pointer[int64](1000),
+                    Refill: &components.KeyCreditsRefill{
+                        Interval: components.KeyCreditsRefillIntervalDaily,
+                        Amount: 1000,
+                        RefillDay: unkey.Pointer[int64](15),
+                    },
+                },
+                Ratelimits: []components.RatelimitRequest{
+                    components.RatelimitRequest{
+                        Name: "requests",
+                        Limit: 100,
+                        Duration: 60000,
+                        AutoApply: unkey.Pointer(true),
+                    },
+                    components.RatelimitRequest{
+                        Name: "heavy_operations",
+                        Limit: 10,
+                        Duration: 3600000,
+                    },
+                },
+            },
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -499,7 +551,7 @@ func main() {
 
 ### Response
 
-**[*operations.MigrateKeysResponse](../../models/operations/migratekeysresponse.md), error**
+**[*operations.KeysMigrateKeysResponse](../../models/operations/keysmigratekeysresponse.md), error**
 
 ### Errors
 
@@ -533,7 +585,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="removePermissions" method="post" path="/v2/keys.removePermissions" -->
+<!-- UsageSnippet language="go" operationID="keys.removePermissions" method="post" path="/v2/keys.removePermissions" -->
 ```go
 package main
 
@@ -575,7 +627,7 @@ func main() {
 
 ### Response
 
-**[*operations.RemovePermissionsResponse](../../models/operations/removepermissionsresponse.md), error**
+**[*operations.KeysRemovePermissionsResponse](../../models/operations/keysremovepermissionsresponse.md), error**
 
 ### Errors
 
@@ -609,7 +661,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="removeRoles" method="post" path="/v2/keys.removeRoles" -->
+<!-- UsageSnippet language="go" operationID="keys.removeRoles" method="post" path="/v2/keys.removeRoles" -->
 ```go
 package main
 
@@ -630,10 +682,7 @@ func main() {
 
     res, err := s.Keys.RemoveRoles(ctx, components.V2KeysRemoveRolesRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Roles: []string{
-            "<value 1>",
-            "<value 2>",
-        },
+        Roles: []string{},
     })
     if err != nil {
         log.Fatal(err)
@@ -654,7 +703,7 @@ func main() {
 
 ### Response
 
-**[*operations.RemoveRolesResponse](../../models/operations/removerolesresponse.md), error**
+**[*operations.KeysRemoveRolesResponse](../../models/operations/keysremoverolesresponse.md), error**
 
 ### Errors
 
@@ -705,7 +754,7 @@ Common use cases include:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="rerollKey" method="post" path="/v2/keys.rerollKey" -->
+<!-- UsageSnippet language="go" operationID="keys.rerollKey" method="post" path="/v2/keys.rerollKey" -->
 ```go
 package main
 
@@ -747,7 +796,7 @@ func main() {
 
 ### Response
 
-**[*operations.RerollKeyResponse](../../models/operations/rerollkeyresponse.md), error**
+**[*operations.KeysRerollKeyResponse](../../models/operations/keysrerollkeyresponse.md), error**
 
 ### Errors
 
@@ -781,7 +830,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="setPermissions" method="post" path="/v2/keys.setPermissions" -->
+<!-- UsageSnippet language="go" operationID="keys.setPermissions" method="post" path="/v2/keys.setPermissions" -->
 ```go
 package main
 
@@ -804,6 +853,8 @@ func main() {
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
         Permissions: []string{
             "<value 1>",
+            "<value 2>",
+            "<value 3>",
         },
     })
     if err != nil {
@@ -825,7 +876,7 @@ func main() {
 
 ### Response
 
-**[*operations.SetPermissionsResponse](../../models/operations/setpermissionsresponse.md), error**
+**[*operations.KeysSetPermissionsResponse](../../models/operations/keyssetpermissionsresponse.md), error**
 
 ### Errors
 
@@ -859,7 +910,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="setRoles" method="post" path="/v2/keys.setRoles" -->
+<!-- UsageSnippet language="go" operationID="keys.setRoles" method="post" path="/v2/keys.setRoles" -->
 ```go
 package main
 
@@ -880,11 +931,7 @@ func main() {
 
     res, err := s.Keys.SetRoles(ctx, components.V2KeysSetRolesRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Roles: []string{
-            "<value 1>",
-            "<value 2>",
-            "<value 3>",
-        },
+        Roles: []string{},
     })
     if err != nil {
         log.Fatal(err)
@@ -905,7 +952,7 @@ func main() {
 
 ### Response
 
-**[*operations.SetRolesResponse](../../models/operations/setrolesresponse.md), error**
+**[*operations.KeysSetRolesResponse](../../models/operations/keyssetrolesresponse.md), error**
 
 ### Errors
 
@@ -939,7 +986,7 @@ Credit updates remove the key from cache immediately. Setting credits to unlimit
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="updateCredits" method="post" path="/v2/keys.updateCredits" -->
+<!-- UsageSnippet language="go" operationID="keys.updateCredits" method="post" path="/v2/keys.updateCredits" -->
 ```go
 package main
 
@@ -982,7 +1029,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateCreditsResponse](../../models/operations/updatecreditsresponse.md), error**
+**[*operations.KeysUpdateCreditsResponse](../../models/operations/keysupdatecreditsresponse.md), error**
 
 ### Errors
 
@@ -1016,7 +1063,7 @@ If you specify an `externalId` that doesn't exist, a new identity will be automa
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="updateKey" method="post" path="/v2/keys.updateKey" -->
+<!-- UsageSnippet language="go" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" -->
 ```go
 package main
 
@@ -1073,8 +1120,8 @@ func main() {
         Ratelimits: []components.RatelimitRequest{
             components.RatelimitRequest{
                 Name: "api",
-                Limit: 453542,
-                Duration: 350222,
+                Limit: 738192,
+                Duration: 167910,
             },
         },
         Enabled: unkey.Pointer(true),
@@ -1107,7 +1154,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateKeyResponse](../../models/operations/updatekeyresponse.md), error**
+**[*operations.KeysUpdateKeyResponse](../../models/operations/keysupdatekeyresponse.md), error**
 
 ### Errors
 
@@ -1144,7 +1191,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="verifyKey" method="post" path="/v2/keys.verifyKey" -->
+<!-- UsageSnippet language="go" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" -->
 ```go
 package main
 
@@ -1205,7 +1252,7 @@ func main() {
 
 ### Response
 
-**[*operations.VerifyKeyResponse](../../models/operations/verifykeyresponse.md), error**
+**[*operations.KeysVerifyKeyResponse](../../models/operations/keysverifykeyresponse.md), error**
 
 ### Errors
 
@@ -1233,7 +1280,7 @@ If your rootkey lacks permissions but the key exists, we may return a 404 status
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="whoami" method="post" path="/v2/keys.whoami" -->
+<!-- UsageSnippet language="go" operationID="keys.whoami" method="post" path="/v2/keys.whoami" -->
 ```go
 package main
 
@@ -1274,7 +1321,7 @@ func main() {
 
 ### Response
 
-**[*operations.WhoamiResponse](../../models/operations/whoamiresponse.md), error**
+**[*operations.KeysWhoamiResponse](../../models/operations/keyswhoamiresponse.md), error**
 
 ### Errors
 

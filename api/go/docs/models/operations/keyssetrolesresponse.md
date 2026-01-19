@@ -1,0 +1,9 @@
+# KeysSetRolesResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `V2KeysSetRolesResponseBody`                                                                    | [*components.V2KeysSetRolesResponseBody](../../models/components/v2keyssetrolesresponsebody.md) | :heavy_minus_sign:                                                                              | Roles set successfully. Returns all roles currently assigned to the key.                        |

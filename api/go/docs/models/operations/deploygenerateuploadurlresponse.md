@@ -1,0 +1,9 @@
+# DeployGenerateUploadURLResponse
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                    | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
+| `V2DeployGenerateUploadURLResponseBody`                                                                               | [*components.V2DeployGenerateUploadURLResponseBody](../../models/components/v2deploygenerateuploadurlresponsebody.md) | :heavy_minus_sign:                                                                                                    | Upload URL generated successfully                                                                                     |

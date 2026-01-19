@@ -92,7 +92,7 @@ Use this for data cleanup, compliance requirements, or when removing entities fr
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v2.identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
 ```go
 package main
 
@@ -133,7 +133,7 @@ func main() {
 
 ### Response
 
-**[*operations.V2IdentitiesDeleteIdentityResponse](../../models/operations/v2identitiesdeleteidentityresponse.md), error**
+**[*operations.IdentitiesDeleteIdentityResponse](../../models/operations/identitiesdeleteidentityresponse.md), error**
 
 ### Errors
 
@@ -302,7 +302,7 @@ Perfect for subscription changes, plan upgrades, or updating user information. C
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v2.identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
 ```go
 package main
 
@@ -348,7 +348,7 @@ func main() {
 
 ### Response
 
-**[*operations.V2IdentitiesUpdateIdentityResponse](../../models/operations/v2identitiesupdateidentityresponse.md), error**
+**[*operations.IdentitiesUpdateIdentityResponse](../../models/operations/identitiesupdateidentityresponse.md), error**
 
 ### Errors
 

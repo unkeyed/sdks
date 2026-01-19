@@ -43,7 +43,7 @@ func newApis(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 //
 // Your root key must have one of the following permissions:
 // - `api.*.create_api` (to create APIs in any workspace)
-func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPIRequestBody, opts ...operations.Option) (*operations.CreateAPIResponse, error) {
+func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPIRequestBody, opts ...operations.Option) (*operations.ApisCreateAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -72,7 +72,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "createApi",
+		OperationID:      "apis.createApi",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -207,7 +207,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 		}
 	}
 
-	res := &operations.CreateAPIResponse{
+	res := &operations.ApisCreateAPIResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -358,7 +358,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 // Your root key must have one of the following permissions:
 // - `api.*.delete_api` (to delete any API)
 // - `api.<api_id>.delete_api` (to delete a specific API)
-func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPIRequestBody, opts ...operations.Option) (*operations.DeleteAPIResponse, error) {
+func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPIRequestBody, opts ...operations.Option) (*operations.ApisDeleteAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -387,7 +387,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "deleteApi",
+		OperationID:      "apis.deleteApi",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -522,7 +522,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 		}
 	}
 
-	res := &operations.DeleteAPIResponse{
+	res := &operations.ApisDeleteAPIResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -711,7 +711,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 // Your root key must have one of the following permissions:
 // - `api.*.read_api` (to read any API)
 // - `api.<api_id>.read_api` (to read a specific API)
-func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIRequestBody, opts ...operations.Option) (*operations.GetAPIResponse, error) {
+func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIRequestBody, opts ...operations.Option) (*operations.ApisGetAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -740,7 +740,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getApi",
+		OperationID:      "apis.getApi",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -875,7 +875,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 		}
 	}
 
-	res := &operations.GetAPIResponse{
+	res := &operations.ApisGetAPIResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1051,7 +1051,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 //
 // Additional permission required for decrypt functionality:
 // - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRequestBody, opts ...operations.Option) (*operations.ListKeysResponse, error) {
+func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRequestBody, opts ...operations.Option) (*operations.ApisListKeysResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1080,7 +1080,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "listKeys",
+		OperationID:      "apis.listKeys",
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1215,7 +1215,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		}
 	}
 
-	res := &operations.ListKeysResponse{
+	res := &operations.ApisListKeysResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
