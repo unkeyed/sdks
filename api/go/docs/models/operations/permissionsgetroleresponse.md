@@ -1,0 +1,9 @@
+# PermissionsGetRoleResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PermissionsGetRoleResponseBody`                                                                          | [*components.V2PermissionsGetRoleResponseBody](../../models/components/v2permissionsgetroleresponsebody.md) | :heavy_minus_sign:                                                                                          | Role retrieved successfully                                                                                 |

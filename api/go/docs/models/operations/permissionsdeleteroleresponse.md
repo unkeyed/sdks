@@ -1,0 +1,9 @@
+# PermissionsDeleteRoleResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2PermissionsDeleteRoleResponseBody`                                                                             | [*components.V2PermissionsDeleteRoleResponseBody](../../models/components/v2permissionsdeleteroleresponsebody.md) | :heavy_minus_sign:                                                                                                | Role deleted successfully                                                                                         |

@@ -1,9 +1,0 @@
-# UpdateKeyResponse
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `V2KeysUpdateKeyResponseBody`                                                                     | [*components.V2KeysUpdateKeyResponseBody](../../models/components/v2keysupdatekeyresponsebody.md) | :heavy_minus_sign:                                                                                | Key updated successfully. Changes take effect immediately with up to 30-second edge propagation.<br/> |

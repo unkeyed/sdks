@@ -1,0 +1,9 @@
+# KeysGetKeyResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2KeysGetKeyResponseBody`                                                                                        | [*components.V2KeysGetKeyResponseBody](../../models/components/v2keysgetkeyresponsebody.md)                       | :heavy_minus_sign:                                                                                                | Successfully retrieved key information. When `decrypt: true`, includes plaintext key value for recoverable keys.<br/> |
