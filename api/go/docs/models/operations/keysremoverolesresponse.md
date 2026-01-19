@@ -1,0 +1,9 @@
+# KeysRemoveRolesResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                    | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `V2KeysRemoveRolesResponseBody`                                                                       | [*components.V2KeysRemoveRolesResponseBody](../../models/components/v2keysremoverolesresponsebody.md) | :heavy_minus_sign:                                                                                    | Roles removed successfully. Returns all roles currently assigned to the key.                          |

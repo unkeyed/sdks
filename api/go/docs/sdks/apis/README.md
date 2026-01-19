@@ -27,7 +27,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="createApi" method="post" path="/v2/apis.createApi" -->
+<!-- UsageSnippet language="go" operationID="apis.createApi" method="post" path="/v2/apis.createApi" -->
 ```go
 package main
 
@@ -68,7 +68,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateAPIResponse](../../models/operations/createapiresponse.md), error**
+**[*operations.ApisCreateAPIResponse](../../models/operations/apiscreateapiresponse.md), error**
 
 ### Errors
 
@@ -99,7 +99,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="deleteApi" method="post" path="/v2/apis.deleteApi" -->
+<!-- UsageSnippet language="go" operationID="apis.deleteApi" method="post" path="/v2/apis.deleteApi" -->
 ```go
 package main
 
@@ -140,7 +140,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteAPIResponse](../../models/operations/deleteapiresponse.md), error**
+**[*operations.ApisDeleteAPIResponse](../../models/operations/apisdeleteapiresponse.md), error**
 
 ### Errors
 
@@ -169,7 +169,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getApi" method="post" path="/v2/apis.getApi" -->
+<!-- UsageSnippet language="go" operationID="apis.getApi" method="post" path="/v2/apis.getApi" -->
 ```go
 package main
 
@@ -210,7 +210,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetAPIResponse](../../models/operations/getapiresponse.md), error**
+**[*operations.ApisGetAPIResponse](../../models/operations/apisgetapiresponse.md), error**
 
 ### Errors
 
@@ -246,7 +246,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="listKeys" method="post" path="/v2/apis.listKeys" -->
+<!-- UsageSnippet language="go" operationID="apis.listKeys" method="post" path="/v2/apis.listKeys" -->
 ```go
 package main
 
@@ -289,7 +289,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListKeysResponse](../../models/operations/listkeysresponse.md), error**
+**[*operations.ApisListKeysResponse](../../models/operations/apislistkeysresponse.md), error**
 
 ### Errors
 

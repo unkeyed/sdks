@@ -1,0 +1,9 @@
+# KeysAddRolesResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `V2KeysAddRolesResponseBody`                                                                    | [*components.V2KeysAddRolesResponseBody](../../models/components/v2keysaddrolesresponsebody.md) | :heavy_minus_sign:                                                                              | Roles added successfully. Returns all roles currently assigned to the key.                      |

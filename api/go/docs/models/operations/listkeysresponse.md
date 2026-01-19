@@ -1,9 +1,0 @@
-# ListKeysResponse
-
-
-## Fields
-
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                                     | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `V2ApisListKeysResponseBody`                                                                                   | [*components.V2ApisListKeysResponseBody](../../models/components/v2apislistkeysresponsebody.md)                | :heavy_minus_sign:                                                                                             | Successfully retrieved paginated keys. Use the pagination cursor for additional results when `hasMore: true`.<br/> |
