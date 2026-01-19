@@ -31,7 +31,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createPermission" method="post" path="/v2/permissions.createPermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.createPermission" method="post" path="/v2/permissions.createPermission" -->
 ```python
 from unkey.py import Unkey
 
@@ -85,7 +85,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createRole" method="post" path="/v2/permissions.createRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" -->
 ```python
 from unkey.py import Unkey
 
@@ -138,7 +138,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deletePermission" method="post" path="/v2/permissions.deletePermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.deletePermission" method="post" path="/v2/permissions.deletePermission" -->
 ```python
 from unkey.py import Unkey
 
@@ -190,7 +190,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deleteRole" method="post" path="/v2/permissions.deleteRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.deleteRole" method="post" path="/v2/permissions.deleteRole" -->
 ```python
 from unkey.py import Unkey
 
@@ -239,7 +239,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getPermission" method="post" path="/v2/permissions.getPermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.getPermission" method="post" path="/v2/permissions.getPermission" -->
 ```python
 from unkey.py import Unkey
 
@@ -289,7 +289,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getRole" method="post" path="/v2/permissions.getRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.getRole" method="post" path="/v2/permissions.getRole" -->
 ```python
 from unkey.py import Unkey
 
@@ -340,7 +340,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listPermissions" method="post" path="/v2/permissions.listPermissions" -->
+<!-- UsageSnippet language="python" operationID="permissions.listPermissions" method="post" path="/v2/permissions.listPermissions" -->
 ```python
 from unkey.py import Unkey
 
@@ -391,7 +391,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listRoles" method="post" path="/v2/permissions.listRoles" -->
+<!-- UsageSnippet language="python" operationID="permissions.listRoles" method="post" path="/v2/permissions.listRoles" -->
 ```python
 from unkey.py import Unkey
 

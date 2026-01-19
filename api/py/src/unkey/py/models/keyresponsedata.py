@@ -5,9 +5,10 @@ from .identity import Identity, IdentityTypedDict
 from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
 from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-from unkey.py.types import BaseModel
+from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class KeyResponseDataTypedDict(TypedDict):
@@ -75,3 +76,32 @@ class KeyResponseData(BaseModel):
     r"""Decrypted key value (only when decrypt=true)."""
 
     ratelimits: Optional[List[RatelimitResponse]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "meta",
+                "updatedAt",
+                "expires",
+                "permissions",
+                "roles",
+                "credits",
+                "identity",
+                "plaintext",
+                "ratelimits",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
