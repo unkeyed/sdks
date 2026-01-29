@@ -92,7 +92,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createApi",
+                operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -214,7 +214,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createApi",
+                operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -341,7 +341,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteApi",
+                operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -478,7 +478,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteApi",
+                operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -609,7 +609,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getApi",
+                operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -735,7 +735,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getApi",
+                operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -900,7 +900,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listKeys",
+                operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1065,7 +1065,7 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listKeys",
+                operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
