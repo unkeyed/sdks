@@ -3,7 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
@@ -20,7 +21,7 @@ export const Operation = {
  *
  * @remarks
  */
-export type Operation = ClosedEnum<typeof Operation>;
+export type Operation = OpenEnum<typeof Operation>;
 
 export type V2KeysUpdateCreditsRequestBody = {
   /**
@@ -32,7 +33,7 @@ export type V2KeysUpdateCreditsRequestBody = {
    *
    * @remarks
    *
-   * Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=INSUFFICIENT_CREDITS`.
+   * Set to null when using 'set' operation to make the key unlimited (removes usage restrictions entirely). When decrementing, if the result would be negative, remaining credits are automatically set to zero. Credits are consumed during successful key verification, and when credits reach zero, verification fails with `code=USAGE_EXCEEDED`.
    *
    * Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
    */
@@ -46,8 +47,11 @@ export type V2KeysUpdateCreditsRequestBody = {
 };
 
 /** @internal */
-export const Operation$outboundSchema: z.ZodNativeEnum<typeof Operation> = z
-  .nativeEnum(Operation);
+export const Operation$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Operation
+> = openEnums.outboundSchema(Operation);
 
 /** @internal */
 export type V2KeysUpdateCreditsRequestBody$Outbound = {
