@@ -4,7 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,7 +19,7 @@ export const KeyCreditsRefillInterval = {
 /**
  * How often credits are automatically refilled.
  */
-export type KeyCreditsRefillInterval = ClosedEnum<
+export type KeyCreditsRefillInterval = OpenEnum<
   typeof KeyCreditsRefillInterval
 >;
 
@@ -45,13 +46,17 @@ export type KeyCreditsRefill = {
 };
 
 /** @internal */
-export const KeyCreditsRefillInterval$inboundSchema: z.ZodNativeEnum<
-  typeof KeyCreditsRefillInterval
-> = z.nativeEnum(KeyCreditsRefillInterval);
+export const KeyCreditsRefillInterval$inboundSchema: z.ZodType<
+  KeyCreditsRefillInterval,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(KeyCreditsRefillInterval);
 /** @internal */
-export const KeyCreditsRefillInterval$outboundSchema: z.ZodNativeEnum<
-  typeof KeyCreditsRefillInterval
-> = KeyCreditsRefillInterval$inboundSchema;
+export const KeyCreditsRefillInterval$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  KeyCreditsRefillInterval
+> = openEnums.outboundSchema(KeyCreditsRefillInterval);
 
 /** @internal */
 export const KeyCreditsRefill$inboundSchema: z.ZodType<

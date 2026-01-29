@@ -118,7 +118,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "whoami",
+    operationID: "keys.whoami",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
