@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 00a2b1c84346ae76c8bf6a15b9e6cf18
+  docChecksum: 152c76ae2bbb312c50545033f7c6b556
   docVersion: 2.0.0
-  speakeasyVersion: 1.688.0
-  generationVersion: 2.796.4
-  releaseVersion: 2.5.0
-  configChecksum: 6bf58bba3de4b3d3e1e2144e2bac24df
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 2.5.1
+  configChecksum: ecdeeb56d13c7110cf74b21811cde82d
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks/api/go
 persistentEdits:
-  generation_id: 5e4982ec-b0fd-479d-a3df-a0d687bca814
-  pristine_commit_hash: 3666b7d6e5ff66897105628c7925822ad214315a
-  pristine_tree_hash: c807524c7ea316628177d52f5ff6a5665bccb0c1
+  generation_id: 0729ed29-9ae2-45bc-8c8d-9c28b388a3bb
+  pristine_commit_hash: 79ee5fb81a8f0a84acfd599ea989d04327638365
+  pristine_tree_hash: e40c2606b47a57d5b05c1c88a1ab904e96de7c09
 features:
   go:
     additionalDependencies: 0.1.0
@@ -53,6 +53,10 @@ trackedFiles:
     id: eaaeac15a75e
     last_write_checksum: sha1:45f62acc86fb2f672da13f7ec1a24f4ad1b6428e
     pristine_git_object: a8c4eec1d50743892231b0ef6af03aee70986cc8
+  deploy.go:
+    id: 8170ecd65784
+    last_write_checksum: sha1:7723db9aecd3bc804aa1374fb68b1d37b0996133
+    pristine_git_object: 004c40c7fab3cc0ed351eeeb32566474b0a7c298
   docs/models/apierrors/badrequesterrorresponse.md:
     id: 63d1eac23098
     last_write_checksum: sha1:9cf805c81e8d8f33fc4e3b5e34e9df8f4e1810cb
@@ -245,6 +249,14 @@ trackedFiles:
     id: a31f7ed47554
     last_write_checksum: sha1:37cd3d5c1f3a4ab2521ea4171ec30c9c2dce326e
     pristine_git_object: 3d54f802f1d18bfe7895ff2ae702ebdad5bc05b2
+  docs/models/components/v2deploycompleteuploadrequestbody.md:
+    id: 24bed8544a8f
+    last_write_checksum: sha1:26c16e91e8a433b738d731da317909281e1bf516
+    pristine_git_object: 12630363a49de8ec8945a4f51b93ab3d613c2058
+  docs/models/components/v2deploycompleteuploadresponsebody.md:
+    id: 60cd74f15375
+    last_write_checksum: sha1:4a32d99b0deb50704cbbfa4d7373aa202525d0f9
+    pristine_git_object: e513eb1c889f356ad6b5f7507477b8d8c82e3786
   docs/models/components/v2deploycreatedeploymentresponsebody.md:
     id: 48c90e78c76a
     last_write_checksum: sha1:356cb6250a0518a47fa5dd27f61cee8042a90ac0
@@ -641,6 +653,10 @@ trackedFiles:
     id: cf6a177e7742
     last_write_checksum: sha1:9a033056b7f888e2748c5bd1b995edc38c3cc113
     pristine_git_object: 75af196cfffc18f36f2f889fade2c02f733c98a2
+  docs/models/operations/deploycompleteuploadresponse.md:
+    id: 680710b78fbb
+    last_write_checksum: sha1:5b7fc89ead70cb1af5ddc0f824ed106b8d7618c8
+    pristine_git_object: 35ad5970795f63268621c67a5583c4c8c06d6a6e
   docs/models/operations/deploycreatedeploymentrequest.md:
     id: 91f6f09d5569
     last_write_checksum: sha1:017c5dd7b491e7560128f739466a297c0699c38a
@@ -813,6 +829,10 @@ trackedFiles:
     id: 23f09d8da686
     last_write_checksum: sha1:34a9f9027c8f3a2afecd753ea2f09e41cbbf24a9
     pristine_git_object: 19bdfd5b3d5368cace0887863b6d0160fe92fbe8
+  docs/sdks/deploy/README.md:
+    id: af5acd57a3cc
+    last_write_checksum: sha1:aa5d29d2291327a7350d17ec321ec54b521d633e
+    pristine_git_object: a9fe2416ccf059f595dd6372aa55822286628472
   docs/sdks/identities/README.md:
     id: 751b50358a28
     last_write_checksum: sha1:a4fdffee52bbdb80d1814b0213ed9829cf8b043a
@@ -1085,6 +1105,14 @@ trackedFiles:
     id: 76b8044cb3dd
     last_write_checksum: sha1:769ead4b123998f5c4d1acbf4874ea4fc0299cc5
     pristine_git_object: ae34a6182ca70178e452f01e1a78d60dad6f8447
+  models/components/v2deploycompleteuploadrequestbody.go:
+    id: f4a52fb3d4e5
+    last_write_checksum: sha1:6abbcf4e4e660fd6841b0f2901005d0e4e5a061e
+    pristine_git_object: 6c8807a1db24ef13b67717de54cac980abaf3f69
+  models/components/v2deploycompleteuploadresponsebody.go:
+    id: f45a0d493b95
+    last_write_checksum: sha1:a90c14b66cdf0604a45396b49ff193cdd3b7d65e
+    pristine_git_object: a62a80f178f45bba424ca2b2dac97b0b8037dd63
   models/components/v2deploycreatedeploymentresponsebody.go:
     id: 5cec069b817c
     last_write_checksum: sha1:f91ef6a7f024a73f2035a16670a695c19bf64669
@@ -1477,6 +1505,10 @@ trackedFiles:
     id: eac1b0e7ec33
     last_write_checksum: sha1:a3bf0d3bbd29d75c4967929fddf8e344a3f362db
     pristine_git_object: 80f2063cc77dd72912fdb879f9cf88a5c2eb62e2
+  models/operations/deploycompleteupload.go:
+    id: 3d0b5b089acf
+    last_write_checksum: sha1:30abc3b763384ed3750a840de9c88ae3e9be9cbb
+    pristine_git_object: 1a23c0fc772da4d5f71165c61043bd1aecc15894
   models/operations/deploycreatedeployment.go:
     id: 83091fd02453
     last_write_checksum: sha1:b67fc5002772cee9467816303d834cfb7a50d54d
@@ -1667,8 +1699,8 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:b722f2bb10c5e7c116d1cabf6d63d841a58c5459
-    pristine_git_object: a521f0d7c382ad0165849e3a144846f079a569c2
+    last_write_checksum: sha1:e68d74fef90f6fa62924baef7a413a4f2c07024d
+    pristine_git_object: 01c4197c2a8bceced020c5f7c9a081eb32a3d941
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -2383,6 +2415,22 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "No override found for the specified identifier in this namespace.", "status": 404, "title": "Not Found", "type": "not_found"}}
+    speakeasy-default-ratelimit-delete-override:
+      requestBody:
+        application/json: {"namespace": "<value>", "identifier": "<value>"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   ratelimit.getOverride:
     specific:
       requestBody:
@@ -2428,6 +2476,22 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "No override found for the specified identifier in this namespace.", "status": 404, "title": "Not Found", "type": "not_found"}}
+    speakeasy-default-ratelimit-get-override:
+      requestBody:
+        application/json: {"namespace": "<value>", "identifier": "<value>"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>", "duration": 632319, "identifier": "<value>", "limit": 573177}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   ratelimit.limit:
     basic:
       requestBody:
@@ -2540,6 +2604,22 @@ examples:
       responses:
         "403":
           application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'ratelimit.*.read_override' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    speakeasy-default-ratelimit-list-overrides:
+      requestBody:
+        application/json: {"namespace": "<value>", "limit": 10}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"overrideId": "<id>", "duration": 669136, "identifier": "<value>", "limit": 84483}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   ratelimit.setOverride:
     premium:
       requestBody:
@@ -2585,6 +2665,22 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "This namespace does not exist.", "status": 404, "title": "Not Found", "type": "not_found"}}
+    speakeasy-default-ratelimit-set-override:
+      requestBody:
+        application/json: {"namespace": "<value>", "duration": 956831, "identifier": "<value>", "limit": 816580}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"overrideId": "<id>"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   rerollKey:
     speakeasy-default-reroll-key:
       requestBody:
@@ -2898,6 +2994,22 @@ examples:
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "Identity with externalId \"user_123\" not found.", "status": 404, "title": "Not Found", "type": "not_found"}}
+    speakeasy-default-identities-update-identity:
+      requestBody:
+        application/json: {"identity": "user_123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
+      responses:
+        "200":
+          application/json: {"data": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "meta": {"requestId": "req_123"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   keys.addPermissions:
     speakeasy-default-keys-add-permissions:
       requestBody:
@@ -3116,6 +3228,22 @@ examples:
       responses:
         "400":
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "error": {"detail": "Syntax error in permission query: unexpected token 'AND' at position 15. Expected permission name or opening parenthesis.", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/user/bad_request/permissions_query_syntax_error", "errors": [{"location": "body.permissions", "message": "unexpected token 'AND' at position 15", "fix": "Check your query syntax. AND/OR operators must be between permissions, not at the start or end"}]}}
+    speakeasy-default-keys-verify-key:
+      requestBody:
+        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "migrationId": "m_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"valid": true, "code": "NOT_FOUND", "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "ratelimits": [{"exceeded": false, "id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "reset": 3600000, "remaining": 999, "autoApply": true}]}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   keys.whoami:
     speakeasy-default-keys-whoami:
       requestBody:
@@ -3183,8 +3311,40 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    speakeasy-default-permissions-create-role:
+      requestBody:
+        application/json: {"name": "support.readonly", "description": "Provides read-only access for customer support representatives. Includes permissions to view user accounts, support tickets, and basic analytics. Does not include access to billing, admin functions, or data modification capabilities."}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"roleId": "role_1234567890abcdef"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   permissions.deletePermission:
     basic:
+      requestBody:
+        application/json: {"permission": "perm_1234567890abcdef"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    speakeasy-default-permissions-delete-permission:
       requestBody:
         application/json: {"permission": "perm_1234567890abcdef"}
       responses:
@@ -3281,13 +3441,28 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  deploy.completeUpload:
+    speakeasy-default-deploy-complete-upload:
+      requestBody:
+        application/json: {"deploymentId": "d_abc123", "buildContextPath": "proj_123/build_abc.tar.gz", "dockerfilePath": "Dockerfile"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Unkey.Internal.CreateDeployment()`: **Added**
-  * `Unkey.Internal.GenerateUploadUrl()`: **Added**
-  * `Unkey.Internal.GetDeployment()`: **Added**
+  * `Unkey.Deploy.CompleteUpload()`: **Added**
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go
