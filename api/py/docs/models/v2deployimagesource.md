@@ -1,0 +1,15 @@
+# V2DeployImageSource
+
+Prebuilt Docker image configuration
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `image`                                                              | *str*                                                                | :heavy_check_mark:                                                   | Prebuilt Docker image reference                                      | nginx:latest                                                         |
+| `project_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | Unkey project ID                                                     | proj_123abc                                                          |
+| `keyspace_id`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Optional keyspace ID for authentication context                      | key_abc123                                                           |
+| `branch`                                                             | *str*                                                                | :heavy_check_mark:                                                   | Git branch name                                                      | main                                                                 |
+| `environment_slug`                                                   | *str*                                                                | :heavy_check_mark:                                                   | Environment slug (e.g., "production", "staging")                     | production                                                           |
+| `git_commit`                                                         | [Optional[models.V2DeployGitCommit]](../models/v2deploygitcommit.md) | :heavy_minus_sign:                                                   | Optional git commit information                                      |                                                                      |

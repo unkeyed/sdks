@@ -84,7 +84,7 @@ Use this for data cleanup, compliance requirements, or when removing entities fr
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="v2.identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
 ```python
 from unkey.py import Unkey
 
@@ -237,7 +237,7 @@ Perfect for subscription changes, plan upgrades, or updating user information. C
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="v2.identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
 ```python
 from unkey.py import Unkey
 
