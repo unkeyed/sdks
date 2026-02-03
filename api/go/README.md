@@ -218,10 +218,6 @@ func main() {
 * [GetAPI](docs/sdks/apis/README.md#getapi) - Get API namespace
 * [ListKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
-### [Deploy](docs/sdks/deploy/README.md)
-
-* [CompleteUpload](docs/sdks/deploy/README.md#completeupload) - Complete upload
-
 ### [Identities](docs/sdks/identities/README.md)
 
 * [CreateIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
@@ -233,7 +229,6 @@ func main() {
 ### [Internal](docs/sdks/internal/README.md)
 
 * [CreateDeployment](docs/sdks/internal/README.md#createdeployment) - Create deployment
-* [GenerateUploadURL](docs/sdks/internal/README.md#generateuploadurl) - Generate upload URL
 * [GetDeployment](docs/sdks/internal/README.md#getdeployment) - Get deployment
 
 ### [Keys](docs/sdks/keys/README.md)

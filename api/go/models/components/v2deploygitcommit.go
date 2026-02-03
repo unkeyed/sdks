@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
-)
-
 // V2DeployGitCommit - Optional git commit information
 type V2DeployGitCommit struct {
 	// Git commit SHA
@@ -18,17 +14,6 @@ type V2DeployGitCommit struct {
 	AuthorAvatarURL *string `json:"authorAvatarUrl,omitempty"`
 	// Commit timestamp in milliseconds
 	Timestamp *int64 `json:"timestamp,omitempty"`
-}
-
-func (v V2DeployGitCommit) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *V2DeployGitCommit) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (v *V2DeployGitCommit) GetCommitSha() *string {
