@@ -3,12 +3,12 @@ speakeasyVersion: latest
 sources:
     api:
         inputs:
-            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/github-webhook/svc/api/openapi/openapi-generated.yaml
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
         registry:
             location: registry.speakeasyapi.dev/unkey/unkey/api
     api-python:
         inputs:
-            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/github-webhook/svc/api/openapi/openapi-generated.yaml
+            - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
         registry:
             location: registry.speakeasyapi.dev/unkey/unkey/api-python
 targets:
