@@ -1,12 +1,12 @@
-speakeasyVersion: 1.688.0
+speakeasyVersion: 1.700.2
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:32ca57e2f019c5d9005e5787d440d81cc6b7f59acf8162770bc84c686e552306
-        sourceBlobDigest: sha256:e91c7338b802b42c1973f8bb28b4f2cc0b7045f929730e6a538abb3e52b36064
+        sourceRevisionDigest: sha256:4fddfd819baad8d6af98ada95e0f17780157fa37340acf8cda76a99e5fbd437d
+        sourceBlobDigest: sha256:6357b76a5ae27fcfb3050e95f86e7f37d76883d0845389774834ba9439fd049d
         tags:
             - latest
-            - speakeasy-sdk-regen-1768350274
+            - speakeasy-sdk-regen-1767918743
             - 2.0.0
     api-python:
         sourceNamespace: api-python
@@ -34,10 +34,10 @@ targets:
     api-ts:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:9e7111d0c845576ad4215b84d467fc902324cb84ba725d7e36923ee851b64080
-        sourceBlobDigest: sha256:61dd94490ef9a7f52417785a3f31bc889b0518fa5ad0a4ba72168138b8e0e9b7
+        sourceRevisionDigest: sha256:4fddfd819baad8d6af98ada95e0f17780157fa37340acf8cda76a99e5fbd437d
+        sourceBlobDigest: sha256:6357b76a5ae27fcfb3050e95f86e7f37d76883d0845389774834ba9439fd049d
         codeSamplesNamespace: api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:15fb4c383a87b9ff4f572e5d208070182fa0048a7bcd8596123eddaf5a32e7ee
+        codeSamplesRevisionDigest: sha256:fc3d1fbb6f37a3e2842a4ab6767bb2f9a54470d40bb9e42f90d55d76f9af2a4e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

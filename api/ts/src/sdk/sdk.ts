@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Analytics } from "./analytics.js";
 import { Apis } from "./apis.js";
 import { Identities } from "./identities.js";
+import { Internal } from "./internal.js";
 import { Keys } from "./keys.js";
 import { Permissions } from "./permissions.js";
 import { Ratelimit } from "./ratelimit.js";
@@ -19,6 +20,11 @@ export class Unkey extends ClientSDK {
   private _apis?: Apis;
   get apis(): Apis {
     return (this._apis ??= new Apis(this._options));
+  }
+
+  private _internal?: Internal;
+  get internal(): Internal {
+    return (this._internal ??= new Internal(this._options));
   }
 
   private _identities?: Identities;

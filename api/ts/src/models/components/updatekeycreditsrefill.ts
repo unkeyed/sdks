@@ -3,7 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * How often credits are automatically refilled.
@@ -15,7 +16,7 @@ export const UpdateKeyCreditsRefillInterval = {
 /**
  * How often credits are automatically refilled.
  */
-export type UpdateKeyCreditsRefillInterval = ClosedEnum<
+export type UpdateKeyCreditsRefillInterval = OpenEnum<
   typeof UpdateKeyCreditsRefillInterval
 >;
 
@@ -42,9 +43,11 @@ export type UpdateKeyCreditsRefill = {
 };
 
 /** @internal */
-export const UpdateKeyCreditsRefillInterval$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateKeyCreditsRefillInterval
-> = z.nativeEnum(UpdateKeyCreditsRefillInterval);
+export const UpdateKeyCreditsRefillInterval$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  UpdateKeyCreditsRefillInterval
+> = openEnums.outboundSchema(UpdateKeyCreditsRefillInterval);
 
 /** @internal */
 export type UpdateKeyCreditsRefill$Outbound = {
