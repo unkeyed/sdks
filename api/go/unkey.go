@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.796.4
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.801.2
 
 import (
 	"context"
@@ -133,7 +133,9 @@ type Unkey struct {
 	// Analytics query operations
 	Analytics *Analytics
 	// API management operations
-	Apis     *Apis
+	Apis *Apis
+	// Deployment operations
+	Deploy   *Deploy
 	Internal *Internal
 	// Identity management operations
 	Identities *Identities
@@ -219,9 +221,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.5.0",
+		SDKVersion: "2.5.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.5.0 2.796.4 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.5.1 2.801.2 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -251,6 +253,7 @@ func New(opts ...SDKOption) *Unkey {
 
 	sdk.Analytics = newAnalytics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Apis = newApis(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Deploy = newDeploy(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Internal = newInternal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
