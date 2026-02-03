@@ -2,11 +2,11 @@ speakeasyVersion: 1.700.2
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:58659f8aa26b04a9f0a0fc0a0b3e71279f09eace2e9a2487247660b87ccc75b9
-        sourceBlobDigest: sha256:e77f344cc3328644235e2a2258adcf90b2bca3fb015c3e2fd07fd92f45e59725
+        sourceRevisionDigest: sha256:eaba588ac297acb8f1bc048ba37e4d93934abce43d82413dcf2bcf0d9fd050fc
+        sourceBlobDigest: sha256:4abcc181456101694db7b8bcc43c484fdd59ac1c53aff9847b1d37066543e3b6
         tags:
             - latest
-            - speakeasy-sdk-regen-1769559871
+            - speakeasy-sdk-regen-1770123418
             - 2.0.0
     api-python:
         sourceNamespace: api-python
@@ -20,10 +20,10 @@ targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:58659f8aa26b04a9f0a0fc0a0b3e71279f09eace2e9a2487247660b87ccc75b9
-        sourceBlobDigest: sha256:e77f344cc3328644235e2a2258adcf90b2bca3fb015c3e2fd07fd92f45e59725
+        sourceRevisionDigest: sha256:eaba588ac297acb8f1bc048ba37e4d93934abce43d82413dcf2bcf0d9fd050fc
+        sourceBlobDigest: sha256:4abcc181456101694db7b8bcc43c484fdd59ac1c53aff9847b1d37066543e3b6
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:8442fd8d6510299b8d406b22df496ceb5fd0b7f2ef49338c78e97f18120d78ea
+        codeSamplesRevisionDigest: sha256:faafff059c4f8afaa2a8864d938132cbcf111b5e7d0cadf8d128733013c3e358
     api-py:
         source: api-python
         sourceNamespace: api-python
@@ -44,12 +44,12 @@ workflow:
     sources:
         api:
             inputs:
-                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/github-webhook/svc/api/openapi/openapi-generated.yaml
+                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api
         api-python:
             inputs:
-                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/github-webhook/svc/api/openapi/openapi-generated.yaml
+                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-python
     targets:

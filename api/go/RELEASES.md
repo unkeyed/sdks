@@ -109,3 +109,13 @@ Based on:
 - [go v2.5.1] api/go
 ### Releases
 - [Go v2.5.1] https://github.com/unkeyed/sdks/releases/tag/api/go/v2.5.1 - api/go
+
+## 2026-02-03 12:56:36
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.700.2 (2.801.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v2.6.0] api/go
+### Releases
+- [Go v2.6.0] https://github.com/unkeyed/sdks/releases/tag/api/go/v2.6.0 - api/go

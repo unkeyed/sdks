@@ -1,2 +1,4 @@
 ## Go SDK Changes:
-* `Unkey.Deploy.CompleteUpload()`: **Added**
+* `Unkey.Internal.CreateDeployment()`:  `request.Request` **Changed** **Breaking** ⚠️
+* `Unkey.Deploy.CompleteUpload()`: **Removed** **Breaking** ⚠️
+* `Unkey.Internal.GenerateUploadUrl()`: **Removed** **Breaking** ⚠️
