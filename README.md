@@ -1,5 +1,5 @@
 <div align="center">
-    <h1 align="center">Unkey SDKS</h1>
+    <h1 align="center">Unkey SDKs</h1>
     <h5>One place for all of our SDKs</h5>
 </div>
 
