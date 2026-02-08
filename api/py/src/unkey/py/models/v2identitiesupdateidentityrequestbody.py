@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-from unkey.py.types import BaseModel
+from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class V2IdentitiesUpdateIdentityRequestBodyTypedDict(TypedDict):
@@ -45,3 +46,19 @@ class V2IdentitiesUpdateIdentityRequestBody(BaseModel):
     Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["meta", "ratelimits"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

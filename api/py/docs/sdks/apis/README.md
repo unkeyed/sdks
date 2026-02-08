@@ -27,7 +27,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createApi" method="post" path="/v2/apis.createApi" -->
+<!-- UsageSnippet language="python" operationID="apis.createApi" method="post" path="/v2/apis.createApi" -->
 ```python
 from unkey.py import Unkey
 
@@ -83,7 +83,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deleteApi" method="post" path="/v2/apis.deleteApi" -->
+<!-- UsageSnippet language="python" operationID="apis.deleteApi" method="post" path="/v2/apis.deleteApi" -->
 ```python
 from unkey.py import Unkey
 
@@ -137,7 +137,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getApi" method="post" path="/v2/apis.getApi" -->
+<!-- UsageSnippet language="python" operationID="apis.getApi" method="post" path="/v2/apis.getApi" -->
 ```python
 from unkey.py import Unkey
 
@@ -198,7 +198,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listKeys" method="post" path="/v2/apis.listKeys" -->
+<!-- UsageSnippet language="python" operationID="apis.listKeys" method="post" path="/v2/apis.listKeys" -->
 ```python
 from unkey.py import Unkey
 

@@ -43,7 +43,7 @@ Invalidates the key cache for immediate effect, and makes permissions available 
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="addPermissions" method="post" path="/v2/keys.addPermissions" -->
+<!-- UsageSnippet language="python" operationID="keys.addPermissions" method="post" path="/v2/keys.addPermissions" -->
 ```python
 from unkey.py import Unkey
 
@@ -52,7 +52,9 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.keys.add_permissions(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", permissions=[])
+    res = unkey.keys.add_permissions(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", permissions=[
+        "<value 1>",
+    ])
 
     # Handle response
     print(res)
@@ -103,7 +105,7 @@ Invalidates the key cache for immediate effect, and makes role assignments avail
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="addRoles" method="post" path="/v2/keys.addRoles" -->
+<!-- UsageSnippet language="python" operationID="keys.addRoles" method="post" path="/v2/keys.addRoles" -->
 ```python
 from unkey.py import Unkey
 
@@ -114,6 +116,8 @@ with Unkey(
 
     res = unkey.keys.add_roles(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", roles=[
         "<value 1>",
+        "<value 2>",
+        "<value 3>",
     ])
 
     # Handle response
@@ -166,7 +170,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createKey" method="post" path="/v2/keys.createKey" -->
+<!-- UsageSnippet language="python" operationID="keys.createKey" method="post" path="/v2/keys.createKey" -->
 ```python
 from unkey.py import Unkey, models
 
@@ -270,7 +274,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deleteKey" method="post" path="/v2/keys.deleteKey" -->
+<!-- UsageSnippet language="python" operationID="keys.deleteKey" method="post" path="/v2/keys.deleteKey" -->
 ```python
 from unkey.py import Unkey
 
@@ -329,7 +333,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getKey" method="post" path="/v2/keys.getKey" -->
+<!-- UsageSnippet language="python" operationID="keys.getKey" method="post" path="/v2/keys.getKey" -->
 ```python
 from unkey.py import Unkey
 
@@ -380,16 +384,64 @@ Your root key must have one of the following permissions for basic key informati
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
+<!-- UsageSnippet language="python" operationID="keys.migrateKeys" method="post" path="/v2/keys.migrateKeys" -->
 ```python
-from unkey.py import Unkey
+from unkey.py import Unkey, models
 
 
 with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.keys.migrate_keys(migration_id="your_company", api_id="api_123456789", keys=[])
+    res = unkey.keys.migrate_keys(migration_id="your_company", api_id="api_123456789", keys=[
+        {
+            "hash": "your_already_hashed_key",
+            "name": "Payment Service Production Key",
+            "external_id": "user_1234abcd",
+            "meta": {
+                "plan": "enterprise",
+                "featureFlags": {
+                    "betaAccess": True,
+                    "concurrentConnections": 10,
+                },
+                "customerName": "Acme Corp",
+                "billing": {
+                    "tier": "premium",
+                    "renewal": "2024-12-31",
+                },
+            },
+            "roles": [
+                "api_admin",
+                "billing_reader",
+            ],
+            "permissions": [
+                "documents.read",
+                "documents.write",
+                "settings.view",
+            ],
+            "credits": {
+                "remaining": 1000,
+                "refill": {
+                    "interval": models.KeyCreditsRefillInterval.DAILY,
+                    "amount": 1000,
+                    "refill_day": 15,
+                },
+            },
+            "ratelimits": [
+                {
+                    "name": "requests",
+                    "limit": 100,
+                    "duration": 60000,
+                    "auto_apply": True,
+                },
+                {
+                    "name": "heavy_operations",
+                    "limit": 10,
+                    "duration": 3600000,
+                },
+            ],
+        },
+    ])
 
     # Handle response
     print(res)
@@ -441,7 +493,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="removePermissions" method="post" path="/v2/keys.removePermissions" -->
+<!-- UsageSnippet language="python" operationID="keys.removePermissions" method="post" path="/v2/keys.removePermissions" -->
 ```python
 from unkey.py import Unkey
 
@@ -501,7 +553,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="removeRoles" method="post" path="/v2/keys.removeRoles" -->
+<!-- UsageSnippet language="python" operationID="keys.removeRoles" method="post" path="/v2/keys.removeRoles" -->
 ```python
 from unkey.py import Unkey
 
@@ -510,10 +562,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.keys.remove_roles(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", roles=[
-        "<value 1>",
-        "<value 2>",
-    ])
+    res = unkey.keys.remove_roles(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", roles=[])
 
     # Handle response
     print(res)
@@ -581,7 +630,7 @@ Common use cases include:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="rerollKey" method="post" path="/v2/keys.rerollKey" -->
+<!-- UsageSnippet language="python" operationID="keys.rerollKey" method="post" path="/v2/keys.rerollKey" -->
 ```python
 from unkey.py import Unkey
 
@@ -641,7 +690,7 @@ Invalidates the key cache for immediate effect, and makes permission changes ava
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="setPermissions" method="post" path="/v2/keys.setPermissions" -->
+<!-- UsageSnippet language="python" operationID="keys.setPermissions" method="post" path="/v2/keys.setPermissions" -->
 ```python
 from unkey.py import Unkey
 
@@ -652,6 +701,8 @@ with Unkey(
 
     res = unkey.keys.set_permissions(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", permissions=[
         "<value 1>",
+        "<value 2>",
+        "<value 3>",
     ])
 
     # Handle response
@@ -703,7 +754,7 @@ Invalidates the key cache for immediate effect, and makes role changes available
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="setRoles" method="post" path="/v2/keys.setRoles" -->
+<!-- UsageSnippet language="python" operationID="keys.setRoles" method="post" path="/v2/keys.setRoles" -->
 ```python
 from unkey.py import Unkey
 
@@ -712,11 +763,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.keys.set_roles(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", roles=[
-        "<value 1>",
-        "<value 2>",
-        "<value 3>",
-    ])
+    res = unkey.keys.set_roles(key_id="key_2cGKbMxRyIzhCxo1Idjz8q", roles=[])
 
     # Handle response
     print(res)
@@ -767,7 +814,7 @@ Credit updates remove the key from cache immediately. Setting credits to unlimit
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="updateCredits" method="post" path="/v2/keys.updateCredits" -->
+<!-- UsageSnippet language="python" operationID="keys.updateCredits" method="post" path="/v2/keys.updateCredits" -->
 ```python
 from unkey.py import Unkey, models
 
@@ -828,7 +875,7 @@ If you specify an `externalId` that doesn't exist, a new identity will be automa
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="updateKey" method="post" path="/v2/keys.updateKey" -->
+<!-- UsageSnippet language="python" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" example="success" -->
 ```python
 from unkey.py import Unkey, models
 
@@ -868,8 +915,8 @@ with Unkey(
     }, ratelimits=[
         {
             "name": "api",
-            "limit": 453542,
-            "duration": 350222,
+            "limit": 738192,
+            "duration": 167910,
         },
     ], enabled=True, roles=[
         "api_admin",
@@ -940,7 +987,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="verifyKey" method="post" path="/v2/keys.verifyKey" -->
+<!-- UsageSnippet language="python" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" example="permissionsQuerySyntaxError" -->
 ```python
 from unkey.py import Unkey
 
@@ -1013,7 +1060,7 @@ If your rootkey lacks permissions but the key exists, we may return a 404 status
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="whoami" method="post" path="/v2/keys.whoami" -->
+<!-- UsageSnippet language="python" operationID="keys.whoami" method="post" path="/v2/keys.whoami" -->
 ```python
 from unkey.py import Unkey
 

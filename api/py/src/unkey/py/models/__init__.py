@@ -97,6 +97,36 @@ if TYPE_CHECKING:
         V2ApisListKeysResponseBody,
         V2ApisListKeysResponseBodyTypedDict,
     )
+    from .v2deploycreatedeploymentrequestbody import (
+        V2DeployCreateDeploymentRequestBody,
+        V2DeployCreateDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploycreatedeploymentresponsebody import (
+        V2DeployCreateDeploymentResponseBody,
+        V2DeployCreateDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploycreatedeploymentresponsedata import (
+        V2DeployCreateDeploymentResponseData,
+        V2DeployCreateDeploymentResponseDataTypedDict,
+    )
+    from .v2deploydeploymentstep import (
+        V2DeployDeploymentStep,
+        V2DeployDeploymentStepTypedDict,
+    )
+    from .v2deploygetdeploymentrequestbody import (
+        V2DeployGetDeploymentRequestBody,
+        V2DeployGetDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploygetdeploymentresponsebody import (
+        V2DeployGetDeploymentResponseBody,
+        V2DeployGetDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploygetdeploymentresponsedata import (
+        Status,
+        V2DeployGetDeploymentResponseData,
+        V2DeployGetDeploymentResponseDataTypedDict,
+    )
+    from .v2deploygitcommit import V2DeployGitCommit, V2DeployGitCommitTypedDict
     from .v2identitiescreateidentityrequestbody import (
         V2IdentitiesCreateIdentityRequestBody,
         V2IdentitiesCreateIdentityRequestBodyTypedDict,
@@ -469,6 +499,7 @@ __all__ = [
     "RoleTypedDict",
     "Security",
     "SecurityTypedDict",
+    "Status",
     "UpdateKeyCreditsData",
     "UpdateKeyCreditsDataTypedDict",
     "UpdateKeyCreditsRefill",
@@ -498,6 +529,22 @@ __all__ = [
     "V2ApisListKeysRequestBodyTypedDict",
     "V2ApisListKeysResponseBody",
     "V2ApisListKeysResponseBodyTypedDict",
+    "V2DeployCreateDeploymentRequestBody",
+    "V2DeployCreateDeploymentRequestBodyTypedDict",
+    "V2DeployCreateDeploymentResponseBody",
+    "V2DeployCreateDeploymentResponseBodyTypedDict",
+    "V2DeployCreateDeploymentResponseData",
+    "V2DeployCreateDeploymentResponseDataTypedDict",
+    "V2DeployDeploymentStep",
+    "V2DeployDeploymentStepTypedDict",
+    "V2DeployGetDeploymentRequestBody",
+    "V2DeployGetDeploymentRequestBodyTypedDict",
+    "V2DeployGetDeploymentResponseBody",
+    "V2DeployGetDeploymentResponseBodyTypedDict",
+    "V2DeployGetDeploymentResponseData",
+    "V2DeployGetDeploymentResponseDataTypedDict",
+    "V2DeployGitCommit",
+    "V2DeployGitCommitTypedDict",
     "V2IdentitiesCreateIdentityRequestBody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict",
     "V2IdentitiesCreateIdentityResponseBody",
@@ -733,6 +780,23 @@ _dynamic_imports: dict[str, str] = {
     "V2ApisListKeysRequestBodyTypedDict": ".v2apislistkeysrequestbody",
     "V2ApisListKeysResponseBody": ".v2apislistkeysresponsebody",
     "V2ApisListKeysResponseBodyTypedDict": ".v2apislistkeysresponsebody",
+    "V2DeployCreateDeploymentRequestBody": ".v2deploycreatedeploymentrequestbody",
+    "V2DeployCreateDeploymentRequestBodyTypedDict": ".v2deploycreatedeploymentrequestbody",
+    "V2DeployCreateDeploymentResponseBody": ".v2deploycreatedeploymentresponsebody",
+    "V2DeployCreateDeploymentResponseBodyTypedDict": ".v2deploycreatedeploymentresponsebody",
+    "V2DeployCreateDeploymentResponseData": ".v2deploycreatedeploymentresponsedata",
+    "V2DeployCreateDeploymentResponseDataTypedDict": ".v2deploycreatedeploymentresponsedata",
+    "V2DeployDeploymentStep": ".v2deploydeploymentstep",
+    "V2DeployDeploymentStepTypedDict": ".v2deploydeploymentstep",
+    "V2DeployGetDeploymentRequestBody": ".v2deploygetdeploymentrequestbody",
+    "V2DeployGetDeploymentRequestBodyTypedDict": ".v2deploygetdeploymentrequestbody",
+    "V2DeployGetDeploymentResponseBody": ".v2deploygetdeploymentresponsebody",
+    "V2DeployGetDeploymentResponseBodyTypedDict": ".v2deploygetdeploymentresponsebody",
+    "Status": ".v2deploygetdeploymentresponsedata",
+    "V2DeployGetDeploymentResponseData": ".v2deploygetdeploymentresponsedata",
+    "V2DeployGetDeploymentResponseDataTypedDict": ".v2deploygetdeploymentresponsedata",
+    "V2DeployGitCommit": ".v2deploygitcommit",
+    "V2DeployGitCommitTypedDict": ".v2deploygitcommit",
     "V2IdentitiesCreateIdentityRequestBody": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityResponseBody": ".v2identitiescreateidentityresponsebody",
