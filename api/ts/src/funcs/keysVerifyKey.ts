@@ -128,7 +128,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "verifyKey",
+    operationID: "keys.verifyKey",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
