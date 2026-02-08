@@ -31,7 +31,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createPermission" method="post" path="/v2/permissions.createPermission" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.createPermission" method="post" path="/v2/permissions.createPermission" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -119,9 +119,9 @@ Your root key must have the following permission:
 - `rbac.*.create_role`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="createRole" method="post" path="/v2/permissions.createRole" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -159,6 +159,55 @@ async function run() {
   const res = await permissionsCreateRole(unkey, {
     name: "content.editor",
     description: "Can read and write content",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsCreateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withoutDescription
+
+<!-- UsageSnippet language="typescript" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" example="withoutDescription" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.createRole({
+    name: "api.reader",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsCreateRole } from "@unkey/api/funcs/permissionsCreateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsCreateRole(unkey, {
+    name: "api.reader",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -209,7 +258,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deletePermission" method="post" path="/v2/permissions.deletePermission" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.deletePermission" method="post" path="/v2/permissions.deletePermission" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -295,7 +344,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deleteRole" method="post" path="/v2/permissions.deleteRole" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.deleteRole" method="post" path="/v2/permissions.deleteRole" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -378,7 +427,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getPermission" method="post" path="/v2/permissions.getPermission" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.getPermission" method="post" path="/v2/permissions.getPermission" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -462,7 +511,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getRole" method="post" path="/v2/permissions.getRole" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.getRole" method="post" path="/v2/permissions.getRole" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -547,7 +596,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="listPermissions" method="post" path="/v2/permissions.listPermissions" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.listPermissions" method="post" path="/v2/permissions.listPermissions" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -633,7 +682,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="listRoles" method="post" path="/v2/permissions.listRoles" -->
+<!-- UsageSnippet language="typescript" operationID="permissions.listRoles" method="post" path="/v2/permissions.listRoles" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
