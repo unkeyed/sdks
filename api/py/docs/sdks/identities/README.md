@@ -22,9 +22,9 @@ Perfect for users with multiple devices, organizations with multiple API keys, o
 Requires `identity.*.create_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -38,6 +38,125 @@ with Unkey(
             "name": "api",
             "limit": 696170,
             "duration": 249033,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: identityExists
+
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="identityExists" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.create_identity(external_id="user_123", ratelimits=[
+        {
+            "name": "api",
+            "limit": 249033,
+            "duration": 650402,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.create_identity(external_id="user_123", ratelimits=[
+        {
+            "name": "api",
+            "limit": 249033,
+            "duration": 650402,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="success" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.create_identity(external_id="user_123", ratelimits=[
+        {
+            "name": "api",
+            "limit": 249033,
+            "duration": 650402,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withMetadata
+
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withMetadata" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.create_identity(external_id="user_123", meta={
+        "email": "alice@example.com",
+        "name": "Alice Smith",
+        "plan": "premium",
+    }, ratelimits=[
+        {
+            "name": "api",
+            "limit": 696170,
+            "duration": 249033,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withRatelimits
+
+<!-- UsageSnippet language="python" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withRatelimits" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.create_identity(external_id="user_123", ratelimits=[
+        {
+            "name": "requests",
+            "limit": 1000,
+            "duration": 60000,
         },
     ])
 
@@ -82,9 +201,60 @@ Use this for data cleanup, compliance requirements, or when removing entities fr
 > External ID becomes available for reuse immediately
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="v2.identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="basic" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.delete_identity(identity="user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="python" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="identityNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.delete_identity(identity="user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.delete_identity(identity="user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="python" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="success" -->
 ```python
 from unkey.py import Unkey
 
@@ -132,9 +302,9 @@ Use this to check if an identity exists, view configurations, or build managemen
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -144,6 +314,57 @@ with Unkey(
 ) as unkey:
 
     res = unkey.identities.get_identity(identity="user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="python" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="identityNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.get_identity(identity="user_abc123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.get_identity(identity="user_abc123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="python" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="success" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.get_identity(identity="user_abc123")
 
     # Handle response
     print(res)
@@ -182,9 +403,66 @@ Perfect for building management dashboards, auditing configurations, or browsing
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" -->
+<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="basic" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="success" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: withCursor
+
+<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withCursor" -->
 ```python
 from unkey.py import Unkey
 
@@ -235,9 +513,65 @@ Perfect for subscription changes, plan upgrades, or updating user information. C
 > Rate limit changes propagate within 30 seconds
 
 
-### Example Usage
+### Example Usage: identityNotFound
 
-<!-- UsageSnippet language="python" operationID="v2.identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
+<!-- UsageSnippet language="python" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="identityNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.update_identity(identity="user_123", meta={
+        "name": "Alice Smith",
+        "email": "alice@example.com",
+        "plan": "premium",
+    }, ratelimits=[
+        {
+            "name": "requests",
+            "limit": 1000,
+            "duration": 3600000,
+            "auto_apply": True,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.update_identity(identity="user_123", meta={
+        "name": "Alice Smith",
+        "email": "alice@example.com",
+        "plan": "premium",
+    }, ratelimits=[
+        {
+            "name": "requests",
+            "limit": 1000,
+            "duration": 3600000,
+            "auto_apply": True,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: updateMetadata
+
+<!-- UsageSnippet language="python" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="updateMetadata" -->
 ```python
 from unkey.py import Unkey
 
