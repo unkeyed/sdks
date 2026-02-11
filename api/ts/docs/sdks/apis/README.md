@@ -27,7 +27,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="createApi" method="post" path="/v2/apis.createApi" -->
+<!-- UsageSnippet language="typescript" operationID="apis.createApi" method="post" path="/v2/apis.createApi" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -117,7 +117,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="deleteApi" method="post" path="/v2/apis.deleteApi" -->
+<!-- UsageSnippet language="typescript" operationID="apis.deleteApi" method="post" path="/v2/apis.deleteApi" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -205,7 +205,7 @@ Your root key must have one of the following permissions:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getApi" method="post" path="/v2/apis.getApi" -->
+<!-- UsageSnippet language="typescript" operationID="apis.getApi" method="post" path="/v2/apis.getApi" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -300,7 +300,7 @@ Additional permission required for decrypt functionality:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="listKeys" method="post" path="/v2/apis.listKeys" -->
+<!-- UsageSnippet language="typescript" operationID="apis.listKeys" method="post" path="/v2/apis.listKeys" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 

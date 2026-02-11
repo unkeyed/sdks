@@ -22,9 +22,9 @@ Perfect for users with multiple devices, organizations with multiple API keys, o
 Requires `identity.*.create_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" -->
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -60,6 +60,317 @@ const unkey = new UnkeyCore({
 async function run() {
   const res = await identitiesCreateIdentity(unkey, {
     externalId: "user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesCreateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: identityExists
+
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="identityExists" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.createIdentity({
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesCreateIdentity(unkey, {
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesCreateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.createIdentity({
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesCreateIdentity(unkey, {
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesCreateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="success" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.createIdentity({
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesCreateIdentity(unkey, {
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "api",
+        limit: 249033,
+        duration: 650402,
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesCreateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withMetadata
+
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withMetadata" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.createIdentity({
+    externalId: "user_123",
+    meta: {
+      "email": "alice@example.com",
+      "name": "Alice Smith",
+      "plan": "premium",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesCreateIdentity(unkey, {
+    externalId: "user_123",
+    meta: {
+      "email": "alice@example.com",
+      "name": "Alice Smith",
+      "plan": "premium",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesCreateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withRatelimits
+
+<!-- UsageSnippet language="typescript" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withRatelimits" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.createIdentity({
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 60000,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesCreateIdentity } from "@unkey/api/funcs/identitiesCreateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesCreateIdentity(unkey, {
+    externalId: "user_123",
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 60000,
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -108,9 +419,156 @@ Use this for data cleanup, compliance requirements, or when removing entities fr
 > External ID becomes available for reuse immediately
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="v2.identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
+<!-- UsageSnippet language="typescript" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="basic" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.deleteIdentity({
+    identity: "user_123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesDeleteIdentity } from "@unkey/api/funcs/identitiesDeleteIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesDeleteIdentity(unkey, {
+    identity: "user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesDeleteIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="typescript" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="identityNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.deleteIdentity({
+    identity: "user_123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesDeleteIdentity } from "@unkey/api/funcs/identitiesDeleteIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesDeleteIdentity(unkey, {
+    identity: "user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesDeleteIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.deleteIdentity({
+    identity: "user_123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesDeleteIdentity } from "@unkey/api/funcs/identitiesDeleteIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesDeleteIdentity(unkey, {
+    identity: "user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesDeleteIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="typescript" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="success" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -192,9 +650,9 @@ Use this to check if an identity exists, view configurations, or build managemen
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" -->
+<!-- UsageSnippet language="typescript" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -241,6 +699,153 @@ async function run() {
 
 run();
 ```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="typescript" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="identityNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.getIdentity({
+    identity: "user_abc123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesGetIdentity } from "@unkey/api/funcs/identitiesGetIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesGetIdentity(unkey, {
+    identity: "user_abc123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesGetIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.getIdentity({
+    identity: "user_abc123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesGetIdentity } from "@unkey/api/funcs/identitiesGetIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesGetIdentity(unkey, {
+    identity: "user_abc123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesGetIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="typescript" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="success" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.getIdentity({
+    identity: "user_abc123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesGetIdentity } from "@unkey/api/funcs/identitiesGetIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesGetIdentity(unkey, {
+    identity: "user_abc123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesGetIdentity failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -276,9 +881,9 @@ Perfect for building management dashboards, auditing configurations, or browsing
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" -->
+<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -329,6 +934,171 @@ async function run() {
 
 run();
 ```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.listIdentities({
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesListIdentities } from "@unkey/api/funcs/identitiesListIdentities.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesListIdentities(unkey, {
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("identitiesListIdentities failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="success" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.listIdentities({
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesListIdentities } from "@unkey/api/funcs/identitiesListIdentities.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesListIdentities(unkey, {
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("identitiesListIdentities failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withCursor
+
+<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withCursor" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.listIdentities({
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesListIdentities } from "@unkey/api/funcs/identitiesListIdentities.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesListIdentities(unkey, {
+    limit: 50,
+    cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("identitiesListIdentities failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -364,9 +1134,159 @@ Perfect for subscription changes, plan upgrades, or updating user information. C
 > Rate limit changes propagate within 30 seconds
 
 
-### Example Usage
+### Example Usage: identityNotFound
 
-<!-- UsageSnippet language="typescript" operationID="v2.identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
+<!-- UsageSnippet language="typescript" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="identityNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.updateIdentity({
+    identity: "user_123",
+    meta: {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "plan": "premium",
+    },
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesUpdateIdentity } from "@unkey/api/funcs/identitiesUpdateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesUpdateIdentity(unkey, {
+    identity: "user_123",
+    meta: {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "plan": "premium",
+    },
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesUpdateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.updateIdentity({
+    identity: "user_123",
+    meta: {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "plan": "premium",
+    },
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesUpdateIdentity } from "@unkey/api/funcs/identitiesUpdateIdentity.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesUpdateIdentity(unkey, {
+    identity: "user_123",
+    meta: {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "plan": "premium",
+    },
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 1000,
+        duration: 3600000,
+        autoApply: true,
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("identitiesUpdateIdentity failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: updateMetadata
+
+<!-- UsageSnippet language="typescript" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="updateMetadata" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 

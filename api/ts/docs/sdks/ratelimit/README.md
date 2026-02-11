@@ -24,9 +24,111 @@ Use this to remove temporary overrides, reset identifiers to standard limits, or
 **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteOverride({
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteOverride } from "@unkey/api/funcs/ratelimitDeleteOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteOverride(unkey, {
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="overrideNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteOverride({
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteOverride } from "@unkey/api/funcs/ratelimitDeleteOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteOverride(unkey, {
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="specific" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -75,6 +177,57 @@ async function run() {
 
 run();
 ```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="wildcard" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteOverride({
+    namespace: "api.requests",
+    identifier: "premium_*",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteOverride } from "@unkey/api/funcs/ratelimitDeleteOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteOverride(unkey, {
+    namespace: "api.requests",
+    identifier: "premium_*",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteOverride failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -111,9 +264,111 @@ Use this to inspect override configurations, audit rate limiting policies, or de
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.getOverride({
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitGetOverride } from "@unkey/api/funcs/ratelimitGetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitGetOverride(unkey, {
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitGetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="overrideNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.getOverride({
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitGetOverride } from "@unkey/api/funcs/ratelimitGetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitGetOverride(unkey, {
+    namespace: "<value>",
+    identifier: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitGetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="specific" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -151,6 +406,57 @@ async function run() {
   const res = await ratelimitGetOverride(unkey, {
     namespace: "api.requests",
     identifier: "premium_user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitGetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="wildcard" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.getOverride({
+    namespace: "api.requests",
+    identifier: "premium_*",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitGetOverride } from "@unkey/api/funcs/ratelimitGetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitGetOverride(unkey, {
+    namespace: "api.requests",
+    identifier: "premium_*",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -202,9 +508,66 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
-### Example Usage
+### Example Usage: allowed
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -259,6 +622,234 @@ async function run() {
 
 run();
 ```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "auth.login",
+    cost: 5,
+    duration: 60000,
+    identifier: "203.0.113.42",
+    limit: 5,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "auth.login",
+    cost: 5,
+    duration: 60000,
+    identifier: "203.0.113.42",
+    limit: 5,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "api.heavy_operations",
+    cost: 5,
+    duration: 3600000,
+    identifier: "user_def456",
+    limit: 50,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "api.heavy_operations",
+    cost: 5,
+    duration: 3600000,
+    identifier: "user_def456",
+    limit: 50,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -296,9 +887,9 @@ Use this to audit rate limiting policies, build admin dashboards, or manage over
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="basic" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -336,6 +927,106 @@ async function run() {
   const res = await ratelimitListOverrides(unkey, {
     namespace: "api.requests",
     limit: 20,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitListOverrides failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listOverrides({
+    namespace: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListOverrides } from "@unkey/api/funcs/ratelimitListOverrides.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListOverrides(unkey, {
+    namespace: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitListOverrides failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: pagination
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="pagination" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listOverrides({
+    namespace: "api.requests",
+    cursor: "cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListOverrides } from "@unkey/api/funcs/ratelimitListOverrides.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListOverrides(unkey, {
+    namespace: "api.requests",
+    cursor: "cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -387,9 +1078,54 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
-### Example Usage
+### Example Usage: allAllowed
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, []);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -462,6 +1198,260 @@ async function run() {
 
 run();
 ```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, []);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 100,
+    },
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 5,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 100,
+    },
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 5,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "sms.sign_up",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_12345",
+      limit: 1000,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "sms.sign_up",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_12345",
+      limit: 1000,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "api.light_operations",
+      duration: 60000,
+      identifier: "user_xyz789",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_xyz789",
+      limit: 50,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "api.light_operations",
+      duration: 60000,
+      identifier: "user_xyz789",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_xyz789",
+      limit: 50,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -499,9 +1489,119 @@ Use this to create premium tiers with higher limits, apply stricter limits to sp
 **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="typescript" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" -->
+<!-- UsageSnippet language="typescript" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.setOverride({
+    namespace: "<value>",
+    duration: 956831,
+    identifier: "<value>",
+    limit: 816580,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitSetOverride } from "@unkey/api/funcs/ratelimitSetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitSetOverride(unkey, {
+    namespace: "<value>",
+    duration: 956831,
+    identifier: "<value>",
+    limit: 816580,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitSetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="namespaceNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.setOverride({
+    namespace: "<value>",
+    duration: 956831,
+    identifier: "<value>",
+    limit: 816580,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitSetOverride } from "@unkey/api/funcs/ratelimitSetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitSetOverride(unkey, {
+    namespace: "<value>",
+    duration: 956831,
+    identifier: "<value>",
+    limit: 816580,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitSetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: premium
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="premium" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
@@ -543,6 +1643,61 @@ async function run() {
     duration: 60000,
     identifier: "premium_user_123",
     limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitSetOverride failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="wildcard" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.setOverride({
+    namespace: "api.requests",
+    duration: 60000,
+    identifier: "premium_*",
+    limit: 500,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitSetOverride } from "@unkey/api/funcs/ratelimitSetOverride.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitSetOverride(unkey, {
+    namespace: "api.requests",
+    duration: 60000,
+    identifier: "premium_*",
+    limit: 500,
   });
   if (res.ok) {
     const { value: result } = res;
