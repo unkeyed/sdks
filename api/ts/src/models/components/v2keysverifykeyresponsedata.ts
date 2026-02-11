@@ -4,7 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
@@ -19,8 +20,7 @@ import {
  * @remarks
  * or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
  * exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
- * (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
- * (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+ * (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
  * `EXPIRED` (key has passed its expiration date).
  */
 export const Code = {
@@ -28,7 +28,6 @@ export const Code = {
   NotFound: "NOT_FOUND",
   Forbidden: "FORBIDDEN",
   InsufficientPermissions: "INSUFFICIENT_PERMISSIONS",
-  InsufficientCredits: "INSUFFICIENT_CREDITS",
   UsageExceeded: "USAGE_EXCEEDED",
   RateLimited: "RATE_LIMITED",
   Disabled: "DISABLED",
@@ -40,11 +39,10 @@ export const Code = {
  * @remarks
  * or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
  * exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
- * (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
- * (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+ * (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
  * `EXPIRED` (key has passed its expiration date).
  */
-export type Code = ClosedEnum<typeof Code>;
+export type Code = OpenEnum<typeof Code>;
 
 export type V2KeysVerifyKeyResponseData = {
   /**
@@ -61,8 +59,7 @@ export type V2KeysVerifyKeyResponseData = {
    * @remarks
    * or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
    * exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
-   * (key lacks specific required permissions for this request), `INSUFFICIENT_CREDITS`
-   * (key has no remaining credits), `USAGE_EXCEEDED` (key exceeded usage limits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
+   * (key lacks specific required permissions for this request), `USAGE_EXCEEDED` (key has no remaining credits), `RATE_LIMITED` (key exceeded rate limits), `DISABLED` (key was explicitly disabled),
    * `EXPIRED` (key has passed its expiration date).
    */
   code: Code;
@@ -139,9 +136,8 @@ export type V2KeysVerifyKeyResponseData = {
 };
 
 /** @internal */
-export const Code$inboundSchema: z.ZodNativeEnum<typeof Code> = z.nativeEnum(
-  Code,
-);
+export const Code$inboundSchema: z.ZodType<Code, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Code);
 
 /** @internal */
 export const V2KeysVerifyKeyResponseData$inboundSchema: z.ZodType<
