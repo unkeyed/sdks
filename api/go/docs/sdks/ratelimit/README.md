@@ -24,9 +24,75 @@ Use this to remove temporary overrides, reset identifiers to standard limits, or
 **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="go" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteOverride(ctx, components.V2RatelimitDeleteOverrideRequestBody{
+        Namespace: "<value>",
+        Identifier: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="overrideNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteOverride(ctx, components.V2RatelimitDeleteOverrideRequestBody{
+        Namespace: "<value>",
+        Identifier: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="specific" -->
 ```go
 package main
 
@@ -48,6 +114,39 @@ func main() {
     res, err := s.Ratelimit.DeleteOverride(ctx, components.V2RatelimitDeleteOverrideRequestBody{
         Namespace: "api.requests",
         Identifier: "premium_user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="wildcard" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteOverride(ctx, components.V2RatelimitDeleteOverrideRequestBody{
+        Namespace: "api.requests",
+        Identifier: "premium_*",
     })
     if err != nil {
         log.Fatal(err)
@@ -92,9 +191,75 @@ Use this to inspect override configurations, audit rate limiting policies, or de
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="go" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.GetOverride(ctx, components.V2RatelimitGetOverrideRequestBody{
+        Namespace: "<value>",
+        Identifier: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitGetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="go" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="overrideNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.GetOverride(ctx, components.V2RatelimitGetOverrideRequestBody{
+        Namespace: "<value>",
+        Identifier: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitGetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="go" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="specific" -->
 ```go
 package main
 
@@ -116,6 +281,39 @@ func main() {
     res, err := s.Ratelimit.GetOverride(ctx, components.V2RatelimitGetOverrideRequestBody{
         Namespace: "api.requests",
         Identifier: "premium_user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitGetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="go" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="wildcard" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.GetOverride(ctx, components.V2RatelimitGetOverrideRequestBody{
+        Namespace: "api.requests",
+        Identifier: "premium_*",
     })
     if err != nil {
         log.Fatal(err)
@@ -164,9 +362,45 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
-### Example Usage
+### Example Usage: allowed
 
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
 ```go
 package main
 
@@ -191,6 +425,150 @@ func main() {
         Duration: 60000,
         Identifier: "user_abc123",
         Limit: 100,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
+        Namespace: "auth.login",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "203.0.113.42",
+        Limit: 5,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
+        Namespace: "api.heavy_operations",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 3600000,
+        Identifier: "user_def456",
+        Limit: 50,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
     })
     if err != nil {
         log.Fatal(err)
@@ -236,9 +614,9 @@ Use this to audit rate limiting policies, build admin dashboards, or manage over
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="go" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="basic" -->
 ```go
 package main
 
@@ -260,6 +638,71 @@ func main() {
     res, err := s.Ratelimit.ListOverrides(ctx, components.V2RatelimitListOverridesRequestBody{
         Namespace: "api.requests",
         Limit: unkey.Pointer[int64](20),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListOverridesResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListOverrides(ctx, components.V2RatelimitListOverridesRequestBody{
+        Namespace: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListOverridesResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: pagination
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="pagination" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListOverrides(ctx, components.V2RatelimitListOverridesRequestBody{
+        Namespace: "api.requests",
+        Cursor: unkey.Pointer("cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9"),
     })
     if err != nil {
         log.Fatal(err)
@@ -308,9 +751,39 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
-### Example Usage
+### Example Usage: allAllowed
 
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
 ```go
 package main
 
@@ -343,6 +816,163 @@ func main() {
             Duration: 3600000,
             Identifier: "user_def456",
             Limit: 1000,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "api.requests",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "user_abc123",
+            Limit: 100,
+        },
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "auth.login",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "user_abc123",
+            Limit: 5,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "sms.sign_up",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "user_12345",
+            Limit: 1000,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "api.light_operations",
+            Duration: 60000,
+            Identifier: "user_xyz789",
+            Limit: 100,
+        },
+        components.V2RatelimitLimitRequestBody{
+            Namespace: "api.heavy_operations",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 3600000,
+            Identifier: "user_xyz789",
+            Limit: 50,
         },
     })
     if err != nil {
@@ -389,9 +1019,79 @@ Use this to create premium tiers with higher limits, apply stricter limits to sp
 **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="go" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" -->
+<!-- UsageSnippet language="go" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.SetOverride(ctx, components.V2RatelimitSetOverrideRequestBody{
+        Namespace: "<value>",
+        Duration: 956831,
+        Identifier: "<value>",
+        Limit: 816580,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitSetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="go" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="namespaceNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.SetOverride(ctx, components.V2RatelimitSetOverrideRequestBody{
+        Namespace: "<value>",
+        Duration: 956831,
+        Identifier: "<value>",
+        Limit: 816580,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitSetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: premium
+
+<!-- UsageSnippet language="go" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="premium" -->
 ```go
 package main
 
@@ -415,6 +1115,41 @@ func main() {
         Duration: 60000,
         Identifier: "premium_user_123",
         Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitSetOverrideResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="go" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="wildcard" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.SetOverride(ctx, components.V2RatelimitSetOverrideRequestBody{
+        Namespace: "api.requests",
+        Duration: 60000,
+        Identifier: "premium_*",
+        Limit: 500,
     })
     if err != nil {
         log.Fatal(err)

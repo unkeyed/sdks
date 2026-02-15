@@ -22,9 +22,9 @@ Perfect for users with multiple devices, organizations with multiple API keys, o
 Requires `identity.*.create_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="basic" -->
 ```go
 package main
 
@@ -45,6 +45,199 @@ func main() {
 
     res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
         ExternalID: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesCreateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: identityExists
+
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="identityExists" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
+        ExternalID: "user_123",
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "api",
+                Limit: 249033,
+                Duration: 650402,
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesCreateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
+        ExternalID: "user_123",
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "api",
+                Limit: 249033,
+                Duration: 650402,
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesCreateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="success" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
+        ExternalID: "user_123",
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "api",
+                Limit: 249033,
+                Duration: 650402,
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesCreateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withMetadata
+
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withMetadata" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
+        ExternalID: "user_123",
+        Meta: map[string]any{
+            "email": "alice@example.com",
+            "name": "Alice Smith",
+            "plan": "premium",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesCreateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withRatelimits
+
+<!-- UsageSnippet language="go" operationID="identities.createIdentity" method="post" path="/v2/identities.createIdentity" example="withRatelimits" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.CreateIdentity(ctx, components.V2IdentitiesCreateIdentityRequestBody{
+        ExternalID: "user_123",
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "requests",
+                Limit: 1000,
+                Duration: 60000,
+            },
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -84,15 +277,111 @@ Permanently delete an identity. This operation cannot be undone.
 
 Use this for data cleanup, compliance requirements, or when removing entities from your system.
 
-> **Important**  
-> Requires `identity.*.delete_identity` permission  
-> Associated API keys remain functional but lose shared resources  
+> **Important**
+> Requires `identity.*.delete_identity` permission
+> Associated API keys remain functional but lose shared resources
 > External ID becomes available for reuse immediately
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="basic" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.DeleteIdentity(ctx, components.V2IdentitiesDeleteIdentityRequestBody{
+        Identity: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesDeleteIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="identityNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.DeleteIdentity(ctx, components.V2IdentitiesDeleteIdentityRequestBody{
+        Identity: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesDeleteIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.DeleteIdentity(ctx, components.V2IdentitiesDeleteIdentityRequestBody{
+        Identity: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesDeleteIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="go" operationID="identities.deleteIdentity" method="post" path="/v2/identities.deleteIdentity" example="success" -->
 ```go
 package main
 
@@ -152,13 +441,13 @@ Retrieve an identity by external ID. Returns metadata, rate limits, and other as
 
 Use this to check if an identity exists, view configurations, or build management dashboards.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="go" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="basic" -->
 ```go
 package main
 
@@ -179,6 +468,102 @@ func main() {
 
     res, err := s.Identities.GetIdentity(ctx, components.V2IdentitiesGetIdentityRequestBody{
         Identity: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesGetIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: identityNotFound
+
+<!-- UsageSnippet language="go" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="identityNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.GetIdentity(ctx, components.V2IdentitiesGetIdentityRequestBody{
+        Identity: "user_abc123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesGetIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.GetIdentity(ctx, components.V2IdentitiesGetIdentityRequestBody{
+        Identity: "user_abc123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesGetIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="go" operationID="identities.getIdentity" method="post" path="/v2/identities.getIdentity" example="success" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.GetIdentity(ctx, components.V2IdentitiesGetIdentityRequestBody{
+        Identity: "user_abc123",
     })
     if err != nil {
         log.Fatal(err)
@@ -218,13 +603,13 @@ Get a paginated list of all identities in your workspace. Returns metadata and r
 
 Perfect for building management dashboards, auditing configurations, or browsing your identities.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" -->
+<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="basic" -->
 ```go
 package main
 
@@ -245,6 +630,141 @@ func main() {
 
     res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
         Limit: unkey.Pointer[int64](50),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesListIdentitiesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
+        Limit: unkey.Pointer[int64](50),
+        Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesListIdentitiesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="success" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
+        Limit: unkey.Pointer[int64](50),
+        Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesListIdentitiesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: withCursor
+
+<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withCursor" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
+        Limit: unkey.Pointer[int64](50),
+        Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
     })
     if err != nil {
         log.Fatal(err)
@@ -300,9 +820,99 @@ Perfect for subscription changes, plan upgrades, or updating user information. C
 > Rate limit changes propagate within 30 seconds
 
 
-### Example Usage
+### Example Usage: identityNotFound
 
-<!-- UsageSnippet language="go" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" -->
+<!-- UsageSnippet language="go" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="identityNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.UpdateIdentity(ctx, components.V2IdentitiesUpdateIdentityRequestBody{
+        Identity: "user_123",
+        Meta: map[string]any{
+            "name": "Alice Smith",
+            "email": "alice@example.com",
+            "plan": "premium",
+        },
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "requests",
+                Limit: 1000,
+                Duration: 3600000,
+                AutoApply: unkey.Pointer(true),
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesUpdateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.UpdateIdentity(ctx, components.V2IdentitiesUpdateIdentityRequestBody{
+        Identity: "user_123",
+        Meta: map[string]any{
+            "name": "Alice Smith",
+            "email": "alice@example.com",
+            "plan": "premium",
+        },
+        Ratelimits: []components.RatelimitRequest{
+            components.RatelimitRequest{
+                Name: "requests",
+                Limit: 1000,
+                Duration: 3600000,
+                AutoApply: unkey.Pointer(true),
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesUpdateIdentityResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: updateMetadata
+
+<!-- UsageSnippet language="go" operationID="identities.updateIdentity" method="post" path="/v2/identities.updateIdentity" example="updateMetadata" -->
 ```go
 package main
 
