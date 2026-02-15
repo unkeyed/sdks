@@ -42,3 +42,9 @@ class V2KeysAddRolesRequestBody(BaseModel):
     Invalid roles cause the entire operation to fail atomically, ensuring consistent state.
 
     """
+
+
+try:
+    V2KeysAddRolesRequestBody.model_rebuild()
+except NameError:
+    pass

@@ -106,7 +106,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="addPermissions",
+                operation_id="keys.addPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -249,7 +249,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="addPermissions",
+                operation_id="keys.addPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -393,7 +393,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="addRoles",
+                operation_id="keys.addRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -535,7 +535,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="addRoles",
+                operation_id="keys.addRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -755,7 +755,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createKey",
+                operation_id="keys.createKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -975,7 +975,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createKey",
+                operation_id="keys.createKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1115,7 +1115,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteKey",
+                operation_id="keys.deleteKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1255,7 +1255,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteKey",
+                operation_id="keys.deleteKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1398,7 +1398,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getKey",
+                operation_id="keys.getKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1541,7 +1541,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getKey",
+                operation_id="keys.getKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1671,7 +1671,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="migrateKeys",
+                operation_id="keys.migrateKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1803,7 +1803,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="migrateKeys",
+                operation_id="keys.migrateKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1945,7 +1945,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="removePermissions",
+                operation_id="keys.removePermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2087,7 +2087,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="removePermissions",
+                operation_id="keys.removePermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2231,7 +2231,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="removeRoles",
+                operation_id="keys.removeRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2375,7 +2375,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="removeRoles",
+                operation_id="keys.removeRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2548,7 +2548,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="rerollKey",
+                operation_id="keys.rerollKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2719,7 +2719,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="rerollKey",
+                operation_id="keys.rerollKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2863,7 +2863,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="setPermissions",
+                operation_id="keys.setPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3009,7 +3009,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="setPermissions",
+                operation_id="keys.setPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3154,7 +3154,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="setRoles",
+                operation_id="keys.setRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3297,7 +3297,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="setRoles",
+                operation_id="keys.setRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3439,7 +3439,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateCredits",
+                operation_id="keys.updateCredits",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3583,7 +3583,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateCredits",
+                operation_id="keys.updateCredits",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3778,7 +3778,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateKey",
+                operation_id="keys.updateKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -3971,7 +3971,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateKey",
+                operation_id="keys.updateKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -4150,7 +4150,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="verifyKey",
+                operation_id="keys.verifyKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -4329,7 +4329,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="verifyKey",
+                operation_id="keys.verifyKey",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -4456,7 +4456,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="whoami",
+                operation_id="keys.whoami",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -4583,7 +4583,7 @@ class Keys(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="whoami",
+                operation_id="keys.whoami",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),

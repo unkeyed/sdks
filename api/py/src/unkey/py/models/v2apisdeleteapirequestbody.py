@@ -24,3 +24,9 @@ class V2ApisDeleteAPIRequestBody(BaseModel):
     Before proceeding, ensure you have the correct API ID and understand that this action cannot be undone. If you need to migrate functionality, create replacement keys in a new API namespace and update client applications before deletion.
 
     """
+
+
+try:
+    V2ApisDeleteAPIRequestBody.model_rebuild()
+except NameError:
+    pass

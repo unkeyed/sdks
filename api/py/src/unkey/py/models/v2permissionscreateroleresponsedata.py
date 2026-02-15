@@ -24,3 +24,9 @@ class V2PermissionsCreateRoleResponseData(BaseModel):
     Store this ID if you need to manage, modify, or assign this role in future operations.
 
     """
+
+
+try:
+    V2PermissionsCreateRoleResponseData.model_rebuild()
+except NameError:
+    pass
