@@ -413,9 +413,9 @@ Permanently delete an identity. This operation cannot be undone.
 
 Use this for data cleanup, compliance requirements, or when removing entities from your system.
 
-> **Important**  
-> Requires `identity.*.delete_identity` permission  
-> Associated API keys remain functional but lose shared resources  
+> **Important**
+> Requires `identity.*.delete_identity` permission
+> Associated API keys remain functional but lose shared resources
 > External ID becomes available for reuse immediately
 
 
@@ -646,7 +646,7 @@ Retrieve an identity by external ID. Returns metadata, rate limits, and other as
 
 Use this to check if an identity exists, view configurations, or build management dashboards.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 
@@ -877,7 +877,7 @@ Get a paginated list of all identities in your workspace. Returns metadata and r
 
 Perfect for building management dashboards, auditing configurations, or browsing your identities.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 

@@ -585,7 +585,7 @@ run();
 
 ## listPermissions
 
-Retrieve all permissions in your workspace. 
+Retrieve all permissions in your workspace.
 Results are paginated and sorted by their id.
 
 **Required Permissions**
@@ -671,7 +671,7 @@ run();
 
 ## listRoles
 
-Retrieve all roles in your workspace including their assigned permissions. 
+Retrieve all roles in your workspace including their assigned permissions.
 Results are paginated and sorted by their id.
 
 **Required Permissions**
