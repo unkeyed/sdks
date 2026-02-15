@@ -38,3 +38,9 @@ class V2ApisCreateAPIResponseData(BaseModel):
     This identifier is permanent and cannot be changed after creation.
 
     """
+
+
+try:
+    V2ApisCreateAPIResponseData.model_rebuild()
+except NameError:
+    pass

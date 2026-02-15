@@ -20,3 +20,9 @@ class V2ApisGetAPIRequestBody(BaseModel):
     Must be a valid API ID that begins with 'api_' and exists within your workspace.
 
     """
+
+
+try:
+    V2ApisGetAPIRequestBody.model_rebuild()
+except NameError:
+    pass

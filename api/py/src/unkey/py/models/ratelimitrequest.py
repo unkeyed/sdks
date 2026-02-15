@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-from unkey.py.types import BaseModel
+from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class RatelimitRequestTypedDict(TypedDict):
@@ -84,3 +85,25 @@ class RatelimitRequest(BaseModel):
 
     auto_apply: Annotated[Optional[bool], pydantic.Field(alias="autoApply")] = False
     r"""Whether this ratelimit should be automatically applied when verifying a key."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["autoApply"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    RatelimitRequest.model_rebuild()
+except NameError:
+    pass

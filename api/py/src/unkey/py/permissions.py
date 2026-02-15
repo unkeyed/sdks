@@ -123,7 +123,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createPermission",
+                operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -283,7 +283,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createPermission",
+                operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -425,7 +425,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createRole",
+                operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -567,7 +567,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createRole",
+                operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -710,7 +710,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deletePermission",
+                operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -853,7 +853,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deletePermission",
+                operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -991,7 +991,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteRole",
+                operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1124,7 +1124,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteRole",
+                operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1247,7 +1247,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getPermission",
+                operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1375,7 +1375,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getPermission",
+                operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1503,7 +1503,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getRole",
+                operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1631,7 +1631,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getRole",
+                operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1768,7 +1768,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPermissions",
+                operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1900,7 +1900,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPermissions",
+                operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2030,7 +2030,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listRoles",
+                operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -2165,7 +2165,7 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listRoles",
+                operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),

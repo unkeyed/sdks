@@ -31,7 +31,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createPermission" method="post" path="/v2/permissions.createPermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.createPermission" method="post" path="/v2/permissions.createPermission" -->
 ```python
 from unkey.py import Unkey
 
@@ -83,9 +83,9 @@ Your root key must have the following permission:
 - `rbac.*.create_role`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="createRole" method="post" path="/v2/permissions.createRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -95,6 +95,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.permissions.create_role(name="content.editor", description="Can read and write content")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withoutDescription
+
+<!-- UsageSnippet language="python" operationID="permissions.createRole" method="post" path="/v2/permissions.createRole" example="withoutDescription" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.create_role(name="api.reader", description="Provides read-only access for customer support representatives. Includes permissions to view user accounts, support tickets, and basic analytics. Does not include access to billing, admin functions, or data modification capabilities.")
 
     # Handle response
     print(res)
@@ -138,7 +155,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deletePermission" method="post" path="/v2/permissions.deletePermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.deletePermission" method="post" path="/v2/permissions.deletePermission" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -190,7 +207,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="deleteRole" method="post" path="/v2/permissions.deleteRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.deleteRole" method="post" path="/v2/permissions.deleteRole" -->
 ```python
 from unkey.py import Unkey
 
@@ -239,7 +256,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getPermission" method="post" path="/v2/permissions.getPermission" -->
+<!-- UsageSnippet language="python" operationID="permissions.getPermission" method="post" path="/v2/permissions.getPermission" -->
 ```python
 from unkey.py import Unkey
 
@@ -289,7 +306,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getRole" method="post" path="/v2/permissions.getRole" -->
+<!-- UsageSnippet language="python" operationID="permissions.getRole" method="post" path="/v2/permissions.getRole" -->
 ```python
 from unkey.py import Unkey
 
@@ -329,7 +346,7 @@ with Unkey(
 
 ## list_permissions
 
-Retrieve all permissions in your workspace. 
+Retrieve all permissions in your workspace.
 Results are paginated and sorted by their id.
 
 **Required Permissions**
@@ -340,7 +357,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listPermissions" method="post" path="/v2/permissions.listPermissions" -->
+<!-- UsageSnippet language="python" operationID="permissions.listPermissions" method="post" path="/v2/permissions.listPermissions" -->
 ```python
 from unkey.py import Unkey
 
@@ -380,7 +397,7 @@ with Unkey(
 
 ## list_roles
 
-Retrieve all roles in your workspace including their assigned permissions. 
+Retrieve all roles in your workspace including their assigned permissions.
 Results are paginated and sorted by their id.
 
 **Required Permissions**
@@ -391,7 +408,7 @@ Your root key must have the following permission:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listRoles" method="post" path="/v2/permissions.listRoles" -->
+<!-- UsageSnippet language="python" operationID="permissions.listRoles" method="post" path="/v2/permissions.listRoles" -->
 ```python
 from unkey.py import Unkey
 

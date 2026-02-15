@@ -46,3 +46,9 @@ class V2KeysSetPermissionsRequestBody(BaseModel):
 
     Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
     """
+
+
+try:
+    V2KeysSetPermissionsRequestBody.model_rebuild()
+except NameError:
+    pass

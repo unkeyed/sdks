@@ -24,9 +24,43 @@ Use this to remove temporary overrides, reset identifiers to standard limits, or
 **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="overrideNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="specific" -->
 ```python
 from unkey.py import Unkey
 
@@ -36,6 +70,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.delete_override(namespace="api.requests", identifier="premium_user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="api.requests", identifier="premium_*")
 
     # Handle response
     print(res)
@@ -76,9 +127,43 @@ Use this to inspect override configurations, audit rate limiting policies, or de
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="overrideNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="specific" -->
 ```python
 from unkey.py import Unkey
 
@@ -88,6 +173,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.get_override(namespace="api.requests", identifier="premium_user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="api.requests", identifier="premium_*")
 
     # Handle response
     print(res)
@@ -132,9 +234,26 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
-### Example Usage
+### Example Usage: allowed
 
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -144,6 +263,74 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.limit(namespace="api.requests", duration=60000, identifier="user_abc123", limit=100, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="auth.login", duration=60000, identifier="203.0.113.42", limit=5, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="api.heavy_operations", duration=3600000, identifier="user_def456", limit=50, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
 
     # Handle response
     print(res)
@@ -188,9 +375,9 @@ Use this to audit rate limiting policies, build admin dashboards, or manage over
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -200,6 +387,40 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.list_overrides(namespace="api.requests", limit=20)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_overrides(namespace="<value>", limit=10)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: pagination
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="pagination" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_overrides(namespace="api.requests", cursor="cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9", limit=10)
 
     # Handle response
     print(res)
@@ -245,9 +466,26 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
-### Example Usage
+### Example Usage: allAllowed
 
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
 ```python
 from unkey.py import Unkey
 
@@ -270,6 +508,111 @@ with Unkey(
             "duration": 3600000,
             "identifier": "user_def456",
             "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.requests",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_abc123",
+            "limit": 100,
+        },
+        {
+            "namespace": "auth.login",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_abc123",
+            "limit": 5,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "sms.sign_up",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_12345",
+            "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.light_operations",
+            "duration": 60000,
+            "identifier": "user_xyz789",
+            "limit": 100,
+        },
+        {
+            "namespace": "api.heavy_operations",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_xyz789",
+            "limit": 50,
         },
     ])
 
@@ -312,9 +655,43 @@ Use this to create premium tiers with higher limits, apply stricter limits to sp
 **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="<value>", duration=956831, identifier="<value>", limit=816580)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="namespaceNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="<value>", duration=956831, identifier="<value>", limit=816580)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: premium
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="premium" -->
 ```python
 from unkey.py import Unkey
 
@@ -324,6 +701,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.set_override(namespace="api.requests", duration=60000, identifier="premium_user_123", limit=1000)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="api.requests", duration=60000, identifier="premium_*", limit=500)
 
     # Handle response
     print(res)
