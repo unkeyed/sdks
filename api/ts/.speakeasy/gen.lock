@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 7ee044e244a5cd5cecbc02c2ca9ac22f
+  docChecksum: efcaf41f9259bc544eb6995d05e989aa
   docVersion: 2.0.0
-  speakeasyVersion: 1.709.4
-  generationVersion: 2.816.0
-  releaseVersion: 2.3.0
-  configChecksum: 3a2180f3fafb229811de40002cf3127e
+  speakeasyVersion: 1.723.0
+  generationVersion: 2.835.2
+  releaseVersion: 2.3.1
+  configChecksum: c0af50cade4db9eaa74ff230953fc63f
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://gitpkg.now.sh/unkeyed/sdks/api/ts
   published: true
 persistentEdits:
-  generation_id: 20101192-9101-4598-aa03-5039a83e3451
-  pristine_commit_hash: 63c1375ba998d8aac5830e13c5a684d0086aebdd
-  pristine_tree_hash: 447bf4c0644f8ff4befccf571508b1c914542760
+  generation_id: 4ba895c6-43a2-4968-9a7e-3455a40c9863
+  pristine_commit_hash: 9ce6a7b4d3405d577a135cb4bb4fffbd9b75fe5a
+  pristine_tree_hash: 9af6163b51dbc5719ca7bcd3c891fa1f85dad48d
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.13
-    core: 3.26.27
+    core: 3.26.31
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -29,7 +29,7 @@ features:
     globalServerURLs: 2.83.0
     groups: 2.81.3
     ignores: 2.81.1
-    nameOverrides: 2.81.2
+    nameOverrides: 2.81.4
     nullables: 0.1.1
     openEnums: 0.1.2
     pagination: 2.83.0
@@ -627,8 +627,8 @@ trackedFiles:
     pristine_git_object: 06c8107bde149f28008c662d06e8af0e963d70a5
   docs/sdks/identities/README.md:
     id: 751b50358a28
-    last_write_checksum: sha1:aa8e14dddaffc498f8c4b0ed5d2fad395070b3de
-    pristine_git_object: a5412371b3faade1655fe1b32555414de6c108fe
+    last_write_checksum: sha1:46bcaf011086539dd90832c7de3bb41fe800e823
+    pristine_git_object: 7ef0bdd8c3684311c2fb43c7103e9b0aa29e52b9
   docs/sdks/internal/README.md:
     id: 11cb26f5abcb
     last_write_checksum: sha1:fd2ec32950222f0d7b5814c8295558048c8a531c
@@ -639,8 +639,8 @@ trackedFiles:
     pristine_git_object: b112f6754716c2fa4b72ddaacffaaf9451d3d815
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
-    last_write_checksum: sha1:3fe05144b13e583f36fd302221f024bcb7167d02
-    pristine_git_object: c50dfd0fb409ab25defe4898e8fa9644a38eec48
+    last_write_checksum: sha1:d0e254662a871312b5360bfd42e9570066c56911
+    pristine_git_object: 29addcd42c3b438a5bfc386efeb1a5cd6c05c6fd
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
     last_write_checksum: sha1:4822d39bc59dedf2bfa146192884c83101b669cc
@@ -667,12 +667,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:6b816f15ac982e996413d8cd8e08064d6956f390
-    pristine_git_object: 80d2d0e7536396ba34cc3dc32cf94305fb88a41d
+    last_write_checksum: sha1:2112a99113d07fad05b545238365943162d1c246
+    pristine_git_object: dc6daea6cdfa1a158d0f286c864309a263a321bf
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0a0486efb403cd39a8e0dd2151233baed1223308
-    pristine_git_object: 44da9fd0923ee46212440adb0eb28f7a2a4326ee
+    last_write_checksum: sha1:acc6ce6d8a9ae98d52e77d092c5a110988dde9e4
+    pristine_git_object: ddd362857b307ea96552da1b47d39bd640eb48c6
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -863,8 +863,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a941a03fe930e87bdc1b1af3f947c8270c1788ba
-    pristine_git_object: 75b0ca684870d47d07dbfd1c78080d6f7c515b8c
+    last_write_checksum: sha1:d48e01e8f0aee22e22729143f4954f1e7ab70b27
+    pristine_git_object: 13bd8e7d71f8b08e613c9fa2a3de4e2653b24128
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3294,11 +3294,6 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `unkey.keys.verifyKey()`:  `response.data.code.enum(insufficientCredits)` **Removed** (Breaking ⚠️)
-  * `unkey.internal.createDeployment()`: **Added**
-  * `unkey.internal.getDeployment()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore
