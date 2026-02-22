@@ -417,7 +417,7 @@ class Identities(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="v2.identities.deleteIdentity",
+                operation_id="identities.deleteIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -546,7 +546,7 @@ class Identities(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="v2.identities.deleteIdentity",
+                operation_id="identities.deleteIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1228,7 +1228,7 @@ class Identities(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="v2.identities.updateIdentity",
+                operation_id="identities.updateIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1374,7 +1374,7 @@ class Identities(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="v2.identities.updateIdentity",
+                operation_id="identities.updateIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),

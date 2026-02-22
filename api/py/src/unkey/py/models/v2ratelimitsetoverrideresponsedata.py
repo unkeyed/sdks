@@ -30,3 +30,9 @@ class V2RatelimitSetOverrideResponseData(BaseModel):
 
     Store this ID if you need to manage the override in the future.
     """
+
+
+try:
+    V2RatelimitSetOverrideResponseData.model_rebuild()
+except NameError:
+    pass

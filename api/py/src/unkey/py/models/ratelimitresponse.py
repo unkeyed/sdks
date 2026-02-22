@@ -34,3 +34,9 @@ class RatelimitResponse(BaseModel):
 
     auto_apply: Annotated[bool, pydantic.Field(alias="autoApply")]
     r"""Whether this rate limit was automatically applied when verifying the key."""
+
+
+try:
+    RatelimitResponse.model_rebuild()
+except NameError:
+    pass

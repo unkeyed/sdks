@@ -18,3 +18,9 @@ class Meta(BaseModel):
 
     request_id: Annotated[str, pydantic.Field(alias="requestId")]
     r"""A unique id for this request. Always include this ID when contacting support about a specific API request. This identifier allows Unkey's support team to trace the exact request through logs and diagnostic systems to provide faster assistance."""
+
+
+try:
+    Meta.model_rebuild()
+except NameError:
+    pass

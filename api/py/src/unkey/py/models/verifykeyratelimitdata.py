@@ -55,3 +55,9 @@ class VerifyKeyRatelimitData(BaseModel):
     When true, we will automatically apply this limit during verification without it being explicitly listed.
 
     """
+
+
+try:
+    VerifyKeyRatelimitData.model_rebuild()
+except NameError:
+    pass

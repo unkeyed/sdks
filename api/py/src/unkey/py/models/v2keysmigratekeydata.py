@@ -4,9 +4,10 @@ from __future__ import annotations
 from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
 from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-from unkey.py.types import BaseModel
+from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class V2KeysMigrateKeyDataTypedDict(TypedDict):
@@ -146,3 +147,37 @@ class V2KeysMigrateKeyData(BaseModel):
     Essential for preventing API abuse while maintaining good performance for legitimate usage.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "externalId",
+                "meta",
+                "roles",
+                "permissions",
+                "expires",
+                "enabled",
+                "credits",
+                "ratelimits",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    V2KeysMigrateKeyData.model_rebuild()
+except NameError:
+    pass

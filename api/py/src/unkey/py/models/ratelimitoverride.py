@@ -67,3 +67,9 @@ class RatelimitOverride(BaseModel):
     - Zero limit to completely block specific patterns
     - Custom tier-based limits for different customer segments
     """
+
+
+try:
+    RatelimitOverride.model_rebuild()
+except NameError:
+    pass
