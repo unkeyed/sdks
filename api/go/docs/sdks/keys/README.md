@@ -1063,7 +1063,7 @@ If you specify an `externalId` that doesn't exist, a new identity will be automa
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" -->
+<!-- UsageSnippet language="go" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" example="success" -->
 ```go
 package main
 
@@ -1191,7 +1191,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" -->
+<!-- UsageSnippet language="go" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" example="permissionsQuerySyntaxError" -->
 ```go
 package main
 
