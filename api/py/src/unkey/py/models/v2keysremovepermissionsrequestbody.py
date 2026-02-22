@@ -38,3 +38,9 @@ class V2KeysRemovePermissionsRequestBody(BaseModel):
     After removal, verification checks for these permissions will fail unless granted through roles.
 
     """
+
+
+try:
+    V2KeysRemovePermissionsRequestBody.model_rebuild()
+except NameError:
+    pass

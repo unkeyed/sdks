@@ -19,3 +19,9 @@ class V2KeysMigrateKeysMigration(BaseModel):
 
     key_id: Annotated[str, pydantic.Field(alias="keyId")]
     r"""The unique identifier for this key in Unkey's system. This is NOT the actual API key, but a reference ID used for management operations like updating or deleting the key. Store this ID in your database to reference the key later. This ID is not sensitive and can be logged or displayed in dashboards."""
+
+
+try:
+    V2KeysMigrateKeysMigration.model_rebuild()
+except NameError:
+    pass

@@ -1,4 +1,3 @@
-## Typescript SDK Changes:
-* `unkey.keys.verifyKey()`:  `response.data.code.enum(insufficientCredits)` **Removed** (Breaking ⚠️)
-* `unkey.internal.createDeployment()`: **Added**
-* `unkey.internal.getDeployment()`: **Added**
+## Python SDK Changes:
+* `unkey.internal.create_deployment()`: **Added**
+* `unkey.internal.get_deployment()`: **Added**

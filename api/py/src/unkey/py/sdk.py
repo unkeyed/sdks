@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from unkey.py.analytics import Analytics
     from unkey.py.apis import Apis
     from unkey.py.identities import Identities
+    from unkey.py.internal import Internal
     from unkey.py.keys import Keys
     from unkey.py.permissions import Permissions
     from unkey.py.ratelimit import Ratelimit
@@ -106,6 +107,7 @@ class Unkey(BaseSDK):
     r"""Analytics query operations"""
     apis: "Apis"
     r"""API management operations"""
+    internal: "Internal"
     identities: "Identities"
     r"""Identity management operations"""
     keys: "Keys"
@@ -117,6 +119,7 @@ class Unkey(BaseSDK):
     _sub_sdk_map = {
         "analytics": ("unkey.py.analytics", "Analytics"),
         "apis": ("unkey.py.apis", "Apis"),
+        "internal": ("unkey.py.internal", "Internal"),
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),
         "permissions": ("unkey.py.permissions", "Permissions"),

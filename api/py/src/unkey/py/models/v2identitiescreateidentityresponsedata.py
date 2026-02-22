@@ -14,3 +14,9 @@ class V2IdentitiesCreateIdentityResponseDataTypedDict(TypedDict):
 class V2IdentitiesCreateIdentityResponseData(BaseModel):
     identity_id: Annotated[str, pydantic.Field(alias="identityId")]
     r"""The unique identifier of the created identity."""
+
+
+try:
+    V2IdentitiesCreateIdentityResponseData.model_rebuild()
+except NameError:
+    pass

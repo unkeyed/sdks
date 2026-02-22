@@ -69,3 +69,9 @@ class V2KeysRerollKeyResponseData(BaseModel):
     This is NOT the keyId - it's the actual secret token used for authentication.
 
     """
+
+
+try:
+    V2KeysRerollKeyResponseData.model_rebuild()
+except NameError:
+    pass

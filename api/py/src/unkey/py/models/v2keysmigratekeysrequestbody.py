@@ -24,3 +24,9 @@ class V2KeysMigrateKeysRequestBody(BaseModel):
     r"""The ID of the API that the keys should be inserted into"""
 
     keys: List[V2KeysMigrateKeyData]
+
+
+try:
+    V2KeysMigrateKeysRequestBody.model_rebuild()
+except NameError:
+    pass
