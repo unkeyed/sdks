@@ -44,3 +44,9 @@ class V2KeysSetRolesRequestBody(BaseModel):
     Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
 
     """
+
+
+try:
+    V2KeysSetRolesRequestBody.model_rebuild()
+except NameError:
+    pass

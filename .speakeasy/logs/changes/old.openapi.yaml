@@ -386,73 +386,6 @@ components:
                     x-go-type-skip-optional-pointer: true
                     x-go-type-skip-optional-pointer-with-omitzero: true
             additionalProperties: false
-        V2DeployCreateDeploymentRequestBody:
-            type: object
-            required:
-                - projectId
-                - branch
-                - environmentSlug
-                - dockerImage
-            properties:
-                projectId:
-                    type: string
-                    minLength: 1
-                    description: Unkey project ID
-                    example: "proj_123abc"
-                    pattern: "^proj_[a-zA-Z0-9]+$"
-                keyspaceId:
-                    type: string
-                    description: Optional keyspace ID for authentication context
-                    example: "key_abc123"
-                branch:
-                    type: string
-                    minLength: 1
-                    description: Git branch name
-                    example: "main"
-                environmentSlug:
-                    type: string
-                    minLength: 1
-                    description: Environment slug (e.g., "production", "staging")
-                    example: "production"
-                dockerImage:
-                    type: string
-                    minLength: 1
-                    description: Docker image reference to deploy
-                    example: "ghcr.io/user/app:v1.0.0"
-                gitCommit:
-                    $ref: "#/components/schemas/V2DeployGitCommit"
-            description: Create a deployment from a pre-built Docker image
-        V2DeployCreateDeploymentResponseBody:
-            type: object
-            required:
-                - meta
-                - data
-            properties:
-                meta:
-                    $ref: "#/components/schemas/Meta"
-                data:
-                    $ref: "#/components/schemas/V2DeployCreateDeploymentResponseData"
-        V2DeployGetDeploymentRequestBody:
-            type: object
-            required:
-                - deploymentId
-            properties:
-                deploymentId:
-                    type: string
-                    minLength: 1
-                    description: Unique deployment identifier to retrieve
-                    example: "d_abc123xyz"
-                    pattern: "^d_[a-zA-Z0-9]+$"
-        V2DeployGetDeploymentResponseBody:
-            type: object
-            required:
-                - meta
-                - data
-            properties:
-                meta:
-                    $ref: "#/components/schemas/Meta"
-                data:
-                    $ref: "#/components/schemas/V2DeployGetDeploymentResponseData"
         V2IdentitiesCreateIdentityRequestBody:
             type: object
             required:
@@ -842,7 +775,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4.1024448e+12
+                    maximum: 4102444800000
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1130,7 +1063,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4.1024448e+12
+                    maximum: 4102444800000
                     description: |
                         Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
 
@@ -1261,7 +1194,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: |
                         The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
@@ -1360,7 +1293,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 4.1024448e+12
+                    maximum: 4102444800000
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1581,7 +1514,7 @@ components:
                     example: "users-read"
                 description:
                     type: string
-                    maxLength: 512
+                    maxLength: 128
                     description: |
                         Provides detailed documentation of what this permission grants access to.
                         Include information about affected resources, allowed actions, and any important limitations.
@@ -1623,7 +1556,7 @@ components:
                     example: "support.readonly"
                 description:
                     type: string
-                    maxLength: 512
+                    maxLength: 2048
                     description: |
                         Provides comprehensive documentation of what this role encompasses and what access it grants.
                         Include information about the intended use case, what permissions should be assigned, and any important considerations.
@@ -1969,7 +1902,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2.592e+09
+                    maximum: 2592000000
                     description: |
                         Sets the rate limit window duration in milliseconds after which the counter resets.
                         Shorter durations enable faster recovery but may be less effective against sustained abuse.
@@ -1991,7 +1924,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1e+06
+                    maximum: 1000000
                     description: |
                         Sets the maximum operations allowed within the duration window before requests are rejected.
                         When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
@@ -2380,14 +2313,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Unix timestamp in milliseconds when key was created.
                     example: 1701425400000
                 updatedAt:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Unix timestamp in milliseconds when key was last updated.
                     example: 1701425400000
                     x-go-type-skip-optional-pointer: true
@@ -2396,7 +2329,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Unix timestamp in milliseconds when key expires (if set).
                     example: 1735689600000
                     x-go-type-skip-optional-pointer: true
@@ -2456,7 +2389,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Number of credits remaining (null for unlimited).
                     example: 1000
                 refill:
@@ -2511,14 +2444,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1e+06
+                    maximum: 1000000
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2.592e+09
+                    maximum: 2592000000
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 autoApply:
@@ -2548,7 +2481,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -2566,98 +2499,6 @@ components:
                 - interval
                 - amount
             additionalProperties: false
-        V2DeployGitCommit:
-            type: object
-            description: Optional git commit information
-            properties:
-                commitSha:
-                    type: string
-                    description: Git commit SHA
-                    example: "a1b2c3d4e5f6"
-                commitMessage:
-                    type: string
-                    description: Git commit message
-                    example: "feat: add new feature"
-                authorHandle:
-                    type: string
-                    description: Git author handle/username
-                    example: "johndoe"
-                authorAvatarUrl:
-                    type: string
-                    description: Git author avatar URL
-                    example: "https://avatars.githubusercontent.com/u/123456"
-                timestamp:
-                    type: integer
-                    format: int64
-                    description: Commit timestamp in milliseconds
-                    example: 1704067200000
-        V2DeployCreateDeploymentResponseData:
-            type: object
-            required:
-                - deploymentId
-            properties:
-                deploymentId:
-                    type: string
-                    description: Unique deployment identifier
-                    example: "d_abc123xyz"
-        V2DeployGetDeploymentResponseData:
-            type: object
-            required:
-                - id
-                - status
-            properties:
-                id:
-                    type: string
-                    description: Unique deployment identifier
-                    example: "d_abc123xyz"
-                status:
-                    type: string
-                    description: Current deployment status
-                    enum:
-                        - UNSPECIFIED
-                        - PENDING
-                        - BUILDING
-                        - DEPLOYING
-                        - NETWORK
-                        - READY
-                        - FAILED
-                    example: "READY"
-                    x-speakeasy-unknown-values: allow
-                errorMessage:
-                    type: string
-                    description: Error message if deployment failed
-                    example: "Failed to pull image: authentication required"
-                hostnames:
-                    type: array
-                    items:
-                        type: string
-                    description: Hostnames associated with this deployment
-                    example: ["app.example.com", "api.example.com"]
-                steps:
-                    type: array
-                    items:
-                        $ref: "#/components/schemas/V2DeployDeploymentStep"
-                    description: Deployment steps with status and messages
-        V2DeployDeploymentStep:
-            type: object
-            properties:
-                status:
-                    type: string
-                    description: Step status
-                    example: "completed"
-                message:
-                    type: string
-                    description: Step message
-                    example: "Image pulled successfully"
-                errorMessage:
-                    type: string
-                    description: Error message if step failed
-                    example: "Connection timeout"
-                createdAt:
-                    type: integer
-                    format: int64
-                    description: Unix timestamp in milliseconds
-                    example: 1704067200000
         RatelimitRequest:
             type: object
             required:
@@ -2773,7 +2614,7 @@ components:
                     example: users-read
                 description:
                     type: string
-                    maxLength: 512
+                    maxLength: 2048
                     description: |
                         Optional detailed explanation of what this permission grants access to.
                         Helps team members understand the scope and implications of granting this permission.
@@ -2941,7 +2782,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4.1024448e+12
+                    maximum: 4102444800000
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -3131,7 +2972,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Number of credits remaining (null for unlimited). This also clears the refilling schedule.
                     example: 1000
                 refill:
@@ -3155,7 +2996,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9.223372036854776e+18
+                    maximum: 9223372036854776000
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -3180,7 +3021,7 @@ components:
                     type: integer
                     format: int32
                     minimum: 0
-                    maximum: 1e+09
+                    maximum: 1000000000
                     description: |
                         Sets how many credits to deduct for this verification request.
                         Use 0 for read-only operations or free tier access, higher values for premium features.
@@ -3359,28 +3200,28 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1e+06
+                    maximum: 1000000
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2.592e+09
+                    maximum: 2592000000
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 reset:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2.592e+09
+                    maximum: 2592000000
                     description: Rate limit reset duration in milliseconds.
                     example: 3600000
                 remaining:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 1e+06
+                    maximum: 1000000
                     description: Rate limit remaining requests within the time window.
                     example: 999
                 autoApply:
@@ -3951,7 +3792,7 @@ paths:
 
                 Your root key must have one of the following permissions:
                 - `api.*.create_api` (to create APIs in any workspace)
-            operationId: apis.createApi
+            operationId: createApi
             requestBody:
                 content:
                     application/json:
@@ -4012,7 +3853,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.delete_api` (to delete any API)
                 - `api.<api_id>.delete_api` (to delete a specific API)
-            operationId: apis.deleteApi
+            operationId: deleteApi
             requestBody:
                 content:
                     application/json:
@@ -4080,7 +3921,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.read_api` (to read any API)
                 - `api.<api_id>.read_api` (to read a specific API)
-            operationId: apis.getApi
+            operationId: getApi
             requestBody:
                 content:
                     application/json:
@@ -4150,7 +3991,7 @@ paths:
 
                 Additional permission required for decrypt functionality:
                 - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-            operationId: apis.listKeys
+            operationId: listKeys
             requestBody:
                 content:
                     application/json:
@@ -4201,126 +4042,6 @@ paths:
             tags:
                 - apis
             x-speakeasy-name-override: listKeys
-    /v2/deploy.createDeployment:
-        post:
-            description: |
-                **INTERNAL** - This endpoint is internal and may change without notice.
-                Not recommended for production use.
-
-                Creates a new deployment for a project using either a pre-built Docker image or build context.
-
-                **Authentication**: Requires a valid root key with appropriate permissions.
-            operationId: deploy.createDeployment
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/V2DeployCreateDeploymentRequestBody'
-                required: true
-            responses:
-                "201":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/V2DeployCreateDeploymentResponseBody'
-                    description: Deployment created successfully
-                "400":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/BadRequestErrorResponse'
-                    description: Bad request
-                "401":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
-                    description: Unauthorized
-                "403":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ForbiddenErrorResponse'
-                    description: Forbidden
-                "404":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/NotFoundErrorResponse'
-                    description: Not found
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InternalServerErrorResponse'
-                    description: Internal server error
-            security:
-                - rootKey: []
-            summary: Create deployment
-            tags:
-                - deploy
-            x-speakeasy-group: internal
-            x-speakeasy-name-override: createDeployment
-    /v2/deploy.getDeployment:
-        post:
-            description: |
-                **INTERNAL** - This endpoint is internal and may change without notice.
-                Not recommended for production use.
-
-                Retrieves deployment information including status, error messages, and steps.
-
-                **Authentication**: Requires a valid root key with appropriate permissions.
-            operationId: deploy.getDeployment
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/V2DeployGetDeploymentRequestBody'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/V2DeployGetDeploymentResponseBody'
-                    description: Deployment retrieved successfully
-                "400":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/BadRequestErrorResponse'
-                    description: Bad request
-                "401":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
-                    description: Unauthorized
-                "403":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ForbiddenErrorResponse'
-                    description: Forbidden
-                "404":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/NotFoundErrorResponse'
-                    description: Not found
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InternalServerErrorResponse'
-                    description: Internal server error
-            security:
-                - rootKey: []
-            summary: Get deployment
-            tags:
-                - deploy
-            x-speakeasy-group: internal
-            x-speakeasy-name-override: getDeployment
     /v2/identities.createIdentity:
         post:
             description: |
@@ -4432,7 +4153,7 @@ paths:
     /v2/identities.deleteIdentity:
         post:
             description: "Permanently delete an identity. This operation cannot be undone.\n\nUse this for data cleanup, compliance requirements, or when removing entities from your system.\n\n> **Important**  \n> Requires `identity.*.delete_identity` permission  \n> Associated API keys remain functional but lose shared resources  \n> External ID becomes available for reuse immediately\n"
-            operationId: identities.deleteIdentity
+            operationId: v2.identities.deleteIdentity
             requestBody:
                 content:
                     application/json:
@@ -4726,7 +4447,7 @@ paths:
                 > **Important**
                 > Requires `identity.*.update_identity` permission
                 > Rate limit changes propagate within 30 seconds
-            operationId: identities.updateIdentity
+            operationId: v2.identities.updateIdentity
             requestBody:
                 content:
                     application/json:
@@ -4825,7 +4546,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
-            operationId: keys.addPermissions
+            operationId: addPermissions
             requestBody:
                 content:
                     application/json:
@@ -4893,7 +4614,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
-            operationId: keys.addRoles
+            operationId: addRoles
             requestBody:
                 content:
                     application/json:
@@ -4962,7 +4683,7 @@ paths:
                 Your root key needs one of:
                 - `api.*.create_key` (create keys in any API)
                 - `api.<api_id>.create_key` (create keys in specific API)
-            operationId: keys.createKey
+            operationId: createKey
             requestBody:
                 content:
                     application/json:
@@ -5026,7 +4747,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.delete_key` (to delete keys in any API)
                 - `api.<api_id>.delete_key` (to delete keys in a specific API)
-            operationId: keys.deleteKey
+            operationId: deleteKey
             requestBody:
                 content:
                     application/json:
@@ -5094,7 +4815,7 @@ paths:
 
                 Additional permission required for decrypt functionality:
                 - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-            operationId: keys.getKey
+            operationId: getKey
             requestBody:
                 content:
                     application/json:
@@ -5154,7 +4875,7 @@ paths:
                 Your root key must have one of the following permissions for basic key information:
                 - `api.*.create_key` (to migrate keys to any API)
                 - `api.<api_id>.create_key` (to migrate keys to a specific API)
-            operationId: keys.migrateKeys
+            operationId: migrateKeys
             requestBody:
                 content:
                     application/json:
@@ -5222,7 +4943,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-            operationId: keys.removePermissions
+            operationId: removePermissions
             requestBody:
                 content:
                     application/json:
@@ -5290,7 +5011,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-            operationId: keys.removeRoles
+            operationId: removeRoles
             requestBody:
                 content:
                     application/json:
@@ -5375,7 +5096,7 @@ paths:
                  Your root key must have:
                  - `api.*.create_key` or `api.<api_id>.create_key`
                  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-            operationId: keys.rerollKey
+            operationId: rerollKey
             requestBody:
                 content:
                     application/json:
@@ -5443,7 +5164,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-            operationId: keys.setPermissions
+            operationId: setPermissions
             requestBody:
                 content:
                     application/json:
@@ -5511,7 +5232,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-            operationId: keys.setRoles
+            operationId: setRoles
             requestBody:
                 content:
                     application/json:
@@ -5579,7 +5300,7 @@ paths:
                 **Side Effects**
 
                 Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
-            operationId: keys.updateCredits
+            operationId: updateCredits
             requestBody:
                 content:
                     application/json:
@@ -5648,7 +5369,7 @@ paths:
                 **Side Effects**
 
                 If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
-            operationId: keys.updateKey
+            operationId: updateKey
             requestBody:
                 content:
                     application/json:
@@ -5727,7 +5448,7 @@ paths:
                 - `api.<api_id>.verify_key` (verify keys in specific API)
 
                 **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
-            operationId: keys.verifyKey
+            operationId: verifyKey
             requestBody:
                 content:
                     application/json:
@@ -5812,7 +5533,7 @@ paths:
                 - `api.<api_id>.read_key` (to read keys from a specific API)
 
                 If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
-            operationId: keys.whoami
+            operationId: whoami
             requestBody:
                 content:
                     application/json:
@@ -5948,7 +5669,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.create_permission`
-            operationId: permissions.createPermission
+            operationId: createPermission
             requestBody:
                 content:
                     application/json:
@@ -6009,7 +5730,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.create_role`
-            operationId: permissions.createRole
+            operationId: createRole
             requestBody:
                 content:
                     application/json:
@@ -6080,7 +5801,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.delete_permission`
-            operationId: permissions.deletePermission
+            operationId: deletePermission
             requestBody:
                 content:
                     application/json:
@@ -6146,7 +5867,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.delete_role`
-            operationId: permissions.deleteRole
+            operationId: deleteRole
             requestBody:
                 content:
                     application/json:
@@ -6199,7 +5920,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.read_permission`
-            operationId: permissions.getPermission
+            operationId: getPermission
             requestBody:
                 content:
                     application/json:
@@ -6258,7 +5979,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.read_role`
-            operationId: permissions.getRole
+            operationId: getRole
             requestBody:
                 content:
                     application/json:
@@ -6311,7 +6032,7 @@ paths:
     /v2/permissions.listPermissions:
         post:
             description: "Retrieve all permissions in your workspace. \nResults are paginated and sorted by their id.\n\n**Required Permissions**\n\nYour root key must have the following permission:\n- `rbac.*.read_permission`\n"
-            operationId: permissions.listPermissions
+            operationId: listPermissions
             requestBody:
                 content:
                     application/json:
@@ -6358,7 +6079,7 @@ paths:
     /v2/permissions.listRoles:
         post:
             description: "Retrieve all roles in your workspace including their assigned permissions. \nResults are paginated and sorted by their id.\n\n**Required Permissions**\n\nYour root key must have the following permission:\n- `rbac.*.read_role`\n"
-            operationId: permissions.listRoles
+            operationId: listRoles
             requestBody:
                 content:
                     application/json:
@@ -7077,8 +6798,6 @@ tags:
       name: analytics
     - description: API management operations
       name: apis
-    - description: Deployment operations
-      name: deploy
     - description: Identity management operations
       name: identities
     - description: API key management operations

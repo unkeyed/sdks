@@ -24,3 +24,9 @@ class V2PermissionsCreatePermissionResponseData(BaseModel):
     Store this ID if you need to manage or reference this permission in future operations.
 
     """
+
+
+try:
+    V2PermissionsCreatePermissionResponseData.model_rebuild()
+except NameError:
+    pass

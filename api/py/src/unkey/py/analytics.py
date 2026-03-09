@@ -138,7 +138,7 @@ class Analytics(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
+        if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
             )
@@ -289,7 +289,7 @@ class Analytics(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
+        if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
             )

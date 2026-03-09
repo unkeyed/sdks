@@ -52,7 +52,7 @@ with Unkey(
 | errors.ForbiddenErrorResponse           | 403                                     | application/json                        |
 | errors.NotFoundErrorResponse            | 404                                     | application/json                        |
 | errors.UnprocessableEntityErrorResponse | 422                                     | application/json                        |
-| errors.TooManyRequestsErrorResponse     | 429                                     | application/json                        |
+| errors.TooManyRequestsErrorResponse     | 429                                     | application/problem+json                |
 | errors.InternalServerErrorResponse      | 500                                     | application/json                        |
 | errors.ServiceUnavailableErrorResponse  | 503                                     | application/json                        |
 | errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |

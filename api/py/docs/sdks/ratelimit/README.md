@@ -24,9 +24,43 @@ Use this to remove temporary overrides, reset identifiers to standard limits, or
 **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="overrideNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="specific" -->
 ```python
 from unkey.py import Unkey
 
@@ -36,6 +70,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.delete_override(namespace="api.requests", identifier="premium_user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteOverride" method="post" path="/v2/ratelimit.deleteOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_override(namespace="api.requests", identifier="premium_*")
 
     # Handle response
     print(res)
@@ -56,14 +107,15 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## get_override
 
@@ -76,9 +128,43 @@ Use this to inspect override configurations, audit rate limiting policies, or de
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: overrideNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="overrideNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="<value>", identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: specific
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="specific" -->
 ```python
 from unkey.py import Unkey
 
@@ -88,6 +174,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.get_override(namespace="api.requests", identifier="premium_user_123")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.getOverride" method="post" path="/v2/ratelimit.getOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.get_override(namespace="api.requests", identifier="premium_*")
 
     # Handle response
     print(res)
@@ -108,14 +211,15 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## limit
 
@@ -123,7 +227,7 @@ Check and enforce rate limits for any identifier (user ID, IP address, API clien
 
 Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
 
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
 **Required Permissions**
 
@@ -132,9 +236,26 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
-### Example Usage
+### Example Usage: allowed
 
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -144,6 +265,74 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.limit(namespace="api.requests", duration=60000, identifier="user_abc123", limit=100, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="auth.login", duration=60000, identifier="203.0.113.42", limit=5, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="api.heavy_operations", duration=3600000, identifier="user_def456", limit=50, cost=5)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
 
     # Handle response
     print(res)
@@ -167,15 +356,16 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.GoneErrorResponse           | 410                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## list_overrides
 
@@ -188,9 +378,9 @@ Use this to audit rate limiting policies, build admin dashboards, or manage over
 **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
-### Example Usage
+### Example Usage: basic
 
-<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="basic" -->
 ```python
 from unkey.py import Unkey
 
@@ -200,6 +390,40 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.list_overrides(namespace="api.requests", limit=20)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_overrides(namespace="<value>", limit=10)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: pagination
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listOverrides" method="post" path="/v2/ratelimit.listOverrides" example="pagination" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_overrides(namespace="api.requests", cursor="cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9", limit=10)
 
     # Handle response
     print(res)
@@ -221,14 +445,15 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## multi_limit
 
@@ -236,7 +461,7 @@ Check and enforce multiple rate limits in a single request for any identifiers (
 
 Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
 
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
 **Required Permissions**
 
@@ -245,9 +470,26 @@ Your root key must have one of the following permissions:
 - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
-### Example Usage
+### Example Usage: allAllowed
 
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
 ```python
 from unkey.py import Unkey
 
@@ -277,6 +519,111 @@ with Unkey(
     print(res)
 
 ```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.requests",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_abc123",
+            "limit": 100,
+        },
+        {
+            "namespace": "auth.login",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_abc123",
+            "limit": 5,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "sms.sign_up",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_12345",
+            "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.light_operations",
+            "duration": 60000,
+            "identifier": "user_xyz789",
+            "limit": 100,
+        },
+        {
+            "namespace": "api.heavy_operations",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_xyz789",
+            "limit": 50,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
 
 ### Parameters
 
@@ -291,15 +638,16 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.GoneErrorResponse           | 410                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## set_override
 
@@ -312,9 +660,43 @@ Use this to create premium tiers with higher limits, apply stricter limits to sp
 **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
-### Example Usage
+### Example Usage: missingPermission
 
-<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" -->
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="<value>", duration=956831, identifier="<value>", limit=816580)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="namespaceNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="<value>", duration=956831, identifier="<value>", limit=816580)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: premium
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="premium" -->
 ```python
 from unkey.py import Unkey
 
@@ -324,6 +706,23 @@ with Unkey(
 ) as unkey:
 
     res = unkey.ratelimit.set_override(namespace="api.requests", duration=60000, identifier="premium_user_123", limit=1000)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: wildcard
+
+<!-- UsageSnippet language="python" operationID="ratelimit.setOverride" method="post" path="/v2/ratelimit.setOverride" example="wildcard" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.set_override(namespace="api.requests", duration=60000, identifier="premium_*", limit=500)
 
     # Handle response
     print(res)
@@ -346,11 +745,12 @@ with Unkey(
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

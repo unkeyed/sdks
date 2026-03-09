@@ -65,3 +65,9 @@ class V2KeysRerollKeyRequestBody(BaseModel):
     - 30 days grace period: 2592000000
 
     """
+
+
+try:
+    V2KeysRerollKeyRequestBody.model_rebuild()
+except NameError:
+    pass
