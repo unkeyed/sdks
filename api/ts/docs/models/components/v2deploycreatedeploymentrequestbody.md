@@ -8,7 +8,8 @@ Create a deployment from a pre-built Docker image
 import { V2DeployCreateDeploymentRequestBody } from "@unkey/api/models/components";
 
 let value: V2DeployCreateDeploymentRequestBody = {
-  projectId: "proj_123abc",
+  project: "my-project",
+  app: "default",
   keyspaceId: "key_abc123",
   branch: "main",
   environmentSlug: "production",
@@ -27,7 +28,8 @@ let value: V2DeployCreateDeploymentRequestBody = {
 
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `projectId`                                                                  | *string*                                                                     | :heavy_check_mark:                                                           | Unkey project ID                                                             | proj_123abc                                                                  |
+| `project`                                                                    | *string*                                                                     | :heavy_check_mark:                                                           | Project slug                                                                 | my-project                                                                   |
+| `app`                                                                        | *string*                                                                     | :heavy_check_mark:                                                           | App slug within the project                                                  | default                                                                      |
 | `keyspaceId`                                                                 | *string*                                                                     | :heavy_minus_sign:                                                           | Optional keyspace ID for authentication context                              | key_abc123                                                                   |
 | `branch`                                                                     | *string*                                                                     | :heavy_check_mark:                                                           | Git branch name                                                              | main                                                                         |
 | `environmentSlug`                                                            | *string*                                                                     | :heavy_check_mark:                                                           | Environment slug (e.g., "production", "staging")                             | production                                                                   |

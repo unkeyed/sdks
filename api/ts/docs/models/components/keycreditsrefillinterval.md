@@ -8,11 +8,11 @@ How often credits are automatically refilled.
 import { KeyCreditsRefillInterval } from "@unkey/api/models/components";
 
 let value: KeyCreditsRefillInterval = "daily";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "daily" | "monthly" | Unrecognized<string>

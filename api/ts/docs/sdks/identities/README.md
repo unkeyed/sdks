@@ -398,14 +398,15 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.ConflictErrorResponse       | 409                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## deleteIdentity
 
@@ -413,9 +414,9 @@ Permanently delete an identity. This operation cannot be undone.
 
 Use this for data cleanup, compliance requirements, or when removing entities from your system.
 
-> **Important**  
-> Requires `identity.*.delete_identity` permission  
-> Associated API keys remain functional but lose shared resources  
+> **Important**
+> Requires `identity.*.delete_identity` permission
+> Associated API keys remain functional but lose shared resources
 > External ID becomes available for reuse immediately
 
 
@@ -631,14 +632,15 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/problem+json           |
-| errors.UnauthorizedErrorResponse   | 401                                | application/problem+json           |
-| errors.ForbiddenErrorResponse      | 403                                | application/problem+json           |
-| errors.NotFoundErrorResponse       | 404                                | application/problem+json           |
-| errors.InternalServerErrorResponse | 500                                | application/problem+json           |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/problem+json            |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/problem+json            |
+| errors.ForbiddenErrorResponse       | 403                                 | application/problem+json            |
+| errors.NotFoundErrorResponse        | 404                                 | application/problem+json            |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/problem+json            |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## getIdentity
 
@@ -646,7 +648,7 @@ Retrieve an identity by external ID. Returns metadata, rate limits, and other as
 
 Use this to check if an identity exists, view configurations, or build management dashboards.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 
@@ -862,14 +864,15 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## listIdentities
 
@@ -877,7 +880,7 @@ Get a paginated list of all identities in your workspace. Returns metadata and r
 
 Perfect for building management dashboards, auditing configurations, or browsing your identities.
 
-> **Important**  
+> **Important**
 > Requires `identity.*.read_identity` permission
 
 
@@ -1115,13 +1118,14 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## updateIdentity
 
@@ -1359,11 +1363,12 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

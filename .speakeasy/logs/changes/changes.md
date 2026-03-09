@@ -1,51 +1,51 @@
-## Go SDK Changes:
-* `Unkey.Internal.CreateDeployment()`: 
-  * `request.Request` **Changed** (Breaking ⚠️)
-    - `App` **Added** (Breaking ⚠️)
-    - `ProjectId` **Removed** (Breaking ⚠️)
-    - `Project` **Added** (Breaking ⚠️)
+## Typescript SDK Changes:
+* `unkey.internal.createDeployment()`: 
+  * `request` **Changed** (Breaking ⚠️)
+    - `app` **Added** (Breaking ⚠️)
+    - `projectId` **Removed** (Breaking ⚠️)
+    - `project` **Added** (Breaking ⚠️)
   *  `error.status[429]` **Added**
-* `Unkey.Analytics.GetVerifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)
-* `Unkey.Keys.RerollKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.RemovePermissions()`:  `error.status[429]` **Added**
-* `Unkey.Apis.ListKeys()`:  `error.status[429]` **Added**
-* `Unkey.Apis.DeleteApi()`:  `error.status[429]` **Added**
-* `Unkey.Internal.GetDeployment()`: 
-  * `response.Data.Status` **Changed**
-    - `Enum(finalizing)` **Added**
-    - `Enum(starting)` **Added**
+* `unkey.analytics.getVerifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)
+* `unkey.keys.rerollKey()`:  `error.status[429]` **Added**
+* `unkey.keys.removePermissions()`:  `error.status[429]` **Added**
+* `unkey.apis.listKeys()`:  `error.status[429]` **Added**
+* `unkey.apis.deleteApi()`:  `error.status[429]` **Added**
+* `unkey.internal.getDeployment()`: 
+  * `response.data.status` **Changed**
+    - `enum(finalizing)` **Added**
+    - `enum(starting)` **Added**
   *  `error.status[429]` **Added**
-* `Unkey.Identities.CreateIdentity()`:  `error.status[429]` **Added**
-* `Unkey.Identities.DeleteIdentity()`:  `error.status[429]` **Added**
-* `Unkey.Identities.GetIdentity()`:  `error.status[429]` **Added**
-* `Unkey.Identities.ListIdentities()`:  `error.status[429]` **Added**
-* `Unkey.Identities.UpdateIdentity()`:  `error.status[429]` **Added**
-* `Unkey.Keys.AddPermissions()`:  `error.status[429]` **Added**
-* `Unkey.Keys.AddRoles()`:  `error.status[429]` **Added**
-* `Unkey.Keys.CreateKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.DeleteKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.GetKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.MigrateKeys()`:  `error.status[429]` **Added**
-* `Unkey.Keys.SetPermissions()`:  `error.status[429]` **Added**
-* `Unkey.Keys.RemoveRoles()`:  `error.status[429]` **Added**
-* `Unkey.Apis.GetApi()`:  `error.status[429]` **Added**
-* `Unkey.Apis.CreateApi()`:  `error.status[429]` **Added**
-* `Unkey.Keys.VerifyKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.UpdateCredits()`:  `error.status[429]` **Added**
-* `Unkey.Keys.UpdateKey()`:  `error.status[429]` **Added**
-* `Unkey.Keys.SetRoles()`:  `error.status[429]` **Added**
-* `Unkey.Keys.Whoami()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.CreatePermission()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.CreateRole()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.DeletePermission()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.DeleteRole()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.GetPermission()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.GetRole()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.ListPermissions()`:  `error.status[429]` **Added**
-* `Unkey.Permissions.ListRoles()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.DeleteOverride()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.GetOverride()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.Limit()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.ListOverrides()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.MultiLimit()`:  `error.status[429]` **Added**
-* `Unkey.Ratelimit.SetOverride()`:  `error.status[429]` **Added**
+* `unkey.identities.createIdentity()`:  `error.status[429]` **Added**
+* `unkey.identities.deleteIdentity()`:  `error.status[429]` **Added**
+* `unkey.identities.getIdentity()`:  `error.status[429]` **Added**
+* `unkey.identities.listIdentities()`:  `error.status[429]` **Added**
+* `unkey.identities.updateIdentity()`:  `error.status[429]` **Added**
+* `unkey.keys.addPermissions()`:  `error.status[429]` **Added**
+* `unkey.keys.addRoles()`:  `error.status[429]` **Added**
+* `unkey.keys.createKey()`:  `error.status[429]` **Added**
+* `unkey.keys.deleteKey()`:  `error.status[429]` **Added**
+* `unkey.keys.getKey()`:  `error.status[429]` **Added**
+* `unkey.keys.migrateKeys()`:  `error.status[429]` **Added**
+* `unkey.keys.setPermissions()`:  `error.status[429]` **Added**
+* `unkey.keys.removeRoles()`:  `error.status[429]` **Added**
+* `unkey.apis.getApi()`:  `error.status[429]` **Added**
+* `unkey.apis.createApi()`:  `error.status[429]` **Added**
+* `unkey.keys.verifyKey()`:  `error.status[429]` **Added**
+* `unkey.keys.updateCredits()`:  `error.status[429]` **Added**
+* `unkey.keys.updateKey()`:  `error.status[429]` **Added**
+* `unkey.keys.setRoles()`:  `error.status[429]` **Added**
+* `unkey.keys.whoami()`:  `error.status[429]` **Added**
+* `unkey.permissions.createPermission()`:  `error.status[429]` **Added**
+* `unkey.permissions.createRole()`:  `error.status[429]` **Added**
+* `unkey.permissions.deletePermission()`:  `error.status[429]` **Added**
+* `unkey.permissions.deleteRole()`:  `error.status[429]` **Added**
+* `unkey.permissions.getPermission()`:  `error.status[429]` **Added**
+* `unkey.permissions.getRole()`:  `error.status[429]` **Added**
+* `unkey.permissions.listPermissions()`:  `error.status[429]` **Added**
+* `unkey.permissions.listRoles()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.deleteOverride()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.getOverride()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.limit()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.listOverrides()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.multiLimit()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.setOverride()`:  `error.status[429]` **Added**

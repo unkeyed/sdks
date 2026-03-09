@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - go</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,71 +95,71 @@
         }
     </style>
 </head>
-<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>Unkey.Internal.CreateDeployment()</code>:
+<li><code>unkey.internal.createDeployment()</code>:
 
 <ul>
-<li><code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>App</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>ProjectId</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Project</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>app</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>projectId</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>project</code> <strong>Added</strong> (Breaking ⚠️)</li>
 </ul></li>
 <li><code>error.status[429]</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Analytics.GetVerifications()</code>:  <code>error.status[429]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Keys.RerollKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.RemovePermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Apis.ListKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Apis.DeleteApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Internal.GetDeployment()</code>:
+<li><code>unkey.analytics.getVerifications()</code>:  <code>error.status[429]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.keys.rerollKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.removePermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.listKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.deleteApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.internal.getDeployment()</code>:
 
 <ul>
-<li><code>response.Data.Status</code> <strong>Changed</strong>
+<li><code>response.data.status</code> <strong>Changed</strong>
 
 <ul>
-<li><code>Enum(finalizing)</code> <strong>Added</strong></li>
-<li><code>Enum(starting)</code> <strong>Added</strong></li>
+<li><code>enum(finalizing)</code> <strong>Added</strong></li>
+<li><code>enum(starting)</code> <strong>Added</strong></li>
 </ul></li>
 <li><code>error.status[429]</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Identities.CreateIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Identities.DeleteIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Identities.GetIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Identities.ListIdentities()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Identities.UpdateIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.AddPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.AddRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.CreateKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.DeleteKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.GetKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.MigrateKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.SetPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.RemoveRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Apis.GetApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Apis.CreateApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.VerifyKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.UpdateCredits()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.UpdateKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.SetRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Keys.Whoami()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.CreatePermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.CreateRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.DeletePermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.DeleteRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.GetPermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.GetRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.ListPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.ListRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.DeleteOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.GetOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.Limit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.ListOverrides()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.MultiLimit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>Unkey.Ratelimit.SetOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.createIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.deleteIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.getIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.listIdentities()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.updateIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.addPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.addRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.createKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.deleteKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.getKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.migrateKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.setPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.removeRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.getApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.createApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.verifyKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.updateCredits()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.updateKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.setRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.whoami()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.createPermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.createRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.deletePermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.deleteRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.getPermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.getRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.listPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.listRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.deleteOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.getOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.limit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.listOverrides()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.multiLimit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.setOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

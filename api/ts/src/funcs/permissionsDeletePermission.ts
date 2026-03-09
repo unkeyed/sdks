@@ -49,6 +49,7 @@ export function permissionsDeletePermission(
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -79,6 +80,7 @@ async function $do(
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
+      | errors.TooManyRequestsErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -159,7 +161,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -178,6 +180,7 @@ async function $do(
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -196,6 +199,9 @@ async function $do(
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

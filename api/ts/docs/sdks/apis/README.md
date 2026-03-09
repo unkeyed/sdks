@@ -90,13 +90,14 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## deleteApi
 
@@ -187,6 +188,7 @@ run();
 | errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
 | errors.InternalServerErrorResponse     | 500                                    | application/json                       |
 | errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
@@ -268,14 +270,15 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## listKeys
 
@@ -367,11 +370,12 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

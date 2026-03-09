@@ -29,7 +29,8 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.internal.createDeployment({
-    projectId: "proj_123abc",
+    project: "my-project",
+    app: "default",
     keyspaceId: "key_abc123",
     branch: "main",
     environmentSlug: "production",
@@ -65,7 +66,8 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await internalCreateDeployment(unkey, {
-    projectId: "proj_123abc",
+    project: "my-project",
+    app: "default",
     keyspaceId: "key_abc123",
     branch: "main",
     environmentSlug: "production",
@@ -104,14 +106,15 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## getDeployment
 
@@ -188,11 +191,12 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.BadRequestErrorResponse     | 400                                | application/json                   |
-| errors.UnauthorizedErrorResponse   | 401                                | application/json                   |
-| errors.ForbiddenErrorResponse      | 403                                | application/json                   |
-| errors.NotFoundErrorResponse       | 404                                | application/json                   |
-| errors.InternalServerErrorResponse | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

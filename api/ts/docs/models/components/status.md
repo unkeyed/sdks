@@ -8,12 +8,12 @@ Current deployment status
 import { Status } from "@unkey/api/models/components";
 
 let value: Status = "READY";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"UNSPECIFIED" | "PENDING" | "BUILDING" | "DEPLOYING" | "NETWORK" | "READY" | "FAILED" | Unrecognized<string>
+"UNSPECIFIED" | "PENDING" | "STARTING" | "BUILDING" | "DEPLOYING" | "NETWORK" | "FINALIZING" | "READY" | "FAILED" | Unrecognized<string>
 ```
