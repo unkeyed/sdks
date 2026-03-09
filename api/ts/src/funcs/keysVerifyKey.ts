@@ -33,7 +33,7 @@ import { Result } from "../types/fp.js";
  *
  * Use this endpoint on every incoming request to your protected resources. It checks key validity, permissions, rate limits, and usage quotas in a single call.
  *
- * **Important**: Always returns HTTP 200. Check the `valid` field in response data to determine if the key is authorized.
+ * **Important**: Returns HTTP 200 for all verification outcomes — check the `valid` field in response data to determine if the key is authorized. A 429 may be returned if the workspace exceeds its API rate limit.
  *
  * **Common use cases:**
  * - Authenticate API requests before processing
@@ -59,6 +59,7 @@ export function keysVerifyKey(
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -89,6 +90,7 @@ async function $do(
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
+      | errors.TooManyRequestsErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -167,7 +169,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -186,6 +188,7 @@ async function $do(
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -201,6 +204,9 @@ async function $do(
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

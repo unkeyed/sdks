@@ -19,9 +19,11 @@ import {
 export const Status = {
   Unspecified: "UNSPECIFIED",
   Pending: "PENDING",
+  Starting: "STARTING",
   Building: "BUILDING",
   Deploying: "DEPLOYING",
   Network: "NETWORK",
+  Finalizing: "FINALIZING",
   Ready: "READY",
   Failed: "FAILED",
 } as const;

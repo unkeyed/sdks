@@ -9,11 +9,11 @@ Defines how to modify the key's remaining credits. Use 'set' to replace current 
 import { Operation } from "@unkey/api/models/components";
 
 let value: Operation = "set";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "set" | "increment" | "decrement" | Unrecognized<string>

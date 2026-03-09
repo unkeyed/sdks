@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  *
  * Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
  *
- * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+ * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
  *
  * **Required Permissions**
  *
@@ -54,6 +54,7 @@ export function ratelimitMultiLimit(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.GoneErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -85,6 +86,7 @@ async function $do(
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
       | errors.GoneErrorResponse
+      | errors.TooManyRequestsErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -165,7 +167,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "410", "429", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -185,6 +187,7 @@ async function $do(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.GoneErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -201,6 +204,9 @@ async function $do(
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
     M.jsonErr(410, errors.GoneErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

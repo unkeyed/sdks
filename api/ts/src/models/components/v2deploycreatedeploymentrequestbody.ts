@@ -14,9 +14,13 @@ import {
  */
 export type V2DeployCreateDeploymentRequestBody = {
   /**
-   * Unkey project ID
+   * Project slug
    */
-  projectId: string;
+  project: string;
+  /**
+   * App slug within the project
+   */
+  app: string;
   /**
    * Optional keyspace ID for authentication context
    */
@@ -41,7 +45,8 @@ export type V2DeployCreateDeploymentRequestBody = {
 
 /** @internal */
 export type V2DeployCreateDeploymentRequestBody$Outbound = {
-  projectId: string;
+  project: string;
+  app: string;
   keyspaceId?: string | undefined;
   branch: string;
   environmentSlug: string;
@@ -55,7 +60,8 @@ export const V2DeployCreateDeploymentRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   V2DeployCreateDeploymentRequestBody
 > = z.object({
-  projectId: z.string(),
+  project: z.string(),
+  app: z.string(),
   keyspaceId: z.string().optional(),
   branch: z.string(),
   environmentSlug: z.string(),

@@ -842,7 +842,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1130,7 +1130,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
 
@@ -1261,7 +1261,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: |
                         The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
@@ -1360,7 +1360,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1969,7 +1969,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: |
                         Sets the rate limit window duration in milliseconds after which the counter resets.
                         Shorter durations enable faster recovery but may be less effective against sustained abuse.
@@ -1991,7 +1991,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: |
                         Sets the maximum operations allowed within the duration window before requests are rejected.
                         When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
@@ -2380,14 +2380,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key was created.
                     example: 1701425400000
                 updatedAt:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key was last updated.
                     example: 1701425400000
                     x-go-type-skip-optional-pointer: true
@@ -2396,7 +2396,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key expires (if set).
                     example: 1735689600000
                     x-go-type-skip-optional-pointer: true
@@ -2456,7 +2456,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits remaining (null for unlimited).
                     example: 1000
                 refill:
@@ -2511,14 +2511,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 autoApply:
@@ -2548,7 +2548,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -2941,7 +2941,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -3131,7 +3131,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits remaining (null for unlimited). This also clears the refilling schedule.
                     example: 1000
                 refill:
@@ -3155,7 +3155,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -3180,7 +3180,7 @@ components:
                     type: integer
                     format: int32
                     minimum: 0
-                    maximum: 1000000000
+                    maximum: 1e+09
                     description: |
                         Sets how many credits to deduct for this verification request.
                         Use 0 for read-only operations or free tier access, higher values for premium features.
@@ -3359,28 +3359,28 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 reset:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit reset duration in milliseconds.
                     example: 3600000
                 remaining:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Rate limit remaining requests within the time window.
                     example: 999
                 autoApply:

@@ -55,6 +55,7 @@ export function apisDeleteApi(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.PreconditionFailedErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -86,6 +87,7 @@ async function $do(
       | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
       | errors.PreconditionFailedErrorResponse
+      | errors.TooManyRequestsErrorResponse
       | errors.InternalServerErrorResponse
       | UnkeyError
       | ResponseValidationError
@@ -164,7 +166,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "412", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "412", "429", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -184,6 +186,7 @@ async function $do(
     | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.PreconditionFailedErrorResponse
+    | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
     | UnkeyError
     | ResponseValidationError
@@ -200,6 +203,9 @@ async function $do(
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
     M.jsonErr(412, errors.PreconditionFailedErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

@@ -211,7 +211,9 @@ async function $do(
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
     M.jsonErr(422, errors.UnprocessableEntityErrorResponse$inboundSchema),
-    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
+      ctype: "application/problem+json",
+    }),
     M.jsonErr(500, errors.InternalServerErrorResponse$inboundSchema),
     M.jsonErr(503, errors.ServiceUnavailableErrorResponse$inboundSchema),
     M.fail("4XX"),

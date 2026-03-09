@@ -13,11 +13,11 @@ exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `I
 import { Code } from "@unkey/api/models/components";
 
 let value: Code = "VALID";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "VALID" | "NOT_FOUND" | "FORBIDDEN" | "INSUFFICIENT_PERMISSIONS" | "USAGE_EXCEEDED" | "RATE_LIMITED" | "DISABLED" | "EXPIRED" | Unrecognized<string>
