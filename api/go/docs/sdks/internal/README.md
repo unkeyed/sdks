@@ -39,7 +39,8 @@ func main() {
     )
 
     res, err := s.Internal.CreateDeployment(ctx, components.V2DeployCreateDeploymentRequestBody{
-        ProjectID: "proj_123abc",
+        Project: "my-project",
+        App: "default",
         KeyspaceID: unkey.Pointer("key_abc123"),
         Branch: "main",
         EnvironmentSlug: "production",
@@ -75,14 +76,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## GetDeployment
 
@@ -141,11 +143,12 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
