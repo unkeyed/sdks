@@ -4,8 +4,10 @@ package components
 
 // V2DeployCreateDeploymentRequestBody - Create a deployment from a pre-built Docker image
 type V2DeployCreateDeploymentRequestBody struct {
-	// Unkey project ID
-	ProjectID string `json:"projectId"`
+	// Project slug
+	Project string `json:"project"`
+	// App slug within the project
+	App string `json:"app"`
 	// Optional keyspace ID for authentication context
 	KeyspaceID *string `json:"keyspaceId,omitempty"`
 	// Git branch name
@@ -18,11 +20,18 @@ type V2DeployCreateDeploymentRequestBody struct {
 	GitCommit *V2DeployGitCommit `json:"gitCommit,omitempty"`
 }
 
-func (v *V2DeployCreateDeploymentRequestBody) GetProjectID() string {
+func (v *V2DeployCreateDeploymentRequestBody) GetProject() string {
 	if v == nil {
 		return ""
 	}
-	return v.ProjectID
+	return v.Project
+}
+
+func (v *V2DeployCreateDeploymentRequestBody) GetApp() string {
+	if v == nil {
+		return ""
+	}
+	return v.App
 }
 
 func (v *V2DeployCreateDeploymentRequestBody) GetKeyspaceID() *string {

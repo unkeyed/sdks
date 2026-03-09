@@ -8,9 +8,11 @@ type Status string
 const (
 	StatusUnspecified Status = "UNSPECIFIED"
 	StatusPending     Status = "PENDING"
+	StatusStarting    Status = "STARTING"
 	StatusBuilding    Status = "BUILDING"
 	StatusDeploying   Status = "DEPLOYING"
 	StatusNetwork     Status = "NETWORK"
+	StatusFinalizing  Status = "FINALIZING"
 	StatusReady       Status = "READY"
 	StatusFailed      Status = "FAILED"
 )
@@ -23,7 +25,7 @@ func (e Status) ToPointer() *Status {
 func (e *Status) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "UNSPECIFIED", "PENDING", "BUILDING", "DEPLOYING", "NETWORK", "READY", "FAILED":
+		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED":
 			return true
 		}
 	}

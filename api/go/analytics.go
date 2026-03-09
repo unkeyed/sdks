@@ -335,7 +335,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 		}
 	case httpRes.StatusCode == 429:
 		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/problem+json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err

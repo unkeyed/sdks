@@ -91,14 +91,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## AddRoles
 
@@ -171,14 +172,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## CreateKey
 
@@ -294,14 +296,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## DeleteKey
 
@@ -365,14 +368,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## GetKey
 
@@ -439,14 +443,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## MigrateKeys
 
@@ -555,14 +560,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## RemovePermissions
 
@@ -631,14 +637,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## RemoveRoles
 
@@ -707,14 +714,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## RerollKey
 
@@ -800,14 +808,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## SetPermissions
 
@@ -880,14 +889,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## SetRoles
 
@@ -956,14 +966,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## UpdateCredits
 
@@ -1033,14 +1044,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## UpdateKey
 
@@ -1063,7 +1075,7 @@ If you specify an `externalId` that doesn't exist, a new identity will be automa
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" -->
+<!-- UsageSnippet language="go" operationID="keys.updateKey" method="post" path="/v2/keys.updateKey" example="success" -->
 ```go
 package main
 
@@ -1158,14 +1170,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## VerifyKey
 
@@ -1173,7 +1186,7 @@ Verify an API key's validity and permissions for request authentication.
 
 Use this endpoint on every incoming request to your protected resources. It checks key validity, permissions, rate limits, and usage quotas in a single call.
 
-**Important**: Always returns HTTP 200. Check the `valid` field in response data to determine if the key is authorized.
+**Important**: Returns HTTP 200 for all verification outcomes — check the `valid` field in response data to determine if the key is authorized. A 429 may be returned if the workspace exceeds its API rate limit.
 
 **Common use cases:**
 - Authenticate API requests before processing
@@ -1191,7 +1204,7 @@ Your root key needs one of:
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" -->
+<!-- UsageSnippet language="go" operationID="keys.verifyKey" method="post" path="/v2/keys.verifyKey" example="permissionsQuerySyntaxError" -->
 ```go
 package main
 
@@ -1256,14 +1269,15 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Whoami
 
@@ -1325,11 +1339,12 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| apierrors.BadRequestErrorResponse     | 400                                   | application/json                      |
-| apierrors.UnauthorizedErrorResponse   | 401                                   | application/json                      |
-| apierrors.ForbiddenErrorResponse      | 403                                   | application/json                      |
-| apierrors.NotFoundErrorResponse       | 404                                   | application/json                      |
-| apierrors.InternalServerErrorResponse | 500                                   | application/json                      |
-| apierrors.APIError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

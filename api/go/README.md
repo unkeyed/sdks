@@ -427,17 +427,17 @@ By Default, an API error will return `apierrors.APIError`. When custom error res
 
 For example, the `GetVerifications` function may return the following errors:
 
-| Error Type                                 | Status Code | Content Type     |
-| ------------------------------------------ | ----------- | ---------------- |
-| apierrors.BadRequestErrorResponse          | 400         | application/json |
-| apierrors.UnauthorizedErrorResponse        | 401         | application/json |
-| apierrors.ForbiddenErrorResponse           | 403         | application/json |
-| apierrors.NotFoundErrorResponse            | 404         | application/json |
-| apierrors.UnprocessableEntityErrorResponse | 422         | application/json |
-| apierrors.TooManyRequestsErrorResponse     | 429         | application/json |
-| apierrors.InternalServerErrorResponse      | 500         | application/json |
-| apierrors.ServiceUnavailableErrorResponse  | 503         | application/json |
-| apierrors.APIError                         | 4XX, 5XX    | \*/\*            |
+| Error Type                                 | Status Code | Content Type             |
+| ------------------------------------------ | ----------- | ------------------------ |
+| apierrors.BadRequestErrorResponse          | 400         | application/json         |
+| apierrors.UnauthorizedErrorResponse        | 401         | application/json         |
+| apierrors.ForbiddenErrorResponse           | 403         | application/json         |
+| apierrors.NotFoundErrorResponse            | 404         | application/json         |
+| apierrors.UnprocessableEntityErrorResponse | 422         | application/json         |
+| apierrors.TooManyRequestsErrorResponse     | 429         | application/problem+json |
+| apierrors.InternalServerErrorResponse      | 500         | application/json         |
+| apierrors.ServiceUnavailableErrorResponse  | 503         | application/json         |
+| apierrors.APIError                         | 4XX, 5XX    | \*/\*                    |
 
 ### Example
 

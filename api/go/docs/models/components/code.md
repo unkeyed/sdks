@@ -7,6 +7,19 @@ exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `I
 `EXPIRED` (key has passed its expiration date).
 
 
+## Example Usage
+
+```go
+import (
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+)
+
+value := components.CodeValid
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.Code("custom_value")
+```
+
 
 ## Values
 
