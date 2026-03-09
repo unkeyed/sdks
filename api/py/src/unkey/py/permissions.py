@@ -123,12 +123,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createPermission",
+                operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -157,6 +157,11 @@ class Permissions(BaseSDK):
                 errors.ConflictErrorResponseData, http_res
             )
             raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -283,12 +288,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createPermission",
+                operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -317,6 +322,11 @@ class Permissions(BaseSDK):
                 errors.ConflictErrorResponseData, http_res
             )
             raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -425,12 +435,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createRole",
+                operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -459,6 +469,11 @@ class Permissions(BaseSDK):
                 errors.ConflictErrorResponseData, http_res
             )
             raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -567,12 +582,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createRole",
+                operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -601,6 +616,11 @@ class Permissions(BaseSDK):
                 errors.ConflictErrorResponseData, http_res
             )
             raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -710,12 +730,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deletePermission",
+                operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -744,6 +764,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -853,12 +878,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deletePermission",
+                operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -887,6 +912,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -991,12 +1021,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteRole",
+                operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1020,6 +1050,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1124,12 +1159,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteRole",
+                operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1153,6 +1188,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1247,12 +1287,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getPermission",
+                operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1281,6 +1321,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1375,12 +1420,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getPermission",
+                operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1409,6 +1454,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1503,12 +1553,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getRole",
+                operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1537,6 +1587,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1631,12 +1686,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getRole",
+                operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1665,6 +1720,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1768,12 +1828,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPermissions",
+                operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1797,6 +1857,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1900,12 +1965,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPermissions",
+                operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1929,6 +1994,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -2030,12 +2100,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listRoles",
+                operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -2064,6 +2134,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -2165,12 +2240,12 @@ class Permissions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listRoles",
+                operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -2199,6 +2274,11 @@ class Permissions(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res

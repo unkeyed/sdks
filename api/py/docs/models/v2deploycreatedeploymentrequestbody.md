@@ -1,0 +1,16 @@
+# V2DeployCreateDeploymentRequestBody
+
+Create a deployment from a pre-built Docker image
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `project`                                                            | *str*                                                                | :heavy_check_mark:                                                   | Project slug                                                         | my-project                                                           |
+| `app`                                                                | *str*                                                                | :heavy_check_mark:                                                   | App slug within the project                                          | default                                                              |
+| `keyspace_id`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Optional keyspace ID for authentication context                      | key_abc123                                                           |
+| `branch`                                                             | *str*                                                                | :heavy_check_mark:                                                   | Git branch name                                                      | main                                                                 |
+| `environment_slug`                                                   | *str*                                                                | :heavy_check_mark:                                                   | Environment slug (e.g., "production", "staging")                     | production                                                           |
+| `docker_image`                                                       | *str*                                                                | :heavy_check_mark:                                                   | Docker image reference to deploy                                     | ghcr.io/user/app:v1.0.0                                              |
+| `git_commit`                                                         | [Optional[models.V2DeployGitCommit]](../models/v2deploygitcommit.md) | :heavy_minus_sign:                                                   | Optional git commit information                                      |                                                                      |

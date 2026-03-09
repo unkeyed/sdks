@@ -7,6 +7,16 @@ exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `I
 `EXPIRED` (key has passed its expiration date).
 
 
+## Example Usage
+
+```python
+from unkey.py.models import Code
+
+value = Code.VALID
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+```
+
 
 ## Values
 

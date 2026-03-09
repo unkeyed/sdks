@@ -1,51 +1,42 @@
-## Typescript SDK Changes:
-* `unkey.internal.createDeployment()`: 
-  * `request` **Changed** (Breaking ⚠️)
-    - `app` **Added** (Breaking ⚠️)
-    - `projectId` **Removed** (Breaking ⚠️)
-    - `project` **Added** (Breaking ⚠️)
-  *  `error.status[429]` **Added**
-* `unkey.analytics.getVerifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)
-* `unkey.keys.rerollKey()`:  `error.status[429]` **Added**
-* `unkey.keys.removePermissions()`:  `error.status[429]` **Added**
-* `unkey.apis.listKeys()`:  `error.status[429]` **Added**
-* `unkey.apis.deleteApi()`:  `error.status[429]` **Added**
-* `unkey.internal.getDeployment()`: 
-  * `response.data.status` **Changed**
-    - `enum(finalizing)` **Added**
-    - `enum(starting)` **Added**
-  *  `error.status[429]` **Added**
-* `unkey.identities.createIdentity()`:  `error.status[429]` **Added**
-* `unkey.identities.deleteIdentity()`:  `error.status[429]` **Added**
-* `unkey.identities.getIdentity()`:  `error.status[429]` **Added**
-* `unkey.identities.listIdentities()`:  `error.status[429]` **Added**
-* `unkey.identities.updateIdentity()`:  `error.status[429]` **Added**
-* `unkey.keys.addPermissions()`:  `error.status[429]` **Added**
-* `unkey.keys.addRoles()`:  `error.status[429]` **Added**
-* `unkey.keys.createKey()`:  `error.status[429]` **Added**
-* `unkey.keys.deleteKey()`:  `error.status[429]` **Added**
-* `unkey.keys.getKey()`:  `error.status[429]` **Added**
-* `unkey.keys.migrateKeys()`:  `error.status[429]` **Added**
-* `unkey.keys.setPermissions()`:  `error.status[429]` **Added**
-* `unkey.keys.removeRoles()`:  `error.status[429]` **Added**
-* `unkey.apis.getApi()`:  `error.status[429]` **Added**
-* `unkey.apis.createApi()`:  `error.status[429]` **Added**
-* `unkey.keys.verifyKey()`:  `error.status[429]` **Added**
-* `unkey.keys.updateCredits()`:  `error.status[429]` **Added**
-* `unkey.keys.updateKey()`:  `error.status[429]` **Added**
-* `unkey.keys.setRoles()`:  `error.status[429]` **Added**
+## Python SDK Changes:
+* `unkey.analytics.get_verifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)
+* `unkey.keys.reroll_key()`:  `error.status[429]` **Added**
+* `unkey.keys.delete_key()`:  `error.status[429]` **Added**
+* `unkey.apis.create_api()`:  `error.status[429]` **Added**
+* `unkey.apis.delete_api()`:  `error.status[429]` **Added**
+* `unkey.apis.get_api()`:  `error.status[429]` **Added**
+* `unkey.apis.list_keys()`:  `error.status[429]` **Added**
+* `unkey.identities.create_identity()`:  `error.status[429]` **Added**
+* `unkey.identities.delete_identity()`:  `error.status[429]` **Added**
+* `unkey.identities.get_identity()`:  `error.status[429]` **Added**
+* `unkey.identities.list_identities()`:  `error.status[429]` **Added**
+* `unkey.identities.update_identity()`:  `error.status[429]` **Added**
+* `unkey.keys.add_permissions()`:  `error.status[429]` **Added**
+* `unkey.keys.add_roles()`:  `error.status[429]` **Added**
+* `unkey.keys.create_key()`:  `error.status[429]` **Added**
+* `unkey.internal.create_deployment()`: **Added**
+* `unkey.keys.get_key()`:  `error.status[429]` **Added**
+* `unkey.keys.migrate_keys()`:  `error.status[429]` **Added**
+* `unkey.keys.remove_permissions()`:  `error.status[429]` **Added**
+* `unkey.internal.get_deployment()`: **Added**
+* `unkey.keys.remove_roles()`:  `error.status[429]` **Added**
 * `unkey.keys.whoami()`:  `error.status[429]` **Added**
-* `unkey.permissions.createPermission()`:  `error.status[429]` **Added**
-* `unkey.permissions.createRole()`:  `error.status[429]` **Added**
-* `unkey.permissions.deletePermission()`:  `error.status[429]` **Added**
-* `unkey.permissions.deleteRole()`:  `error.status[429]` **Added**
-* `unkey.permissions.getPermission()`:  `error.status[429]` **Added**
-* `unkey.permissions.getRole()`:  `error.status[429]` **Added**
-* `unkey.permissions.listPermissions()`:  `error.status[429]` **Added**
-* `unkey.permissions.listRoles()`:  `error.status[429]` **Added**
-* `unkey.ratelimit.deleteOverride()`:  `error.status[429]` **Added**
-* `unkey.ratelimit.getOverride()`:  `error.status[429]` **Added**
+* `unkey.keys.set_roles()`:  `error.status[429]` **Added**
+* `unkey.keys.update_credits()`:  `error.status[429]` **Added**
+* `unkey.keys.update_key()`:  `error.status[429]` **Added**
+* `unkey.keys.verify_key()`:  `error.status[429]` **Added**
+* `unkey.keys.set_permissions()`:  `error.status[429]` **Added**
+* `unkey.permissions.create_permission()`:  `error.status[429]` **Added**
+* `unkey.permissions.create_role()`:  `error.status[429]` **Added**
+* `unkey.permissions.delete_permission()`:  `error.status[429]` **Added**
+* `unkey.permissions.delete_role()`:  `error.status[429]` **Added**
+* `unkey.permissions.get_permission()`:  `error.status[429]` **Added**
+* `unkey.permissions.get_role()`:  `error.status[429]` **Added**
+* `unkey.permissions.list_permissions()`:  `error.status[429]` **Added**
+* `unkey.permissions.list_roles()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.delete_override()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.get_override()`:  `error.status[429]` **Added**
 * `unkey.ratelimit.limit()`:  `error.status[429]` **Added**
-* `unkey.ratelimit.listOverrides()`:  `error.status[429]` **Added**
-* `unkey.ratelimit.multiLimit()`:  `error.status[429]` **Added**
-* `unkey.ratelimit.setOverride()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.list_overrides()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.multi_limit()`:  `error.status[429]` **Added**
+* `unkey.ratelimit.set_override()`:  `error.status[429]` **Added**

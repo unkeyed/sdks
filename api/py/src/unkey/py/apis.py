@@ -92,12 +92,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createApi",
+                operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -119,6 +119,11 @@ class Apis(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -214,12 +219,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createApi",
+                operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -241,6 +246,11 @@ class Apis(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -341,12 +351,22 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteApi",
+                operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "412", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "412",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -378,6 +398,11 @@ class Apis(BaseSDK):
                 errors.PreconditionFailedErrorResponseData, http_res
             )
             raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -478,12 +503,22 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteApi",
+                operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "412", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "412",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -515,6 +550,11 @@ class Apis(BaseSDK):
                 errors.PreconditionFailedErrorResponseData, http_res
             )
             raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -609,12 +649,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getApi",
+                operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -641,6 +681,11 @@ class Apis(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -735,12 +780,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getApi",
+                operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -767,6 +812,11 @@ class Apis(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -900,12 +950,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listKeys",
+                operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -932,6 +982,11 @@ class Apis(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1065,12 +1120,12 @@ class Apis(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listKeys",
+                operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1097,6 +1152,11 @@ class Apis(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res

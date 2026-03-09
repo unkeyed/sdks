@@ -106,7 +106,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -135,6 +135,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -244,7 +249,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -273,6 +278,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -378,7 +388,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -407,6 +417,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -512,7 +527,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -541,6 +556,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -574,7 +594,7 @@ class Ratelimit(BaseSDK):
 
         Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
 
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
         **Required Permissions**
 
@@ -669,7 +689,17 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "410",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -703,6 +733,11 @@ class Ratelimit(BaseSDK):
                 errors.GoneErrorResponseData, http_res
             )
             raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -736,7 +771,7 @@ class Ratelimit(BaseSDK):
 
         Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
 
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
         **Required Permissions**
 
@@ -831,7 +866,17 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "410",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -865,6 +910,11 @@ class Ratelimit(BaseSDK):
                 errors.GoneErrorResponseData, http_res
             )
             raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -976,7 +1026,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1005,6 +1055,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1116,7 +1171,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1145,6 +1200,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1177,7 +1237,7 @@ class Ratelimit(BaseSDK):
 
         Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
 
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
         **Required Permissions**
 
@@ -1247,7 +1307,17 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "410",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1281,6 +1351,11 @@ class Ratelimit(BaseSDK):
                 errors.GoneErrorResponseData, http_res
             )
             raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1313,7 +1388,7 @@ class Ratelimit(BaseSDK):
 
         Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
 
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
         **Required Permissions**
 
@@ -1383,7 +1458,17 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "410", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "410",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1417,6 +1502,11 @@ class Ratelimit(BaseSDK):
                 errors.GoneErrorResponseData, http_res
             )
             raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1546,7 +1636,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1575,6 +1665,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -1704,7 +1799,7 @@ class Ratelimit(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1733,6 +1828,11 @@ class Ratelimit(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res

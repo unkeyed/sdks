@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - typescript</title>
+    <title>SDK Changelog - python</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,71 +95,50 @@
         }
     </style>
 </head>
-<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
+<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.internal.createDeployment()</code>:
-
-<ul>
-<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>app</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>projectId</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>project</code> <strong>Added</strong> (Breaking ⚠️)</li>
-</ul></li>
-<li><code>error.status[429]</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.analytics.getVerifications()</code>:  <code>error.status[429]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>unkey.keys.rerollKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.removePermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.apis.listKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.apis.deleteApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.internal.getDeployment()</code>:
-
-<ul>
-<li><code>response.data.status</code> <strong>Changed</strong>
-
-<ul>
-<li><code>enum(finalizing)</code> <strong>Added</strong></li>
-<li><code>enum(starting)</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>error.status[429]</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.identities.createIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.identities.deleteIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.identities.getIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.identities.listIdentities()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.identities.updateIdentity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.addPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.addRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.createKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.deleteKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.getKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.migrateKeys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.setPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.removeRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.apis.getApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.apis.createApi()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.verifyKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.updateCredits()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.updateKey()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.keys.setRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.analytics.get_verifications()</code>:  <code>error.status[429]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.keys.reroll_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.delete_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.create_api()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.delete_api()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.get_api()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.apis.list_keys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.create_identity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.delete_identity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.get_identity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.list_identities()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.identities.update_identity()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.add_permissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.add_roles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.create_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.internal.create_deployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.keys.get_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.migrate_keys()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.remove_permissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.internal.get_deployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.keys.remove_roles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
 <li><code>unkey.keys.whoami()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.createPermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.createRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.deletePermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.deleteRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.getPermission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.getRole()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.listPermissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.listRoles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.ratelimit.deleteOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.ratelimit.getOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.set_roles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.update_credits()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.update_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.verify_key()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.keys.set_permissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.create_permission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.create_role()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.delete_permission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.delete_role()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.get_permission()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.get_role()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.list_permissions()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.list_roles()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.delete_override()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.get_override()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
 <li><code>unkey.ratelimit.limit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.ratelimit.listOverrides()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.ratelimit.multiLimit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
-<li><code>unkey.ratelimit.setOverride()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.list_overrides()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.multi_limit()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
+<li><code>unkey.ratelimit.set_override()</code>:  <code>error.status[429]</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

@@ -42,3 +42,9 @@ class V2KeysRemoveRolesRequestBody(BaseModel):
     Invalid role references cause the entire operation to fail atomically, ensuring consistent state.
 
     """
+
+
+try:
+    V2KeysRemoveRolesRequestBody.model_rebuild()
+except NameError:
+    pass
