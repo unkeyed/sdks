@@ -21,79 +21,6 @@ components:
             scheme: bearer
             type: http
     schemas:
-        ChproxyMetricsRequestBody:
-            type: array
-            description: Array of API request metric events to be processed
-            items:
-                type: object
-                additionalProperties: true
-        ChproxyMetricsResponseBody:
-            type: object
-            required:
-                - status
-            properties:
-                status:
-                    type: string
-                    description: Processing status
-                    example: "OK"
-        BadRequestErrorResponse:
-            type: object
-            required:
-                - meta
-                - error
-            properties:
-                meta:
-                    $ref: "#/components/schemas/Meta"
-                error:
-                    $ref: "#/components/schemas/BadRequestErrorDetails"
-            description: Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying.
-        InternalServerErrorResponse:
-            type: object
-            required:
-                - meta
-                - error
-            properties:
-                meta:
-                    $ref: "#/components/schemas/Meta"
-                error:
-                    $ref: "#/components/schemas/BaseError"
-            description: |-
-                Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.
-
-                When you encounter this error:
-                - The request ID in the response can help Unkey support investigate the issue
-                - The error is likely temporary and retrying may succeed
-                - If the error persists, contact Unkey support with the request ID
-        ChproxyRatelimitsRequestBody:
-            type: array
-            description: Array of ratelimit events to be processed
-            items:
-                type: object
-                additionalProperties: true
-        ChproxyRatelimitsResponseBody:
-            type: object
-            required:
-                - status
-            properties:
-                status:
-                    type: string
-                    description: Processing status
-                    example: "OK"
-        ChproxyVerificationsRequestBody:
-            type: array
-            description: Array of key verification events to be processed
-            items:
-                type: object
-                additionalProperties: true
-        ChproxyVerificationsResponseBody:
-            type: object
-            required:
-                - status
-            properties:
-                status:
-                    type: string
-                    description: Processing status
-                    example: "OK"
         V2AnalyticsGetVerificationsRequestBody:
             type: object
             required:
@@ -115,6 +42,17 @@ components:
                     $ref: "#/components/schemas/Meta"
                 data:
                     $ref: "#/components/schemas/V2AnalyticsGetVerificationsResponseData"
+        BadRequestErrorResponse:
+            type: object
+            required:
+                - meta
+                - error
+            properties:
+                meta:
+                    $ref: "#/components/schemas/Meta"
+                error:
+                    $ref: "#/components/schemas/BadRequestErrorDetails"
+            description: Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying.
         UnauthorizedErrorResponse:
             type: object
             required:
@@ -202,6 +140,23 @@ components:
                 - Cache results where appropriate to reduce request frequency
                 - Check the error detail message for specific quota information
                 - Contact support if you need a higher quota for your use case
+        InternalServerErrorResponse:
+            type: object
+            required:
+                - meta
+                - error
+            properties:
+                meta:
+                    $ref: "#/components/schemas/Meta"
+                error:
+                    $ref: "#/components/schemas/BaseError"
+            description: |-
+                Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.
+
+                When you encounter this error:
+                - The request ID in the response can help Unkey support investigate the issue
+                - The error is likely temporary and retrying may succeed
+                - If the error persists, contact Unkey support with the request ID
         ServiceUnavailableErrorResponse:
             type: object
             required:
@@ -386,6 +341,78 @@ components:
                     x-go-type-skip-optional-pointer: true
                     x-go-type-skip-optional-pointer-with-omitzero: true
             additionalProperties: false
+        V2DeployCreateDeploymentRequestBody:
+            type: object
+            required:
+                - project
+                - app
+                - branch
+                - environmentSlug
+                - dockerImage
+            properties:
+                project:
+                    type: string
+                    minLength: 1
+                    description: Project slug
+                    example: "my-project"
+                app:
+                    type: string
+                    minLength: 1
+                    description: App slug within the project
+                    example: "default"
+                keyspaceId:
+                    type: string
+                    description: Optional keyspace ID for authentication context
+                    example: "key_abc123"
+                branch:
+                    type: string
+                    minLength: 1
+                    description: Git branch name
+                    example: "main"
+                environmentSlug:
+                    type: string
+                    minLength: 1
+                    description: Environment slug (e.g., "production", "staging")
+                    example: "production"
+                dockerImage:
+                    type: string
+                    minLength: 1
+                    description: Docker image reference to deploy
+                    example: "ghcr.io/user/app:v1.0.0"
+                gitCommit:
+                    $ref: "#/components/schemas/V2DeployGitCommit"
+            description: Create a deployment from a pre-built Docker image
+        V2DeployCreateDeploymentResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    $ref: "#/components/schemas/Meta"
+                data:
+                    $ref: "#/components/schemas/V2DeployCreateDeploymentResponseData"
+        V2DeployGetDeploymentRequestBody:
+            type: object
+            required:
+                - deploymentId
+            properties:
+                deploymentId:
+                    type: string
+                    minLength: 1
+                    description: Unique deployment identifier to retrieve
+                    example: "d_abc123xyz"
+                    pattern: "^d_[a-zA-Z0-9]+$"
+        V2DeployGetDeploymentResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    $ref: "#/components/schemas/Meta"
+                data:
+                    $ref: "#/components/schemas/V2DeployGetDeploymentResponseData"
         V2IdentitiesCreateIdentityRequestBody:
             type: object
             required:
@@ -775,7 +802,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1063,7 +1090,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
 
@@ -1194,7 +1221,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: |
                         The credit value to use with the specified operation. The meaning depends on the operation: for 'set', this becomes the new remaining credits value; for 'increment', this amount is added to current credits; for 'decrement', this amount is subtracted from current credits.
 
@@ -1293,7 +1320,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -1391,8 +1418,7 @@ components:
                     items:
                         type: string
                         minLength: 1
-                        maxLength: 256
-                        pattern: "^[a-zA-Z0-9_=/.:-]+$"
+                        maxLength: 512
                     maxItems: 20
                     description: |
                         Attaches metadata tags for analytics and monitoring without affecting verification outcomes.
@@ -1514,7 +1540,7 @@ components:
                     example: "users-read"
                 description:
                     type: string
-                    maxLength: 128
+                    maxLength: 512
                     description: |
                         Provides detailed documentation of what this permission grants access to.
                         Include information about affected resources, allowed actions, and any important limitations.
@@ -1556,7 +1582,7 @@ components:
                     example: "support.readonly"
                 description:
                     type: string
-                    maxLength: 2048
+                    maxLength: 512
                     description: |
                         Provides comprehensive documentation of what this role encompasses and what access it grants.
                         Include information about the intended use case, what permissions should be assigned, and any important considerations.
@@ -1902,7 +1928,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: |
                         Sets the rate limit window duration in milliseconds after which the counter resets.
                         Shorter durations enable faster recovery but may be less effective against sustained abuse.
@@ -1924,7 +1950,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: |
                         Sets the maximum operations allowed within the duration window before requests are rejected.
                         When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
@@ -2109,6 +2135,20 @@ components:
                     type: string
             additionalProperties: false
             description: Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
+        V2AnalyticsGetVerificationsResponseData:
+            type: array
+            description: Array of verification rows returned by the query. Fields vary based on the SQL SELECT clause.
+            items:
+                type: object
+                additionalProperties: true
+                description: Dynamic row with fields determined by the query. Can include any combination of fields like time, outcome, count, key_id, etc.
+            example:
+                - outcome: "VALID"
+                  count: 1234
+                  time: 1696118400000
+                - outcome: "RATE_LIMITED"
+                  count: 56
+                  time: 1696118400000
         BadRequestErrorDetails:
             allOf:
                 - $ref: "#/components/schemas/BaseError"
@@ -2175,20 +2215,6 @@ components:
                 - message
             type: object
             description: Individual validation error details. Each validation error provides precise information about what failed, where it failed, and how to fix it, enabling efficient error resolution.
-        V2AnalyticsGetVerificationsResponseData:
-            type: array
-            description: Array of verification rows returned by the query. Fields vary based on the SQL SELECT clause.
-            items:
-                type: object
-                additionalProperties: true
-                description: Dynamic row with fields determined by the query. Can include any combination of fields like time, outcome, count, key_id, etc.
-            example:
-                - outcome: "VALID"
-                  count: 1234
-                  time: 1696118400000
-                - outcome: "RATE_LIMITED"
-                  count: 56
-                  time: 1696118400000
         V2ApisCreateApiResponseData:
             type: object
             properties:
@@ -2313,14 +2339,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key was created.
                     example: 1701425400000
                 updatedAt:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key was last updated.
                     example: 1701425400000
                     x-go-type-skip-optional-pointer: true
@@ -2329,7 +2355,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Unix timestamp in milliseconds when key expires (if set).
                     example: 1735689600000
                     x-go-type-skip-optional-pointer: true
@@ -2389,7 +2415,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits remaining (null for unlimited).
                     example: 1000
                 refill:
@@ -2444,14 +2470,14 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 autoApply:
@@ -2481,7 +2507,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -2499,6 +2525,100 @@ components:
                 - interval
                 - amount
             additionalProperties: false
+        V2DeployGitCommit:
+            type: object
+            description: Optional git commit information
+            properties:
+                commitSha:
+                    type: string
+                    description: Git commit SHA
+                    example: "a1b2c3d4e5f6"
+                commitMessage:
+                    type: string
+                    description: Git commit message
+                    example: "feat: add new feature"
+                authorHandle:
+                    type: string
+                    description: Git author handle/username
+                    example: "johndoe"
+                authorAvatarUrl:
+                    type: string
+                    description: Git author avatar URL
+                    example: "https://avatars.githubusercontent.com/u/123456"
+                timestamp:
+                    type: integer
+                    format: int64
+                    description: Commit timestamp in milliseconds
+                    example: 1704067200000
+        V2DeployCreateDeploymentResponseData:
+            type: object
+            required:
+                - deploymentId
+            properties:
+                deploymentId:
+                    type: string
+                    description: Unique deployment identifier
+                    example: "d_abc123xyz"
+        V2DeployGetDeploymentResponseData:
+            type: object
+            required:
+                - id
+                - status
+            properties:
+                id:
+                    type: string
+                    description: Unique deployment identifier
+                    example: "d_abc123xyz"
+                status:
+                    type: string
+                    description: Current deployment status
+                    enum:
+                        - UNSPECIFIED
+                        - PENDING
+                        - STARTING
+                        - BUILDING
+                        - DEPLOYING
+                        - NETWORK
+                        - FINALIZING
+                        - READY
+                        - FAILED
+                    example: "READY"
+                    x-speakeasy-unknown-values: allow
+                errorMessage:
+                    type: string
+                    description: Error message if deployment failed
+                    example: "Failed to pull image: authentication required"
+                hostnames:
+                    type: array
+                    items:
+                        type: string
+                    description: Hostnames associated with this deployment
+                    example: ["app.example.com", "api.example.com"]
+                steps:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/V2DeployDeploymentStep"
+                    description: Deployment steps with status and messages
+        V2DeployDeploymentStep:
+            type: object
+            properties:
+                status:
+                    type: string
+                    description: Step status
+                    example: "completed"
+                message:
+                    type: string
+                    description: Step message
+                    example: "Image pulled successfully"
+                errorMessage:
+                    type: string
+                    description: Error message if step failed
+                    example: "Connection timeout"
+                createdAt:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp in milliseconds
+                    example: 1704067200000
         RatelimitRequest:
             type: object
             required:
@@ -2614,7 +2734,7 @@ components:
                     example: users-read
                 description:
                     type: string
-                    maxLength: 2048
+                    maxLength: 512
                     description: |
                         Optional detailed explanation of what this permission grants access to.
                         Helps team members understand the scope and implications of granting this permission.
@@ -2782,7 +2902,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 4102444800000
+                    maximum: 4.1024448e+12
                     description: |
                         Sets when this key automatically expires as a Unix timestamp in milliseconds.
                         Verification fails with code=EXPIRED immediately after this time passes.
@@ -2972,7 +3092,7 @@ components:
                         - "null"
                     format: int64
                     minimum: 0
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits remaining (null for unlimited). This also clears the refilling schedule.
                     example: 1000
                 refill:
@@ -2996,7 +3116,7 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 9223372036854776000
+                    maximum: 9.223372036854776e+18
                     description: Number of credits to add during each refill cycle.
                     example: 1000
                 refillDay:
@@ -3021,7 +3141,7 @@ components:
                     type: integer
                     format: int32
                     minimum: 0
-                    maximum: 1000000000
+                    maximum: 1e+09
                     description: |
                         Sets how many credits to deduct for this verification request.
                         Use 0 for read-only operations or free tier access, higher values for premium features.
@@ -3200,28 +3320,28 @@ components:
                     type: integer
                     format: int64
                     minimum: 1
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Maximum requests allowed within the time window.
                     example: 1000
                 duration:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit window duration in milliseconds.
                     example: 3600000
                 reset:
                     type: integer
                     format: int64
                     minimum: 1000
-                    maximum: 2592000000
+                    maximum: 2.592e+09
                     description: Rate limit reset duration in milliseconds.
                     example: 3600000
                 remaining:
                     type: integer
                     format: int64
                     minimum: 0
-                    maximum: 1000000
+                    maximum: 1e+06
                     description: Rate limit remaining requests within the time window.
                     example: 999
                 autoApply:
@@ -3592,120 +3712,6 @@ info:
     version: 2.0.0
 openapi: 3.1.0
 paths:
-    /_internal/chproxy/metrics:
-        post:
-            description: |-
-                Internal endpoint for batching API request metric events to ClickHouse. This endpoint is used internally by the API to efficiently store request/response data for analytics and should not be used by external clients.
-
-                This endpoint bypasses normal authentication and validation as it's intended for internal use only.
-            operationId: chproxyMetrics
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ChproxyMetricsRequestBody'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ChproxyMetricsResponseBody'
-                    description: Events successfully queued for processing
-                "400":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/BadRequestErrorResponse'
-                    description: Invalid request body or malformed events
-                "529":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InternalServerErrorResponse'
-                    description: Service overloaded, unable to process events
-            security: []
-            summary: Internal ClickHouse proxy for API request metrics
-            tags:
-                - chproxy
-            x-excluded: true
-            x-speakeasy-ignore: true
-    /_internal/chproxy/ratelimits:
-        post:
-            description: |-
-                Internal endpoint for batching ratelimit events to ClickHouse. This endpoint is used internally by the API to efficiently store ratelimit data and should not be used by external clients.
-
-                This endpoint bypasses normal authentication and validation as it's intended for internal use only.
-            operationId: chproxyRatelimits
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ChproxyRatelimitsRequestBody'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ChproxyRatelimitsResponseBody'
-                    description: Events successfully queued for processing
-                "400":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/BadRequestErrorResponse'
-                    description: Invalid request body or malformed events
-                "529":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InternalServerErrorResponse'
-                    description: Service overloaded, unable to process events
-            security: []
-            summary: Internal ClickHouse proxy for ratelimit events
-            tags:
-                - chproxy
-            x-excluded: true
-            x-speakeasy-ignore: true
-    /_internal/chproxy/verifications:
-        post:
-            description: |-
-                Internal endpoint for batching key verification events to ClickHouse. This endpoint is used internally by the API to efficiently store verification data and should not be used by external clients.
-
-                This endpoint bypasses normal authentication and validation as it's intended for internal use only. External clients should use the standard key verification endpoints instead.
-            operationId: chproxyVerifications
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ChproxyVerificationsRequestBody'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ChproxyVerificationsResponseBody'
-                    description: Events successfully queued for processing
-                "400":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/BadRequestErrorResponse'
-                    description: Invalid request body or malformed events
-                "529":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InternalServerErrorResponse'
-                    description: Service overloaded, unable to process events
-            security: []
-            summary: Internal ClickHouse proxy for verification events
-            tags:
-                - chproxy
-            x-excluded: true
-            x-speakeasy-ignore: true
     /v2/analytics.getVerifications:
         post:
             description: |
@@ -3757,7 +3763,7 @@ paths:
                     description: Query exceeds resource limits (timeout, memory, rows scanned, or result size)
                 "429":
                     content:
-                        application/json:
+                        application/problem+json:
                             schema:
                                 $ref: '#/components/schemas/TooManyRequestsErrorResponse'
                     description: Query quota exceeded
@@ -3792,7 +3798,7 @@ paths:
 
                 Your root key must have one of the following permissions:
                 - `api.*.create_api` (to create APIs in any workspace)
-            operationId: createApi
+            operationId: apis.createApi
             requestBody:
                 content:
                     application/json:
@@ -3825,6 +3831,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ForbiddenErrorResponse'
                     description: Forbidden
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -3853,7 +3865,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.delete_api` (to delete any API)
                 - `api.<api_id>.delete_api` (to delete a specific API)
-            operationId: deleteApi
+            operationId: apis.deleteApi
             requestBody:
                 content:
                     application/json:
@@ -3897,6 +3909,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/PreconditionFailedErrorResponse'
                     description: Delete protection is enabled. Disable protection through the dashboard or API configuration, then retry the deletion.
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -3921,7 +3939,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.read_api` (to read any API)
                 - `api.<api_id>.read_api` (to read a specific API)
-            operationId: getApi
+            operationId: apis.getApi
             requestBody:
                 content:
                     application/json:
@@ -3959,6 +3977,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -3991,7 +4015,7 @@ paths:
 
                 Additional permission required for decrypt functionality:
                 - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-            operationId: listKeys
+            operationId: apis.listKeys
             requestBody:
                 content:
                     application/json:
@@ -4030,6 +4054,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4042,6 +4072,138 @@ paths:
             tags:
                 - apis
             x-speakeasy-name-override: listKeys
+    /v2/deploy.createDeployment:
+        post:
+            description: |
+                **INTERNAL** - This endpoint is internal and may change without notice.
+                Not recommended for production use.
+
+                Creates a new deployment for a project using either a pre-built Docker image or build context.
+
+                **Authentication**: Requires a valid root key with appropriate permissions.
+            operationId: deploy.createDeployment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2DeployCreateDeploymentRequestBody'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/V2DeployCreateDeploymentResponseBody'
+                    description: Deployment created successfully
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: Forbidden
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - rootKey: []
+            summary: Create deployment
+            tags:
+                - deploy
+            x-speakeasy-group: internal
+            x-speakeasy-name-override: createDeployment
+    /v2/deploy.getDeployment:
+        post:
+            description: |
+                **INTERNAL** - This endpoint is internal and may change without notice.
+                Not recommended for production use.
+
+                Retrieves deployment information including status, error messages, and steps.
+
+                **Authentication**: Requires a valid root key with appropriate permissions.
+            operationId: deploy.getDeployment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2DeployGetDeploymentRequestBody'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/V2DeployGetDeploymentResponseBody'
+                    description: Deployment retrieved successfully
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: Forbidden
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - rootKey: []
+            summary: Get deployment
+            tags:
+                - deploy
+            x-speakeasy-group: internal
+            x-speakeasy-name-override: getDeployment
     /v2/identities.createIdentity:
         post:
             description: |
@@ -4138,6 +4300,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ConflictErrorResponse'
                     description: Conflict - Identity with this externalId already exists
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4152,8 +4320,16 @@ paths:
             x-speakeasy-name-override: createIdentity
     /v2/identities.deleteIdentity:
         post:
-            description: "Permanently delete an identity. This operation cannot be undone.\n\nUse this for data cleanup, compliance requirements, or when removing entities from your system.\n\n> **Important**  \n> Requires `identity.*.delete_identity` permission  \n> Associated API keys remain functional but lose shared resources  \n> External ID becomes available for reuse immediately\n"
-            operationId: v2.identities.deleteIdentity
+            description: |
+                Permanently delete an identity. This operation cannot be undone.
+
+                Use this for data cleanup, compliance requirements, or when removing entities from your system.
+
+                > **Important**
+                > Requires `identity.*.delete_identity` permission
+                > Associated API keys remain functional but lose shared resources
+                > External ID becomes available for reuse immediately
+            operationId: identities.deleteIdentity
             requestBody:
                 content:
                     application/json:
@@ -4224,6 +4400,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Identity with the specified externalId doesn't exist
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/problem+json:
@@ -4238,7 +4420,13 @@ paths:
             x-speakeasy-name-override: deleteIdentity
     /v2/identities.getIdentity:
         post:
-            description: "Retrieve an identity by external ID. Returns metadata, rate limits, and other associated data.\n\nUse this to check if an identity exists, view configurations, or build management dashboards.\n\n> **Important**  \n> Requires `identity.*.read_identity` permission\n"
+            description: |
+                Retrieve an identity by external ID. Returns metadata, rate limits, and other associated data.
+
+                Use this to check if an identity exists, view configurations, or build management dashboards.
+
+                > **Important**
+                > Requires `identity.*.read_identity` permission
             operationId: identities.getIdentity
             requestBody:
                 content:
@@ -4321,6 +4509,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Identity with the specified externalId doesn't exist
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4335,7 +4529,13 @@ paths:
             x-speakeasy-name-override: getIdentity
     /v2/identities.listIdentities:
         post:
-            description: "Get a paginated list of all identities in your workspace. Returns metadata and rate limit configurations.\n\nPerfect for building management dashboards, auditing configurations, or browsing your identities.\n\n> **Important**  \n> Requires `identity.*.read_identity` permission\n"
+            description: |
+                Get a paginated list of all identities in your workspace. Returns metadata and rate limit configurations.
+
+                Perfect for building management dashboards, auditing configurations, or browsing your identities.
+
+                > **Important**
+                > Requires `identity.*.read_identity` permission
             operationId: identities.listIdentities
             requestBody:
                 content:
@@ -4417,6 +4617,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ForbiddenErrorResponse'
                     description: Forbidden - Insufficient permissions (requires `identity.*.read_identity`)
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4447,7 +4653,7 @@ paths:
                 > **Important**
                 > Requires `identity.*.update_identity` permission
                 > Rate limit changes propagate within 30 seconds
-            operationId: v2.identities.updateIdentity
+            operationId: identities.updateIdentity
             requestBody:
                 content:
                     application/json:
@@ -4516,6 +4722,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Identity with the specified ID or externalId doesn't exist
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4546,7 +4758,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
-            operationId: addPermissions
+            operationId: keys.addPermissions
             requestBody:
                 content:
                     application/json:
@@ -4584,6 +4796,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4614,7 +4832,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
-            operationId: addRoles
+            operationId: keys.addRoles
             requestBody:
                 content:
                     application/json:
@@ -4652,6 +4870,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4683,7 +4907,7 @@ paths:
                 Your root key needs one of:
                 - `api.*.create_key` (create keys in any API)
                 - `api.<api_id>.create_key` (create keys in specific API)
-            operationId: createKey
+            operationId: keys.createKey
             requestBody:
                 content:
                     application/json:
@@ -4721,6 +4945,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4747,7 +4977,7 @@ paths:
                 Your root key must have one of the following permissions:
                 - `api.*.delete_key` (to delete keys in any API)
                 - `api.<api_id>.delete_key` (to delete keys in a specific API)
-            operationId: deleteKey
+            operationId: keys.deleteKey
             requestBody:
                 content:
                     application/json:
@@ -4786,6 +5016,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4815,7 +5051,7 @@ paths:
 
                 Additional permission required for decrypt functionality:
                 - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-            operationId: getKey
+            operationId: keys.getKey
             requestBody:
                 content:
                     application/json:
@@ -4854,6 +5090,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4875,7 +5117,7 @@ paths:
                 Your root key must have one of the following permissions for basic key information:
                 - `api.*.create_key` (to migrate keys to any API)
                 - `api.<api_id>.create_key` (to migrate keys to a specific API)
-            operationId: migrateKeys
+            operationId: keys.migrateKeys
             requestBody:
                 content:
                     application/json:
@@ -4913,6 +5155,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -4943,7 +5191,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-            operationId: removePermissions
+            operationId: keys.removePermissions
             requestBody:
                 content:
                     application/json:
@@ -4981,6 +5229,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5011,7 +5265,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-            operationId: removeRoles
+            operationId: keys.removeRoles
             requestBody:
                 content:
                     application/json:
@@ -5049,6 +5303,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5096,7 +5356,7 @@ paths:
                  Your root key must have:
                  - `api.*.create_key` or `api.<api_id>.create_key`
                  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-            operationId: rerollKey
+            operationId: keys.rerollKey
             requestBody:
                 content:
                     application/json:
@@ -5134,6 +5394,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5164,7 +5430,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-            operationId: setPermissions
+            operationId: keys.setPermissions
             requestBody:
                 content:
                     application/json:
@@ -5202,6 +5468,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5232,7 +5504,7 @@ paths:
                 **Side Effects**
 
                 Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-            operationId: setRoles
+            operationId: keys.setRoles
             requestBody:
                 content:
                     application/json:
@@ -5270,6 +5542,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5300,7 +5578,7 @@ paths:
                 **Side Effects**
 
                 Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
-            operationId: updateCredits
+            operationId: keys.updateCredits
             requestBody:
                 content:
                     application/json:
@@ -5339,6 +5617,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5369,7 +5653,7 @@ paths:
                 **Side Effects**
 
                 If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
-            operationId: updateKey
+            operationId: keys.updateKey
             requestBody:
                 content:
                     application/json:
@@ -5415,6 +5699,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5434,7 +5724,7 @@ paths:
 
                 Use this endpoint on every incoming request to your protected resources. It checks key validity, permissions, rate limits, and usage quotas in a single call.
 
-                **Important**: Always returns HTTP 200. Check the `valid` field in response data to determine if the key is authorized.
+                **Important**: Returns HTTP 200 for all verification outcomes — check the `valid` field in response data to determine if the key is authorized. A 429 may be returned if the workspace exceeds its API rate limit.
 
                 **Common use cases:**
                 - Authenticate API requests before processing
@@ -5448,7 +5738,7 @@ paths:
                 - `api.<api_id>.verify_key` (verify keys in specific API)
 
                 **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
-            operationId: verifyKey
+            operationId: keys.verifyKey
             requestBody:
                 content:
                     application/json:
@@ -5509,6 +5799,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5533,7 +5829,7 @@ paths:
                 - `api.<api_id>.read_key` (to read keys from a specific API)
 
                 If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
-            operationId: whoami
+            operationId: keys.whoami
             requestBody:
                 content:
                     application/json:
@@ -5572,6 +5868,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5669,7 +5971,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.create_permission`
-            operationId: createPermission
+            operationId: permissions.createPermission
             requestBody:
                 content:
                     application/json:
@@ -5707,6 +6009,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ConflictErrorResponse'
                     description: Conflict - permission with that name already exists
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5730,7 +6038,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.create_role`
-            operationId: createRole
+            operationId: permissions.createRole
             requestBody:
                 content:
                     application/json:
@@ -5778,6 +6086,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ConflictErrorResponse'
                     description: Conflict - A role with this name already exists
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5801,7 +6115,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.delete_permission`
-            operationId: deletePermission
+            operationId: permissions.deletePermission
             requestBody:
                 content:
                     application/json:
@@ -5844,6 +6158,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - The specified permission does not exist
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5867,7 +6187,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.delete_role`
-            operationId: deleteRole
+            operationId: permissions.deleteRole
             requestBody:
                 content:
                     application/json:
@@ -5899,6 +6219,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ForbiddenErrorResponse'
                     description: Forbidden
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5920,7 +6246,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.read_permission`
-            operationId: getPermission
+            operationId: permissions.getPermission
             requestBody:
                 content:
                     application/json:
@@ -5958,6 +6284,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -5979,7 +6311,7 @@ paths:
 
                 Your root key must have the following permission:
                 - `rbac.*.read_role`
-            operationId: getRole
+            operationId: permissions.getRole
             requestBody:
                 content:
                     application/json:
@@ -6017,6 +6349,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6031,8 +6369,15 @@ paths:
             x-speakeasy-name-override: GetRole
     /v2/permissions.listPermissions:
         post:
-            description: "Retrieve all permissions in your workspace. \nResults are paginated and sorted by their id.\n\n**Required Permissions**\n\nYour root key must have the following permission:\n- `rbac.*.read_permission`\n"
-            operationId: listPermissions
+            description: |
+                Retrieve all permissions in your workspace.
+                Results are paginated and sorted by their id.
+
+                **Required Permissions**
+
+                Your root key must have the following permission:
+                - `rbac.*.read_permission`
+            operationId: permissions.listPermissions
             requestBody:
                 content:
                     application/json:
@@ -6064,6 +6409,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ForbiddenErrorResponse'
                     description: Forbidden
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6078,8 +6429,15 @@ paths:
             x-speakeasy-name-override: ListPermissions
     /v2/permissions.listRoles:
         post:
-            description: "Retrieve all roles in your workspace including their assigned permissions. \nResults are paginated and sorted by their id.\n\n**Required Permissions**\n\nYour root key must have the following permission:\n- `rbac.*.read_role`\n"
-            operationId: listRoles
+            description: |
+                Retrieve all roles in your workspace including their assigned permissions.
+                Results are paginated and sorted by their id.
+
+                **Required Permissions**
+
+                Your root key must have the following permission:
+                - `rbac.*.read_role`
+            operationId: permissions.listRoles
             requestBody:
                 content:
                     application/json:
@@ -6117,6 +6475,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6210,6 +6574,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Override or namespace not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6303,6 +6673,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Override or namespace not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6322,7 +6698,7 @@ paths:
 
                 Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
 
-                **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded - check the `success` field in the response to determine if the request should be allowed. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+                **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
                 **Required Permissions**
 
@@ -6429,6 +6805,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/GoneErrorResponse'
                     description: Gone - Namespace has been deleted
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6511,6 +6893,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6530,7 +6918,7 @@ paths:
 
                 Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
 
-                **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded - check the `passed` field to see if all limits passed, or the `success` field in each individual result. 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+                **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
 
                 **Required Permissions**
 
@@ -6680,6 +7068,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/GoneErrorResponse'
                     description: Gone - Namespace has been deleted
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6777,6 +7171,12 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundErrorResponse'
                     description: Not Found - Namespace not found
+                "429":
+                    content:
+                        application/problem+json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
                 "500":
                     content:
                         application/json:
@@ -6798,6 +7198,8 @@ tags:
       name: analytics
     - description: API management operations
       name: apis
+    - description: Deployment operations
+      name: deploy
     - description: Identity management operations
       name: identities
     - description: API key management operations

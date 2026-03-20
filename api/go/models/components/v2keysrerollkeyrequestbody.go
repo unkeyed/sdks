@@ -43,3 +43,6 @@ func (v *V2KeysRerollKeyRequestBody) GetExpiration() int64 {
 	}
 	return v.Expiration
 }
+
+// #region class-body-v2keysrerollkeyrequestbody
+// #endregion class-body-v2keysrerollkeyrequestbody

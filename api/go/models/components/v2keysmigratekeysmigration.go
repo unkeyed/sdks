@@ -22,3 +22,6 @@ func (v *V2KeysMigrateKeysMigration) GetKeyID() string {
 	}
 	return v.KeyID
 }
+
+// #region class-body-v2keysmigratekeysmigration
+// #endregion class-body-v2keysmigratekeysmigration

@@ -30,3 +30,6 @@ func (v *V2KeysMigrateKeysRequestBody) GetKeys() []V2KeysMigrateKeyData {
 	}
 	return v.Keys
 }
+
+// #region class-body-v2keysmigratekeysrequestbody
+// #endregion class-body-v2keysmigratekeysrequestbody

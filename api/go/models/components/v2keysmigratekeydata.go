@@ -143,3 +143,6 @@ func (v *V2KeysMigrateKeyData) GetRatelimits() []RatelimitRequest {
 	}
 	return v.Ratelimits
 }
+
+// #region class-body-v2keysmigratekeydata
+// #endregion class-body-v2keysmigratekeydata

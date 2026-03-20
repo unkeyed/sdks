@@ -17,3 +17,6 @@ func (v *V2PermissionsCreateRoleResponseData) GetRoleID() string {
 	}
 	return v.RoleID
 }
+
+// #region class-body-v2permissionscreateroleresponsedata
+// #endregion class-body-v2permissionscreateroleresponsedata

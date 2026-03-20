@@ -15,3 +15,6 @@ func (v *V2AnalyticsGetVerificationsRequestBody) GetQuery() string {
 	}
 	return v.Query
 }
+
+// #region class-body-v2analyticsgetverificationsrequestbody
+// #endregion class-body-v2analyticsgetverificationsrequestbody

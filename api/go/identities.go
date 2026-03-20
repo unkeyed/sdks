@@ -1300,13 +1300,11 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.ListIdentities(
 			ctx,
-			components.V2IdentitiesListIdentitiesRequestBody{
-				Limit:  request.Limit,
-				Cursor: &nCVal,
-			},
+			request,
 			opts...,
 		)
 	}

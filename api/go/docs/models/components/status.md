@@ -18,14 +18,16 @@ custom := components.Status("custom_value")
 
 ## Values
 
-| Name                | Value               |
-| ------------------- | ------------------- |
-| `StatusUnspecified` | UNSPECIFIED         |
-| `StatusPending`     | PENDING             |
-| `StatusStarting`    | STARTING            |
-| `StatusBuilding`    | BUILDING            |
-| `StatusDeploying`   | DEPLOYING           |
-| `StatusNetwork`     | NETWORK             |
-| `StatusFinalizing`  | FINALIZING          |
-| `StatusReady`       | READY               |
-| `StatusFailed`      | FAILED              |
+| Name                     | Value                    |
+| ------------------------ | ------------------------ |
+| `StatusUnspecified`      | UNSPECIFIED              |
+| `StatusPending`          | PENDING                  |
+| `StatusStarting`         | STARTING                 |
+| `StatusBuilding`         | BUILDING                 |
+| `StatusDeploying`        | DEPLOYING                |
+| `StatusNetwork`          | NETWORK                  |
+| `StatusFinalizing`       | FINALIZING               |
+| `StatusReady`            | READY                    |
+| `StatusFailed`           | FAILED                   |
+| `StatusSkipped`          | SKIPPED                  |
+| `StatusAwaitingApproval` | AWAITING_APPROVAL        |

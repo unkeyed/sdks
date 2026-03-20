@@ -52,3 +52,6 @@ func (v *V2RatelimitListOverridesRequestBody) GetLimit() *int64 {
 	}
 	return v.Limit
 }
+
+// #region class-body-v2ratelimitlistoverridesrequestbody
+// #endregion class-body-v2ratelimitlistoverridesrequestbody

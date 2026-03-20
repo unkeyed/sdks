@@ -14,3 +14,6 @@ func (v *V2PermissionsGetPermissionRequestBody) GetPermission() string {
 	}
 	return v.Permission
 }
+
+// #region class-body-v2permissionsgetpermissionrequestbody
+// #endregion class-body-v2permissionsgetpermissionrequestbody

@@ -37,3 +37,6 @@ func (v *V2RatelimitGetOverrideRequestBody) GetIdentifier() string {
 	}
 	return v.Identifier
 }
+
+// #region class-body-v2ratelimitgetoverriderequestbody
+// #endregion class-body-v2ratelimitgetoverriderequestbody

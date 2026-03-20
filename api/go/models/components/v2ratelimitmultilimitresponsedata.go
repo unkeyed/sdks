@@ -25,3 +25,6 @@ func (v *V2RatelimitMultiLimitResponseData) GetLimits() []V2RatelimitMultiLimitC
 	}
 	return v.Limits
 }
+
+// #region class-body-v2ratelimitmultilimitresponsedata
+// #endregion class-body-v2ratelimitmultilimitresponsedata

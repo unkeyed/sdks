@@ -21,3 +21,6 @@ func (v *V2KeysMigrateKeysResponseBody) GetData() V2KeysMigrateKeysResponseData 
 	}
 	return v.Data
 }
+
+// #region class-body-v2keysmigratekeysresponsebody
+// #endregion class-body-v2keysmigratekeysresponsebody

@@ -23,3 +23,6 @@ func (v *V2KeysCreateKeyResponseData) GetKey() string {
 	}
 	return v.Key
 }
+
+// #region class-body-v2keyscreatekeyresponsedata
+// #endregion class-body-v2keyscreatekeyresponsedata

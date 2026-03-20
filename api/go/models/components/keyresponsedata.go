@@ -17,6 +17,8 @@ type KeyResponseData struct {
 	CreatedAt int64 `json:"createdAt"`
 	// Unix timestamp in milliseconds when key was last updated.
 	UpdatedAt *int64 `json:"updatedAt,omitempty"`
+	// Unix timestamp in milliseconds when key was last used for verification. This is an approximated value, accurate to within 5 minutes.
+	LastUsedAt *int64 `json:"lastUsedAt,omitempty"`
 	// Unix timestamp in milliseconds when key expires (if set).
 	Expires     *int64   `json:"expires,omitempty"`
 	Permissions []string `json:"permissions,omitempty"`
@@ -76,6 +78,13 @@ func (k *KeyResponseData) GetUpdatedAt() *int64 {
 		return nil
 	}
 	return k.UpdatedAt
+}
+
+func (k *KeyResponseData) GetLastUsedAt() *int64 {
+	if k == nil {
+		return nil
+	}
+	return k.LastUsedAt
 }
 
 func (k *KeyResponseData) GetExpires() *int64 {

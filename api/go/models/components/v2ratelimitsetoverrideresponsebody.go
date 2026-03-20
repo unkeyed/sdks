@@ -21,3 +21,6 @@ func (v *V2RatelimitSetOverrideResponseBody) GetData() V2RatelimitSetOverrideRes
 	}
 	return v.Data
 }
+
+// #region class-body-v2ratelimitsetoverrideresponsebody
+// #endregion class-body-v2ratelimitsetoverrideresponsebody

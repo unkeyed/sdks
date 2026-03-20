@@ -31,3 +31,6 @@ func (v *V2IdentitiesListIdentitiesResponseBody) GetPagination() Pagination {
 	}
 	return v.Pagination
 }
+
+// #region class-body-v2identitieslistidentitiesresponsebody
+// #endregion class-body-v2identitieslistidentitiesresponsebody

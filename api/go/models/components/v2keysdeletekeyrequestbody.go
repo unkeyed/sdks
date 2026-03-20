@@ -48,3 +48,6 @@ func (v *V2KeysDeleteKeyRequestBody) GetPermanent() *bool {
 	}
 	return v.Permanent
 }
+
+// #region class-body-v2keysdeletekeyrequestbody
+// #endregion class-body-v2keysdeletekeyrequestbody

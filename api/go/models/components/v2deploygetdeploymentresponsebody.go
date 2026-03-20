@@ -21,3 +21,6 @@ func (v *V2DeployGetDeploymentResponseBody) GetData() V2DeployGetDeploymentRespo
 	}
 	return v.Data
 }
+
+// #region class-body-v2deploygetdeploymentresponsebody
+// #endregion class-body-v2deploygetdeploymentresponsebody

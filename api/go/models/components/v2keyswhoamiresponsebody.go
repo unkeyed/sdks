@@ -21,3 +21,6 @@ func (v *V2KeysWhoamiResponseBody) GetData() KeyResponseData {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keyswhoamiresponsebody
+// #endregion class-body-v2keyswhoamiresponsebody

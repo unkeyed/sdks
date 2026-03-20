@@ -31,3 +31,6 @@ func (v *V2ApisListKeysResponseBody) GetPagination() *Pagination {
 	}
 	return v.Pagination
 }
+
+// #region class-body-v2apislistkeysresponsebody
+// #endregion class-body-v2apislistkeysresponsebody

@@ -21,3 +21,6 @@ func (v *V2PermissionsGetRoleResponseBody) GetData() Role {
 	}
 	return v.Data
 }
+
+// #region class-body-v2permissionsgetroleresponsebody
+// #endregion class-body-v2permissionsgetroleresponsebody

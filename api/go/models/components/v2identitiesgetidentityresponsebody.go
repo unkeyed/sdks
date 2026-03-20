@@ -21,3 +21,6 @@ func (v *V2IdentitiesGetIdentityResponseBody) GetData() Identity {
 	}
 	return v.Data
 }
+
+// #region class-body-v2identitiesgetidentityresponsebody
+// #endregion class-body-v2identitiesgetidentityresponsebody

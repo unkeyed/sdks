@@ -29,3 +29,6 @@ func (v *V2KeysRemovePermissionsResponseBody) GetData() []Permission {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keysremovepermissionsresponsebody
+// #endregion class-body-v2keysremovepermissionsresponsebody

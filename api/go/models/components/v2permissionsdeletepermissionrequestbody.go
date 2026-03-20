@@ -27,3 +27,6 @@ func (v *V2PermissionsDeletePermissionRequestBody) GetPermission() string {
 	}
 	return v.Permission
 }
+
+// #region class-body-v2permissionsdeletepermissionrequestbody
+// #endregion class-body-v2permissionsdeletepermissionrequestbody

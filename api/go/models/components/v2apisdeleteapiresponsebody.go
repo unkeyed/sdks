@@ -22,3 +22,6 @@ func (v *V2ApisDeleteAPIResponseBody) GetData() EmptyResponse {
 	}
 	return v.Data
 }
+
+// #region class-body-v2apisdeleteapiresponsebody
+// #endregion class-body-v2apisdeleteapiresponsebody

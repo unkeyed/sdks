@@ -6,15 +6,17 @@ package components
 type Status string
 
 const (
-	StatusUnspecified Status = "UNSPECIFIED"
-	StatusPending     Status = "PENDING"
-	StatusStarting    Status = "STARTING"
-	StatusBuilding    Status = "BUILDING"
-	StatusDeploying   Status = "DEPLOYING"
-	StatusNetwork     Status = "NETWORK"
-	StatusFinalizing  Status = "FINALIZING"
-	StatusReady       Status = "READY"
-	StatusFailed      Status = "FAILED"
+	StatusUnspecified      Status = "UNSPECIFIED"
+	StatusPending          Status = "PENDING"
+	StatusStarting         Status = "STARTING"
+	StatusBuilding         Status = "BUILDING"
+	StatusDeploying        Status = "DEPLOYING"
+	StatusNetwork          Status = "NETWORK"
+	StatusFinalizing       Status = "FINALIZING"
+	StatusReady            Status = "READY"
+	StatusFailed           Status = "FAILED"
+	StatusSkipped          Status = "SKIPPED"
+	StatusAwaitingApproval Status = "AWAITING_APPROVAL"
 )
 
 func (e Status) ToPointer() *Status {
@@ -25,7 +27,7 @@ func (e Status) ToPointer() *Status {
 func (e *Status) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED":
+		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED", "SKIPPED", "AWAITING_APPROVAL":
 			return true
 		}
 	}
@@ -79,3 +81,6 @@ func (v *V2DeployGetDeploymentResponseData) GetSteps() []V2DeployDeploymentStep 
 	}
 	return v.Steps
 }
+
+// #region class-body-v2deploygetdeploymentresponsedata
+// #endregion class-body-v2deploygetdeploymentresponsedata

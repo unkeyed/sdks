@@ -14,3 +14,6 @@ func (v *V2IdentitiesDeleteIdentityResponseBody) GetMeta() Meta {
 	}
 	return v.Meta
 }
+
+// #region class-body-v2identitiesdeleteidentityresponsebody
+// #endregion class-body-v2identitiesdeleteidentityresponsebody

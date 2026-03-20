@@ -39,3 +39,6 @@ func (v *V2IdentitiesUpdateIdentityRequestBody) GetRatelimits() []RatelimitReque
 	}
 	return v.Ratelimits
 }
+
+// #region class-body-v2identitiesupdateidentityrequestbody
+// #endregion class-body-v2identitiesupdateidentityrequestbody

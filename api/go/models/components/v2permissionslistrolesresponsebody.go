@@ -31,3 +31,6 @@ func (v *V2PermissionsListRolesResponseBody) GetPagination() *Pagination {
 	}
 	return v.Pagination
 }
+
+// #region class-body-v2permissionslistrolesresponsebody
+// #endregion class-body-v2permissionslistrolesresponsebody

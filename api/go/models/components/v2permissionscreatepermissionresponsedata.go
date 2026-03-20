@@ -17,3 +17,6 @@ func (v *V2PermissionsCreatePermissionResponseData) GetPermissionID() string {
 	}
 	return v.PermissionID
 }
+
+// #region class-body-v2permissionscreatepermissionresponsedata
+// #endregion class-body-v2permissionscreatepermissionresponsedata

@@ -32,3 +32,6 @@ func (v *V2KeysSetRolesRequestBody) GetRoles() []string {
 	}
 	return v.Roles
 }
+
+// #region class-body-v2keyssetrolesrequestbody
+// #endregion class-body-v2keyssetrolesrequestbody

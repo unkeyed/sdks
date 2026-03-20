@@ -13,3 +13,6 @@ func (v *V2DeployGetDeploymentRequestBody) GetDeploymentID() string {
 	}
 	return v.DeploymentID
 }
+
+// #region class-body-v2deploygetdeploymentrequestbody
+// #endregion class-body-v2deploygetdeploymentrequestbody

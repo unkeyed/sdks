@@ -73,3 +73,6 @@ func (v *V2RatelimitSetOverrideRequestBody) GetLimit() int64 {
 	}
 	return v.Limit
 }
+
+// #region class-body-v2ratelimitsetoverriderequestbody
+// #endregion class-body-v2ratelimitsetoverriderequestbody

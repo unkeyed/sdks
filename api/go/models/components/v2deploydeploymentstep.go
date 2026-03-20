@@ -40,3 +40,6 @@ func (v *V2DeployDeploymentStep) GetCreatedAt() *int64 {
 	}
 	return v.CreatedAt
 }
+
+// #region class-body-v2deploydeploymentstep
+// #endregion class-body-v2deploydeploymentstep

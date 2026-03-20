@@ -22,3 +22,6 @@ func (v *V2KeysMigrateKeysResponseData) GetFailed() []string {
 	}
 	return v.Failed
 }
+
+// #region class-body-v2keysmigratekeysresponsedata
+// #endregion class-body-v2keysmigratekeysresponsedata

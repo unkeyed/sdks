@@ -13,3 +13,6 @@ func (v *V2IdentitiesDeleteIdentityRequestBody) GetIdentity() string {
 	}
 	return v.Identity
 }
+
+// #region class-body-v2identitiesdeleteidentityrequestbody
+// #endregion class-body-v2identitiesdeleteidentityrequestbody

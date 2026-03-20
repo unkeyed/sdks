@@ -120,3 +120,6 @@ func (v *V2KeysUpdateKeyRequestBody) GetPermissions() []string {
 	}
 	return v.Permissions
 }
+
+// #region class-body-v2keysupdatekeyrequestbody
+// #endregion class-body-v2keysupdatekeyrequestbody

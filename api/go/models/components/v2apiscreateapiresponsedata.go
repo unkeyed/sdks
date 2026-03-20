@@ -24,3 +24,6 @@ func (v *V2ApisCreateAPIResponseData) GetAPIID() string {
 	}
 	return v.APIID
 }
+
+// #region class-body-v2apiscreateapiresponsedata
+// #endregion class-body-v2apiscreateapiresponsedata

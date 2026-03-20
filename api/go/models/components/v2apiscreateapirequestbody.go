@@ -15,3 +15,6 @@ func (v *V2ApisCreateAPIRequestBody) GetName() string {
 	}
 	return v.Name
 }
+
+// #region class-body-v2apiscreateapirequestbody
+// #endregion class-body-v2apiscreateapirequestbody

@@ -39,3 +39,6 @@ func (v *V2RatelimitDeleteOverrideRequestBody) GetIdentifier() string {
 	}
 	return v.Identifier
 }
+
+// #region class-body-v2ratelimitdeleteoverriderequestbody
+// #endregion class-body-v2ratelimitdeleteoverriderequestbody

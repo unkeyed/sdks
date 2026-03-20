@@ -33,3 +33,6 @@ func (v *V2KeysRemoveRolesResponseBody) GetData() []Role {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keysremoverolesresponsebody
+// #endregion class-body-v2keysremoverolesresponsebody
