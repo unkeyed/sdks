@@ -15,5 +15,5 @@ let value: Status = "READY";
 ## Values
 
 ```typescript
-"UNSPECIFIED" | "PENDING" | "STARTING" | "BUILDING" | "DEPLOYING" | "NETWORK" | "FINALIZING" | "READY" | "FAILED" | Unrecognized<string>
+"UNSPECIFIED" | "PENDING" | "STARTING" | "BUILDING" | "DEPLOYING" | "NETWORK" | "FINALIZING" | "READY" | "FAILED" | "SKIPPED" | "AWAITING_APPROVAL" | Unrecognized<string>
 ```
