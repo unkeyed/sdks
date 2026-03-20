@@ -21,6 +21,7 @@ let value: V2KeysWhoamiResponseBody = {
     },
     createdAt: 1701425400000,
     updatedAt: 1701425400000,
+    lastUsedAt: 1701425400000,
     expires: 1735689600000,
     permissions: [
       "documents.read",

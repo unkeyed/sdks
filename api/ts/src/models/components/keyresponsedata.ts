@@ -46,6 +46,10 @@ export type KeyResponseData = {
    */
   updatedAt?: number | undefined;
   /**
+   * Unix timestamp in milliseconds when key was last used for verification. This is an approximated value, accurate to within 5 minutes.
+   */
+  lastUsedAt?: number | undefined;
+  /**
    * Unix timestamp in milliseconds when key expires (if set).
    */
   expires?: number | undefined;
@@ -76,6 +80,7 @@ export const KeyResponseData$inboundSchema: z.ZodType<
   meta: z.record(z.any()).optional(),
   createdAt: z.number().int(),
   updatedAt: z.number().int().optional(),
+  lastUsedAt: z.number().int().optional(),
   expires: z.number().int().optional(),
   permissions: z.array(z.string()).optional(),
   roles: z.array(z.string()).optional(),

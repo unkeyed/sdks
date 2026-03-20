@@ -26,6 +26,8 @@ export const Status = {
   Finalizing: "FINALIZING",
   Ready: "READY",
   Failed: "FAILED",
+  Skipped: "SKIPPED",
+  AwaitingApproval: "AWAITING_APPROVAL",
 } as const;
 /**
  * Current deployment status

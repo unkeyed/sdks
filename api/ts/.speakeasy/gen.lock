@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 9485fe3fccbde2c1c8f1f797c9f2d608
+  docChecksum: dda5b6d1903f68aca58fe02fa2bf9048
   docVersion: 2.0.0
-  speakeasyVersion: 1.750.0
-  generationVersion: 2.856.1
-  releaseVersion: 2.3.1
-  configChecksum: b164f69999b357a461ef95dba1f54071
+  speakeasyVersion: 1.758.0
+  generationVersion: 2.866.2
+  releaseVersion: 2.3.2
+  configChecksum: 7dbf33667daf22598e4fb03c20609536
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: e7b40040-a824-4fc4-b9f2-3dee388b3197
-  pristine_commit_hash: ac3fc0272a8d88397b70a268fa2156e95fe46249
-  pristine_tree_hash: 7a4d34c44669ca8523ffc34ada0c9e99a92f3e9d
+  generation_id: 2e650de5-9344-430e-ad8c-489293c52251
+  pristine_commit_hash: 10737fd8fa092e2bf75d99147a69814632665901
+  pristine_tree_hash: 1411d4a5c3bc839611e70c00142cd8204bc9832f
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.26.41
+    core: 3.26.42
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -95,8 +95,8 @@ trackedFiles:
     pristine_git_object: fc3eb53a1e39204eacb0251959cb9dac0cfade87
   docs/models/components/keyresponsedata.md:
     id: d5018289f515
-    last_write_checksum: sha1:f7d560d8f0f20fdfb9829453edc9d374ebe4fa5e
-    pristine_git_object: 47cf1e3282f9a0b4c8836062a5256d703f752a6f
+    last_write_checksum: sha1:1f89a65d01e246e0ce5f67e436ea7681a0194946
+    pristine_git_object: 30c934080c93fd8afb5959516f516b4bb7efd665
   docs/models/components/keysverifykeycredits.md:
     id: b87d4b64c82e
     last_write_checksum: sha1:8834e3c9f2cd5b7c9a550bd07d7dd1c7a79351c2
@@ -143,8 +143,8 @@ trackedFiles:
     pristine_git_object: 708ada900d8d525492cbfdbe489431e0be157048
   docs/models/components/status.md:
     id: e26b2fe7f53e
-    last_write_checksum: sha1:1310478663fff29208d61f5619990a4c9ea7547e
-    pristine_git_object: 8a6d1806287681648fcbd24d6e10853d4e754a25
+    last_write_checksum: sha1:8511b361485b93812c2fa856603aa07e91620979
+    pristine_git_object: c13428363d00a5ca7f6628c2434991d6c189b1a1
   docs/models/components/updatekeycreditsdata.md:
     id: 116788edee66
     last_write_checksum: sha1:7aa46b3b627586559ae540f4d645f2edb95447fd
@@ -323,8 +323,8 @@ trackedFiles:
     pristine_git_object: 6b6bd5d7474921d00e990b4be58064b058f78dfd
   docs/models/components/v2keysgetkeyresponsebody.md:
     id: 7689c75142d1
-    last_write_checksum: sha1:23419829a9f58860fef4ded59e7a9dd191db3c16
-    pristine_git_object: cbe5ed8f2c1ac148530c2527341c8623a44c139d
+    last_write_checksum: sha1:18ec2701d3a8c1e5db1c2fd25c6b303136b66fe6
+    pristine_git_object: a0fd1cfa20222955a20b22930dc393635313ef47
   docs/models/components/v2keysmigratekeydata.md:
     id: 2063234960a5
     last_write_checksum: sha1:6e5c8ce14d1a92a6a764b5da480d12cd8ca0af2c
@@ -423,8 +423,8 @@ trackedFiles:
     pristine_git_object: 623167fbf9ae0eac7251dc26c620ff6d2403df78
   docs/models/components/v2keyswhoamiresponsebody.md:
     id: e95e510cdbeb
-    last_write_checksum: sha1:b2aa1081476af7919a74a63dd1b24275f41a3668
-    pristine_git_object: fb73763cfba5bfd03f6990c0903b74c2261c44a8
+    last_write_checksum: sha1:be906256d16ce5a97d6443b6c95e3f26260f9292
+    pristine_git_object: 3e02f2a44f05b8c526c13c249c23948b4b378829
   docs/models/components/v2permissionscreatepermissionrequestbody.md:
     id: f52515943c12
     last_write_checksum: sha1:f72a88e0c76163ac25f50ec9fc8ff861d4a4e908
@@ -667,12 +667,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:2112a99113d07fad05b545238365943162d1c246
-    pristine_git_object: dc6daea6cdfa1a158d0f286c864309a263a321bf
+    last_write_checksum: sha1:b642272a28350053fd81c73af0cdd49c764ea964
+    pristine_git_object: 1a20d0e38d4daa65e29ffe807496cd89f5f8c842
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:fa025bab850d3482f42c4f9136257c7210d6b1cc
-    pristine_git_object: d23603cfbec2d0eaff361bcfd1eaf231b03c9eed
+    last_write_checksum: sha1:2368934fe8dde89254b2cdcc42e5e4f9d993a6f1
+    pristine_git_object: 4c8f0cf83bee4c3e7818deeef36dca7d10a89b7d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -863,8 +863,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:411abf9de0df388086a7ae4c744695e362603c41
-    pristine_git_object: 9d244ae333e9105f6c4208ce58688589aa475603
+    last_write_checksum: sha1:08767a4af5b79c0c4b6ebe23419d37ee2222701e
+    pristine_git_object: 5b804986ce724d8b57971d1326c526e9b6243b97
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -879,8 +879,8 @@ trackedFiles:
     pristine_git_object: 5b6209b8afa2e2c0269487ad0637be3b9c4a0b66
   src/lib/files.ts:
     id: e5efa54fcb95
-    last_write_checksum: sha1:d0f325f445b8d22e7d73baf052c585ec2dd24841
-    pristine_git_object: 0344cd046d033f9e8a55de02f7935c5cec5dc30b
+    last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
+    pristine_git_object: 6ca6b37d35a12448da176ee2517cc036db12c81c
   src/lib/http.ts:
     id: 63a80782d37e
     last_write_checksum: sha1:797cbf16d3c7c4d62d3ba0eedb08617524938457
@@ -951,8 +951,8 @@ trackedFiles:
     pristine_git_object: ad752568a5087f0e68fea724b77928d7c9bd4442
   src/models/components/keyresponsedata.ts:
     id: 8c5ad8b91e63
-    last_write_checksum: sha1:5d8d4e62691f32cdfd8a3260416a6484c16b2bf2
-    pristine_git_object: 6f8ff70089b2ca0adeea3cfe29108457226970d2
+    last_write_checksum: sha1:ed0250cfedd2bbdfda5eaacf4dd02844ca8ad67b
+    pristine_git_object: 0f29b60c3b0eee60185c2af4051acc88dd93fa64
   src/models/components/keysverifykeycredits.ts:
     id: 8dfda6db802d
     last_write_checksum: sha1:c78fd1a93e0e8b736e14162868e0a182e71b7540
@@ -1075,8 +1075,8 @@ trackedFiles:
     pristine_git_object: f54fd87fd480dc262d5cc501117755cb0f849900
   src/models/components/v2deploygetdeploymentresponsedata.ts:
     id: dd235a3e9e08
-    last_write_checksum: sha1:67aeaf9809d3e14ffb762945084ebdd01511e535
-    pristine_git_object: a50416869323bcf6b6b7ac6624f8cc8eac5a9549
+    last_write_checksum: sha1:bcb57112347765920dbcd316e82d14762738e7ed
+    pristine_git_object: 5275908760d62c7fb078c52b76444ae222c46061
   src/models/components/v2deploygitcommit.ts:
     id: d320fe07fa86
     last_write_checksum: sha1:29c7910eb1c896400a0902fd1396be2d13b44906
@@ -3010,7 +3010,7 @@ examples:
         application/json: {"keyId": "key_1234abcd", "decrypt": false}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "lastUsedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -3194,7 +3194,7 @@ examples:
         application/json: {"key": "sk_1234abcdef5678"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "lastUsedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -3411,7 +3411,12 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `unkey.internal.createDeployment()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `error.status[429]` **Added**\n* `unkey.analytics.getVerifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)\n* `unkey.keys.rerollKey()`:  `error.status[429]` **Added**\n* `unkey.keys.removePermissions()`:  `error.status[429]` **Added**\n* `unkey.apis.listKeys()`:  `error.status[429]` **Added**\n* `unkey.apis.deleteApi()`:  `error.status[429]` **Added**\n* `unkey.internal.getDeployment()`: \n  *  `response.data.status` **Changed**\n  *  `error.status[429]` **Added**\n* `unkey.identities.createIdentity()`:  `error.status[429]` **Added**\n* `unkey.identities.deleteIdentity()`:  `error.status[429]` **Added**\n* `unkey.identities.getIdentity()`:  `error.status[429]` **Added**\n* `unkey.identities.listIdentities()`:  `error.status[429]` **Added**\n* `unkey.identities.updateIdentity()`:  `error.status[429]` **Added**\n* `unkey.keys.addPermissions()`:  `error.status[429]` **Added**\n* `unkey.keys.addRoles()`:  `error.status[429]` **Added**\n* `unkey.keys.createKey()`:  `error.status[429]` **Added**\n* `unkey.keys.deleteKey()`:  `error.status[429]` **Added**\n* `unkey.keys.getKey()`:  `error.status[429]` **Added**\n* `unkey.keys.migrateKeys()`:  `error.status[429]` **Added**\n* `unkey.keys.setPermissions()`:  `error.status[429]` **Added**\n* `unkey.keys.removeRoles()`:  `error.status[429]` **Added**\n* `unkey.apis.getApi()`:  `error.status[429]` **Added**\n* `unkey.apis.createApi()`:  `error.status[429]` **Added**\n* `unkey.keys.verifyKey()`:  `error.status[429]` **Added**\n* `unkey.keys.updateCredits()`:  `error.status[429]` **Added**\n* `unkey.keys.updateKey()`:  `error.status[429]` **Added**\n* `unkey.keys.setRoles()`:  `error.status[429]` **Added**\n* `unkey.keys.whoami()`:  `error.status[429]` **Added**\n* `unkey.permissions.createPermission()`:  `error.status[429]` **Added**\n* `unkey.permissions.createRole()`:  `error.status[429]` **Added**\n* `unkey.permissions.deletePermission()`:  `error.status[429]` **Added**\n* `unkey.permissions.deleteRole()`:  `error.status[429]` **Added**\n* `unkey.permissions.getPermission()`:  `error.status[429]` **Added**\n* `unkey.permissions.getRole()`:  `error.status[429]` **Added**\n* `unkey.permissions.listPermissions()`:  `error.status[429]` **Added**\n* `unkey.permissions.listRoles()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.deleteOverride()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.getOverride()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.limit()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.listOverrides()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.multiLimit()`:  `error.status[429]` **Added**\n* `unkey.ratelimit.setOverride()`:  `error.status[429]` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `unkey.apis.listKeys()`:  `response.data[].lastUsedAt` **Added**
+  * `unkey.internal.getDeployment()`:  `response.data.status` **Changed**
+  * `unkey.keys.getKey()`:  `response.data.lastUsedAt` **Added**
+  * `unkey.keys.whoami()`:  `response.data.lastUsedAt` **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore
