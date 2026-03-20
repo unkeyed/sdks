@@ -26,6 +26,8 @@ class KeyResponseDataTypedDict(TypedDict):
     r"""Custom metadata associated with this key."""
     updated_at: NotRequired[int]
     r"""Unix timestamp in milliseconds when key was last updated."""
+    last_used_at: NotRequired[int]
+    r"""Unix timestamp in milliseconds when key was last used for verification. This is an approximated value, accurate to within 5 minutes."""
     expires: NotRequired[int]
     r"""Unix timestamp in milliseconds when key expires (if set)."""
     permissions: NotRequired[List[str]]
@@ -60,6 +62,9 @@ class KeyResponseData(BaseModel):
     updated_at: Annotated[Optional[int], pydantic.Field(alias="updatedAt")] = None
     r"""Unix timestamp in milliseconds when key was last updated."""
 
+    last_used_at: Annotated[Optional[int], pydantic.Field(alias="lastUsedAt")] = None
+    r"""Unix timestamp in milliseconds when key was last used for verification. This is an approximated value, accurate to within 5 minutes."""
+
     expires: Optional[int] = None
     r"""Unix timestamp in milliseconds when key expires (if set)."""
 
@@ -84,6 +89,7 @@ class KeyResponseData(BaseModel):
                 "name",
                 "meta",
                 "updatedAt",
+                "lastUsedAt",
                 "expires",
                 "permissions",
                 "roles",

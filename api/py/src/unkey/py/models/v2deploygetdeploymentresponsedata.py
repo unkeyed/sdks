@@ -26,6 +26,8 @@ class Status(str, Enum, metaclass=utils.OpenEnumMeta):
     FINALIZING = "FINALIZING"
     READY = "READY"
     FAILED = "FAILED"
+    SKIPPED = "SKIPPED"
+    AWAITING_APPROVAL = "AWAITING_APPROVAL"
 
 
 class V2DeployGetDeploymentResponseDataTypedDict(TypedDict):

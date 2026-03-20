@@ -15,14 +15,16 @@ value = Status.UNSPECIFIED
 
 ## Values
 
-| Name          | Value         |
-| ------------- | ------------- |
-| `UNSPECIFIED` | UNSPECIFIED   |
-| `PENDING`     | PENDING       |
-| `STARTING`    | STARTING      |
-| `BUILDING`    | BUILDING      |
-| `DEPLOYING`   | DEPLOYING     |
-| `NETWORK`     | NETWORK       |
-| `FINALIZING`  | FINALIZING    |
-| `READY`       | READY         |
-| `FAILED`      | FAILED        |
+| Name                | Value               |
+| ------------------- | ------------------- |
+| `UNSPECIFIED`       | UNSPECIFIED         |
+| `PENDING`           | PENDING             |
+| `STARTING`          | STARTING            |
+| `BUILDING`          | BUILDING            |
+| `DEPLOYING`         | DEPLOYING           |
+| `NETWORK`           | NETWORK             |
+| `FINALIZING`        | FINALIZING          |
+| `READY`             | READY               |
+| `FAILED`            | FAILED              |
+| `SKIPPED`           | SKIPPED             |
+| `AWAITING_APPROVAL` | AWAITING_APPROVAL   |

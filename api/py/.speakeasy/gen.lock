@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: 9485fe3fccbde2c1c8f1f797c9f2d608
+  docChecksum: dda5b6d1903f68aca58fe02fa2bf9048
   docVersion: 2.0.0
-  speakeasyVersion: 1.750.0
-  generationVersion: 2.856.1
-  releaseVersion: 3.0.0
-  configChecksum: 526fa332752d4c5ed1dc12b8f11d1eb9
+  speakeasyVersion: 1.758.0
+  generationVersion: 2.866.2
+  releaseVersion: 3.0.1
+  configChecksum: 5e391fbfb775038320f1be9161379f7a
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
   published: true
 persistentEdits:
-  generation_id: 971871c8-14b4-4e37-80bf-e06daec1e1ec
-  pristine_commit_hash: 59179f24971ea4bb9a268a9ecd1358a599e80aa3
-  pristine_tree_hash: c5364466fdcfe8fba8bc02470edcf9db69e75f40
+  generation_id: ccd51919-cf5b-4740-b1f0-ac025afd9309
+  pristine_commit_hash: 9030d207a1784b2f81a79f363a6e9b38b983d2b4
+  pristine_tree_hash: dc0b1b19cdbdbc1921b27621667d243ee2609b29
 features:
   python:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.7
-    core: 6.0.16
+    core: 6.0.19
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.2
@@ -134,8 +134,8 @@ trackedFiles:
     pristine_git_object: 6435a70b00185cefd2c977041c480bb04710bff0
   docs/models/keyresponsedata.md:
     id: cf15eec7e96d
-    last_write_checksum: sha1:e26c82089c9a6698d2923d2649fd7ee6ee523718
-    pristine_git_object: 0ae2653247ffbd001a5ddeba3227e75e3ddd58da
+    last_write_checksum: sha1:fb9fa5a66aeff5738f466ec6cfd7b38120c80869
+    pristine_git_object: 1e1a5848ecedcaf8e5b33122be3e001187b71bbb
   docs/models/keysverifykeycredits.md:
     id: 8e1b1feec6e9
     last_write_checksum: sha1:829bd978d31ec024d0c8e103309e7f96f2871e7d
@@ -182,8 +182,8 @@ trackedFiles:
     pristine_git_object: 6d3133d8230ed3d6ba1ede614207deace92423b8
   docs/models/status.md:
     id: 959cd204aadf
-    last_write_checksum: sha1:45e6a17f4b5e5c42671587ffda38a770ab35f86c
-    pristine_git_object: 04ba054860b080f9095c2b38162e162973fe03ff
+    last_write_checksum: sha1:60d839b224efd6b90d492b185dc4188bdbd6b113
+    pristine_git_object: 02da17711291d748c7cdba816b24b7767df424f9
   docs/models/updatekeycreditsdata.md:
     id: 803a3b0d4b55
     last_write_checksum: sha1:47573358cedada27e68876fd6338601f641832b3
@@ -654,8 +654,8 @@ trackedFiles:
     pristine_git_object: 42a9de7b4883572d33fd257118d55ff12faf0acb
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:5ee9494991976d62a6d8559a6361651f39de7c22
-    pristine_git_object: b5969996729b8a96611092d9a488ee362cd8d0e5
+    last_write_checksum: sha1:caa099ea8dbb06fcfdbbba513ca9d0af5d45e02d
+    pristine_git_object: 20a46b59840929069c7273a14ebb1a2490cd9a01
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:623648abfc037d1a6a3a146251169d77b83801ae
@@ -682,8 +682,8 @@ trackedFiles:
     pristine_git_object: 7671d6b2801c991b7b5a8329fbcd2cf1fd4b63e9
   src/unkey/py/_version.py:
     id: dd5769ea5724
-    last_write_checksum: sha1:779a2049b43ac5fc31480093e53226837472fb7a
-    pristine_git_object: 0c44db1346dbfd2c061f77f07c346a13936a3dcc
+    last_write_checksum: sha1:89ba3c860af54a297707d0bce466efa87856f53e
+    pristine_git_object: 6fe32adc2b963e9d624599fd9c17e91c6e4526cf
   src/unkey/py/analytics.py:
     id: 8a9a23d68313
     last_write_checksum: sha1:d95d4a74e827bfc4c010bfb92e317016a53314e3
@@ -810,8 +810,8 @@ trackedFiles:
     pristine_git_object: 7912a0c8af2c285bac1f0854c63a43747ea70ff2
   src/unkey/py/models/keyresponsedata.py:
     id: 7730b0f7ed45
-    last_write_checksum: sha1:1d1a42056f4f73dbd9608c799aa53e2052e1dbf9
-    pristine_git_object: 1a2577ec4a045b139a15dc0f7ff65cb2557b5d10
+    last_write_checksum: sha1:1d90c52d90fb71c6c18f664d45ced09975e1892d
+    pristine_git_object: 9b6c3cf1e86fe1d59cc830bdd6fa52fb58f26cfe
   src/unkey/py/models/keysverifykeycredits.py:
     id: 365dfbb351e1
     last_write_checksum: sha1:46a5e81d75b0a1020615fa561915310c003fdf3a
@@ -934,8 +934,8 @@ trackedFiles:
     pristine_git_object: 83af8435a5cff31bca2a20775182f1205e26afb8
   src/unkey/py/models/v2deploygetdeploymentresponsedata.py:
     id: d9e4ae97041f
-    last_write_checksum: sha1:95cca6194a100026208b9765fff518b55f0f1ed4
-    pristine_git_object: 57aaeba735f8d427aaf4fc459f1f98e9d1ef686d
+    last_write_checksum: sha1:50e27c3f2cec8c000e2e18f79afffd1aa45e0bee
+    pristine_git_object: d2209a8756ea771978bc62265ad9363e71f3e284
   src/unkey/py/models/v2deploygitcommit.py:
     id: a31e6067ef25
     last_write_checksum: sha1:ac80449312f5ef44b8ac270aac65808866bd0ae0
@@ -1322,8 +1322,8 @@ trackedFiles:
     pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/unkey/py/utils/eventstreaming.py:
     id: b1fa45837866
-    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
-    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
+    last_write_checksum: sha1:620d78a8b4e3b854e08d136e02e40a01a786bd70
+    pristine_git_object: 3bdcd6d3d4fc772cb7f5fca8685dcdc8c85e13e8
   src/unkey/py/utils/forms.py:
     id: 3c2dd590d2c3
     last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
@@ -2813,7 +2813,7 @@ examples:
         application/json: {"keyId": "key_1234abcd", "decrypt": false}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "lastUsedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -2997,7 +2997,7 @@ examples:
         application/json: {"key": "sk_1234abcdef5678"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"keyId": "key_1234567890abcdef", "start": "sk_test_abc123", "enabled": true, "name": "Production API Key", "meta": {"key": "<value>", "key1": "<value>"}, "createdAt": 1701425400000, "updatedAt": 1701425400000, "lastUsedAt": 1701425400000, "expires": 1735689600000, "permissions": ["documents.read", "documents.write"], "roles": ["editor", "viewer"], "credits": {"remaining": 1000, "refill": {"interval": "daily", "amount": 1000, "refillDay": 15}}, "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "plaintext": "sk_test_abc123def456", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -3216,47 +3216,10 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes:
-  * `unkey.analytics.get_verifications()`:  `error.status[429]` **Changed** (Breaking ⚠️)
-  * `unkey.keys.reroll_key()`:  `error.status[429]` **Added**
-  * `unkey.keys.delete_key()`:  `error.status[429]` **Added**
-  * `unkey.apis.create_api()`:  `error.status[429]` **Added**
-  * `unkey.apis.delete_api()`:  `error.status[429]` **Added**
-  * `unkey.apis.get_api()`:  `error.status[429]` **Added**
-  * `unkey.apis.list_keys()`:  `error.status[429]` **Added**
-  * `unkey.identities.create_identity()`:  `error.status[429]` **Added**
-  * `unkey.identities.delete_identity()`:  `error.status[429]` **Added**
-  * `unkey.identities.get_identity()`:  `error.status[429]` **Added**
-  * `unkey.identities.list_identities()`:  `error.status[429]` **Added**
-  * `unkey.identities.update_identity()`:  `error.status[429]` **Added**
-  * `unkey.keys.add_permissions()`:  `error.status[429]` **Added**
-  * `unkey.keys.add_roles()`:  `error.status[429]` **Added**
-  * `unkey.keys.create_key()`:  `error.status[429]` **Added**
-  * `unkey.internal.create_deployment()`: **Added**
-  * `unkey.keys.get_key()`:  `error.status[429]` **Added**
-  * `unkey.keys.migrate_keys()`:  `error.status[429]` **Added**
-  * `unkey.keys.remove_permissions()`:  `error.status[429]` **Added**
-  * `unkey.internal.get_deployment()`: **Added**
-  * `unkey.keys.remove_roles()`:  `error.status[429]` **Added**
-  * `unkey.keys.whoami()`:  `error.status[429]` **Added**
-  * `unkey.keys.set_roles()`:  `error.status[429]` **Added**
-  * `unkey.keys.update_credits()`:  `error.status[429]` **Added**
-  * `unkey.keys.update_key()`:  `error.status[429]` **Added**
-  * `unkey.keys.verify_key()`:  `error.status[429]` **Added**
-  * `unkey.keys.set_permissions()`:  `error.status[429]` **Added**
-  * `unkey.permissions.create_permission()`:  `error.status[429]` **Added**
-  * `unkey.permissions.create_role()`:  `error.status[429]` **Added**
-  * `unkey.permissions.delete_permission()`:  `error.status[429]` **Added**
-  * `unkey.permissions.delete_role()`:  `error.status[429]` **Added**
-  * `unkey.permissions.get_permission()`:  `error.status[429]` **Added**
-  * `unkey.permissions.get_role()`:  `error.status[429]` **Added**
-  * `unkey.permissions.list_permissions()`:  `error.status[429]` **Added**
-  * `unkey.permissions.list_roles()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.delete_override()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.get_override()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.limit()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.list_overrides()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.multi_limit()`:  `error.status[429]` **Added**
-  * `unkey.ratelimit.set_override()`:  `error.status[429]` **Added**
+  * `unkey.apis.list_keys()`:  `response.data[].last_used_at` **Added**
+  * `unkey.internal.get_deployment()`:  `response.data.status` **Changed**
+  * `unkey.keys.get_key()`:  `response.data.last_used_at` **Added**
+  * `unkey.keys.whoami()`:  `response.data.last_used_at` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
