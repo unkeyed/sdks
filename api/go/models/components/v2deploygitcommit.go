@@ -50,3 +50,6 @@ func (v *V2DeployGitCommit) GetTimestamp() *int64 {
 	}
 	return v.Timestamp
 }
+
+// #region class-body-v2deploygitcommit
+// #endregion class-body-v2deploygitcommit

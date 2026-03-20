@@ -21,3 +21,6 @@ func (v *V2PermissionsCreateRoleResponseBody) GetData() V2PermissionsCreateRoleR
 	}
 	return v.Data
 }
+
+// #region class-body-v2permissionscreateroleresponsebody
+// #endregion class-body-v2permissionscreateroleresponsebody

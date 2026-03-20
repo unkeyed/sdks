@@ -26,3 +26,6 @@ func (v *V2PermissionsDeleteRoleRequestBody) GetRole() string {
 	}
 	return v.Role
 }
+
+// #region class-body-v2permissionsdeleterolerequestbody
+// #endregion class-body-v2permissionsdeleterolerequestbody

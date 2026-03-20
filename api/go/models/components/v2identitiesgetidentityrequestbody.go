@@ -13,3 +13,6 @@ func (v *V2IdentitiesGetIdentityRequestBody) GetIdentity() string {
 	}
 	return v.Identity
 }
+
+// #region class-body-v2identitiesgetidentityrequestbody
+// #endregion class-body-v2identitiesgetidentityrequestbody

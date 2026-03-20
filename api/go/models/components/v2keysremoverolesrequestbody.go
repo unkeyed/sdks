@@ -31,3 +31,6 @@ func (v *V2KeysRemoveRolesRequestBody) GetRoles() []string {
 	}
 	return v.Roles
 }
+
+// #region class-body-v2keysremoverolesrequestbody
+// #endregion class-body-v2keysremoverolesrequestbody

@@ -43,3 +43,6 @@ func (v *V2PermissionsListPermissionsRequestBody) GetLimit() *int64 {
 	}
 	return v.Limit
 }
+
+// #region class-body-v2permissionslistpermissionsrequestbody
+// #endregion class-body-v2permissionslistpermissionsrequestbody

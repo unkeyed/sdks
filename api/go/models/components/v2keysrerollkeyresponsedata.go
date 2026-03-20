@@ -45,3 +45,6 @@ func (v *V2KeysRerollKeyResponseData) GetKey() string {
 	}
 	return v.Key
 }
+
+// #region class-body-v2keysrerollkeyresponsedata
+// #endregion class-body-v2keysrerollkeyresponsedata

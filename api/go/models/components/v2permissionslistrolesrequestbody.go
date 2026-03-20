@@ -45,3 +45,6 @@ func (v *V2PermissionsListRolesRequestBody) GetCursor() *string {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2permissionslistrolesrequestbody
+// #endregion class-body-v2permissionslistrolesrequestbody

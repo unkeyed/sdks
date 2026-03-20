@@ -21,3 +21,6 @@ func (v *V2IdentitiesUpdateIdentityResponseBody) GetMeta() Meta {
 	}
 	return v.Meta
 }
+
+// #region class-body-v2identitiesupdateidentityresponsebody
+// #endregion class-body-v2identitiesupdateidentityresponsebody

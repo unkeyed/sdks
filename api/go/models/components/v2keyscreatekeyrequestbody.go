@@ -183,3 +183,6 @@ func (v *V2KeysCreateKeyRequestBody) GetRecoverable() *bool {
 	}
 	return v.Recoverable
 }
+
+// #region class-body-v2keyscreatekeyrequestbody
+// #endregion class-body-v2keyscreatekeyrequestbody

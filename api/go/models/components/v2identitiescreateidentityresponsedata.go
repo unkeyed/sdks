@@ -13,3 +13,6 @@ func (v *V2IdentitiesCreateIdentityResponseData) GetIdentityID() string {
 	}
 	return v.IdentityID
 }
+
+// #region class-body-v2identitiescreateidentityresponsedata
+// #endregion class-body-v2identitiescreateidentityresponsedata

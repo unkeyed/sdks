@@ -36,3 +36,6 @@ func (v *V2PermissionsCreateRoleRequestBody) GetDescription() *string {
 	}
 	return v.Description
 }
+
+// #region class-body-v2permissionscreaterolerequestbody
+// #endregion class-body-v2permissionscreaterolerequestbody

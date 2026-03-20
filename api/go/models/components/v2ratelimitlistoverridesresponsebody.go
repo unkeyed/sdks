@@ -30,3 +30,6 @@ func (v *V2RatelimitListOverridesResponseBody) GetPagination() *Pagination {
 	}
 	return v.Pagination
 }
+
+// #region class-body-v2ratelimitlistoverridesresponsebody
+// #endregion class-body-v2ratelimitlistoverridesresponsebody

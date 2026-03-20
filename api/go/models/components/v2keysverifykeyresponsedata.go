@@ -179,3 +179,6 @@ func (v *V2KeysVerifyKeyResponseData) GetRatelimits() []VerifyKeyRatelimitData {
 	}
 	return v.Ratelimits
 }
+
+// #region class-body-v2keysverifykeyresponsedata
+// #endregion class-body-v2keysverifykeyresponsedata

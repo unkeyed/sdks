@@ -22,3 +22,6 @@ func (v *V2PermissionsDeletePermissionResponseBody) GetData() EmptyResponse {
 	}
 	return v.Data
 }
+
+// #region class-body-v2permissionsdeletepermissionresponsebody
+// #endregion class-body-v2permissionsdeletepermissionresponsebody

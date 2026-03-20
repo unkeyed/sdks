@@ -31,3 +31,6 @@ func (v *V2KeysSetPermissionsResponseBody) GetData() []Permission {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keyssetpermissionsresponsebody
+// #endregion class-body-v2keyssetpermissionsresponsebody

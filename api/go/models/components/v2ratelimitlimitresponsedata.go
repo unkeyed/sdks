@@ -73,3 +73,6 @@ func (v *V2RatelimitLimitResponseData) GetOverrideID() *string {
 	}
 	return v.OverrideID
 }
+
+// #region class-body-v2ratelimitlimitresponsedata
+// #endregion class-body-v2ratelimitlimitresponsedata

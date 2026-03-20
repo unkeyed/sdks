@@ -22,3 +22,6 @@ func (v *V2RatelimitDeleteOverrideResponseBody) GetData() V2RatelimitDeleteOverr
 	}
 	return v.Data
 }
+
+// #region class-body-v2ratelimitdeleteoverrideresponsebody
+// #endregion class-body-v2ratelimitdeleteoverrideresponsebody

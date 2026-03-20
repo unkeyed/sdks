@@ -21,3 +21,6 @@ func (v *V2IdentitiesCreateIdentityResponseBody) GetData() V2IdentitiesCreateIde
 	}
 	return v.Data
 }
+
+// #region class-body-v2identitiescreateidentityresponsebody
+// #endregion class-body-v2identitiescreateidentityresponsebody

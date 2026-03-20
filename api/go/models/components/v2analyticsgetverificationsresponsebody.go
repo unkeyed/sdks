@@ -22,3 +22,6 @@ func (v *V2AnalyticsGetVerificationsResponseBody) GetData() []map[string]any {
 	}
 	return v.Data
 }
+
+// #region class-body-v2analyticsgetverificationsresponsebody
+// #endregion class-body-v2analyticsgetverificationsresponsebody

@@ -16,3 +16,6 @@ func (v *V2KeysWhoamiRequestBody) GetKey() string {
 	}
 	return v.Key
 }
+
+// #region class-body-v2keyswhoamirequestbody
+// #endregion class-body-v2keyswhoamirequestbody

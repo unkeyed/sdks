@@ -91,3 +91,6 @@ func (v *V2ApisListKeysRequestBody) GetRevalidateKeysCache() *bool {
 	}
 	return v.RevalidateKeysCache
 }
+
+// #region class-body-v2apislistkeysrequestbody
+// #endregion class-body-v2apislistkeysrequestbody

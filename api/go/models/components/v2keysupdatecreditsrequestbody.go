@@ -61,3 +61,6 @@ func (v *V2KeysUpdateCreditsRequestBody) GetOperation() Operation {
 	}
 	return v.Operation
 }
+
+// #region class-body-v2keysupdatecreditsrequestbody
+// #endregion class-body-v2keysupdatecreditsrequestbody

@@ -18,3 +18,6 @@ func (v *V2PermissionsGetRoleRequestBody) GetRole() string {
 	}
 	return v.Role
 }
+
+// #region class-body-v2permissionsgetrolerequestbody
+// #endregion class-body-v2permissionsgetrolerequestbody

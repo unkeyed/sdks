@@ -22,3 +22,6 @@ func (v *V2KeysUpdateCreditsResponseBody) GetData() KeyCreditsData {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keysupdatecreditsresponsebody
+// #endregion class-body-v2keysupdatecreditsresponsebody

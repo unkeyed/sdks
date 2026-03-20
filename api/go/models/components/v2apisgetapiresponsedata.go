@@ -30,3 +30,6 @@ func (v *V2ApisGetAPIResponseData) GetName() string {
 	}
 	return v.Name
 }
+
+// #region class-body-v2apisgetapiresponsedata
+// #endregion class-body-v2apisgetapiresponsedata

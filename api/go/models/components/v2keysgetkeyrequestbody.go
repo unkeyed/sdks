@@ -48,3 +48,6 @@ func (v *V2KeysGetKeyRequestBody) GetDecrypt() *bool {
 	}
 	return v.Decrypt
 }
+
+// #region class-body-v2keysgetkeyrequestbody
+// #endregion class-body-v2keysgetkeyrequestbody

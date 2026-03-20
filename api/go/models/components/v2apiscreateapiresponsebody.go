@@ -21,3 +21,6 @@ func (v *V2ApisCreateAPIResponseBody) GetData() V2ApisCreateAPIResponseData {
 	}
 	return v.Data
 }
+
+// #region class-body-v2apiscreateapiresponsebody
+// #endregion class-body-v2apiscreateapiresponsebody

@@ -17,3 +17,6 @@ func (v *V2ApisDeleteAPIRequestBody) GetAPIID() string {
 	}
 	return v.APIID
 }
+
+// #region class-body-v2apisdeleteapirequestbody
+// #endregion class-body-v2apisdeleteapirequestbody

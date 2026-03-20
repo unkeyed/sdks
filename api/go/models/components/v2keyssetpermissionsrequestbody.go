@@ -33,3 +33,6 @@ func (v *V2KeysSetPermissionsRequestBody) GetPermissions() []string {
 	}
 	return v.Permissions
 }
+
+// #region class-body-v2keyssetpermissionsrequestbody
+// #endregion class-body-v2keyssetpermissionsrequestbody

@@ -15,3 +15,6 @@ func (v *V2ApisGetAPIRequestBody) GetAPIID() string {
 	}
 	return v.APIID
 }
+
+// #region class-body-v2apisgetapirequestbody
+// #endregion class-body-v2apisgetapirequestbody

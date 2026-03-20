@@ -37,3 +37,6 @@ func (v *V2IdentitiesListIdentitiesRequestBody) GetCursor() *string {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2identitieslistidentitiesrequestbody
+// #endregion class-body-v2identitieslistidentitiesrequestbody

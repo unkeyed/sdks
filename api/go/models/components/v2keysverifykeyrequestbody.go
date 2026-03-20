@@ -78,3 +78,6 @@ func (v *V2KeysVerifyKeyRequestBody) GetMigrationID() *string {
 	}
 	return v.MigrationID
 }
+
+// #region class-body-v2keysverifykeyrequestbody
+// #endregion class-body-v2keysverifykeyrequestbody

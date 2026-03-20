@@ -81,3 +81,6 @@ func (v *V2RatelimitLimitRequestBody) GetLimit() int64 {
 	}
 	return v.Limit
 }
+
+// #region class-body-v2ratelimitlimitrequestbody
+// #endregion class-body-v2ratelimitlimitrequestbody

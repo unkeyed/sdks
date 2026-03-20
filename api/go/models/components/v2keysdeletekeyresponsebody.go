@@ -22,3 +22,6 @@ func (v *V2KeysDeleteKeyResponseBody) GetData() EmptyResponse {
 	}
 	return v.Data
 }
+
+// #region class-body-v2keysdeletekeyresponsebody
+// #endregion class-body-v2keysdeletekeyresponsebody

@@ -54,3 +54,6 @@ func (v *V2PermissionsCreatePermissionRequestBody) GetDescription() *string {
 	}
 	return v.Description
 }
+
+// #region class-body-v2permissionscreatepermissionrequestbody
+// #endregion class-body-v2permissionscreatepermissionrequestbody

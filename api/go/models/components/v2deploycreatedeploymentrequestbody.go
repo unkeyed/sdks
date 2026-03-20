@@ -68,3 +68,6 @@ func (v *V2DeployCreateDeploymentRequestBody) GetGitCommit() *V2DeployGitCommit 
 	}
 	return v.GitCommit
 }
+
+// #region class-body-v2deploycreatedeploymentrequestbody
+// #endregion class-body-v2deploycreatedeploymentrequestbody
