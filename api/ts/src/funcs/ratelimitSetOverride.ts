@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
  *
  * **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitSetOverride(
   client: UnkeyCore,
@@ -114,7 +116,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

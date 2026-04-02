@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
  *
  * **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitDeleteOverride(
   client: UnkeyCore,
@@ -116,7 +118,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

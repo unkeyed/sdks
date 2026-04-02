@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - python</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,18 +95,10 @@
         }
     </style>
 </head>
-<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.apis.list_keys()</code>:  <code>response.data[].last_used_at</code> <strong>Added</strong></li>
-<li><code>unkey.internal.get_deployment()</code>: <code>response.data.status</code> <strong>Changed</strong>
-
-<ul>
-<li><code>enum(awaiting_approval)</code> <strong>Added</strong></li>
-<li><code>enum(skipped)</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.keys.get_key()</code>:  <code>response.data.last_used_at</code> <strong>Added</strong></li>
-<li><code>unkey.keys.whoami()</code>:  <code>response.data.last_used_at</code> <strong>Added</strong></li>
+<li><code>unkey.internal.getDeployment()</code>:  <code>response.data.status.enum(stopped)</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

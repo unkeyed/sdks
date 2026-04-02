@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * **Side Effects**
  *
  * Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function keysUpdateCredits(
   client: UnkeyCore,
@@ -122,7 +124,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

@@ -40,6 +40,8 @@ import { Result } from "../types/fp.js";
  * Your root key must have one of the following permissions:
  * - `ratelimit.*.limit` (to check limits in any namespace)
  * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitLimit(
   client: UnkeyCore,
@@ -120,7 +122,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

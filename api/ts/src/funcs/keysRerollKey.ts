@@ -61,6 +61,8 @@ import { Result } from "../types/fp.js";
  *  Your root key must have:
  *  - `api.*.create_key` or `api.<api_id>.create_key`
  *  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function keysRerollKey(
   client: UnkeyCore,
@@ -139,7 +141,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

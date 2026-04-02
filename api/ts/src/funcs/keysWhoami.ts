@@ -38,6 +38,8 @@ import { Result } from "../types/fp.js";
  * - `api.<api_id>.read_key` (to read keys from a specific API)
  *
  * If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function keysWhoami(
   client: UnkeyCore,
@@ -115,7 +117,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

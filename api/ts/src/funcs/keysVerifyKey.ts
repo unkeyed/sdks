@@ -47,6 +47,8 @@ import { Result } from "../types/fp.js";
  * - `api.<api_id>.verify_key` (verify keys in specific API)
  *
  * **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function keysVerifyKey(
   client: UnkeyCore,
@@ -125,7 +127,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
