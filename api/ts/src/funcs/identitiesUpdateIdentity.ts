@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * > **Important**
  * > Requires `identity.*.update_identity` permission
  * > Rate limit changes propagate within 30 seconds
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function identitiesUpdateIdentity(
   client: UnkeyCore,
@@ -116,7 +118,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

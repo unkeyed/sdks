@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * **Important:** The identifier must match exactly as specified when creating the override, including wildcard patterns.
  *
  * **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitGetOverride(
   client: UnkeyCore,
@@ -114,7 +116,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

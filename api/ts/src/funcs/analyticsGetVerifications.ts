@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Execute custom SQL queries against your key verification analytics.
  * For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function analyticsGetVerifications(
   client: UnkeyCore,
@@ -115,7 +117,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

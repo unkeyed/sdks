@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * **Important:** Results are paginated. Use the cursor parameter to retrieve additional pages when more results are available.
  *
  * **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitListOverrides(
   client: UnkeyCore,
@@ -116,7 +118,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

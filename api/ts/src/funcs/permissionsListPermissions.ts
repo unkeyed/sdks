@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  *
  * Your root key must have the following permission:
  * - `rbac.*.read_permission`
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function permissionsListPermissions(
   client: UnkeyCore,
@@ -114,7 +116,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

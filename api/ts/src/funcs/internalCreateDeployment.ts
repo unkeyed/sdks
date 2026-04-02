@@ -35,6 +35,8 @@ import { Result } from "../types/fp.js";
  * Creates a new deployment for a project using either a pre-built Docker image or build context.
  *
  * **Authentication**: Requires a valid root key with appropriate permissions.
+ *
+ * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function internalCreateDeployment(
   client: UnkeyCore,
@@ -115,7 +117,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
