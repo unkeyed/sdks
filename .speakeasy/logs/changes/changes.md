@@ -1,2 +1,2 @@
-## Typescript SDK Changes:
-* `unkey.internal.getDeployment()`:  `response.data.status.enum(stopped)` **Added**
+## Go SDK Changes:
+* `Unkey.Internal.GetDeployment()`:  `response.Data.Status.Enum(stopped)` **Added**
