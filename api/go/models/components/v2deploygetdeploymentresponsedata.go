@@ -17,6 +17,7 @@ const (
 	StatusFailed           Status = "FAILED"
 	StatusSkipped          Status = "SKIPPED"
 	StatusAwaitingApproval Status = "AWAITING_APPROVAL"
+	StatusStopped          Status = "STOPPED"
 )
 
 func (e Status) ToPointer() *Status {
@@ -27,7 +28,7 @@ func (e Status) ToPointer() *Status {
 func (e *Status) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED", "SKIPPED", "AWAITING_APPROVAL":
+		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED", "SKIPPED", "AWAITING_APPROVAL", "STOPPED":
 			return true
 		}
 	}

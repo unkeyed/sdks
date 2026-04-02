@@ -43,6 +43,8 @@ func newApis(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 //
 // Your root key must have one of the following permissions:
 // - `api.*.create_api` (to create APIs in any workspace)
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPIRequestBody, opts ...operations.Option) (*operations.ApisCreateAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -102,7 +104,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -379,6 +381,8 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 // Your root key must have one of the following permissions:
 // - `api.*.delete_api` (to delete any API)
 // - `api.<api_id>.delete_api` (to delete a specific API)
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPIRequestBody, opts ...operations.Option) (*operations.ApisDeleteAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -438,7 +442,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -753,6 +757,8 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 // Your root key must have one of the following permissions:
 // - `api.*.read_api` (to read any API)
 // - `api.<api_id>.read_api` (to read a specific API)
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIRequestBody, opts ...operations.Option) (*operations.ApisGetAPIResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -812,7 +818,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1114,6 +1120,8 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 //
 // Additional permission required for decrypt functionality:
 // - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRequestBody, opts ...operations.Option) (*operations.ApisListKeysResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1173,7 +1181,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 

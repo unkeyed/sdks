@@ -1,4 +1,4 @@
-speakeasyVersion: 1.761.0
+speakeasyVersion: 1.761.1
 sources:
     api:
         sourceNamespace: api
@@ -18,10 +18,10 @@ targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:3cb560a54e1d937c50f68909c28a96246d9147ba3ffe039d048560b8d2f80a04
-        sourceBlobDigest: sha256:dc325957f905320b13a9fd8d163b1ecb25954f3b010004bc56909723642cde69
+        sourceRevisionDigest: sha256:8e7a9ae8b1313c11c52b3cddcb2cfa70e9fdc2b69fda7fef158c7be1a668e9d7
+        sourceBlobDigest: sha256:8e412febf397f1b7930b013f775f905f96316e433013181613acc2cfb599e872
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:cc489efec692e8721187639060b75e439042ccba7a66ef1f91178fab8793c172
+        codeSamplesRevisionDigest: sha256:303a956b7f1edbcf51291197800248a864d1fa7ef6fa58ce886ac6f3257f5cf4
     api-py:
         source: api-python
         sourceNamespace: api-python

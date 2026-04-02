@@ -38,6 +38,8 @@ func newInternal(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks
 // Creates a new deployment for a project using either a pre-built Docker image or build context.
 //
 // **Authentication**: Requires a valid root key with appropriate permissions.
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Internal) CreateDeployment(ctx context.Context, request components.V2DeployCreateDeploymentRequestBody, opts ...operations.Option) (*operations.DeployCreateDeploymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -97,7 +99,7 @@ func (s *Internal) CreateDeployment(ctx context.Context, request components.V2De
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -388,6 +390,8 @@ func (s *Internal) CreateDeployment(ctx context.Context, request components.V2De
 // Retrieves deployment information including status, error messages, and steps.
 //
 // **Authentication**: Requires a valid root key with appropriate permissions.
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Internal) GetDeployment(ctx context.Context, request components.V2DeployGetDeploymentRequestBody, opts ...operations.Option) (*operations.DeployGetDeploymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -447,7 +451,7 @@ func (s *Internal) GetDeployment(ctx context.Context, request components.V2Deplo
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 

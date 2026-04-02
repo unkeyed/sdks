@@ -42,6 +42,8 @@ func newIdentities(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hoo
 //
 // **Important**
 // Requires `identity.*.create_identity` permission
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) CreateIdentity(ctx context.Context, request components.V2IdentitiesCreateIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesCreateIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -101,7 +103,7 @@ func (s *Identities) CreateIdentity(ctx context.Context, request components.V2Id
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -394,6 +396,8 @@ func (s *Identities) CreateIdentity(ctx context.Context, request components.V2Id
 // > Requires `identity.*.delete_identity` permission
 // > Associated API keys remain functional but lose shared resources
 // > External ID becomes available for reuse immediately
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2IdentitiesDeleteIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesDeleteIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -453,7 +457,7 @@ func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2Id
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -744,6 +748,8 @@ func (s *Identities) DeleteIdentity(ctx context.Context, request components.V2Id
 //
 // > **Important**
 // > Requires `identity.*.read_identity` permission
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) GetIdentity(ctx context.Context, request components.V2IdentitiesGetIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesGetIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -803,7 +809,7 @@ func (s *Identities) GetIdentity(ctx context.Context, request components.V2Ident
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1094,6 +1100,8 @@ func (s *Identities) GetIdentity(ctx context.Context, request components.V2Ident
 //
 // > **Important**
 // > Requires `identity.*.read_identity` permission
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) ListIdentities(ctx context.Context, request components.V2IdentitiesListIdentitiesRequestBody, opts ...operations.Option) (*operations.IdentitiesListIdentitiesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1153,7 +1161,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1468,6 +1476,8 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 // > **Important**
 // > Requires `identity.*.update_identity` permission
 // > Rate limit changes propagate within 30 seconds
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2IdentitiesUpdateIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesUpdateIdentityResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1527,7 +1537,7 @@ func (s *Identities) UpdateIdentity(ctx context.Context, request components.V2Id
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 

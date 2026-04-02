@@ -35,6 +35,8 @@ func newAnalytics(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hook
 // GetVerifications - Query key verification data
 // Execute custom SQL queries against your key verification analytics.
 // For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Analytics) GetVerifications(ctx context.Context, request components.V2AnalyticsGetVerificationsRequestBody, opts ...operations.Option) (*operations.AnalyticsGetVerificationsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -94,7 +96,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 

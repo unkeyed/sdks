@@ -40,6 +40,8 @@ func newRatelimit(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hook
 // **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
 //
 // **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) DeleteOverride(ctx context.Context, request components.V2RatelimitDeleteOverrideRequestBody, opts ...operations.Option) (*operations.RatelimitDeleteOverrideResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -99,7 +101,7 @@ func (s *Ratelimit) DeleteOverride(ctx context.Context, request components.V2Rat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -391,6 +393,8 @@ func (s *Ratelimit) DeleteOverride(ctx context.Context, request components.V2Rat
 // **Important:** The identifier must match exactly as specified when creating the override, including wildcard patterns.
 //
 // **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) GetOverride(ctx context.Context, request components.V2RatelimitGetOverrideRequestBody, opts ...operations.Option) (*operations.RatelimitGetOverrideResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -450,7 +454,7 @@ func (s *Ratelimit) GetOverride(ctx context.Context, request components.V2Rateli
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -746,6 +750,8 @@ func (s *Ratelimit) GetOverride(ctx context.Context, request components.V2Rateli
 // Your root key must have one of the following permissions:
 // - `ratelimit.*.limit` (to check limits in any namespace)
 // - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) Limit(ctx context.Context, request components.V2RatelimitLimitRequestBody, opts ...operations.Option) (*operations.RatelimitLimitResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -805,7 +811,7 @@ func (s *Ratelimit) Limit(ctx context.Context, request components.V2RatelimitLim
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1118,6 +1124,8 @@ func (s *Ratelimit) Limit(ctx context.Context, request components.V2RatelimitLim
 // **Important:** Results are paginated. Use the cursor parameter to retrieve additional pages when more results are available.
 //
 // **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2RatelimitListOverridesRequestBody, opts ...operations.Option) (*operations.RatelimitListOverridesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1177,7 +1185,7 @@ func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2Rate
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1473,6 +1481,8 @@ func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2Rate
 // Your root key must have one of the following permissions:
 // - `ratelimit.*.limit` (to check limits in any namespace)
 // - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) MultiLimit(ctx context.Context, request []components.V2RatelimitLimitRequestBody, opts ...operations.Option) (*operations.RatelimitMultiLimitResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1532,7 +1542,7 @@ func (s *Ratelimit) MultiLimit(ctx context.Context, request []components.V2Ratel
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1845,6 +1855,8 @@ func (s *Ratelimit) MultiLimit(ctx context.Context, request []components.V2Ratel
 // **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
 //
 // **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) SetOverride(ctx context.Context, request components.V2RatelimitSetOverrideRequestBody, opts ...operations.Option) (*operations.RatelimitSetOverrideResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1904,7 +1916,7 @@ func (s *Ratelimit) SetOverride(ctx context.Context, request components.V2Rateli
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 

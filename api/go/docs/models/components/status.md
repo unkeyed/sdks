@@ -31,3 +31,4 @@ custom := components.Status("custom_value")
 | `StatusFailed`           | FAILED                   |
 | `StatusSkipped`          | SKIPPED                  |
 | `StatusAwaitingApproval` | AWAITING_APPROVAL        |
+| `StatusStopped`          | STOPPED                  |

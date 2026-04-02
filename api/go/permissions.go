@@ -43,6 +43,8 @@ func newPermissions(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *ho
 //
 // Your root key must have the following permission:
 // - `rbac.*.create_permission`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) CreatePermission(ctx context.Context, request components.V2PermissionsCreatePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsCreatePermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -102,7 +104,7 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -395,6 +397,8 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 //
 // Your root key must have the following permission:
 // - `rbac.*.create_role`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) CreateRole(ctx context.Context, request components.V2PermissionsCreateRoleRequestBody, opts ...operations.Option) (*operations.PermissionsCreateRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -454,7 +458,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -747,6 +751,8 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 //
 // Your root key must have the following permission:
 // - `rbac.*.delete_permission`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) DeletePermission(ctx context.Context, request components.V2PermissionsDeletePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsDeletePermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -806,7 +812,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1099,6 +1105,8 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 //
 // Your root key must have the following permission:
 // - `rbac.*.delete_role`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) DeleteRole(ctx context.Context, request components.V2PermissionsDeleteRoleRequestBody, opts ...operations.Option) (*operations.PermissionsDeleteRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1158,7 +1166,7 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1428,6 +1436,8 @@ func (s *Permissions) DeleteRole(ctx context.Context, request components.V2Permi
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_permission`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) GetPermission(ctx context.Context, request components.V2PermissionsGetPermissionRequestBody, opts ...operations.Option) (*operations.PermissionsGetPermissionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1487,7 +1497,7 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -1778,6 +1788,8 @@ func (s *Permissions) GetPermission(ctx context.Context, request components.V2Pe
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_role`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) GetRole(ctx context.Context, request components.V2PermissionsGetRoleRequestBody, opts ...operations.Option) (*operations.PermissionsGetRoleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1837,7 +1849,7 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -2129,6 +2141,8 @@ func (s *Permissions) GetRole(ctx context.Context, request components.V2Permissi
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_permission`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) ListPermissions(ctx context.Context, request components.V2PermissionsListPermissionsRequestBody, opts ...operations.Option) (*operations.PermissionsListPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2188,7 +2202,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
@@ -2459,6 +2473,8 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 //
 // Your root key must have the following permission:
 // - `rbac.*.read_role`
+//
+// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) ListRoles(ctx context.Context, request components.V2PermissionsListRolesRequestBody, opts ...operations.Option) (*operations.PermissionsListRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2518,7 +2534,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
 		return nil, err
 	}
 
