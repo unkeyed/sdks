@@ -36,6 +36,8 @@ class Internal(BaseSDK):
         **Authentication**: Requires a valid root key with appropriate permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param project: Project slug
         :param app: App slug within the project
         :param branch: Git branch name
@@ -91,6 +93,7 @@ class Internal(BaseSDK):
                 models.V2DeployCreateDeploymentRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -190,6 +193,8 @@ class Internal(BaseSDK):
         **Authentication**: Requires a valid root key with appropriate permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param project: Project slug
         :param app: App slug within the project
         :param branch: Git branch name
@@ -245,6 +250,7 @@ class Internal(BaseSDK):
                 models.V2DeployCreateDeploymentRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -336,6 +342,8 @@ class Internal(BaseSDK):
         **Authentication**: Requires a valid root key with appropriate permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param deployment_id: Unique deployment identifier to retrieve
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -373,6 +381,7 @@ class Internal(BaseSDK):
                 request, False, False, "json", models.V2DeployGetDeploymentRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -464,6 +473,8 @@ class Internal(BaseSDK):
         **Authentication**: Requires a valid root key with appropriate permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param deployment_id: Unique deployment identifier to retrieve
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -501,6 +512,7 @@ class Internal(BaseSDK):
                 request, False, False, "json", models.V2DeployGetDeploymentRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

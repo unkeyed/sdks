@@ -35,6 +35,8 @@ class Identities(BaseSDK):
         Requires `identity.*.create_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity.
             Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
             This identifier links Unkey identities to your authentication system, database records, or tenant structure.
@@ -107,6 +109,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesCreateIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -202,6 +205,8 @@ class Identities(BaseSDK):
         Requires `identity.*.create_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param external_id: Creates an identity using your system's unique identifier for a user, organization, or entity.
             Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
             This identifier links Unkey identities to your authentication system, database records, or tenant structure.
@@ -274,6 +279,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesCreateIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -367,6 +373,8 @@ class Identities(BaseSDK):
         > External ID becomes available for reuse immediately
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to delete. This can be either the externalId (from your own system that was used during identity creation) or the identityId (the internal ID returned by the identity service).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -408,6 +416,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesDeleteIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -501,6 +510,8 @@ class Identities(BaseSDK):
         > External ID becomes available for reuse immediately
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to delete. This can be either the externalId (from your own system that was used during identity creation) or the identityId (the internal ID returned by the identity service).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -542,6 +553,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesDeleteIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -633,6 +645,8 @@ class Identities(BaseSDK):
         > Requires `identity.*.read_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to retrieve. This can be either the externalId (from your own system that was used during identity creation) or the identityId (the internal ID returned by the identity service).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -670,6 +684,7 @@ class Identities(BaseSDK):
                 request, False, False, "json", models.V2IdentitiesGetIdentityRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -761,6 +776,8 @@ class Identities(BaseSDK):
         > Requires `identity.*.read_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to retrieve. This can be either the externalId (from your own system that was used during identity creation) or the identityId (the internal ID returned by the identity service).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -798,6 +815,7 @@ class Identities(BaseSDK):
                 request, False, False, "json", models.V2IdentitiesGetIdentityRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -890,6 +908,8 @@ class Identities(BaseSDK):
         > Requires `identity.*.read_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param limit: The maximum number of identities to return in a single request. Use this to control response size and loading performance.
         :param cursor: Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
         :param retries: Override the default retry configuration for this method
@@ -933,6 +953,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesListIdentitiesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -976,6 +997,9 @@ class Identities(BaseSDK):
                 limit=limit,
                 cursor=next_cursor,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -1040,6 +1064,8 @@ class Identities(BaseSDK):
         > Requires `identity.*.read_identity` permission
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param limit: The maximum number of identities to return in a single request. Use this to control response size and loading performance.
         :param cursor: Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
         :param retries: Override the default retry configuration for this method
@@ -1083,6 +1109,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesListIdentitiesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1126,6 +1153,9 @@ class Identities(BaseSDK):
                 limit=limit,
                 cursor=next_cursor,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -1194,6 +1224,8 @@ class Identities(BaseSDK):
         > Rate limit changes propagate within 30 seconds
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
         :param meta: Replaces all existing metadata with this new metadata object.
             Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
@@ -1249,6 +1281,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesUpdateIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1345,6 +1378,8 @@ class Identities(BaseSDK):
         > Rate limit changes propagate within 30 seconds
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param identity: The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
         :param meta: Replaces all existing metadata with this new metadata object.
             Omitting this field preserves existing metadata, while providing an empty object clears all metadata.
@@ -1400,6 +1435,7 @@ class Identities(BaseSDK):
                 models.V2IdentitiesUpdateIdentityRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

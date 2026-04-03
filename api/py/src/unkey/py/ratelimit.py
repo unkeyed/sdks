@@ -32,6 +32,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace containing the override.
         :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
 
@@ -82,6 +84,7 @@ class Ratelimit(BaseSDK):
                 models.V2RatelimitDeleteOverrideRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -175,6 +178,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace containing the override.
         :param identifier: The exact identifier pattern of the override to delete. This must match exactly as it was specified when creating the override.
 
@@ -225,6 +230,7 @@ class Ratelimit(BaseSDK):
                 models.V2RatelimitDeleteOverrideRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -318,6 +324,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace containing the override.
         :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
 
@@ -364,6 +372,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitGetOverrideRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -457,6 +466,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace containing the override.
         :param identifier: The exact identifier pattern for the override you want to retrieve. This must match exactly as it was specified when creating the override.
 
@@ -503,6 +514,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitGetOverrideRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -603,6 +615,8 @@ class Ratelimit(BaseSDK):
         - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace.
         :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
             Shorter durations enable faster recovery but may be less effective against sustained abuse.
@@ -665,6 +679,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitLimitRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -780,6 +795,8 @@ class Ratelimit(BaseSDK):
         - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the namespace.
         :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
             Shorter durations enable faster recovery but may be less effective against sustained abuse.
@@ -842,6 +859,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitLimitRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -951,6 +969,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the rate limit namespace to list overrides for.
         :param cursor: Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
         :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
@@ -1002,6 +1022,7 @@ class Ratelimit(BaseSDK):
                 models.V2RatelimitListOverridesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1096,6 +1117,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.read_override` or `ratelimit.<namespace_id>.read_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The id or name of the rate limit namespace to list overrides for.
         :param cursor: Pagination cursor from a previous response. Include this when fetching subsequent pages of results. Each response containing more results than the requested limit will include a cursor value in the pagination object that can be used here.
         :param limit: Maximum number of override entries to return in a single response. Use this to control response size and loading performance.
@@ -1147,6 +1170,7 @@ class Ratelimit(BaseSDK):
                 models.V2RatelimitListOverridesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1246,6 +1270,8 @@ class Ratelimit(BaseSDK):
         - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1283,6 +1309,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1397,6 +1424,8 @@ class Ratelimit(BaseSDK):
         - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1434,6 +1463,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1544,6 +1574,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The ID or name of the rate limit namespace.
         :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.
 
@@ -1612,6 +1644,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitSetOverrideRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1707,6 +1740,8 @@ class Ratelimit(BaseSDK):
         **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param namespace: The ID or name of the rate limit namespace.
         :param duration: The duration in milliseconds for the rate limit window. This defines how long the rate limit counter accumulates before resetting to zero.
 
@@ -1775,6 +1810,7 @@ class Ratelimit(BaseSDK):
                 request, False, False, "json", models.V2RatelimitSetOverrideRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

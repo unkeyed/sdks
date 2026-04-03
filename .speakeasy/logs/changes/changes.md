@@ -1,2 +1,2 @@
-## Go SDK Changes:
-* `Unkey.Internal.GetDeployment()`:  `response.Data.Status.Enum(stopped)` **Added**
+## Python SDK Changes:
+* `unkey.internal.get_deployment()`:  `response.data.status.enum(stopped)` **Added**
