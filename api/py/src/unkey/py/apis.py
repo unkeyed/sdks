@@ -34,6 +34,8 @@ class Apis(BaseSDK):
         - `api.*.create_api` (to create APIs in any workspace)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: Unique identifier for this API namespace within your workspace.
             Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
 
@@ -73,6 +75,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisCreateAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -161,6 +164,8 @@ class Apis(BaseSDK):
         - `api.*.create_api` (to create APIs in any workspace)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: Unique identifier for this API namespace within your workspace.
             Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
 
@@ -200,6 +205,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisCreateAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -291,6 +297,8 @@ class Apis(BaseSDK):
         - `api.<api_id>.delete_api` (to delete a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: Specifies which API namespace to permanently delete from your workspace.
             Must be a valid API ID that begins with 'api_' and exists within your workspace.
 
@@ -332,6 +340,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisDeleteAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -443,6 +452,8 @@ class Apis(BaseSDK):
         - `api.<api_id>.delete_api` (to delete a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: Specifies which API namespace to permanently delete from your workspace.
             Must be a valid API ID that begins with 'api_' and exists within your workspace.
 
@@ -484,6 +495,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisDeleteAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -591,6 +603,8 @@ class Apis(BaseSDK):
         - `api.<api_id>.read_api` (to read a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: Specifies which API to retrieve by its unique identifier.
             Must be a valid API ID that begins with 'api_' and exists within your workspace.
 
@@ -630,6 +644,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisGetAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -722,6 +737,8 @@ class Apis(BaseSDK):
         - `api.<api_id>.read_api` (to read a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: Specifies which API to retrieve by its unique identifier.
             Must be a valid API ID that begins with 'api_' and exists within your workspace.
 
@@ -761,6 +778,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisGetAPIRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -866,6 +884,8 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: The API namespace whose keys you want to list.
             Returns all keys in this API, subject to pagination and filters.
 
@@ -931,6 +951,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisListKeysRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1036,6 +1057,8 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: The API namespace whose keys you want to list.
             Returns all keys in this API, subject to pagination and filters.
 
@@ -1101,6 +1124,7 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisListKeysRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

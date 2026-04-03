@@ -28,3 +28,4 @@ value = Status.UNSPECIFIED
 | `FAILED`            | FAILED              |
 | `SKIPPED`           | SKIPPED             |
 | `AWAITING_APPROVAL` | AWAITING_APPROVAL   |
+| `STOPPED`           | STOPPED             |

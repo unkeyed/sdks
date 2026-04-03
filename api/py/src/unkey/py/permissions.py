@@ -36,6 +36,8 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: Creates a permission with this human-readable name that describes its purpose.
             Names must be unique within your workspace to prevent conflicts during assignment.
             Use clear, semantic names that developers can easily understand when building authorization logic.
@@ -104,6 +106,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsCreatePermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -201,6 +204,8 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: Creates a permission with this human-readable name that describes its purpose.
             Names must be unique within your workspace to prevent conflicts during assignment.
             Use clear, semantic names that developers can easily understand when building authorization logic.
@@ -269,6 +274,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsCreatePermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -363,6 +369,8 @@ class Permissions(BaseSDK):
         - `rbac.*.create_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
 
             Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
@@ -416,6 +424,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsCreateRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -510,6 +519,8 @@ class Permissions(BaseSDK):
         - `rbac.*.create_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
 
             Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
@@ -563,6 +574,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsCreateRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -656,6 +668,8 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param permission: Specifies which permission to permanently delete from your workspace.
 
             This can be a permission ID or a permission slug.
@@ -711,6 +725,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsDeletePermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -804,6 +819,8 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param permission: Specifies which permission to permanently delete from your workspace.
 
             This can be a permission ID or a permission slug.
@@ -859,6 +876,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsDeletePermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -952,6 +970,8 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param role: Unique identifier of the role to permanently delete from your workspace.
             Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
 
@@ -1002,6 +1022,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsDeleteRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1090,6 +1111,8 @@ class Permissions(BaseSDK):
         - `rbac.*.delete_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param role: Unique identifier of the role to permanently delete from your workspace.
             Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
 
@@ -1140,6 +1163,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsDeleteRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1226,6 +1250,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param permission: The unique identifier of the permission to retrieve. Must be a valid permission ID that begins with 'perm_' and exists within your workspace.
 
         :param retries: Override the default retry configuration for this method
@@ -1268,6 +1294,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsGetPermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1359,6 +1386,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param permission: The unique identifier of the permission to retrieve. Must be a valid permission ID that begins with 'perm_' and exists within your workspace.
 
         :param retries: Override the default retry configuration for this method
@@ -1401,6 +1430,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsGetPermissionRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1492,6 +1522,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param role: Unique identifier of the role to permanently delete from your workspace.
             Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
 
@@ -1534,6 +1566,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsGetRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1625,6 +1658,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param role: Unique identifier of the role to permanently delete from your workspace.
             Must either be a valid role ID that begins with 'role_' or the given role name and exists within your workspace.
 
@@ -1667,6 +1702,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsGetRoleRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1760,6 +1796,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param cursor: Pagination cursor from a previous response to fetch the next page of permissions.
             Include this value when you need to retrieve additional permissions beyond the initial response.
             Each response containing more results than the requested limit includes a cursor for subsequent pages.
@@ -1809,6 +1847,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsListPermissionsRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1897,6 +1936,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_permission`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param cursor: Pagination cursor from a previous response to fetch the next page of permissions.
             Include this value when you need to retrieve additional permissions beyond the initial response.
             Each response containing more results than the requested limit includes a cursor for subsequent pages.
@@ -1946,6 +1987,7 @@ class Permissions(BaseSDK):
                 models.V2PermissionsListPermissionsRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2034,6 +2076,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param limit: Maximum number of roles to return in a single response.
             Use smaller values for faster response times and better UI performance.
             Use larger values when you need to process many roles efficiently.
@@ -2081,6 +2125,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsListRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2174,6 +2219,8 @@ class Permissions(BaseSDK):
         - `rbac.*.read_role`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param limit: Maximum number of roles to return in a single response.
             Use smaller values for faster response times and better UI performance.
             Use larger values when you need to process many roles efficiently.
@@ -2221,6 +2268,7 @@ class Permissions(BaseSDK):
                 request, False, False, "json", models.V2PermissionsListRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

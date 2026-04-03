@@ -26,6 +26,8 @@ class Analytics(BaseSDK):
         For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param query: SQL query to execute against your analytics data.
             Only SELECT queries are allowed.
 
@@ -69,6 +71,7 @@ class Analytics(BaseSDK):
                 models.V2AnalyticsGetVerificationsRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -177,6 +180,8 @@ class Analytics(BaseSDK):
         For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param query: SQL query to execute against your analytics data.
             Only SELECT queries are allowed.
 
@@ -220,6 +225,7 @@ class Analytics(BaseSDK):
                 models.V2AnalyticsGetVerificationsRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 

@@ -40,6 +40,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -87,6 +89,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysAddPermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -188,6 +191,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -235,6 +240,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysAddPermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -336,6 +342,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Added roles supplement existing roles and permissions without replacing them.
@@ -384,6 +392,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysAddRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -483,6 +492,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional roles using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Added roles supplement existing roles and permissions without replacing them.
@@ -531,6 +542,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysAddRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -646,6 +658,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (create keys in specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: The API namespace this key belongs to.
             Keys from different APIs cannot access each other.
 
@@ -756,6 +770,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysCreateKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -871,6 +886,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (create keys in specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param api_id: The API namespace this key belongs to.
             Keys from different APIs cannot access each other.
 
@@ -981,6 +998,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysCreateKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1076,6 +1094,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.delete_key` (to delete keys in a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`.
@@ -1126,6 +1146,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysDeleteKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1221,6 +1242,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.delete_key` (to delete keys in a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Deletion immediately invalidates the key, causing all future verification attempts to fail with `code=NOT_FOUND`.
@@ -1271,6 +1294,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysDeleteKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1369,6 +1393,8 @@ class Keys(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`.
@@ -1419,6 +1445,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysGetKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1517,6 +1544,8 @@ class Keys(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to retrieve using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
             Key data includes metadata, permissions, usage statistics, and configuration but never the plaintext key value unless `decrypt=true`.
@@ -1567,6 +1596,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysGetKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1661,6 +1691,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
@@ -1702,6 +1734,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysMigrateKeysRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1798,6 +1831,8 @@ class Keys(BaseSDK):
         - `api.<api_id>.create_key` (to migrate keys to a specific API)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param migration_id: Identifier of the configured migration provider/strategy to use (e.g., \"your_company\"). You will receive this from Unkey's support staff.
         :param api_id: The ID of the API that the keys should be inserted into
         :param keys:
@@ -1839,6 +1874,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysMigrateKeysRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1940,6 +1976,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -1986,6 +2024,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRemovePermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2087,6 +2126,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to remove permissions from using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -2133,6 +2174,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRemovePermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2234,6 +2276,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key loses the roles using the database identifier returned from createKey.
             Do not confuse this with the actual API key string that users include in requests.
             Removing roles only affects direct assignments, not permissions inherited from other sources.
@@ -2282,6 +2326,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRemoveRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2383,6 +2428,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key loses the roles using the database identifier returned from createKey.
             Do not confuse this with the actual API key string that users include in requests.
             Removing roles only affects direct assignments, not permissions inherited from other sources.
@@ -2431,6 +2478,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRemoveRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2549,6 +2597,8 @@ class Keys(BaseSDK):
         - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: The database identifier of the key to reroll.
 
             This is the unique ID returned when creating or listing keys, NOT the actual API key token.
@@ -2609,6 +2659,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRerollKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2725,6 +2776,8 @@ class Keys(BaseSDK):
         - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: The database identifier of the key to reroll.
 
             This is the unique ID returned when creating or listing keys, NOT the actual API key token.
@@ -2785,6 +2838,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysRerollKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2884,6 +2938,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -2934,6 +2990,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysSetPermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3035,6 +3092,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key receives the additional permissions using the database identifier returned from `keys.createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -3085,6 +3144,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysSetPermissionsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3186,6 +3246,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey.
             Do not confuse this with the actual API key string that users include in requests.
             This is a wholesale replacement operation that removes all existing roles not included in the request.
@@ -3235,6 +3297,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysSetRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3334,6 +3397,8 @@ class Keys(BaseSDK):
         Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key gets the complete role replacement using the database identifier returned from createKey.
             Do not confuse this with the actual API key string that users include in requests.
             This is a wholesale replacement operation that removes all existing roles not included in the request.
@@ -3383,6 +3448,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysSetRolesRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3483,6 +3549,8 @@ class Keys(BaseSDK):
         Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: The ID of the key to update (begins with `key_`). This is the database reference ID for the key, not the actual API key string that users authenticate with. This ID uniquely identifies which key's credits will be updated.
         :param operation: Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 
@@ -3530,6 +3598,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysUpdateCreditsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3632,6 +3701,8 @@ class Keys(BaseSDK):
         Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: The ID of the key to update (begins with `key_`). This is the database reference ID for the key, not the actual API key string that users authenticate with. This ID uniquely identifies which key's credits will be updated.
         :param operation: Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 
@@ -3679,6 +3750,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysUpdateCreditsRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3792,6 +3864,8 @@ class Keys(BaseSDK):
         If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to update using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -3879,6 +3953,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysUpdateKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3990,6 +4065,8 @@ class Keys(BaseSDK):
         If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key_id: Specifies which key to update using the database identifier returned from `createKey`.
             Do not confuse this with the actual API key string that users include in requests.
 
@@ -4077,6 +4154,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysUpdateKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -4190,6 +4268,8 @@ class Keys(BaseSDK):
         **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key: The API key to verify, exactly as provided by your user.
             Include any prefix - even small changes will cause verification to fail.
 
@@ -4261,6 +4341,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysVerifyKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -4374,6 +4455,8 @@ class Keys(BaseSDK):
         **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key: The API key to verify, exactly as provided by your user.
             Include any prefix - even small changes will cause verification to fail.
 
@@ -4445,6 +4528,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysVerifyKeyRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -4537,6 +4621,8 @@ class Keys(BaseSDK):
         If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key: The complete API key string provided by you, including any prefix.
             Never log, cache, or store API keys in your system as they provide full access to user resources.
             Include the full key exactly as provided - even minor modifications will cause a not found error.
@@ -4577,6 +4663,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysWhoamiRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -4669,6 +4756,8 @@ class Keys(BaseSDK):
         If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
 
 
+        If set, this operation will use `root_key` from the global security.
+
         :param key: The complete API key string provided by you, including any prefix.
             Never log, cache, or store API keys in your system as they provide full access to user resources.
             Include the full key exactly as provided - even minor modifications will cause a not found error.
@@ -4709,6 +4798,7 @@ class Keys(BaseSDK):
                 request, False, False, "json", models.V2KeysWhoamiRequestBody
             ),
             allow_empty_value=None,
+            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
