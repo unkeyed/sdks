@@ -1,9 +1,9 @@
-speakeasyVersion: 1.761.1
+speakeasyVersion: 1.761.9
 sources:
     api:
         sourceNamespace: api
-        sourceRevisionDigest: sha256:8e7a9ae8b1313c11c52b3cddcb2cfa70e9fdc2b69fda7fef158c7be1a668e9d7
-        sourceBlobDigest: sha256:8e412febf397f1b7930b013f775f905f96316e433013181613acc2cfb599e872
+        sourceRevisionDigest: sha256:228075542ad85dff9177acba747cd0fac59955f040ecf10ec658a2a21013fef0
+        sourceBlobDigest: sha256:8fe7a23539209d89e7eb072f41f0ca053bf33052b5a25399a0e20ab5792e1fcd
         tags:
             - latest
             - 2.0.0
@@ -18,10 +18,10 @@ targets:
     api-go:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:8e7a9ae8b1313c11c52b3cddcb2cfa70e9fdc2b69fda7fef158c7be1a668e9d7
-        sourceBlobDigest: sha256:8e412febf397f1b7930b013f775f905f96316e433013181613acc2cfb599e872
+        sourceRevisionDigest: sha256:228075542ad85dff9177acba747cd0fac59955f040ecf10ec658a2a21013fef0
+        sourceBlobDigest: sha256:8fe7a23539209d89e7eb072f41f0ca053bf33052b5a25399a0e20ab5792e1fcd
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:303a956b7f1edbcf51291197800248a864d1fa7ef6fa58ce886ac6f3257f5cf4
+        codeSamplesRevisionDigest: sha256:4242cb63759406d849cbe92f2b513191ed1dedcb0ae746d272384ce552466f4b
     api-py:
         source: api-python
         sourceNamespace: api-python
