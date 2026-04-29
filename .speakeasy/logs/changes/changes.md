@@ -1,2 +1,7 @@
 ## Python SDK Changes:
-* `unkey.internal.get_deployment()`:  `response.data.status.enum(stopped)` **Added**
+* `unkey.keys.verify_key()`: 
+  *  `request.credits.cost` **Changed** (Breaking ⚠️)
+  *  `response.data.credits` **Changed** (Breaking ⚠️)
+* `unkey.internal.get_deployment()`: `response.data.status` **Changed**
+    - `enum(cancelled)` **Added**
+    - `enum(superseded)` **Added**
