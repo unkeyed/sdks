@@ -11,10 +11,10 @@ type KeysVerifyKeyCredits struct {
 	// Credits are deducted after all security checks pass.
 	// Essential for implementing usage-based pricing with different operation costs.
 	//
-	Cost int `json:"cost"`
+	Cost int64 `json:"cost"`
 }
 
-func (k *KeysVerifyKeyCredits) GetCost() int {
+func (k *KeysVerifyKeyCredits) GetCost() int64 {
 	if k == nil {
 		return 0
 	}

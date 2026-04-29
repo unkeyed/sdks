@@ -75,7 +75,7 @@ type V2KeysVerifyKeyResponseData struct {
 	// each verification (based on the 'cost' parameter) unless explicit credit
 	// refills are configured.
 	//
-	Credits *int `json:"credits,omitempty"`
+	Credits *int64 `json:"credits,omitempty"`
 	// Indicates if the key is currently enabled. Disabled keys will
 	// always fail verification with `code=DISABLED`. This is useful for implementing
 	// temporary suspensions without deleting the key.
@@ -138,7 +138,7 @@ func (v *V2KeysVerifyKeyResponseData) GetExpires() *int64 {
 	return v.Expires
 }
 
-func (v *V2KeysVerifyKeyResponseData) GetCredits() *int {
+func (v *V2KeysVerifyKeyResponseData) GetCredits() *int64 {
 	if v == nil {
 		return nil
 	}
