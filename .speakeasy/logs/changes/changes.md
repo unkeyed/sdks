@@ -1,2 +1,7 @@
-## Python SDK Changes:
-* `unkey.internal.get_deployment()`:  `response.data.status.enum(stopped)` **Added**
+## Go SDK Changes:
+* `Unkey.Keys.VerifyKey()`: 
+  *  `request.Request.Credits.Cost` **Changed** (Breaking ⚠️)
+  *  `response.Data.Credits` **Changed** (Breaking ⚠️)
+* `Unkey.Internal.GetDeployment()`: `response.Data.Status` **Changed**
+    - `Enum(cancelled)` **Added**
+    - `Enum(superseded)` **Added**

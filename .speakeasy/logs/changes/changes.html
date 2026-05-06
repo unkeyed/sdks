@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - python</title>
+    <title>SDK Changelog - go</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,10 +95,21 @@
         }
     </style>
 </head>
-<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
+<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.internal.get_deployment()</code>:  <code>response.data.status.enum(stopped)</code> <strong>Added</strong></li>
+<li><code>Unkey.Keys.VerifyKey()</code>:
+
+<ul>
+<li><code>request.Request.Credits.Cost</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>response.Data.Credits</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>Unkey.Internal.GetDeployment()</code>: <code>response.Data.Status</code> <strong>Changed</strong>
+
+<ul>
+<li><code>Enum(cancelled)</code> <strong>Added</strong></li>
+<li><code>Enum(superseded)</code> <strong>Added</strong></li>
+</ul></li>
 </ul>
 </body>
 </html>
