@@ -29,6 +29,8 @@ class Status(str, Enum, metaclass=utils.OpenEnumMeta):
     SKIPPED = "SKIPPED"
     AWAITING_APPROVAL = "AWAITING_APPROVAL"
     STOPPED = "STOPPED"
+    SUPERSEDED = "SUPERSEDED"
+    CANCELLED = "CANCELLED"
 
 
 class V2DeployGetDeploymentResponseDataTypedDict(TypedDict):
