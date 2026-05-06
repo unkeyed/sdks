@@ -1,2 +1,7 @@
-## Python SDK Changes:
-* `unkey.internal.get_deployment()`:  `response.data.status.enum(stopped)` **Added**
+## Typescript SDK Changes:
+* `unkey.keys.verifyKey()`: 
+  *  `request.credits.cost` **Changed** (Breaking ⚠️)
+  *  `response.data.credits` **Changed** (Breaking ⚠️)
+* `unkey.internal.getDeployment()`: `response.data.status` **Changed**
+    - `enum(cancelled)` **Added**
+    - `enum(superseded)` **Added**
