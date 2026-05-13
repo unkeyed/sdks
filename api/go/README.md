@@ -260,6 +260,11 @@ func main() {
 * [ListPermissions](docs/sdks/permissions/README.md#listpermissions) - List permissions
 * [ListRoles](docs/sdks/permissions/README.md#listroles) - List roles
 
+### [Portal](docs/sdks/portal/README.md)
+
+* [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
+* [ExchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
 * [DeleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override

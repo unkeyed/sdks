@@ -32,3 +32,5 @@ custom := components.Status("custom_value")
 | `StatusSkipped`          | SKIPPED                  |
 | `StatusAwaitingApproval` | AWAITING_APPROVAL        |
 | `StatusStopped`          | STOPPED                  |
+| `StatusSuperseded`       | SUPERSEDED               |
+| `StatusCancelled`        | CANCELLED                |
