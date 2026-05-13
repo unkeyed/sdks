@@ -3,3 +3,5 @@
  */
 
 export * from "./identitieslistidentities.js";
+export * from "./portalcreatesession.js";
+export * from "./portalexchangesession.js";
