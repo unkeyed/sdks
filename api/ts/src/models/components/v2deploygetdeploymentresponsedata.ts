@@ -29,6 +29,8 @@ export const Status = {
   Skipped: "SKIPPED",
   AwaitingApproval: "AWAITING_APPROVAL",
   Stopped: "STOPPED",
+  Superseded: "SUPERSEDED",
+  Cancelled: "CANCELLED",
 } as const;
 /**
  * Current deployment status
