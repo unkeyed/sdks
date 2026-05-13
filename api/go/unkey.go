@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.879.6
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.882.0
 
 import (
 	"context"
@@ -141,6 +141,8 @@ type Unkey struct {
 	Keys *Keys
 	// Permission and role management operations
 	Permissions *Permissions
+	// Customer Portal session management
+	Portal *Portal
 	// Rate limiting operations
 	Ratelimit *Ratelimit
 
@@ -219,9 +221,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.6.3",
+		SDKVersion: "2.6.4",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.6.3 2.879.6 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.6.4 2.882.0 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -255,6 +257,7 @@ func New(opts ...SDKOption) *Unkey {
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Portal = newPortal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ratelimit = newRatelimit(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
