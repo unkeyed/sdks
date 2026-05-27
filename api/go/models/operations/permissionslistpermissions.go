@@ -10,6 +10,8 @@ type PermissionsListPermissionsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Permissions retrieved successfully
 	V2PermissionsListPermissionsResponseBody *components.V2PermissionsListPermissionsResponseBody
+
+	Next func() (*PermissionsListPermissionsResponse, error)
 }
 
 func (p *PermissionsListPermissionsResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -303,13 +303,15 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
-		Limit: unkey.Pointer[int64](50),
+	res, err := s.Apis.ListKeys(ctx, components.V2ApisListKeysRequestBody{
+		APIID:      "api_1234abcd",
+		Cursor:     unkey.Pointer("key_1234abcd"),
+		ExternalID: unkey.Pointer("user_1234abcd"),
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2IdentitiesListIdentitiesResponseBody != nil {
+	if res.V2ApisListKeysResponseBody != nil {
 		for {
 			// handle items
 

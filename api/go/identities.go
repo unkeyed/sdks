@@ -1282,7 +1282,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 		if err != nil {
 			return nil, err
 		}
-		nC, err := ajson.Eval(b, "$.data.cursor")
+		nC, err := ajson.Eval(b, "$.pagination.cursor")
 		if err != nil {
 			return nil, err
 		}
