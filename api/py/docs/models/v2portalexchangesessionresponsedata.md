@@ -1,0 +1,9 @@
+# V2PortalExchangeSessionResponseData
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `token`                                                                                      | *str*                                                                                        | :heavy_check_mark:                                                                           | The browser session token. Store this as an httpOnly cookie for subsequent portal requests.<br/> | ps_xyz789abc123                                                                              |
+| `expires_at`                                                                                 | *int*                                                                                        | :heavy_check_mark:                                                                           | Unix timestamp in milliseconds when the browser session expires (24 hours from creation).<br/> | 1711386400000                                                                                |

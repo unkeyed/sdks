@@ -212,8 +212,10 @@ with Unkey(
 
     res = unkey.apis.list_keys(api_id="api_1234abcd", limit=100, cursor="key_1234abcd", external_id="user_1234abcd", decrypt=False, revalidate_keys_cache=False)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -231,7 +233,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2ApisListKeysResponseBody](../../models/v2apislistkeysresponsebody.md)**
+**[models.ApisListKeysResponse](../../models/apislistkeysresponse.md)**
 
 ### Errors
 

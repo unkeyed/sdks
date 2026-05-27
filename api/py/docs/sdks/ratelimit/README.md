@@ -391,8 +391,10 @@ with Unkey(
 
     res = unkey.ratelimit.list_overrides(namespace="api.requests", limit=20)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: missingPermission
@@ -408,8 +410,10 @@ with Unkey(
 
     res = unkey.ratelimit.list_overrides(namespace="<value>", limit=10)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: pagination
@@ -425,8 +429,10 @@ with Unkey(
 
     res = unkey.ratelimit.list_overrides(namespace="api.requests", cursor="cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9", limit=10)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -441,7 +447,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2RatelimitListOverridesResponseBody](../../models/v2ratelimitlistoverridesresponsebody.md)**
+**[models.RatelimitListOverridesResponse](../../models/ratelimitlistoverridesresponse.md)**
 
 ### Errors
 

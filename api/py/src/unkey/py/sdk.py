@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from unkey.py.internal import Internal
     from unkey.py.keys import Keys
     from unkey.py.permissions import Permissions
+    from unkey.py.portal import Portal
     from unkey.py.ratelimit import Ratelimit
 
 
@@ -114,6 +115,8 @@ class Unkey(BaseSDK):
     r"""API key management operations"""
     permissions: "Permissions"
     r"""Permission and role management operations"""
+    portal: "Portal"
+    r"""Customer Portal session management"""
     ratelimit: "Ratelimit"
     r"""Rate limiting operations"""
     _sub_sdk_map = {
@@ -123,6 +126,7 @@ class Unkey(BaseSDK):
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),
         "permissions": ("unkey.py.permissions", "Permissions"),
+        "portal": ("unkey.py.portal", "Portal"),
         "ratelimit": ("unkey.py.ratelimit", "Ratelimit"),
     }
 
@@ -171,7 +175,9 @@ class Unkey(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(root_key):
+        if root_key is None:
+            security = None
+        elif callable(root_key):
             # pylint: disable=unnecessary-lambda-assignment
             security = lambda: models.Security(root_key=root_key())
         else:

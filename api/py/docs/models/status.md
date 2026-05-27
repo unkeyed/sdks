@@ -29,3 +29,5 @@ value = Status.UNSPECIFIED
 | `SKIPPED`           | SKIPPED             |
 | `AWAITING_APPROVAL` | AWAITING_APPROVAL   |
 | `STOPPED`           | STOPPED             |
+| `SUPERSEDED`        | SUPERSEDED          |
+| `CANCELLED`         | CANCELLED           |
