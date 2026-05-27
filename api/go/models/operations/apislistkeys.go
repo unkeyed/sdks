@@ -11,6 +11,8 @@ type ApisListKeysResponse struct {
 	// Successfully retrieved paginated keys. Use the pagination cursor for additional results when `hasMore: true`.
 	//
 	V2ApisListKeysResponseBody *components.V2ApisListKeysResponseBody
+
+	Next func() (*ApisListKeysResponse, error)
 }
 
 func (a *ApisListKeysResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -10,6 +10,8 @@ type RatelimitListOverridesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Overrides retrieved successfully. Includes pagination metadata if more results are available.
 	V2RatelimitListOverridesResponseBody *components.V2RatelimitListOverridesResponseBody
+
+	Next func() (*RatelimitListOverridesResponse, error)
 }
 
 func (r *RatelimitListOverridesResponse) GetHTTPMeta() components.HTTPMetadata {
