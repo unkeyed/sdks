@@ -374,8 +374,10 @@ with Unkey(
 
     res = unkey.permissions.list_permissions(cursor="eyJrZXkiOiJwZXJtXzEyMzQifQ==", limit=50)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -389,7 +391,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2PermissionsListPermissionsResponseBody](../../models/v2permissionslistpermissionsresponsebody.md)**
+**[models.PermissionsListPermissionsResponse](../../models/permissionslistpermissionsresponse.md)**
 
 ### Errors
 
@@ -426,8 +428,10 @@ with Unkey(
 
     res = unkey.permissions.list_roles(limit=50, cursor="eyJrZXkiOiJyb2xlXzEyMzQifQ==")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -441,7 +445,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2PermissionsListRolesResponseBody](../../models/v2permissionslistrolesresponsebody.md)**
+**[models.PermissionsListRolesResponse](../../models/permissionslistrolesresponse.md)**
 
 ### Errors
 

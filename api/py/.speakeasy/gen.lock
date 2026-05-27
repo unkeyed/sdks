@@ -1,29 +1,29 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: 32cb877074f31cfbb0bd23307ec90d6b
+  docChecksum: 094646d54ff6378de010e9eb1c7b585c
   docVersion: 2.0.0
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 3.0.2
-  configChecksum: ff99f152f3d2d79e295bace310f33bf7
+  speakeasyVersion: 1.766.0
+  generationVersion: 2.887.0
+  releaseVersion: 3.0.3
+  configChecksum: fa5ab7a60350212d6bc5951142f5718f
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
   published: true
 persistentEdits:
-  generation_id: f79c2816-70a6-4d08-8080-fedc8b094ed9
-  pristine_commit_hash: 19330641c67e7882fb23d0ac08aa053200e1d1e4
-  pristine_tree_hash: b133243d67b17c802dddc507eda40041f4b384ae
+  generation_id: 85534353-e074-4a1a-a05b-66b768ec2413
+  pristine_commit_hash: 7046486e3bfe338a0199e0b41aa81c749460be95
+  pristine_tree_hash: 1d1f23c358c4b905fccea58b3c485c9202d00687
 features:
   python:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.7
-    core: 6.0.21
+    core: 6.0.22
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
-    envVarSecurityUsage: 0.3.2
+    envVarSecurityUsage: 0.3.3
     flatRequests: 1.0.1
     globalSecurity: 3.0.7
     globalSecurityCallbacks: 1.0.0
@@ -35,9 +35,9 @@ features:
     nameOverrides: 3.0.3
     nullables: 1.0.2
     openEnums: 1.0.4
-    pagination: 3.0.9
+    pagination: 3.0.10
     responseFormat: 1.1.0
-    retries: 3.0.4
+    retries: 3.0.5
     sdkHooks: 1.2.1
 trackedFiles:
   .gitattributes:
@@ -96,6 +96,10 @@ trackedFiles:
     id: af87aeec5aca
     last_write_checksum: sha1:7f35bd659b808fc4babd61fda6b9ab0ee5a6f212
     pristine_git_object: ce30f1aee0b986dfe6c5f750e6b49de799334da4
+  docs/models/apislistkeysresponse.md:
+    id: 095f0be26559
+    last_write_checksum: sha1:b2a765f2b41c3c17bd6eceb52d8bb0eccdd3d828
+    pristine_git_object: 672440b32c481de598229d95164a771299ee7d84
   docs/models/badrequesterrordetails.md:
     id: 8e2cf6b9450f
     last_write_checksum: sha1:52f78e0610db71702fb5042771700e39acb1f91c
@@ -134,8 +138,8 @@ trackedFiles:
     pristine_git_object: 6435a70b00185cefd2c977041c480bb04710bff0
   docs/models/keyresponsedata.md:
     id: cf15eec7e96d
-    last_write_checksum: sha1:fb9fa5a66aeff5738f466ec6cfd7b38120c80869
-    pristine_git_object: 1e1a5848ecedcaf8e5b33122be3e001187b71bbb
+    last_write_checksum: sha1:ea0d534c1d14fe3b37620e2d7910bb9f2033b996
+    pristine_git_object: b6bde2a89ebc02c49e0752e06fe1827454330312
   docs/models/keysverifykeycredits.md:
     id: 8e1b1feec6e9
     last_write_checksum: sha1:829bd978d31ec024d0c8e103309e7f96f2871e7d
@@ -160,6 +164,26 @@ trackedFiles:
     id: 2e72d664ef50
     last_write_checksum: sha1:798712e0d30a04e90647d2710d6505bb06bffef0
     pristine_git_object: 4e0c58fd0af70d4bb6e5645d46607d100daa00c7
+  docs/models/permissionslistpermissionsresponse.md:
+    id: 009eb7dd738a
+    last_write_checksum: sha1:adf05a1a3e555a3ccb5d7234baf362c077bfb587
+    pristine_git_object: 7f2a951ac3f42ed1778ec1b85476062859dd1001
+  docs/models/permissionslistrolesresponse.md:
+    id: 23709b280427
+    last_write_checksum: sha1:ae25f42948d9e1912dcb99f6f1190e3e21fcfdf3
+    pristine_git_object: 9754b3b7b49344181ee72b240c328983bdea6f43
+  docs/models/portalcreatesessionresponse.md:
+    id: 744cd7e67770
+    last_write_checksum: sha1:e4ab69861fd52ebe986dff82b2b9a53147120cc4
+    pristine_git_object: 18f97f2498bed31e186e4aa72318ac1b3aad1c69
+  docs/models/portalexchangesessionresponse.md:
+    id: 4ad919797fe8
+    last_write_checksum: sha1:b3320d3dc5f7b3dfae0f113400b10db7022e881a
+    pristine_git_object: 7604f81a6609e904f53ff4e09ce9c26a94a3938c
+  docs/models/ratelimitlistoverridesresponse.md:
+    id: 8f1d5e0c07e6
+    last_write_checksum: sha1:a8b6544b6063b488e7ac1999740d33f0dd85ac6b
+    pristine_git_object: 8b7e5e9b3e775f32c83be81da9ce8d821e3a41a7
   docs/models/ratelimitoverride.md:
     id: cdfa82adedbc
     last_write_checksum: sha1:b79bf2112dbfc685af99bdb2f054a6fa36e6d5fc
@@ -182,8 +206,8 @@ trackedFiles:
     pristine_git_object: 6d3133d8230ed3d6ba1ede614207deace92423b8
   docs/models/status.md:
     id: 959cd204aadf
-    last_write_checksum: sha1:c1f6e9ec4d2f796f81ab168cdca57e78ae63c432
-    pristine_git_object: 532c98b74f62524c319267ea9ce3d4d21914a53b
+    last_write_checksum: sha1:a06295e86fe0ef34ba86f0b651006526b8f7cd6f
+    pristine_git_object: 4f747e420046de27ed3d0c08c0136e9f4e98a14d
   docs/models/updatekeycreditsdata.md:
     id: 803a3b0d4b55
     last_write_checksum: sha1:47573358cedada27e68876fd6338601f641832b3
@@ -540,6 +564,30 @@ trackedFiles:
     id: 07be4a8fbb27
     last_write_checksum: sha1:288ba8cc142f90ada72f9d026e1bc26fb4a36b49
     pristine_git_object: 9034eb13fab4cd248bacd93cd7aa0f334ff02d67
+  docs/models/v2portalcreatesessionrequestbody.md:
+    id: 5d616e7b8955
+    last_write_checksum: sha1:3b29fc059b3357c1351235edf6ac8defa477276e
+    pristine_git_object: 1c79231257af586091c907ea58f0638c0d7658eb
+  docs/models/v2portalcreatesessionresponsebody.md:
+    id: c3556a87ac81
+    last_write_checksum: sha1:d517f72e6e0861259b15cbd12f57a83ae5b73672
+    pristine_git_object: 432200fae97cf7e58f29b4a8b33a1ee62a0e3f58
+  docs/models/v2portalcreatesessionresponsedata.md:
+    id: 24e9a4cd2cdf
+    last_write_checksum: sha1:39bcc15ed4856701f6efea7e56195d5709b2aa34
+    pristine_git_object: 8685f7cbc17e835b324e5d3b30a99636bc80864e
+  docs/models/v2portalexchangesessionrequestbody.md:
+    id: 2fc8cb870928
+    last_write_checksum: sha1:7254789d4dabb12860cc6f9c07b58498f3d9f520
+    pristine_git_object: a8932e2d3c69b344745649665ae9ba143cd95275
+  docs/models/v2portalexchangesessionresponsebody.md:
+    id: 448fcc0d8d97
+    last_write_checksum: sha1:f5e424124c481d1c058c7a5610529a37d2237365
+    pristine_git_object: 5344170a9b92329d764ff25d3238d17c6a5562b7
+  docs/models/v2portalexchangesessionresponsedata.md:
+    id: f8aa3af12dc6
+    last_write_checksum: sha1:956e647e96ff0e5d6d087fb65dbdfcf460667482
+    pristine_git_object: 25b9fdf4034aaa58b29b087183e89983f2f5f248
   docs/models/v2ratelimitdeleteoverriderequestbody.md:
     id: f68823fbf2be
     last_write_checksum: sha1:1f8d666bf557272a10190f0fd1563a8eaa3307dd
@@ -618,8 +666,8 @@ trackedFiles:
     pristine_git_object: 8560bb8b4e8fdc0307bf1ec46960b2d567e86829
   docs/sdks/apis/README.md:
     id: 23f09d8da686
-    last_write_checksum: sha1:428d771a962a36fb269dce08b085f6d2f1b0b3b0
-    pristine_git_object: 77833882dc3cdcadbe1ef299f2cba9bc886bd645
+    last_write_checksum: sha1:434a7dea8833bdc8f6588cd0d445d8749e9db017
+    pristine_git_object: 9108578bee3fd5756f4e57a602324714bacaabd2
   docs/sdks/identities/README.md:
     id: 751b50358a28
     last_write_checksum: sha1:1aa3c6228b52f5d58a7830d3a268a9372adc306a
@@ -634,12 +682,16 @@ trackedFiles:
     pristine_git_object: fd601d0418bec57b511a46621e9d7e5f950e939c
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
-    last_write_checksum: sha1:27fc4a200e0befff9b98a91c012f9483b2ed7b36
-    pristine_git_object: e05b9b3294650163651548907b3b8607b36be14f
+    last_write_checksum: sha1:a3669ea4f9c87e632d347010fcf2884707614e81
+    pristine_git_object: b7659d9e8d2374b0d10de1445369537718dbd653
+  docs/sdks/portal/README.md:
+    id: 130ac1af4c35
+    last_write_checksum: sha1:80d0c4e46651230b5cd222ff0d70e3e61234d11c
+    pristine_git_object: ee0c263a75c6cfd4df20683c7ce8ef8ad164c0f7
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
-    last_write_checksum: sha1:a8de4624c432914b038b93bfd599f89c47525dc4
-    pristine_git_object: 10bc9278d83b17ea6c80dcf8a477cbc2a1293860
+    last_write_checksum: sha1:8e588ab82e238fa1de5c4a85003bc811cfd917c7
+    pristine_git_object: e7282f883118247c394b5c3bdcd164375e954566
   poetry.toml:
     id: a81ade82122a
     last_write_checksum: sha1:2242305e29dc6921bdf5b200aea5d4bf67830230
@@ -654,8 +706,8 @@ trackedFiles:
     pristine_git_object: 42a9de7b4883572d33fd257118d55ff12faf0acb
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:99a3b3907ac27e2c6653f17c2dcba5d95837cf18
-    pristine_git_object: 892a88e4fd5c02a8365da293c046685404898edd
+    last_write_checksum: sha1:5d7ab2e93c925a3e6db2e5492d429f58cbee816c
+    pristine_git_object: 3bf04213fd722ddd0d37178de8f45e02c46b252f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:623648abfc037d1a6a3a146251169d77b83801ae
@@ -682,20 +734,20 @@ trackedFiles:
     pristine_git_object: 7671d6b2801c991b7b5a8329fbcd2cf1fd4b63e9
   src/unkey/py/_version.py:
     id: dd5769ea5724
-    last_write_checksum: sha1:73a8191eabb1f400e3fa98f168ccd4240c5778a8
-    pristine_git_object: cfb4f1e6f72a6ac333b273146a325e6659873cec
+    last_write_checksum: sha1:813bf34d9c4c0d0a5c51a1ef55b808eb9f217158
+    pristine_git_object: cf4abd70ac362706e7ef20997a13c9921201b264
   src/unkey/py/analytics.py:
     id: 8a9a23d68313
-    last_write_checksum: sha1:ffb52aa63a92bb3c399eaf7e7cb49a9de44523f0
-    pristine_git_object: 6f77e9a54d74bf34dd7fbdf39a3cb79c93573a10
+    last_write_checksum: sha1:e24cd052b76faab96608d00b740664d526f86e43
+    pristine_git_object: 9529b233b6cb612160132cdc036273503ce9da50
   src/unkey/py/apis.py:
     id: fe64a9c06fa5
-    last_write_checksum: sha1:01ae508b7c6f457ffe10262b1b9cdc466cfc4582
-    pristine_git_object: 2a51523cd0e3e2f170becbdcefe142f8d49a95ce
+    last_write_checksum: sha1:f1c02a5a79e7e5691b72494f30244765d643a4c3
+    pristine_git_object: 048fd2cd82a895f96e396266eb8ee4597ee9e0d6
   src/unkey/py/basesdk.py:
     id: 2abc2fe2b4e1
-    last_write_checksum: sha1:60c0c64d2311dc36e0c2aebf2edf7ab58c544519
-    pristine_git_object: 4816b0825e36008ccb776f181bbe57e94ef3573d
+    last_write_checksum: sha1:92bef75edf78724e08e361ef36c0187057c180f7
+    pristine_git_object: d0a3f865545305f28e8ab43ea14172d4f960a21b
   src/unkey/py/errors/__init__.py:
     id: 66fa56f36052
     last_write_checksum: sha1:7baf8340bad306d00e8812b2e2d4a821f0d70dd9
@@ -766,20 +818,24 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/unkey/py/identities.py:
     id: 8cd19eced4af
-    last_write_checksum: sha1:30652c8e5fbc869556ec6d1809ee620ee06d7670
-    pristine_git_object: 22dcf539b9568552a94f0aa6fbe22f7d3543b53a
+    last_write_checksum: sha1:c79ec11247050a1a572a3e6ca0a7536de5603fec
+    pristine_git_object: 36494fe3fa7777e0c1282f0d07cab520babb9979
   src/unkey/py/internal.py:
     id: 1137858e3f91
-    last_write_checksum: sha1:650e8c2e94d029bc78c787d91b662ebb6f36e2bb
-    pristine_git_object: 35563058c837520876202af74ed21b64bc835761
+    last_write_checksum: sha1:e9d559f07aae7ac81bdfedb92b6c6e272f4913a3
+    pristine_git_object: a7e08e6bbf5b0409517fcfdba3814c94d646f134
   src/unkey/py/keys.py:
     id: 16399d9cff4f
-    last_write_checksum: sha1:a5f078091c1b6aedef04b1e3b4c996b8eef1cfd9
-    pristine_git_object: af0ae61172d9fcb697baf005c30ff2746dec25fc
+    last_write_checksum: sha1:e95f3779a5020bfc9fe9c0b0d9909219ecba3f1c
+    pristine_git_object: 28b8728682cae8a689699d55827d39ae6aa9fe63
   src/unkey/py/models/__init__.py:
     id: ed00b9cad2ec
-    last_write_checksum: sha1:a89eb5d67c898fdbd4ebe0a60cce5c804c6e97ce
-    pristine_git_object: 51e946ecdedacc6aed005a84659e1aaf5da2477d
+    last_write_checksum: sha1:bff2e4884728c734aedea62464eb48e6d3386bdd
+    pristine_git_object: 8d0dcadb90af91ef00bba833919c4b70684b6bd3
+  src/unkey/py/models/apis_listkeysop.py:
+    id: a38366224da8
+    last_write_checksum: sha1:bcd9bee2c958ec4e5acfd0c521ac243fc54ca491
+    pristine_git_object: 78e7b7a017b5c13299bccc3759231993e11afb3e
   src/unkey/py/models/badrequesterrordetails.py:
     id: 30c082a07d91
     last_write_checksum: sha1:fee4f891437a5252dc12652096ec4d712098f1fb
@@ -832,6 +888,26 @@ trackedFiles:
     id: f873160185e3
     last_write_checksum: sha1:a14dc86fdb144c8e6203ac91945c2da3d2a6c336
     pristine_git_object: c9d9ffb6f410beaef4faee2f680e9c53d7780f98
+  src/unkey/py/models/permissions_listpermissionsop.py:
+    id: cb457ac267fa
+    last_write_checksum: sha1:ce9b78902ead4b98034914f3b83e6e4c4c8a48d8
+    pristine_git_object: 21eba6353c13c9af49e21ba159c3fb817619c98f
+  src/unkey/py/models/permissions_listrolesop.py:
+    id: c9e5e903d635
+    last_write_checksum: sha1:16afad6571c7107395b5ae9143786a465e962bb0
+    pristine_git_object: 5b316b41407247e1fe2f91c2c79836531ea27bd4
+  src/unkey/py/models/portal_createsessionop.py:
+    id: 23da430e6da7
+    last_write_checksum: sha1:80e86ae5bbed2b3cfe07221746005b2d5b3630de
+    pristine_git_object: 0a7cb6af808ac246a5dde3c7085dd344f9a4b074
+  src/unkey/py/models/portal_exchangesessionop.py:
+    id: 314e1bcdf138
+    last_write_checksum: sha1:d8b478167890da663ddce4da2dd11e2812bb2205
+    pristine_git_object: 5c530581c1aaea8a5b957040d32da3fce391918b
+  src/unkey/py/models/ratelimit_listoverridesop.py:
+    id: 284c34da4e33
+    last_write_checksum: sha1:8d158a68d92ef73facb9a15454eab957baef80f4
+    pristine_git_object: 874d10032228238c2667b957595ab98a57519c97
   src/unkey/py/models/ratelimitoverride.py:
     id: e02f695fd0ea
     last_write_checksum: sha1:e1a0f1b449127629b32026ee057704377c32963f
@@ -934,8 +1010,8 @@ trackedFiles:
     pristine_git_object: 83af8435a5cff31bca2a20775182f1205e26afb8
   src/unkey/py/models/v2deploygetdeploymentresponsedata.py:
     id: d9e4ae97041f
-    last_write_checksum: sha1:7a1afd30a7ec5f633a3bdbb447a3642a99a6fcd0
-    pristine_git_object: cf6368468720d3542679ad9fee9e0a05269f246a
+    last_write_checksum: sha1:b433580f585af1eee7c5401fc303643657fa97b6
+    pristine_git_object: cd4f971b1d4f9c2ed8743579428fee186df5f9aa
   src/unkey/py/models/v2deploygitcommit.py:
     id: a31e6067ef25
     last_write_checksum: sha1:ac80449312f5ef44b8ac270aac65808866bd0ae0
@@ -1200,6 +1276,30 @@ trackedFiles:
     id: 15bcb5136371
     last_write_checksum: sha1:1b32f1e36ddd3d2345b6d24d1905900dc8969ee1
     pristine_git_object: 039ef0e8a666acee2e1b82796f38f0c813a2867d
+  src/unkey/py/models/v2portalcreatesessionrequestbody.py:
+    id: 79235e5b469e
+    last_write_checksum: sha1:de14ab42000ddfe93a2fbff76bc1c35626d25cad
+    pristine_git_object: 697021e91f34afb8a7b95fe2adbb20ff80e6795e
+  src/unkey/py/models/v2portalcreatesessionresponsebody.py:
+    id: d93ef663421e
+    last_write_checksum: sha1:777cb1280495824eea6f63a4f989db8057e58300
+    pristine_git_object: 6c20025c16d7529d30cf6be81b89228d2a900e07
+  src/unkey/py/models/v2portalcreatesessionresponsedata.py:
+    id: eeee33681d90
+    last_write_checksum: sha1:9d8346c012f75a558aec69193b2de25fa2f9df27
+    pristine_git_object: 2860563a9703f22091f6c83c0756039dfba561a1
+  src/unkey/py/models/v2portalexchangesessionrequestbody.py:
+    id: 27453eb17b4a
+    last_write_checksum: sha1:53a02e63843dae8265ed63cff8fe5b1c5bff827b
+    pristine_git_object: 2bf4dcbe2e6becea5ca3e2f53c6a8468ae70adcc
+  src/unkey/py/models/v2portalexchangesessionresponsebody.py:
+    id: f462d8061778
+    last_write_checksum: sha1:364abee6502ab4f7e800cfd92ede61cda82d1231
+    pristine_git_object: a2da66500da34dfc42501659dd26dd4684b25938
+  src/unkey/py/models/v2portalexchangesessionresponsedata.py:
+    id: 2295bb3cedc2
+    last_write_checksum: sha1:253d863df642ec42242156b8344c0c332a7a91a8
+    pristine_git_object: 73c3d719f81aa08b06d7e99f02c50b4756da5379
   src/unkey/py/models/v2ratelimitdeleteoverriderequestbody.py:
     id: 017c5dc3082f
     last_write_checksum: sha1:32d2b2726c287168b146e3659effe1c0a0312b84
@@ -1274,28 +1374,36 @@ trackedFiles:
     pristine_git_object: 8b65ac6eee33b929aca0b0dc51690a5248208393
   src/unkey/py/permissions.py:
     id: d4f3a7f81197
-    last_write_checksum: sha1:ca64a8f7e19632db5c0b2ba0d37750e523fa6770
-    pristine_git_object: 116abe59d7b2f6551fe781a752e19658d5f4adc9
+    last_write_checksum: sha1:23df933b6df765c1ba74916ea9e9f730b69c4ded
+    pristine_git_object: f55597c964b864733dd957fec92234e025c2422f
+  src/unkey/py/portal.py:
+    id: 5864748454ff
+    last_write_checksum: sha1:0f61301c28700639f0243d8639db157b55ad3e24
+    pristine_git_object: 3fc048c74ac198f00347d4e4d522b9ec0d7bda01
   src/unkey/py/py.typed:
     id: 9310f1c2f81a
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/unkey/py/ratelimit.py:
     id: 67e95f778961
-    last_write_checksum: sha1:98b0d330a091eef992d4ca1cab53c34ccde9dfb6
-    pristine_git_object: 2eb09509930d4614d05a2ea95ba8b07ccaf69a90
+    last_write_checksum: sha1:ba0363ecdc0e0ce375627b31570f9fe2317810ca
+    pristine_git_object: ecc889a297a473c50e7e0a8ecbc5ca96d3673388
   src/unkey/py/sdk.py:
     id: 62460043018c
-    last_write_checksum: sha1:845dc0b063a81cb771b04e7ca2ac8654b9120caa
-    pristine_git_object: fe3e23652a24e2b1ca1c6a2a50135bbe91b89933
+    last_write_checksum: sha1:6cb1478ffd57b4a6251c57770e257e1c7c39e8e5
+    pristine_git_object: 97e59ef296cda44a668daa19427705674dc93e53
   src/unkey/py/sdkconfiguration.py:
     id: 03c497eeccaa
     last_write_checksum: sha1:7ec37a17c10d68c902d6b4e6b0317505c04b50ee
     pristine_git_object: 4a872c2c3801c8769ac55b2b8dd59fb440e87634
   src/unkey/py/types/__init__.py:
     id: 0db8c70b8d80
-    last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
-    pristine_git_object: fc76fe0c5505e29859b5d2bb707d48fd27661b8c
+    last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
+    pristine_git_object: faa268137bc01c9d08cfadc4797017db48747a96
+  src/unkey/py/types/base64fileinput.py:
+    id: 9ec452d0b5d1
+    last_write_checksum: sha1:4780e893d3853b5a6e28d9a6ca3ee102ce0f502d
+    pristine_git_object: 25fc53989ed497649363f983219fc58705c8bf87
   src/unkey/py/types/basemodel.py:
     id: 5b992f01dec3
     last_write_checksum: sha1:10d84aedeb9d35edfdadf2c3020caa1d24d8b584
@@ -3212,11 +3320,43 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  portal.createSession:
+    speakeasy-default-portal-create-session:
+      requestBody:
+        application/json: {"slug": "my-portal", "externalId": "user_123", "permissions": ["api.*.read_key", "api.*.create_key", "api.*.read_analytics"], "preview": false}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"sessionId": "pst_abc123def456", "url": "https://portal.unkey.com/?session=pst_abc123def456"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  portal.exchangeSession:
+    speakeasy-default-portal-exchange-session:
+      requestBody:
+        application/json: {"sessionId": "pst_abc123def456"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"token": "ps_xyz789abc123", "expiresAt": 1711386400000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `unkey.internal.get_deployment()`:  `response.data.status.enum(stopped)` **Added**
+releaseNotes: "## Python SDK Changes:\n* `unkey.keys.verify_key()`: \n  *  `request.credits.cost` **Changed** (Breaking ⚠️)\n  *  `response.data.credits` **Changed** (Breaking ⚠️)\n* `unkey.portal.create_session()`: **Added**\n* `unkey.portal.exchange_session()`: **Added**\n* `unkey.internal.get_deployment()`:  `response.data.status` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

@@ -5,6 +5,7 @@ from typing import Any, TYPE_CHECKING
 from unkey.py.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
+    from .apis_listkeysop import ApisListKeysResponse, ApisListKeysResponseTypedDict
     from .badrequesterrordetails import (
         BadRequestErrorDetails,
         BadRequestErrorDetailsTypedDict,
@@ -34,6 +35,26 @@ if TYPE_CHECKING:
     from .meta import Meta, MetaTypedDict
     from .pagination import Pagination, PaginationTypedDict
     from .permission import Permission, PermissionTypedDict
+    from .permissions_listpermissionsop import (
+        PermissionsListPermissionsResponse,
+        PermissionsListPermissionsResponseTypedDict,
+    )
+    from .permissions_listrolesop import (
+        PermissionsListRolesResponse,
+        PermissionsListRolesResponseTypedDict,
+    )
+    from .portal_createsessionop import (
+        PortalCreateSessionResponse,
+        PortalCreateSessionResponseTypedDict,
+    )
+    from .portal_exchangesessionop import (
+        PortalExchangeSessionResponse,
+        PortalExchangeSessionResponseTypedDict,
+    )
+    from .ratelimit_listoverridesop import (
+        RatelimitListOverridesResponse,
+        RatelimitListOverridesResponseTypedDict,
+    )
     from .ratelimitoverride import RatelimitOverride, RatelimitOverrideTypedDict
     from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
     from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
@@ -388,6 +409,30 @@ if TYPE_CHECKING:
         V2PermissionsListRolesResponseBody,
         V2PermissionsListRolesResponseBodyTypedDict,
     )
+    from .v2portalcreatesessionrequestbody import (
+        V2PortalCreateSessionRequestBody,
+        V2PortalCreateSessionRequestBodyTypedDict,
+    )
+    from .v2portalcreatesessionresponsebody import (
+        V2PortalCreateSessionResponseBody,
+        V2PortalCreateSessionResponseBodyTypedDict,
+    )
+    from .v2portalcreatesessionresponsedata import (
+        V2PortalCreateSessionResponseData,
+        V2PortalCreateSessionResponseDataTypedDict,
+    )
+    from .v2portalexchangesessionrequestbody import (
+        V2PortalExchangeSessionRequestBody,
+        V2PortalExchangeSessionRequestBodyTypedDict,
+    )
+    from .v2portalexchangesessionresponsebody import (
+        V2PortalExchangeSessionResponseBody,
+        V2PortalExchangeSessionResponseBodyTypedDict,
+    )
+    from .v2portalexchangesessionresponsedata import (
+        V2PortalExchangeSessionResponseData,
+        V2PortalExchangeSessionResponseDataTypedDict,
+    )
     from .v2ratelimitdeleteoverriderequestbody import (
         V2RatelimitDeleteOverrideRequestBody,
         V2RatelimitDeleteOverrideRequestBodyTypedDict,
@@ -459,6 +504,8 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "ApisListKeysResponse",
+    "ApisListKeysResponseTypedDict",
     "BadRequestErrorDetails",
     "BadRequestErrorDetailsTypedDict",
     "BaseError",
@@ -488,6 +535,16 @@ __all__ = [
     "PaginationTypedDict",
     "Permission",
     "PermissionTypedDict",
+    "PermissionsListPermissionsResponse",
+    "PermissionsListPermissionsResponseTypedDict",
+    "PermissionsListRolesResponse",
+    "PermissionsListRolesResponseTypedDict",
+    "PortalCreateSessionResponse",
+    "PortalCreateSessionResponseTypedDict",
+    "PortalExchangeSessionResponse",
+    "PortalExchangeSessionResponseTypedDict",
+    "RatelimitListOverridesResponse",
+    "RatelimitListOverridesResponseTypedDict",
     "RatelimitOverride",
     "RatelimitOverrideTypedDict",
     "RatelimitRequest",
@@ -674,6 +731,18 @@ __all__ = [
     "V2PermissionsListRolesRequestBodyTypedDict",
     "V2PermissionsListRolesResponseBody",
     "V2PermissionsListRolesResponseBodyTypedDict",
+    "V2PortalCreateSessionRequestBody",
+    "V2PortalCreateSessionRequestBodyTypedDict",
+    "V2PortalCreateSessionResponseBody",
+    "V2PortalCreateSessionResponseBodyTypedDict",
+    "V2PortalCreateSessionResponseData",
+    "V2PortalCreateSessionResponseDataTypedDict",
+    "V2PortalExchangeSessionRequestBody",
+    "V2PortalExchangeSessionRequestBodyTypedDict",
+    "V2PortalExchangeSessionResponseBody",
+    "V2PortalExchangeSessionResponseBodyTypedDict",
+    "V2PortalExchangeSessionResponseData",
+    "V2PortalExchangeSessionResponseDataTypedDict",
     "V2RatelimitDeleteOverrideRequestBody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict",
     "V2RatelimitDeleteOverrideResponseBody",
@@ -713,6 +782,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "ApisListKeysResponse": ".apis_listkeysop",
+    "ApisListKeysResponseTypedDict": ".apis_listkeysop",
     "BadRequestErrorDetails": ".badrequesterrordetails",
     "BadRequestErrorDetailsTypedDict": ".badrequesterrordetails",
     "BaseError": ".baseerror",
@@ -740,6 +811,16 @@ _dynamic_imports: dict[str, str] = {
     "PaginationTypedDict": ".pagination",
     "Permission": ".permission",
     "PermissionTypedDict": ".permission",
+    "PermissionsListPermissionsResponse": ".permissions_listpermissionsop",
+    "PermissionsListPermissionsResponseTypedDict": ".permissions_listpermissionsop",
+    "PermissionsListRolesResponse": ".permissions_listrolesop",
+    "PermissionsListRolesResponseTypedDict": ".permissions_listrolesop",
+    "PortalCreateSessionResponse": ".portal_createsessionop",
+    "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
+    "PortalExchangeSessionResponse": ".portal_exchangesessionop",
+    "PortalExchangeSessionResponseTypedDict": ".portal_exchangesessionop",
+    "RatelimitListOverridesResponse": ".ratelimit_listoverridesop",
+    "RatelimitListOverridesResponseTypedDict": ".ratelimit_listoverridesop",
     "RatelimitOverride": ".ratelimitoverride",
     "RatelimitOverrideTypedDict": ".ratelimitoverride",
     "RatelimitRequest": ".ratelimitrequest",
@@ -928,6 +1009,18 @@ _dynamic_imports: dict[str, str] = {
     "V2PermissionsListRolesRequestBodyTypedDict": ".v2permissionslistrolesrequestbody",
     "V2PermissionsListRolesResponseBody": ".v2permissionslistrolesresponsebody",
     "V2PermissionsListRolesResponseBodyTypedDict": ".v2permissionslistrolesresponsebody",
+    "V2PortalCreateSessionRequestBody": ".v2portalcreatesessionrequestbody",
+    "V2PortalCreateSessionRequestBodyTypedDict": ".v2portalcreatesessionrequestbody",
+    "V2PortalCreateSessionResponseBody": ".v2portalcreatesessionresponsebody",
+    "V2PortalCreateSessionResponseBodyTypedDict": ".v2portalcreatesessionresponsebody",
+    "V2PortalCreateSessionResponseData": ".v2portalcreatesessionresponsedata",
+    "V2PortalCreateSessionResponseDataTypedDict": ".v2portalcreatesessionresponsedata",
+    "V2PortalExchangeSessionRequestBody": ".v2portalexchangesessionrequestbody",
+    "V2PortalExchangeSessionRequestBodyTypedDict": ".v2portalexchangesessionrequestbody",
+    "V2PortalExchangeSessionResponseBody": ".v2portalexchangesessionresponsebody",
+    "V2PortalExchangeSessionResponseBodyTypedDict": ".v2portalexchangesessionresponsebody",
+    "V2PortalExchangeSessionResponseData": ".v2portalexchangesessionresponsedata",
+    "V2PortalExchangeSessionResponseDataTypedDict": ".v2portalexchangesessionresponsedata",
     "V2RatelimitDeleteOverrideRequestBody": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideResponseBody": ".v2ratelimitdeleteoverrideresponsebody",
