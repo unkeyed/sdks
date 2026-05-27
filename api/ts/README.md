@@ -370,8 +370,10 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.identities.listIdentities({
-    limit: 50,
+  const result = await unkey.apis.listKeys({
+    apiId: "api_1234abcd",
+    cursor: "key_1234abcd",
+    externalId: "user_1234abcd",
   });
 
   for await (const page of result) {

@@ -318,7 +318,9 @@ async function run() {
     externalId: "user_1234abcd",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -346,7 +348,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("apisListKeys failed:", res.error);
   }
@@ -366,7 +370,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2ApisListKeysResponseBody](../../models/components/v2apislistkeysresponsebody.md)\>**
+**Promise\<[operations.ApisListKeysResponse](../../models/operations/apislistkeysresponse.md)\>**
 
 ### Errors
 

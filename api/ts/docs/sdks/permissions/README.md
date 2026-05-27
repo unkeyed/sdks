@@ -616,7 +616,9 @@ async function run() {
     limit: 50,
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -643,7 +645,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("permissionsListPermissions failed:", res.error);
   }
@@ -663,7 +667,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2PermissionsListPermissionsResponseBody](../../models/components/v2permissionslistpermissionsresponsebody.md)\>**
+**Promise\<[operations.PermissionsListPermissionsResponse](../../models/operations/permissionslistpermissionsresponse.md)\>**
 
 ### Errors
 
@@ -703,7 +707,9 @@ async function run() {
     cursor: "eyJrZXkiOiJyb2xlXzEyMzQifQ==",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -730,7 +736,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("permissionsListRoles failed:", res.error);
   }
@@ -750,7 +758,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2PermissionsListRolesResponseBody](../../models/components/v2permissionslistrolesresponsebody.md)\>**
+**Promise\<[operations.PermissionsListRolesResponse](../../models/operations/permissionslistrolesresponse.md)\>**
 
 ### Errors
 

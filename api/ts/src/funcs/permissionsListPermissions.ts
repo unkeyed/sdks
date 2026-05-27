@@ -3,6 +3,7 @@
  */
 
 import { UnkeyCore } from "../core.js";
+import { dlv } from "../lib/dlv.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -23,8 +24,15 @@ import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnkeyError } from "../models/errors/unkeyerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
+import {
+  createPageIterator,
+  haltIterator,
+  PageIterator,
+  Paginator,
+} from "../types/operations.js";
 
 /**
  * List permissions
@@ -45,21 +53,24 @@ export function permissionsListPermissions(
   request: components.V2PermissionsListPermissionsRequestBody,
   options?: RequestOptions,
 ): APIPromise<
-  Result<
-    components.V2PermissionsListPermissionsResponseBody,
-    | errors.BadRequestErrorResponse
-    | errors.UnauthorizedErrorResponse
-    | errors.ForbiddenErrorResponse
-    | errors.TooManyRequestsErrorResponse
-    | errors.InternalServerErrorResponse
-    | UnkeyError
-    | ResponseValidationError
-    | ConnectionError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | InvalidRequestError
-    | UnexpectedClientError
-    | SDKValidationError
+  PageIterator<
+    Result<
+      operations.PermissionsListPermissionsResponse,
+      | errors.BadRequestErrorResponse
+      | errors.UnauthorizedErrorResponse
+      | errors.ForbiddenErrorResponse
+      | errors.TooManyRequestsErrorResponse
+      | errors.InternalServerErrorResponse
+      | UnkeyError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    { cursor: string }
   >
 > {
   return new APIPromise($do(
@@ -75,21 +86,24 @@ async function $do(
   options?: RequestOptions,
 ): Promise<
   [
-    Result<
-      components.V2PermissionsListPermissionsResponseBody,
-      | errors.BadRequestErrorResponse
-      | errors.UnauthorizedErrorResponse
-      | errors.ForbiddenErrorResponse
-      | errors.TooManyRequestsErrorResponse
-      | errors.InternalServerErrorResponse
-      | UnkeyError
-      | ResponseValidationError
-      | ConnectionError
-      | RequestAbortedError
-      | RequestTimeoutError
-      | InvalidRequestError
-      | UnexpectedClientError
-      | SDKValidationError
+    PageIterator<
+      Result<
+        operations.PermissionsListPermissionsResponse,
+        | errors.BadRequestErrorResponse
+        | errors.UnauthorizedErrorResponse
+        | errors.ForbiddenErrorResponse
+        | errors.TooManyRequestsErrorResponse
+        | errors.InternalServerErrorResponse
+        | UnkeyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >,
+      { cursor: string }
     >,
     APICall,
   ]
@@ -103,7 +117,7 @@ async function $do(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
+    return [haltIterator(parsed), { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
@@ -155,7 +169,7 @@ async function $do(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return [requestRes, { status: "invalid" }];
+    return [haltIterator(requestRes), { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -167,7 +181,7 @@ async function $do(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return [doResult, { status: "request-error", request: req }];
+    return [haltIterator(doResult), { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -175,8 +189,8 @@ async function $do(
     HttpMeta: { Response: response, Request: req },
   };
 
-  const [result] = await M.match<
-    components.V2PermissionsListPermissionsResponseBody,
+  const [result, raw] = await M.match<
+    operations.PermissionsListPermissionsResponse,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
@@ -191,10 +205,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      components.V2PermissionsListPermissionsResponseBody$inboundSchema,
-    ),
+    M.json(200, operations.PermissionsListPermissionsResponse$inboundSchema, {
+      key: "Result",
+    }),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
@@ -206,8 +219,61 @@ async function $do(
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return [result, { status: "complete", request: req, response }];
+    return [haltIterator(result), {
+      status: "complete",
+      request: req,
+      response,
+    }];
   }
 
-  return [result, { status: "complete", request: req, response }];
+  const nextFunc = (
+    responseData: unknown,
+  ): {
+    next: Paginator<
+      Result<
+        operations.PermissionsListPermissionsResponse,
+        | errors.BadRequestErrorResponse
+        | errors.UnauthorizedErrorResponse
+        | errors.ForbiddenErrorResponse
+        | errors.TooManyRequestsErrorResponse
+        | errors.InternalServerErrorResponse
+        | UnkeyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >
+    >;
+    "~next"?: { cursor: string };
+  } => {
+    const nextCursor = dlv(responseData, "pagination.cursor");
+    if (typeof nextCursor !== "string") {
+      return { next: () => null };
+    }
+    if (nextCursor.trim() === "") {
+      return { next: () => null };
+    }
+
+    const nextVal = () =>
+      permissionsListPermissions(
+        client,
+        {
+          ...request,
+          cursor: nextCursor,
+        },
+        options,
+      );
+
+    return { next: nextVal, "~next": { cursor: nextCursor } };
+  };
+
+  const page = { ...result, ...nextFunc(raw) };
+  return [{ ...page, ...createPageIterator(page, (v) => !v.ok) }, {
+    status: "complete",
+    request: req,
+    response,
+  }];
 }

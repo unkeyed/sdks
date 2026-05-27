@@ -12,7 +12,9 @@ import { permissionsListPermissions } from "../funcs/permissionsListPermissions.
 import { permissionsListRoles } from "../funcs/permissionsListRoles.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Permissions extends ClientSDK {
   /**
@@ -172,8 +174,13 @@ export class Permissions extends ClientSDK {
   async listPermissions(
     request: components.V2PermissionsListPermissionsRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2PermissionsListPermissionsResponseBody> {
-    return unwrapAsync(permissionsListPermissions(
+  ): Promise<
+    PageIterator<
+      operations.PermissionsListPermissionsResponse,
+      { cursor: string }
+    >
+  > {
+    return unwrapResultIterator(permissionsListPermissions(
       this,
       request,
       options,
@@ -195,8 +202,10 @@ export class Permissions extends ClientSDK {
   async listRoles(
     request: components.V2PermissionsListRolesRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2PermissionsListRolesResponseBody> {
-    return unwrapAsync(permissionsListRoles(
+  ): Promise<
+    PageIterator<operations.PermissionsListRolesResponse, { cursor: string }>
+  > {
+    return unwrapResultIterator(permissionsListRoles(
       this,
       request,
       options,

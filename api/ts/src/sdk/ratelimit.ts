@@ -10,7 +10,9 @@ import { ratelimitMultiLimit } from "../funcs/ratelimitMultiLimit.js";
 import { ratelimitSetOverride } from "../funcs/ratelimitSetOverride.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Ratelimit extends ClientSDK {
   /**
@@ -101,8 +103,10 @@ export class Ratelimit extends ClientSDK {
   async listOverrides(
     request: components.V2RatelimitListOverridesRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2RatelimitListOverridesResponseBody> {
-    return unwrapAsync(ratelimitListOverrides(
+  ): Promise<
+    PageIterator<operations.RatelimitListOverridesResponse, { cursor: string }>
+  > {
+    return unwrapResultIterator(ratelimitListOverrides(
       this,
       request,
       options,

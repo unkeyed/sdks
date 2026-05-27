@@ -8,7 +8,9 @@ import { apisGetApi } from "../funcs/apisGetApi.js";
 import { apisListKeys } from "../funcs/apisListKeys.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Apis extends ClientSDK {
   /**
@@ -116,8 +118,10 @@ export class Apis extends ClientSDK {
   async listKeys(
     request: components.V2ApisListKeysRequestBody,
     options?: RequestOptions,
-  ): Promise<components.V2ApisListKeysResponseBody> {
-    return unwrapAsync(apisListKeys(
+  ): Promise<
+    PageIterator<operations.ApisListKeysResponse, { cursor: string }>
+  > {
+    return unwrapResultIterator(apisListKeys(
       this,
       request,
       options,
