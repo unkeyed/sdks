@@ -906,7 +906,9 @@ async function run() {
     limit: 20,
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -933,7 +935,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("ratelimitListOverrides failed:", res.error);
   }
@@ -956,7 +960,9 @@ async function run() {
     namespace: "<value>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -982,7 +988,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("ratelimitListOverrides failed:", res.error);
   }
@@ -1006,7 +1014,9 @@ async function run() {
     cursor: "cursor_eyJsYXN0SWQiOiJvdnJfM2RITGNOeVN6SnppRHlwMkpla2E5ciJ9",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -1033,7 +1043,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("ratelimitListOverrides failed:", res.error);
   }
@@ -1053,7 +1065,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2RatelimitListOverridesResponseBody](../../models/components/v2ratelimitlistoverridesresponsebody.md)\>**
+**Promise\<[operations.RatelimitListOverridesResponse](../../models/operations/ratelimitlistoverridesresponse.md)\>**
 
 ### Errors
 
