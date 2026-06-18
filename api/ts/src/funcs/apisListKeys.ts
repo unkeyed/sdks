@@ -3,7 +3,6 @@
  */
 
 import { UnkeyCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -261,7 +260,8 @@ async function $do(
     >;
     "~next"?: { cursor: string };
   } => {
-    const nextCursor = dlv(responseData, "pagination.cursor");
+    const nextCursor = (responseData as { pagination?: { cursor?: unknown } })
+      .pagination?.cursor;
     if (typeof nextCursor !== "string") {
       return { next: () => null };
     }
