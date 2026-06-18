@@ -67,7 +67,7 @@ python:
   inferUnionDiscriminators: true
   inputModelSuffix: input
   legacyPyright: false
-  license: ""
+  license: MIT
   maxMethodParams: 0
   methodArguments: infer-optional-args
   moduleName: unkey.py
