@@ -12,6 +12,7 @@ dependencies = [
     "jsonpath-python >=1.0.6",
     "pydantic >=2.11.2",
 ]
+license = { text = "MIT" }
 
 [tool.poetry]
 repository = "https://github.com/unkeyed/sdks.git"

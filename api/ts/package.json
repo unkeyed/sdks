@@ -2,6 +2,7 @@
   "name": "@unkey/api",
   "version": "2.3.5",
   "author": "Speakeasy",
+  "license": "MIT",
   "type": "module",
   "tshy": {
     "sourceDialects": [
