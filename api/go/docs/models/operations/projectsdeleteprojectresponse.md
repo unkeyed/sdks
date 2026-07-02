@@ -1,0 +1,9 @@
+# ProjectsDeleteProjectResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2ProjectsDeleteProjectResponseBody`                                                                             | [*components.V2ProjectsDeleteProjectResponseBody](../../models/components/v2projectsdeleteprojectresponsebody.md) | :heavy_minus_sign:                                                                                                | Successfully enqueued deletion of the project.<br/>                                                               |

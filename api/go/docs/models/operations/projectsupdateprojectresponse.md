@@ -1,0 +1,9 @@
+# ProjectsUpdateProjectResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2ProjectsUpdateProjectResponseBody`                                                                             | [*components.V2ProjectsUpdateProjectResponseBody](../../models/components/v2projectsupdateprojectresponsebody.md) | :heavy_minus_sign:                                                                                                | Successfully updated the project.<br/>                                                                            |
