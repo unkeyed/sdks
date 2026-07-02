@@ -279,6 +279,14 @@ with Unkey(
 * [get_api](docs/sdks/apis/README.md#get_api) - Get API namespace
 * [list_keys](docs/sdks/apis/README.md#list_keys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [create_app](docs/sdks/apps/README.md#create_app) - Create app
+* [delete_app](docs/sdks/apps/README.md#delete_app) - Delete app
+* [get_app](docs/sdks/apps/README.md#get_app) - Get app
+* [list_apps](docs/sdks/apps/README.md#list_apps) - List apps
+* [update_app](docs/sdks/apps/README.md#update_app) - Update app
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [create_identity](docs/sdks/identities/README.md#create_identity) - Create Identity
@@ -325,6 +333,14 @@ with Unkey(
 
 * [create_session](docs/sdks/portal/README.md#create_session) - Create portal session
 * [exchange_session](docs/sdks/portal/README.md#exchange_session) - Exchange session token
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [create_project](docs/sdks/projects/README.md#create_project) - Create project
+* [delete_project](docs/sdks/projects/README.md#delete_project) - Delete project
+* [get_project](docs/sdks/projects/README.md#get_project) - Get project
+* [list_projects](docs/sdks/projects/README.md#list_projects) - List projects
+* [update_project](docs/sdks/projects/README.md#update_project) - Update project
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
@@ -472,11 +488,11 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
-* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 43 methods.*
-* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 43 methods.*
-* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 43 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 43 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 43 methods.*
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 53 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 3 of 53 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 53 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 53 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 53 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

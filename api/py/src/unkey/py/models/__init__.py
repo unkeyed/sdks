@@ -6,6 +6,8 @@ from unkey.py.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
     from .apis_listkeysop import ApisListKeysResponse, ApisListKeysResponseTypedDict
+    from .app import App, AppTypedDict
+    from .apps_listappsop import AppsListAppsResponse, AppsListAppsResponseTypedDict
     from .badrequesterrordetails import (
         BadRequestErrorDetails,
         BadRequestErrorDetailsTypedDict,
@@ -50,6 +52,11 @@ if TYPE_CHECKING:
     from .portal_exchangesessionop import (
         PortalExchangeSessionResponse,
         PortalExchangeSessionResponseTypedDict,
+    )
+    from .project import Project, ProjectTypedDict
+    from .projects_listprojectsop import (
+        ProjectsListProjectsResponse,
+        ProjectsListProjectsResponseTypedDict,
     )
     from .ratelimit_listoverridesop import (
         RatelimitListOverridesResponse,
@@ -116,6 +123,50 @@ if TYPE_CHECKING:
     from .v2apislistkeysresponsebody import (
         V2ApisListKeysResponseBody,
         V2ApisListKeysResponseBodyTypedDict,
+    )
+    from .v2appscreateapprequestbody import (
+        V2AppsCreateAppRequestBody,
+        V2AppsCreateAppRequestBodyTypedDict,
+    )
+    from .v2appscreateappresponsebody import (
+        V2AppsCreateAppResponseBody,
+        V2AppsCreateAppResponseBodyTypedDict,
+    )
+    from .v2appscreateappresponsedata import (
+        V2AppsCreateAppResponseData,
+        V2AppsCreateAppResponseDataTypedDict,
+    )
+    from .v2appsdeleteapprequestbody import (
+        V2AppsDeleteAppRequestBody,
+        V2AppsDeleteAppRequestBodyTypedDict,
+    )
+    from .v2appsdeleteappresponsebody import (
+        V2AppsDeleteAppResponseBody,
+        V2AppsDeleteAppResponseBodyTypedDict,
+    )
+    from .v2appsgetapprequestbody import (
+        V2AppsGetAppRequestBody,
+        V2AppsGetAppRequestBodyTypedDict,
+    )
+    from .v2appsgetappresponsebody import (
+        V2AppsGetAppResponseBody,
+        V2AppsGetAppResponseBodyTypedDict,
+    )
+    from .v2appslistappsrequestbody import (
+        V2AppsListAppsRequestBody,
+        V2AppsListAppsRequestBodyTypedDict,
+    )
+    from .v2appslistappsresponsebody import (
+        V2AppsListAppsResponseBody,
+        V2AppsListAppsResponseBodyTypedDict,
+    )
+    from .v2appsupdateapprequestbody import (
+        V2AppsUpdateAppRequestBody,
+        V2AppsUpdateAppRequestBodyTypedDict,
+    )
+    from .v2appsupdateappresponsebody import (
+        V2AppsUpdateAppResponseBody,
+        V2AppsUpdateAppResponseBodyTypedDict,
     )
     from .v2deploycreatedeploymentrequestbody import (
         V2DeployCreateDeploymentRequestBody,
@@ -433,6 +484,50 @@ if TYPE_CHECKING:
         V2PortalExchangeSessionResponseData,
         V2PortalExchangeSessionResponseDataTypedDict,
     )
+    from .v2projectscreateprojectrequestbody import (
+        V2ProjectsCreateProjectRequestBody,
+        V2ProjectsCreateProjectRequestBodyTypedDict,
+    )
+    from .v2projectscreateprojectresponsebody import (
+        V2ProjectsCreateProjectResponseBody,
+        V2ProjectsCreateProjectResponseBodyTypedDict,
+    )
+    from .v2projectscreateprojectresponsedata import (
+        V2ProjectsCreateProjectResponseData,
+        V2ProjectsCreateProjectResponseDataTypedDict,
+    )
+    from .v2projectsdeleteprojectrequestbody import (
+        V2ProjectsDeleteProjectRequestBody,
+        V2ProjectsDeleteProjectRequestBodyTypedDict,
+    )
+    from .v2projectsdeleteprojectresponsebody import (
+        V2ProjectsDeleteProjectResponseBody,
+        V2ProjectsDeleteProjectResponseBodyTypedDict,
+    )
+    from .v2projectsgetprojectrequestbody import (
+        V2ProjectsGetProjectRequestBody,
+        V2ProjectsGetProjectRequestBodyTypedDict,
+    )
+    from .v2projectsgetprojectresponsebody import (
+        V2ProjectsGetProjectResponseBody,
+        V2ProjectsGetProjectResponseBodyTypedDict,
+    )
+    from .v2projectslistprojectsrequestbody import (
+        V2ProjectsListProjectsRequestBody,
+        V2ProjectsListProjectsRequestBodyTypedDict,
+    )
+    from .v2projectslistprojectsresponsebody import (
+        V2ProjectsListProjectsResponseBody,
+        V2ProjectsListProjectsResponseBodyTypedDict,
+    )
+    from .v2projectsupdateprojectrequestbody import (
+        V2ProjectsUpdateProjectRequestBody,
+        V2ProjectsUpdateProjectRequestBodyTypedDict,
+    )
+    from .v2projectsupdateprojectresponsebody import (
+        V2ProjectsUpdateProjectResponseBody,
+        V2ProjectsUpdateProjectResponseBodyTypedDict,
+    )
     from .v2ratelimitdeleteoverriderequestbody import (
         V2RatelimitDeleteOverrideRequestBody,
         V2RatelimitDeleteOverrideRequestBodyTypedDict,
@@ -506,6 +601,10 @@ if TYPE_CHECKING:
 __all__ = [
     "ApisListKeysResponse",
     "ApisListKeysResponseTypedDict",
+    "App",
+    "AppTypedDict",
+    "AppsListAppsResponse",
+    "AppsListAppsResponseTypedDict",
     "BadRequestErrorDetails",
     "BadRequestErrorDetailsTypedDict",
     "BaseError",
@@ -543,6 +642,10 @@ __all__ = [
     "PortalCreateSessionResponseTypedDict",
     "PortalExchangeSessionResponse",
     "PortalExchangeSessionResponseTypedDict",
+    "Project",
+    "ProjectTypedDict",
+    "ProjectsListProjectsResponse",
+    "ProjectsListProjectsResponseTypedDict",
     "RatelimitListOverridesResponse",
     "RatelimitListOverridesResponseTypedDict",
     "RatelimitOverride",
@@ -585,6 +688,28 @@ __all__ = [
     "V2ApisListKeysRequestBodyTypedDict",
     "V2ApisListKeysResponseBody",
     "V2ApisListKeysResponseBodyTypedDict",
+    "V2AppsCreateAppRequestBody",
+    "V2AppsCreateAppRequestBodyTypedDict",
+    "V2AppsCreateAppResponseBody",
+    "V2AppsCreateAppResponseBodyTypedDict",
+    "V2AppsCreateAppResponseData",
+    "V2AppsCreateAppResponseDataTypedDict",
+    "V2AppsDeleteAppRequestBody",
+    "V2AppsDeleteAppRequestBodyTypedDict",
+    "V2AppsDeleteAppResponseBody",
+    "V2AppsDeleteAppResponseBodyTypedDict",
+    "V2AppsGetAppRequestBody",
+    "V2AppsGetAppRequestBodyTypedDict",
+    "V2AppsGetAppResponseBody",
+    "V2AppsGetAppResponseBodyTypedDict",
+    "V2AppsListAppsRequestBody",
+    "V2AppsListAppsRequestBodyTypedDict",
+    "V2AppsListAppsResponseBody",
+    "V2AppsListAppsResponseBodyTypedDict",
+    "V2AppsUpdateAppRequestBody",
+    "V2AppsUpdateAppRequestBodyTypedDict",
+    "V2AppsUpdateAppResponseBody",
+    "V2AppsUpdateAppResponseBodyTypedDict",
     "V2DeployCreateDeploymentRequestBody",
     "V2DeployCreateDeploymentRequestBodyTypedDict",
     "V2DeployCreateDeploymentResponseBody",
@@ -743,6 +868,28 @@ __all__ = [
     "V2PortalExchangeSessionResponseBodyTypedDict",
     "V2PortalExchangeSessionResponseData",
     "V2PortalExchangeSessionResponseDataTypedDict",
+    "V2ProjectsCreateProjectRequestBody",
+    "V2ProjectsCreateProjectRequestBodyTypedDict",
+    "V2ProjectsCreateProjectResponseBody",
+    "V2ProjectsCreateProjectResponseBodyTypedDict",
+    "V2ProjectsCreateProjectResponseData",
+    "V2ProjectsCreateProjectResponseDataTypedDict",
+    "V2ProjectsDeleteProjectRequestBody",
+    "V2ProjectsDeleteProjectRequestBodyTypedDict",
+    "V2ProjectsDeleteProjectResponseBody",
+    "V2ProjectsDeleteProjectResponseBodyTypedDict",
+    "V2ProjectsGetProjectRequestBody",
+    "V2ProjectsGetProjectRequestBodyTypedDict",
+    "V2ProjectsGetProjectResponseBody",
+    "V2ProjectsGetProjectResponseBodyTypedDict",
+    "V2ProjectsListProjectsRequestBody",
+    "V2ProjectsListProjectsRequestBodyTypedDict",
+    "V2ProjectsListProjectsResponseBody",
+    "V2ProjectsListProjectsResponseBodyTypedDict",
+    "V2ProjectsUpdateProjectRequestBody",
+    "V2ProjectsUpdateProjectRequestBodyTypedDict",
+    "V2ProjectsUpdateProjectResponseBody",
+    "V2ProjectsUpdateProjectResponseBodyTypedDict",
     "V2RatelimitDeleteOverrideRequestBody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict",
     "V2RatelimitDeleteOverrideResponseBody",
@@ -784,6 +931,10 @@ __all__ = [
 _dynamic_imports: dict[str, str] = {
     "ApisListKeysResponse": ".apis_listkeysop",
     "ApisListKeysResponseTypedDict": ".apis_listkeysop",
+    "App": ".app",
+    "AppTypedDict": ".app",
+    "AppsListAppsResponse": ".apps_listappsop",
+    "AppsListAppsResponseTypedDict": ".apps_listappsop",
     "BadRequestErrorDetails": ".badrequesterrordetails",
     "BadRequestErrorDetailsTypedDict": ".badrequesterrordetails",
     "BaseError": ".baseerror",
@@ -819,6 +970,10 @@ _dynamic_imports: dict[str, str] = {
     "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
     "PortalExchangeSessionResponse": ".portal_exchangesessionop",
     "PortalExchangeSessionResponseTypedDict": ".portal_exchangesessionop",
+    "Project": ".project",
+    "ProjectTypedDict": ".project",
+    "ProjectsListProjectsResponse": ".projects_listprojectsop",
+    "ProjectsListProjectsResponseTypedDict": ".projects_listprojectsop",
     "RatelimitListOverridesResponse": ".ratelimit_listoverridesop",
     "RatelimitListOverridesResponseTypedDict": ".ratelimit_listoverridesop",
     "RatelimitOverride": ".ratelimitoverride",
@@ -860,6 +1015,28 @@ _dynamic_imports: dict[str, str] = {
     "V2ApisListKeysRequestBodyTypedDict": ".v2apislistkeysrequestbody",
     "V2ApisListKeysResponseBody": ".v2apislistkeysresponsebody",
     "V2ApisListKeysResponseBodyTypedDict": ".v2apislistkeysresponsebody",
+    "V2AppsCreateAppRequestBody": ".v2appscreateapprequestbody",
+    "V2AppsCreateAppRequestBodyTypedDict": ".v2appscreateapprequestbody",
+    "V2AppsCreateAppResponseBody": ".v2appscreateappresponsebody",
+    "V2AppsCreateAppResponseBodyTypedDict": ".v2appscreateappresponsebody",
+    "V2AppsCreateAppResponseData": ".v2appscreateappresponsedata",
+    "V2AppsCreateAppResponseDataTypedDict": ".v2appscreateappresponsedata",
+    "V2AppsDeleteAppRequestBody": ".v2appsdeleteapprequestbody",
+    "V2AppsDeleteAppRequestBodyTypedDict": ".v2appsdeleteapprequestbody",
+    "V2AppsDeleteAppResponseBody": ".v2appsdeleteappresponsebody",
+    "V2AppsDeleteAppResponseBodyTypedDict": ".v2appsdeleteappresponsebody",
+    "V2AppsGetAppRequestBody": ".v2appsgetapprequestbody",
+    "V2AppsGetAppRequestBodyTypedDict": ".v2appsgetapprequestbody",
+    "V2AppsGetAppResponseBody": ".v2appsgetappresponsebody",
+    "V2AppsGetAppResponseBodyTypedDict": ".v2appsgetappresponsebody",
+    "V2AppsListAppsRequestBody": ".v2appslistappsrequestbody",
+    "V2AppsListAppsRequestBodyTypedDict": ".v2appslistappsrequestbody",
+    "V2AppsListAppsResponseBody": ".v2appslistappsresponsebody",
+    "V2AppsListAppsResponseBodyTypedDict": ".v2appslistappsresponsebody",
+    "V2AppsUpdateAppRequestBody": ".v2appsupdateapprequestbody",
+    "V2AppsUpdateAppRequestBodyTypedDict": ".v2appsupdateapprequestbody",
+    "V2AppsUpdateAppResponseBody": ".v2appsupdateappresponsebody",
+    "V2AppsUpdateAppResponseBodyTypedDict": ".v2appsupdateappresponsebody",
     "V2DeployCreateDeploymentRequestBody": ".v2deploycreatedeploymentrequestbody",
     "V2DeployCreateDeploymentRequestBodyTypedDict": ".v2deploycreatedeploymentrequestbody",
     "V2DeployCreateDeploymentResponseBody": ".v2deploycreatedeploymentresponsebody",
@@ -1021,6 +1198,28 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalExchangeSessionResponseBodyTypedDict": ".v2portalexchangesessionresponsebody",
     "V2PortalExchangeSessionResponseData": ".v2portalexchangesessionresponsedata",
     "V2PortalExchangeSessionResponseDataTypedDict": ".v2portalexchangesessionresponsedata",
+    "V2ProjectsCreateProjectRequestBody": ".v2projectscreateprojectrequestbody",
+    "V2ProjectsCreateProjectRequestBodyTypedDict": ".v2projectscreateprojectrequestbody",
+    "V2ProjectsCreateProjectResponseBody": ".v2projectscreateprojectresponsebody",
+    "V2ProjectsCreateProjectResponseBodyTypedDict": ".v2projectscreateprojectresponsebody",
+    "V2ProjectsCreateProjectResponseData": ".v2projectscreateprojectresponsedata",
+    "V2ProjectsCreateProjectResponseDataTypedDict": ".v2projectscreateprojectresponsedata",
+    "V2ProjectsDeleteProjectRequestBody": ".v2projectsdeleteprojectrequestbody",
+    "V2ProjectsDeleteProjectRequestBodyTypedDict": ".v2projectsdeleteprojectrequestbody",
+    "V2ProjectsDeleteProjectResponseBody": ".v2projectsdeleteprojectresponsebody",
+    "V2ProjectsDeleteProjectResponseBodyTypedDict": ".v2projectsdeleteprojectresponsebody",
+    "V2ProjectsGetProjectRequestBody": ".v2projectsgetprojectrequestbody",
+    "V2ProjectsGetProjectRequestBodyTypedDict": ".v2projectsgetprojectrequestbody",
+    "V2ProjectsGetProjectResponseBody": ".v2projectsgetprojectresponsebody",
+    "V2ProjectsGetProjectResponseBodyTypedDict": ".v2projectsgetprojectresponsebody",
+    "V2ProjectsListProjectsRequestBody": ".v2projectslistprojectsrequestbody",
+    "V2ProjectsListProjectsRequestBodyTypedDict": ".v2projectslistprojectsrequestbody",
+    "V2ProjectsListProjectsResponseBody": ".v2projectslistprojectsresponsebody",
+    "V2ProjectsListProjectsResponseBodyTypedDict": ".v2projectslistprojectsresponsebody",
+    "V2ProjectsUpdateProjectRequestBody": ".v2projectsupdateprojectrequestbody",
+    "V2ProjectsUpdateProjectRequestBodyTypedDict": ".v2projectsupdateprojectrequestbody",
+    "V2ProjectsUpdateProjectResponseBody": ".v2projectsupdateprojectresponsebody",
+    "V2ProjectsUpdateProjectResponseBodyTypedDict": ".v2projectsupdateprojectresponsebody",
     "V2RatelimitDeleteOverrideRequestBody": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideResponseBody": ".v2ratelimitdeleteoverrideresponsebody",
