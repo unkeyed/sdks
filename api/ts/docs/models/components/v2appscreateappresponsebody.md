@@ -1,0 +1,23 @@
+# V2AppsCreateAppResponseBody
+
+## Example Usage
+
+```typescript
+import { V2AppsCreateAppResponseBody } from "@unkey/api/models/components";
+
+let value: V2AppsCreateAppResponseBody = {
+  meta: {
+    requestId: "req_123",
+  },
+  data: {
+    appId: "app_1234abcd",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta`                                                                                                                                                                                                                                                          | [components.Meta](../../models/components/meta.md)                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                              | Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team. |
+| `data`                                                                                                                                                                                                                                                          | [components.V2AppsCreateAppResponseData](../../models/components/v2appscreateappresponsedata.md)                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                              | N/A                                                                                                                                                                                                                                                             |

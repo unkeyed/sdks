@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 094646d54ff6378de010e9eb1c7b585c
+  docChecksum: 2df798806342857b4b0d2614e890afcc
   docVersion: 2.0.0
-  speakeasyVersion: 1.783.1
-  generationVersion: 2.910.1
-  releaseVersion: 2.4.0
-  configChecksum: 003b672b9fece30b57201cdab8337c4a
+  speakeasyVersion: 1.787.0
+  generationVersion: 2.914.0
+  releaseVersion: 2.4.1
+  configChecksum: f75ebcc0ef1c9bbd2d0ec69afdafa1d9
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: f2165103-5d38-4d77-8a21-ffdbe7b9088a
-  pristine_commit_hash: 04327834972326f359dd343f418526e9926d8364
-  pristine_tree_hash: 27caba197565d8fba214f6a56c93efe079da33ee
+  generation_id: f2618007-1366-4e01-b74d-de239134cfc1
+  pristine_commit_hash: fee459d4864286845a9e29b15d2dcd1a14172b6f
+  pristine_tree_hash: 09f52d88668e06899ecc786c9123b68f0497f06f
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.1
+    core: 3.31.2
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -61,6 +61,10 @@ trackedFiles:
     id: 0ce9707cb848
     last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
     pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
+  docs/models/components/app.md:
+    id: a31b0d7743a7
+    last_write_checksum: sha1:b9c30531e4ac5d0f283d1f568dc4d0da49eb8670
+    pristine_git_object: 847d24f5e230568457c5aaaefc7630c96dea6750
   docs/models/components/badrequesterrordetails.md:
     id: 735a46302ed7
     last_write_checksum: sha1:fa1cdb4ff7a61a0c125f356479ac2c1bc92ab9d0
@@ -121,6 +125,10 @@ trackedFiles:
     id: 1627c686fe0e
     last_write_checksum: sha1:4ac1feed8f7df946af8e3b1739dffaf188a46f75
     pristine_git_object: c48c32c0a546aa23c6cf3e44ec93d5e3d1596e6c
+  docs/models/components/project.md:
+    id: e6f9abcd3eff
+    last_write_checksum: sha1:e2d1ff65546c06658cfc917eec0edd4fd8e08bff
+    pristine_git_object: f7e362f21938980f6005a8df9cbe178dd9bfe4cc
   docs/models/components/ratelimitoverride.md:
     id: a5d79f2a2458
     last_write_checksum: sha1:feacb7b956a7fcc94189d0b1e9f6b675c10098c8
@@ -205,6 +213,50 @@ trackedFiles:
     id: a31f7ed47554
     last_write_checksum: sha1:cb5844f40caf7a9053a3bd2e293381aad50411cd
     pristine_git_object: b3fbb4b457aec7d7db6e9795e4ed515e2047ae34
+  docs/models/components/v2appscreateapprequestbody.md:
+    id: 8824cc7a1099
+    last_write_checksum: sha1:565552a565a7052e45c1e308279211841095cda5
+    pristine_git_object: 2139693c75342ab5d41b00742fbefee8dbd0dfcb
+  docs/models/components/v2appscreateappresponsebody.md:
+    id: 4914e74a6b20
+    last_write_checksum: sha1:066481176f3e244cfa542ec24dd40781a5b4ec1b
+    pristine_git_object: c642396bd35848dce9e6f05ac156f10be002227a
+  docs/models/components/v2appscreateappresponsedata.md:
+    id: 4976223f1dc7
+    last_write_checksum: sha1:5d79b73457a7c2aae8d9dad1118c4686a14d1b08
+    pristine_git_object: fe5e1a4b85639283e1a1c70ebc50818e0ce92a66
+  docs/models/components/v2appsdeleteapprequestbody.md:
+    id: c5ae8ae2f782
+    last_write_checksum: sha1:e2655256ea1c10fd04d826468f7aa5ef4b3ab558
+    pristine_git_object: 93d98592d5e96efaddb8b45a64534b0f7ed4c87f
+  docs/models/components/v2appsdeleteappresponsebody.md:
+    id: afdd906423c8
+    last_write_checksum: sha1:4fc35484cc4d67233423ceeb024a48b2fdbbe407
+    pristine_git_object: f407ee8e12d831a2c5db79d2203ff16e3d533bb2
+  docs/models/components/v2appsgetapprequestbody.md:
+    id: 255aeaafa4af
+    last_write_checksum: sha1:474158f850860b4982d3661bc6bbe9ea097533d8
+    pristine_git_object: bd77f23571ee907c7ba2199d9f2a8683b56bd958
+  docs/models/components/v2appsgetappresponsebody.md:
+    id: 7776d200c6d2
+    last_write_checksum: sha1:304c29df247d713101b26f71937e1d0ace7d70a7
+    pristine_git_object: 0d28a1d056fe809bf02d1691301ac6cf912b07a6
+  docs/models/components/v2appslistappsrequestbody.md:
+    id: 8aaf1f3cca79
+    last_write_checksum: sha1:6f270811ad4c8c8189cccef76028214011181d29
+    pristine_git_object: 0d4e3060f225d184dec5228124415f70935a05a7
+  docs/models/components/v2appslistappsresponsebody.md:
+    id: 22fde9586bcf
+    last_write_checksum: sha1:3edcd1c4d3de8dc8f116d6bce0a9d915720c4c9c
+    pristine_git_object: feb60f3260ba16a206a81817d16c181536cbffd6
+  docs/models/components/v2appsupdateapprequestbody.md:
+    id: 706c6edb24e9
+    last_write_checksum: sha1:9511db894f9eea4926d193e0491bee724bb3cef6
+    pristine_git_object: dc7a98acf342b67d473dbeacfa1cee4fdc9dbe85
+  docs/models/components/v2appsupdateappresponsebody.md:
+    id: 091dc9d81cb8
+    last_write_checksum: sha1:4667badd60557453faa45eeedc7d221b04723759
+    pristine_git_object: 5dc81b0441bb25160960bc6f3cde5989b1160d4a
   docs/models/components/v2deploycreatedeploymentrequestbody.md:
     id: 2a2d89cabd54
     last_write_checksum: sha1:731357e7801bf02622f08dca4d04d696bd60ddf0
@@ -521,6 +573,50 @@ trackedFiles:
     id: 9a7157e0552c
     last_write_checksum: sha1:46d78db83c82874343e4ed89c5e405fb68f29c6e
     pristine_git_object: 0c5e564d60ddf95bc6ae13831d2545d596a3cc17
+  docs/models/components/v2projectscreateprojectrequestbody.md:
+    id: c8f749c821fb
+    last_write_checksum: sha1:2bb4903fd5411b347fe9f59dac96f4e99bfaedde
+    pristine_git_object: 059e7197c44fd16ce0dbd622e2b19fc95d24ace7
+  docs/models/components/v2projectscreateprojectresponsebody.md:
+    id: 090974f84848
+    last_write_checksum: sha1:3ff8c6e8a1fb9901eab7df23bd6a79e48bea303e
+    pristine_git_object: ecdf43f409893d2e781ad7b4dd9221d704f20c3d
+  docs/models/components/v2projectscreateprojectresponsedata.md:
+    id: 863d236a7bb3
+    last_write_checksum: sha1:2e562c2adb5a3a236051bd416f4f716fcef62831
+    pristine_git_object: 50277eb2f1d75d1be522cb5b9aa021e8d1cf29d9
+  docs/models/components/v2projectsdeleteprojectrequestbody.md:
+    id: feae1a2afd7f
+    last_write_checksum: sha1:885c331521499a33b3813a4677a6c5f5b0d4623a
+    pristine_git_object: 3ebd700639b40a6112631f2a9f301dc534c6b20c
+  docs/models/components/v2projectsdeleteprojectresponsebody.md:
+    id: aace7d1729de
+    last_write_checksum: sha1:e6e1d988079e666c9e6c9fa590d66493724d3219
+    pristine_git_object: 9249b295f5932774a21122435b7269d041c803b5
+  docs/models/components/v2projectsgetprojectrequestbody.md:
+    id: c9fe0170d9c7
+    last_write_checksum: sha1:4beb3feb80b8b594772c79159976511a2c92a54a
+    pristine_git_object: 40a8c24d7fa1035108df14cf484e1732cd56618c
+  docs/models/components/v2projectsgetprojectresponsebody.md:
+    id: 9d1c148a82a8
+    last_write_checksum: sha1:30eef6149c4e0505903eaf89997f186914f1ff8a
+    pristine_git_object: 2bbd372b09ba0f6ef54824593bab7c1066ea182c
+  docs/models/components/v2projectslistprojectsrequestbody.md:
+    id: 0636f4a7a4c0
+    last_write_checksum: sha1:0564c6382bb511b202c74b0f329bd78eff0f0a72
+    pristine_git_object: bc43eb7ca77697321a55e5027729ae3ec1b58d5d
+  docs/models/components/v2projectslistprojectsresponsebody.md:
+    id: e137f57dcbf9
+    last_write_checksum: sha1:34c62ce17744417faefac0adb3e50bbe70aa67e8
+    pristine_git_object: 1ec6627c22d66d1346f352506897398c9c874225
+  docs/models/components/v2projectsupdateprojectrequestbody.md:
+    id: bd3f6c5f0315
+    last_write_checksum: sha1:8c9c497ec3c37e20991430afb403399b0ad83d61
+    pristine_git_object: 48d325e303d85b7af27d2ae859b94006e89fa7c9
+  docs/models/components/v2projectsupdateprojectresponsebody.md:
+    id: 85ba19c6f76e
+    last_write_checksum: sha1:c67e3886f5419ab305f2f1a061d8a98da07a511b
+    pristine_git_object: c3ef0810cf2a4e0de6b08307c72bc4c88b23cf82
   docs/models/components/v2ratelimitdeleteoverriderequestbody.md:
     id: 27743a6adcdd
     last_write_checksum: sha1:5a1361ff51eaef1b3ef5b60e92316e6a79f5ae41
@@ -641,6 +737,10 @@ trackedFiles:
     id: bbfe230c2a9c
     last_write_checksum: sha1:cc307c0f5054057d94db213140bf7211898c97bf
     pristine_git_object: e250133968d7849306e569561360855c1e53e912
+  docs/models/operations/appslistappsresponse.md:
+    id: 750932944f33
+    last_write_checksum: sha1:54aeb4e378f3e3f6ff2acc32b2b67b92973c7ec4
+    pristine_git_object: a2282104165f6755473b163f856fab528ecaf910
   docs/models/operations/identitieslistidentitiesresponse.md:
     id: 7f1676432a5f
     last_write_checksum: sha1:3ea8656e6d46b02348e6a5be20648b4e541db44f
@@ -661,6 +761,10 @@ trackedFiles:
     id: 529efb0dad92
     last_write_checksum: sha1:ff5c6535009b2260ff5cb212e7c248a4ea27ab43
     pristine_git_object: 37f590e346f6f969fd63bbb2ec6de3ea3d84eb3e
+  docs/models/operations/projectslistprojectsresponse.md:
+    id: 16a6149c0db4
+    last_write_checksum: sha1:a23097da35852cc7256781c1f141f3f83aa080a4
+    pristine_git_object: 53b1e326308d49dd58363d2c076e6cd38ced8b8b
   docs/models/operations/ratelimitlistoverridesresponse.md:
     id: c7c93b7c1a5e
     last_write_checksum: sha1:ddfe5b1eea97847998517c559b05a6e077926505
@@ -673,6 +777,10 @@ trackedFiles:
     id: 23f09d8da686
     last_write_checksum: sha1:02c7476f4ba4dbd06b53acdd630982de440b3100
     pristine_git_object: d363d5ee9308cdf71f56a7c407e3a2f06b6f3009
+  docs/sdks/apps/README.md:
+    id: 9c9c1a6527a3
+    last_write_checksum: sha1:b699d08936d0d123c4a6329020458bcf65bee64d
+    pristine_git_object: 45893e76f1ad4305aef28f1c37f88513f0760470
   docs/sdks/identities/README.md:
     id: 751b50358a28
     last_write_checksum: sha1:184f55d94f7913b37b5a1ec0a39be489e70518b8
@@ -693,6 +801,10 @@ trackedFiles:
     id: 130ac1af4c35
     last_write_checksum: sha1:fd4ee46e1671be98c10f22bb98484469812d757b
     pristine_git_object: fa661523dcc5dc9888df507f5c6c9284f7408ad2
+  docs/sdks/projects/README.md:
+    id: 1c5f71754e17
+    last_write_checksum: sha1:3fe1411927d03dae40a2c036fb5cb960184aac95
+    pristine_git_object: bed56482eed63e67bff4c20898ec8ebffc5eacf3
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
     last_write_checksum: sha1:88974b7e5e62e83dbe5189cbd382bf449c553431
@@ -719,12 +831,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:214892889cf4e6ac2a6e426eb1bbca49fff6ac78
-    pristine_git_object: 0b5084e17b273e0f880006db03a8eab38191ff2c
+    last_write_checksum: sha1:f04c45b987c2eb7ac775b5e4a3af29edc17481f7
+    pristine_git_object: 831da19e1159bb7657154f36d60769d319fdfb32
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:22252135e57302b0bf9f4732966230fcd6bc6c6d
-    pristine_git_object: 3f76bbe52e181345913a5eefdce0f0cea5ec6ca1
+    last_write_checksum: sha1:378f776ba2421b75046964d7c93dc2042d47471b
+    pristine_git_object: ecab2fb49b54d2aa2eaceeade8ffbc778ba77ef8
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -749,6 +861,26 @@ trackedFiles:
     id: fb0006b64511
     last_write_checksum: sha1:e4ac34182075efc09da463f88452b99b7bd8f306
     pristine_git_object: 4bc3e0a009510a005dc400fbe348518baeacc070
+  src/funcs/appsCreateApp.ts:
+    id: f0a583875986
+    last_write_checksum: sha1:e10d1644b199e86504898641b810ff1ddba100b0
+    pristine_git_object: c70c574bebe9b36f281560eddaa74b85171e19b7
+  src/funcs/appsDeleteApp.ts:
+    id: 9a1b64b84633
+    last_write_checksum: sha1:8f6e519a306533c4617414f495751fd05f291f3d
+    pristine_git_object: 721f3f5f3f43259f8ad80a0cbef3fd42caf2a118
+  src/funcs/appsGetApp.ts:
+    id: 122ad6be41b5
+    last_write_checksum: sha1:18032dafde4ab452ac914b4d2dbe6a99df1caba4
+    pristine_git_object: 769e95bc88e120dd15bda18b9636dc910e712dd5
+  src/funcs/appsListApps.ts:
+    id: 5ec6389b158c
+    last_write_checksum: sha1:9d1cfdf8de93f0ef5bb268bad477659fbdc0f33c
+    pristine_git_object: a967a94c2f5db8797091c01e1bac3d67a22d58d1
+  src/funcs/appsUpdateApp.ts:
+    id: 5aaec90ad62f
+    last_write_checksum: sha1:a6e2c5ef32f5a011591bff6952b5d8973cdcbbda
+    pristine_git_object: 374a51af359c5b9f98d015dfbad1687d0e3f3780
   src/funcs/identitiesCreateIdentity.ts:
     id: 45aedb9dc5f8
     last_write_checksum: sha1:35e3b0f6f5a09e87c5db2c19402d3bb523a929f5
@@ -877,6 +1009,26 @@ trackedFiles:
     id: 309b9c3b4ed3
     last_write_checksum: sha1:29fc6b2cb08788cc13dd222890d9bcdf1c41631b
     pristine_git_object: 9399e9229019e4dd9f4b4173b0560f033f8d320c
+  src/funcs/projectsCreateProject.ts:
+    id: 6c0124cd7f03
+    last_write_checksum: sha1:1b2c7f5c0e5ef3f5630d3af5e29fdcb08b65588c
+    pristine_git_object: 42ab9058ec9e0fde925ee1dd199b8403cb6fb317
+  src/funcs/projectsDeleteProject.ts:
+    id: ef4499f2b231
+    last_write_checksum: sha1:7b42379b047e796ca4012b726422213f835029ba
+    pristine_git_object: 521c230118216dd839666444fae99a91abd3299f
+  src/funcs/projectsGetProject.ts:
+    id: 711f8c80aee3
+    last_write_checksum: sha1:17dba05ca22b7aaeb89cc5902296751b036721f8
+    pristine_git_object: 84c76d991806ad7f8f9f3758f2d6f336760acb71
+  src/funcs/projectsListProjects.ts:
+    id: 2fba9509b545
+    last_write_checksum: sha1:3e04751ffb4199c12429f3c37c627a48d93f1025
+    pristine_git_object: 454aa4dedb1227c3a633065cad72e69c1a6f9b88
+  src/funcs/projectsUpdateProject.ts:
+    id: 9372f1167034
+    last_write_checksum: sha1:943e6d68c539e6745a130a1d2a2087f68db66101
+    pristine_git_object: 6adf7ef56d24e3be4af058c199b0b88b4724b10d
   src/funcs/ratelimitDeleteOverride.ts:
     id: a57e20d3f008
     last_write_checksum: sha1:52c1397fdcafad4ba542b07fddd5b8d32b369249
@@ -923,8 +1075,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:47c04f7c77ae4610234b2f9cac09bd12a21b1423
-    pristine_git_object: 78f009d554673089c1601ce07c3490cb5485bd4c
+    last_write_checksum: sha1:7a4f0081f476ee0b22c00e0bb6b295e2fdd469f9
+    pristine_git_object: 1a2a54b7e46a43f510c4be5cd6e5907a180b7d4f
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -973,6 +1125,10 @@ trackedFiles:
     id: b0057e24ed76
     last_write_checksum: sha1:3bceadd74bf0b31adf13eb06b7531077c3e07d65
     pristine_git_object: 79e7ce660b3732053e3adcbb5a4cdeb51496e8aa
+  src/models/components/app.ts:
+    id: 0cbbaf5097fb
+    last_write_checksum: sha1:647fd578b7dcec7d52ca451bcfa1727a99c85b99
+    pristine_git_object: 04a5e4510ddf2879194fab5d5ac1a5b6b152cdef
   src/models/components/badrequesterrordetails.ts:
     id: 3442ddc4fe93
     last_write_checksum: sha1:2ca55ed40fabfee5847f910361c8feb9dc938795
@@ -991,8 +1147,8 @@ trackedFiles:
     pristine_git_object: 13d57aabbb139bd955ff6a36b355e40e34cf6a0c
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:9b01f1c6b7734d32e2f0f7c6b2dfdfe07512528a
-    pristine_git_object: 582da2078ecc9905ec7405972be74a816ec5fcdb
+    last_write_checksum: sha1:40673091e9e3d7baa76639acc31130955c203de4
+    pristine_git_object: 7f0c37124fac398405864ae499e0a4f8660633c8
   src/models/components/keycreditsdata.ts:
     id: 4fd4f07c17f7
     last_write_checksum: sha1:19fe9163b1b45ec403ccc3ca8b6e710fd266be1a
@@ -1025,6 +1181,10 @@ trackedFiles:
     id: 40ec3c60f33f
     last_write_checksum: sha1:9773e6570247f1b7952e0028d1e0f424212be5d7
     pristine_git_object: 5e01298daf83f189b05000c4ccd72e2f00f6fb8d
+  src/models/components/project.ts:
+    id: 0a0f965206a3
+    last_write_checksum: sha1:d6a86d51c7421ba359d599a2ec6c08615d3c4830
+    pristine_git_object: 5a3dbc8f996655bcfa20930c640a0ccae32da3ac
   src/models/components/ratelimitoverride.ts:
     id: d43a171ec654
     last_write_checksum: sha1:dcbc9b593367799631c39e171a286267c2ddab7b
@@ -1101,6 +1261,50 @@ trackedFiles:
     id: 6af7f88999b2
     last_write_checksum: sha1:a89d21851568cf023a21e60b6d2a0400bd4f990f
     pristine_git_object: 69f71536cc8481857e04860dd197f7b67b6ea0dd
+  src/models/components/v2appscreateapprequestbody.ts:
+    id: 4c4b8a7cdf39
+    last_write_checksum: sha1:e7c1980ec4ab86b127c1a4bbef3ca922f8730c45
+    pristine_git_object: 17f22593df782f3f62768de2b96049c8b1f8735e
+  src/models/components/v2appscreateappresponsebody.ts:
+    id: 7ab96808207a
+    last_write_checksum: sha1:698562223927322634dd184aaa659b12de7aa3b6
+    pristine_git_object: 1901f6662adb60eb9465c274807193b7960fe202
+  src/models/components/v2appscreateappresponsedata.ts:
+    id: bb9f25b941c8
+    last_write_checksum: sha1:57fc0a7bfb7d0a9e0f671f32f38270f76f6b4193
+    pristine_git_object: 74b2288f5251e679cfc8946ab3fd7fb907d7e4e6
+  src/models/components/v2appsdeleteapprequestbody.ts:
+    id: db09c0fca8ca
+    last_write_checksum: sha1:43f8a44dd5bc30af189d0820fc811307ad884fff
+    pristine_git_object: 3e7e36fde073d5cf8fe200a28b3c7182ee751b67
+  src/models/components/v2appsdeleteappresponsebody.ts:
+    id: 5352bb9371be
+    last_write_checksum: sha1:61150ff0df90ec9bebe8dfb7a5f7ec59c1b3b7f8
+    pristine_git_object: 4eb2b9f0d8f2bd370c57d512272d315d23167843
+  src/models/components/v2appsgetapprequestbody.ts:
+    id: 39aa70f36525
+    last_write_checksum: sha1:2b07e69fdb9a5aa6266d60f0b7f69634094821a3
+    pristine_git_object: 275e846eb55143715c29c9ae188723edc634f6de
+  src/models/components/v2appsgetappresponsebody.ts:
+    id: 402753f32a3c
+    last_write_checksum: sha1:4dc69924d7f028dd53f3f132527b6b493e6fe414
+    pristine_git_object: 617e98de13a75a7628a486864a5dbae59cbca801
+  src/models/components/v2appslistappsrequestbody.ts:
+    id: 7906b722e4a0
+    last_write_checksum: sha1:95d0d6949c81a269d980a280f5254363e75d2d40
+    pristine_git_object: c4909b015fae6a1127a06cf19bf16e402525bf25
+  src/models/components/v2appslistappsresponsebody.ts:
+    id: f23576b78e1e
+    last_write_checksum: sha1:c7d51c80df1871d0ac213528616953b75dc34a55
+    pristine_git_object: 870f9182e2a07ac552537fe99fb2664aa93d360f
+  src/models/components/v2appsupdateapprequestbody.ts:
+    id: 5bc42d3426b1
+    last_write_checksum: sha1:7406a6bf35fc146179fa6a5f9a54911f361fe567
+    pristine_git_object: 72b3f0ae4748a1da957f84f63ac455b74aaa82cd
+  src/models/components/v2appsupdateappresponsebody.ts:
+    id: 39536f57235c
+    last_write_checksum: sha1:5da83b8c5d4f7bcac1efb077369822a827c0652a
+    pristine_git_object: fd243d829093a4f7a15bcdadacf4fedef3316401
   src/models/components/v2deploycreatedeploymentrequestbody.ts:
     id: 398f40fadaad
     last_write_checksum: sha1:91ccb81aa027a57af0a1311c2ec0c2f94de653ff
@@ -1417,6 +1621,50 @@ trackedFiles:
     id: dff931713d7c
     last_write_checksum: sha1:54fb8b7f7911d029b4b95ade2b8637cd8ab5c8b0
     pristine_git_object: 423e4144ccdb5d82a283593ca0898b4658f3e811
+  src/models/components/v2projectscreateprojectrequestbody.ts:
+    id: de5e1fdd3d5d
+    last_write_checksum: sha1:3a26c290a9bbe744412027af6200cd2642877d15
+    pristine_git_object: 363ffcefd90fa11c20fca7918f27492408e0bdbd
+  src/models/components/v2projectscreateprojectresponsebody.ts:
+    id: d347f9b2901b
+    last_write_checksum: sha1:e31ae60b387fb9f3d47c57793dcf49bbb70beab8
+    pristine_git_object: 6353686084d198e9d34a6a1ba648048f2007e464
+  src/models/components/v2projectscreateprojectresponsedata.ts:
+    id: 290e1f14eb27
+    last_write_checksum: sha1:b059d7990549ee9b935ade9eaa141d69f61d426d
+    pristine_git_object: 3407e640263d0f00a2dac897f840b180309f2207
+  src/models/components/v2projectsdeleteprojectrequestbody.ts:
+    id: e1cd7a2b4cca
+    last_write_checksum: sha1:f6f663189d8722f87ded409b36cd9dbcd62a8195
+    pristine_git_object: ca112f0568ebfc5d54c77c0c47f123344d400a09
+  src/models/components/v2projectsdeleteprojectresponsebody.ts:
+    id: ea2d1f62c522
+    last_write_checksum: sha1:d6eb4f4fd22e52c4b5833529c513899756705936
+    pristine_git_object: 2576a8bcd28de231d84cfdb97bf5950cad0c48d9
+  src/models/components/v2projectsgetprojectrequestbody.ts:
+    id: 6031bbcbf0a2
+    last_write_checksum: sha1:c22f79f311bfc9e71c479302f4545e97513c099f
+    pristine_git_object: 6193703a10727aca71a248d6e6a9130ef6d9bf91
+  src/models/components/v2projectsgetprojectresponsebody.ts:
+    id: 2fb5167b3232
+    last_write_checksum: sha1:6aaf3ca4eb2258f38ce1eedbc22e95bb3a6fc118
+    pristine_git_object: 61deafbddc93ee8cddd032e9f20cb1e10bf1dc1c
+  src/models/components/v2projectslistprojectsrequestbody.ts:
+    id: a4dfcac7e7ad
+    last_write_checksum: sha1:001e495491c747314aa91e2df3a6677cc81f2443
+    pristine_git_object: 2aa2166ed8527c00bda4dc3a7727f7d02539760a
+  src/models/components/v2projectslistprojectsresponsebody.ts:
+    id: 454011f9b1ad
+    last_write_checksum: sha1:1d72ca46f2e9abb8aaa40166d833c63a7b153cee
+    pristine_git_object: 09a78045208fa67640e62585511cb34f593d6775
+  src/models/components/v2projectsupdateprojectrequestbody.ts:
+    id: 0fffa89f54f8
+    last_write_checksum: sha1:94e972a5c73e23b69e4ce783ab18583af3158777
+    pristine_git_object: 1ee1bcd87d16599bcca88503f266a0580c403b28
+  src/models/components/v2projectsupdateprojectresponsebody.ts:
+    id: 0c63cab09c3e
+    last_write_checksum: sha1:c29b1963627d6361ec832da85fd1b0a3cca22dc2
+    pristine_git_object: ed86f4e0a1e35ee8e109d37d77128f6380ebbcc4
   src/models/components/v2ratelimitdeleteoverriderequestbody.ts:
     id: cab077748ec2
     last_write_checksum: sha1:8fc710a1563a80cf3ab141246801db60db8d7e51
@@ -1561,14 +1809,18 @@ trackedFiles:
     id: e7d506fd7ec5
     last_write_checksum: sha1:4c067811b19739ebedd69e071d88abdedb15304a
     pristine_git_object: 580884301d0e062b530902f51e39a84a4bbd746e
+  src/models/operations/appslistapps.ts:
+    id: 43757ba33324
+    last_write_checksum: sha1:77c93bfd151a6559350f839db40c89bdc4c322e0
+    pristine_git_object: 8fa410ffe04a2bd7f3b98c37fc684fec55857af8
   src/models/operations/identitieslistidentities.ts:
     id: 2e2bb37eb46e
     last_write_checksum: sha1:97c5e32fb35195eef5a00d0712457c04641ad1da
     pristine_git_object: 3e2e4a02d3804bfc21acc03d1c452f59a1252557
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:e9a44bf173f0fc55d4351a0fd5e2a637e4d51745
-    pristine_git_object: 5064b3cedf43a94954a514b8a604f3933220aa1f
+    last_write_checksum: sha1:1ee3e7114367021627a2744454bf5169778cfd59
+    pristine_git_object: 321ab77fdda8decea5ccc1b59165a3fca3d1c659
   src/models/operations/permissionslistpermissions.ts:
     id: 7712f66c5734
     last_write_checksum: sha1:5e9f9b2b5dee96ceb15e2e80a2ddf2245cc713e5
@@ -1585,6 +1837,10 @@ trackedFiles:
     id: 577d30a58a4d
     last_write_checksum: sha1:670df456c70e6d82cc1b9ec7ef5104a8f8122f76
     pristine_git_object: 27f339594a9860ffbc8626e9db145596c7fdd36a
+  src/models/operations/projectslistprojects.ts:
+    id: 76c2417a0dc6
+    last_write_checksum: sha1:01017e00f366d259c985f0062ffad6703c78660b
+    pristine_git_object: d668b5e02c187265efc6c9c711257d0837c3b122
   src/models/operations/ratelimitlistoverrides.ts:
     id: 740c92c35886
     last_write_checksum: sha1:a89eb5ee6c8f8a21135128ae172bb7b6d595d292
@@ -1597,6 +1853,10 @@ trackedFiles:
     id: 34f45ce220ae
     last_write_checksum: sha1:a370a28ee505cb01ca601d487415d2671addf85d
     pristine_git_object: a0531e5a81942921d681ee699929b9fa1d70bab9
+  src/sdk/apps.ts:
+    id: a40cb2e73373
+    last_write_checksum: sha1:29ed9f2b19e8907226a25e79faaa4092e96c3bfd
+    pristine_git_object: 563e53b8bdbf98e0124ba385f00d67cdd51dc1fd
   src/sdk/identities.ts:
     id: 2d58fc78cfc9
     last_write_checksum: sha1:a250f7db42a34fef403f665b80780a94726af2e5
@@ -1621,14 +1881,18 @@ trackedFiles:
     id: d907b3858eda
     last_write_checksum: sha1:69ea6f4d0f203c2113d5fcf1871831f42a9fb8a5
     pristine_git_object: 78ef8ed5bd130e5536d139312c9fbf93fa29df49
+  src/sdk/projects.ts:
+    id: 28088373a118
+    last_write_checksum: sha1:fa98769c399008baadb6a183ea8f658a5f5828dd
+    pristine_git_object: 1ce8cf9aeac70095097e5385b18784303d0ef665
   src/sdk/ratelimit.ts:
     id: 014e7f752612
     last_write_checksum: sha1:22d664c3e6b280b7cbf2f73feea405a7d30f5f0b
     pristine_git_object: 69451c483ce43c861f3fb43ae867f2cacd4f9120
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:126d7838ba9c1a893dc37aba30c365e340e28a8c
-    pristine_git_object: 92b765285fbb66954037d1cd85c14bdf566e02b5
+    last_write_checksum: sha1:0d499831795abe27c670a8ed91425c972889fd98
+    pristine_git_object: d1b339eb7aa1f32c114d7f962b3ec6953cef25e0
   src/types/async.ts:
     id: fac8da972f86
     last_write_checksum: sha1:675d04bb4b4081dc3482f18de98674f9b446e7b4
@@ -3547,8 +3811,550 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  apps.createApp:
+    basic:
+      requestBody:
+        application/json: {"project": "payments", "name": "Payments API", "slug": "payments-api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"appId": "app_1234abcd"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"appId": "app_1234abcd"}}
+    invalidSlug:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The slug must match the pattern ^[a-z0-9]+(-[a-z0-9]+)*$.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.slug", "message": "must match ^[a-z0-9]+(-[a-z0-9]+)*$", "fix": "Use lowercase letters, numbers, and hyphens, starting and ending with a letter or number (no leading, trailing, or consecutive hyphens)"}]}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.create_app' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    appExists:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An app with slug 'payments-api' already exists in this project.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  apps.deleteApp:
+    deleteById:
+      requestBody:
+        application/json: {"project": "payments", "app": "app_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    deleteBySlug:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-service"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'delete_app' permission on the target app to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    appNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested app does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+  apps.getApp:
+    getById:
+      requestBody:
+        application/json: {"project": "payments", "app": "app_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    getBySlug:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    app:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'app.*.read_app' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    appNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested app does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+  apps.listApps:
+    basic:
+      requestBody:
+        application/json: {"project": "payments-service", "limit": 100}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    appList:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}, {"id": "app_5678efgh", "name": "Billing API", "slug": "billing-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704240000000}], "pagination": {"hasMore": false}}
+    invalidLimit:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The limit must be between 1 and 100.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.limit", "message": "must be less than or equal to 100", "fix": "Use a limit between 1 and 100"}]}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'app.*.read_app' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+  apps.updateApp:
+    changeSlug:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-service", "slug": "payments-api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    rename:
+      requestBody:
+        application/json: {"project": "payments", "app": "app_1234abcd", "name": "Payments API"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "currentDeploymentId": "dep_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    app:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "projectId": "proj_1234abcd", "defaultBranch": "main", "isRolledBack": false, "deleteProtection": true, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'update_app' permission on the target app to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    appNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested app does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    appExists:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An app with slug 'payments-api' already exists in this project.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  projects.createProject:
+    basic:
+      requestBody:
+        application/json: {"name": "Payments Service", "slug": "payments-service"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd"}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"name": "Payments Service", "slug": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "proj_1234abcd"}}
+    invalidSlug:
+      requestBody:
+        application/json: {"name": "Payments Service", "slug": "proj_1234abcd"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The slug must match the pattern ^[a-zA-Z0-9_-]+$.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.slug", "message": "must match ^[a-zA-Z0-9_-]+$", "fix": "Use only letters, numbers, hyphens, and underscores"}]}}
+    missingPermission:
+      requestBody:
+        application/json: {"name": "Payments Service", "slug": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.create_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectExists:
+      requestBody:
+        application/json: {"name": "Payments Service", "slug": "proj_1234abcd"}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-service' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  projects.deleteProject:
+    deleteById:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    deleteBySlug:
+      requestBody:
+        application/json: {"project": "payment-service"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.delete_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+  projects.getProject:
+    getById:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": false}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    getBySlug:
+      requestBody:
+        application/json: {"project": "payment-service"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": false}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    project:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": true}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.read_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+  projects.listProjects:
+    basic:
+      requestBody:
+        application/json: {"limit": 100}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    projectList:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": true}, {"id": "proj_5678efgh", "name": "Billing Service", "slug": "billing-service", "createdAt": 1704240000000, "deleteProtection": false}], "pagination": {"cursor": "proj_5678efgh", "hasMore": false}}
+    invalidLimit:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "proj_1234abcd"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The limit must be between 1 and 100.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.limit", "message": "must be less than or equal to 100", "fix": "Use a limit between 1 and 100"}]}}
+    missingPermission:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "proj_1234abcd"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.read_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+  projects.updateProject:
+    changeSlug:
+      requestBody:
+        application/json: {"project": "payments-service", "slug": "payments-api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": false}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    rename:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "name": "Payments API"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "name": "Payments Service", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": false}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    project:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "proj_1234abcd", "name": "Payments API", "slug": "payments-service", "createdAt": 1704067200000, "updatedAt": 1704153600000, "deleteProtection": true}}
+    missingPermission:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.update_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    projectNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    projectExists:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-api' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `unkey.apps.createApp()`: **Added**
+  * `unkey.apps.deleteApp()`: **Added**
+  * `unkey.apps.getApp()`: **Added**
+  * `unkey.apps.listApps()`: **Added**
+  * `unkey.apps.updateApp()`: **Added**
+  * `unkey.projects.createProject()`: **Added**
+  * `unkey.projects.deleteProject()`: **Added**
+  * `unkey.projects.getProject()`: **Added**
+  * `unkey.projects.listProjects()`: **Added**
+  * `unkey.projects.updateProject()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore

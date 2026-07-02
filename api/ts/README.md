@@ -229,6 +229,14 @@ run();
 * [getApi](docs/sdks/apis/README.md#getapi) - Get API namespace
 * [listKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [createApp](docs/sdks/apps/README.md#createapp) - Create app
+* [deleteApp](docs/sdks/apps/README.md#deleteapp) - Delete app
+* [getApp](docs/sdks/apps/README.md#getapp) - Get app
+* [listApps](docs/sdks/apps/README.md#listapps) - List apps
+* [updateApp](docs/sdks/apps/README.md#updateapp) - Update app
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [createIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
@@ -276,6 +284,14 @@ run();
 * [createSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [exchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
 
+### [Projects](docs/sdks/projects/README.md)
+
+* [createProject](docs/sdks/projects/README.md#createproject) - Create project
+* [deleteProject](docs/sdks/projects/README.md#deleteproject) - Delete project
+* [getProject](docs/sdks/projects/README.md#getproject) - Get project
+* [listProjects](docs/sdks/projects/README.md#listprojects) - List projects
+* [updateProject](docs/sdks/projects/README.md#updateproject) - Update project
+
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
 * [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
@@ -308,6 +324,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apisDeleteApi`](docs/sdks/apis/README.md#deleteapi) - Delete API namespace
 - [`apisGetApi`](docs/sdks/apis/README.md#getapi) - Get API namespace
 - [`apisListKeys`](docs/sdks/apis/README.md#listkeys) - List API keys
+- [`appsCreateApp`](docs/sdks/apps/README.md#createapp) - Create app
+- [`appsDeleteApp`](docs/sdks/apps/README.md#deleteapp) - Delete app
+- [`appsGetApp`](docs/sdks/apps/README.md#getapp) - Get app
+- [`appsListApps`](docs/sdks/apps/README.md#listapps) - List apps
+- [`appsUpdateApp`](docs/sdks/apps/README.md#updateapp) - Update app
 - [`identitiesCreateIdentity`](docs/sdks/identities/README.md#createidentity) - Create Identity
 - [`identitiesDeleteIdentity`](docs/sdks/identities/README.md#deleteidentity) - Delete Identity
 - [`identitiesGetIdentity`](docs/sdks/identities/README.md#getidentity) - Get Identity
@@ -340,6 +361,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`permissionsListRoles`](docs/sdks/permissions/README.md#listroles) - List roles
 - [`portalCreateSession`](docs/sdks/portal/README.md#createsession) - Create portal session
 - [`portalExchangeSession`](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+- [`projectsCreateProject`](docs/sdks/projects/README.md#createproject) - Create project
+- [`projectsDeleteProject`](docs/sdks/projects/README.md#deleteproject) - Delete project
+- [`projectsGetProject`](docs/sdks/projects/README.md#getproject) - Get project
+- [`projectsListProjects`](docs/sdks/projects/README.md#listprojects) - List projects
+- [`projectsUpdateProject`](docs/sdks/projects/README.md#updateproject) - Update project
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 - [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
@@ -530,11 +556,11 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 43 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 43 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 43 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 43 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 43 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 53 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 3 of 53 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 53 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 53 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 53 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
