@@ -1,0 +1,9 @@
+# ProjectsCreateProjectResponse
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `HTTPMeta`                                                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `V2ProjectsCreateProjectResponseBody`                                                                              | [*components.V2ProjectsCreateProjectResponseBody](../../models/components/v2projectscreateprojectresponsebody.md)  | :heavy_minus_sign:                                                                                                 | Project created successfully. The response contains the project id used to reference it in subsequent operations.<br/> |

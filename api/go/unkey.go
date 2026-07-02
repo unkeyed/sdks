@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.882.0
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.914.0
 
 import (
 	"context"
@@ -133,7 +133,9 @@ type Unkey struct {
 	// Analytics query operations
 	Analytics *Analytics
 	// API management operations
-	Apis     *Apis
+	Apis *Apis
+	// App management operations
+	Apps     *Apps
 	Internal *Internal
 	// Identity management operations
 	Identities *Identities
@@ -142,7 +144,8 @@ type Unkey struct {
 	// Permission and role management operations
 	Permissions *Permissions
 	// Customer Portal session management
-	Portal *Portal
+	Portal   *Portal
+	Projects *Projects
 	// Rate limiting operations
 	Ratelimit *Ratelimit
 
@@ -221,9 +224,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.6.5",
+		SDKVersion: "2.6.6",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.6.5 2.882.0 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.6.6 2.914.0 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -253,11 +256,13 @@ func New(opts ...SDKOption) *Unkey {
 
 	sdk.Analytics = newAnalytics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Apis = newApis(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Apps = newApps(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Internal = newInternal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Portal = newPortal(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Projects = newProjects(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ratelimit = newRatelimit(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk

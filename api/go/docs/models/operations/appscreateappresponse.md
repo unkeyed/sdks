@@ -1,0 +1,9 @@
+# AppsCreateAppResponse
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                         | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `V2AppsCreateAppResponseBody`                                                                              | [*components.V2AppsCreateAppResponseBody](../../models/components/v2appscreateappresponsebody.md)          | :heavy_minus_sign:                                                                                         | App created successfully. The response contains the app id used to reference it in subsequent operations.<br/> |

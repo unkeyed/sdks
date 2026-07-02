@@ -218,6 +218,14 @@ func main() {
 * [GetAPI](docs/sdks/apis/README.md#getapi) - Get API namespace
 * [ListKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [CreateApp](docs/sdks/apps/README.md#createapp) - Create app
+* [DeleteApp](docs/sdks/apps/README.md#deleteapp) - Delete app
+* [GetApp](docs/sdks/apps/README.md#getapp) - Get app
+* [ListApps](docs/sdks/apps/README.md#listapps) - List apps
+* [UpdateApp](docs/sdks/apps/README.md#updateapp) - Update app
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [CreateIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
@@ -264,6 +272,14 @@ func main() {
 
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [ExchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [CreateProject](docs/sdks/projects/README.md#createproject) - Create project
+* [DeleteProject](docs/sdks/projects/README.md#deleteproject) - Delete project
+* [GetProject](docs/sdks/projects/README.md#getproject) - Get project
+* [ListProjects](docs/sdks/projects/README.md#listprojects) - List projects
+* [UpdateProject](docs/sdks/projects/README.md#updateproject) - Update project
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
