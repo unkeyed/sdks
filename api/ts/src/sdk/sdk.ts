@@ -5,11 +5,13 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { Analytics } from "./analytics.js";
 import { Apis } from "./apis.js";
+import { Apps } from "./apps.js";
 import { Identities } from "./identities.js";
 import { Internal } from "./internal.js";
 import { Keys } from "./keys.js";
 import { Permissions } from "./permissions.js";
 import { Portal } from "./portal.js";
+import { Projects } from "./projects.js";
 import { Ratelimit } from "./ratelimit.js";
 
 export class Unkey extends ClientSDK {
@@ -21,6 +23,11 @@ export class Unkey extends ClientSDK {
   private _apis?: Apis;
   get apis(): Apis {
     return (this._apis ??= new Apis(this._options));
+  }
+
+  private _apps?: Apps;
+  get apps(): Apps {
+    return (this._apps ??= new Apps(this._options));
   }
 
   private _internal?: Internal;
@@ -46,6 +53,11 @@ export class Unkey extends ClientSDK {
   private _portal?: Portal;
   get portal(): Portal {
     return (this._portal ??= new Portal(this._options));
+  }
+
+  private _projects?: Projects;
+  get projects(): Projects {
+    return (this._projects ??= new Projects(this._options));
   }
 
   private _ratelimit?: Ratelimit;
