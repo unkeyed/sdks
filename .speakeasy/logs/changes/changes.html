@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - typescript</title>
+    <title>SDK Changelog - go</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,64 +95,64 @@
         }
     </style>
 </head>
-<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
+<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.portal.createSession()</code>:
+<li><code>Unkey.Portal.CreateSession()</code>:
 
 <ul>
-<li><code>request.permissions[]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>request.Request.Permissions[]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>unkey.gateway.listPolicies()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.getApp()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.listApps()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.updateApp()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.createDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.getDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.listDeployments()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.promoteDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.rollbackDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.startDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.stopDeployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.getEnvironment()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.listEnvironmentVariables()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.listEnvironments()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.removeEnvironmentVariables()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.setEnvironmentVariables()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.createApp()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.updateSettings()</code>: <strong>Added</strong></li>
-<li><code>unkey.apis.listKeys()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
-<li><code>unkey.gateway.updatePolicy()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.getVerifications()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.listKeys()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.rerollKey()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.createProject()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.deleteProject()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.getProject()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.listProjects()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.updateProject()</code>: <strong>Added</strong></li>
-<li><code>unkey.gateway.setPolicies()</code>: <strong>Added</strong></li>
-<li><code>unkey.internal.createDeployment()</code>: <strong>Deprecated</strong></li>
-<li><code>unkey.internal.getDeployment()</code>: <strong>Deprecated</strong></li>
-<li><code>unkey.identities.listIdentities()</code>:
+<li><code>Unkey.Gateway.ListPolicies()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Apps.GetApp()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Apps.ListApps()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Apps.UpdateApp()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.CreateDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.GetDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.ListDeployments()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.PromoteDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.RollbackDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.StartDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.StopDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.GetEnvironment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.ListEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.ListEnvironments()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.RemoveEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.SetEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Apps.CreateApp()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Environments.UpdateSettings()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Apis.ListKeys()</code>:  <code>response.Pagination</code> <strong>Changed</strong></li>
+<li><code>Unkey.Gateway.UpdatePolicy()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Portal.GetVerifications()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Portal.ListKeys()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Portal.RerollKey()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Projects.CreateProject()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Projects.DeleteProject()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Projects.GetProject()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Projects.ListProjects()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Projects.UpdateProject()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Gateway.SetPolicies()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Internal.CreateDeployment()</code>: <strong>Deprecated</strong></li>
+<li><code>Unkey.Internal.GetDeployment()</code>: <strong>Deprecated</strong></li>
+<li><code>Unkey.Identities.ListIdentities()</code>:
 
 <ul>
-<li><code>request.search</code> <strong>Added</strong></li>
+<li><code>request.Request.Search</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>unkey.permissions.listPermissions()</code>:
+<li><code>Unkey.Permissions.ListPermissions()</code>:
 
 <ul>
-<li><code>request.search</code> <strong>Added</strong></li>
-<li><code>response.pagination</code> <strong>Changed</strong></li>
+<li><code>request.Request.Search</code> <strong>Added</strong></li>
+<li><code>response.Pagination</code> <strong>Changed</strong></li>
 </ul></li>
-<li><code>unkey.permissions.listRoles()</code>:
+<li><code>Unkey.Permissions.ListRoles()</code>:
 
 <ul>
-<li><code>request.search</code> <strong>Added</strong></li>
-<li><code>response.pagination</code> <strong>Changed</strong></li>
+<li><code>request.Request.Search</code> <strong>Added</strong></li>
+<li><code>response.Pagination</code> <strong>Changed</strong></li>
 </ul></li>
-<li><code>unkey.apps.deleteApp()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.listOverrides()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
+<li><code>Unkey.Apps.DeleteApp()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Ratelimit.ListOverrides()</code>:  <code>response.Pagination</code> <strong>Changed</strong></li>
 </ul>
 </body>
 </html>

@@ -1,13 +1,16 @@
-# Internal
+# ~~Internal~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [CreateDeployment](#createdeployment) - Create deployment
-* [GetDeployment](#getdeployment) - Get deployment
+* [~~CreateDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
+* [~~GetDeployment~~](#getdeployment) - Get deployment :warning: **Deprecated**
 
-## CreateDeployment
+## ~~CreateDeployment~~
 
 **INTERNAL** - This endpoint is internal and may change without notice.
 Not recommended for production use.
@@ -16,6 +19,8 @@ Creates a new deployment for a project using either a pre-built Docker image or 
 
 **Authentication**: Requires a valid root key with appropriate permissions.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -86,7 +91,7 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## GetDeployment
+## ~~GetDeployment~~
 
 **INTERNAL** - This endpoint is internal and may change without notice.
 Not recommended for production use.
@@ -95,6 +100,8 @@ Retrieves deployment information including status, error messages, and steps.
 
 **Authentication**: Requires a valid root key with appropriate permissions.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

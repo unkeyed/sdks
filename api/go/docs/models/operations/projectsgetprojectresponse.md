@@ -1,0 +1,9 @@
+# ProjectsGetProjectResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2ProjectsGetProjectResponseBody`                                                                          | [*components.V2ProjectsGetProjectResponseBody](../../models/components/v2projectsgetprojectresponsebody.md) | :heavy_minus_sign:                                                                                          | Successfully retrieved the project.<br/>                                                                    |

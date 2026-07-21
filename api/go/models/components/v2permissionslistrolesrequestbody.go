@@ -19,6 +19,8 @@ type V2PermissionsListRolesRequestBody struct {
 	// Leave empty or omit this field to start from the beginning of the role list.
 	//
 	Cursor *string `json:"cursor,omitempty"`
+	// Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive.
+	Search *string `json:"search,omitempty"`
 }
 
 func (v V2PermissionsListRolesRequestBody) MarshalJSON() ([]byte, error) {
@@ -44,6 +46,13 @@ func (v *V2PermissionsListRolesRequestBody) GetCursor() *string {
 		return nil
 	}
 	return v.Cursor
+}
+
+func (v *V2PermissionsListRolesRequestBody) GetSearch() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Search
 }
 
 // #region class-body-v2permissionslistrolesrequestbody

@@ -40,6 +40,8 @@ func newInternal(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks
 // **Authentication**: Requires a valid root key with appropriate permissions.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Internal) CreateDeployment(ctx context.Context, request components.V2DeployCreateDeploymentRequestBody, opts ...operations.Option) (*operations.DeployCreateDeploymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -392,6 +394,8 @@ func (s *Internal) CreateDeployment(ctx context.Context, request components.V2De
 // **Authentication**: Requires a valid root key with appropriate permissions.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Internal) GetDeployment(ctx context.Context, request components.V2DeployGetDeploymentRequestBody, opts ...operations.Option) (*operations.DeployGetDeploymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

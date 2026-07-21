@@ -8,7 +8,7 @@ type V2PermissionsListPermissionsResponseBody struct {
 	// Array of permission objects with complete configuration details.
 	Data []Permission `json:"data"`
 	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Pagination Pagination `json:"pagination"`
 }
 
 func (v *V2PermissionsListPermissionsResponseBody) GetMeta() Meta {
@@ -25,9 +25,9 @@ func (v *V2PermissionsListPermissionsResponseBody) GetData() []Permission {
 	return v.Data
 }
 
-func (v *V2PermissionsListPermissionsResponseBody) GetPagination() *Pagination {
+func (v *V2PermissionsListPermissionsResponseBody) GetPagination() Pagination {
 	if v == nil {
-		return nil
+		return Pagination{}
 	}
 	return v.Pagination
 }

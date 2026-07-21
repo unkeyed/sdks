@@ -1,0 +1,9 @@
+# GatewaySetPoliciesResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2GatewaySetPoliciesResponseBody`                                                                          | [*components.V2GatewaySetPoliciesResponseBody](../../models/components/v2gatewaysetpoliciesresponsebody.md) | :heavy_minus_sign:                                                                                          | Successfully set the policies.<br/>                                                                         |
