@@ -22,6 +22,8 @@ class V2PermissionsListRolesRequestBodyTypedDict(TypedDict):
     Leave empty or omit this field to start from the beginning of the role list.
 
     """
+    search: NotRequired[str]
+    r"""Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive."""
 
 
 class V2PermissionsListRolesRequestBody(BaseModel):
@@ -41,9 +43,12 @@ class V2PermissionsListRolesRequestBody(BaseModel):
 
     """
 
+    search: Optional[str] = None
+    r"""Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["limit", "cursor"])
+        optional_fields = set(["limit", "cursor", "search"])
         serialized = handler(self)
         m = {}
 

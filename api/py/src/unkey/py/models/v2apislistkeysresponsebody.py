@@ -4,10 +4,9 @@ from __future__ import annotations
 from .keyresponsedata import KeyResponseData, KeyResponseDataTypedDict
 from .meta import Meta, MetaTypedDict
 from .pagination import Pagination, PaginationTypedDict
-from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
-from unkey.py.types import BaseModel, UNSET_SENTINEL
+from typing import List
+from typing_extensions import TypedDict
+from unkey.py.types import BaseModel
 
 
 class V2ApisListKeysResponseBodyTypedDict(TypedDict):
@@ -15,7 +14,7 @@ class V2ApisListKeysResponseBodyTypedDict(TypedDict):
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
     data: List[KeyResponseDataTypedDict]
     r"""Array of API keys with complete configuration and metadata."""
-    pagination: NotRequired[PaginationTypedDict]
+    pagination: PaginationTypedDict
     r"""Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination."""
 
 
@@ -26,21 +25,5 @@ class V2ApisListKeysResponseBody(BaseModel):
     data: List[KeyResponseData]
     r"""Array of API keys with complete configuration and metadata."""
 
-    pagination: Optional[Pagination] = None
+    pagination: Pagination
     r"""Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["pagination"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m

@@ -130,6 +130,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -298,6 +300,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.createPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -448,6 +452,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -598,6 +604,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.createRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -749,6 +757,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -900,6 +910,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.deletePermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1046,6 +1058,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1187,6 +1201,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.deleteRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1318,6 +1334,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1454,6 +1472,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.getPermission",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1590,6 +1610,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1726,6 +1748,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.getRole",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1781,6 +1805,7 @@ class Permissions(BaseSDK):
         *,
         cursor: Optional[str] = None,
         limit: Optional[int] = 100,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1807,6 +1832,7 @@ class Permissions(BaseSDK):
             Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
 
         :param limit: Maximum number of permissions to return in a single response.
+        :param search: Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1825,6 +1851,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsListPermissionsRequestBody(
             cursor=cursor,
             limit=limit,
+            search=search,
         )
 
         req = self._build_request(
@@ -1871,6 +1898,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1891,6 +1920,7 @@ class Permissions(BaseSDK):
             return self.list_permissions(
                 cursor=next_cursor,
                 limit=limit,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1944,6 +1974,7 @@ class Permissions(BaseSDK):
         *,
         cursor: Optional[str] = None,
         limit: Optional[int] = 100,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1970,6 +2001,7 @@ class Permissions(BaseSDK):
             Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
 
         :param limit: Maximum number of permissions to return in a single response.
+        :param search: Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1988,6 +2020,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsListPermissionsRequestBody(
             cursor=cursor,
             limit=limit,
+            search=search,
         )
 
         req = self._build_request_async(
@@ -2034,6 +2067,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.listPermissions",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2054,6 +2089,7 @@ class Permissions(BaseSDK):
             return self.list_permissions(
                 cursor=next_cursor,
                 limit=limit,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -2107,6 +2143,7 @@ class Permissions(BaseSDK):
         *,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2135,6 +2172,7 @@ class Permissions(BaseSDK):
             Each response containing more results will include a cursor value that can be used here.
             Leave empty or omit this field to start from the beginning of the role list.
 
+        :param search: Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2153,6 +2191,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsListRolesRequestBody(
             limit=limit,
             cursor=cursor,
+            search=search,
         )
 
         req = self._build_request(
@@ -2195,6 +2234,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2215,6 +2256,7 @@ class Permissions(BaseSDK):
             return self.list_roles(
                 limit=limit,
                 cursor=next_cursor,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -2273,6 +2315,7 @@ class Permissions(BaseSDK):
         *,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2301,6 +2344,7 @@ class Permissions(BaseSDK):
             Each response containing more results will include a cursor value that can be used here.
             Leave empty or omit this field to start from the beginning of the role list.
 
+        :param search: Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2319,6 +2363,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsListRolesRequestBody(
             limit=limit,
             cursor=cursor,
+            search=search,
         )
 
         req = self._build_request_async(
@@ -2361,6 +2406,8 @@ class Permissions(BaseSDK):
                 operation_id="permissions.listRoles",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2381,6 +2428,7 @@ class Permissions(BaseSDK):
             return self.list_roles(
                 limit=limit,
                 cursor=next_cursor,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

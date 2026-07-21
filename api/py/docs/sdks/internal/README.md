@@ -1,13 +1,16 @@
-# Internal
+# ~~Internal~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create_deployment](#create_deployment) - Create deployment
-* [get_deployment](#get_deployment) - Get deployment
+* [~~create_deployment~~](#create_deployment) - Create deployment :warning: **Deprecated**
+* [~~get_deployment~~](#get_deployment) - Get deployment :warning: **Deprecated**
 
-## create_deployment
+## ~~create_deployment~~
 
 **INTERNAL** - This endpoint is internal and may change without notice.
 Not recommended for production use.
@@ -16,6 +19,8 @@ Creates a new deployment for a project using either a pre-built Docker image or 
 
 **Authentication**: Requires a valid root key with appropriate permissions.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -70,7 +75,7 @@ with Unkey(
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## get_deployment
+## ~~get_deployment~~
 
 **INTERNAL** - This endpoint is internal and may change without notice.
 Not recommended for production use.
@@ -79,6 +84,8 @@ Retrieves deployment information including status, error messages, and steps.
 
 **Authentication**: Requires a valid root key with appropriate permissions.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

@@ -2,6 +2,7 @@
 
 from .basesdk import BaseSDK
 from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
 from unkey.py.types import OptionalNullable, UNSET
@@ -9,6 +10,9 @@ from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 
 
 class Internal(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_deployment(
         self,
         *,
@@ -116,6 +120,8 @@ class Internal(BaseSDK):
                 operation_id="deploy.createDeployment",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["deploy"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -166,6 +172,9 @@ class Internal(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_deployment_async(
         self,
         *,
@@ -273,6 +282,8 @@ class Internal(BaseSDK):
                 operation_id="deploy.createDeployment",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["deploy"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -323,6 +334,9 @@ class Internal(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get_deployment(
         self,
         *,
@@ -404,6 +418,8 @@ class Internal(BaseSDK):
                 operation_id="deploy.getDeployment",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["deploy"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -454,6 +470,9 @@ class Internal(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_deployment_async(
         self,
         *,
@@ -535,6 +554,8 @@ class Internal(BaseSDK):
                 operation_id="deploy.getDeployment",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["deploy"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
