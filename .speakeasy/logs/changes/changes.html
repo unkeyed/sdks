@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - python</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,23 +95,64 @@
         }
     </style>
 </head>
-<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.keys.verify_key()</code>:
+<li><code>unkey.portal.createSession()</code>:
 
 <ul>
-<li><code>request.credits.cost</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>response.data.credits</code> <strong>Changed</strong> (Breaking ⚠️)</li>
+<li><code>request.permissions[]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>unkey.portal.create_session()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.exchange_session()</code>: <strong>Added</strong></li>
-<li><code>unkey.internal.get_deployment()</code>: <code>response.data.status</code> <strong>Changed</strong>
+<li><code>unkey.gateway.listPolicies()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.getApp()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.listApps()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.updateApp()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.createDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.getDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.listDeployments()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.promoteDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.rollbackDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.startDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.stopDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.getEnvironment()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.listEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.listEnvironments()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.removeEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.setEnvironmentVariables()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.createApp()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.updateSettings()</code>: <strong>Added</strong></li>
+<li><code>unkey.apis.listKeys()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
+<li><code>unkey.gateway.updatePolicy()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.getVerifications()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.listKeys()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.rerollKey()</code>: <strong>Added</strong></li>
+<li><code>unkey.projects.createProject()</code>: <strong>Added</strong></li>
+<li><code>unkey.projects.deleteProject()</code>: <strong>Added</strong></li>
+<li><code>unkey.projects.getProject()</code>: <strong>Added</strong></li>
+<li><code>unkey.projects.listProjects()</code>: <strong>Added</strong></li>
+<li><code>unkey.projects.updateProject()</code>: <strong>Added</strong></li>
+<li><code>unkey.gateway.setPolicies()</code>: <strong>Added</strong></li>
+<li><code>unkey.internal.createDeployment()</code>: <strong>Deprecated</strong></li>
+<li><code>unkey.internal.getDeployment()</code>: <strong>Deprecated</strong></li>
+<li><code>unkey.identities.listIdentities()</code>:
 
 <ul>
-<li><code>enum(cancelled)</code> <strong>Added</strong></li>
-<li><code>enum(superseded)</code> <strong>Added</strong></li>
+<li><code>request.search</code> <strong>Added</strong></li>
 </ul></li>
+<li><code>unkey.permissions.listPermissions()</code>:
+
+<ul>
+<li><code>request.search</code> <strong>Added</strong></li>
+<li><code>response.pagination</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>unkey.permissions.listRoles()</code>:
+
+<ul>
+<li><code>request.search</code> <strong>Added</strong></li>
+<li><code>response.pagination</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>unkey.apps.deleteApp()</code>: <strong>Added</strong></li>
+<li><code>unkey.ratelimit.listOverrides()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
 </ul>
 </body>
 </html>

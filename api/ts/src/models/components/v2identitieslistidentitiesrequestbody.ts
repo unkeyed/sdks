@@ -13,12 +13,17 @@ export type V2IdentitiesListIdentitiesRequestBody = {
    * Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
    */
   cursor?: string | undefined;
+  /**
+   * Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive.
+   */
+  search?: string | undefined;
 };
 
 /** @internal */
 export type V2IdentitiesListIdentitiesRequestBody$Outbound = {
   limit: number;
   cursor?: string | undefined;
+  search?: string | undefined;
 };
 
 /** @internal */
@@ -29,6 +34,7 @@ export const V2IdentitiesListIdentitiesRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   limit: z.number().int().default(100),
   cursor: z.string().optional(),
+  search: z.string().optional(),
 });
 
 export function v2IdentitiesListIdentitiesRequestBodyToJSON(

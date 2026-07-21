@@ -20,12 +20,17 @@ export type V2PermissionsListPermissionsRequestBody = {
    * Maximum number of permissions to return in a single response.
    */
   limit?: number | undefined;
+  /**
+   * Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive.
+   */
+  search?: string | undefined;
 };
 
 /** @internal */
 export type V2PermissionsListPermissionsRequestBody$Outbound = {
   cursor?: string | undefined;
   limit: number;
+  search?: string | undefined;
 };
 
 /** @internal */
@@ -36,6 +41,7 @@ export const V2PermissionsListPermissionsRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   cursor: z.string().optional(),
   limit: z.number().int().default(100),
+  search: z.string().optional(),
 });
 
 export function v2PermissionsListPermissionsRequestBodyToJSON(

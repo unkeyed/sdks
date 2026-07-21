@@ -3,9 +3,15 @@
  */
 
 export * from "./apislistkeys.js";
+export * from "./appslistapps.js";
+export * from "./deploymentslistdeployments.js";
 export * from "./identitieslistidentities.js";
 export * from "./permissionslistpermissions.js";
 export * from "./permissionslistroles.js";
 export * from "./portalcreatesession.js";
 export * from "./portalexchangesession.js";
+export * from "./portalgetverifications.js";
+export * from "./portallistkeys.js";
+export * from "./portalrerollkey.js";
+export * from "./projectslistprojects.js";
 export * from "./ratelimitlistoverrides.js";

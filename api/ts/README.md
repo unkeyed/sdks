@@ -19,7 +19,7 @@ Unkey API: Unkey's API provides programmatic access for all resources within our
 
 ### Authentication
 #
-This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+This API accepts HTTP Bearer credentials. Public integrations use root keys. Dashboard-originated requests use a short-lived dashboard proxy JWT minted by the dashboard server. Most endpoints require permissions associated with the authenticated principal. When making public API requests, include your root key in the `Authorization` header:
 ```
 Authorization: Bearer unkey_xxxxxxxxxxx
 ```
@@ -210,6 +210,30 @@ async function run() {
 run();
 
 ```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey();
+
+async function run() {
+  const result = await unkey.portal.getVerifications({
+    portalSession: process.env["UNKEY_PORTAL_SESSION"] ?? "",
+  }, {
+    startTime: 1704067200000,
+    endTime: 1704672000000,
+    keyId: "key_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+
+```
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -229,6 +253,39 @@ run();
 * [getApi](docs/sdks/apis/README.md#getapi) - Get API namespace
 * [listKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [createApp](docs/sdks/apps/README.md#createapp) - Create app
+* [deleteApp](docs/sdks/apps/README.md#deleteapp) - Delete app
+* [getApp](docs/sdks/apps/README.md#getapp) - Get app
+* [listApps](docs/sdks/apps/README.md#listapps) - List apps
+* [updateApp](docs/sdks/apps/README.md#updateapp) - Update app
+
+### [Deployments](docs/sdks/deployments/README.md)
+
+* [createDeployment](docs/sdks/deployments/README.md#createdeployment) - Create deployment
+* [getDeployment](docs/sdks/deployments/README.md#getdeployment) - Get deployment
+* [listDeployments](docs/sdks/deployments/README.md#listdeployments) - List deployments
+* [promoteDeployment](docs/sdks/deployments/README.md#promotedeployment) - Promote deployment
+* [rollbackDeployment](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
+* [startDeployment](docs/sdks/deployments/README.md#startdeployment) - Start deployment
+* [stopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
+
+### [Environments](docs/sdks/environments/README.md)
+
+* [getEnvironment](docs/sdks/environments/README.md#getenvironment) - Get environment
+* [listEnvironmentVariables](docs/sdks/environments/README.md#listenvironmentvariables) - List environment variables
+* [listEnvironments](docs/sdks/environments/README.md#listenvironments) - List environments
+* [removeEnvironmentVariables](docs/sdks/environments/README.md#removeenvironmentvariables) - Remove environment variables
+* [setEnvironmentVariables](docs/sdks/environments/README.md#setenvironmentvariables) - Set environment variables
+* [updateSettings](docs/sdks/environments/README.md#updatesettings) - Update environment settings
+
+### [Gateway](docs/sdks/gateway/README.md)
+
+* [listPolicies](docs/sdks/gateway/README.md#listpolicies) - List policies
+* [setPolicies](docs/sdks/gateway/README.md#setpolicies) - Set policies
+* [updatePolicy](docs/sdks/gateway/README.md#updatepolicy) - Update policy
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [createIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
@@ -237,10 +294,10 @@ run();
 * [listIdentities](docs/sdks/identities/README.md#listidentities) - List Identities
 * [updateIdentity](docs/sdks/identities/README.md#updateidentity) - Update Identity
 
-### [Internal](docs/sdks/internal/README.md)
+### [~~Internal~~](docs/sdks/internal/README.md)
 
-* [createDeployment](docs/sdks/internal/README.md#createdeployment) - Create deployment
-* [getDeployment](docs/sdks/internal/README.md#getdeployment) - Get deployment
+* [~~createDeployment~~](docs/sdks/internal/README.md#createdeployment) - Create deployment :warning: **Deprecated**
+* [~~getDeployment~~](docs/sdks/internal/README.md#getdeployment) - Get deployment :warning: **Deprecated**
 
 ### [Keys](docs/sdks/keys/README.md)
 
@@ -275,6 +332,17 @@ run();
 
 * [createSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [exchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+* [getVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+* [listKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
+* [rerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [createProject](docs/sdks/projects/README.md#createproject) - Create project
+* [deleteProject](docs/sdks/projects/README.md#deleteproject) - Delete project
+* [getProject](docs/sdks/projects/README.md#getproject) - Get project
+* [listProjects](docs/sdks/projects/README.md#listprojects) - List projects
+* [updateProject](docs/sdks/projects/README.md#updateproject) - Update project
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
@@ -308,13 +376,32 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apisDeleteApi`](docs/sdks/apis/README.md#deleteapi) - Delete API namespace
 - [`apisGetApi`](docs/sdks/apis/README.md#getapi) - Get API namespace
 - [`apisListKeys`](docs/sdks/apis/README.md#listkeys) - List API keys
+- [`appsCreateApp`](docs/sdks/apps/README.md#createapp) - Create app
+- [`appsDeleteApp`](docs/sdks/apps/README.md#deleteapp) - Delete app
+- [`appsGetApp`](docs/sdks/apps/README.md#getapp) - Get app
+- [`appsListApps`](docs/sdks/apps/README.md#listapps) - List apps
+- [`appsUpdateApp`](docs/sdks/apps/README.md#updateapp) - Update app
+- [`deploymentsCreateDeployment`](docs/sdks/deployments/README.md#createdeployment) - Create deployment
+- [`deploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get deployment
+- [`deploymentsListDeployments`](docs/sdks/deployments/README.md#listdeployments) - List deployments
+- [`deploymentsPromoteDeployment`](docs/sdks/deployments/README.md#promotedeployment) - Promote deployment
+- [`deploymentsRollbackDeployment`](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
+- [`deploymentsStartDeployment`](docs/sdks/deployments/README.md#startdeployment) - Start deployment
+- [`deploymentsStopDeployment`](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
+- [`environmentsGetEnvironment`](docs/sdks/environments/README.md#getenvironment) - Get environment
+- [`environmentsListEnvironments`](docs/sdks/environments/README.md#listenvironments) - List environments
+- [`environmentsListEnvironmentVariables`](docs/sdks/environments/README.md#listenvironmentvariables) - List environment variables
+- [`environmentsRemoveEnvironmentVariables`](docs/sdks/environments/README.md#removeenvironmentvariables) - Remove environment variables
+- [`environmentsSetEnvironmentVariables`](docs/sdks/environments/README.md#setenvironmentvariables) - Set environment variables
+- [`environmentsUpdateSettings`](docs/sdks/environments/README.md#updatesettings) - Update environment settings
+- [`gatewayListPolicies`](docs/sdks/gateway/README.md#listpolicies) - List policies
+- [`gatewaySetPolicies`](docs/sdks/gateway/README.md#setpolicies) - Set policies
+- [`gatewayUpdatePolicy`](docs/sdks/gateway/README.md#updatepolicy) - Update policy
 - [`identitiesCreateIdentity`](docs/sdks/identities/README.md#createidentity) - Create Identity
 - [`identitiesDeleteIdentity`](docs/sdks/identities/README.md#deleteidentity) - Delete Identity
 - [`identitiesGetIdentity`](docs/sdks/identities/README.md#getidentity) - Get Identity
 - [`identitiesListIdentities`](docs/sdks/identities/README.md#listidentities) - List Identities
 - [`identitiesUpdateIdentity`](docs/sdks/identities/README.md#updateidentity) - Update Identity
-- [`internalCreateDeployment`](docs/sdks/internal/README.md#createdeployment) - Create deployment
-- [`internalGetDeployment`](docs/sdks/internal/README.md#getdeployment) - Get deployment
 - [`keysAddPermissions`](docs/sdks/keys/README.md#addpermissions) - Add key permissions
 - [`keysAddRoles`](docs/sdks/keys/README.md#addroles) - Add key roles
 - [`keysCreateKey`](docs/sdks/keys/README.md#createkey) - Create API key
@@ -340,12 +427,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`permissionsListRoles`](docs/sdks/permissions/README.md#listroles) - List roles
 - [`portalCreateSession`](docs/sdks/portal/README.md#createsession) - Create portal session
 - [`portalExchangeSession`](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+- [`portalGetVerifications`](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+- [`portalListKeys`](docs/sdks/portal/README.md#listkeys) - List portal keys
+- [`portalRerollKey`](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+- [`projectsCreateProject`](docs/sdks/projects/README.md#createproject) - Create project
+- [`projectsDeleteProject`](docs/sdks/projects/README.md#deleteproject) - Delete project
+- [`projectsGetProject`](docs/sdks/projects/README.md#getproject) - Get project
+- [`projectsListProjects`](docs/sdks/projects/README.md#listprojects) - List projects
+- [`projectsUpdateProject`](docs/sdks/projects/README.md#updateproject) - Update project
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 - [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 - [`ratelimitListOverrides`](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 - [`ratelimitMultiLimit`](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 - [`ratelimitSetOverride`](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
+- ~~[`internalCreateDeployment`](docs/sdks/internal/README.md#createdeployment)~~ - Create deployment :warning: **Deprecated**
+- ~~[`internalGetDeployment`](docs/sdks/internal/README.md#getdeployment)~~ - Get deployment :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -530,11 +627,11 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 43 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 43 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 43 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 43 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 43 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 8 of 72 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 72 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 72 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 72 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 72 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

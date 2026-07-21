@@ -1,0 +1,27 @@
+# V2AppsUpdateAppRequestBody
+
+## Example Usage
+
+```typescript
+import { V2AppsUpdateAppRequestBody } from "@unkey/api/models/components";
+
+let value: V2AppsUpdateAppRequestBody = {
+  project: "proj_1234abcd",
+  app: "proj_1234abcd",
+  name: "Payments API",
+  slug: "proj_1234abcd",
+  defaultBranch: "main",
+  deleteProtection: true,
+};
+```
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `project`                                                                                                                | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `app`                                                                                                                    | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `name`                                                                                                                   | *string*                                                                                                                 | :heavy_minus_sign:                                                                                                       | New human-readable name for the app.<br/>Omit this field to leave the current name unchanged.<br/>                       | Payments API                                                                                                             |
+| `slug`                                                                                                                   | *string*                                                                                                                 | :heavy_minus_sign:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `defaultBranch`                                                                                                          | *string*                                                                                                                 | :heavy_minus_sign:                                                                                                       | New default git branch deployments track for this app.<br/>Omit this field to leave the current branch unchanged.<br/>   | main                                                                                                                     |
+| `deleteProtection`                                                                                                       | *boolean*                                                                                                                | :heavy_minus_sign:                                                                                                       | Enable or disable delete protection for the app.<br/>Omit this field to leave the current setting unchanged.<br/>        | true                                                                                                                     |

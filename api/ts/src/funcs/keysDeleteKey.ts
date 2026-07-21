@@ -30,19 +30,20 @@ import { Result } from "../types/fp.js";
  * Delete API keys
  *
  * @remarks
- * Delete API keys permanently from user accounts or for cleanup purposes.
+ * Delete API keys from user accounts or for cleanup purposes.
  *
- * Use this for user-requested key deletion, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
+ * Use this for user-requested key revocation, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
  *
  * **Important**: For temporary access control, use `updateKey` with `enabled: false` instead of deletion.
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
+ * Your credential must have one of the following permissions:
  * - `api.*.delete_key` (to delete keys in any API)
  * - `api.<api_id>.delete_key` (to delete keys in a specific API)
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
+ * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#delete_key` (to delete keys in any keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
  */
 export function keysDeleteKey(
   client: UnkeyCore,
@@ -121,7 +122,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,

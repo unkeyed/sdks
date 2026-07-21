@@ -951,6 +951,7 @@ async function run() {
   const result = await unkey.identities.listIdentities({
     limit: 50,
     cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+    search: "user_123",
   });
 
   for await (const page of result) {
@@ -979,6 +980,7 @@ async function run() {
   const res = await identitiesListIdentities(unkey, {
     limit: 50,
     cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+    search: "user_123",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1006,6 +1008,7 @@ async function run() {
   const result = await unkey.identities.listIdentities({
     limit: 50,
     cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+    search: "user_123",
   });
 
   for await (const page of result) {
@@ -1034,6 +1037,7 @@ async function run() {
   const res = await identitiesListIdentities(unkey, {
     limit: 50,
     cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+    search: "user_123",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1089,6 +1093,61 @@ async function run() {
   const res = await identitiesListIdentities(unkey, {
     limit: 50,
     cursor: "cursor_eyJrZXkiOiJrZXlfMTIzNCJ9",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("identitiesListIdentities failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withSearch
+
+<!-- UsageSnippet language="typescript" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withSearch" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.identities.listIdentities({
+    limit: 50,
+    search: "user_123",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { identitiesListIdentities } from "@unkey/api/funcs/identitiesListIdentities.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await identitiesListIdentities(unkey, {
+    limit: 50,
+    search: "user_123",
   });
   if (res.ok) {
     const { value: result } = res;
