@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type ApisCreateAPIResponse struct {
 	// API namespace created successfully. The response contains the unique API ID for referencing this namespace in key operations.
 	//
 	V2ApisCreateAPIResponseBody *components.V2ApisCreateAPIResponseBody
+}
+
+func (a ApisCreateAPIResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApisCreateAPIResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *ApisCreateAPIResponse) GetHTTPMeta() components.HTTPMetadata {

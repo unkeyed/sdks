@@ -2,19 +2,34 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // MatchExpr - A single request match expression. Exactly one of `path`, `method`,
 // `header` or `queryParam` must be set.
 type MatchExpr struct {
 	// Matches on the request path.
-	Path *PathMatch `json:"path,omitempty"`
+	Path *PathMatch `json:"path,omitzero"`
 	// Matches when the request method is one of the listed methods.
-	Method *MethodMatch `json:"method,omitempty"`
+	Method *MethodMatch `json:"method,omitzero"`
 	// Matches a named request field (header or query parameter). Exactly one of
 	// `present` or `value` must be set.
-	Header *FieldMatch `json:"header,omitempty"`
+	Header *FieldMatch `json:"header,omitzero"`
 	// Matches a named request field (header or query parameter). Exactly one of
 	// `present` or `value` must be set.
-	QueryParam *FieldMatch `json:"queryParam,omitempty"`
+	QueryParam *FieldMatch `json:"queryParam,omitzero"`
+}
+
+func (m MatchExpr) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MatchExpr) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (m *MatchExpr) GetPath() *PathMatch {

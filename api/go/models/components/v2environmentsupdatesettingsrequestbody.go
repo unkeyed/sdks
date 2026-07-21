@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -18,67 +22,78 @@ type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// Path to the Dockerfile used for builds.
 	// Omit to leave unchanged; set null to clear and fall back to Railpack.
 	//
-	Dockerfile *string `json:"dockerfile,omitempty"`
+	Dockerfile *string `json:"dockerfile,omitzero"`
 	// The directory your app lives in. Unkey builds from here.
 	// Use "." for the repository root, or set a subdirectory when your app
 	// is nested (e.g., services/api). Omit to leave unchanged.
 	//
-	RootDirectory *string `json:"rootDirectory,omitempty"`
+	RootDirectory *string `json:"rootDirectory,omitzero"`
 	// Overrides the build command auto-detected by Railpack.
 	// Omit to leave unchanged; set null to clear and fall back to auto-detection.
 	//
-	BuildCommand *string `json:"buildCommand,omitempty"`
+	BuildCommand *string `json:"buildCommand,omitzero"`
 	// Glob paths that trigger auto-deploys when changed.
 	// Omit to leave unchanged.
 	//
-	WatchPaths []string `json:"watchPaths,omitempty"`
+	WatchPaths []string `json:"watchPaths,omitzero"`
 	// Whether pushes auto-deploy.
 	// Omit to leave unchanged.
 	//
-	AutoDeploy *bool `json:"autoDeploy,omitempty"`
+	AutoDeploy *bool `json:"autoDeploy,omitzero"`
 	// Container port the app listens on.
 	// Omit to leave unchanged.
 	//
-	Port *int64 `json:"port,omitempty"`
+	Port *int64 `json:"port,omitzero"`
 	// CPU allocation in vCPUs. Minimum 0.25 (1/4 vCPU), in steps of 0.25.
 	// The upper bound is your workspace's per-instance quota; exceeding it returns 400.
 	// Omit to leave unchanged.
 	//
-	VCpus *float64 `json:"vCpus,omitempty"`
+	VCpus *float64 `json:"vCpus,omitzero"`
 	// Memory allocation in MiB. Minimum 256, in steps of 256.
 	// The upper bound is your workspace's per-instance quota; exceeding it returns 400.
 	// Omit to leave unchanged.
 	//
-	MemoryMib *int64 `json:"memoryMib,omitempty"`
+	MemoryMib *int64 `json:"memoryMib,omitzero"`
 	// Ephemeral storage allocation in MiB, in steps of 512 (0 for none).
 	// The upper bound is your workspace's per-instance quota; exceeding it returns 400.
 	// Omit to leave unchanged.
 	//
-	StorageMib *int64 `json:"storageMib,omitempty"`
+	StorageMib *int64 `json:"storageMib,omitzero"`
 	// Override container entrypoint command.
 	// Omit to leave unchanged.
 	//
-	Command []string `json:"command,omitempty"`
+	Command []string `json:"command,omitzero"`
 	// HTTP healthcheck configuration.
 	// Omit to leave unchanged; set null to remove.
 	//
-	Healthcheck *EnvironmentHealthcheck `json:"healthcheck,omitempty"`
+	Healthcheck *EnvironmentHealthcheck `json:"healthcheck,omitzero"`
 	// Signal sent to the container on shutdown.
 	//
-	ShutdownSignal *EnvironmentShutdownSignal `json:"shutdownSignal,omitempty"`
+	ShutdownSignal *EnvironmentShutdownSignal `json:"shutdownSignal,omitzero"`
 	// Protocol used to reach the container.
 	//
-	UpstreamProtocol *EnvironmentUpstreamProtocol `json:"upstreamProtocol,omitempty"`
+	UpstreamProtocol *EnvironmentUpstreamProtocol `json:"upstreamProtocol,omitzero"`
 	// Path to the OpenAPI spec file within the build. Must start with a slash.
 	// Omit to leave unchanged; set null to clear.
 	//
-	OpenapiSpecPath *string `json:"openapiSpecPath,omitempty"`
+	OpenapiSpecPath *string `json:"openapiSpecPath,omitzero"`
 	// Desired set of regions with per-region replica bounds.
 	// Omit to leave regions unchanged; when present, this replaces the full set
 	// (regions absent from the list are removed). At least one region is required;
 	// an empty list is rejected because an environment cannot have zero regions.
 	//
-	Regions []EnvironmentRegion `json:"regions,omitempty"`
+	Regions []EnvironmentRegion `json:"regions,omitzero"`
+}
+
+func (v V2EnvironmentsUpdateSettingsRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2EnvironmentsUpdateSettingsRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2EnvironmentsUpdateSettingsRequestBody) GetProject() string {

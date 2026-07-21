@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type PermissionsDeleteRoleResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Role deleted successfully
 	V2PermissionsDeleteRoleResponseBody *components.V2PermissionsDeleteRoleResponseBody
+}
+
+func (p PermissionsDeleteRoleResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PermissionsDeleteRoleResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PermissionsDeleteRoleResponse) GetHTTPMeta() components.HTTPMetadata {

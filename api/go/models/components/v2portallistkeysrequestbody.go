@@ -14,7 +14,7 @@ type V2PortalListKeysRequestBody struct {
 	// Pagination cursor from a previous response to fetch the next page.
 	// Use when `hasMore: true` in the previous response.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 }
 
 func (v V2PortalListKeysRequestBody) MarshalJSON() ([]byte, error) {

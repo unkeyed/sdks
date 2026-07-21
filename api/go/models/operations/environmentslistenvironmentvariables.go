@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type EnvironmentsListEnvironmentVariablesResponse struct {
 	// Successfully retrieved a page of environment variables.
 	//
 	V2EnvironmentsListEnvironmentVariablesResponseBody *components.V2EnvironmentsListEnvironmentVariablesResponseBody
+}
+
+func (e EnvironmentsListEnvironmentVariablesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnvironmentsListEnvironmentVariablesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EnvironmentsListEnvironmentVariablesResponse) GetHTTPMeta() components.HTTPMetadata {

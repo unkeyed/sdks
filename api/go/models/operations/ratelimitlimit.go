@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type RatelimitLimitResponse struct {
 	// Rate limit check completed successfully. Check the `success` field to determine if the request is allowed.
 	//
 	V2RatelimitLimitResponseBody *components.V2RatelimitLimitResponseBody
+}
+
+func (r RatelimitLimitResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RatelimitLimitResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *RatelimitLimitResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -2,15 +2,30 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // KeyLocation - Where to look for the API key on incoming requests. Exactly one of
 // `bearer`, `header` or `queryParam` must be set.
 type KeyLocation struct {
 	// Extract the key from the `Authorization Bearer` header.
-	Bearer *BearerTokenLocation `json:"bearer,omitempty"`
+	Bearer *BearerTokenLocation `json:"bearer,omitzero"`
 	// Extract the key from a custom header.
-	Header *HeaderKeyLocation `json:"header,omitempty"`
+	Header *HeaderKeyLocation `json:"header,omitzero"`
 	// Extract the key from a query parameter.
-	QueryParam *QueryParamKeyLocation `json:"queryParam,omitempty"`
+	QueryParam *QueryParamKeyLocation `json:"queryParam,omitzero"`
+}
+
+func (k KeyLocation) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeyLocation) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeyLocation) GetBearer() *BearerTokenLocation {

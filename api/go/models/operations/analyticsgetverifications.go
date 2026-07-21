@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type AnalyticsGetVerificationsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Query executed successfully
 	V2AnalyticsGetVerificationsResponseBody *components.V2AnalyticsGetVerificationsResponseBody
+}
+
+func (a AnalyticsGetVerificationsResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AnalyticsGetVerificationsResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *AnalyticsGetVerificationsResponse) GetHTTPMeta() components.HTTPMetadata {

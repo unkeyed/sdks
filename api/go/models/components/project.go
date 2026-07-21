@@ -19,7 +19,7 @@ type Project struct {
 	// Unix timestamp in milliseconds when the project was last updated.
 	// Omitted if the project has never been updated.
 	//
-	UpdatedAt *int64 `json:"updatedAt,omitempty"`
+	UpdatedAt *int64 `json:"updatedAt,omitzero"`
 	// Whether delete protection is enabled for this project.
 	// When true, the project cannot be deleted until protection is disabled.
 	//

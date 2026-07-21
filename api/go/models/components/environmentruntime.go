@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // EnvironmentRuntime - Runtime settings that control how the container runs.
 // Omitted until the environment has runtime settings.
 type EnvironmentRuntime struct {
@@ -20,7 +24,7 @@ type EnvironmentRuntime struct {
 	// Container entrypoint command override.
 	//
 	Command     []string                `json:"command"`
-	Healthcheck *EnvironmentHealthcheck `json:"healthcheck,omitempty"`
+	Healthcheck *EnvironmentHealthcheck `json:"healthcheck,omitzero"`
 	// Signal sent to the container on shutdown.
 	//
 	ShutdownSignal EnvironmentShutdownSignal `json:"shutdownSignal"`
@@ -29,7 +33,18 @@ type EnvironmentRuntime struct {
 	UpstreamProtocol EnvironmentUpstreamProtocol `json:"upstreamProtocol"`
 	// Path to the OpenAPI spec served by the container, if any.
 	//
-	OpenapiSpecPath *string `json:"openapiSpecPath,omitempty"`
+	OpenapiSpecPath *string `json:"openapiSpecPath,omitzero"`
+}
+
+func (e EnvironmentRuntime) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnvironmentRuntime) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EnvironmentRuntime) GetPort() int64 {

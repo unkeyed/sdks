@@ -35,7 +35,7 @@ type V2KeysUpdateCreditsRequestBody struct {
 	//
 	// Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 	//
-	Value *int64 `json:"value,omitempty"`
+	Value *int64 `json:"value,omitzero"`
 	// Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 	//
 	Operation Operation `json:"operation"`

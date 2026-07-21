@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type RatelimitDeleteOverrideResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Override successfully deleted. Affected identifiers now use default limits.
 	V2RatelimitDeleteOverrideResponseBody *components.V2RatelimitDeleteOverrideResponseBody
+}
+
+func (r RatelimitDeleteOverrideResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RatelimitDeleteOverrideResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *RatelimitDeleteOverrideResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type AppsCreateAppResponse struct {
 	// App created successfully. The response contains the app id used to reference it in subsequent operations.
 	//
 	V2AppsCreateAppResponseBody *components.V2AppsCreateAppResponseBody
+}
+
+func (a AppsCreateAppResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AppsCreateAppResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *AppsCreateAppResponse) GetHTTPMeta() components.HTTPMetadata {

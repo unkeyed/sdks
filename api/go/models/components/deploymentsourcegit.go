@@ -9,11 +9,11 @@ import (
 // DeploymentSourceGit - Build from the app's connected GitHub repository.
 type DeploymentSourceGit struct {
 	// Branch to build (its HEAD). Omit branch and commitSha to use the app's default branch.
-	Branch *string `json:"branch,omitempty"`
+	Branch *string `json:"branch,omitzero"`
 	// Commit to build (full or abbreviated SHA). Takes precedence over branch.
-	CommitSha *string `json:"commitSha,omitempty"`
+	CommitSha *string `json:"commitSha,omitzero"`
 	// Build from a fork instead of the app's connected repository, as "owner/repo". Requires commitSha.
-	Repository *string `json:"repository,omitempty"`
+	Repository *string `json:"repository,omitzero"`
 }
 
 func (d DeploymentSourceGit) MarshalJSON() ([]byte, error) {

@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type KeysUpdateCreditsResponse struct {
 	// Credits updated successfully. Response includes updated remaining credits and refill settings.
 	//
 	V2KeysUpdateCreditsResponseBody *components.V2KeysUpdateCreditsResponseBody
+}
+
+func (k KeysUpdateCreditsResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysUpdateCreditsResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysUpdateCreditsResponse) GetHTTPMeta() components.HTTPMetadata {

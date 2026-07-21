@@ -8,7 +8,7 @@ type Pagination struct {
 	// Include this exact value in the cursor field of subsequent requests.
 	// Cursors are temporary and may expire after extended periods.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 	// Indicates whether additional results exist beyond this page.
 	// When true, use the cursor to fetch the next page.
 	// When false, you have reached the end of the result set.

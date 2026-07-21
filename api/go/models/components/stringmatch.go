@@ -5,14 +5,14 @@ package components
 // StringMatch - String matcher. Exactly one of `exact`, `prefix` or `regex` must be set.
 type StringMatch struct {
 	// Matches when the input equals this value.
-	Exact *string `json:"exact,omitempty"`
+	Exact *string `json:"exact,omitzero"`
 	// Matches when the input starts with this value.
-	Prefix *string `json:"prefix,omitempty"`
+	Prefix *string `json:"prefix,omitzero"`
 	// Matches when the input satisfies this RE2 regular expression. Invalid
 	// patterns are rejected when the policy is created.
-	Regex *string `json:"regex,omitempty"`
+	Regex *string `json:"regex,omitzero"`
 	// Compare case-insensitively. May accompany any match mode.
-	IgnoreCase *bool `json:"ignoreCase,omitempty"`
+	IgnoreCase *bool `json:"ignoreCase,omitzero"`
 }
 
 func (s *StringMatch) GetExact() *string {

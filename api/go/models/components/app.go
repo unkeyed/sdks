@@ -19,7 +19,7 @@ type App struct {
 	// The identifier of the deployment currently serving this app.
 	// Omitted if the app has no active deployment yet.
 	//
-	CurrentDeploymentID *string `json:"currentDeploymentId,omitempty"`
+	CurrentDeploymentID *string `json:"currentDeploymentId,omitzero"`
 	// Whether the app is currently serving a rolled-back deployment rather than its latest one.
 	//
 	IsRolledBack bool `json:"isRolledBack"`
@@ -33,7 +33,7 @@ type App struct {
 	// Unix timestamp in milliseconds when the app was last updated.
 	// Omitted if the app has never been updated.
 	//
-	UpdatedAt *int64 `json:"updatedAt,omitempty"`
+	UpdatedAt *int64 `json:"updatedAt,omitzero"`
 }
 
 func (a *App) GetID() string {

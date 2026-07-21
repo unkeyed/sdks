@@ -2,19 +2,34 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // RatelimitIdentifier - How requests are grouped for rate limiting. Exactly one of `remoteIp`,
 // `header`, `authenticatedSubject`, `path` or `principalField` must be set.
 type RatelimitIdentifier struct {
 	// Rate limit by the client's IP address.
-	RemoteIP *RemoteIPKey `json:"remoteIp,omitempty"`
+	RemoteIP *RemoteIPKey `json:"remoteIp,omitzero"`
 	// Rate limit by the value of a request header.
-	Header *HeaderKey `json:"header,omitempty"`
+	Header *HeaderKey `json:"header,omitzero"`
 	// Rate limit by the authenticated subject (e.g. the verified key).
-	AuthenticatedSubject *AuthenticatedSubjectKey `json:"authenticatedSubject,omitempty"`
+	AuthenticatedSubject *AuthenticatedSubjectKey `json:"authenticatedSubject,omitzero"`
 	// Rate limit by the request path.
-	Path *PathKey `json:"path,omitempty"`
+	Path *PathKey `json:"path,omitzero"`
 	// Rate limit by a field extracted from the authenticated principal.
-	PrincipalField *PrincipalFieldKey `json:"principalField,omitempty"`
+	PrincipalField *PrincipalFieldKey `json:"principalField,omitzero"`
+}
+
+func (r RatelimitIdentifier) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RatelimitIdentifier) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *RatelimitIdentifier) GetRemoteIP() *RemoteIPKey {

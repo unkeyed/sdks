@@ -3,12 +3,24 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
 type IdentitiesCreateIdentityResponse struct {
 	HTTPMeta                               components.HTTPMetadata `json:"-"`
 	V2IdentitiesCreateIdentityResponseBody *components.V2IdentitiesCreateIdentityResponseBody
+}
+
+func (i IdentitiesCreateIdentityResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *IdentitiesCreateIdentityResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (i *IdentitiesCreateIdentityResponse) GetHTTPMeta() components.HTTPMetadata {

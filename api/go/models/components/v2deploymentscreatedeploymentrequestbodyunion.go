@@ -22,9 +22,9 @@ type V2DeploymentsCreateDeploymentRequestBody3 struct {
 	//
 	Environment string `json:"environment"`
 	// Build from the app's connected GitHub repository.
-	Git *DeploymentSourceGit `json:"git,omitempty"`
+	Git *DeploymentSourceGit `json:"git,omitzero"`
 	// Deploy a prebuilt Docker image as-is.
-	Image *DeploymentSourceImage `json:"image,omitempty"`
+	Image *DeploymentSourceImage `json:"image,omitzero"`
 	// Re-run an existing deployment.
 	Deployment DeploymentSourceDeployment `json:"deployment"`
 }
@@ -101,9 +101,9 @@ type V2DeploymentsCreateDeploymentRequestBody2 struct {
 	// Build from the app's connected GitHub repository.
 	Git DeploymentSourceGit `json:"git"`
 	// Deploy a prebuilt Docker image as-is.
-	Image *DeploymentSourceImage `json:"image,omitempty"`
+	Image *DeploymentSourceImage `json:"image,omitzero"`
 	// Re-run an existing deployment.
-	Deployment *DeploymentSourceDeployment `json:"deployment,omitempty"`
+	Deployment *DeploymentSourceDeployment `json:"deployment,omitzero"`
 }
 
 func (v V2DeploymentsCreateDeploymentRequestBody2) MarshalJSON() ([]byte, error) {
@@ -176,11 +176,11 @@ type V2DeploymentsCreateDeploymentRequestBody1 struct {
 	//
 	Environment string `json:"environment"`
 	// Build from the app's connected GitHub repository.
-	Git *DeploymentSourceGit `json:"git,omitempty"`
+	Git *DeploymentSourceGit `json:"git,omitzero"`
 	// Deploy a prebuilt Docker image as-is.
 	Image DeploymentSourceImage `json:"image"`
 	// Re-run an existing deployment.
-	Deployment *DeploymentSourceDeployment `json:"deployment,omitempty"`
+	Deployment *DeploymentSourceDeployment `json:"deployment,omitzero"`
 }
 
 func (v V2DeploymentsCreateDeploymentRequestBody1) MarshalJSON() ([]byte, error) {

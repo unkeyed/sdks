@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2IdentitiesCreateIdentityRequestBody struct {
 	// Creates an identity using your system's unique identifier for a user, organization, or entity.
 	// Must be stable and unique across your workspace - duplicate externalIds return CONFLICT errors.
@@ -21,7 +25,7 @@ type V2IdentitiesCreateIdentityRequestBody struct {
 	// Use this for subscription details, feature flags, user preferences, and organization information.
 	// Metadata is returned as-is whenever keys associated with this identity are verified.
 	//
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Defines shared rate limits that apply to all keys belonging to this identity.
 	// Prevents abuse by users with multiple keys by enforcing consistent limits across their entire key portfolio.
 	// Essential for implementing fair usage policies and tiered access levels in multi-tenant applications.
@@ -33,7 +37,18 @@ type V2IdentitiesCreateIdentityRequestBody struct {
 	//
 	// When verifying keys, you can specify which limits you want to use and all keys attached to this identity will share the limits, regardless of which specific key is used.
 	//
-	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
+	Ratelimits []RatelimitRequest `json:"ratelimits,omitzero"`
+}
+
+func (v V2IdentitiesCreateIdentityRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2IdentitiesCreateIdentityRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2IdentitiesCreateIdentityRequestBody) GetExternalID() string {

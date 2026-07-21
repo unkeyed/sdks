@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type KeysDeleteKeyResponse struct {
 	// Key deleted successfully. Verification fails immediately with up to 30-second edge propagation.
 	//
 	V2KeysDeleteKeyResponseBody *components.V2KeysDeleteKeyResponseBody
+}
+
+func (k KeysDeleteKeyResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysDeleteKeyResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysDeleteKeyResponse) GetHTTPMeta() components.HTTPMetadata {

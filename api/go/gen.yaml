@@ -49,7 +49,7 @@ go:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
-  includeEmptyObjects: false
+  includeEmptyObjects: true
   inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 1

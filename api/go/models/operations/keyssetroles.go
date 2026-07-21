@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type KeysSetRolesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Roles set successfully. Returns all roles currently assigned to the key.
 	V2KeysSetRolesResponseBody *components.V2KeysSetRolesResponseBody
+}
+
+func (k KeysSetRolesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysSetRolesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysSetRolesResponse) GetHTTPMeta() components.HTTPMetadata {

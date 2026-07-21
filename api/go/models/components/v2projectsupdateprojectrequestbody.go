@@ -10,15 +10,15 @@ type V2ProjectsUpdateProjectRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	Slug *string `json:"slug,omitempty"`
+	Slug *string `json:"slug,omitzero"`
 	// New human-readable name for the project.
 	// Omit this field to leave the current name unchanged.
 	//
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Enable or disable delete protection for the project.
 	// Omit this field to leave the current setting unchanged.
 	//
-	DeleteProtection *bool `json:"deleteProtection,omitempty"`
+	DeleteProtection *bool `json:"deleteProtection,omitzero"`
 }
 
 func (v *V2ProjectsUpdateProjectRequestBody) GetProject() string {

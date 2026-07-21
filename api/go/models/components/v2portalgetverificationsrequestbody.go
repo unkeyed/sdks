@@ -15,7 +15,7 @@ type V2PortalGetVerificationsRequestBody struct {
 	// authenticated end user; results are always scoped to the session identity
 	// regardless of this value.
 	//
-	KeyID *string `json:"keyId,omitempty"`
+	KeyID *string `json:"keyId,omitzero"`
 }
 
 func (v *V2PortalGetVerificationsRequestBody) GetStartTime() int64 {

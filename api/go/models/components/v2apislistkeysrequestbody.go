@@ -18,11 +18,11 @@ type V2ApisListKeysRequestBody struct {
 	// Pagination cursor from previous response to fetch next page.
 	// Use when `hasMore: true` in previous response.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 	// Filter keys by external ID to find keys for a specific user or entity.
 	// Must exactly match the externalId set during key creation.
 	//
-	ExternalID *string `json:"externalId,omitempty"`
+	ExternalID *string `json:"externalId,omitzero"`
 	// When true, attempts to include the plaintext key value in the response. SECURITY WARNING:
 	// - This requires special permissions on the calling root key
 	// - Only works for keys created with 'recoverable: true'

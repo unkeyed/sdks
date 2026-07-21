@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -22,6 +23,17 @@ type PortalGetVerificationsResponse struct {
 	// Successfully retrieved verification analytics.
 	//
 	V2PortalGetVerificationsResponseBody *components.V2PortalGetVerificationsResponseBody
+}
+
+func (p PortalGetVerificationsResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PortalGetVerificationsResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PortalGetVerificationsResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2KeysUpdateKeyRequestBody struct {
 	// Specifies which key to update using the database identifier returned from `createKey`.
 	// Do not confuse this with the actual API key string that users include in requests.
@@ -11,19 +15,19 @@ type V2KeysUpdateKeyRequestBody struct {
 	// Omitting this field leaves the current name unchanged, while setting null removes it entirely.
 	// Avoid generic names like "API Key" when managing multiple keys per user or service.
 	//
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Links this key to a user or entity in your system for ownership tracking during verification.
 	// Omitting this field preserves the current association, while setting null disconnects the key from any identity.
 	// Essential for user-specific analytics, billing, and key management across multiple users.
 	// Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
 	//
-	ExternalID *string `json:"externalId,omitempty"`
+	ExternalID *string `json:"externalId,omitzero"`
 	// Stores arbitrary JSON metadata returned during key verification.
 	// Omitting this field preserves existing metadata, while setting null removes all metadata entirely.
 	// Avoid storing sensitive data here as it's returned in verification responses.
 	// Large metadata objects increase verification latency and should stay under 10KB total size.
 	//
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Sets when this key automatically expires as a Unix timestamp in milliseconds.
 	// Verification fails with code=EXPIRED immediately after this time passes.
 	// Omitting this field preserves the current expiration, while setting null makes the key permanent.
@@ -32,23 +36,34 @@ type V2KeysUpdateKeyRequestBody struct {
 	// Keys expire based on server time, not client time, which prevents timezone-related issues.
 	// Active sessions continue until their next verification attempt after expiry.
 	//
-	Expires *int64 `json:"expires,omitempty"`
+	Expires *int64 `json:"expires,omitzero"`
 	// Credit configuration and remaining balance for this key.
-	Credits *UpdateKeyCreditsData `json:"credits,omitempty"`
+	Credits *UpdateKeyCreditsData `json:"credits,omitzero"`
 	// Defines time-based rate limits that protect against abuse by controlling request frequency.
 	// Omitting this field preserves existing rate limits, while setting null removes all rate limits.
 	// Unlike credits which track total usage, rate limits reset automatically after each window expires.
 	// Multiple rate limits can control different operation types with separate thresholds and windows.
 	//
-	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
+	Ratelimits []RatelimitRequest `json:"ratelimits,omitzero"`
 	// Controls whether the key is currently active for verification requests.
 	// When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings.
 	// Omitting this field preserves the current enabled status.
 	// Useful for temporarily suspending access during billing issues, security incidents, or maintenance windows without losing key configuration.
 	//
-	Enabled     *bool    `json:"enabled,omitempty"`
-	Roles       []string `json:"roles,omitempty"`
-	Permissions []string `json:"permissions,omitempty"`
+	Enabled     *bool    `json:"enabled,omitzero"`
+	Roles       []string `json:"roles,omitzero"`
+	Permissions []string `json:"permissions,omitzero"`
+}
+
+func (v V2KeysUpdateKeyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2KeysUpdateKeyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2KeysUpdateKeyRequestBody) GetKeyID() string {

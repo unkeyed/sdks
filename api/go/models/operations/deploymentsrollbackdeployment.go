@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type DeploymentsRollbackDeploymentResponse struct {
 	// Rollback accepted. Poll `getDeployment` to observe the result.
 	//
 	V2DeploymentsRollbackDeploymentResponseBody *components.V2DeploymentsRollbackDeploymentResponseBody
+}
+
+func (d DeploymentsRollbackDeploymentResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeploymentsRollbackDeploymentResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeploymentsRollbackDeploymentResponse) GetHTTPMeta() components.HTTPMetadata {

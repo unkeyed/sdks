@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type IdentitiesDeleteIdentityResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Identity successfully deleted
 	V2IdentitiesDeleteIdentityResponseBody *components.V2IdentitiesDeleteIdentityResponseBody
+}
+
+func (i IdentitiesDeleteIdentityResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *IdentitiesDeleteIdentityResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (i *IdentitiesDeleteIdentityResponse) GetHTTPMeta() components.HTTPMetadata {

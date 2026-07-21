@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -17,6 +18,17 @@ type KeysVerifyKeyResponse struct {
 	// The response also includes identity information when the key is associated with an identity, providing additional context about the key holder and any identity-specific rate limits or metadata that may apply to the verification.
 	//
 	V2KeysVerifyKeyResponseBody *components.V2KeysVerifyKeyResponseBody
+}
+
+func (k KeysVerifyKeyResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysVerifyKeyResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysVerifyKeyResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // V2GatewayUpdatePolicyRequestBody - Partial update of a single policy. Omitted fields keep their stored
 // values; at least one updatable field must be provided. Providing one of
 // `keyauth`, `ratelimit`, `firewall` or `openapi` replaces the policy's
@@ -24,23 +28,34 @@ type V2GatewayUpdatePolicyRequestBody struct {
 	// so list the policies first if you are unsure the id is current.
 	PolicyID string `json:"policyId"`
 	// New human-readable name. Omit to keep the current name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Enable or disable the policy. Disabled policies are stored but skipped
 	// during evaluation. Omit to keep the current setting.
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitzero"`
 	// Replaces all match expressions. Set null to remove them so the policy
 	// applies to every request. Omit to keep the current expressions.
-	Match []MatchExpr `json:"match,omitempty"`
+	Match []MatchExpr `json:"match,omitzero"`
 	// Verifies Unkey API keys on matching requests.
-	Keyauth *KeyauthPolicy `json:"keyauth,omitempty"`
+	Keyauth *KeyauthPolicy `json:"keyauth,omitzero"`
 	// Rate limits matching requests.
-	Ratelimit *RatelimitPolicy `json:"ratelimit,omitempty"`
+	Ratelimit *RatelimitPolicy `json:"ratelimit,omitzero"`
 	// Blocks matching requests.
-	Firewall *FirewallPolicy `json:"firewall,omitempty"`
+	Firewall *FirewallPolicy `json:"firewall,omitzero"`
 	// Validates matching requests against the app's uploaded OpenAPI spec. Has no
 	// configuration of its own. If no spec has been uploaded for the deployment,
 	// the policy is a no-op and requests pass through unvalidated.
-	Openapi *OpenapiPolicy `json:"openapi,omitempty"`
+	Openapi *OpenapiPolicy `json:"openapi,omitzero"`
+}
+
+func (v V2GatewayUpdatePolicyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2GatewayUpdatePolicyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2GatewayUpdatePolicyRequestBody) GetProject() string {

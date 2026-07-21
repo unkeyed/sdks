@@ -31,7 +31,7 @@ type V2PermissionsCreatePermissionRequestBody struct {
 	// - Any conditions or limitations
 	// - Related permissions that might be needed
 	//
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (v *V2PermissionsCreatePermissionRequestBody) GetName() string {

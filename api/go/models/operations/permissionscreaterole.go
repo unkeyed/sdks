@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type PermissionsCreateRoleResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Role created successfully
 	V2PermissionsCreateRoleResponseBody *components.V2PermissionsCreateRoleResponseBody
+}
+
+func (p PermissionsCreateRoleResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PermissionsCreateRoleResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PermissionsCreateRoleResponse) GetHTTPMeta() components.HTTPMetadata {

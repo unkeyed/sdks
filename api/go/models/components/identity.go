@@ -2,15 +2,30 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type Identity struct {
 	// Identity ID
 	ID string `json:"id"`
 	// External identity ID
 	ExternalID string `json:"externalId"`
 	// Identity metadata
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Identity ratelimits
-	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
+	Ratelimits []RatelimitResponse `json:"ratelimits,omitzero"`
+}
+
+func (i Identity) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *Identity) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (i *Identity) GetID() string {

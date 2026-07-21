@@ -15,12 +15,12 @@ type V2KeysCreateKeyRequestBody struct {
 	// The prefix becomes part of the actual key string (e.g., `prod_xxxxxxxxx`).
 	// Avoid using sensitive information in prefixes as they may appear in logs and error messages.
 	//
-	Prefix *string `json:"prefix,omitempty"`
+	Prefix *string `json:"prefix,omitzero"`
 	// Sets a human-readable identifier for internal organization and dashboard display.
 	// Never exposed to end users, only visible in management interfaces and API responses.
 	// Avoid generic names like "API Key" when managing multiple keys for the same user or service.
 	//
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Controls the cryptographic strength of the generated key in bytes.
 	// Higher values increase security but result in longer keys that may be more annoying to handle.
 	// The default 16 bytes provides 2^128 possible combinations, sufficient for most applications.
@@ -33,24 +33,24 @@ type V2KeysCreateKeyRequestBody struct {
 	// Use your primary user ID, organization ID, or tenant ID for best results.
 	// Accepts letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
 	//
-	ExternalID *string `json:"externalId,omitempty"`
+	ExternalID *string `json:"externalId,omitzero"`
 	// Stores arbitrary JSON metadata returned during key verification for contextual information.
 	// Eliminates additional database lookups during verification, improving performance for stateless services.
 	// Avoid storing sensitive data here as it's returned in verification responses.
 	// Large metadata objects increase verification latency and should stay under 10KB total size.
 	//
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Assigns existing roles to this key for permission management through role-based access control.
 	// Roles must already exist in your workspace before assignment.
 	// During verification, all permissions from assigned roles are checked against requested permissions.
 	// Roles provide a convenient way to group permissions and apply consistent access patterns across multiple keys.
 	//
-	Roles []string `json:"roles,omitempty"`
+	Roles []string `json:"roles,omitzero"`
 	// Grants specific permissions directly to this key without requiring role membership.
 	// Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`.
 	// Direct permissions supplement any permissions inherited from assigned roles.
 	//
-	Permissions []string `json:"permissions,omitempty"`
+	Permissions []string `json:"permissions,omitzero"`
 	// Sets when this key automatically expires as a Unix timestamp in milliseconds.
 	// Verification fails with code=EXPIRED immediately after this time passes.
 	// Omitting this field creates a permanent key that never expires.
@@ -59,15 +59,15 @@ type V2KeysCreateKeyRequestBody struct {
 	// Keys expire based on server time, not client time, which prevents timezone-related issues.
 	// Essential for trial periods, temporary access, and security compliance requiring key rotation.
 	//
-	Expires *int64 `json:"expires,omitempty"`
+	Expires *int64 `json:"expires,omitzero"`
 	// Credit configuration and remaining balance for this key.
-	Credits *KeyCreditsData `json:"credits,omitempty"`
+	Credits *KeyCreditsData `json:"credits,omitzero"`
 	// Defines time-based rate limits that protect against abuse by controlling request frequency.
 	// Unlike credits which track total usage, rate limits reset automatically after each window expires.
 	// Multiple rate limits can control different operation types with separate thresholds and windows.
 	// Essential for preventing API abuse while maintaining good performance for legitimate usage.
 	//
-	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
+	Ratelimits []RatelimitRequest `json:"ratelimits,omitzero"`
 	// Controls whether the key is active immediately upon creation.
 	// When set to `false`, the key exists but all verification attempts fail with `code=DISABLED`.
 	// Useful for pre-creating keys that will be activated later or for keys requiring manual approval.

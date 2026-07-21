@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // V2DeployCreateDeploymentRequestBody - Create a deployment from a pre-built Docker image
 type V2DeployCreateDeploymentRequestBody struct {
 	// Project slug
@@ -9,7 +13,7 @@ type V2DeployCreateDeploymentRequestBody struct {
 	// App slug within the project
 	App string `json:"app"`
 	// Optional keyspace ID for authentication context
-	KeyspaceID *string `json:"keyspaceId,omitempty"`
+	KeyspaceID *string `json:"keyspaceId,omitzero"`
 	// Git branch name
 	Branch string `json:"branch"`
 	// Environment slug (e.g., "production", "staging")
@@ -17,7 +21,18 @@ type V2DeployCreateDeploymentRequestBody struct {
 	// Docker image reference to deploy
 	DockerImage string `json:"dockerImage"`
 	// Optional git commit information
-	GitCommit *V2DeployGitCommit `json:"gitCommit,omitempty"`
+	GitCommit *V2DeployGitCommit `json:"gitCommit,omitzero"`
+}
+
+func (v V2DeployCreateDeploymentRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2DeployCreateDeploymentRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2DeployCreateDeploymentRequestBody) GetProject() string {

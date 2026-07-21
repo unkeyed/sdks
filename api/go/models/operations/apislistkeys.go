@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -13,6 +14,17 @@ type ApisListKeysResponse struct {
 	V2ApisListKeysResponseBody *components.V2ApisListKeysResponseBody
 
 	Next func() (*ApisListKeysResponse, error)
+}
+
+func (a ApisListKeysResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApisListKeysResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *ApisListKeysResponse) GetHTTPMeta() components.HTTPMetadata {

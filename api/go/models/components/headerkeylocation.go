@@ -6,7 +6,7 @@ package components
 type HeaderKeyLocation struct {
 	Name string `json:"name"`
 	// Optional prefix removed from the header value before verification.
-	StripPrefix *string `json:"stripPrefix,omitempty"`
+	StripPrefix *string `json:"stripPrefix,omitzero"`
 }
 
 func (h *HeaderKeyLocation) GetName() string {

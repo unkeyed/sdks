@@ -12,19 +12,19 @@ type V2DeploymentsListDeploymentsRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	Project *string `json:"project,omitempty"`
+	Project *string `json:"project,omitzero"`
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	App *string `json:"app,omitempty"`
+	App *string `json:"app,omitzero"`
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	Environment *string `json:"environment,omitempty"`
+	Environment *string `json:"environment,omitzero"`
 	// Restrict results to deployments in any of the given lifecycle statuses.
 	// Omit to return deployments in every status.
 	//
-	Status []DeploymentStatus `json:"status,omitempty"`
+	Status []DeploymentStatus `json:"status,omitzero"`
 	// Maximum number of deployments to return per request.
 	// Balance between response size and number of pagination calls needed.
 	//
@@ -32,7 +32,7 @@ type V2DeploymentsListDeploymentsRequestBody struct {
 	// Pagination cursor from a previous response to fetch the next page.
 	// Use when `hasMore: true` in the previous response.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 }
 
 func (v V2DeploymentsListDeploymentsRequestBody) MarshalJSON() ([]byte, error) {

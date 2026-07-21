@@ -21,7 +21,7 @@ targets:
         sourceRevisionDigest: sha256:356fc8ecfc82003c591b317047889320a48982b01a2dce2708385a7f27e1f567
         sourceBlobDigest: sha256:7ad730181ae3326955c7c2652c4fd9ac8ed04263adeb5e29bab33988e62069a5
         codeSamplesNamespace: api-go-code-samples
-        codeSamplesRevisionDigest: sha256:a32d22771ad75d7c5b6a32c79c4e28c22d47a418bb103ba524dc859506b52ab7
+        codeSamplesRevisionDigest: sha256:dd5b8ddb01fdc1ff1dc517276e46a74ee79411c920a5e073a85931e028e124c0
     api-py:
         source: api-python
         sourceNamespace: api-python

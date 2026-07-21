@@ -10,12 +10,12 @@ type KeyRatelimit struct {
 	Name string `json:"name"`
 	// Inline override: maximum number of operations per window. Must be set
 	// together with `duration`.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"limit,omitzero"`
 	// Inline override: window duration in milliseconds. Must be set together
 	// with `limit`.
-	Duration *int64 `json:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitzero"`
 	// Cost charged against the limit per request. Defaults to 1.
-	Cost *int64 `json:"cost,omitempty"`
+	Cost *int64 `json:"cost,omitzero"`
 }
 
 func (k *KeyRatelimit) GetName() string {

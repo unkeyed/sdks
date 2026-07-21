@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // KeyauthPolicy - Verifies Unkey API keys on matching requests.
 type KeyauthPolicy struct {
 	// Keyspaces to verify keys against, referenced by id. All keyspaces must
@@ -9,12 +13,23 @@ type KeyauthPolicy struct {
 	Keyspaces []string `json:"keyspaces"`
 	// Where to look for the key on incoming requests, tried in order. Defaults
 	// to the `Authorization Bearer` header when omitted.
-	Locations []KeyLocation `json:"locations,omitempty"`
+	Locations []KeyLocation `json:"locations,omitzero"`
 	// Optional permission query the verified key must satisfy, e.g.
 	// `documents.read AND documents.write`.
-	PermissionQuery *string `json:"permissionQuery,omitempty"`
+	PermissionQuery *string `json:"permissionQuery,omitzero"`
 	// Rate limits applied during key verification.
-	Ratelimits []KeyRatelimit `json:"ratelimits,omitempty"`
+	Ratelimits []KeyRatelimit `json:"ratelimits,omitzero"`
+}
+
+func (k KeyauthPolicy) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeyauthPolicy) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeyauthPolicy) GetKeyspaces() []string {

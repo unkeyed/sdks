@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type AppsDeleteAppResponse struct {
 	// Successfully enqueued deletion of the app.
 	//
 	V2AppsDeleteAppResponseBody *components.V2AppsDeleteAppResponseBody
+}
+
+func (a AppsDeleteAppResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AppsDeleteAppResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *AppsDeleteAppResponse) GetHTTPMeta() components.HTTPMetadata {

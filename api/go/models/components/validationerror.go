@@ -14,7 +14,7 @@ type ValidationError struct {
 	// Detailed error message explaining what validation rule was violated. This provides specific information about why the field or parameter was rejected, such as format errors, invalid values, or constraint violations.
 	Message string `json:"message"`
 	// A human-readable suggestion describing how to fix the error. This provides practical guidance on what changes would satisfy the validation requirements. Not all validation errors include fix suggestions, but when present, they offer specific remediation advice.
-	Fix *string `json:"fix,omitempty"`
+	Fix *string `json:"fix,omitzero"`
 }
 
 func (v *ValidationError) GetLocation() string {

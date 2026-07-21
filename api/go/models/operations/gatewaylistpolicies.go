@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type GatewayListPoliciesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Policies retrieved successfully
 	V2GatewayListPoliciesResponseBody *components.V2GatewayListPoliciesResponseBody
+}
+
+func (g GatewayListPoliciesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GatewayListPoliciesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GatewayListPoliciesResponse) GetHTTPMeta() components.HTTPMetadata {

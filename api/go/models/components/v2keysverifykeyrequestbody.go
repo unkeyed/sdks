@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2KeysVerifyKeyRequestBody struct {
 	// The API key to verify, exactly as provided by your user.
 	// Include any prefix - even small changes will cause verification to fail.
@@ -12,7 +16,7 @@ type V2KeysVerifyKeyRequestBody struct {
 	// Use 'key=value' format for compatibility with most analytics tools and clear categorization.
 	// Avoid including sensitive data in tags as they may appear in logs and analytics reports.
 	//
-	Tags []string `json:"tags,omitempty"`
+	Tags []string `json:"tags,omitzero"`
 	// Checks if the key has the specified permission(s) using a query syntax.
 	// Supports single permissions, logical operators (AND, OR), and parentheses for grouping.
 	// Examples:
@@ -21,20 +25,31 @@ type V2KeysVerifyKeyRequestBody struct {
 	// - Complex queries: "(documents.read OR documents.write) AND users.view"
 	// Verification fails if the key lacks the required permissions through direct assignment or role inheritance.
 	//
-	Permissions *string `json:"permissions,omitempty"`
+	Permissions *string `json:"permissions,omitzero"`
 	// Controls credit consumption for usage-based billing and quota enforcement.
 	// Omitting this field uses the default cost of 1 credit per verification.
 	// Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 	//
-	Credits *KeysVerifyKeyCredits `json:"credits,omitempty"`
+	Credits *KeysVerifyKeyCredits `json:"credits,omitzero"`
 	// Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
 	// Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
 	// Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
 	// Rate limit checks are optimized for performance but may allow brief bursts during high concurrency.
 	//
-	Ratelimits []KeysVerifyKeyRatelimit `json:"ratelimits,omitempty"`
+	Ratelimits []KeysVerifyKeyRatelimit `json:"ratelimits,omitzero"`
 	// Migrate keys on demand from your previous system. Reach out for migration support at support@unkey.dev
-	MigrationID *string `json:"migrationId,omitempty"`
+	MigrationID *string `json:"migrationId,omitzero"`
+}
+
+func (v V2KeysVerifyKeyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2KeysVerifyKeyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2KeysVerifyKeyRequestBody) GetKey() string {
