@@ -29,3 +29,37 @@ jobs:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+  test:
+    name: Test API-GO
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve generated SDK branch
+        id: generated
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ref="$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --search '"Generate API-GO" in:title sort:updated-desc' \
+            --json headRefName,title,updatedAt \
+            --jq '[.[] | select(.title | contains("Generate API-GO"))] | sort_by(.updatedAt) | last | .headRefName // empty')"
+
+          if [[ -z "$ref" ]]; then
+            ref="$GITHUB_REF_NAME"
+          fi
+
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+      - name: Checkout generated SDK
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.generated.outputs.ref }}
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: api/go/go.mod
+          cache-dependency-path: api/go/go.sum
+      - name: Run Go tests
+        working-directory: api/go
+        run: go test ./...
