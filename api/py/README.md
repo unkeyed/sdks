@@ -19,7 +19,7 @@ Unkey API: Unkey's API provides programmatic access for all resources within our
 
 ### Authentication
 #
-This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+This API accepts HTTP Bearer credentials. Public integrations use root keys. Dashboard-originated requests use a short-lived dashboard proxy JWT minted by the dashboard server. Most endpoints require permissions associated with the authenticated principal. When making public API requests, include your root key in the `Authorization` header:
 ```
 Authorization: Bearer unkey_xxxxxxxxxxx
 ```
@@ -260,6 +260,24 @@ with Unkey(
     print(res)
 
 ```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey() as unkey:
+
+    res = unkey.portal.get_verifications(security=models.PortalGetVerificationsSecurity(
+        portal_session="<YOUR_API_KEY_HERE>",
+    ), start_time=1704067200000, end_time=1704672000000, key_id="key_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -279,6 +297,39 @@ with Unkey(
 * [get_api](docs/sdks/apis/README.md#get_api) - Get API namespace
 * [list_keys](docs/sdks/apis/README.md#list_keys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [create_app](docs/sdks/apps/README.md#create_app) - Create app
+* [delete_app](docs/sdks/apps/README.md#delete_app) - Delete app
+* [get_app](docs/sdks/apps/README.md#get_app) - Get app
+* [list_apps](docs/sdks/apps/README.md#list_apps) - List apps
+* [update_app](docs/sdks/apps/README.md#update_app) - Update app
+
+### [Deployments](docs/sdks/deployments/README.md)
+
+* [create_deployment](docs/sdks/deployments/README.md#create_deployment) - Create deployment
+* [get_deployment](docs/sdks/deployments/README.md#get_deployment) - Get deployment
+* [list_deployments](docs/sdks/deployments/README.md#list_deployments) - List deployments
+* [promote_deployment](docs/sdks/deployments/README.md#promote_deployment) - Promote deployment
+* [rollback_deployment](docs/sdks/deployments/README.md#rollback_deployment) - Rollback deployment
+* [start_deployment](docs/sdks/deployments/README.md#start_deployment) - Start deployment
+* [stop_deployment](docs/sdks/deployments/README.md#stop_deployment) - Stop deployment
+
+### [Environments](docs/sdks/environments/README.md)
+
+* [get_environment](docs/sdks/environments/README.md#get_environment) - Get environment
+* [list_environment_variables](docs/sdks/environments/README.md#list_environment_variables) - List environment variables
+* [list_environments](docs/sdks/environments/README.md#list_environments) - List environments
+* [remove_environment_variables](docs/sdks/environments/README.md#remove_environment_variables) - Remove environment variables
+* [set_environment_variables](docs/sdks/environments/README.md#set_environment_variables) - Set environment variables
+* [update_settings](docs/sdks/environments/README.md#update_settings) - Update environment settings
+
+### [Gateway](docs/sdks/gateway/README.md)
+
+* [list_policies](docs/sdks/gateway/README.md#list_policies) - List policies
+* [set_policies](docs/sdks/gateway/README.md#set_policies) - Set policies
+* [update_policy](docs/sdks/gateway/README.md#update_policy) - Update policy
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [create_identity](docs/sdks/identities/README.md#create_identity) - Create Identity
@@ -287,10 +338,10 @@ with Unkey(
 * [list_identities](docs/sdks/identities/README.md#list_identities) - List Identities
 * [update_identity](docs/sdks/identities/README.md#update_identity) - Update Identity
 
-### [Internal](docs/sdks/internal/README.md)
+### [~~Internal~~](docs/sdks/internal/README.md)
 
-* [create_deployment](docs/sdks/internal/README.md#create_deployment) - Create deployment
-* [get_deployment](docs/sdks/internal/README.md#get_deployment) - Get deployment
+* [~~create_deployment~~](docs/sdks/internal/README.md#create_deployment) - Create deployment :warning: **Deprecated**
+* [~~get_deployment~~](docs/sdks/internal/README.md#get_deployment) - Get deployment :warning: **Deprecated**
 
 ### [Keys](docs/sdks/keys/README.md)
 
@@ -325,6 +376,17 @@ with Unkey(
 
 * [create_session](docs/sdks/portal/README.md#create_session) - Create portal session
 * [exchange_session](docs/sdks/portal/README.md#exchange_session) - Exchange session token
+* [get_verifications](docs/sdks/portal/README.md#get_verifications) - Get portal verifications
+* [list_keys](docs/sdks/portal/README.md#list_keys) - List portal keys
+* [reroll_key](docs/sdks/portal/README.md#reroll_key) - Reroll portal key
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [create_project](docs/sdks/projects/README.md#create_project) - Create project
+* [delete_project](docs/sdks/projects/README.md#delete_project) - Delete project
+* [get_project](docs/sdks/projects/README.md#get_project) - Get project
+* [list_projects](docs/sdks/projects/README.md#list_projects) - List projects
+* [update_project](docs/sdks/projects/README.md#update_project) - Update project
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
@@ -472,11 +534,11 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
-* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 3 of 43 methods.*
-* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 43 methods.*
-* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 1 of 43 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 43 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 43 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 8 of 72 methods.*
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 72 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 72 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 72 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 72 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

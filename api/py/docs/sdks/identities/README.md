@@ -417,7 +417,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9", search="user_123")
 
     while res is not None:
         # Handle items
@@ -436,7 +436,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9", search="user_123")
 
     while res is not None:
         # Handle items
@@ -455,7 +455,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9", search="user_123")
 
     while res is not None:
         # Handle items
@@ -474,7 +474,26 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9")
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9", search="user_123")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: withSearch
+
+<!-- UsageSnippet language="python" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withSearch" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.identities.list_identities(limit=50, cursor="cursor_eyJrZXkiOiJrZXlfMTIzNCJ9", search="user_123")
 
     while res is not None:
         # Handle items
@@ -485,11 +504,12 @@ with Unkey(
 
 ### Parameters
 
-| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          | Example                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `limit`                                                                                                                              | *Optional[int]*                                                                                                                      | :heavy_minus_sign:                                                                                                                   | The maximum number of identities to return in a single request. Use this to control response size and loading performance.           | 50                                                                                                                                   |
-| `cursor`                                                                                                                             | *Optional[str]*                                                                                                                      | :heavy_minus_sign:                                                                                                                   | Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value. | cursor_eyJrZXkiOiJrZXlfMTIzNCJ9                                                                                                      |
-| `retries`                                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                     | :heavy_minus_sign:                                                                                                                   | Configuration to override the default retry behavior of the client.                                                                  |                                                                                                                                      |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`                                                                                                                                   | *Optional[int]*                                                                                                                           | :heavy_minus_sign:                                                                                                                        | The maximum number of identities to return in a single request. Use this to control response size and loading performance.                | 50                                                                                                                                        |
+| `cursor`                                                                                                                                  | *Optional[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                        | Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.      | cursor_eyJrZXkiOiJrZXlfMTIzNCJ9                                                                                                           |
+| `search`                                                                                                                                  | *Optional[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                        | Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive. | user_123                                                                                                                                  |
+| `retries`                                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                          | :heavy_minus_sign:                                                                                                                        | Configuration to override the default retry behavior of the client.                                                                       |                                                                                                                                           |
 
 ### Response
 

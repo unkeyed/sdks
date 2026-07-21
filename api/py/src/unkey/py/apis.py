@@ -99,6 +99,8 @@ class Apis(BaseSDK):
                 operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -229,6 +231,8 @@ class Apis(BaseSDK):
                 operation_id="apis.createApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -364,6 +368,8 @@ class Apis(BaseSDK):
                 operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -509,6 +515,8 @@ class Apis(BaseSDK):
                 operation_id="apis.deleteApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -648,6 +656,8 @@ class Apis(BaseSDK):
                 operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -782,6 +792,8 @@ class Apis(BaseSDK):
                 operation_id="apis.getApi",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -865,8 +877,6 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        If set, this operation will use `root_key` from the global security.
-
         :param api_id: The API namespace whose keys you want to list.
             Returns all keys in this API, subject to pagination and filters.
 
@@ -932,7 +942,6 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisListKeysRequestBody
             ),
             allow_empty_value=None,
-            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -955,6 +964,8 @@ class Apis(BaseSDK):
                 operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1067,8 +1078,6 @@ class Apis(BaseSDK):
         - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
 
 
-        If set, this operation will use `root_key` from the global security.
-
         :param api_id: The API namespace whose keys you want to list.
             Returns all keys in this API, subject to pagination and filters.
 
@@ -1134,7 +1143,6 @@ class Apis(BaseSDK):
                 request, False, False, "json", models.V2ApisListKeysRequestBody
             ),
             allow_empty_value=None,
-            allowed_fields=["root_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1157,6 +1165,8 @@ class Apis(BaseSDK):
                 operation_id="apis.listKeys",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["apis"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

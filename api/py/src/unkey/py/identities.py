@@ -2,7 +2,7 @@
 
 from .basesdk import BaseSDK
 from jsonpath import JSONPath
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
 from unkey.py.types import OptionalNullable, UNSET
@@ -16,9 +16,12 @@ class Identities(BaseSDK):
         self,
         *,
         external_id: str,
-        meta: Optional[Dict[str, Any]] = None,
+        meta: Optional[Mapping[str, Any]] = None,
         ratelimits: Optional[
-            Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
+            Union[
+                Iterable[models.RatelimitRequest],
+                Iterable[models.RatelimitRequestTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -82,7 +85,7 @@ class Identities(BaseSDK):
 
         request = models.V2IdentitiesCreateIdentityRequestBody(
             external_id=external_id,
-            meta=meta,
+            meta=utils.unmarshal(meta, Optional[Dict[str, Any]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
@@ -132,6 +135,8 @@ class Identities(BaseSDK):
                 operation_id="identities.createIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -186,9 +191,12 @@ class Identities(BaseSDK):
         self,
         *,
         external_id: str,
-        meta: Optional[Dict[str, Any]] = None,
+        meta: Optional[Mapping[str, Any]] = None,
         ratelimits: Optional[
-            Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
+            Union[
+                Iterable[models.RatelimitRequest],
+                Iterable[models.RatelimitRequestTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -252,7 +260,7 @@ class Identities(BaseSDK):
 
         request = models.V2IdentitiesCreateIdentityRequestBody(
             external_id=external_id,
-            meta=meta,
+            meta=utils.unmarshal(meta, Optional[Dict[str, Any]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
@@ -302,6 +310,8 @@ class Identities(BaseSDK):
                 operation_id="identities.createIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -439,6 +449,8 @@ class Identities(BaseSDK):
                 operation_id="identities.deleteIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -576,6 +588,8 @@ class Identities(BaseSDK):
                 operation_id="identities.deleteIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -707,6 +721,8 @@ class Identities(BaseSDK):
                 operation_id="identities.getIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -838,6 +854,8 @@ class Identities(BaseSDK):
                 operation_id="identities.getIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -893,6 +911,7 @@ class Identities(BaseSDK):
         *,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -912,6 +931,7 @@ class Identities(BaseSDK):
 
         :param limit: The maximum number of identities to return in a single request. Use this to control response size and loading performance.
         :param cursor: Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
+        :param search: Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -930,6 +950,7 @@ class Identities(BaseSDK):
         request = models.V2IdentitiesListIdentitiesRequestBody(
             limit=limit,
             cursor=cursor,
+            search=search,
         )
 
         req = self._build_request(
@@ -976,6 +997,8 @@ class Identities(BaseSDK):
                 operation_id="identities.listIdentities",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -996,6 +1019,7 @@ class Identities(BaseSDK):
             return self.list_identities(
                 limit=limit,
                 cursor=next_cursor,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1049,6 +1073,7 @@ class Identities(BaseSDK):
         *,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
+        search: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1068,6 +1093,7 @@ class Identities(BaseSDK):
 
         :param limit: The maximum number of identities to return in a single request. Use this to control response size and loading performance.
         :param cursor: Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
+        :param search: Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1086,6 +1112,7 @@ class Identities(BaseSDK):
         request = models.V2IdentitiesListIdentitiesRequestBody(
             limit=limit,
             cursor=cursor,
+            search=search,
         )
 
         req = self._build_request_async(
@@ -1132,6 +1159,8 @@ class Identities(BaseSDK):
                 operation_id="identities.listIdentities",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1152,6 +1181,7 @@ class Identities(BaseSDK):
             return self.list_identities(
                 limit=limit,
                 cursor=next_cursor,
+                search=search,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1204,9 +1234,12 @@ class Identities(BaseSDK):
         self,
         *,
         identity: str,
-        meta: Optional[Dict[str, Any]] = None,
+        meta: Optional[Mapping[str, Any]] = None,
         ratelimits: Optional[
-            Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
+            Union[
+                Iterable[models.RatelimitRequest],
+                Iterable[models.RatelimitRequestTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1254,7 +1287,7 @@ class Identities(BaseSDK):
 
         request = models.V2IdentitiesUpdateIdentityRequestBody(
             identity=identity,
-            meta=meta,
+            meta=utils.unmarshal(meta, Optional[Dict[str, Any]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
@@ -1304,6 +1337,8 @@ class Identities(BaseSDK):
                 operation_id="identities.updateIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1358,9 +1393,12 @@ class Identities(BaseSDK):
         self,
         *,
         identity: str,
-        meta: Optional[Dict[str, Any]] = None,
+        meta: Optional[Mapping[str, Any]] = None,
         ratelimits: Optional[
-            Union[List[models.RatelimitRequest], List[models.RatelimitRequestTypedDict]]
+            Union[
+                Iterable[models.RatelimitRequest],
+                Iterable[models.RatelimitRequestTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1408,7 +1446,7 @@ class Identities(BaseSDK):
 
         request = models.V2IdentitiesUpdateIdentityRequestBody(
             identity=identity,
-            meta=meta,
+            meta=utils.unmarshal(meta, Optional[Dict[str, Any]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.RatelimitRequest]]
             ),
@@ -1458,6 +1496,8 @@ class Identities(BaseSDK):
                 operation_id="identities.updateIdentity",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
+                tags=["identities"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
