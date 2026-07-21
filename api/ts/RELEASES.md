@@ -199,3 +199,13 @@ Based on:
 - [typescript v2.5.0-canary.1] api/ts
 ### Releases
 - [NPM v2.5.0-canary.1] https://www.npmjs.com/package/@unkey/api/v/2.5.0-canary.1 - api/ts
+
+## 2026-07-21 15:43:34
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.790.3 (2.918.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.5.0] api/ts
+### Releases
+- [NPM v2.5.0] https://www.npmjs.com/package/@unkey/api/v/2.5.0 - api/ts

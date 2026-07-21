@@ -5,16 +5,16 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.790.3
   generationVersion: 2.918.4
-  releaseVersion: 2.5.0-canary.1
-  configChecksum: 6c58fb53a9c33ad0381fba03ff07686b
+  releaseVersion: 2.5.0
+  configChecksum: 00982df4ca0950cefb7d9e42dbc5ff21
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: 19e3f1db-896a-4d00-a717-0d0fc65d543d
-  pristine_commit_hash: c2cb2a6118f8195af2d9953f8a07832966288726
-  pristine_tree_hash: 4c26e220ce11d035479c151e0b13b0e02a14407f
+  generation_id: a35dc9a6-55a9-46fc-8308-97549a71be49
+  pristine_commit_hash: cd68ecd629d9f118ace225c673d29d37e3e578cc
+  pristine_tree_hash: b0e8afaab512cf15730f8aa95b0bc5e946137fa3
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1226,12 +1226,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:4f974773ae71298736e78c612df0918d776d1a3a
-    pristine_git_object: 01c33ee8a73ad263936ecf5e2e644daba6e0f355
+    last_write_checksum: sha1:c6e2a3dd3ad76301dc1603905e968bd0b47854bb
+    pristine_git_object: 3d75c90c22b10cf7726c98d14f1e2edc26ecc8eb
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:17305591bd0514c28e5a098527fa9a7323a83895
-    pristine_git_object: a4cc9f68372d9d71df8c593d8cd369a0b3cb537b
+    last_write_checksum: sha1:e711c017de542926f22b3f4f8a0995acef24968e
+    pristine_git_object: dfc9ad68288393790346db1c9606e19f7ca2d779
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -1546,8 +1546,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e3bbc1c257597764383ec8dd9523a2dee17e0a55
-    pristine_git_object: bfe6af5fc757eb382a87a29c9e43c94259d32f4d
+    last_write_checksum: sha1:37cf45f6845cd21ef63cac2f04adbd0f773ea23c
+    pristine_git_object: 9c31819293c63a6e2c9695e900a9b1833b0447dc
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -5955,7 +5955,6 @@ examples:
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-api' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `unkey.portal.createSession()`: \n  *  `request.permissions[]` **Changed** (Breaking ⚠️)\n* `unkey.gateway.listPolicies()`: **Added**\n* `unkey.apps.getApp()`: **Added**\n* `unkey.apps.listApps()`: **Added**\n* `unkey.apps.updateApp()`: **Added**\n* `unkey.deployments.createDeployment()`: **Added**\n* `unkey.deployments.getDeployment()`: **Added**\n* `unkey.deployments.listDeployments()`: **Added**\n* `unkey.deployments.promoteDeployment()`: **Added**\n* `unkey.deployments.rollbackDeployment()`: **Added**\n* `unkey.deployments.startDeployment()`: **Added**\n* `unkey.deployments.stopDeployment()`: **Added**\n* `unkey.environments.getEnvironment()`: **Added**\n* `unkey.environments.listEnvironmentVariables()`: **Added**\n* `unkey.environments.listEnvironments()`: **Added**\n* `unkey.environments.removeEnvironmentVariables()`: **Added**\n* `unkey.environments.setEnvironmentVariables()`: **Added**\n* `unkey.apps.createApp()`: **Added**\n* `unkey.environments.updateSettings()`: **Added**\n* `unkey.apis.listKeys()`:  `response.pagination` **Changed**\n* `unkey.gateway.updatePolicy()`: **Added**\n* `unkey.portal.getVerifications()`: **Added**\n* `unkey.portal.listKeys()`: **Added**\n* `unkey.portal.rerollKey()`: **Added**\n* `unkey.projects.createProject()`: **Added**\n* `unkey.projects.deleteProject()`: **Added**\n* `unkey.projects.getProject()`: **Added**\n* `unkey.projects.listProjects()`: **Added**\n* `unkey.projects.updateProject()`: **Added**\n* `unkey.gateway.setPolicies()`: **Added**\n* `unkey.internal.createDeployment()`: **Deprecated**\n* `unkey.internal.getDeployment()`: **Deprecated**\n* `unkey.identities.listIdentities()`: \n  *  `request.search` **Added**\n* `unkey.permissions.listPermissions()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.permissions.listRoles()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.apps.deleteApp()`: **Added**\n* `unkey.ratelimit.listOverrides()`:  `response.pagination` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
