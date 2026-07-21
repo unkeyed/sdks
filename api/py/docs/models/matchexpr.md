@@ -1,0 +1,14 @@
+# MatchExpr
+
+A single request match expression. Exactly one of `path`, `method`,
+`header` or `queryParam` must be set.
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `path`                                                                                                      | [Optional[models.PathMatch]](../models/pathmatch.md)                                                        | :heavy_minus_sign:                                                                                          | Matches on the request path.                                                                                |
+| `method`                                                                                                    | [Optional[models.MethodMatch]](../models/methodmatch.md)                                                    | :heavy_minus_sign:                                                                                          | Matches when the request method is one of the listed methods.                                               |
+| `header`                                                                                                    | [Optional[models.FieldMatch]](../models/fieldmatch.md)                                                      | :heavy_minus_sign:                                                                                          | Matches a named request field (header or query parameter). Exactly one of<br/>`present` or `value` must be set. |
+| `query_param`                                                                                               | [Optional[models.FieldMatch]](../models/fieldmatch.md)                                                      | :heavy_minus_sign:                                                                                          | Matches a named request field (header or query parameter). Exactly one of<br/>`present` or `value` must be set. |

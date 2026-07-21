@@ -6,23 +6,76 @@ from unkey.py.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
     from .apis_listkeysop import ApisListKeysResponse, ApisListKeysResponseTypedDict
+    from .app import App, AppTypedDict
+    from .apps_listappsop import AppsListAppsResponse, AppsListAppsResponseTypedDict
+    from .authenticatedsubjectkey import (
+        AuthenticatedSubjectKey,
+        AuthenticatedSubjectKeyTypedDict,
+    )
     from .badrequesterrordetails import (
         BadRequestErrorDetails,
         BadRequestErrorDetailsTypedDict,
     )
     from .baseerror import BaseError, BaseErrorTypedDict
+    from .bearertokenlocation import BearerTokenLocation, BearerTokenLocationTypedDict
+    from .deployment import Deployment, DeploymentTypedDict
+    from .deploymentaction import DeploymentAction
+    from .deploymentdocker import DeploymentDocker, DeploymentDockerTypedDict
+    from .deploymenterror import DeploymentError, DeploymentErrorTypedDict
+    from .deploymenterrorcode import DeploymentErrorCode
+    from .deploymentgit import DeploymentGit, DeploymentGitTypedDict
+    from .deploymentruntime import DeploymentRuntime, DeploymentRuntimeTypedDict
+    from .deployments_listdeploymentsop import (
+        DeploymentsListDeploymentsResponse,
+        DeploymentsListDeploymentsResponseTypedDict,
+    )
+    from .deploymentsourcedeployment import (
+        DeploymentSourceDeployment,
+        DeploymentSourceDeploymentTypedDict,
+    )
+    from .deploymentsourcegit import DeploymentSourceGit, DeploymentSourceGitTypedDict
+    from .deploymentsourceimage import (
+        DeploymentSourceImage,
+        DeploymentSourceImageTypedDict,
+    )
+    from .deploymentstatus import DeploymentStatus
     from .emptyresponse import EmptyResponse, EmptyResponseTypedDict
+    from .environment import Environment, EnvironmentTypedDict
+    from .environmentbuild import EnvironmentBuild, EnvironmentBuildTypedDict
+    from .environmenthealthcheck import (
+        EnvironmentHealthcheck,
+        EnvironmentHealthcheckMethod,
+        EnvironmentHealthcheckTypedDict,
+    )
+    from .environmentregion import EnvironmentRegion, EnvironmentRegionTypedDict
+    from .environmentruntime import EnvironmentRuntime, EnvironmentRuntimeTypedDict
+    from .environmentshutdownsignal import EnvironmentShutdownSignal
+    from .environmentupstreamprotocol import EnvironmentUpstreamProtocol
+    from .environmentvariable import EnvironmentVariable, EnvironmentVariableTypedDict
+    from .environmentvariableinput import (
+        EnvironmentVariableInput,
+        EnvironmentVariableInputTypedDict,
+        Kind,
+    )
+    from .environmentvariablekind import EnvironmentVariableKind
+    from .fieldmatch import FieldMatch, FieldMatchTypedDict
+    from .firewallpolicy import Action, FirewallPolicy, FirewallPolicyTypedDict
+    from .headerkey import HeaderKey, HeaderKeyTypedDict
+    from .headerkeylocation import HeaderKeyLocation, HeaderKeyLocationTypedDict
     from .identities_listidentitiesop import (
         IdentitiesListIdentitiesResponse,
         IdentitiesListIdentitiesResponseTypedDict,
     )
     from .identity import Identity, IdentityTypedDict
+    from .keyauthpolicy import KeyauthPolicy, KeyauthPolicyTypedDict
     from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
     from .keycreditsrefill import (
         KeyCreditsRefill,
         KeyCreditsRefillInterval,
         KeyCreditsRefillTypedDict,
     )
+    from .keylocation import KeyLocation, KeyLocationTypedDict
+    from .keyratelimit import KeyRatelimit, KeyRatelimitTypedDict
     from .keyresponsedata import KeyResponseData, KeyResponseDataTypedDict
     from .keysverifykeycredits import (
         KeysVerifyKeyCredits,
@@ -32,8 +85,13 @@ if TYPE_CHECKING:
         KeysVerifyKeyRatelimit,
         KeysVerifyKeyRatelimitTypedDict,
     )
+    from .matchexpr import MatchExpr, MatchExprTypedDict
     from .meta import Meta, MetaTypedDict
+    from .methodmatch import MethodMatch, MethodMatchMethod, MethodMatchTypedDict
+    from .openapipolicy import OpenapiPolicy, OpenapiPolicyTypedDict
     from .pagination import Pagination, PaginationTypedDict
+    from .pathkey import PathKey, PathKeyTypedDict
+    from .pathmatch import PathMatch, PathMatchTypedDict
     from .permission import Permission, PermissionTypedDict
     from .permissions_listpermissionsop import (
         PermissionsListPermissionsResponse,
@@ -43,6 +101,8 @@ if TYPE_CHECKING:
         PermissionsListRolesResponse,
         PermissionsListRolesResponseTypedDict,
     )
+    from .policy import Policy, PolicyTypedDict
+    from .policyresponse import PolicyResponse, PolicyResponseTypedDict
     from .portal_createsessionop import (
         PortalCreateSessionResponse,
         PortalCreateSessionResponseTypedDict,
@@ -51,15 +111,44 @@ if TYPE_CHECKING:
         PortalExchangeSessionResponse,
         PortalExchangeSessionResponseTypedDict,
     )
+    from .portal_getverificationsop import (
+        PortalGetVerificationsSecurity,
+        PortalGetVerificationsSecurityTypedDict,
+    )
+    from .portal_listkeysop import (
+        PortalListKeysResponse,
+        PortalListKeysResponseTypedDict,
+        PortalListKeysSecurity,
+        PortalListKeysSecurityTypedDict,
+    )
+    from .portal_rerollkeyop import (
+        PortalRerollKeySecurity,
+        PortalRerollKeySecurityTypedDict,
+    )
+    from .principalfieldkey import PrincipalFieldKey, PrincipalFieldKeyTypedDict
+    from .project import Project, ProjectTypedDict
+    from .projects_listprojectsop import (
+        ProjectsListProjectsResponse,
+        ProjectsListProjectsResponseTypedDict,
+    )
+    from .queryparamkeylocation import (
+        QueryParamKeyLocation,
+        QueryParamKeyLocationTypedDict,
+    )
     from .ratelimit_listoverridesop import (
         RatelimitListOverridesResponse,
         RatelimitListOverridesResponseTypedDict,
     )
+    from .ratelimitidentifier import RatelimitIdentifier, RatelimitIdentifierTypedDict
     from .ratelimitoverride import RatelimitOverride, RatelimitOverrideTypedDict
+    from .ratelimitpolicy import RatelimitPolicy, RatelimitPolicyTypedDict
     from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
     from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
+    from .remoteipkey import RemoteIPKey, RemoteIPKeyTypedDict
+    from .replicas import Replicas, ReplicasTypedDict
     from .role import Role, RoleTypedDict
     from .security import Security, SecurityTypedDict
+    from .stringmatch import StringMatch, StringMatchTypedDict
     from .updatekeycreditsdata import (
         UpdateKeyCreditsData,
         UpdateKeyCreditsDataTypedDict,
@@ -117,6 +206,50 @@ if TYPE_CHECKING:
         V2ApisListKeysResponseBody,
         V2ApisListKeysResponseBodyTypedDict,
     )
+    from .v2appscreateapprequestbody import (
+        V2AppsCreateAppRequestBody,
+        V2AppsCreateAppRequestBodyTypedDict,
+    )
+    from .v2appscreateappresponsebody import (
+        V2AppsCreateAppResponseBody,
+        V2AppsCreateAppResponseBodyTypedDict,
+    )
+    from .v2appscreateappresponsedata import (
+        V2AppsCreateAppResponseData,
+        V2AppsCreateAppResponseDataTypedDict,
+    )
+    from .v2appsdeleteapprequestbody import (
+        V2AppsDeleteAppRequestBody,
+        V2AppsDeleteAppRequestBodyTypedDict,
+    )
+    from .v2appsdeleteappresponsebody import (
+        V2AppsDeleteAppResponseBody,
+        V2AppsDeleteAppResponseBodyTypedDict,
+    )
+    from .v2appsgetapprequestbody import (
+        V2AppsGetAppRequestBody,
+        V2AppsGetAppRequestBodyTypedDict,
+    )
+    from .v2appsgetappresponsebody import (
+        V2AppsGetAppResponseBody,
+        V2AppsGetAppResponseBodyTypedDict,
+    )
+    from .v2appslistappsrequestbody import (
+        V2AppsListAppsRequestBody,
+        V2AppsListAppsRequestBodyTypedDict,
+    )
+    from .v2appslistappsresponsebody import (
+        V2AppsListAppsResponseBody,
+        V2AppsListAppsResponseBodyTypedDict,
+    )
+    from .v2appsupdateapprequestbody import (
+        V2AppsUpdateAppRequestBody,
+        V2AppsUpdateAppRequestBodyTypedDict,
+    )
+    from .v2appsupdateappresponsebody import (
+        V2AppsUpdateAppResponseBody,
+        V2AppsUpdateAppResponseBodyTypedDict,
+    )
     from .v2deploycreatedeploymentrequestbody import (
         V2DeployCreateDeploymentRequestBody,
         V2DeployCreateDeploymentRequestBodyTypedDict,
@@ -147,6 +280,144 @@ if TYPE_CHECKING:
         V2DeployGetDeploymentResponseDataTypedDict,
     )
     from .v2deploygitcommit import V2DeployGitCommit, V2DeployGitCommitTypedDict
+    from .v2deploymentscreatedeploymentrequestbody_union import (
+        V2DeploymentsCreateDeploymentRequestBody1,
+        V2DeploymentsCreateDeploymentRequestBody1TypedDict,
+        V2DeploymentsCreateDeploymentRequestBody2,
+        V2DeploymentsCreateDeploymentRequestBody2TypedDict,
+        V2DeploymentsCreateDeploymentRequestBody3,
+        V2DeploymentsCreateDeploymentRequestBody3TypedDict,
+        V2DeploymentsCreateDeploymentRequestBodyUnion,
+        V2DeploymentsCreateDeploymentRequestBodyUnionTypedDict,
+    )
+    from .v2deploymentscreatedeploymentresponsebody import (
+        V2DeploymentsCreateDeploymentResponseBody,
+        V2DeploymentsCreateDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentscreatedeploymentresponsedata import (
+        V2DeploymentsCreateDeploymentResponseData,
+        V2DeploymentsCreateDeploymentResponseDataTypedDict,
+    )
+    from .v2deploymentsgetdeploymentrequestbody import (
+        V2DeploymentsGetDeploymentRequestBody,
+        V2DeploymentsGetDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentsgetdeploymentresponsebody import (
+        V2DeploymentsGetDeploymentResponseBody,
+        V2DeploymentsGetDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentslistdeploymentsrequestbody import (
+        V2DeploymentsListDeploymentsRequestBody,
+        V2DeploymentsListDeploymentsRequestBodyTypedDict,
+    )
+    from .v2deploymentslistdeploymentsresponsebody import (
+        V2DeploymentsListDeploymentsResponseBody,
+        V2DeploymentsListDeploymentsResponseBodyTypedDict,
+    )
+    from .v2deploymentspromotedeploymentrequestbody import (
+        V2DeploymentsPromoteDeploymentRequestBody,
+        V2DeploymentsPromoteDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentspromotedeploymentresponsebody import (
+        V2DeploymentsPromoteDeploymentResponseBody,
+        V2DeploymentsPromoteDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentsrollbackdeploymentrequestbody import (
+        V2DeploymentsRollbackDeploymentRequestBody,
+        V2DeploymentsRollbackDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentsrollbackdeploymentresponsebody import (
+        V2DeploymentsRollbackDeploymentResponseBody,
+        V2DeploymentsRollbackDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentsstartdeploymentrequestbody import (
+        V2DeploymentsStartDeploymentRequestBody,
+        V2DeploymentsStartDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentsstartdeploymentresponsebody import (
+        V2DeploymentsStartDeploymentResponseBody,
+        V2DeploymentsStartDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentsstopdeploymentrequestbody import (
+        V2DeploymentsStopDeploymentRequestBody,
+        V2DeploymentsStopDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentsstopdeploymentresponsebody import (
+        V2DeploymentsStopDeploymentResponseBody,
+        V2DeploymentsStopDeploymentResponseBodyTypedDict,
+    )
+    from .v2environmentsgetenvironmentrequestbody import (
+        V2EnvironmentsGetEnvironmentRequestBody,
+        V2EnvironmentsGetEnvironmentRequestBodyTypedDict,
+    )
+    from .v2environmentsgetenvironmentresponsebody import (
+        V2EnvironmentsGetEnvironmentResponseBody,
+        V2EnvironmentsGetEnvironmentResponseBodyTypedDict,
+    )
+    from .v2environmentslistenvironmentsrequestbody import (
+        V2EnvironmentsListEnvironmentsRequestBody,
+        V2EnvironmentsListEnvironmentsRequestBodyTypedDict,
+    )
+    from .v2environmentslistenvironmentsresponsebody import (
+        V2EnvironmentsListEnvironmentsResponseBody,
+        V2EnvironmentsListEnvironmentsResponseBodyTypedDict,
+    )
+    from .v2environmentslistenvironmentvariablesrequestbody import (
+        V2EnvironmentsListEnvironmentVariablesRequestBody,
+        V2EnvironmentsListEnvironmentVariablesRequestBodyTypedDict,
+    )
+    from .v2environmentslistenvironmentvariablesresponsebody import (
+        V2EnvironmentsListEnvironmentVariablesResponseBody,
+        V2EnvironmentsListEnvironmentVariablesResponseBodyTypedDict,
+    )
+    from .v2environmentsremoveenvironmentvariablesrequestbody import (
+        V2EnvironmentsRemoveEnvironmentVariablesRequestBody,
+        V2EnvironmentsRemoveEnvironmentVariablesRequestBodyTypedDict,
+    )
+    from .v2environmentsremoveenvironmentvariablesresponsebody import (
+        V2EnvironmentsRemoveEnvironmentVariablesResponseBody,
+        V2EnvironmentsRemoveEnvironmentVariablesResponseBodyTypedDict,
+    )
+    from .v2environmentssetenvironmentvariablesrequestbody import (
+        V2EnvironmentsSetEnvironmentVariablesRequestBody,
+        V2EnvironmentsSetEnvironmentVariablesRequestBodyTypedDict,
+    )
+    from .v2environmentssetenvironmentvariablesresponsebody import (
+        V2EnvironmentsSetEnvironmentVariablesResponseBody,
+        V2EnvironmentsSetEnvironmentVariablesResponseBodyTypedDict,
+    )
+    from .v2environmentsupdatesettingsrequestbody import (
+        V2EnvironmentsUpdateSettingsRequestBody,
+        V2EnvironmentsUpdateSettingsRequestBodyTypedDict,
+    )
+    from .v2environmentsupdatesettingsresponsebody import (
+        V2EnvironmentsUpdateSettingsResponseBody,
+        V2EnvironmentsUpdateSettingsResponseBodyTypedDict,
+    )
+    from .v2gatewaylistpoliciesrequestbody import (
+        V2GatewayListPoliciesRequestBody,
+        V2GatewayListPoliciesRequestBodyTypedDict,
+    )
+    from .v2gatewaylistpoliciesresponsebody import (
+        V2GatewayListPoliciesResponseBody,
+        V2GatewayListPoliciesResponseBodyTypedDict,
+    )
+    from .v2gatewaysetpoliciesrequestbody import (
+        V2GatewaySetPoliciesRequestBody,
+        V2GatewaySetPoliciesRequestBodyTypedDict,
+    )
+    from .v2gatewaysetpoliciesresponsebody import (
+        V2GatewaySetPoliciesResponseBody,
+        V2GatewaySetPoliciesResponseBodyTypedDict,
+    )
+    from .v2gatewayupdatepolicyrequestbody import (
+        V2GatewayUpdatePolicyRequestBody,
+        V2GatewayUpdatePolicyRequestBodyTypedDict,
+    )
+    from .v2gatewayupdatepolicyresponsebody import (
+        V2GatewayUpdatePolicyResponseBody,
+        V2GatewayUpdatePolicyResponseBodyTypedDict,
+    )
     from .v2identitiescreateidentityrequestbody import (
         V2IdentitiesCreateIdentityRequestBody,
         V2IdentitiesCreateIdentityRequestBodyTypedDict,
@@ -410,6 +681,7 @@ if TYPE_CHECKING:
         V2PermissionsListRolesResponseBodyTypedDict,
     )
     from .v2portalcreatesessionrequestbody import (
+        PermissionEnum,
         V2PortalCreateSessionRequestBody,
         V2PortalCreateSessionRequestBodyTypedDict,
     )
@@ -432,6 +704,70 @@ if TYPE_CHECKING:
     from .v2portalexchangesessionresponsedata import (
         V2PortalExchangeSessionResponseData,
         V2PortalExchangeSessionResponseDataTypedDict,
+    )
+    from .v2portalgetverificationsdatapoint import (
+        V2PortalGetVerificationsDataPoint,
+        V2PortalGetVerificationsDataPointTypedDict,
+    )
+    from .v2portalgetverificationsrequestbody import (
+        V2PortalGetVerificationsRequestBody,
+        V2PortalGetVerificationsRequestBodyTypedDict,
+    )
+    from .v2portalgetverificationsresponsebody import (
+        V2PortalGetVerificationsResponseBody,
+        V2PortalGetVerificationsResponseBodyTypedDict,
+    )
+    from .v2portallistkeysrequestbody import (
+        V2PortalListKeysRequestBody,
+        V2PortalListKeysRequestBodyTypedDict,
+    )
+    from .v2portallistkeysresponsebody import (
+        V2PortalListKeysResponseBody,
+        V2PortalListKeysResponseBodyTypedDict,
+    )
+    from .v2projectscreateprojectrequestbody import (
+        V2ProjectsCreateProjectRequestBody,
+        V2ProjectsCreateProjectRequestBodyTypedDict,
+    )
+    from .v2projectscreateprojectresponsebody import (
+        V2ProjectsCreateProjectResponseBody,
+        V2ProjectsCreateProjectResponseBodyTypedDict,
+    )
+    from .v2projectscreateprojectresponsedata import (
+        V2ProjectsCreateProjectResponseData,
+        V2ProjectsCreateProjectResponseDataTypedDict,
+    )
+    from .v2projectsdeleteprojectrequestbody import (
+        V2ProjectsDeleteProjectRequestBody,
+        V2ProjectsDeleteProjectRequestBodyTypedDict,
+    )
+    from .v2projectsdeleteprojectresponsebody import (
+        V2ProjectsDeleteProjectResponseBody,
+        V2ProjectsDeleteProjectResponseBodyTypedDict,
+    )
+    from .v2projectsgetprojectrequestbody import (
+        V2ProjectsGetProjectRequestBody,
+        V2ProjectsGetProjectRequestBodyTypedDict,
+    )
+    from .v2projectsgetprojectresponsebody import (
+        V2ProjectsGetProjectResponseBody,
+        V2ProjectsGetProjectResponseBodyTypedDict,
+    )
+    from .v2projectslistprojectsrequestbody import (
+        V2ProjectsListProjectsRequestBody,
+        V2ProjectsListProjectsRequestBodyTypedDict,
+    )
+    from .v2projectslistprojectsresponsebody import (
+        V2ProjectsListProjectsResponseBody,
+        V2ProjectsListProjectsResponseBodyTypedDict,
+    )
+    from .v2projectsupdateprojectrequestbody import (
+        V2ProjectsUpdateProjectRequestBody,
+        V2ProjectsUpdateProjectRequestBodyTypedDict,
+    )
+    from .v2projectsupdateprojectresponsebody import (
+        V2ProjectsUpdateProjectResponseBody,
+        V2ProjectsUpdateProjectResponseBodyTypedDict,
     )
     from .v2ratelimitdeleteoverriderequestbody import (
         V2RatelimitDeleteOverrideRequestBody,
@@ -504,15 +840,71 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "Action",
     "ApisListKeysResponse",
     "ApisListKeysResponseTypedDict",
+    "App",
+    "AppTypedDict",
+    "AppsListAppsResponse",
+    "AppsListAppsResponseTypedDict",
+    "AuthenticatedSubjectKey",
+    "AuthenticatedSubjectKeyTypedDict",
     "BadRequestErrorDetails",
     "BadRequestErrorDetailsTypedDict",
     "BaseError",
     "BaseErrorTypedDict",
+    "BearerTokenLocation",
+    "BearerTokenLocationTypedDict",
     "Code",
+    "Deployment",
+    "DeploymentAction",
+    "DeploymentDocker",
+    "DeploymentDockerTypedDict",
+    "DeploymentError",
+    "DeploymentErrorCode",
+    "DeploymentErrorTypedDict",
+    "DeploymentGit",
+    "DeploymentGitTypedDict",
+    "DeploymentRuntime",
+    "DeploymentRuntimeTypedDict",
+    "DeploymentSourceDeployment",
+    "DeploymentSourceDeploymentTypedDict",
+    "DeploymentSourceGit",
+    "DeploymentSourceGitTypedDict",
+    "DeploymentSourceImage",
+    "DeploymentSourceImageTypedDict",
+    "DeploymentStatus",
+    "DeploymentTypedDict",
+    "DeploymentsListDeploymentsResponse",
+    "DeploymentsListDeploymentsResponseTypedDict",
     "EmptyResponse",
     "EmptyResponseTypedDict",
+    "Environment",
+    "EnvironmentBuild",
+    "EnvironmentBuildTypedDict",
+    "EnvironmentHealthcheck",
+    "EnvironmentHealthcheckMethod",
+    "EnvironmentHealthcheckTypedDict",
+    "EnvironmentRegion",
+    "EnvironmentRegionTypedDict",
+    "EnvironmentRuntime",
+    "EnvironmentRuntimeTypedDict",
+    "EnvironmentShutdownSignal",
+    "EnvironmentTypedDict",
+    "EnvironmentUpstreamProtocol",
+    "EnvironmentVariable",
+    "EnvironmentVariableInput",
+    "EnvironmentVariableInputTypedDict",
+    "EnvironmentVariableKind",
+    "EnvironmentVariableTypedDict",
+    "FieldMatch",
+    "FieldMatchTypedDict",
+    "FirewallPolicy",
+    "FirewallPolicyTypedDict",
+    "HeaderKey",
+    "HeaderKeyLocation",
+    "HeaderKeyLocationTypedDict",
+    "HeaderKeyTypedDict",
     "IdentitiesListIdentitiesResponse",
     "IdentitiesListIdentitiesResponseTypedDict",
     "Identity",
@@ -522,40 +914,89 @@ __all__ = [
     "KeyCreditsRefill",
     "KeyCreditsRefillInterval",
     "KeyCreditsRefillTypedDict",
+    "KeyLocation",
+    "KeyLocationTypedDict",
+    "KeyRatelimit",
+    "KeyRatelimitTypedDict",
     "KeyResponseData",
     "KeyResponseDataTypedDict",
+    "KeyauthPolicy",
+    "KeyauthPolicyTypedDict",
     "KeysVerifyKeyCredits",
     "KeysVerifyKeyCreditsTypedDict",
     "KeysVerifyKeyRatelimit",
     "KeysVerifyKeyRatelimitTypedDict",
+    "Kind",
+    "MatchExpr",
+    "MatchExprTypedDict",
     "Meta",
     "MetaTypedDict",
+    "MethodMatch",
+    "MethodMatchMethod",
+    "MethodMatchTypedDict",
+    "OpenapiPolicy",
+    "OpenapiPolicyTypedDict",
     "Operation",
     "Pagination",
     "PaginationTypedDict",
+    "PathKey",
+    "PathKeyTypedDict",
+    "PathMatch",
+    "PathMatchTypedDict",
     "Permission",
+    "PermissionEnum",
     "PermissionTypedDict",
     "PermissionsListPermissionsResponse",
     "PermissionsListPermissionsResponseTypedDict",
     "PermissionsListRolesResponse",
     "PermissionsListRolesResponseTypedDict",
+    "Policy",
+    "PolicyResponse",
+    "PolicyResponseTypedDict",
+    "PolicyTypedDict",
     "PortalCreateSessionResponse",
     "PortalCreateSessionResponseTypedDict",
     "PortalExchangeSessionResponse",
     "PortalExchangeSessionResponseTypedDict",
+    "PortalGetVerificationsSecurity",
+    "PortalGetVerificationsSecurityTypedDict",
+    "PortalListKeysResponse",
+    "PortalListKeysResponseTypedDict",
+    "PortalListKeysSecurity",
+    "PortalListKeysSecurityTypedDict",
+    "PortalRerollKeySecurity",
+    "PortalRerollKeySecurityTypedDict",
+    "PrincipalFieldKey",
+    "PrincipalFieldKeyTypedDict",
+    "Project",
+    "ProjectTypedDict",
+    "ProjectsListProjectsResponse",
+    "ProjectsListProjectsResponseTypedDict",
+    "QueryParamKeyLocation",
+    "QueryParamKeyLocationTypedDict",
+    "RatelimitIdentifier",
+    "RatelimitIdentifierTypedDict",
     "RatelimitListOverridesResponse",
     "RatelimitListOverridesResponseTypedDict",
     "RatelimitOverride",
     "RatelimitOverrideTypedDict",
+    "RatelimitPolicy",
+    "RatelimitPolicyTypedDict",
     "RatelimitRequest",
     "RatelimitRequestTypedDict",
     "RatelimitResponse",
     "RatelimitResponseTypedDict",
+    "RemoteIPKey",
+    "RemoteIPKeyTypedDict",
+    "Replicas",
+    "ReplicasTypedDict",
     "Role",
     "RoleTypedDict",
     "Security",
     "SecurityTypedDict",
     "Status",
+    "StringMatch",
+    "StringMatchTypedDict",
     "UpdateKeyCreditsData",
     "UpdateKeyCreditsDataTypedDict",
     "UpdateKeyCreditsRefill",
@@ -585,6 +1026,28 @@ __all__ = [
     "V2ApisListKeysRequestBodyTypedDict",
     "V2ApisListKeysResponseBody",
     "V2ApisListKeysResponseBodyTypedDict",
+    "V2AppsCreateAppRequestBody",
+    "V2AppsCreateAppRequestBodyTypedDict",
+    "V2AppsCreateAppResponseBody",
+    "V2AppsCreateAppResponseBodyTypedDict",
+    "V2AppsCreateAppResponseData",
+    "V2AppsCreateAppResponseDataTypedDict",
+    "V2AppsDeleteAppRequestBody",
+    "V2AppsDeleteAppRequestBodyTypedDict",
+    "V2AppsDeleteAppResponseBody",
+    "V2AppsDeleteAppResponseBodyTypedDict",
+    "V2AppsGetAppRequestBody",
+    "V2AppsGetAppRequestBodyTypedDict",
+    "V2AppsGetAppResponseBody",
+    "V2AppsGetAppResponseBodyTypedDict",
+    "V2AppsListAppsRequestBody",
+    "V2AppsListAppsRequestBodyTypedDict",
+    "V2AppsListAppsResponseBody",
+    "V2AppsListAppsResponseBodyTypedDict",
+    "V2AppsUpdateAppRequestBody",
+    "V2AppsUpdateAppRequestBodyTypedDict",
+    "V2AppsUpdateAppResponseBody",
+    "V2AppsUpdateAppResponseBodyTypedDict",
     "V2DeployCreateDeploymentRequestBody",
     "V2DeployCreateDeploymentRequestBodyTypedDict",
     "V2DeployCreateDeploymentResponseBody",
@@ -601,6 +1064,78 @@ __all__ = [
     "V2DeployGetDeploymentResponseDataTypedDict",
     "V2DeployGitCommit",
     "V2DeployGitCommitTypedDict",
+    "V2DeploymentsCreateDeploymentRequestBody1",
+    "V2DeploymentsCreateDeploymentRequestBody1TypedDict",
+    "V2DeploymentsCreateDeploymentRequestBody2",
+    "V2DeploymentsCreateDeploymentRequestBody2TypedDict",
+    "V2DeploymentsCreateDeploymentRequestBody3",
+    "V2DeploymentsCreateDeploymentRequestBody3TypedDict",
+    "V2DeploymentsCreateDeploymentRequestBodyUnion",
+    "V2DeploymentsCreateDeploymentRequestBodyUnionTypedDict",
+    "V2DeploymentsCreateDeploymentResponseBody",
+    "V2DeploymentsCreateDeploymentResponseBodyTypedDict",
+    "V2DeploymentsCreateDeploymentResponseData",
+    "V2DeploymentsCreateDeploymentResponseDataTypedDict",
+    "V2DeploymentsGetDeploymentRequestBody",
+    "V2DeploymentsGetDeploymentRequestBodyTypedDict",
+    "V2DeploymentsGetDeploymentResponseBody",
+    "V2DeploymentsGetDeploymentResponseBodyTypedDict",
+    "V2DeploymentsListDeploymentsRequestBody",
+    "V2DeploymentsListDeploymentsRequestBodyTypedDict",
+    "V2DeploymentsListDeploymentsResponseBody",
+    "V2DeploymentsListDeploymentsResponseBodyTypedDict",
+    "V2DeploymentsPromoteDeploymentRequestBody",
+    "V2DeploymentsPromoteDeploymentRequestBodyTypedDict",
+    "V2DeploymentsPromoteDeploymentResponseBody",
+    "V2DeploymentsPromoteDeploymentResponseBodyTypedDict",
+    "V2DeploymentsRollbackDeploymentRequestBody",
+    "V2DeploymentsRollbackDeploymentRequestBodyTypedDict",
+    "V2DeploymentsRollbackDeploymentResponseBody",
+    "V2DeploymentsRollbackDeploymentResponseBodyTypedDict",
+    "V2DeploymentsStartDeploymentRequestBody",
+    "V2DeploymentsStartDeploymentRequestBodyTypedDict",
+    "V2DeploymentsStartDeploymentResponseBody",
+    "V2DeploymentsStartDeploymentResponseBodyTypedDict",
+    "V2DeploymentsStopDeploymentRequestBody",
+    "V2DeploymentsStopDeploymentRequestBodyTypedDict",
+    "V2DeploymentsStopDeploymentResponseBody",
+    "V2DeploymentsStopDeploymentResponseBodyTypedDict",
+    "V2EnvironmentsGetEnvironmentRequestBody",
+    "V2EnvironmentsGetEnvironmentRequestBodyTypedDict",
+    "V2EnvironmentsGetEnvironmentResponseBody",
+    "V2EnvironmentsGetEnvironmentResponseBodyTypedDict",
+    "V2EnvironmentsListEnvironmentVariablesRequestBody",
+    "V2EnvironmentsListEnvironmentVariablesRequestBodyTypedDict",
+    "V2EnvironmentsListEnvironmentVariablesResponseBody",
+    "V2EnvironmentsListEnvironmentVariablesResponseBodyTypedDict",
+    "V2EnvironmentsListEnvironmentsRequestBody",
+    "V2EnvironmentsListEnvironmentsRequestBodyTypedDict",
+    "V2EnvironmentsListEnvironmentsResponseBody",
+    "V2EnvironmentsListEnvironmentsResponseBodyTypedDict",
+    "V2EnvironmentsRemoveEnvironmentVariablesRequestBody",
+    "V2EnvironmentsRemoveEnvironmentVariablesRequestBodyTypedDict",
+    "V2EnvironmentsRemoveEnvironmentVariablesResponseBody",
+    "V2EnvironmentsRemoveEnvironmentVariablesResponseBodyTypedDict",
+    "V2EnvironmentsSetEnvironmentVariablesRequestBody",
+    "V2EnvironmentsSetEnvironmentVariablesRequestBodyTypedDict",
+    "V2EnvironmentsSetEnvironmentVariablesResponseBody",
+    "V2EnvironmentsSetEnvironmentVariablesResponseBodyTypedDict",
+    "V2EnvironmentsUpdateSettingsRequestBody",
+    "V2EnvironmentsUpdateSettingsRequestBodyTypedDict",
+    "V2EnvironmentsUpdateSettingsResponseBody",
+    "V2EnvironmentsUpdateSettingsResponseBodyTypedDict",
+    "V2GatewayListPoliciesRequestBody",
+    "V2GatewayListPoliciesRequestBodyTypedDict",
+    "V2GatewayListPoliciesResponseBody",
+    "V2GatewayListPoliciesResponseBodyTypedDict",
+    "V2GatewaySetPoliciesRequestBody",
+    "V2GatewaySetPoliciesRequestBodyTypedDict",
+    "V2GatewaySetPoliciesResponseBody",
+    "V2GatewaySetPoliciesResponseBodyTypedDict",
+    "V2GatewayUpdatePolicyRequestBody",
+    "V2GatewayUpdatePolicyRequestBodyTypedDict",
+    "V2GatewayUpdatePolicyResponseBody",
+    "V2GatewayUpdatePolicyResponseBodyTypedDict",
     "V2IdentitiesCreateIdentityRequestBody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict",
     "V2IdentitiesCreateIdentityResponseBody",
@@ -743,6 +1278,38 @@ __all__ = [
     "V2PortalExchangeSessionResponseBodyTypedDict",
     "V2PortalExchangeSessionResponseData",
     "V2PortalExchangeSessionResponseDataTypedDict",
+    "V2PortalGetVerificationsDataPoint",
+    "V2PortalGetVerificationsDataPointTypedDict",
+    "V2PortalGetVerificationsRequestBody",
+    "V2PortalGetVerificationsRequestBodyTypedDict",
+    "V2PortalGetVerificationsResponseBody",
+    "V2PortalGetVerificationsResponseBodyTypedDict",
+    "V2PortalListKeysRequestBody",
+    "V2PortalListKeysRequestBodyTypedDict",
+    "V2PortalListKeysResponseBody",
+    "V2PortalListKeysResponseBodyTypedDict",
+    "V2ProjectsCreateProjectRequestBody",
+    "V2ProjectsCreateProjectRequestBodyTypedDict",
+    "V2ProjectsCreateProjectResponseBody",
+    "V2ProjectsCreateProjectResponseBodyTypedDict",
+    "V2ProjectsCreateProjectResponseData",
+    "V2ProjectsCreateProjectResponseDataTypedDict",
+    "V2ProjectsDeleteProjectRequestBody",
+    "V2ProjectsDeleteProjectRequestBodyTypedDict",
+    "V2ProjectsDeleteProjectResponseBody",
+    "V2ProjectsDeleteProjectResponseBodyTypedDict",
+    "V2ProjectsGetProjectRequestBody",
+    "V2ProjectsGetProjectRequestBodyTypedDict",
+    "V2ProjectsGetProjectResponseBody",
+    "V2ProjectsGetProjectResponseBodyTypedDict",
+    "V2ProjectsListProjectsRequestBody",
+    "V2ProjectsListProjectsRequestBodyTypedDict",
+    "V2ProjectsListProjectsResponseBody",
+    "V2ProjectsListProjectsResponseBodyTypedDict",
+    "V2ProjectsUpdateProjectRequestBody",
+    "V2ProjectsUpdateProjectRequestBodyTypedDict",
+    "V2ProjectsUpdateProjectResponseBody",
+    "V2ProjectsUpdateProjectResponseBodyTypedDict",
     "V2RatelimitDeleteOverrideRequestBody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict",
     "V2RatelimitDeleteOverrideResponseBody",
@@ -784,53 +1351,157 @@ __all__ = [
 _dynamic_imports: dict[str, str] = {
     "ApisListKeysResponse": ".apis_listkeysop",
     "ApisListKeysResponseTypedDict": ".apis_listkeysop",
+    "App": ".app",
+    "AppTypedDict": ".app",
+    "AppsListAppsResponse": ".apps_listappsop",
+    "AppsListAppsResponseTypedDict": ".apps_listappsop",
+    "AuthenticatedSubjectKey": ".authenticatedsubjectkey",
+    "AuthenticatedSubjectKeyTypedDict": ".authenticatedsubjectkey",
     "BadRequestErrorDetails": ".badrequesterrordetails",
     "BadRequestErrorDetailsTypedDict": ".badrequesterrordetails",
     "BaseError": ".baseerror",
     "BaseErrorTypedDict": ".baseerror",
+    "BearerTokenLocation": ".bearertokenlocation",
+    "BearerTokenLocationTypedDict": ".bearertokenlocation",
+    "Deployment": ".deployment",
+    "DeploymentTypedDict": ".deployment",
+    "DeploymentAction": ".deploymentaction",
+    "DeploymentDocker": ".deploymentdocker",
+    "DeploymentDockerTypedDict": ".deploymentdocker",
+    "DeploymentError": ".deploymenterror",
+    "DeploymentErrorTypedDict": ".deploymenterror",
+    "DeploymentErrorCode": ".deploymenterrorcode",
+    "DeploymentGit": ".deploymentgit",
+    "DeploymentGitTypedDict": ".deploymentgit",
+    "DeploymentRuntime": ".deploymentruntime",
+    "DeploymentRuntimeTypedDict": ".deploymentruntime",
+    "DeploymentsListDeploymentsResponse": ".deployments_listdeploymentsop",
+    "DeploymentsListDeploymentsResponseTypedDict": ".deployments_listdeploymentsop",
+    "DeploymentSourceDeployment": ".deploymentsourcedeployment",
+    "DeploymentSourceDeploymentTypedDict": ".deploymentsourcedeployment",
+    "DeploymentSourceGit": ".deploymentsourcegit",
+    "DeploymentSourceGitTypedDict": ".deploymentsourcegit",
+    "DeploymentSourceImage": ".deploymentsourceimage",
+    "DeploymentSourceImageTypedDict": ".deploymentsourceimage",
+    "DeploymentStatus": ".deploymentstatus",
     "EmptyResponse": ".emptyresponse",
     "EmptyResponseTypedDict": ".emptyresponse",
+    "Environment": ".environment",
+    "EnvironmentTypedDict": ".environment",
+    "EnvironmentBuild": ".environmentbuild",
+    "EnvironmentBuildTypedDict": ".environmentbuild",
+    "EnvironmentHealthcheck": ".environmenthealthcheck",
+    "EnvironmentHealthcheckMethod": ".environmenthealthcheck",
+    "EnvironmentHealthcheckTypedDict": ".environmenthealthcheck",
+    "EnvironmentRegion": ".environmentregion",
+    "EnvironmentRegionTypedDict": ".environmentregion",
+    "EnvironmentRuntime": ".environmentruntime",
+    "EnvironmentRuntimeTypedDict": ".environmentruntime",
+    "EnvironmentShutdownSignal": ".environmentshutdownsignal",
+    "EnvironmentUpstreamProtocol": ".environmentupstreamprotocol",
+    "EnvironmentVariable": ".environmentvariable",
+    "EnvironmentVariableTypedDict": ".environmentvariable",
+    "EnvironmentVariableInput": ".environmentvariableinput",
+    "EnvironmentVariableInputTypedDict": ".environmentvariableinput",
+    "Kind": ".environmentvariableinput",
+    "EnvironmentVariableKind": ".environmentvariablekind",
+    "FieldMatch": ".fieldmatch",
+    "FieldMatchTypedDict": ".fieldmatch",
+    "Action": ".firewallpolicy",
+    "FirewallPolicy": ".firewallpolicy",
+    "FirewallPolicyTypedDict": ".firewallpolicy",
+    "HeaderKey": ".headerkey",
+    "HeaderKeyTypedDict": ".headerkey",
+    "HeaderKeyLocation": ".headerkeylocation",
+    "HeaderKeyLocationTypedDict": ".headerkeylocation",
     "IdentitiesListIdentitiesResponse": ".identities_listidentitiesop",
     "IdentitiesListIdentitiesResponseTypedDict": ".identities_listidentitiesop",
     "Identity": ".identity",
     "IdentityTypedDict": ".identity",
+    "KeyauthPolicy": ".keyauthpolicy",
+    "KeyauthPolicyTypedDict": ".keyauthpolicy",
     "KeyCreditsData": ".keycreditsdata",
     "KeyCreditsDataTypedDict": ".keycreditsdata",
     "KeyCreditsRefill": ".keycreditsrefill",
     "KeyCreditsRefillInterval": ".keycreditsrefill",
     "KeyCreditsRefillTypedDict": ".keycreditsrefill",
+    "KeyLocation": ".keylocation",
+    "KeyLocationTypedDict": ".keylocation",
+    "KeyRatelimit": ".keyratelimit",
+    "KeyRatelimitTypedDict": ".keyratelimit",
     "KeyResponseData": ".keyresponsedata",
     "KeyResponseDataTypedDict": ".keyresponsedata",
     "KeysVerifyKeyCredits": ".keysverifykeycredits",
     "KeysVerifyKeyCreditsTypedDict": ".keysverifykeycredits",
     "KeysVerifyKeyRatelimit": ".keysverifykeyratelimit",
     "KeysVerifyKeyRatelimitTypedDict": ".keysverifykeyratelimit",
+    "MatchExpr": ".matchexpr",
+    "MatchExprTypedDict": ".matchexpr",
     "Meta": ".meta",
     "MetaTypedDict": ".meta",
+    "MethodMatch": ".methodmatch",
+    "MethodMatchMethod": ".methodmatch",
+    "MethodMatchTypedDict": ".methodmatch",
+    "OpenapiPolicy": ".openapipolicy",
+    "OpenapiPolicyTypedDict": ".openapipolicy",
     "Pagination": ".pagination",
     "PaginationTypedDict": ".pagination",
+    "PathKey": ".pathkey",
+    "PathKeyTypedDict": ".pathkey",
+    "PathMatch": ".pathmatch",
+    "PathMatchTypedDict": ".pathmatch",
     "Permission": ".permission",
     "PermissionTypedDict": ".permission",
     "PermissionsListPermissionsResponse": ".permissions_listpermissionsop",
     "PermissionsListPermissionsResponseTypedDict": ".permissions_listpermissionsop",
     "PermissionsListRolesResponse": ".permissions_listrolesop",
     "PermissionsListRolesResponseTypedDict": ".permissions_listrolesop",
+    "Policy": ".policy",
+    "PolicyTypedDict": ".policy",
+    "PolicyResponse": ".policyresponse",
+    "PolicyResponseTypedDict": ".policyresponse",
     "PortalCreateSessionResponse": ".portal_createsessionop",
     "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
     "PortalExchangeSessionResponse": ".portal_exchangesessionop",
     "PortalExchangeSessionResponseTypedDict": ".portal_exchangesessionop",
+    "PortalGetVerificationsSecurity": ".portal_getverificationsop",
+    "PortalGetVerificationsSecurityTypedDict": ".portal_getverificationsop",
+    "PortalListKeysResponse": ".portal_listkeysop",
+    "PortalListKeysResponseTypedDict": ".portal_listkeysop",
+    "PortalListKeysSecurity": ".portal_listkeysop",
+    "PortalListKeysSecurityTypedDict": ".portal_listkeysop",
+    "PortalRerollKeySecurity": ".portal_rerollkeyop",
+    "PortalRerollKeySecurityTypedDict": ".portal_rerollkeyop",
+    "PrincipalFieldKey": ".principalfieldkey",
+    "PrincipalFieldKeyTypedDict": ".principalfieldkey",
+    "Project": ".project",
+    "ProjectTypedDict": ".project",
+    "ProjectsListProjectsResponse": ".projects_listprojectsop",
+    "ProjectsListProjectsResponseTypedDict": ".projects_listprojectsop",
+    "QueryParamKeyLocation": ".queryparamkeylocation",
+    "QueryParamKeyLocationTypedDict": ".queryparamkeylocation",
     "RatelimitListOverridesResponse": ".ratelimit_listoverridesop",
     "RatelimitListOverridesResponseTypedDict": ".ratelimit_listoverridesop",
+    "RatelimitIdentifier": ".ratelimitidentifier",
+    "RatelimitIdentifierTypedDict": ".ratelimitidentifier",
     "RatelimitOverride": ".ratelimitoverride",
     "RatelimitOverrideTypedDict": ".ratelimitoverride",
+    "RatelimitPolicy": ".ratelimitpolicy",
+    "RatelimitPolicyTypedDict": ".ratelimitpolicy",
     "RatelimitRequest": ".ratelimitrequest",
     "RatelimitRequestTypedDict": ".ratelimitrequest",
     "RatelimitResponse": ".ratelimitresponse",
     "RatelimitResponseTypedDict": ".ratelimitresponse",
+    "RemoteIPKey": ".remoteipkey",
+    "RemoteIPKeyTypedDict": ".remoteipkey",
+    "Replicas": ".replicas",
+    "ReplicasTypedDict": ".replicas",
     "Role": ".role",
     "RoleTypedDict": ".role",
     "Security": ".security",
     "SecurityTypedDict": ".security",
+    "StringMatch": ".stringmatch",
+    "StringMatchTypedDict": ".stringmatch",
     "UpdateKeyCreditsData": ".updatekeycreditsdata",
     "UpdateKeyCreditsDataTypedDict": ".updatekeycreditsdata",
     "UpdateKeyCreditsRefill": ".updatekeycreditsrefill",
@@ -860,6 +1531,28 @@ _dynamic_imports: dict[str, str] = {
     "V2ApisListKeysRequestBodyTypedDict": ".v2apislistkeysrequestbody",
     "V2ApisListKeysResponseBody": ".v2apislistkeysresponsebody",
     "V2ApisListKeysResponseBodyTypedDict": ".v2apislistkeysresponsebody",
+    "V2AppsCreateAppRequestBody": ".v2appscreateapprequestbody",
+    "V2AppsCreateAppRequestBodyTypedDict": ".v2appscreateapprequestbody",
+    "V2AppsCreateAppResponseBody": ".v2appscreateappresponsebody",
+    "V2AppsCreateAppResponseBodyTypedDict": ".v2appscreateappresponsebody",
+    "V2AppsCreateAppResponseData": ".v2appscreateappresponsedata",
+    "V2AppsCreateAppResponseDataTypedDict": ".v2appscreateappresponsedata",
+    "V2AppsDeleteAppRequestBody": ".v2appsdeleteapprequestbody",
+    "V2AppsDeleteAppRequestBodyTypedDict": ".v2appsdeleteapprequestbody",
+    "V2AppsDeleteAppResponseBody": ".v2appsdeleteappresponsebody",
+    "V2AppsDeleteAppResponseBodyTypedDict": ".v2appsdeleteappresponsebody",
+    "V2AppsGetAppRequestBody": ".v2appsgetapprequestbody",
+    "V2AppsGetAppRequestBodyTypedDict": ".v2appsgetapprequestbody",
+    "V2AppsGetAppResponseBody": ".v2appsgetappresponsebody",
+    "V2AppsGetAppResponseBodyTypedDict": ".v2appsgetappresponsebody",
+    "V2AppsListAppsRequestBody": ".v2appslistappsrequestbody",
+    "V2AppsListAppsRequestBodyTypedDict": ".v2appslistappsrequestbody",
+    "V2AppsListAppsResponseBody": ".v2appslistappsresponsebody",
+    "V2AppsListAppsResponseBodyTypedDict": ".v2appslistappsresponsebody",
+    "V2AppsUpdateAppRequestBody": ".v2appsupdateapprequestbody",
+    "V2AppsUpdateAppRequestBodyTypedDict": ".v2appsupdateapprequestbody",
+    "V2AppsUpdateAppResponseBody": ".v2appsupdateappresponsebody",
+    "V2AppsUpdateAppResponseBodyTypedDict": ".v2appsupdateappresponsebody",
     "V2DeployCreateDeploymentRequestBody": ".v2deploycreatedeploymentrequestbody",
     "V2DeployCreateDeploymentRequestBodyTypedDict": ".v2deploycreatedeploymentrequestbody",
     "V2DeployCreateDeploymentResponseBody": ".v2deploycreatedeploymentresponsebody",
@@ -877,6 +1570,78 @@ _dynamic_imports: dict[str, str] = {
     "V2DeployGetDeploymentResponseDataTypedDict": ".v2deploygetdeploymentresponsedata",
     "V2DeployGitCommit": ".v2deploygitcommit",
     "V2DeployGitCommitTypedDict": ".v2deploygitcommit",
+    "V2DeploymentsCreateDeploymentRequestBody1": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBody1TypedDict": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBody2": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBody2TypedDict": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBody3": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBody3TypedDict": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBodyUnion": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentRequestBodyUnionTypedDict": ".v2deploymentscreatedeploymentrequestbody_union",
+    "V2DeploymentsCreateDeploymentResponseBody": ".v2deploymentscreatedeploymentresponsebody",
+    "V2DeploymentsCreateDeploymentResponseBodyTypedDict": ".v2deploymentscreatedeploymentresponsebody",
+    "V2DeploymentsCreateDeploymentResponseData": ".v2deploymentscreatedeploymentresponsedata",
+    "V2DeploymentsCreateDeploymentResponseDataTypedDict": ".v2deploymentscreatedeploymentresponsedata",
+    "V2DeploymentsGetDeploymentRequestBody": ".v2deploymentsgetdeploymentrequestbody",
+    "V2DeploymentsGetDeploymentRequestBodyTypedDict": ".v2deploymentsgetdeploymentrequestbody",
+    "V2DeploymentsGetDeploymentResponseBody": ".v2deploymentsgetdeploymentresponsebody",
+    "V2DeploymentsGetDeploymentResponseBodyTypedDict": ".v2deploymentsgetdeploymentresponsebody",
+    "V2DeploymentsListDeploymentsRequestBody": ".v2deploymentslistdeploymentsrequestbody",
+    "V2DeploymentsListDeploymentsRequestBodyTypedDict": ".v2deploymentslistdeploymentsrequestbody",
+    "V2DeploymentsListDeploymentsResponseBody": ".v2deploymentslistdeploymentsresponsebody",
+    "V2DeploymentsListDeploymentsResponseBodyTypedDict": ".v2deploymentslistdeploymentsresponsebody",
+    "V2DeploymentsPromoteDeploymentRequestBody": ".v2deploymentspromotedeploymentrequestbody",
+    "V2DeploymentsPromoteDeploymentRequestBodyTypedDict": ".v2deploymentspromotedeploymentrequestbody",
+    "V2DeploymentsPromoteDeploymentResponseBody": ".v2deploymentspromotedeploymentresponsebody",
+    "V2DeploymentsPromoteDeploymentResponseBodyTypedDict": ".v2deploymentspromotedeploymentresponsebody",
+    "V2DeploymentsRollbackDeploymentRequestBody": ".v2deploymentsrollbackdeploymentrequestbody",
+    "V2DeploymentsRollbackDeploymentRequestBodyTypedDict": ".v2deploymentsrollbackdeploymentrequestbody",
+    "V2DeploymentsRollbackDeploymentResponseBody": ".v2deploymentsrollbackdeploymentresponsebody",
+    "V2DeploymentsRollbackDeploymentResponseBodyTypedDict": ".v2deploymentsrollbackdeploymentresponsebody",
+    "V2DeploymentsStartDeploymentRequestBody": ".v2deploymentsstartdeploymentrequestbody",
+    "V2DeploymentsStartDeploymentRequestBodyTypedDict": ".v2deploymentsstartdeploymentrequestbody",
+    "V2DeploymentsStartDeploymentResponseBody": ".v2deploymentsstartdeploymentresponsebody",
+    "V2DeploymentsStartDeploymentResponseBodyTypedDict": ".v2deploymentsstartdeploymentresponsebody",
+    "V2DeploymentsStopDeploymentRequestBody": ".v2deploymentsstopdeploymentrequestbody",
+    "V2DeploymentsStopDeploymentRequestBodyTypedDict": ".v2deploymentsstopdeploymentrequestbody",
+    "V2DeploymentsStopDeploymentResponseBody": ".v2deploymentsstopdeploymentresponsebody",
+    "V2DeploymentsStopDeploymentResponseBodyTypedDict": ".v2deploymentsstopdeploymentresponsebody",
+    "V2EnvironmentsGetEnvironmentRequestBody": ".v2environmentsgetenvironmentrequestbody",
+    "V2EnvironmentsGetEnvironmentRequestBodyTypedDict": ".v2environmentsgetenvironmentrequestbody",
+    "V2EnvironmentsGetEnvironmentResponseBody": ".v2environmentsgetenvironmentresponsebody",
+    "V2EnvironmentsGetEnvironmentResponseBodyTypedDict": ".v2environmentsgetenvironmentresponsebody",
+    "V2EnvironmentsListEnvironmentsRequestBody": ".v2environmentslistenvironmentsrequestbody",
+    "V2EnvironmentsListEnvironmentsRequestBodyTypedDict": ".v2environmentslistenvironmentsrequestbody",
+    "V2EnvironmentsListEnvironmentsResponseBody": ".v2environmentslistenvironmentsresponsebody",
+    "V2EnvironmentsListEnvironmentsResponseBodyTypedDict": ".v2environmentslistenvironmentsresponsebody",
+    "V2EnvironmentsListEnvironmentVariablesRequestBody": ".v2environmentslistenvironmentvariablesrequestbody",
+    "V2EnvironmentsListEnvironmentVariablesRequestBodyTypedDict": ".v2environmentslistenvironmentvariablesrequestbody",
+    "V2EnvironmentsListEnvironmentVariablesResponseBody": ".v2environmentslistenvironmentvariablesresponsebody",
+    "V2EnvironmentsListEnvironmentVariablesResponseBodyTypedDict": ".v2environmentslistenvironmentvariablesresponsebody",
+    "V2EnvironmentsRemoveEnvironmentVariablesRequestBody": ".v2environmentsremoveenvironmentvariablesrequestbody",
+    "V2EnvironmentsRemoveEnvironmentVariablesRequestBodyTypedDict": ".v2environmentsremoveenvironmentvariablesrequestbody",
+    "V2EnvironmentsRemoveEnvironmentVariablesResponseBody": ".v2environmentsremoveenvironmentvariablesresponsebody",
+    "V2EnvironmentsRemoveEnvironmentVariablesResponseBodyTypedDict": ".v2environmentsremoveenvironmentvariablesresponsebody",
+    "V2EnvironmentsSetEnvironmentVariablesRequestBody": ".v2environmentssetenvironmentvariablesrequestbody",
+    "V2EnvironmentsSetEnvironmentVariablesRequestBodyTypedDict": ".v2environmentssetenvironmentvariablesrequestbody",
+    "V2EnvironmentsSetEnvironmentVariablesResponseBody": ".v2environmentssetenvironmentvariablesresponsebody",
+    "V2EnvironmentsSetEnvironmentVariablesResponseBodyTypedDict": ".v2environmentssetenvironmentvariablesresponsebody",
+    "V2EnvironmentsUpdateSettingsRequestBody": ".v2environmentsupdatesettingsrequestbody",
+    "V2EnvironmentsUpdateSettingsRequestBodyTypedDict": ".v2environmentsupdatesettingsrequestbody",
+    "V2EnvironmentsUpdateSettingsResponseBody": ".v2environmentsupdatesettingsresponsebody",
+    "V2EnvironmentsUpdateSettingsResponseBodyTypedDict": ".v2environmentsupdatesettingsresponsebody",
+    "V2GatewayListPoliciesRequestBody": ".v2gatewaylistpoliciesrequestbody",
+    "V2GatewayListPoliciesRequestBodyTypedDict": ".v2gatewaylistpoliciesrequestbody",
+    "V2GatewayListPoliciesResponseBody": ".v2gatewaylistpoliciesresponsebody",
+    "V2GatewayListPoliciesResponseBodyTypedDict": ".v2gatewaylistpoliciesresponsebody",
+    "V2GatewaySetPoliciesRequestBody": ".v2gatewaysetpoliciesrequestbody",
+    "V2GatewaySetPoliciesRequestBodyTypedDict": ".v2gatewaysetpoliciesrequestbody",
+    "V2GatewaySetPoliciesResponseBody": ".v2gatewaysetpoliciesresponsebody",
+    "V2GatewaySetPoliciesResponseBodyTypedDict": ".v2gatewaysetpoliciesresponsebody",
+    "V2GatewayUpdatePolicyRequestBody": ".v2gatewayupdatepolicyrequestbody",
+    "V2GatewayUpdatePolicyRequestBodyTypedDict": ".v2gatewayupdatepolicyrequestbody",
+    "V2GatewayUpdatePolicyResponseBody": ".v2gatewayupdatepolicyresponsebody",
+    "V2GatewayUpdatePolicyResponseBodyTypedDict": ".v2gatewayupdatepolicyresponsebody",
     "V2IdentitiesCreateIdentityRequestBody": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityResponseBody": ".v2identitiescreateidentityresponsebody",
@@ -1009,6 +1774,7 @@ _dynamic_imports: dict[str, str] = {
     "V2PermissionsListRolesRequestBodyTypedDict": ".v2permissionslistrolesrequestbody",
     "V2PermissionsListRolesResponseBody": ".v2permissionslistrolesresponsebody",
     "V2PermissionsListRolesResponseBodyTypedDict": ".v2permissionslistrolesresponsebody",
+    "PermissionEnum": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBody": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBodyTypedDict": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionResponseBody": ".v2portalcreatesessionresponsebody",
@@ -1021,6 +1787,38 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalExchangeSessionResponseBodyTypedDict": ".v2portalexchangesessionresponsebody",
     "V2PortalExchangeSessionResponseData": ".v2portalexchangesessionresponsedata",
     "V2PortalExchangeSessionResponseDataTypedDict": ".v2portalexchangesessionresponsedata",
+    "V2PortalGetVerificationsDataPoint": ".v2portalgetverificationsdatapoint",
+    "V2PortalGetVerificationsDataPointTypedDict": ".v2portalgetverificationsdatapoint",
+    "V2PortalGetVerificationsRequestBody": ".v2portalgetverificationsrequestbody",
+    "V2PortalGetVerificationsRequestBodyTypedDict": ".v2portalgetverificationsrequestbody",
+    "V2PortalGetVerificationsResponseBody": ".v2portalgetverificationsresponsebody",
+    "V2PortalGetVerificationsResponseBodyTypedDict": ".v2portalgetverificationsresponsebody",
+    "V2PortalListKeysRequestBody": ".v2portallistkeysrequestbody",
+    "V2PortalListKeysRequestBodyTypedDict": ".v2portallistkeysrequestbody",
+    "V2PortalListKeysResponseBody": ".v2portallistkeysresponsebody",
+    "V2PortalListKeysResponseBodyTypedDict": ".v2portallistkeysresponsebody",
+    "V2ProjectsCreateProjectRequestBody": ".v2projectscreateprojectrequestbody",
+    "V2ProjectsCreateProjectRequestBodyTypedDict": ".v2projectscreateprojectrequestbody",
+    "V2ProjectsCreateProjectResponseBody": ".v2projectscreateprojectresponsebody",
+    "V2ProjectsCreateProjectResponseBodyTypedDict": ".v2projectscreateprojectresponsebody",
+    "V2ProjectsCreateProjectResponseData": ".v2projectscreateprojectresponsedata",
+    "V2ProjectsCreateProjectResponseDataTypedDict": ".v2projectscreateprojectresponsedata",
+    "V2ProjectsDeleteProjectRequestBody": ".v2projectsdeleteprojectrequestbody",
+    "V2ProjectsDeleteProjectRequestBodyTypedDict": ".v2projectsdeleteprojectrequestbody",
+    "V2ProjectsDeleteProjectResponseBody": ".v2projectsdeleteprojectresponsebody",
+    "V2ProjectsDeleteProjectResponseBodyTypedDict": ".v2projectsdeleteprojectresponsebody",
+    "V2ProjectsGetProjectRequestBody": ".v2projectsgetprojectrequestbody",
+    "V2ProjectsGetProjectRequestBodyTypedDict": ".v2projectsgetprojectrequestbody",
+    "V2ProjectsGetProjectResponseBody": ".v2projectsgetprojectresponsebody",
+    "V2ProjectsGetProjectResponseBodyTypedDict": ".v2projectsgetprojectresponsebody",
+    "V2ProjectsListProjectsRequestBody": ".v2projectslistprojectsrequestbody",
+    "V2ProjectsListProjectsRequestBodyTypedDict": ".v2projectslistprojectsrequestbody",
+    "V2ProjectsListProjectsResponseBody": ".v2projectslistprojectsresponsebody",
+    "V2ProjectsListProjectsResponseBodyTypedDict": ".v2projectslistprojectsresponsebody",
+    "V2ProjectsUpdateProjectRequestBody": ".v2projectsupdateprojectrequestbody",
+    "V2ProjectsUpdateProjectRequestBodyTypedDict": ".v2projectsupdateprojectrequestbody",
+    "V2ProjectsUpdateProjectResponseBody": ".v2projectsupdateprojectresponsebody",
+    "V2ProjectsUpdateProjectResponseBodyTypedDict": ".v2projectsupdateprojectresponsebody",
     "V2RatelimitDeleteOverrideRequestBody": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideResponseBody": ".v2ratelimitdeleteoverrideresponsebody",

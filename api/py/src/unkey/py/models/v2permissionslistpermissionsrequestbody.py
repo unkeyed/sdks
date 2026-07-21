@@ -19,6 +19,8 @@ class V2PermissionsListPermissionsRequestBodyTypedDict(TypedDict):
     """
     limit: NotRequired[int]
     r"""Maximum number of permissions to return in a single response."""
+    search: NotRequired[str]
+    r"""Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive."""
 
 
 class V2PermissionsListPermissionsRequestBody(BaseModel):
@@ -35,9 +37,12 @@ class V2PermissionsListPermissionsRequestBody(BaseModel):
     limit: Optional[int] = 100
     r"""Maximum number of permissions to return in a single response."""
 
+    search: Optional[str] = None
+    r"""Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cursor", "limit"])
+        optional_fields = set(["cursor", "limit", "search"])
         serialized = handler(self)
         m = {}
 

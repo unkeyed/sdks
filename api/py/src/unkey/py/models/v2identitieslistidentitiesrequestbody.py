@@ -12,6 +12,8 @@ class V2IdentitiesListIdentitiesRequestBodyTypedDict(TypedDict):
     r"""The maximum number of identities to return in a single request. Use this to control response size and loading performance."""
     cursor: NotRequired[str]
     r"""Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value."""
+    search: NotRequired[str]
+    r"""Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive."""
 
 
 class V2IdentitiesListIdentitiesRequestBody(BaseModel):
@@ -21,9 +23,12 @@ class V2IdentitiesListIdentitiesRequestBody(BaseModel):
     cursor: Optional[str] = None
     r"""Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value."""
 
+    search: Optional[str] = None
+    r"""Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["limit", "cursor"])
+        optional_fields = set(["limit", "cursor", "search"])
         serialized = handler(self)
         m = {}
 
