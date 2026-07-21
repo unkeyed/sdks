@@ -48,8 +48,6 @@ func newKeys(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permissions available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddPermissionsRequestBody, opts ...operations.Option) (*operations.KeysAddPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -109,7 +107,7 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -409,8 +407,6 @@ func (s *Keys) AddPermissions(ctx context.Context, request components.V2KeysAddP
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role assignments available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRequestBody, opts ...operations.Option) (*operations.KeysAddRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -470,7 +466,7 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -768,11 +764,11 @@ func (s *Keys) AddRoles(ctx context.Context, request components.V2KeysAddRolesRe
 //
 // **Required Permissions**
 //
-// Your root key needs one of:
+// Your credential needs one of:
 // - `api.*.create_key` (create keys in any API)
 // - `api.<api_id>.create_key` (create keys in specific API)
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+// - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
 func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKeyRequestBody, opts ...operations.Option) (*operations.KeysCreateKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -832,7 +828,7 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -1117,19 +1113,20 @@ func (s *Keys) CreateKey(ctx context.Context, request components.V2KeysCreateKey
 }
 
 // DeleteKey - Delete API keys
-// Delete API keys permanently from user accounts or for cleanup purposes.
+// Delete API keys from user accounts or for cleanup purposes.
 //
-// Use this for user-requested key deletion, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
+// Use this for user-requested key revocation, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
 //
 // **Important**: For temporary access control, use `updateKey` with `enabled: false` instead of deletion.
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions:
+// Your credential must have one of the following permissions:
 // - `api.*.delete_key` (to delete keys in any API)
 // - `api.<api_id>.delete_key` (to delete keys in a specific API)
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#delete_key` (to delete keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
 func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKeyRequestBody, opts ...operations.Option) (*operations.KeysDeleteKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1189,7 +1186,7 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -1482,14 +1479,18 @@ func (s *Keys) DeleteKey(ctx context.Context, request components.V2KeysDeleteKey
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions for basic key information:
+// Your credential must have one of the following permissions for basic key information:
 // - `api.*.read_key` (to read keys from any API)
 // - `api.<api_id>.read_key` (to read keys from a specific API)
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#read_key` (to read keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#read_key` (to read keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#read_key` (to read a specific key)
 //
 // Additional permission required for decrypt functionality:
 // - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#decrypt_key`
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#decrypt_key`
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#decrypt_key`
 func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyRequestBody, opts ...operations.Option) (*operations.KeysGetKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1549,7 +1550,7 @@ func (s *Keys) GetKey(ctx context.Context, request components.V2KeysGetKeyReques
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -2201,8 +2202,6 @@ func (s *Keys) MigrateKeys(ctx context.Context, request components.V2KeysMigrate
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysRemovePermissionsRequestBody, opts ...operations.Option) (*operations.KeysRemovePermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2262,7 +2261,7 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -2562,8 +2561,6 @@ func (s *Keys) RemovePermissions(ctx context.Context, request components.V2KeysR
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveRolesRequestBody, opts ...operations.Option) (*operations.KeysRemoveRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2623,7 +2620,7 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -2937,11 +2934,11 @@ func (s *Keys) RemoveRoles(ctx context.Context, request components.V2KeysRemoveR
 //
 // **Required Permissions**
 //
-//	Your root key must have:
+//	Your credential must have:
 //	- `api.*.create_key` or `api.<api_id>.create_key`
+//	- `unkey:v1:<workspace_id>:keyspaces/*#create_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key`
 //	- `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+//	- `unkey:v1:<workspace_id>:keyspaces/*/keys/*#encrypt_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#encrypt_key` (only when the original key is recoverable)
 func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKeyRequestBody, opts ...operations.Option) (*operations.KeysRerollKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3001,7 +2998,7 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -3301,8 +3298,6 @@ func (s *Keys) RerollKey(ctx context.Context, request components.V2KeysRerollKey
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes permission changes available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetPermissionsRequestBody, opts ...operations.Option) (*operations.KeysSetPermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3362,7 +3357,7 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -3662,8 +3657,6 @@ func (s *Keys) SetPermissions(ctx context.Context, request components.V2KeysSetP
 // **Side Effects**
 //
 // Invalidates the key cache for immediate effect, and makes role changes available for verification within 30 seconds across all regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRequestBody, opts ...operations.Option) (*operations.KeysSetRolesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3723,7 +3716,7 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -4016,15 +4009,16 @@ func (s *Keys) SetRoles(ctx context.Context, request components.V2KeysSetRolesRe
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions:
+// Your credential must have one of the following permissions:
 // - `api.*.update_key` (to update keys in any API)
 // - `api.<api_id>.update_key` (to update keys in a specific API)
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#update_key` (to update keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
 //
 // **Side Effects**
 //
 // Credit updates remove the key from cache immediately. Setting credits to unlimited automatically clears any existing refill settings. Changes take effect instantly but may take up to 30 seconds to propagate to all edge regions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdateCreditsRequestBody, opts ...operations.Option) (*operations.KeysUpdateCreditsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4084,7 +4078,7 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -4377,15 +4371,16 @@ func (s *Keys) UpdateCredits(ctx context.Context, request components.V2KeysUpdat
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions:
+// Your credential must have one of the following permissions:
 // - `api.*.update_key` (to update keys in any API)
 // - `api.<api_id>.update_key` (to update keys in a specific API)
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#update_key` (to update keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
 //
 // **Side Effects**
 //
 // If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKeyRequestBody, opts ...operations.Option) (*operations.KeysUpdateKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4445,7 +4440,7 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -4743,13 +4738,14 @@ func (s *Keys) UpdateKey(ctx context.Context, request components.V2KeysUpdateKey
 //
 // **Required Permissions**
 //
-// Your root key needs one of:
+// Your credential needs one of:
 // - `api.*.verify_key` (verify keys in any API)
 // - `api.<api_id>.verify_key` (verify keys in specific API)
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#verify_key` (verify keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
 //
-// **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+// **Note**: If your credential has no verify permissions at all, you will receive a `403 Forbidden` error. If your credential has verify permissions for a different API or keyspace than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
 func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKeyRequestBody, opts ...operations.Option) (*operations.KeysVerifyKeyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4809,7 +4805,7 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -5098,13 +5094,14 @@ func (s *Keys) VerifyKey(ctx context.Context, request components.V2KeysVerifyKey
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions for basic key information:
+// Your credential must have one of the following permissions for basic key information:
 // - `api.*.read_key` (to read keys from any API)
 // - `api.<api_id>.read_key` (to read keys from a specific API)
+// - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#read_key` (to read keys in any keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#read_key` (to read keys in a specific keyspace)
+// - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#read_key` (to read a specific key)
 //
-// If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
-//
-// If set, this operation will use [Security.RootKey] from the global security.
+// If your credential lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existence of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your credential has the correct permissions.
 func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiRequestBody, opts ...operations.Option) (*operations.KeysWhoamiResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5164,7 +5161,7 @@ func (s *Keys) Whoami(ctx context.Context, request components.V2KeysWhoamiReques
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

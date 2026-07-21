@@ -19,7 +19,7 @@ Unkey API: Unkey's API provides programmatic access for all resources within our
 
 ### Authentication
 #
-This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+This API accepts HTTP Bearer credentials. Public integrations use root keys. Dashboard-originated requests use a short-lived dashboard proxy JWT minted by the dashboard server. Most endpoints require permissions associated with the authenticated principal. When making public API requests, include your root key in the `Authorization` header:
 ```
 Authorization: Bearer unkey_xxxxxxxxxxx
 ```
@@ -199,6 +199,43 @@ func main() {
 }
 
 ```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```go
+package main
+
+import (
+	"context"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/models/operations"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := unkey.New()
+
+	res, err := s.Portal.GetVerifications(ctx, components.V2PortalGetVerificationsRequestBody{
+		StartTime: 1704067200000,
+		EndTime:   1704672000000,
+		KeyID:     unkey.Pointer("key_1234abcd"),
+	}, operations.PortalGetVerificationsSecurity{
+		PortalSession: os.Getenv("UNKEY_PORTAL_SESSION"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.V2PortalGetVerificationsResponseBody != nil {
+		// handle response
+	}
+}
+
+```
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -218,6 +255,39 @@ func main() {
 * [GetAPI](docs/sdks/apis/README.md#getapi) - Get API namespace
 * [ListKeys](docs/sdks/apis/README.md#listkeys) - List API keys
 
+### [Apps](docs/sdks/apps/README.md)
+
+* [CreateApp](docs/sdks/apps/README.md#createapp) - Create app
+* [DeleteApp](docs/sdks/apps/README.md#deleteapp) - Delete app
+* [GetApp](docs/sdks/apps/README.md#getapp) - Get app
+* [ListApps](docs/sdks/apps/README.md#listapps) - List apps
+* [UpdateApp](docs/sdks/apps/README.md#updateapp) - Update app
+
+### [Deployments](docs/sdks/deployments/README.md)
+
+* [CreateDeployment](docs/sdks/deployments/README.md#createdeployment) - Create deployment
+* [GetDeployment](docs/sdks/deployments/README.md#getdeployment) - Get deployment
+* [ListDeployments](docs/sdks/deployments/README.md#listdeployments) - List deployments
+* [PromoteDeployment](docs/sdks/deployments/README.md#promotedeployment) - Promote deployment
+* [RollbackDeployment](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
+* [StartDeployment](docs/sdks/deployments/README.md#startdeployment) - Start deployment
+* [StopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
+
+### [Environments](docs/sdks/environments/README.md)
+
+* [GetEnvironment](docs/sdks/environments/README.md#getenvironment) - Get environment
+* [ListEnvironmentVariables](docs/sdks/environments/README.md#listenvironmentvariables) - List environment variables
+* [ListEnvironments](docs/sdks/environments/README.md#listenvironments) - List environments
+* [RemoveEnvironmentVariables](docs/sdks/environments/README.md#removeenvironmentvariables) - Remove environment variables
+* [SetEnvironmentVariables](docs/sdks/environments/README.md#setenvironmentvariables) - Set environment variables
+* [UpdateSettings](docs/sdks/environments/README.md#updatesettings) - Update environment settings
+
+### [Gateway](docs/sdks/gateway/README.md)
+
+* [ListPolicies](docs/sdks/gateway/README.md#listpolicies) - List policies
+* [SetPolicies](docs/sdks/gateway/README.md#setpolicies) - Set policies
+* [UpdatePolicy](docs/sdks/gateway/README.md#updatepolicy) - Update policy
+
 ### [Identities](docs/sdks/identities/README.md)
 
 * [CreateIdentity](docs/sdks/identities/README.md#createidentity) - Create Identity
@@ -226,10 +296,10 @@ func main() {
 * [ListIdentities](docs/sdks/identities/README.md#listidentities) - List Identities
 * [UpdateIdentity](docs/sdks/identities/README.md#updateidentity) - Update Identity
 
-### [Internal](docs/sdks/internal/README.md)
+### [~~Internal~~](docs/sdks/internal/README.md)
 
-* [CreateDeployment](docs/sdks/internal/README.md#createdeployment) - Create deployment
-* [GetDeployment](docs/sdks/internal/README.md#getdeployment) - Get deployment
+* [~~CreateDeployment~~](docs/sdks/internal/README.md#createdeployment) - Create deployment :warning: **Deprecated**
+* [~~GetDeployment~~](docs/sdks/internal/README.md#getdeployment) - Get deployment :warning: **Deprecated**
 
 ### [Keys](docs/sdks/keys/README.md)
 
@@ -264,6 +334,17 @@ func main() {
 
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [ExchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+* [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+* [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
+* [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [CreateProject](docs/sdks/projects/README.md#createproject) - Create project
+* [DeleteProject](docs/sdks/projects/README.md#deleteproject) - Delete project
+* [GetProject](docs/sdks/projects/README.md#getproject) - Get project
+* [ListProjects](docs/sdks/projects/README.md#listprojects) - List projects
+* [UpdateProject](docs/sdks/projects/README.md#updateproject) - Update project
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 

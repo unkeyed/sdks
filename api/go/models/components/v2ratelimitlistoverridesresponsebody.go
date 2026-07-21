@@ -7,7 +7,7 @@ type V2RatelimitListOverridesResponseBody struct {
 	Meta Meta                `json:"meta"`
 	Data []RatelimitOverride `json:"data"`
 	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Pagination Pagination `json:"pagination"`
 }
 
 func (v *V2RatelimitListOverridesResponseBody) GetMeta() Meta {
@@ -24,9 +24,9 @@ func (v *V2RatelimitListOverridesResponseBody) GetData() []RatelimitOverride {
 	return v.Data
 }
 
-func (v *V2RatelimitListOverridesResponseBody) GetPagination() *Pagination {
+func (v *V2RatelimitListOverridesResponseBody) GetPagination() Pagination {
 	if v == nil {
-		return nil
+		return Pagination{}
 	}
 	return v.Pagination
 }

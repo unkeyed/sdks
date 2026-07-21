@@ -1,0 +1,9 @@
+# AppsUpdateAppResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `V2AppsUpdateAppResponseBody`                                                                     | [*components.V2AppsUpdateAppResponseBody](../../models/components/v2appsupdateappresponsebody.md) | :heavy_minus_sign:                                                                                | Successfully updated the app.<br/>                                                                |

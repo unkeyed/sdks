@@ -1,0 +1,9 @@
+# PortalListKeysResponse
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                     | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `V2PortalListKeysResponseBody`                                                                                 | [*components.V2PortalListKeysResponseBody](../../models/components/v2portallistkeysresponsebody.md)            | :heavy_minus_sign:                                                                                             | Successfully retrieved paginated keys. Use the pagination cursor for additional results when `hasMore: true`.<br/> |

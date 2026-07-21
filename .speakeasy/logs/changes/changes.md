@@ -1,44 +1,44 @@
-## Typescript SDK Changes:
-* `unkey.portal.createSession()`: 
-  *  `request.permissions[]` **Changed** (Breaking ⚠️)
-* `unkey.gateway.listPolicies()`: **Added**
-* `unkey.apps.getApp()`: **Added**
-* `unkey.apps.listApps()`: **Added**
-* `unkey.apps.updateApp()`: **Added**
-* `unkey.deployments.createDeployment()`: **Added**
-* `unkey.deployments.getDeployment()`: **Added**
-* `unkey.deployments.listDeployments()`: **Added**
-* `unkey.deployments.promoteDeployment()`: **Added**
-* `unkey.deployments.rollbackDeployment()`: **Added**
-* `unkey.deployments.startDeployment()`: **Added**
-* `unkey.deployments.stopDeployment()`: **Added**
-* `unkey.environments.getEnvironment()`: **Added**
-* `unkey.environments.listEnvironmentVariables()`: **Added**
-* `unkey.environments.listEnvironments()`: **Added**
-* `unkey.environments.removeEnvironmentVariables()`: **Added**
-* `unkey.environments.setEnvironmentVariables()`: **Added**
-* `unkey.apps.createApp()`: **Added**
-* `unkey.environments.updateSettings()`: **Added**
-* `unkey.apis.listKeys()`:  `response.pagination` **Changed**
-* `unkey.gateway.updatePolicy()`: **Added**
-* `unkey.portal.getVerifications()`: **Added**
-* `unkey.portal.listKeys()`: **Added**
-* `unkey.portal.rerollKey()`: **Added**
-* `unkey.projects.createProject()`: **Added**
-* `unkey.projects.deleteProject()`: **Added**
-* `unkey.projects.getProject()`: **Added**
-* `unkey.projects.listProjects()`: **Added**
-* `unkey.projects.updateProject()`: **Added**
-* `unkey.gateway.setPolicies()`: **Added**
-* `unkey.internal.createDeployment()`: **Deprecated**
-* `unkey.internal.getDeployment()`: **Deprecated**
-* `unkey.identities.listIdentities()`: 
-  *  `request.search` **Added**
-* `unkey.permissions.listPermissions()`: 
-  *  `request.search` **Added**
-  *  `response.pagination` **Changed**
-* `unkey.permissions.listRoles()`: 
-  *  `request.search` **Added**
-  *  `response.pagination` **Changed**
-* `unkey.apps.deleteApp()`: **Added**
-* `unkey.ratelimit.listOverrides()`:  `response.pagination` **Changed**
+## Go SDK Changes:
+* `Unkey.Portal.CreateSession()`: 
+  *  `request.Request.Permissions[]` **Changed** (Breaking ⚠️)
+* `Unkey.Gateway.ListPolicies()`: **Added**
+* `Unkey.Apps.GetApp()`: **Added**
+* `Unkey.Apps.ListApps()`: **Added**
+* `Unkey.Apps.UpdateApp()`: **Added**
+* `Unkey.Deployments.CreateDeployment()`: **Added**
+* `Unkey.Deployments.GetDeployment()`: **Added**
+* `Unkey.Deployments.ListDeployments()`: **Added**
+* `Unkey.Deployments.PromoteDeployment()`: **Added**
+* `Unkey.Deployments.RollbackDeployment()`: **Added**
+* `Unkey.Deployments.StartDeployment()`: **Added**
+* `Unkey.Deployments.StopDeployment()`: **Added**
+* `Unkey.Environments.GetEnvironment()`: **Added**
+* `Unkey.Environments.ListEnvironmentVariables()`: **Added**
+* `Unkey.Environments.ListEnvironments()`: **Added**
+* `Unkey.Environments.RemoveEnvironmentVariables()`: **Added**
+* `Unkey.Environments.SetEnvironmentVariables()`: **Added**
+* `Unkey.Apps.CreateApp()`: **Added**
+* `Unkey.Environments.UpdateSettings()`: **Added**
+* `Unkey.Apis.ListKeys()`:  `response.Pagination` **Changed**
+* `Unkey.Gateway.UpdatePolicy()`: **Added**
+* `Unkey.Portal.GetVerifications()`: **Added**
+* `Unkey.Portal.ListKeys()`: **Added**
+* `Unkey.Portal.RerollKey()`: **Added**
+* `Unkey.Projects.CreateProject()`: **Added**
+* `Unkey.Projects.DeleteProject()`: **Added**
+* `Unkey.Projects.GetProject()`: **Added**
+* `Unkey.Projects.ListProjects()`: **Added**
+* `Unkey.Projects.UpdateProject()`: **Added**
+* `Unkey.Gateway.SetPolicies()`: **Added**
+* `Unkey.Internal.CreateDeployment()`: **Deprecated**
+* `Unkey.Internal.GetDeployment()`: **Deprecated**
+* `Unkey.Identities.ListIdentities()`: 
+  *  `request.Request.Search` **Added**
+* `Unkey.Permissions.ListPermissions()`: 
+  *  `request.Request.Search` **Added**
+  *  `response.Pagination` **Changed**
+* `Unkey.Permissions.ListRoles()`: 
+  *  `request.Request.Search` **Added**
+  *  `response.Pagination` **Changed**
+* `Unkey.Apps.DeleteApp()`: **Added**
+* `Unkey.Ratelimit.ListOverrides()`:  `response.Pagination` **Changed**

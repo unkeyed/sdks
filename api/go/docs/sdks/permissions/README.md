@@ -496,6 +496,7 @@ func main() {
     res, err := s.Permissions.ListPermissions(ctx, components.V2PermissionsListPermissionsRequestBody{
         Cursor: unkey.Pointer("eyJrZXkiOiJwZXJtXzEyMzQifQ=="),
         Limit: unkey.Pointer[int64](50),
+        Search: unkey.Pointer("documents"),
     })
     if err != nil {
         log.Fatal(err)
@@ -576,6 +577,7 @@ func main() {
     res, err := s.Permissions.ListRoles(ctx, components.V2PermissionsListRolesRequestBody{
         Limit: unkey.Pointer[int64](50),
         Cursor: unkey.Pointer("eyJrZXkiOiJyb2xlXzEyMzQifQ=="),
+        Search: unkey.Pointer("admin"),
     })
     if err != nil {
         log.Fatal(err)

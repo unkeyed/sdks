@@ -1,0 +1,14 @@
+# MatchExpr
+
+A single request match expression. Exactly one of `path`, `method`,
+`header` or `queryParam` must be set.
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Path`                                                                                                      | [*components.PathMatch](../../models/components/pathmatch.md)                                               | :heavy_minus_sign:                                                                                          | Matches on the request path.                                                                                |
+| `Method`                                                                                                    | [*components.MethodMatch](../../models/components/methodmatch.md)                                           | :heavy_minus_sign:                                                                                          | Matches when the request method is one of the listed methods.                                               |
+| `Header`                                                                                                    | [*components.FieldMatch](../../models/components/fieldmatch.md)                                             | :heavy_minus_sign:                                                                                          | Matches a named request field (header or query parameter). Exactly one of<br/>`present` or `value` must be set. |
+| `QueryParam`                                                                                                | [*components.FieldMatch](../../models/components/fieldmatch.md)                                             | :heavy_minus_sign:                                                                                          | Matches a named request field (header or query parameter). Exactly one of<br/>`present` or `value` must be set. |

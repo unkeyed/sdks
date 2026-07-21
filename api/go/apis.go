@@ -1123,8 +1123,6 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 //
 // Additional permission required for decrypt functionality:
 // - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
-//
-// If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRequestBody, opts ...operations.Option) (*operations.ApisListKeysResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1184,7 +1182,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "RootKey"); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
