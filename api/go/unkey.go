@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.882.0
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.918.4
 
 import (
 	"context"
@@ -51,7 +51,7 @@ func Pointer[T any](v T) *T { return &v }
 //
 // ### Authentication
 // #
-// This API uses HTTP Bearer authentication with root keys. Most endpoints require specific permissions associated with your root key. When making requests, include your root key in the `Authorization` header:
+// This API accepts HTTP Bearer credentials. Public integrations use root keys. Dashboard-originated requests use a short-lived dashboard proxy JWT minted by the dashboard server. Most endpoints require permissions associated with the authenticated principal. When making public API requests, include your root key in the `Authorization` header:
 // ```
 // Authorization: Bearer unkey_xxxxxxxxxxx
 // ```
@@ -133,8 +133,16 @@ type Unkey struct {
 	// Analytics query operations
 	Analytics *Analytics
 	// API management operations
-	Apis     *Apis
+	Apis *Apis
+	// App management operations
+	Apps     *Apps
 	Internal *Internal
+	// Deployment operations
+	Deployments *Deployments
+	// Environment management operations
+	Environments *Environments
+	// Gateway policy operations
+	Gateway *Gateway
 	// Identity management operations
 	Identities *Identities
 	// API key management operations
@@ -142,7 +150,8 @@ type Unkey struct {
 	// Permission and role management operations
 	Permissions *Permissions
 	// Customer Portal session management
-	Portal *Portal
+	Portal   *Portal
+	Projects *Projects
 	// Rate limiting operations
 	Ratelimit *Ratelimit
 
@@ -221,9 +230,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.6.5",
+		SDKVersion: "2.7.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.6.5 2.882.0 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.7.0 2.918.4 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -253,11 +262,16 @@ func New(opts ...SDKOption) *Unkey {
 
 	sdk.Analytics = newAnalytics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Apis = newApis(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Apps = newApps(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Internal = newInternal(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Deployments = newDeployments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Environments = newEnvironments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Gateway = newGateway(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Portal = newPortal(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Projects = newProjects(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ratelimit = newRatelimit(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk

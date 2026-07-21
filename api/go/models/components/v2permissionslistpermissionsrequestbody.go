@@ -17,6 +17,8 @@ type V2PermissionsListPermissionsRequestBody struct {
 	Cursor *string `json:"cursor,omitempty"`
 	// Maximum number of permissions to return in a single response.
 	Limit *int64 `default:"100" json:"limit"`
+	// Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive.
+	Search *string `json:"search,omitempty"`
 }
 
 func (v V2PermissionsListPermissionsRequestBody) MarshalJSON() ([]byte, error) {
@@ -42,6 +44,13 @@ func (v *V2PermissionsListPermissionsRequestBody) GetLimit() *int64 {
 		return nil
 	}
 	return v.Limit
+}
+
+func (v *V2PermissionsListPermissionsRequestBody) GetSearch() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Search
 }
 
 // #region class-body-v2permissionslistpermissionsrequestbody

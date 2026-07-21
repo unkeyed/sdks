@@ -1,0 +1,9 @@
+# GatewayUpdatePolicyResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2GatewayUpdatePolicyResponseBody`                                                                           | [*components.V2GatewayUpdatePolicyResponseBody](../../models/components/v2gatewayupdatepolicyresponsebody.md) | :heavy_minus_sign:                                                                                            | Successfully updated the policy.<br/>                                                                         |

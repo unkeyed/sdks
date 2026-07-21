@@ -11,6 +11,8 @@ type V2IdentitiesListIdentitiesRequestBody struct {
 	Limit *int64 `default:"100" json:"limit"`
 	// Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
 	Cursor *string `json:"cursor,omitempty"`
+	// Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive.
+	Search *string `json:"search,omitempty"`
 }
 
 func (v V2IdentitiesListIdentitiesRequestBody) MarshalJSON() ([]byte, error) {
@@ -36,6 +38,13 @@ func (v *V2IdentitiesListIdentitiesRequestBody) GetCursor() *string {
 		return nil
 	}
 	return v.Cursor
+}
+
+func (v *V2IdentitiesListIdentitiesRequestBody) GetSearch() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Search
 }
 
 // #region class-body-v2identitieslistidentitiesrequestbody

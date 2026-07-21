@@ -8,7 +8,7 @@ type V2ApisListKeysResponseBody struct {
 	// Array of API keys with complete configuration and metadata.
 	Data []KeyResponseData `json:"data"`
 	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Pagination Pagination `json:"pagination"`
 }
 
 func (v *V2ApisListKeysResponseBody) GetMeta() Meta {
@@ -25,9 +25,9 @@ func (v *V2ApisListKeysResponseBody) GetData() []KeyResponseData {
 	return v.Data
 }
 
-func (v *V2ApisListKeysResponseBody) GetPagination() *Pagination {
+func (v *V2ApisListKeysResponseBody) GetPagination() Pagination {
 	if v == nil {
-		return nil
+		return Pagination{}
 	}
 	return v.Pagination
 }

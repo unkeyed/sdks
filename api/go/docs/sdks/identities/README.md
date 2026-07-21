@@ -678,6 +678,7 @@ func main() {
     res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
         Limit: unkey.Pointer[int64](50),
         Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
+        Search: unkey.Pointer("user_123"),
     })
     if err != nil {
         log.Fatal(err)
@@ -723,6 +724,7 @@ func main() {
     res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
         Limit: unkey.Pointer[int64](50),
         Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
+        Search: unkey.Pointer("user_123"),
     })
     if err != nil {
         log.Fatal(err)
@@ -768,6 +770,51 @@ func main() {
     res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
         Limit: unkey.Pointer[int64](50),
         Cursor: unkey.Pointer("cursor_eyJrZXkiOiJrZXlfMTIzNCJ9"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2IdentitiesListIdentitiesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: withSearch
+
+<!-- UsageSnippet language="go" operationID="identities.listIdentities" method="post" path="/v2/identities.listIdentities" example="withSearch" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Identities.ListIdentities(ctx, components.V2IdentitiesListIdentitiesRequestBody{
+        Limit: unkey.Pointer[int64](50),
+        Search: unkey.Pointer("user_123"),
     })
     if err != nil {
         log.Fatal(err)

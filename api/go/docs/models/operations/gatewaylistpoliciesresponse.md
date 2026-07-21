@@ -1,0 +1,9 @@
+# GatewayListPoliciesResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2GatewayListPoliciesResponseBody`                                                                           | [*components.V2GatewayListPoliciesResponseBody](../../models/components/v2gatewaylistpoliciesresponsebody.md) | :heavy_minus_sign:                                                                                            | Policies retrieved successfully                                                                               |

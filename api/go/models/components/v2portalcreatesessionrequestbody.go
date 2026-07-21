@@ -3,8 +3,42 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 )
+
+type PermissionEnum string
+
+const (
+	PermissionEnumKeysRead      PermissionEnum = "keys:read"
+	PermissionEnumKeysCreate    PermissionEnum = "keys:create"
+	PermissionEnumKeysReroll    PermissionEnum = "keys:reroll"
+	PermissionEnumAnalyticsRead PermissionEnum = "analytics:read"
+)
+
+func (e PermissionEnum) ToPointer() *PermissionEnum {
+	return &e
+}
+func (e *PermissionEnum) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "keys:read":
+		fallthrough
+	case "keys:create":
+		fallthrough
+	case "keys:reroll":
+		fallthrough
+	case "analytics:read":
+		*e = PermissionEnum(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for PermissionEnum: %v", v)
+	}
+}
 
 type V2PortalCreateSessionRequestBody struct {
 	// The human-readable slug of the portal configuration to create the session against.
@@ -17,16 +51,19 @@ type V2PortalCreateSessionRequestBody struct {
 	// Accepts arbitrary string values (user IDs, emails, UUIDs, etc.).
 	//
 	ExternalID string `json:"externalId"`
-	// List of RBAC tuple permissions defining what the end user can do in the Portal.
-	// Each permission is a string in the format `{resourceType}.{resourceId}.{action}`.
-	// Use `*` as resourceId to grant access to all resources of that type.
+	// The capabilities granted to the end user in the Portal, from a fixed
+	// vocabulary. All capabilities are scoped to this end user: key capabilities
+	// (`keys:*`) apply only to keys the end user owns within the keyspace
+	// configured on the portal configuration, and `analytics:read` returns only
+	// the end user's own verification events. An end user can never see another
+	// identity's keys or analytics.
 	//
-	// Tab visibility is derived from the action segment:
-	// - Keys tab: `read_key`, `create_key`, `update_key`, `delete_key`
-	// - Analytics tab: `read_analytics`
-	// - Docs tab: visible when any permission is present
+	// Tab visibility is derived from the capabilities:
+	// - Keys tab: any `keys:*` capability
+	// - Analytics tab: `analytics:read`
+	// - Docs tab: visible when any capability is present
 	//
-	Permissions []string `json:"permissions"`
+	Permissions []PermissionEnum `json:"permissions"`
 	// When true, creates a preview session for testing the portal experience.
 	//
 	Preview *bool `default:"false" json:"preview"`
@@ -57,9 +94,9 @@ func (v *V2PortalCreateSessionRequestBody) GetExternalID() string {
 	return v.ExternalID
 }
 
-func (v *V2PortalCreateSessionRequestBody) GetPermissions() []string {
+func (v *V2PortalCreateSessionRequestBody) GetPermissions() []PermissionEnum {
 	if v == nil {
-		return []string{}
+		return []PermissionEnum{}
 	}
 	return v.Permissions
 }

@@ -1,0 +1,9 @@
+# PortalGetVerificationsResponse
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                  | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| `V2PortalGetVerificationsResponseBody`                                                                              | [*components.V2PortalGetVerificationsResponseBody](../../models/components/v2portalgetverificationsresponsebody.md) | :heavy_minus_sign:                                                                                                  | Successfully retrieved verification analytics.<br/>                                                                 |
