@@ -43,13 +43,14 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key needs one of:
+ * Your credential needs one of:
  * - `api.*.verify_key` (verify keys in any API)
  * - `api.<api_id>.verify_key` (verify keys in specific API)
+ * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#verify_key` (verify keys in any keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
  *
- * **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
+ * **Note**: If your credential has no verify permissions at all, you will receive a `403 Forbidden` error. If your credential has verify permissions for a different API or keyspace than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
  */
 export function keysVerifyKey(
   client: UnkeyCore,
@@ -128,7 +129,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,

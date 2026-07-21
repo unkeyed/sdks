@@ -101,9 +101,11 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key needs one of:
+   * Your credential needs one of:
    * - `api.*.create_key` (create keys in any API)
    * - `api.<api_id>.create_key` (create keys in specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
    */
   async createKey(
     request: components.V2KeysCreateKeyRequestBody,
@@ -120,17 +122,20 @@ export class Keys extends ClientSDK {
    * Delete API keys
    *
    * @remarks
-   * Delete API keys permanently from user accounts or for cleanup purposes.
+   * Delete API keys from user accounts or for cleanup purposes.
    *
-   * Use this for user-requested key deletion, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
+   * Use this for user-requested key revocation, account deletion workflows, or cleaning up unused keys. Keys are immediately invalidated. Two modes: soft delete (default, preserves audit records) and permanent delete.
    *
    * **Important**: For temporary access control, use `updateKey` with `enabled: false` instead of deletion.
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
+   * Your credential must have one of the following permissions:
    * - `api.*.delete_key` (to delete keys in any API)
    * - `api.<api_id>.delete_key` (to delete keys in a specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#delete_key` (to delete keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
    */
   async deleteKey(
     request: components.V2KeysDeleteKeyRequestBody,
@@ -155,12 +160,18 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions for basic key information:
+   * Your credential must have one of the following permissions for basic key information:
    * - `api.*.read_key` (to read keys from any API)
    * - `api.<api_id>.read_key` (to read keys from a specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#read_key` (to read keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#read_key` (to read keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#read_key` (to read a specific key)
    *
    * Additional permission required for decrypt functionality:
    * - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#decrypt_key`
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#decrypt_key`
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#decrypt_key`
    */
   async getKey(
     request: components.V2KeysGetKeyRequestBody,
@@ -290,9 +301,11 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   *  Your root key must have:
+   *  Your credential must have:
    *  - `api.*.create_key` or `api.<api_id>.create_key`
+   *  - `unkey:v1:<workspace_id>:keyspaces/*#create_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key`
    *  - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
+   *  - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#encrypt_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#encrypt_key` (only when the original key is recoverable)
    */
   async rerollKey(
     request: components.V2KeysRerollKeyRequestBody,
@@ -379,9 +392,12 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
+   * Your credential must have one of the following permissions:
    * - `api.*.update_key` (to update keys in any API)
    * - `api.<api_id>.update_key` (to update keys in a specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#update_key` (to update keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
    *
    * **Side Effects**
    *
@@ -410,9 +426,12 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
+   * Your credential must have one of the following permissions:
    * - `api.*.update_key` (to update keys in any API)
    * - `api.<api_id>.update_key` (to update keys in a specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#update_key` (to update keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
    *
    * **Side Effects**
    *
@@ -446,11 +465,14 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key needs one of:
+   * Your credential needs one of:
    * - `api.*.verify_key` (verify keys in any API)
    * - `api.<api_id>.verify_key` (verify keys in specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#verify_key` (verify keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
    *
-   * **Note**: If your root key has no verify permissions at all, you will receive a `403 Forbidden` error. If your root key has verify permissions for a different API than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
+   * **Note**: If your credential has no verify permissions at all, you will receive a `403 Forbidden` error. If your credential has verify permissions for a different API or keyspace than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
    */
   async verifyKey(
     request: components.V2KeysVerifyKeyRequestBody,
@@ -471,11 +493,14 @@ export class Keys extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions for basic key information:
+   * Your credential must have one of the following permissions for basic key information:
    * - `api.*.read_key` (to read keys from any API)
    * - `api.<api_id>.read_key` (to read keys from a specific API)
+   * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#read_key` (to read keys in any keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#read_key` (to read keys in a specific keyspace)
+   * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#read_key` (to read a specific key)
    *
-   * If your rootkey lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existance of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your root key has the correct permissions.
+   * If your credential lacks permissions but the key exists, we may return a 404 status here to prevent leaking the existence of a key to unauthorized clients. If you believe that a key should exist, but receive a 404, please double check your credential has the correct permissions.
    */
   async whoami(
     request: components.V2KeysWhoamiRequestBody,

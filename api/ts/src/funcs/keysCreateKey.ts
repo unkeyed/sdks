@@ -43,11 +43,11 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key needs one of:
+ * Your credential needs one of:
  * - `api.*.create_key` (create keys in any API)
  * - `api.<api_id>.create_key` (create keys in specific API)
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
+ * - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
  */
 export function keysCreateKey(
   client: UnkeyCore,
@@ -126,7 +126,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,

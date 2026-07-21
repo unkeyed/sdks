@@ -38,15 +38,16 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
+ * Your credential must have one of the following permissions:
  * - `api.*.update_key` (to update keys in any API)
  * - `api.<api_id>.update_key` (to update keys in a specific API)
+ * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#update_key` (to update keys in any keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
  *
  * **Side Effects**
  *
  * If you specify an `externalId` that doesn't exist, a new identity will be automatically created and linked to the key. Permission updates will auto-create any permissions that don't exist in your workspace. Changes take effect immediately but may take up to 30 seconds to propagate to all edge regions due to cache invalidation.
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function keysUpdateKey(
   client: UnkeyCore,
@@ -125,7 +126,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,

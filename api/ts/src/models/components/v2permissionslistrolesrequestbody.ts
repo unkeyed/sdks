@@ -23,12 +23,17 @@ export type V2PermissionsListRolesRequestBody = {
    * Leave empty or omit this field to start from the beginning of the role list.
    */
   cursor?: string | undefined;
+  /**
+   * Free-form text to filter roles. Returns roles whose ID, name, or description contains the search string. Matching is case-insensitive.
+   */
+  search?: string | undefined;
 };
 
 /** @internal */
 export type V2PermissionsListRolesRequestBody$Outbound = {
   limit: number;
   cursor?: string | undefined;
+  search?: string | undefined;
 };
 
 /** @internal */
@@ -39,6 +44,7 @@ export const V2PermissionsListRolesRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   limit: z.number().int().default(100),
   cursor: z.string().optional(),
+  search: z.string().optional(),
 });
 
 export function v2PermissionsListRolesRequestBodyToJSON(

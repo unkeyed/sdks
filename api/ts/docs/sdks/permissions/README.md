@@ -614,6 +614,7 @@ async function run() {
   const result = await unkey.permissions.listPermissions({
     cursor: "eyJrZXkiOiJwZXJtXzEyMzQifQ==",
     limit: 50,
+    search: "documents",
   });
 
   for await (const page of result) {
@@ -642,6 +643,7 @@ async function run() {
   const res = await permissionsListPermissions(unkey, {
     cursor: "eyJrZXkiOiJwZXJtXzEyMzQifQ==",
     limit: 50,
+    search: "documents",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -705,6 +707,7 @@ async function run() {
   const result = await unkey.permissions.listRoles({
     limit: 50,
     cursor: "eyJrZXkiOiJyb2xlXzEyMzQifQ==",
+    search: "admin",
   });
 
   for await (const page of result) {
@@ -733,6 +736,7 @@ async function run() {
   const res = await permissionsListRoles(unkey, {
     limit: 50,
     cursor: "eyJrZXkiOiJyb2xlXzEyMzQifQ==",
+    search: "admin",
   });
   if (res.ok) {
     const { value: result } = res;

@@ -3,6 +3,15 @@
  */
 
 import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
+
+export const PermissionEnum = {
+  KeysRead: "keys:read",
+  KeysCreate: "keys:create",
+  KeysReroll: "keys:reroll",
+  AnalyticsRead: "analytics:read",
+} as const;
+export type PermissionEnum = ClosedEnum<typeof PermissionEnum>;
 
 export type V2PortalCreateSessionRequestBody = {
   /**
@@ -22,18 +31,21 @@ export type V2PortalCreateSessionRequestBody = {
    */
   externalId: string;
   /**
-   * List of RBAC tuple permissions defining what the end user can do in the Portal.
+   * The capabilities granted to the end user in the Portal, from a fixed
    *
    * @remarks
-   * Each permission is a string in the format `{resourceType}.{resourceId}.{action}`.
-   * Use `*` as resourceId to grant access to all resources of that type.
+   * vocabulary. All capabilities are scoped to this end user: key capabilities
+   * (`keys:*`) apply only to keys the end user owns within the keyspace
+   * configured on the portal configuration, and `analytics:read` returns only
+   * the end user's own verification events. An end user can never see another
+   * identity's keys or analytics.
    *
-   * Tab visibility is derived from the action segment:
-   * - Keys tab: `read_key`, `create_key`, `update_key`, `delete_key`
-   * - Analytics tab: `read_analytics`
-   * - Docs tab: visible when any permission is present
+   * Tab visibility is derived from the capabilities:
+   * - Keys tab: any `keys:*` capability
+   * - Analytics tab: `analytics:read`
+   * - Docs tab: visible when any capability is present
    */
-  permissions: Array<string>;
+  permissions: Array<PermissionEnum>;
   /**
    * When true, creates a preview session for testing the portal experience.
    *
@@ -41,6 +53,11 @@ export type V2PortalCreateSessionRequestBody = {
    */
   preview?: boolean | undefined;
 };
+
+/** @internal */
+export const PermissionEnum$outboundSchema: z.ZodNativeEnum<
+  typeof PermissionEnum
+> = z.nativeEnum(PermissionEnum);
 
 /** @internal */
 export type V2PortalCreateSessionRequestBody$Outbound = {
@@ -58,7 +75,7 @@ export const V2PortalCreateSessionRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   slug: z.string(),
   externalId: z.string(),
-  permissions: z.array(z.string()),
+  permissions: z.array(PermissionEnum$outboundSchema),
   preview: z.boolean().default(false),
 });
 

@@ -54,8 +54,6 @@ import {
  *
  * Additional permission required for decrypt functionality:
  * - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function apisListKeys(
   client: UnkeyCore,
@@ -139,7 +137,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,
@@ -260,8 +258,8 @@ async function $do(
     >;
     "~next"?: { cursor: string };
   } => {
-    const nextCursor = (responseData as { pagination?: { cursor?: unknown } })
-      .pagination?.cursor;
+    const nextCursor =
+      (responseData as { pagination: { cursor?: unknown } }).pagination.cursor;
     if (typeof nextCursor !== "string") {
       return { next: () => null };
     }

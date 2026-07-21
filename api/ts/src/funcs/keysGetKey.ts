@@ -38,14 +38,18 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions for basic key information:
+ * Your credential must have one of the following permissions for basic key information:
  * - `api.*.read_key` (to read keys from any API)
  * - `api.<api_id>.read_key` (to read keys from a specific API)
+ * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#read_key` (to read keys in any keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#read_key` (to read keys in a specific keyspace)
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#read_key` (to read a specific key)
  *
  * Additional permission required for decrypt functionality:
  * - `api.*.decrypt_key` or `api.<api_id>.decrypt_key`
- *
- * If set, this operation will use {@link Security.rootKey} from the global security.
+ * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#decrypt_key`
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#decrypt_key`
+ * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#decrypt_key`
  */
 export function keysGetKey(
   client: UnkeyCore,
@@ -123,7 +127,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.rootKey);
   const securityInput = secConfig == null ? {} : { rootKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,
