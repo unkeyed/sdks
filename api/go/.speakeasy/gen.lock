@@ -5,15 +5,15 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.790.3
   generationVersion: 2.918.4
-  releaseVersion: 2.7.0
-  configChecksum: aa46508445c3d182fd22dddc7c24e659
+  releaseVersion: 2.7.1
+  configChecksum: c52cbf3bf2ef0c55ed0d06d3c338af68
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks
 persistentEdits:
-  generation_id: f553156f-fa1f-4b9e-b613-ea070028400c
-  pristine_commit_hash: 977ae4555919b6b6cd02d5ab6418e98bdd6dae26
-  pristine_tree_hash: 368e1e7712dcd088ed31c7f676c37e023d7739d3
+  generation_id: 290008a1-fab2-4fa2-8934-d85e826ee950
+  pristine_commit_hash: 3558c49f0b097ee71a8a1dd21864830be735c50d
+  pristine_tree_hash: 9c73f88470bb6d91c6fdde5f3d24f8f2d82ab2f0
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2865,8 +2865,8 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:34dd9186286784b989eacea1e0c5e071fc63f448
-    pristine_git_object: ae30498d7e1ca51199328c1980455ec9378bbd6c
+    last_write_checksum: sha1:0b34edff9838e5411cee36399483f1607e7f4b66
+    pristine_git_object: 339e8f545b0184a9049ea9cb7b982160e2a62c28
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
