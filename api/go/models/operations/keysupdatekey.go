@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type KeysUpdateKeyResponse struct {
 	// Key updated successfully. Changes take effect immediately with up to 30-second edge propagation.
 	//
 	V2KeysUpdateKeyResponseBody *components.V2KeysUpdateKeyResponseBody
+}
+
+func (k KeysUpdateKeyResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysUpdateKeyResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysUpdateKeyResponse) GetHTTPMeta() components.HTTPMetadata {

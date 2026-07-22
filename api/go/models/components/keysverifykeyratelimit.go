@@ -12,9 +12,9 @@ type KeysVerifyKeyRatelimit struct {
 	// Optionally override how expensive this operation is and how many tokens are deducted from the current limit.
 	Cost *int64 `default:"1" json:"cost"`
 	// Optionally override the maximum number of requests allowed within the specified interval.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"limit,omitzero"`
 	// Optionally override the duration of the rate limit window duration.
-	Duration *int64 `json:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitzero"`
 }
 
 func (k KeysVerifyKeyRatelimit) MarshalJSON() ([]byte, error) {

@@ -52,7 +52,7 @@ type EnvironmentVariableInput struct {
 	Kind *Kind `default:"writeonly" json:"kind"`
 	// Human-readable description of the variable.
 	//
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (e EnvironmentVariableInput) MarshalJSON() ([]byte, error) {

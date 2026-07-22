@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -12,6 +13,17 @@ type PortalCreateSessionResponse struct {
 	//
 	V2PortalCreateSessionResponseBody *components.V2PortalCreateSessionResponseBody
 	Headers                           map[string][]string
+}
+
+func (p PortalCreateSessionResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PortalCreateSessionResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PortalCreateSessionResponse) GetHTTPMeta() components.HTTPMetadata {

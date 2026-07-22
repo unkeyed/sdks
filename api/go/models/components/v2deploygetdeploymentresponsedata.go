@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // Status - Current deployment status
 type Status string
 
@@ -43,11 +47,22 @@ type V2DeployGetDeploymentResponseData struct {
 	// Current deployment status
 	Status Status `json:"status"`
 	// Error message if deployment failed
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitzero"`
 	// Hostnames associated with this deployment
-	Hostnames []string `json:"hostnames,omitempty"`
+	Hostnames []string `json:"hostnames,omitzero"`
 	// Deployment steps with status and messages
-	Steps []V2DeployDeploymentStep `json:"steps,omitempty"`
+	Steps []V2DeployDeploymentStep `json:"steps,omitzero"`
+}
+
+func (v V2DeployGetDeploymentResponseData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2DeployGetDeploymentResponseData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2DeployGetDeploymentResponseData) GetID() string {

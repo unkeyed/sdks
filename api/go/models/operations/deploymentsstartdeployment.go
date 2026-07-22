@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -12,6 +13,17 @@ type DeploymentsStartDeploymentResponse struct {
 	// asynchronously; poll `getDeployment` to observe the transition.
 	//
 	V2DeploymentsStartDeploymentResponseBody *components.V2DeploymentsStartDeploymentResponseBody
+}
+
+func (d DeploymentsStartDeploymentResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeploymentsStartDeploymentResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeploymentsStartDeploymentResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -10,9 +10,9 @@ type V2IdentitiesListIdentitiesRequestBody struct {
 	// The maximum number of identities to return in a single request. Use this to control response size and loading performance.
 	Limit *int64 `default:"100" json:"limit"`
 	// Pagination cursor from a previous response. Use this to fetch subsequent pages of results when the response contains a cursor value.
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 	// Free-form text to filter identities. Returns identities whose ID or external ID contains the search string. Matching is case-insensitive.
-	Search *string `json:"search,omitempty"`
+	Search *string `json:"search,omitzero"`
 }
 
 func (v V2IdentitiesListIdentitiesRequestBody) MarshalJSON() ([]byte, error) {

@@ -7,7 +7,7 @@ package components
 type EnvironmentBuild struct {
 	// Path to the Dockerfile used to build the app, if any.
 	//
-	Dockerfile *string `json:"dockerfile,omitempty"`
+	Dockerfile *string `json:"dockerfile,omitzero"`
 	// The directory the app is built from. "." for the repository root.
 	//
 	RootDirectory string `json:"rootDirectory"`
@@ -15,7 +15,7 @@ type EnvironmentBuild struct {
 	// scope the build to a single app. Omitted when left to auto-detection or
 	// for Dockerfile builds.
 	//
-	BuildCommand *string `json:"buildCommand,omitempty"`
+	BuildCommand *string `json:"buildCommand,omitzero"`
 	// Paths that trigger a rebuild when changed.
 	//
 	WatchPaths []string `json:"watchPaths"`

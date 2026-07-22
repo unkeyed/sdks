@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type ApisDeleteAPIResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// API namespace deleted successfully. All associated keys are immediately invalidated and will fail verification with `code=NOT_FOUND`.
 	V2ApisDeleteAPIResponseBody *components.V2ApisDeleteAPIResponseBody
+}
+
+func (a ApisDeleteAPIResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApisDeleteAPIResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *ApisDeleteAPIResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -14,9 +14,9 @@ type V2ProjectsListProjectsRequestBody struct {
 	// Pagination cursor from a previous response to fetch the next page.
 	// Use when `hasMore: true` in the previous response.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 	// Free-form text to filter projects. Returns projects whose ID, name, or slug contains the search string. Matching is case-insensitive.
-	Search *string `json:"search,omitempty"`
+	Search *string `json:"search,omitzero"`
 }
 
 func (v V2ProjectsListProjectsRequestBody) MarshalJSON() ([]byte, error) {

@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type KeysRemoveRolesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Roles removed successfully. Returns all roles currently assigned to the key.
 	V2KeysRemoveRolesResponseBody *components.V2KeysRemoveRolesResponseBody
+}
+
+func (k KeysRemoveRolesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysRemoveRolesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysRemoveRolesResponse) GetHTTPMeta() components.HTTPMetadata {

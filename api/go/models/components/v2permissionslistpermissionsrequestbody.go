@@ -14,11 +14,11 @@ type V2PermissionsListPermissionsRequestBody struct {
 	// Leave empty or omit this field to start from the beginning of the permission list.
 	// Cursors are temporary and may expire - always handle cases where a cursor becomes invalid.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 	// Maximum number of permissions to return in a single response.
 	Limit *int64 `default:"100" json:"limit"`
 	// Free-form text to filter permissions. Returns permissions whose ID, name, slug, or description contains the search string. Matching is case-insensitive.
-	Search *string `json:"search,omitempty"`
+	Search *string `json:"search,omitzero"`
 }
 
 func (v V2PermissionsListPermissionsRequestBody) MarshalJSON() ([]byte, error) {

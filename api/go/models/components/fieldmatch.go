@@ -13,9 +13,9 @@ type FieldMatch struct {
 	Name string `json:"name"`
 	// Matches when the field is present, regardless of value.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	present *bool `const:"true" json:"present,omitempty"`
+	present *bool `const:"true" json:"present,omitzero"`
 	// String matcher. Exactly one of `exact`, `prefix` or `regex` must be set.
-	Value *StringMatch `json:"value,omitempty"`
+	Value *StringMatch `json:"value,omitzero"`
 }
 
 func (f FieldMatch) MarshalJSON() ([]byte, error) {

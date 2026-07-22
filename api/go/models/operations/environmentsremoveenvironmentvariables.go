@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type EnvironmentsRemoveEnvironmentVariablesResponse struct {
 	// Successfully removed the environment variables.
 	//
 	V2EnvironmentsRemoveEnvironmentVariablesResponseBody *components.V2EnvironmentsRemoveEnvironmentVariablesResponseBody
+}
+
+func (e EnvironmentsRemoveEnvironmentVariablesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnvironmentsRemoveEnvironmentVariablesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EnvironmentsRemoveEnvironmentVariablesResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type PermissionsDeletePermissionResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Permission deleted successfully
 	V2PermissionsDeletePermissionResponseBody *components.V2PermissionsDeletePermissionResponseBody
+}
+
+func (p PermissionsDeletePermissionResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PermissionsDeletePermissionResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PermissionsDeletePermissionResponse) GetHTTPMeta() components.HTTPMetadata {

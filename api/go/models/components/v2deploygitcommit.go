@@ -5,15 +5,15 @@ package components
 // V2DeployGitCommit - Optional git commit information
 type V2DeployGitCommit struct {
 	// Git commit SHA
-	CommitSha *string `json:"commitSha,omitempty"`
+	CommitSha *string `json:"commitSha,omitzero"`
 	// Git commit message
-	CommitMessage *string `json:"commitMessage,omitempty"`
+	CommitMessage *string `json:"commitMessage,omitzero"`
 	// Git author handle/username
-	AuthorHandle *string `json:"authorHandle,omitempty"`
+	AuthorHandle *string `json:"authorHandle,omitzero"`
 	// Git author avatar URL
-	AuthorAvatarURL *string `json:"authorAvatarUrl,omitempty"`
+	AuthorAvatarURL *string `json:"authorAvatarUrl,omitzero"`
 	// Commit timestamp in milliseconds
-	Timestamp *int64 `json:"timestamp,omitempty"`
+	Timestamp *int64 `json:"timestamp,omitzero"`
 }
 
 func (v *V2DeployGitCommit) GetCommitSha() *string {

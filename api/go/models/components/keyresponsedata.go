@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type KeyResponseData struct {
 	// Unique identifier for this key.
 	KeyID string `json:"keyId"`
@@ -10,25 +14,36 @@ type KeyResponseData struct {
 	// Whether the key is enabled or disabled.
 	Enabled bool `json:"enabled"`
 	// Human-readable name for this key.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Custom metadata associated with this key.
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Unix timestamp in milliseconds when key was created.
 	CreatedAt int64 `json:"createdAt"`
 	// Unix timestamp in milliseconds when key was last updated.
-	UpdatedAt *int64 `json:"updatedAt,omitempty"`
+	UpdatedAt *int64 `json:"updatedAt,omitzero"`
 	// Unix timestamp in milliseconds when key was last used for verification. This is an approximated value, accurate to within 5 minutes.
-	LastUsedAt *int64 `json:"lastUsedAt,omitempty"`
+	LastUsedAt *int64 `json:"lastUsedAt,omitzero"`
 	// Unix timestamp in milliseconds when key expires (if set).
-	Expires     *int64   `json:"expires,omitempty"`
-	Permissions []string `json:"permissions,omitempty"`
-	Roles       []string `json:"roles,omitempty"`
+	Expires     *int64   `json:"expires,omitzero"`
+	Permissions []string `json:"permissions,omitzero"`
+	Roles       []string `json:"roles,omitzero"`
 	// Credit configuration and remaining balance for this key.
-	Credits  *KeyCreditsData `json:"credits,omitempty"`
-	Identity *Identity       `json:"identity,omitempty"`
+	Credits  *KeyCreditsData `json:"credits,omitzero"`
+	Identity *Identity       `json:"identity,omitzero"`
 	// Decrypted key value (only when decrypt=true).
-	Plaintext  *string             `json:"plaintext,omitempty"`
-	Ratelimits []RatelimitResponse `json:"ratelimits,omitempty"`
+	Plaintext  *string             `json:"plaintext,omitzero"`
+	Ratelimits []RatelimitResponse `json:"ratelimits,omitzero"`
+}
+
+func (k KeyResponseData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeyResponseData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeyResponseData) GetKeyID() string {

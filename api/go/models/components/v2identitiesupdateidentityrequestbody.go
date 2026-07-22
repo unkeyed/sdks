@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2IdentitiesUpdateIdentityRequestBody struct {
 	// The ID of the identity to update. Accepts either the externalId (your system-generated identifier) or the identityId (internal identifier returned by the identity service).
 	Identity string `json:"identity"`
@@ -10,13 +14,24 @@ type V2IdentitiesUpdateIdentityRequestBody struct {
 	// Avoid storing sensitive data here as it's returned in verification responses.
 	// Large metadata objects increase verification latency and should stay under 10KB total size.
 	//
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Replaces all existing identity rate limits with this complete list of rate limits.
 	// Omitting this field preserves existing rate limits, while providing an empty array removes all rate limits.
 	// These limits are shared across all keys belonging to this identity, preventing abuse through multiple keys.
 	// Rate limit changes take effect immediately but may take up to 30 seconds to propagate across all regions.
 	//
-	Ratelimits []RatelimitRequest `json:"ratelimits,omitempty"`
+	Ratelimits []RatelimitRequest `json:"ratelimits,omitzero"`
+}
+
+func (v V2IdentitiesUpdateIdentityRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2IdentitiesUpdateIdentityRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2IdentitiesUpdateIdentityRequestBody) GetIdentity() string {

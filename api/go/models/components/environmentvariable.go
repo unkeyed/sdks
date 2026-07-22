@@ -13,9 +13,9 @@ type EnvironmentVariable struct {
 	// The decrypted plaintext value. Present only for `recoverable` variables.
 	// Omitted for `writeonly` variables, which can never be read back.
 	//
-	Value *string `json:"value,omitempty"`
+	Value *string `json:"value,omitzero"`
 	// Human-readable description. Omitted if none was provided.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitzero"`
 	// Unix timestamp in milliseconds when the variable was created.
 	CreatedAt int64 `json:"createdAt"`
 }

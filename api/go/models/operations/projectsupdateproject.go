@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type ProjectsUpdateProjectResponse struct {
 	// Successfully updated the project.
 	//
 	V2ProjectsUpdateProjectResponseBody *components.V2ProjectsUpdateProjectResponseBody
+}
+
+func (p ProjectsUpdateProjectResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProjectsUpdateProjectResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *ProjectsUpdateProjectResponse) GetHTTPMeta() components.HTTPMetadata {

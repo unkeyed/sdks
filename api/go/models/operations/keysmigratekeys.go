@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type KeysMigrateKeysResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successfully migrated keys.
 	V2KeysMigrateKeysResponseBody *components.V2KeysMigrateKeysResponseBody
+}
+
+func (k KeysMigrateKeysResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysMigrateKeysResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysMigrateKeysResponse) GetHTTPMeta() components.HTTPMetadata {

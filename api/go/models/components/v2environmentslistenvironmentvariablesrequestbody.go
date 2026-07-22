@@ -24,7 +24,7 @@ type V2EnvironmentsListEnvironmentVariablesRequestBody struct {
 	// Pagination cursor from a previous response to fetch the next page.
 	// Use when `hasMore: true` in the previous response.
 	//
-	Cursor *string `json:"cursor,omitempty"`
+	Cursor *string `json:"cursor,omitzero"`
 }
 
 func (v V2EnvironmentsListEnvironmentVariablesRequestBody) MarshalJSON() ([]byte, error) {

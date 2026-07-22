@@ -35,7 +35,7 @@ type KeyCreditsRefill struct {
 	// Only required when interval is 'monthly'.
 	// For days beyond the month's length, refill occurs on the last day of the month.
 	//
-	RefillDay *int64 `json:"refillDay,omitempty"`
+	RefillDay *int64 `json:"refillDay,omitzero"`
 }
 
 func (k *KeyCreditsRefill) GetInterval() KeyCreditsRefillInterval {

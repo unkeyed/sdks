@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -12,6 +13,17 @@ type RatelimitListOverridesResponse struct {
 	V2RatelimitListOverridesResponseBody *components.V2RatelimitListOverridesResponseBody
 
 	Next func() (*RatelimitListOverridesResponse, error)
+}
+
+func (r RatelimitListOverridesResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RatelimitListOverridesResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *RatelimitListOverridesResponse) GetHTTPMeta() components.HTTPMetadata {

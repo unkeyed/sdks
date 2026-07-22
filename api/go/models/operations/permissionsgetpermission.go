@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type PermissionsGetPermissionResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Permission retrieved successfully
 	V2PermissionsGetPermissionResponseBody *components.V2PermissionsGetPermissionResponseBody
+}
+
+func (p PermissionsGetPermissionResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PermissionsGetPermissionResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PermissionsGetPermissionResponse) GetHTTPMeta() components.HTTPMetadata {

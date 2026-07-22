@@ -43,16 +43,16 @@ type EnvironmentHealthcheck struct {
 	Path string `json:"path"`
 	// How often the probe runs, in seconds. Defaults to 10 when omitted.
 	//
-	IntervalSeconds *int64 `json:"intervalSeconds,omitempty"`
+	IntervalSeconds *int64 `json:"intervalSeconds,omitzero"`
 	// Per-probe timeout, in seconds. Defaults to 5 when omitted.
 	//
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty"`
+	TimeoutSeconds *int64 `json:"timeoutSeconds,omitzero"`
 	// Consecutive failures before the container is restarted. Defaults to 3 when omitted.
 	//
-	FailureThreshold *int64 `json:"failureThreshold,omitempty"`
+	FailureThreshold *int64 `json:"failureThreshold,omitzero"`
 	// Delay before the first probe runs, in seconds. Defaults to 0 when omitted.
 	//
-	InitialDelaySeconds *int64 `json:"initialDelaySeconds,omitempty"`
+	InitialDelaySeconds *int64 `json:"initialDelaySeconds,omitzero"`
 }
 
 func (e *EnvironmentHealthcheck) GetMethod() EnvironmentHealthcheckMethod {

@@ -21,7 +21,7 @@ type Permission struct {
 	// Include information about what resources can be accessed and what actions can be performed.
 	// Not visible to end users - this is for internal documentation and team clarity.
 	//
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (p *Permission) GetID() string {

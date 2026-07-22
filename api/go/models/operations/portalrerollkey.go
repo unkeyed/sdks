@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -22,6 +23,17 @@ type PortalRerollKeyResponse struct {
 	// Key rerolled successfully. The new plaintext key is returned exactly once.
 	//
 	V2KeysRerollKeyResponseBody *components.V2KeysRerollKeyResponseBody
+}
+
+func (p PortalRerollKeyResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PortalRerollKeyResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PortalRerollKeyResponse) GetHTTPMeta() components.HTTPMetadata {

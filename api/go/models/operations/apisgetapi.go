@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type ApisGetAPIResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// API information retrieved successfully. Contains the unique API ID and human-readable name.
 	V2ApisGetAPIResponseBody *components.V2ApisGetAPIResponseBody
+}
+
+func (a ApisGetAPIResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApisGetAPIResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *ApisGetAPIResponse) GetHTTPMeta() components.HTTPMetadata {

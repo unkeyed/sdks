@@ -2,12 +2,27 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // UpdateKeyCreditsData - Credit configuration and remaining balance for this key.
 type UpdateKeyCreditsData struct {
 	// Number of credits remaining (null for unlimited). This also clears the refilling schedule.
-	Remaining *int64 `json:"remaining,omitempty"`
+	Remaining *int64 `json:"remaining,omitzero"`
 	// Configuration for automatic credit refill behavior.
-	Refill *UpdateKeyCreditsRefill `json:"refill,omitempty"`
+	Refill *UpdateKeyCreditsRefill `json:"refill,omitzero"`
+}
+
+func (u UpdateKeyCreditsData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateKeyCreditsData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *UpdateKeyCreditsData) GetRemaining() *int64 {

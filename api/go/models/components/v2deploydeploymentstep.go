@@ -4,13 +4,13 @@ package components
 
 type V2DeployDeploymentStep struct {
 	// Step status
-	Status *string `json:"status,omitempty"`
+	Status *string `json:"status,omitzero"`
 	// Step message
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitzero"`
 	// Error message if step failed
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitzero"`
 	// Unix timestamp in milliseconds
-	CreatedAt *int64 `json:"createdAt,omitempty"`
+	CreatedAt *int64 `json:"createdAt,omitzero"`
 }
 
 func (v *V2DeployDeploymentStep) GetStatus() *string {

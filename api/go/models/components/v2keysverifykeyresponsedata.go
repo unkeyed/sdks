@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // Code - A machine-readable code indicating the verification status
 // or failure reason. Values: `VALID` (key is valid and passed all checks), `NOT_FOUND` (key doesn't
 // exist or belongs to wrong API), `FORBIDDEN` (key lacks required permissions), `INSUFFICIENT_PERMISSIONS`
@@ -52,48 +56,59 @@ type V2KeysVerifyKeyResponseData struct {
 	// Use this ID for operations like updating or revoking the key. This field
 	// is returned for both valid and invalid keys (except when `code=NOT_FOUND`).
 	//
-	KeyID *string `json:"keyId,omitempty"`
+	KeyID *string `json:"keyId,omitzero"`
 	// The human-readable name assigned to this key during creation.
 	// This is useful for displaying in logs or admin interfaces to identify
 	// the key's purpose.
 	//
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Custom metadata associated with the key. This can include any
 	// JSON-serializable data you stored with the key during creation or updates,
 	// such as plan information, feature flags, or user details. Use this to
 	// avoid additional database lookups for contextual information needed during
 	// API calls.
 	//
-	Meta map[string]any `json:"meta,omitempty"`
+	Meta map[string]any `json:"meta,omitzero"`
 	// Unix timestamp (in milliseconds) when the key will expire.
 	// If omitted, the key has no expiration. You can use this to
 	// warn users about upcoming expirations or to understand the validity period.
 	//
-	Expires *int64 `json:"expires,omitempty"`
+	Expires *int64 `json:"expires,omitzero"`
 	// The number of requests/credits remaining for this key. If omitted,
 	// the key has unlimited usage. This value decreases with
 	// each verification (based on the 'cost' parameter) unless explicit credit
 	// refills are configured.
 	//
-	Credits *int64 `json:"credits,omitempty"`
+	Credits *int64 `json:"credits,omitzero"`
 	// Indicates if the key is currently enabled. Disabled keys will
 	// always fail verification with `code=DISABLED`. This is useful for implementing
 	// temporary suspensions without deleting the key.
 	//
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitzero"`
 	// A list of all permission names assigned to this key, either
 	// directly or through roles. These permissions determine what actions the
 	// key can perform. Only returned when permissions were checked during verification
 	// or when the key fails with `code=FORBIDDEN`.
 	//
-	Permissions []string `json:"permissions,omitempty"`
+	Permissions []string `json:"permissions,omitzero"`
 	// A list of all role names assigned to this key. Roles are collections
 	// of permissions that grant access to specific functionality. Only returned
 	// when permissions were checked during verification.
 	//
-	Roles      []string                 `json:"roles,omitempty"`
-	Identity   *Identity                `json:"identity,omitempty"`
-	Ratelimits []VerifyKeyRatelimitData `json:"ratelimits,omitempty"`
+	Roles      []string                 `json:"roles,omitzero"`
+	Identity   *Identity                `json:"identity,omitzero"`
+	Ratelimits []VerifyKeyRatelimitData `json:"ratelimits,omitzero"`
+}
+
+func (v V2KeysVerifyKeyResponseData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2KeysVerifyKeyResponseData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2KeysVerifyKeyResponseData) GetValid() bool {

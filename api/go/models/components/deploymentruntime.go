@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type DeploymentRuntime struct {
 	// CPU allocation in vCPUs (1 = one vCPU, 0.5 = half a vCPU).
 	//
@@ -24,7 +28,18 @@ type DeploymentRuntime struct {
 	// Protocol used to reach the container.
 	//
 	UpstreamProtocol EnvironmentUpstreamProtocol `json:"upstreamProtocol"`
-	Healthcheck      *EnvironmentHealthcheck     `json:"healthcheck,omitempty"`
+	Healthcheck      *EnvironmentHealthcheck     `json:"healthcheck,omitzero"`
+}
+
+func (d DeploymentRuntime) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeploymentRuntime) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeploymentRuntime) GetVCpus() float64 {

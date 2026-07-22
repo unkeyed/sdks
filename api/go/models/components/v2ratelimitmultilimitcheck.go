@@ -40,7 +40,7 @@ type V2RatelimitMultiLimitCheck struct {
 	// - Debugging which override rule was matched
 	// - Tracking the effects of specific overrides
 	// - Understanding why limits differ from default values
-	OverrideID *string `json:"overrideId,omitempty"`
+	OverrideID *string `json:"overrideId,omitzero"`
 }
 
 func (v *V2RatelimitMultiLimitCheck) GetNamespace() string {

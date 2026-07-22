@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type KeysWhoamiResponse struct {
 	// Successfully retrieved key information.
 	//
 	V2KeysWhoamiResponseBody *components.V2KeysWhoamiResponseBody
+}
+
+func (k KeysWhoamiResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *KeysWhoamiResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (k *KeysWhoamiResponse) GetHTTPMeta() components.HTTPMetadata {

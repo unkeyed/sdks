@@ -6,7 +6,7 @@ type DeploymentGit struct {
 	// The git commit SHA this deployment was built from.
 	CommitSha string `json:"commitSha"`
 	// The git branch this deployment was built from. Omitted when unknown.
-	Branch *string `json:"branch,omitempty"`
+	Branch *string `json:"branch,omitzero"`
 }
 
 func (d *DeploymentGit) GetCommitSha() string {

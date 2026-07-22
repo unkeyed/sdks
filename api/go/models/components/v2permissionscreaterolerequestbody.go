@@ -20,7 +20,7 @@ type V2PermissionsCreateRoleRequestBody struct {
 	// - Any security considerations or limitations
 	// - Related roles that might be used together
 	//
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (v *V2PermissionsCreateRoleRequestBody) GetName() string {

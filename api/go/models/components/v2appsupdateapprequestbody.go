@@ -14,19 +14,19 @@ type V2AppsUpdateAppRequestBody struct {
 	// New human-readable name for the app.
 	// Omit this field to leave the current name unchanged.
 	//
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitzero"`
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	Slug *string `json:"slug,omitempty"`
+	Slug *string `json:"slug,omitzero"`
 	// New default git branch deployments track for this app.
 	// Omit this field to leave the current branch unchanged.
 	//
-	DefaultBranch *string `json:"defaultBranch,omitempty"`
+	DefaultBranch *string `json:"defaultBranch,omitzero"`
 	// Enable or disable delete protection for the app.
 	// Omit this field to leave the current setting unchanged.
 	//
-	DeleteProtection *bool `json:"deleteProtection,omitempty"`
+	DeleteProtection *bool `json:"deleteProtection,omitzero"`
 }
 
 func (v *V2AppsUpdateAppRequestBody) GetProject() string {

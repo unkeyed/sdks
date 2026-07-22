@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 // Policy - A gateway policy. Exactly one of `keyauth`, `ratelimit`, `firewall` or
 // `openapi` must be set. The server generates an id for every policy it
 // stores.
@@ -12,17 +16,28 @@ type Policy struct {
 	Enabled bool `json:"enabled"`
 	// Optional request matchers. The policy applies only to requests matching
 	// all expressions; omit to apply to every request.
-	Match []MatchExpr `json:"match,omitempty"`
+	Match []MatchExpr `json:"match,omitzero"`
 	// Verifies Unkey API keys on matching requests.
-	Keyauth *KeyauthPolicy `json:"keyauth,omitempty"`
+	Keyauth *KeyauthPolicy `json:"keyauth,omitzero"`
 	// Rate limits matching requests.
-	Ratelimit *RatelimitPolicy `json:"ratelimit,omitempty"`
+	Ratelimit *RatelimitPolicy `json:"ratelimit,omitzero"`
 	// Blocks matching requests.
-	Firewall *FirewallPolicy `json:"firewall,omitempty"`
+	Firewall *FirewallPolicy `json:"firewall,omitzero"`
 	// Validates matching requests against the app's uploaded OpenAPI spec. Has no
 	// configuration of its own. If no spec has been uploaded for the deployment,
 	// the policy is a no-op and requests pass through unvalidated.
-	Openapi *OpenapiPolicy `json:"openapi,omitempty"`
+	Openapi *OpenapiPolicy `json:"openapi,omitzero"`
+}
+
+func (p Policy) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *Policy) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *Policy) GetName() string {

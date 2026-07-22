@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -11,6 +12,17 @@ type ProjectsDeleteProjectResponse struct {
 	// Successfully enqueued deletion of the project.
 	//
 	V2ProjectsDeleteProjectResponseBody *components.V2ProjectsDeleteProjectResponseBody
+}
+
+func (p ProjectsDeleteProjectResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProjectsDeleteProjectResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *ProjectsDeleteProjectResponse) GetHTTPMeta() components.HTTPMetadata {

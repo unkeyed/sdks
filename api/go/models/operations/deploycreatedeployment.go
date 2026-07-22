@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 )
 
@@ -10,6 +11,17 @@ type DeployCreateDeploymentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Deployment created successfully
 	V2DeployCreateDeploymentResponseBody *components.V2DeployCreateDeploymentResponseBody
+}
+
+func (d DeployCreateDeploymentResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeployCreateDeploymentResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeployCreateDeploymentResponse) GetHTTPMeta() components.HTTPMetadata {
