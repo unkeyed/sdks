@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 2.7.0
+  version: 2.7.1
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: true
   baseErrorName: UnkeyError
@@ -49,8 +49,6 @@ go:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
-  # this must be set to true, otherwise empty objects such as `Meta: map[string]string{}` would be omitted
-  # Our API uses empty objects or arrays to clear state, whereas missing or undefined is a noop.
   includeEmptyObjects: true
   inferUnionDiscriminators: false
   inputModelSuffix: input
