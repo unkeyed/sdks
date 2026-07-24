@@ -27,26 +27,26 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Query key verification data
+ * Query rate limit data
  *
  * @remarks
- * Execute custom SQL queries against your key verification analytics. CTEs, subqueries, UNION, and EXCEPT are supported.
- * Queries must use one of the five public aliases: `key_verifications_v1`, `key_verifications_per_minute_v1`, `key_verifications_per_hour_v1`, `key_verifications_per_day_v1`, or `key_verifications_per_month_v1`. Physical `default.*` table names are unsupported.
- * Queries are always restricted to the authenticated workspace. Wildcard analytics permission can read every API in that workspace; API-scoped permissions automatically restrict results to the permitted APIs.
- * For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
+ * Queries may reference only the five public rate limit analytics aliases: `ratelimits_v1`, `ratelimits_per_minute_v1`, `ratelimits_per_hour_v1`, `ratelimits_per_day_v1`, or `ratelimits_per_month_v1`. CTEs, subqueries, UNION, and EXCEPT are supported.
+ * Queries are always restricted to the authenticated workspace. Wildcard analytics permission can read every namespace in that workspace; namespace-scoped permissions automatically restrict results to the permitted namespace IDs.
+ * Workspace retention and query limits apply.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */
-export function analyticsGetVerifications(
+export function analyticsGetRatelimits(
   client: UnkeyCore,
-  request: components.V2AnalyticsGetVerificationsRequestBody,
+  request: components.V2AnalyticsGetRatelimitsRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2AnalyticsGetVerificationsResponseBody,
+    components.V2AnalyticsGetRatelimitsResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
+    | errors.PreconditionFailedErrorResponse
     | errors.UnprocessableEntityErrorResponse
     | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
@@ -70,15 +70,16 @@ export function analyticsGetVerifications(
 
 async function $do(
   client: UnkeyCore,
-  request: components.V2AnalyticsGetVerificationsRequestBody,
+  request: components.V2AnalyticsGetRatelimitsRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.V2AnalyticsGetVerificationsResponseBody,
+      components.V2AnalyticsGetRatelimitsResponseBody,
       | errors.BadRequestErrorResponse
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
+      | errors.PreconditionFailedErrorResponse
       | errors.UnprocessableEntityErrorResponse
       | errors.TooManyRequestsErrorResponse
       | errors.InternalServerErrorResponse
@@ -98,7 +99,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.V2AnalyticsGetVerificationsRequestBody$outboundSchema.parse(
+      components.V2AnalyticsGetRatelimitsRequestBody$outboundSchema.parse(
         value,
       ),
     "Input validation failed",
@@ -109,7 +110,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/analytics.getVerifications")();
+  const path = pathToFunc("/v2/analytics.getRatelimits")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -123,7 +124,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "analytics.getVerifications",
+    operationID: "analytics.getRatelimits",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -177,10 +178,11 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.V2AnalyticsGetVerificationsResponseBody,
+    components.V2AnalyticsGetRatelimitsResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
+    | errors.PreconditionFailedErrorResponse
     | errors.UnprocessableEntityErrorResponse
     | errors.TooManyRequestsErrorResponse
     | errors.InternalServerErrorResponse
@@ -194,13 +196,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      components.V2AnalyticsGetVerificationsResponseBody$inboundSchema,
-    ),
+    M.json(200, components.V2AnalyticsGetRatelimitsResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
+    M.jsonErr(412, errors.PreconditionFailedErrorResponse$inboundSchema),
     M.jsonErr(422, errors.UnprocessableEntityErrorResponse$inboundSchema),
     M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {
       ctype: "application/problem+json",

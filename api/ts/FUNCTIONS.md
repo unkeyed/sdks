@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { analyticsGetVerifications } from "@unkey/api/funcs/analyticsGetVerifications.js";
+import { analyticsGetRatelimits } from "@unkey/api/funcs/analyticsGetRatelimits.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,14 +29,14 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await analyticsGetVerifications(unkey, {
-    query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+  const res = await analyticsGetRatelimits(unkey, {
+    query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("analyticsGetVerifications failed:", res.error);
+    console.log("analyticsGetRatelimits failed:", res.error);
   }
 }
 
