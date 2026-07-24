@@ -8,7 +8,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_ratelimits(query="SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id")
 
     # Handle response
     print(res)
@@ -29,7 +29,7 @@ async def main():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.analytics.get_verifications_async(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+        res = await unkey.analytics.get_ratelimits_async(query="SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id")
 
         # Handle response
         print(res)
