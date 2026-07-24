@@ -17,13 +17,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }

@@ -6,11 +6,80 @@ Analytics query operations
 
 ### Available Operations
 
+* [GetRatelimits](#getratelimits) - Query rate limit data
 * [GetVerifications](#getverifications) - Query key verification data
+
+## GetRatelimits
+
+Queries may reference only the five public rate limit analytics aliases: `ratelimits_v1`, `ratelimits_per_minute_v1`, `ratelimits_per_hour_v1`, `ratelimits_per_day_v1`, or `ratelimits_per_month_v1`. CTEs, subqueries, UNION, and EXCEPT are supported.
+Queries are always restricted to the authenticated workspace. Wildcard analytics permission can read every namespace in that workspace; namespace-scoped permissions automatically restrict results to the permitted namespace IDs.
+Workspace retention and query limits apply.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="analytics.getRatelimits" method="post" path="/v2/analytics.getRatelimits" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+        Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2AnalyticsGetRatelimitsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [components.V2AnalyticsGetRatelimitsRequestBody](../../models/components/v2analyticsgetratelimitsrequestbody.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `opts`                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.AnalyticsGetRatelimitsResponse](../../models/operations/analyticsgetratelimitsresponse.md), error**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| apierrors.BadRequestErrorResponse          | 400                                        | application/json                           |
+| apierrors.UnauthorizedErrorResponse        | 401                                        | application/json                           |
+| apierrors.ForbiddenErrorResponse           | 403                                        | application/json                           |
+| apierrors.PreconditionFailedErrorResponse  | 412                                        | application/json                           |
+| apierrors.UnprocessableEntityErrorResponse | 422                                        | application/json                           |
+| apierrors.TooManyRequestsErrorResponse     | 429                                        | application/problem+json                   |
+| apierrors.InternalServerErrorResponse      | 500                                        | application/json                           |
+| apierrors.ServiceUnavailableErrorResponse  | 503                                        | application/json                           |
+| apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |
 
 ## GetVerifications
 
-Execute custom SQL queries against your key verification analytics.
+Execute custom SQL queries against your key verification analytics. CTEs, subqueries, UNION, and EXCEPT are supported.
+Queries must use one of the five public aliases: `key_verifications_v1`, `key_verifications_per_minute_v1`, `key_verifications_per_hour_v1`, `key_verifications_per_day_v1`, or `key_verifications_per_month_v1`. Physical `default.*` table names are unsupported.
+Queries are always restricted to the authenticated workspace. Wildcard analytics permission can read every API in that workspace; API-scoped permissions automatically restrict results to the permitted APIs.
 For complete documentation including available tables, columns, data types, query examples, see the schema reference in the API documentation.
 
 
@@ -66,7 +135,6 @@ func main() {
 | apierrors.BadRequestErrorResponse          | 400                                        | application/json                           |
 | apierrors.UnauthorizedErrorResponse        | 401                                        | application/json                           |
 | apierrors.ForbiddenErrorResponse           | 403                                        | application/json                           |
-| apierrors.NotFoundErrorResponse            | 404                                        | application/json                           |
 | apierrors.UnprocessableEntityErrorResponse | 422                                        | application/json                           |
 | apierrors.TooManyRequestsErrorResponse     | 429                                        | application/problem+json                   |
 | apierrors.InternalServerErrorResponse      | 500                                        | application/json                           |
