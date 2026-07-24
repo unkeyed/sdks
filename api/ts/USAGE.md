@@ -7,9 +7,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getRatelimits({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
   });
 
   console.log(result);

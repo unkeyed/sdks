@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @unkey/api SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx analyticsGetVerifications.example.ts
+ * npm run build && npx tsx analyticsGetRatelimits.example.ts
  */
 
 import { Unkey } from "@unkey/api";
@@ -18,9 +18,9 @@ const unkey = new Unkey({
 });
 
 async function main() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getRatelimits({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
   });
 
   console.log(result);

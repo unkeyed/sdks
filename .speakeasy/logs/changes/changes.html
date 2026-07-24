@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - python</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,60 +95,11 @@
         }
     </style>
 </head>
-<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.portal.create_session()</code>:
-
-<ul>
-<li><code>request.permissions[]</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-</ul></li>
-<li><code>unkey.gateway.list_policies()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.get_app()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.list_apps()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.update_app()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.create_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.get_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.list_deployments()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.promote_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.rollback_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.start_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.stop_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.get_environment()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.list_environment_variables()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.list_environments()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.remove_environment_variables()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.set_environment_variables()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.create_app()</code>: <strong>Added</strong></li>
-<li><code>unkey.environments.update_settings()</code>: <strong>Added</strong></li>
-<li><code>unkey.apis.list_keys()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
-<li><code>unkey.gateway.update_policy()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.get_verifications()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.list_keys()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.reroll_key()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.create_project()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.delete_project()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.get_project()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.list_projects()</code>: <strong>Added</strong></li>
-<li><code>unkey.projects.update_project()</code>: <strong>Added</strong></li>
-<li><code>unkey.gateway.set_policies()</code>: <strong>Added</strong></li>
-<li><code>unkey.internal.create_deployment()</code>: <strong>Deprecated</strong></li>
-<li><code>unkey.internal.get_deployment()</code>: <strong>Deprecated</strong></li>
-<li><code>unkey.identities.list_identities()</code>:  <code>request.search</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.list_permissions()</code>:
-
-<ul>
-<li><code>request.search</code> <strong>Added</strong></li>
-<li><code>response.pagination</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>unkey.permissions.list_roles()</code>:
-
-<ul>
-<li><code>request.search</code> <strong>Added</strong></li>
-<li><code>response.pagination</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>unkey.apps.delete_app()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.list_overrides()</code>:  <code>response.pagination</code> <strong>Changed</strong></li>
+<li><code>unkey.analytics.getVerifications()</code>:  <code>error.status[404]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.analytics.getRatelimits()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>

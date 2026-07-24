@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: d76e6914313b6948d7d28a2a92a49a10
+  docChecksum: 3c3908d51e12f4238b42c84c898d9788
   docVersion: 2.0.0
   speakeasyVersion: 1.790.3
   generationVersion: 2.918.4
-  releaseVersion: 2.5.0
-  configChecksum: 00982df4ca0950cefb7d9e42dbc5ff21
+  releaseVersion: 2.5.1
+  configChecksum: dc6335084c56575fb58ca56dbf6bc9ca
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: a35dc9a6-55a9-46fc-8308-97549a71be49
-  pristine_commit_hash: cd68ecd629d9f118ace225c673d29d37e3e578cc
-  pristine_tree_hash: b0e8afaab512cf15730f8aa95b0bc5e946137fa3
+  generation_id: fa1292c8-322d-4cae-9100-5ebdb86959ab
+  pristine_commit_hash: 497a15706b298586f77b6c4856102a37e58b829c
+  pristine_tree_hash: c81979715fbd16f0f9ae897cfef44880dce6ebb7
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -50,16 +50,16 @@ trackedFiles:
     pristine_git_object: 670ac0a62d7e568c9d44a14f5deafb8442a255d8
   FUNCTIONS.md:
     id: 21b9df02aaeb
-    last_write_checksum: sha1:626829378340a65c6ed1ab824e46afd96ac83b4a
-    pristine_git_object: 0d84ef2283853bb41ea9a9b2fe681a22f60d232c
+    last_write_checksum: sha1:0551351bece7fdf01d4917abcac4b44a9eed5b4e
+    pristine_git_object: 0134df3ed359ff2ed6f4334cc8316e98ca72e696
   RUNTIMES.md:
     id: 620c490847b6
     last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
     pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:41e325a7ab88c6850c71b8e5c5b421ecb1f2505c
-    pristine_git_object: 773370b64232246f66ddffca4371afa98826746e
+    last_write_checksum: sha1:6f16163b15ae44490356b11766484b66125c10b5
+    pristine_git_object: d923a162e42b7194f77b0008a209304a099b3239
   docs/lib/utils/retryconfig.md:
     id: 0ce9707cb848
     last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
@@ -364,10 +364,18 @@ trackedFiles:
     id: 99cdf9265a42
     last_write_checksum: sha1:be7302376b7b0a67b2b42586d68454ac96bec3e3
     pristine_git_object: 79b5800e90d235bc7ea0762881cf37347e7696d1
+  docs/models/components/v2analyticsgetratelimitsrequestbody.md:
+    id: 98b58ea191f0
+    last_write_checksum: sha1:e8cf54aa13a0187b91ab0c347a377ddd44154bba
+    pristine_git_object: e48d45c7a8f5df6a16a80bd49e3b0ad12acc512e
+  docs/models/components/v2analyticsgetratelimitsresponsebody.md:
+    id: ec7667d74a3b
+    last_write_checksum: sha1:4dc5574bf8b711424d157516e7041f924d7e3632
+    pristine_git_object: b0c4476594ebf5829f44ecf7c53ce26c4c1370b6
   docs/models/components/v2analyticsgetverificationsrequestbody.md:
     id: 8b4bc4329a6d
-    last_write_checksum: sha1:f7cc81e7190b1400c84b568f2a4b3a330487b4cc
-    pristine_git_object: 76e8c3af06f6c69869aa0b5d5b7458bedc34706a
+    last_write_checksum: sha1:1e1cbce9f05fb505115b8edb3fc8103da37641c7
+    pristine_git_object: a80d88cacd4307f5f9c805f4c1ba9912ef828188
   docs/models/components/v2analyticsgetverificationsresponsebody.md:
     id: ef98f9209b54
     last_write_checksum: sha1:81b170b8f54ac77138f5711230d16e2b2fd1c901
@@ -1154,8 +1162,8 @@ trackedFiles:
     pristine_git_object: 2db9e94448d8c5ac9b2946cf0036bd6408308e2c
   docs/sdks/analytics/README.md:
     id: 4c84abb05030
-    last_write_checksum: sha1:35042b0eb1842fb5a2823914688e3c4845b341ac
-    pristine_git_object: 182dcbc900993ca2ab4904e2d548b217734df8fd
+    last_write_checksum: sha1:ee584a2408fa72f312039fd7ec8c0898984aade6
+    pristine_git_object: 636e760a56d3dd2e9bf0b7264ea50e3d4d5a5392
   docs/sdks/apis/README.md:
     id: 23f09d8da686
     last_write_checksum: sha1:02c7476f4ba4dbd06b53acdd630982de440b3100
@@ -1216,30 +1224,34 @@ trackedFiles:
     id: 9d0f69d6e677
     last_write_checksum: sha1:ea7a938fd002182a39dd5c6067dfb977a13b6677
     pristine_git_object: 505591de79855e6922dcb0ed783f2512d6045af6
-  examples/analyticsGetVerifications.example.ts:
-    id: 6afb6fde09e2
-    last_write_checksum: sha1:ae73090e4261ebcb25e24fd8451542d9179658e8
-    pristine_git_object: 139b2c2eba02a1a6e0632bd3947640a35bb21f83
+  examples/analyticsGetRatelimits.example.ts:
+    id: a33a1966b036
+    last_write_checksum: sha1:f47a937088038a0156144b553ccdc85fb0479231
+    pristine_git_object: fd3508e706e37a1200b805d5f289dee4ddb425a2
   examples/package.json:
     id: c1d7b0ec8e7e
     last_write_checksum: sha1:2f93510f8101a35257fc7fcc95a858660880a0ae
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:c6e2a3dd3ad76301dc1603905e968bd0b47854bb
-    pristine_git_object: 3d75c90c22b10cf7726c98d14f1e2edc26ecc8eb
+    last_write_checksum: sha1:5bbb43244e7df490fbb827369378320d6a52e3de
+    pristine_git_object: b0a0b0c4ecf2be785c2ad864c0d00c86520242c8
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:e711c017de542926f22b3f4f8a0995acef24968e
-    pristine_git_object: dfc9ad68288393790346db1c9606e19f7ca2d779
+    last_write_checksum: sha1:1113239a0c52cfdc1a38da22937e8df54ea66da5
+    pristine_git_object: a1272333247cbc38b0cf9a73bd2636393c21b7b3
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
     pristine_git_object: ff4f2a956125fb70fae10be74f28a0d009fbe180
+  src/funcs/analyticsGetRatelimits.ts:
+    id: 941136daeee2
+    last_write_checksum: sha1:b44b0fda368eae4fa8a5fc0701ceaebfa346a9bc
+    pristine_git_object: 84714011829cd6968e6b37d9563032c2b7ec15ac
   src/funcs/analyticsGetVerifications.ts:
     id: f271511e3fa9
-    last_write_checksum: sha1:7f03caef9b540608906569feac7ba93e432fefd6
-    pristine_git_object: 9bede8101060bb6c8173cbb25b38feb89e31e370
+    last_write_checksum: sha1:48c964a24f96bdf773553deb5458753e17ee5347
+    pristine_git_object: 6cbd732ddc34b968fbf62057db0091fedbeaff4d
   src/funcs/apisCreateApi.ts:
     id: 1a9af09382d5
     last_write_checksum: sha1:0b4f0ec7f077b8f0fae6e39ba173c3c4bafaaec4
@@ -1546,8 +1558,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:37cf45f6845cd21ef63cac2f04adbd0f773ea23c
-    pristine_git_object: 9c31819293c63a6e2c9695e900a9b1833b0447dc
+    last_write_checksum: sha1:13e890e16e91c9424c71297ab813489e9a863f26
+    pristine_git_object: 8cf8ea5317748e0dbf3bdd84bfcd0a26b2bd9001
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -1726,8 +1738,8 @@ trackedFiles:
     pristine_git_object: 13d57aabbb139bd955ff6a36b355e40e34cf6a0c
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:c767a2fa1fabe4c8854a22b47f4a067804205d6a
-    pristine_git_object: 99c399d232db447dc56d9d434f75b0d10eb28a0b
+    last_write_checksum: sha1:859b60ff90681136626005e9cdfd5b7f846c4e1c
+    pristine_git_object: b96f869684efa3f8d811c5d294effeeda7bd1428
   src/models/components/keyauthpolicy.ts:
     id: ea83d0dc1318
     last_write_checksum: sha1:681f5f76dca7c12ab9d50a56af4307a8b4b09d38
@@ -1860,10 +1872,18 @@ trackedFiles:
     id: e5e40205f015
     last_write_checksum: sha1:2a7ad0ab73d26fc6fc796c99ed1af83645d401a4
     pristine_git_object: 37922b84c01759417d989d8dc46595c79eda9cce
+  src/models/components/v2analyticsgetratelimitsrequestbody.ts:
+    id: 80babfa54460
+    last_write_checksum: sha1:64d732ec80f2179ed43cc9780b1d7750d15e715b
+    pristine_git_object: c9774ec9787727806a7ae156693d1bf070df2c94
+  src/models/components/v2analyticsgetratelimitsresponsebody.ts:
+    id: 8e1cdcd10385
+    last_write_checksum: sha1:5c635c06e631a3953cccfc6d48c1a890ab75ba44
+    pristine_git_object: 03898cb5b42711e47ad2d2a1d60c3fd404705edb
   src/models/components/v2analyticsgetverificationsrequestbody.ts:
     id: 0effbb32e04b
-    last_write_checksum: sha1:dd2af2221fb2e085a767a911ba76ffbbc0f2db26
-    pristine_git_object: fce43ad907fe1f6a0fc46330cc7672d4fa9e0d3b
+    last_write_checksum: sha1:22f2559fa3c0345a21146d71f7a9c41ee01f335e
+    pristine_git_object: 4106d0a663d8665856def04e1bfe2a882c53602b
   src/models/components/v2analyticsgetverificationsresponsebody.ts:
     id: 7f9b1ef7a5e9
     last_write_checksum: sha1:ae670449e3858465d8525c4acf7031ec3d588c55
@@ -2662,8 +2682,8 @@ trackedFiles:
     pristine_git_object: a391eec30b5d34f15bfa86a0cda85d064a8605bd
   src/sdk/analytics.ts:
     id: 411d91261be3
-    last_write_checksum: sha1:393fa83174d7e4720a46df43188fd7d1bf61d13a
-    pristine_git_object: ce3eab2154e0b34562e91598622d2efb149f9b87
+    last_write_checksum: sha1:e26ed11757de2b29e291485855e781f7aaf55037
+    pristine_git_object: 094f78e79245b836997dd512ffefc4ff1c0504b3
   src/sdk/apis.ts:
     id: 34f45ce220ae
     last_write_checksum: sha1:a370a28ee505cb01ca601d487415d2671addf85d
@@ -5953,8 +5973,35 @@ examples:
       responses:
         "409":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-api' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  analytics.getRatelimits:
+    speakeasy-default-analytics-get-ratelimits:
+      requestBody:
+        application/json: {"query": "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"namespace_id": "rlns_123", "total": 1234}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `unkey.analytics.getVerifications()`:  `error.status[404]` **Removed** (Breaking ⚠️)
+  * `unkey.analytics.getRatelimits()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore
