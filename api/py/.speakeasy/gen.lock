@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: d76e6914313b6948d7d28a2a92a49a10
+  docChecksum: 3c3908d51e12f4238b42c84c898d9788
   docVersion: 2.0.0
   speakeasyVersion: 1.790.3
   generationVersion: 2.918.4
-  releaseVersion: 3.1.0
-  configChecksum: 9e9a7c3450c1c6eb5051fcbcddef1dc2
+  releaseVersion: 3.1.1
+  configChecksum: 92e97d942280e5e1e6ac7a2877a8a904
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
   published: true
 persistentEdits:
-  generation_id: eeaba18e-9aa5-4878-b51e-eeb6e9c75b66
-  pristine_commit_hash: f9f2cb1232dd6450c39d61afe5a8c3310bf7c236
-  pristine_tree_hash: f33b7aafb9faf57b2dc5574dfa1e7e09376ec4ed
+  generation_id: 9d82b5d5-e733-4ee5-8eea-11044c6a63fd
+  pristine_commit_hash: 548c84863d72b41efc68797d09cf66b1bdc576d9
+  pristine_tree_hash: 0c7947bd01ec914d0647046b341e8f481b66a7b7
 features:
   python:
     additionalDependencies: 1.1.0
@@ -53,8 +53,8 @@ trackedFiles:
     pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:380bab7af7a6cfd171968d0bc2f8e15a402ec584
-    pristine_git_object: 0e119fafd47106a86c686da6fa8188a4e3e3a6a2
+    last_write_checksum: sha1:3e2e3f1c41512899b89d786c2992447f127dfe90
+    pristine_git_object: 8157ac29dd1cfbc1327697a9f2f4cb02414c3fad
   docs/errors/badrequesterrorresponse.md:
     id: 4261460b6f0e
     last_write_checksum: sha1:5637143bb840c60f4815611ed09b8d0aed1973fc
@@ -459,10 +459,18 @@ trackedFiles:
     id: 4343ac43161c
     last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
     pristine_git_object: 69dd549ec7f5f885101d08dd502e25748183aebf
+  docs/models/v2analyticsgetratelimitsrequestbody.md:
+    id: a3fd625ac3b5
+    last_write_checksum: sha1:06ec99b354ad47c1f8ddb2fa1a0fe492d59f0b3c
+    pristine_git_object: d8ade1728ee96f9da902309d4a99605ce207a38d
+  docs/models/v2analyticsgetratelimitsresponsebody.md:
+    id: 1a6d0111b1b0
+    last_write_checksum: sha1:6375c57eb3540f4c3bf928bb253897248628fe71
+    pristine_git_object: cd2f8f5bfcc89e47ee0bb15bc931614e3c907c82
   docs/models/v2analyticsgetverificationsrequestbody.md:
     id: 13fff08eae84
-    last_write_checksum: sha1:c2ea4f101e057d8f65369bad401a724293a7ccf9
-    pristine_git_object: be4f8ea3a8aad5cf6f3813328d0489c60e84bb9a
+    last_write_checksum: sha1:751e0df28b66f6fe81a12bcaa56706dd4dc281ec
+    pristine_git_object: 7fd427c8fdf1ae4938cb920a486ce6042ff6034c
   docs/models/v2analyticsgetverificationsresponsebody.md:
     id: d6424509f371
     last_write_checksum: sha1:5c2cf87a55aa2c862c1d70c41eb950df7a1d120f
@@ -1149,8 +1157,8 @@ trackedFiles:
     pristine_git_object: d8287c3f9378a956ff986053cccb2a4805a31e75
   docs/sdks/analytics/README.md:
     id: 4c84abb05030
-    last_write_checksum: sha1:0fbf0b3e87ab8dd7b18754be81004ea1a6664f03
-    pristine_git_object: 8560bb8b4e8fdc0307bf1ec46960b2d567e86829
+    last_write_checksum: sha1:498fb093280e8492d08086ffa8461fb07ca17956
+    pristine_git_object: 32c1d8df2ee7543ea28c54f7fbf0d73221379c42
   docs/sdks/apis/README.md:
     id: 23f09d8da686
     last_write_checksum: sha1:434a7dea8833bdc8f6588cd0d445d8749e9db017
@@ -1213,8 +1221,8 @@ trackedFiles:
     pristine_git_object: 42a9de7b4883572d33fd257118d55ff12faf0acb
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b43156e9c68a409571b818c19f032c14374373eb
-    pristine_git_object: df53f50947471c4fa8e706d2191d23eafa34cc31
+    last_write_checksum: sha1:9af21fd3002072540895a615edc5976a12f5c027
+    pristine_git_object: 805b9bcb0396ead1d8a1c423ad7cd0f645e23c7e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:623648abfc037d1a6a3a146251169d77b83801ae
@@ -1241,12 +1249,12 @@ trackedFiles:
     pristine_git_object: e3bace255cef14ba5daa2e931aa3c0974a372218
   src/unkey/py/_version.py:
     id: dd5769ea5724
-    last_write_checksum: sha1:593b77557cebc6ced598ed7e1aa7e3a222cf6e2d
-    pristine_git_object: 1aa9a2a83c4a74db7b208f1cdfd7a6c4b18c7828
+    last_write_checksum: sha1:4992ceba73bbaa18ea02d16886fa9d075cad4f30
+    pristine_git_object: 0c7d306d42c6450d7c3bafd956f897f548922871
   src/unkey/py/analytics.py:
     id: 8a9a23d68313
-    last_write_checksum: sha1:2a8affe5665988e7cc7666ef4d132a794b8df1fb
-    pristine_git_object: 6070f0f4ed8750bb7c5d5af30c7fe3516700a4f6
+    last_write_checksum: sha1:4ebb12c920550cc8d76ca0fba7abab3eadb7ab54
+    pristine_git_object: 5b08c6de1fb7726c66e6eb006fb98905b533dd00
   src/unkey/py/apis.py:
     id: fe64a9c06fa5
     last_write_checksum: sha1:47c7c33c76721931a70d4ad655166c6c3ecfced9
@@ -1353,8 +1361,8 @@ trackedFiles:
     pristine_git_object: f21840170643099bf3314b981494a582e4d2c925
   src/unkey/py/models/__init__.py:
     id: ed00b9cad2ec
-    last_write_checksum: sha1:54c5d94b92c5849afc11ccc82f346152e9af1051
-    pristine_git_object: 1c119a02d94ce38aa63e3370a6b6dc489da23311
+    last_write_checksum: sha1:400a8c9eead37c53791cfccfd968cddd1a69c40d
+    pristine_git_object: bc9a9059861ec4e5611b778563d4207997c95be2
   src/unkey/py/models/apis_listkeysop.py:
     id: a38366224da8
     last_write_checksum: sha1:bcd9bee2c958ec4e5acfd0c521ac243fc54ca491
@@ -1667,10 +1675,18 @@ trackedFiles:
     id: 8e1c81b0b02c
     last_write_checksum: sha1:afbb4ec0f01b0ea7d5771863ff6cb149c53e2f88
     pristine_git_object: 3d899f9d3822c5ca3e4a4459a384e7e2fba7d22a
+  src/unkey/py/models/v2analyticsgetratelimitsrequestbody.py:
+    id: eeed47112c04
+    last_write_checksum: sha1:afe02ba6c66f1e6317bb35fcef5636815c5acf60
+    pristine_git_object: 6026c53cd87615ac2fec15d009ca875285c6e0f5
+  src/unkey/py/models/v2analyticsgetratelimitsresponsebody.py:
+    id: b8f36fd55cba
+    last_write_checksum: sha1:539c2cd8627c3c661d1c4f531f3214faf79845d2
+    pristine_git_object: 29445e0a64ea7d97329df126279eaa66b34dabdf
   src/unkey/py/models/v2analyticsgetverificationsrequestbody.py:
     id: 1e251e193d2b
-    last_write_checksum: sha1:2a013212ee894b3c46eac5a5ed4474076a278cf3
-    pristine_git_object: c2f40f3ffaf1daa02cdf7e979186a6d9bc480e2f
+    last_write_checksum: sha1:23847fc6b5cbbcf2ef07b51507d0b3cc327f505f
+    pristine_git_object: d0779e3edd1f02d9ac43d8406ff700767a5b4988
   src/unkey/py/models/v2analyticsgetverificationsresponsebody.py:
     id: dcbd42c34e44
     last_write_checksum: sha1:e35c53098f7d2b919e5d8cffd91f570074697a3f
@@ -5644,9 +5660,35 @@ examples:
       responses:
         "409":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-api' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  analytics.getRatelimits:
+    speakeasy-default-analytics-get-ratelimits:
+      requestBody:
+        application/json: {"query": "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"namespace_id": "rlns_123", "total": 1234}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `unkey.portal.create_session()`: \n  *  `request.permissions[]` **Changed** (Breaking ⚠️)\n* `unkey.gateway.list_policies()`: **Added**\n* `unkey.apps.get_app()`: **Added**\n* `unkey.apps.list_apps()`: **Added**\n* `unkey.apps.update_app()`: **Added**\n* `unkey.deployments.create_deployment()`: **Added**\n* `unkey.deployments.get_deployment()`: **Added**\n* `unkey.deployments.list_deployments()`: **Added**\n* `unkey.deployments.promote_deployment()`: **Added**\n* `unkey.deployments.rollback_deployment()`: **Added**\n* `unkey.deployments.start_deployment()`: **Added**\n* `unkey.deployments.stop_deployment()`: **Added**\n* `unkey.environments.get_environment()`: **Added**\n* `unkey.environments.list_environment_variables()`: **Added**\n* `unkey.environments.list_environments()`: **Added**\n* `unkey.environments.remove_environment_variables()`: **Added**\n* `unkey.environments.set_environment_variables()`: **Added**\n* `unkey.apps.create_app()`: **Added**\n* `unkey.environments.update_settings()`: **Added**\n* `unkey.apis.list_keys()`:  `response.pagination` **Changed**\n* `unkey.gateway.update_policy()`: **Added**\n* `unkey.portal.get_verifications()`: **Added**\n* `unkey.portal.list_keys()`: **Added**\n* `unkey.portal.reroll_key()`: **Added**\n* `unkey.projects.create_project()`: **Added**\n* `unkey.projects.delete_project()`: **Added**\n* `unkey.projects.get_project()`: **Added**\n* `unkey.projects.list_projects()`: **Added**\n* `unkey.projects.update_project()`: **Added**\n* `unkey.gateway.set_policies()`: **Added**\n* `unkey.internal.create_deployment()`: **Deprecated**\n* `unkey.internal.get_deployment()`: **Deprecated**\n* `unkey.identities.list_identities()`:  `request.search` **Added**\n* `unkey.permissions.list_permissions()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.permissions.list_roles()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.apps.delete_app()`: **Added**\n* `unkey.ratelimit.list_overrides()`:  `response.pagination` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `unkey.analytics.get_verifications()`:  `error.status[404]` **Removed** (Breaking ⚠️)
+  * `unkey.analytics.get_ratelimits()`: **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
