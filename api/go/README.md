@@ -143,13 +143,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }
@@ -187,13 +187,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }
@@ -246,6 +246,7 @@ func main() {
 
 ### [Analytics](docs/sdks/analytics/README.md)
 
+* [GetRatelimits](docs/sdks/analytics/README.md#getratelimits) - Query rate limit data
 * [GetVerifications](docs/sdks/analytics/README.md#getverifications) - Query key verification data
 
 ### [Apis](docs/sdks/apis/README.md)
@@ -438,8 +439,8 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
@@ -454,7 +455,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }
@@ -492,13 +493,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }
@@ -513,14 +514,14 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `GetVerifications` function may return the following errors:
+For example, the `GetRatelimits` function may return the following errors:
 
 | Error Type                                 | Status Code | Content Type             |
 | ------------------------------------------ | ----------- | ------------------------ |
 | apierrors.BadRequestErrorResponse          | 400         | application/json         |
 | apierrors.UnauthorizedErrorResponse        | 401         | application/json         |
 | apierrors.ForbiddenErrorResponse           | 403         | application/json         |
-| apierrors.NotFoundErrorResponse            | 404         | application/json         |
+| apierrors.PreconditionFailedErrorResponse  | 412         | application/json         |
 | apierrors.UnprocessableEntityErrorResponse | 422         | application/json         |
 | apierrors.TooManyRequestsErrorResponse     | 429         | application/problem+json |
 | apierrors.InternalServerErrorResponse      | 500         | application/json         |
@@ -549,8 +550,8 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 
@@ -572,7 +573,7 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
-		var e *apierrors.NotFoundErrorResponse
+		var e *apierrors.PreconditionFailedErrorResponse
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -638,13 +639,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetRatelimits(ctx, components.V2AnalyticsGetRatelimitsRequestBody{
+		Query: "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetRatelimitsResponseBody != nil {
 		// handle response
 	}
 }
