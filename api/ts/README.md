@@ -166,9 +166,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
 
   console.log(result);
@@ -199,9 +199,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
 
   console.log(result);
@@ -244,6 +244,9 @@ run();
 
 ### [Analytics](docs/sdks/analytics/README.md)
 
+* [getGatewayRequests](docs/sdks/analytics/README.md#getgatewayrequests) - Query gateway request data
+* [getRatelimits](docs/sdks/analytics/README.md#getratelimits) - Query rate limit data
+* [getRuntimeLogs](docs/sdks/analytics/README.md#getruntimelogs) - Query runtime log data
 * [getVerifications](docs/sdks/analytics/README.md#getverifications) - Query key verification data
 
 ### [Apis](docs/sdks/apis/README.md)
@@ -271,6 +274,14 @@ run();
 * [startDeployment](docs/sdks/deployments/README.md#startdeployment) - Start deployment
 * [stopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
 
+### [Domains](docs/sdks/domains/README.md)
+
+* [createDomain](docs/sdks/domains/README.md#createdomain) - Create domain
+* [deleteDomain](docs/sdks/domains/README.md#deletedomain) - Delete domain
+* [getDomain](docs/sdks/domains/README.md#getdomain) - Get domain
+* [listDomains](docs/sdks/domains/README.md#listdomains) - List domains
+* [verifyDomain](docs/sdks/domains/README.md#verifydomain) - Verify domain
+
 ### [Environments](docs/sdks/environments/README.md)
 
 * [getEnvironment](docs/sdks/environments/README.md#getenvironment) - Get environment
@@ -285,6 +296,10 @@ run();
 * [listPolicies](docs/sdks/gateway/README.md#listpolicies) - List policies
 * [setPolicies](docs/sdks/gateway/README.md#setpolicies) - Set policies
 * [updatePolicy](docs/sdks/gateway/README.md#updatepolicy) - Update policy
+
+### [Github](docs/sdks/github/README.md)
+
+* [installApp](docs/sdks/github/README.md#installapp) - Install GitHub App
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -327,11 +342,12 @@ run();
 * [getRole](docs/sdks/permissions/README.md#getrole) - Get role
 * [listPermissions](docs/sdks/permissions/README.md#listpermissions) - List permissions
 * [listRoles](docs/sdks/permissions/README.md#listroles) - List roles
+* [setRolePermissions](docs/sdks/permissions/README.md#setrolepermissions) - Set role permissions
 
 ### [Portal](docs/sdks/portal/README.md)
 
 * [createSession](docs/sdks/portal/README.md#createsession) - Create portal session
-* [exchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+* [exchangeCode](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
 * [getVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 * [listKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
 * [rerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
@@ -371,6 +387,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`analyticsGetGatewayRequests`](docs/sdks/analytics/README.md#getgatewayrequests) - Query gateway request data
+- [`analyticsGetRatelimits`](docs/sdks/analytics/README.md#getratelimits) - Query rate limit data
+- [`analyticsGetRuntimeLogs`](docs/sdks/analytics/README.md#getruntimelogs) - Query runtime log data
 - [`analyticsGetVerifications`](docs/sdks/analytics/README.md#getverifications) - Query key verification data
 - [`apisCreateApi`](docs/sdks/apis/README.md#createapi) - Create API namespace
 - [`apisDeleteApi`](docs/sdks/apis/README.md#deleteapi) - Delete API namespace
@@ -388,6 +407,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`deploymentsRollbackDeployment`](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
 - [`deploymentsStartDeployment`](docs/sdks/deployments/README.md#startdeployment) - Start deployment
 - [`deploymentsStopDeployment`](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
+- [`domainsCreateDomain`](docs/sdks/domains/README.md#createdomain) - Create domain
+- [`domainsDeleteDomain`](docs/sdks/domains/README.md#deletedomain) - Delete domain
+- [`domainsGetDomain`](docs/sdks/domains/README.md#getdomain) - Get domain
+- [`domainsListDomains`](docs/sdks/domains/README.md#listdomains) - List domains
+- [`domainsVerifyDomain`](docs/sdks/domains/README.md#verifydomain) - Verify domain
 - [`environmentsGetEnvironment`](docs/sdks/environments/README.md#getenvironment) - Get environment
 - [`environmentsListEnvironments`](docs/sdks/environments/README.md#listenvironments) - List environments
 - [`environmentsListEnvironmentVariables`](docs/sdks/environments/README.md#listenvironmentvariables) - List environment variables
@@ -397,6 +421,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`gatewayListPolicies`](docs/sdks/gateway/README.md#listpolicies) - List policies
 - [`gatewaySetPolicies`](docs/sdks/gateway/README.md#setpolicies) - Set policies
 - [`gatewayUpdatePolicy`](docs/sdks/gateway/README.md#updatepolicy) - Update policy
+- [`githubInstallApp`](docs/sdks/github/README.md#installapp) - Install GitHub App
 - [`identitiesCreateIdentity`](docs/sdks/identities/README.md#createidentity) - Create Identity
 - [`identitiesDeleteIdentity`](docs/sdks/identities/README.md#deleteidentity) - Delete Identity
 - [`identitiesGetIdentity`](docs/sdks/identities/README.md#getidentity) - Get Identity
@@ -425,8 +450,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`permissionsGetRole`](docs/sdks/permissions/README.md#getrole) - Get role
 - [`permissionsListPermissions`](docs/sdks/permissions/README.md#listpermissions) - List permissions
 - [`permissionsListRoles`](docs/sdks/permissions/README.md#listroles) - List roles
+- [`permissionsSetRolePermissions`](docs/sdks/permissions/README.md#setrolepermissions) - Set role permissions
 - [`portalCreateSession`](docs/sdks/portal/README.md#createsession) - Create portal session
-- [`portalExchangeSession`](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+- [`portalExchangeCode`](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
 - [`portalGetVerifications`](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 - [`portalListKeys`](docs/sdks/portal/README.md#listkeys) - List portal keys
 - [`portalRerollKey`](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
@@ -497,9 +523,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   }, {
     retries: {
       strategy: "backoff",
@@ -539,9 +565,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
 
   console.log(result);
@@ -577,9 +603,9 @@ const unkey = new Unkey({
 
 async function run() {
   try {
-    const result = await unkey.analytics.getVerifications({
+    const result = await unkey.analytics.getGatewayRequests({
       query:
-        "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+        "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
     });
 
     console.log(result);
@@ -627,11 +653,11 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 8 of 72 methods.*
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 72 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 72 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 72 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 72 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 12 of 82 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 8 of 82 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 4 of 82 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 4 of 82 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 82 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -654,9 +680,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
 
   console.log(result);

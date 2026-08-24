@@ -42,6 +42,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
 
   console.log(result);
@@ -69,6 +73,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -148,6 +156,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
 
   console.log(result);
@@ -175,6 +187,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -201,6 +217,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
 
   console.log(result);
@@ -228,6 +248,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -254,6 +278,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
 
   console.log(result);
@@ -281,6 +309,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -307,6 +339,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
 
   console.log(result);
@@ -334,6 +370,10 @@ async function run() {
     project: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1313,7 +1353,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
 
@@ -1343,7 +1386,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
   if (res.ok) {
@@ -1372,7 +1418,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
 
@@ -1402,7 +1451,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
   if (res.ok) {
@@ -1431,7 +1483,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
 
@@ -1461,7 +1516,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
   if (res.ok) {
@@ -1543,7 +1601,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
 
@@ -1573,7 +1634,10 @@ async function run() {
     app: "proj_1234abcd",
     name: "Payments API",
     slug: "proj_1234abcd",
-    defaultBranch: "main",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
     deleteProtection: true,
   });
   if (res.ok) {

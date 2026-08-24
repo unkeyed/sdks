@@ -14,6 +14,7 @@ Permission and role management operations
 * [getRole](#getrole) - Get role
 * [listPermissions](#listpermissions) - List permissions
 * [listRoles](#listroles) - List roles
+* [setRolePermissions](#setrolepermissions) - Set role permissions
 
 ## createPermission
 
@@ -110,14 +111,20 @@ run();
 
 ## createRole
 
-Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys.
+Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys. Permission slugs supplied in `permissions` are attached during creation. Missing permissions are created automatically.
 
 **Important:** Role names must be unique within the workspace. Once created, roles are immediately available for assignment.
 
 **Required Permissions**
 
-Your root key must have the following permission:
+Your root key must always have:
 - `rbac.*.create_role`
+
+When `permissions` is not empty, it must also have:
+- `rbac.*.add_permission_to_role`
+
+When any requested permission slug does not exist, it must also have:
+- `rbac.*.create_permission`
 
 
 ### Example Usage: basic
@@ -134,6 +141,10 @@ async function run() {
   const result = await unkey.permissions.createRole({
     name: "content.editor",
     description: "Can read and write content",
+    permissions: [
+      "content.read",
+      "content.write",
+    ],
   });
 
   console.log(result);
@@ -160,6 +171,10 @@ async function run() {
   const res = await permissionsCreateRole(unkey, {
     name: "content.editor",
     description: "Can read and write content",
+    permissions: [
+      "content.read",
+      "content.write",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -763,6 +778,101 @@ run();
 ### Response
 
 **Promise\<[operations.PermissionsListRolesResponse](../../models/operations/permissionslistrolesresponse.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## setRolePermissions
+
+Atomically replaces all permissions directly assigned to a role. An empty `permissions` array removes every permission from the role. Permissions that do not exist are created when the caller has permission to create them.
+
+**Required Permissions**
+
+Your root key must have:
+- `rbac.*.add_permission_to_role`
+- `rbac.*.remove_permission_from_role`
+
+When any requested permission slug does not exist, it must also have:
+- `rbac.*.create_permission`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="permissions.setRolePermissions" method="post" path="/v2/permissions.setRolePermissions" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.setRolePermissions({
+    roleId: "proj_1234abcd",
+    permissions: [
+      "<value 1>",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsSetRolePermissions } from "@unkey/api/funcs/permissionsSetRolePermissions.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsSetRolePermissions(unkey, {
+    roleId: "proj_1234abcd",
+    permissions: [
+      "<value 1>",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsSetRolePermissions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PermissionsSetRolePermissionsRequestBody](../../models/components/v2permissionssetrolepermissionsrequestbody.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2PermissionsSetRolePermissionsResponseBody](../../models/components/v2permissionssetrolepermissionsresponsebody.md)\>**
 
 ### Errors
 

@@ -13,6 +13,7 @@ let value: V2EnvironmentsGetEnvironmentResponseBody = {
     id: "env_1234abcd",
     slug: "production",
     description: "Production environment",
+    kind: "production",
     deleteProtection: false,
     createdAt: 1704067200000,
     updatedAt: 1704153600000,

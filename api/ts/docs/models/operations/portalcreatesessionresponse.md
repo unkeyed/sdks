@@ -20,8 +20,8 @@ let value: PortalCreateSessionResponse = {
       requestId: "req_123",
     },
     data: {
-      sessionId: "pst_abc123def456",
-      url: "https://portal.unkey.com/?session=pst_abc123def456",
+      id: "ps_abc123def456",
+      url: "https://portal.unkey.com/?code=pst_abc123def456",
     },
   },
 };
