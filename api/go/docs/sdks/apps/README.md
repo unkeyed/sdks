@@ -52,6 +52,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -120,6 +124,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -154,6 +162,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -188,6 +200,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -222,6 +238,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -957,6 +977,7 @@ import(
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"log"
 )
 
@@ -972,7 +993,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -994,6 +1018,7 @@ import(
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"log"
 )
 
@@ -1009,7 +1034,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1031,6 +1059,7 @@ import(
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"log"
 )
 
@@ -1046,7 +1075,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1102,6 +1134,7 @@ import(
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"log"
 )
 
@@ -1117,7 +1150,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {

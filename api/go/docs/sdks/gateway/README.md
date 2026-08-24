@@ -238,7 +238,7 @@ func main() {
                 Ratelimit: &components.RatelimitPolicy{
                     Limit: 100,
                     WindowMs: 60000,
-                    Identifier: components.RatelimitIdentifier{
+                    Identifier: &components.Identifier{
                         RemoteIP: &components.RemoteIPKey{},
                     },
                 },
@@ -310,6 +310,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -326,7 +327,7 @@ func main() {
         App: "payments-api",
         Environment: "production",
         PolicyID: "pol_9d2Fk1LmQ",
-        Match: nil,
+        Match: optionalnullable.From[[]components.MatchExpr](nil),
     })
     if err != nil {
         log.Fatal(err)

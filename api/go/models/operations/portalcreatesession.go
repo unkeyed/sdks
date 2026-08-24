@@ -9,7 +9,7 @@ import (
 
 type PortalCreateSessionResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Session token created successfully. Redirect the end user to the returned URL.
+	// Session created successfully. Redirect the end user to the returned URL.
 	//
 	V2PortalCreateSessionResponseBody *components.V2PortalCreateSessionResponseBody
 	Headers                           map[string][]string

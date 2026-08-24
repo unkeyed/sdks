@@ -3,19 +3,21 @@
 package components
 
 type V2PortalCreateSessionResponseData struct {
-	// The short-lived session token ID. Valid for 15 minutes and can be exchanged once for a browser session.
+	// The portal session's identifier. Not a credential: it is safe to log and
+	// to store against your own records of the end user's visit.
 	//
-	SessionID string `json:"sessionId"`
-	// The full portal URL with the session parameter. Redirect the end user to this URL.
+	ID string `json:"id"`
+	// The full portal URL to redirect the end user to. Carries a single-use
+	// exchange code that is valid for 15 minutes.
 	//
 	URL string `json:"url"`
 }
 
-func (v *V2PortalCreateSessionResponseData) GetSessionID() string {
+func (v *V2PortalCreateSessionResponseData) GetID() string {
 	if v == nil {
 		return ""
 	}
-	return v.SessionID
+	return v.ID
 }
 
 func (v *V2PortalCreateSessionResponseData) GetURL() string {

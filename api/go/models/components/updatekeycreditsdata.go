@@ -4,14 +4,15 @@ package components
 
 import (
 	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 )
 
 // UpdateKeyCreditsData - Credit configuration and remaining balance for this key.
 type UpdateKeyCreditsData struct {
 	// Number of credits remaining (null for unlimited). This also clears the refilling schedule.
-	Remaining *int64 `json:"remaining,omitzero"`
+	Remaining optionalnullable.OptionalNullable[int64] `json:"remaining,omitzero"`
 	// Configuration for automatic credit refill behavior.
-	Refill *UpdateKeyCreditsRefill `json:"refill,omitzero"`
+	Refill optionalnullable.OptionalNullable[UpdateKeyCreditsRefill] `json:"refill,omitzero"`
 }
 
 func (u UpdateKeyCreditsData) MarshalJSON() ([]byte, error) {
@@ -25,14 +26,14 @@ func (u *UpdateKeyCreditsData) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (u *UpdateKeyCreditsData) GetRemaining() *int64 {
+func (u *UpdateKeyCreditsData) GetRemaining() optionalnullable.OptionalNullable[int64] {
 	if u == nil {
 		return nil
 	}
 	return u.Remaining
 }
 
-func (u *UpdateKeyCreditsData) GetRefill() *UpdateKeyCreditsRefill {
+func (u *UpdateKeyCreditsData) GetRefill() optionalnullable.OptionalNullable[UpdateKeyCreditsRefill] {
 	if u == nil {
 		return nil
 	}

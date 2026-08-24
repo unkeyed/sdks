@@ -4,6 +4,7 @@ package components
 
 import (
 	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 )
 
 type V2KeysUpdateKeyRequestBody struct {
@@ -15,19 +16,19 @@ type V2KeysUpdateKeyRequestBody struct {
 	// Omitting this field leaves the current name unchanged, while setting null removes it entirely.
 	// Avoid generic names like "API Key" when managing multiple keys per user or service.
 	//
-	Name *string `json:"name,omitzero"`
+	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
 	// Links this key to a user or entity in your system for ownership tracking during verification.
 	// Omitting this field preserves the current association, while setting null disconnects the key from any identity.
 	// Essential for user-specific analytics, billing, and key management across multiple users.
 	// Supports letters, numbers, underscores, dots, and hyphens for flexible identifier formats.
 	//
-	ExternalID *string `json:"externalId,omitzero"`
+	ExternalID optionalnullable.OptionalNullable[string] `json:"externalId,omitzero"`
 	// Stores arbitrary JSON metadata returned during key verification.
 	// Omitting this field preserves existing metadata, while setting null removes all metadata entirely.
 	// Avoid storing sensitive data here as it's returned in verification responses.
 	// Large metadata objects increase verification latency and should stay under 10KB total size.
 	//
-	Meta map[string]any `json:"meta,omitzero"`
+	Meta optionalnullable.OptionalNullable[map[string]any] `json:"meta,omitzero"`
 	// Sets when this key automatically expires as a Unix timestamp in milliseconds.
 	// Verification fails with code=EXPIRED immediately after this time passes.
 	// Omitting this field preserves the current expiration, while setting null makes the key permanent.
@@ -36,15 +37,15 @@ type V2KeysUpdateKeyRequestBody struct {
 	// Keys expire based on server time, not client time, which prevents timezone-related issues.
 	// Active sessions continue until their next verification attempt after expiry.
 	//
-	Expires *int64 `json:"expires,omitzero"`
+	Expires optionalnullable.OptionalNullable[int64] `json:"expires,omitzero"`
 	// Credit configuration and remaining balance for this key.
-	Credits *UpdateKeyCreditsData `json:"credits,omitzero"`
+	Credits optionalnullable.OptionalNullable[UpdateKeyCreditsData] `json:"credits,omitzero"`
 	// Defines time-based rate limits that protect against abuse by controlling request frequency.
 	// Omitting this field preserves existing rate limits, while setting null removes all rate limits.
 	// Unlike credits which track total usage, rate limits reset automatically after each window expires.
 	// Multiple rate limits can control different operation types with separate thresholds and windows.
 	//
-	Ratelimits []RatelimitRequest `json:"ratelimits,omitzero"`
+	Ratelimits optionalnullable.OptionalNullable[[]RatelimitRequest] `json:"ratelimits,omitzero"`
 	// Controls whether the key is currently active for verification requests.
 	// When set to `false`, all verification attempts fail with `code=DISABLED` regardless of other settings.
 	// Omitting this field preserves the current enabled status.
@@ -73,42 +74,42 @@ func (v *V2KeysUpdateKeyRequestBody) GetKeyID() string {
 	return v.KeyID
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetName() *string {
+func (v *V2KeysUpdateKeyRequestBody) GetName() optionalnullable.OptionalNullable[string] {
 	if v == nil {
 		return nil
 	}
 	return v.Name
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetExternalID() *string {
+func (v *V2KeysUpdateKeyRequestBody) GetExternalID() optionalnullable.OptionalNullable[string] {
 	if v == nil {
 		return nil
 	}
 	return v.ExternalID
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetMeta() map[string]any {
+func (v *V2KeysUpdateKeyRequestBody) GetMeta() optionalnullable.OptionalNullable[map[string]any] {
 	if v == nil {
 		return nil
 	}
 	return v.Meta
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetExpires() *int64 {
+func (v *V2KeysUpdateKeyRequestBody) GetExpires() optionalnullable.OptionalNullable[int64] {
 	if v == nil {
 		return nil
 	}
 	return v.Expires
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetCredits() *UpdateKeyCreditsData {
+func (v *V2KeysUpdateKeyRequestBody) GetCredits() optionalnullable.OptionalNullable[UpdateKeyCreditsData] {
 	if v == nil {
 		return nil
 	}
 	return v.Credits
 }
 
-func (v *V2KeysUpdateKeyRequestBody) GetRatelimits() []RatelimitRequest {
+func (v *V2KeysUpdateKeyRequestBody) GetRatelimits() optionalnullable.OptionalNullable[[]RatelimitRequest] {
 	if v == nil {
 		return nil
 	}

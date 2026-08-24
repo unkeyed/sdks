@@ -786,6 +786,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -801,25 +802,25 @@ func main() {
         Project: "proj_1234abcd",
         App: "proj_1234abcd",
         Environment: "proj_1234abcd",
-        Dockerfile: unkey.Pointer("./Dockerfile"),
+        Dockerfile: optionalnullable.From(unkey.Pointer("./Dockerfile")),
         RootDirectory: unkey.Pointer("."),
-        BuildCommand: unkey.Pointer("pnpm --filter api build"),
+        BuildCommand: optionalnullable.From(unkey.Pointer("pnpm --filter api build")),
         AutoDeploy: unkey.Pointer(true),
         Port: unkey.Pointer[int64](8080),
         VCpus: unkey.Pointer[float64](1.0),
         MemoryMib: unkey.Pointer[int64](512),
         StorageMib: unkey.Pointer[int64](1024),
-        Healthcheck: &components.EnvironmentHealthcheck{
+        Healthcheck: optionalnullable.From(&components.EnvironmentHealthcheck{
             Method: components.EnvironmentHealthcheckMethodGet,
             Path: "/healthz",
             IntervalSeconds: unkey.Pointer[int64](10),
             TimeoutSeconds: unkey.Pointer[int64](2),
             FailureThreshold: unkey.Pointer[int64](3),
             InitialDelaySeconds: unkey.Pointer[int64](5),
-        },
+        }),
         ShutdownSignal: components.EnvironmentShutdownSignalSigterm.ToPointer(),
         UpstreamProtocol: components.EnvironmentUpstreamProtocolHttp1.ToPointer(),
-        OpenapiSpecPath: unkey.Pointer("/openapi.yaml"),
+        OpenapiSpecPath: optionalnullable.From(unkey.Pointer("/openapi.yaml")),
         Regions: []components.EnvironmentRegion{
             components.EnvironmentRegion{
                 Name: "us-east-1",
@@ -848,6 +849,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -863,25 +865,25 @@ func main() {
         Project: "proj_1234abcd",
         App: "proj_1234abcd",
         Environment: "proj_1234abcd",
-        Dockerfile: unkey.Pointer("./Dockerfile"),
+        Dockerfile: optionalnullable.From(unkey.Pointer("./Dockerfile")),
         RootDirectory: unkey.Pointer("."),
-        BuildCommand: unkey.Pointer("pnpm --filter api build"),
+        BuildCommand: optionalnullable.From(unkey.Pointer("pnpm --filter api build")),
         AutoDeploy: unkey.Pointer(true),
         Port: unkey.Pointer[int64](8080),
         VCpus: unkey.Pointer[float64](1.0),
         MemoryMib: unkey.Pointer[int64](512),
         StorageMib: unkey.Pointer[int64](1024),
-        Healthcheck: &components.EnvironmentHealthcheck{
+        Healthcheck: optionalnullable.From(&components.EnvironmentHealthcheck{
             Method: components.EnvironmentHealthcheckMethodGet,
             Path: "/healthz",
             IntervalSeconds: unkey.Pointer[int64](10),
             TimeoutSeconds: unkey.Pointer[int64](2),
             FailureThreshold: unkey.Pointer[int64](3),
             InitialDelaySeconds: unkey.Pointer[int64](5),
-        },
+        }),
         ShutdownSignal: components.EnvironmentShutdownSignalSigterm.ToPointer(),
         UpstreamProtocol: components.EnvironmentUpstreamProtocolHttp1.ToPointer(),
-        OpenapiSpecPath: unkey.Pointer("/openapi.yaml"),
+        OpenapiSpecPath: optionalnullable.From(unkey.Pointer("/openapi.yaml")),
         Regions: []components.EnvironmentRegion{
             components.EnvironmentRegion{
                 Name: "us-east-1",
@@ -989,6 +991,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -1004,25 +1007,25 @@ func main() {
         Project: "proj_1234abcd",
         App: "proj_1234abcd",
         Environment: "proj_1234abcd",
-        Dockerfile: unkey.Pointer("./Dockerfile"),
+        Dockerfile: optionalnullable.From(unkey.Pointer("./Dockerfile")),
         RootDirectory: unkey.Pointer("."),
-        BuildCommand: unkey.Pointer("pnpm --filter api build"),
+        BuildCommand: optionalnullable.From(unkey.Pointer("pnpm --filter api build")),
         AutoDeploy: unkey.Pointer(true),
         Port: unkey.Pointer[int64](8080),
         VCpus: unkey.Pointer[float64](1.0),
         MemoryMib: unkey.Pointer[int64](512),
         StorageMib: unkey.Pointer[int64](1024),
-        Healthcheck: &components.EnvironmentHealthcheck{
+        Healthcheck: optionalnullable.From(&components.EnvironmentHealthcheck{
             Method: components.EnvironmentHealthcheckMethodGet,
             Path: "/healthz",
             IntervalSeconds: unkey.Pointer[int64](10),
             TimeoutSeconds: unkey.Pointer[int64](2),
             FailureThreshold: unkey.Pointer[int64](3),
             InitialDelaySeconds: unkey.Pointer[int64](5),
-        },
+        }),
         ShutdownSignal: components.EnvironmentShutdownSignalSigterm.ToPointer(),
         UpstreamProtocol: components.EnvironmentUpstreamProtocolHttp1.ToPointer(),
-        OpenapiSpecPath: unkey.Pointer("/openapi.yaml"),
+        OpenapiSpecPath: optionalnullable.From(unkey.Pointer("/openapi.yaml")),
         Regions: []components.EnvironmentRegion{
             components.EnvironmentRegion{
                 Name: "us-east-1",

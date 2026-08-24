@@ -2,7 +2,7 @@
 
 package v2
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.918.4
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.932.9
 
 import (
 	"context"
@@ -139,10 +139,14 @@ type Unkey struct {
 	Internal *Internal
 	// Deployment operations
 	Deployments *Deployments
+	// Custom domain operations
+	Domains *Domains
 	// Environment management operations
 	Environments *Environments
 	// Gateway policy operations
 	Gateway *Gateway
+	// GitHub App installation operations
+	Github *Github
 	// Identity management operations
 	Identities *Identities
 	// API key management operations
@@ -230,9 +234,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "2.7.1",
+		SDKVersion: "2.7.2",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 2.7.1 2.918.4 2.0.0 github.com/unkeyed/sdks/api/go/v2",
+			UserAgent:  "speakeasy-sdk/go 2.7.2 2.932.9 2.0.0 github.com/unkeyed/sdks/api/go/v2",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -265,8 +269,10 @@ func New(opts ...SDKOption) *Unkey {
 	sdk.Apps = newApps(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Internal = newInternal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Deployments = newDeployments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Domains = newDomains(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Environments = newEnvironments(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Gateway = newGateway(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Github = newGithub(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)

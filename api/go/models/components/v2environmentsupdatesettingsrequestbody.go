@@ -4,6 +4,7 @@ package components
 
 import (
 	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 )
 
 type V2EnvironmentsUpdateSettingsRequestBody struct {
@@ -22,7 +23,7 @@ type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// Path to the Dockerfile used for builds.
 	// Omit to leave unchanged; set null to clear and fall back to Railpack.
 	//
-	Dockerfile *string `json:"dockerfile,omitzero"`
+	Dockerfile optionalnullable.OptionalNullable[string] `json:"dockerfile,omitzero"`
 	// The directory your app lives in. Unkey builds from here.
 	// Use "." for the repository root, or set a subdirectory when your app
 	// is nested (e.g., services/api). Omit to leave unchanged.
@@ -31,7 +32,7 @@ type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// Overrides the build command auto-detected by Railpack.
 	// Omit to leave unchanged; set null to clear and fall back to auto-detection.
 	//
-	BuildCommand *string `json:"buildCommand,omitzero"`
+	BuildCommand optionalnullable.OptionalNullable[string] `json:"buildCommand,omitzero"`
 	// Glob paths that trigger auto-deploys when changed.
 	// Omit to leave unchanged.
 	//
@@ -66,7 +67,7 @@ type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// HTTP healthcheck configuration.
 	// Omit to leave unchanged; set null to remove.
 	//
-	Healthcheck *EnvironmentHealthcheck `json:"healthcheck,omitzero"`
+	Healthcheck optionalnullable.OptionalNullable[EnvironmentHealthcheck] `json:"healthcheck,omitzero"`
 	// Signal sent to the container on shutdown.
 	//
 	ShutdownSignal *EnvironmentShutdownSignal `json:"shutdownSignal,omitzero"`
@@ -76,7 +77,7 @@ type V2EnvironmentsUpdateSettingsRequestBody struct {
 	// Path to the OpenAPI spec file within the build. Must start with a slash.
 	// Omit to leave unchanged; set null to clear.
 	//
-	OpenapiSpecPath *string `json:"openapiSpecPath,omitzero"`
+	OpenapiSpecPath optionalnullable.OptionalNullable[string] `json:"openapiSpecPath,omitzero"`
 	// Desired set of regions with per-region replica bounds.
 	// Omit to leave regions unchanged; when present, this replaces the full set
 	// (regions absent from the list are removed). At least one region is required;
@@ -117,7 +118,7 @@ func (v *V2EnvironmentsUpdateSettingsRequestBody) GetEnvironment() string {
 	return v.Environment
 }
 
-func (v *V2EnvironmentsUpdateSettingsRequestBody) GetDockerfile() *string {
+func (v *V2EnvironmentsUpdateSettingsRequestBody) GetDockerfile() optionalnullable.OptionalNullable[string] {
 	if v == nil {
 		return nil
 	}
@@ -131,7 +132,7 @@ func (v *V2EnvironmentsUpdateSettingsRequestBody) GetRootDirectory() *string {
 	return v.RootDirectory
 }
 
-func (v *V2EnvironmentsUpdateSettingsRequestBody) GetBuildCommand() *string {
+func (v *V2EnvironmentsUpdateSettingsRequestBody) GetBuildCommand() optionalnullable.OptionalNullable[string] {
 	if v == nil {
 		return nil
 	}
@@ -187,7 +188,7 @@ func (v *V2EnvironmentsUpdateSettingsRequestBody) GetCommand() []string {
 	return v.Command
 }
 
-func (v *V2EnvironmentsUpdateSettingsRequestBody) GetHealthcheck() *EnvironmentHealthcheck {
+func (v *V2EnvironmentsUpdateSettingsRequestBody) GetHealthcheck() optionalnullable.OptionalNullable[EnvironmentHealthcheck] {
 	if v == nil {
 		return nil
 	}
@@ -208,7 +209,7 @@ func (v *V2EnvironmentsUpdateSettingsRequestBody) GetUpstreamProtocol() *Environ
 	return v.UpstreamProtocol
 }
 
-func (v *V2EnvironmentsUpdateSettingsRequestBody) GetOpenapiSpecPath() *string {
+func (v *V2EnvironmentsUpdateSettingsRequestBody) GetOpenapiSpecPath() optionalnullable.OptionalNullable[string] {
 	if v == nil {
 		return nil
 	}

@@ -14,6 +14,7 @@ Permission and role management operations
 * [GetRole](#getrole) - Get role
 * [ListPermissions](#listpermissions) - List permissions
 * [ListRoles](#listroles) - List roles
+* [SetRolePermissions](#setrolepermissions) - Set role permissions
 
 ## CreatePermission
 
@@ -90,14 +91,20 @@ func main() {
 
 ## CreateRole
 
-Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys.
+Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys. Permission slugs supplied in `permissions` are attached during creation. Missing permissions are created automatically.
 
 **Important:** Role names must be unique within the workspace. Once created, roles are immediately available for assignment.
 
 **Required Permissions**
 
-Your root key must have the following permission:
+Your root key must always have:
 - `rbac.*.create_role`
+
+When `permissions` is not empty, it must also have:
+- `rbac.*.add_permission_to_role`
+
+When any requested permission slug does not exist, it must also have:
+- `rbac.*.create_permission`
 
 
 ### Example Usage: basic
@@ -124,6 +131,10 @@ func main() {
     res, err := s.Permissions.CreateRole(ctx, components.V2PermissionsCreateRoleRequestBody{
         Name: "content.editor",
         Description: unkey.Pointer("Can read and write content"),
+        Permissions: []string{
+            "content.read",
+            "content.write",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -611,6 +622,80 @@ func main() {
 ### Response
 
 **[*operations.PermissionsListRolesResponse](../../models/operations/permissionslistrolesresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## SetRolePermissions
+
+Atomically replaces all permissions directly assigned to a role. An empty `permissions` array removes every permission from the role. Permissions that do not exist are created when the caller has permission to create them.
+
+**Required Permissions**
+
+Your root key must have:
+- `rbac.*.add_permission_to_role`
+- `rbac.*.remove_permission_from_role`
+
+When any requested permission slug does not exist, it must also have:
+- `rbac.*.create_permission`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="permissions.setRolePermissions" method="post" path="/v2/permissions.setRolePermissions" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.SetRolePermissions(ctx, components.V2PermissionsSetRolePermissionsRequestBody{
+        RoleID: "proj_1234abcd",
+        Permissions: []string{
+            "<value 1>",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsSetRolePermissionsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
+| `request`                                                                                                                      | [components.V2PermissionsSetRolePermissionsRequestBody](../../models/components/v2permissionssetrolepermissionsrequestbody.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
+| `opts`                                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
+
+### Response
+
+**[*operations.PermissionsSetRolePermissionsResponse](../../models/operations/permissionssetrolepermissionsresponse.md), error**
 
 ### Errors
 

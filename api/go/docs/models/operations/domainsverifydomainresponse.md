@@ -1,0 +1,9 @@
+# DomainsVerifyDomainResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2DomainsVerifyDomainResponseBody`                                                                           | [*components.V2DomainsVerifyDomainResponseBody](../../models/components/v2domainsverifydomainresponsebody.md) | :heavy_minus_sign:                                                                                            | Verification retry accepted. The workflow runs in the background.<br/>                                        |

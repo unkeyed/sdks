@@ -1021,6 +1021,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -1034,7 +1035,7 @@ func main() {
 
     res, err := s.Keys.UpdateCredits(ctx, components.V2KeysUpdateCreditsRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Value: unkey.Pointer[int64](1000),
+        Value: optionalnullable.From(unkey.Pointer[int64](1000)),
         Operation: components.OperationSet,
     })
     if err != nil {
@@ -1102,6 +1103,7 @@ import(
 	"context"
 	"os"
 	unkey "github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
 	"github.com/unkeyed/sdks/api/go/v2/models/components"
 	"log"
 )
@@ -1115,9 +1117,9 @@ func main() {
 
     res, err := s.Keys.UpdateKey(ctx, components.V2KeysUpdateKeyRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Name: unkey.Pointer("Payment Service Production Key"),
-        ExternalID: unkey.Pointer("user_912a841d"),
-        Meta: map[string]any{
+        Name: optionalnullable.From(unkey.Pointer("Payment Service Production Key")),
+        ExternalID: optionalnullable.From(unkey.Pointer("user_912a841d")),
+        Meta: optionalnullable.From(unkey.Pointer(map[string]any{
             "plan": "enterprise",
             "limits": map[string]any{
                 "storage": "500GB",
@@ -1138,23 +1140,23 @@ func main() {
                 "notifications": true,
             },
             "lastBillingDate": "2023-10-15",
-        },
-        Expires: unkey.Pointer[int64](1704067200000),
-        Credits: &components.UpdateKeyCreditsData{
-            Remaining: unkey.Pointer[int64](1000),
-            Refill: &components.UpdateKeyCreditsRefill{
+        })),
+        Expires: optionalnullable.From(unkey.Pointer[int64](1704067200000)),
+        Credits: optionalnullable.From(&components.UpdateKeyCreditsData{
+            Remaining: optionalnullable.From(unkey.Pointer[int64](1000)),
+            Refill: optionalnullable.From(&components.UpdateKeyCreditsRefill{
                 Interval: components.UpdateKeyCreditsRefillIntervalDaily,
                 Amount: 1000,
                 RefillDay: unkey.Pointer[int64](15),
-            },
-        },
-        Ratelimits: []components.RatelimitRequest{
+            }),
+        }),
+        Ratelimits: optionalnullable.From(unkey.Pointer([]components.RatelimitRequest{
             components.RatelimitRequest{
                 Name: "api",
                 Limit: 738192,
                 Duration: 167910,
             },
-        },
+        })),
         Enabled: unkey.Pointer(true),
         Roles: []string{
             "api_admin",
