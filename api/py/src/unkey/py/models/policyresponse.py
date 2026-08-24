@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .firewallpolicy import FirewallPolicy, FirewallPolicyTypedDict
 from .keyauthpolicy import KeyauthPolicy, KeyauthPolicyTypedDict
+from .loggingpolicy import LoggingPolicy, LoggingPolicyTypedDict
 from .matchexpr import MatchExpr, MatchExprTypedDict
 from .openapipolicy import OpenapiPolicy, OpenapiPolicyTypedDict
 from .ratelimitpolicy import RatelimitPolicy, RatelimitPolicyTypedDict
@@ -14,7 +15,7 @@ from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 class PolicyResponseTypedDict(TypedDict):
     r"""A stored gateway policy as returned by list endpoints. Exactly one of
-    `keyauth`, `ratelimit`, `firewall` or `openapi` is set.
+    `keyauth`, `ratelimit`, `firewall`, `openapi` or `logging` is set.
     """
 
     id: str
@@ -30,7 +31,10 @@ class PolicyResponseTypedDict(TypedDict):
     keyauth: NotRequired[KeyauthPolicyTypedDict]
     r"""Verifies Unkey API keys on matching requests."""
     ratelimit: NotRequired[RatelimitPolicyTypedDict]
-    r"""Rate limits matching requests."""
+    r"""Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+    The deprecated `identifier` field is accepted in place of a one-entry
+    `identifiers` list; set exactly one of the two.
+    """
     firewall: NotRequired[FirewallPolicyTypedDict]
     r"""Blocks matching requests."""
     openapi: NotRequired[OpenapiPolicyTypedDict]
@@ -38,11 +42,22 @@ class PolicyResponseTypedDict(TypedDict):
     configuration of its own. If no spec has been uploaded for the deployment,
     the policy is a no-op and requests pass through unvalidated.
     """
+    logging: NotRequired[LoggingPolicyTypedDict]
+    r"""Adds request data to the log entries of matching requests. The gateway
+    always records a basic log entry for every request: method, host, path,
+    status, and latency. Each capture setting is a separate opt-in: request
+    headers, response headers, request body, response body, and query data.
+    The policy's `match` expressions select the requests. A policy without
+    `match` expressions matches every request. If more than one enabled
+    logging policy matches a request, the gateway combines their settings.
+    The gateway always redacts the `Authorization` header and configured key
+    locations before it stores headers or query data.
+    """
 
 
 class PolicyResponse(BaseModel):
     r"""A stored gateway policy as returned by list endpoints. Exactly one of
-    `keyauth`, `ratelimit`, `firewall` or `openapi` is set.
+    `keyauth`, `ratelimit`, `firewall`, `openapi` or `logging` is set.
     """
 
     id: str
@@ -63,7 +78,10 @@ class PolicyResponse(BaseModel):
     r"""Verifies Unkey API keys on matching requests."""
 
     ratelimit: Optional[RatelimitPolicy] = None
-    r"""Rate limits matching requests."""
+    r"""Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+    The deprecated `identifier` field is accepted in place of a one-entry
+    `identifiers` list; set exactly one of the two.
+    """
 
     firewall: Optional[FirewallPolicy] = None
     r"""Blocks matching requests."""
@@ -74,9 +92,23 @@ class PolicyResponse(BaseModel):
     the policy is a no-op and requests pass through unvalidated.
     """
 
+    logging: Optional[LoggingPolicy] = None
+    r"""Adds request data to the log entries of matching requests. The gateway
+    always records a basic log entry for every request: method, host, path,
+    status, and latency. Each capture setting is a separate opt-in: request
+    headers, response headers, request body, response body, and query data.
+    The policy's `match` expressions select the requests. A policy without
+    `match` expressions matches every request. If more than one enabled
+    logging policy matches a request, the gateway combines their settings.
+    The gateway always redacts the `Authorization` header and configured key
+    locations before it stores headers or query data.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["match", "keyauth", "ratelimit", "firewall", "openapi"])
+        optional_fields = set(
+            ["match", "keyauth", "ratelimit", "firewall", "openapi", "logging"]
+        )
         serialized = handler(self)
         m = {}
 

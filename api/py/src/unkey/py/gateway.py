@@ -671,6 +671,9 @@ class Gateway(BaseSDK):
         openapi: Optional[
             Union[models.OpenapiPolicy, models.OpenapiPolicyTypedDict]
         ] = None,
+        logging: Optional[
+            Union[models.LoggingPolicy, models.LoggingPolicyTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -718,11 +721,22 @@ class Gateway(BaseSDK):
         :param match: Replaces all match expressions. Set null to remove them so the policy
             applies to every request. Omit to keep the current expressions.
         :param keyauth: Verifies Unkey API keys on matching requests.
-        :param ratelimit: Rate limits matching requests.
+        :param ratelimit: Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+            The deprecated `identifier` field is accepted in place of a one-entry
+            `identifiers` list; set exactly one of the two.
         :param firewall: Blocks matching requests.
         :param openapi: Validates matching requests against the app's uploaded OpenAPI spec. Has no
             configuration of its own. If no spec has been uploaded for the deployment,
             the policy is a no-op and requests pass through unvalidated.
+        :param logging: Adds request data to the log entries of matching requests. The gateway
+            always records a basic log entry for every request: method, host, path,
+            status, and latency. Each capture setting is a separate opt-in: request
+            headers, response headers, request body, response body, and query data.
+            The policy's `match` expressions select the requests. A policy without
+            `match` expressions matches every request. If more than one enabled
+            logging policy matches a request, the gateway combines their settings.
+            The gateway always redacts the `Authorization` header and configured key
+            locations before it stores headers or query data.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -756,6 +770,7 @@ class Gateway(BaseSDK):
                 firewall, Optional[models.FirewallPolicy]
             ),
             openapi=utils.get_pydantic_model(openapi, Optional[models.OpenapiPolicy]),
+            logging=utils.get_pydantic_model(logging, Optional[models.LoggingPolicy]),
         )
 
         req = self._build_request(
@@ -874,6 +889,9 @@ class Gateway(BaseSDK):
         openapi: Optional[
             Union[models.OpenapiPolicy, models.OpenapiPolicyTypedDict]
         ] = None,
+        logging: Optional[
+            Union[models.LoggingPolicy, models.LoggingPolicyTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -921,11 +939,22 @@ class Gateway(BaseSDK):
         :param match: Replaces all match expressions. Set null to remove them so the policy
             applies to every request. Omit to keep the current expressions.
         :param keyauth: Verifies Unkey API keys on matching requests.
-        :param ratelimit: Rate limits matching requests.
+        :param ratelimit: Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+            The deprecated `identifier` field is accepted in place of a one-entry
+            `identifiers` list; set exactly one of the two.
         :param firewall: Blocks matching requests.
         :param openapi: Validates matching requests against the app's uploaded OpenAPI spec. Has no
             configuration of its own. If no spec has been uploaded for the deployment,
             the policy is a no-op and requests pass through unvalidated.
+        :param logging: Adds request data to the log entries of matching requests. The gateway
+            always records a basic log entry for every request: method, host, path,
+            status, and latency. Each capture setting is a separate opt-in: request
+            headers, response headers, request body, response body, and query data.
+            The policy's `match` expressions select the requests. A policy without
+            `match` expressions matches every request. If more than one enabled
+            logging policy matches a request, the gateway combines their settings.
+            The gateway always redacts the `Authorization` header and configured key
+            locations before it stores headers or query data.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -959,6 +988,7 @@ class Gateway(BaseSDK):
                 firewall, Optional[models.FirewallPolicy]
             ),
             openapi=utils.get_pydantic_model(openapi, Optional[models.OpenapiPolicy]),
+            logging=utils.get_pydantic_model(logging, Optional[models.LoggingPolicy]),
         )
 
         req = self._build_request_async(

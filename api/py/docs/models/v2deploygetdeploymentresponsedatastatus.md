@@ -1,13 +1,13 @@
-# Status
+# V2DeployGetDeploymentResponseDataStatus
 
 Current deployment status
 
 ## Example Usage
 
 ```python
-from unkey.py.models import Status
+from unkey.py.models import V2DeployGetDeploymentResponseDataStatus
 
-value = Status.UNSPECIFIED
+value = V2DeployGetDeploymentResponseDataStatus.UNSPECIFIED
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
 ```

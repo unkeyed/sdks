@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .environmentbuild import EnvironmentBuild, EnvironmentBuildTypedDict
+from .environmentkind import EnvironmentKind
 from .environmentregion import EnvironmentRegion, EnvironmentRegionTypedDict
 from .environmentruntime import EnvironmentRuntime, EnvironmentRuntimeTypedDict
 import pydantic
@@ -23,6 +24,13 @@ class EnvironmentTypedDict(TypedDict):
     description: str
     r"""Human-readable description of this environment.
     Empty string if none was provided.
+
+    """
+    kind: EnvironmentKind
+    r"""The deployment lifecycle role of an environment.
+
+    - `production`: Deployments serve production traffic, support promotion and rollback, and cannot be stopped.
+    - `preview`: Deployments can be stopped and started and are eligible for preview lifecycle automation.
 
     """
     delete_protection: bool
@@ -70,6 +78,14 @@ class Environment(BaseModel):
     description: str
     r"""Human-readable description of this environment.
     Empty string if none was provided.
+
+    """
+
+    kind: EnvironmentKind
+    r"""The deployment lifecycle role of an environment.
+
+    - `production`: Deployments serve production traffic, support promotion and rollback, and cannot be stopped.
+    - `preview`: Deployments can be stopped and started and are eligible for preview lifecycle automation.
 
     """
 

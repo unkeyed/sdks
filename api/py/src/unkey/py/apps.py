@@ -18,6 +18,9 @@ class Apps(BaseSDK):
         project: str,
         name: str,
         slug: str,
+        git: Optional[
+            Union[models.AppGitCreateInput, models.AppGitCreateInputTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -49,6 +52,9 @@ class Apps(BaseSDK):
         :param slug: Identifies a resource by either its unique ID or its slug.
             Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
+        :param git: Connect a GitHub repository to the app on creation. Omit to create the app
+            without a repository and connect one later with apps.updateApp.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -68,6 +74,7 @@ class Apps(BaseSDK):
             project=project,
             name=name,
             slug=slug,
+            git=utils.get_pydantic_model(git, Optional[models.AppGitCreateInput]),
         )
 
         req = self._build_request(
@@ -171,6 +178,9 @@ class Apps(BaseSDK):
         project: str,
         name: str,
         slug: str,
+        git: Optional[
+            Union[models.AppGitCreateInput, models.AppGitCreateInputTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -202,6 +212,9 @@ class Apps(BaseSDK):
         :param slug: Identifies a resource by either its unique ID or its slug.
             Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
+        :param git: Connect a GitHub repository to the app on creation. Omit to create the app
+            without a repository and connect one later with apps.updateApp.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -221,6 +234,7 @@ class Apps(BaseSDK):
             project=project,
             name=name,
             slug=slug,
+            git=utils.get_pydantic_model(git, Optional[models.AppGitCreateInput]),
         )
 
         req = self._build_request_async(
@@ -1253,7 +1267,9 @@ class Apps(BaseSDK):
         app: str,
         name: Optional[str] = None,
         slug: Optional[str] = None,
-        default_branch: Optional[str] = None,
+        git: OptionalNullable[
+            Union[models.AppGitUpdateInput, models.AppGitUpdateInputTypedDict]
+        ] = UNSET,
         delete_protection: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1289,8 +1305,10 @@ class Apps(BaseSDK):
         :param slug: Identifies a resource by either its unique ID or its slug.
             Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
-        :param default_branch: New default git branch deployments track for this app.
-            Omit this field to leave the current branch unchanged.
+        :param git: Connect, reconfigure, or disconnect this app's GitHub repository.
+            Omit to leave unchanged, set null to disconnect, or set an object with a
+            \"repository\" to connect or replace it and/or a \"defaultBranch\" to set which
+            branch it tracks. Fields are independent, so send only the one you change.
 
         :param delete_protection: Enable or disable delete protection for the app.
             Omit this field to leave the current setting unchanged.
@@ -1315,7 +1333,9 @@ class Apps(BaseSDK):
             app=app,
             name=name,
             slug=slug,
-            default_branch=default_branch,
+            git=utils.get_pydantic_model(
+                git, OptionalNullable[models.AppGitUpdateInput]
+            ),
             delete_protection=delete_protection,
         )
 
@@ -1421,7 +1441,9 @@ class Apps(BaseSDK):
         app: str,
         name: Optional[str] = None,
         slug: Optional[str] = None,
-        default_branch: Optional[str] = None,
+        git: OptionalNullable[
+            Union[models.AppGitUpdateInput, models.AppGitUpdateInputTypedDict]
+        ] = UNSET,
         delete_protection: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1457,8 +1479,10 @@ class Apps(BaseSDK):
         :param slug: Identifies a resource by either its unique ID or its slug.
             Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
-        :param default_branch: New default git branch deployments track for this app.
-            Omit this field to leave the current branch unchanged.
+        :param git: Connect, reconfigure, or disconnect this app's GitHub repository.
+            Omit to leave unchanged, set null to disconnect, or set an object with a
+            \"repository\" to connect or replace it and/or a \"defaultBranch\" to set which
+            branch it tracks. Fields are independent, so send only the one you change.
 
         :param delete_protection: Enable or disable delete protection for the app.
             Omit this field to leave the current setting unchanged.
@@ -1483,7 +1507,9 @@ class Apps(BaseSDK):
             app=app,
             name=name,
             slug=slug,
-            default_branch=default_branch,
+            git=utils.get_pydantic_model(
+                git, OptionalNullable[models.AppGitUpdateInput]
+            ),
             delete_protection=delete_protection,
         )
 

@@ -119,3 +119,13 @@ Based on:
 - [python v3.1.0] api/py
 ### Releases
 - [PyPI v3.1.0] https://pypi.org/project/unkey.py/3.1.0 - api/py
+
+## 2026-08-24 14:15:05
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.795.2 (2.932.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v3.2.0] api/py
+### Releases
+- [PyPI v3.2.0] https://pypi.org/project/unkey.py/3.2.0 - api/py

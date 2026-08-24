@@ -204,7 +204,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
     # Handle response
     print(res)
@@ -225,7 +225,7 @@ async def main():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.analytics.get_verifications_async(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+        res = await unkey.analytics.get_gateway_requests_async(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
         # Handle response
         print(res)
@@ -254,7 +254,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
     # Handle response
     print(res)
@@ -288,6 +288,9 @@ with Unkey() as unkey:
 
 ### [Analytics](docs/sdks/analytics/README.md)
 
+* [get_gateway_requests](docs/sdks/analytics/README.md#get_gateway_requests) - Query gateway request data
+* [get_ratelimits](docs/sdks/analytics/README.md#get_ratelimits) - Query rate limit data
+* [get_runtime_logs](docs/sdks/analytics/README.md#get_runtime_logs) - Query runtime log data
 * [get_verifications](docs/sdks/analytics/README.md#get_verifications) - Query key verification data
 
 ### [Apis](docs/sdks/apis/README.md)
@@ -315,6 +318,14 @@ with Unkey() as unkey:
 * [start_deployment](docs/sdks/deployments/README.md#start_deployment) - Start deployment
 * [stop_deployment](docs/sdks/deployments/README.md#stop_deployment) - Stop deployment
 
+### [Domains](docs/sdks/domains/README.md)
+
+* [create_domain](docs/sdks/domains/README.md#create_domain) - Create domain
+* [delete_domain](docs/sdks/domains/README.md#delete_domain) - Delete domain
+* [get_domain](docs/sdks/domains/README.md#get_domain) - Get domain
+* [list_domains](docs/sdks/domains/README.md#list_domains) - List domains
+* [verify_domain](docs/sdks/domains/README.md#verify_domain) - Verify domain
+
 ### [Environments](docs/sdks/environments/README.md)
 
 * [get_environment](docs/sdks/environments/README.md#get_environment) - Get environment
@@ -329,6 +340,10 @@ with Unkey() as unkey:
 * [list_policies](docs/sdks/gateway/README.md#list_policies) - List policies
 * [set_policies](docs/sdks/gateway/README.md#set_policies) - Set policies
 * [update_policy](docs/sdks/gateway/README.md#update_policy) - Update policy
+
+### [Github](docs/sdks/github/README.md)
+
+* [install_app](docs/sdks/github/README.md#install_app) - Install GitHub App
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -371,11 +386,12 @@ with Unkey() as unkey:
 * [get_role](docs/sdks/permissions/README.md#get_role) - Get role
 * [list_permissions](docs/sdks/permissions/README.md#list_permissions) - List permissions
 * [list_roles](docs/sdks/permissions/README.md#list_roles) - List roles
+* [set_role_permissions](docs/sdks/permissions/README.md#set_role_permissions) - Set role permissions
 
 ### [Portal](docs/sdks/portal/README.md)
 
 * [create_session](docs/sdks/portal/README.md#create_session) - Create portal session
-* [exchange_session](docs/sdks/portal/README.md#exchange_session) - Exchange session token
+* [exchange_code](docs/sdks/portal/README.md#exchange_code) - Exchange portal code
 * [get_verifications](docs/sdks/portal/README.md#get_verifications) - Get portal verifications
 * [list_keys](docs/sdks/portal/README.md#list_keys) - List portal keys
 * [reroll_key](docs/sdks/portal/README.md#reroll_key) - Reroll portal key
@@ -441,7 +457,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -460,7 +476,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
     # Handle response
     print(res)
@@ -493,7 +509,7 @@ with Unkey(
     res = None
     try:
 
-        res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+        res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
         # Handle response
         print(res)
@@ -534,11 +550,11 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
-* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 8 of 72 methods.*
-* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 7 of 72 methods.*
-* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 72 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 1 of 72 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 1 of 72 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 12 of 82 methods.*
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 8 of 82 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 4 of 82 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 4 of 82 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 82 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -561,7 +577,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
     # Handle response
     print(res)
@@ -648,6 +664,20 @@ class CustomClient(AsyncHttpClient):
 
 s = Unkey(async_client=CustomClient(httpx.AsyncClient()))
 ```
+### httpx2 (Pydantic's httpx fork)
+
+[httpx2](https://httpx2.pydantic.dev/) is Pydantic's maintained fork of `httpx`. To run this SDK on httpx2, call `alias_httpx()` at your program's entry point, before importing the SDK, so every `import httpx` — including the ones inside the SDK — resolves to `httpx2`:
+```python
+import httpx2
+
+httpx2.alias_httpx()
+
+from unkey.py import Unkey
+
+s = Unkey()
+```
+
+An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->

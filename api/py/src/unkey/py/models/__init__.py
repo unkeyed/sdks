@@ -7,6 +7,9 @@ from unkey.py.utils.dynamic_imports import lazy_getattr, lazy_dir
 if TYPE_CHECKING:
     from .apis_listkeysop import ApisListKeysResponse, ApisListKeysResponseTypedDict
     from .app import App, AppTypedDict
+    from .appgit import AppGit, AppGitTypedDict
+    from .appgitcreateinput import AppGitCreateInput, AppGitCreateInputTypedDict
+    from .appgitupdateinput import AppGitUpdateInput, AppGitUpdateInputTypedDict
     from .apps_listappsop import AppsListAppsResponse, AppsListAppsResponseTypedDict
     from .authenticatedsubjectkey import (
         AuthenticatedSubjectKey,
@@ -39,6 +42,9 @@ if TYPE_CHECKING:
         DeploymentSourceImageTypedDict,
     )
     from .deploymentstatus import DeploymentStatus
+    from .dnsrecord import DNSRecord, DNSRecordTypedDict, Type
+    from .domain import Domain, DomainStatus, DomainTypedDict
+    from .domainconnect import DomainConnect, DomainConnectTypedDict
     from .emptyresponse import EmptyResponse, EmptyResponseTypedDict
     from .environment import Environment, EnvironmentTypedDict
     from .environmentbuild import EnvironmentBuild, EnvironmentBuildTypedDict
@@ -47,6 +53,7 @@ if TYPE_CHECKING:
         EnvironmentHealthcheckMethod,
         EnvironmentHealthcheckTypedDict,
     )
+    from .environmentkind import EnvironmentKind
     from .environmentregion import EnvironmentRegion, EnvironmentRegionTypedDict
     from .environmentruntime import EnvironmentRuntime, EnvironmentRuntimeTypedDict
     from .environmentshutdownsignal import EnvironmentShutdownSignal
@@ -85,6 +92,7 @@ if TYPE_CHECKING:
         KeysVerifyKeyRatelimit,
         KeysVerifyKeyRatelimitTypedDict,
     )
+    from .loggingpolicy import LoggingPolicy, LoggingPolicyTypedDict
     from .matchexpr import MatchExpr, MatchExprTypedDict
     from .meta import Meta, MetaTypedDict
     from .methodmatch import MethodMatch, MethodMatchMethod, MethodMatchTypedDict
@@ -107,9 +115,9 @@ if TYPE_CHECKING:
         PortalCreateSessionResponse,
         PortalCreateSessionResponseTypedDict,
     )
-    from .portal_exchangesessionop import (
-        PortalExchangeSessionResponse,
-        PortalExchangeSessionResponseTypedDict,
+    from .portal_exchangecodeop import (
+        PortalExchangeCodeResponse,
+        PortalExchangeCodeResponseTypedDict,
     )
     from .portal_getverificationsop import (
         PortalGetVerificationsSecurity,
@@ -141,7 +149,12 @@ if TYPE_CHECKING:
     )
     from .ratelimitidentifier import RatelimitIdentifier, RatelimitIdentifierTypedDict
     from .ratelimitoverride import RatelimitOverride, RatelimitOverrideTypedDict
-    from .ratelimitpolicy import RatelimitPolicy, RatelimitPolicyTypedDict
+    from .ratelimitpolicy import (
+        Identifier,
+        IdentifierTypedDict,
+        RatelimitPolicy,
+        RatelimitPolicyTypedDict,
+    )
     from .ratelimitrequest import RatelimitRequest, RatelimitRequestTypedDict
     from .ratelimitresponse import RatelimitResponse, RatelimitResponseTypedDict
     from .remoteipkey import RemoteIPKey, RemoteIPKeyTypedDict
@@ -157,6 +170,30 @@ if TYPE_CHECKING:
         UpdateKeyCreditsRefill,
         UpdateKeyCreditsRefillInterval,
         UpdateKeyCreditsRefillTypedDict,
+    )
+    from .v2analyticsgetgatewayrequestsrequestbody import (
+        V2AnalyticsGetGatewayRequestsRequestBody,
+        V2AnalyticsGetGatewayRequestsRequestBodyTypedDict,
+    )
+    from .v2analyticsgetgatewayrequestsresponsebody import (
+        V2AnalyticsGetGatewayRequestsResponseBody,
+        V2AnalyticsGetGatewayRequestsResponseBodyTypedDict,
+    )
+    from .v2analyticsgetratelimitsrequestbody import (
+        V2AnalyticsGetRatelimitsRequestBody,
+        V2AnalyticsGetRatelimitsRequestBodyTypedDict,
+    )
+    from .v2analyticsgetratelimitsresponsebody import (
+        V2AnalyticsGetRatelimitsResponseBody,
+        V2AnalyticsGetRatelimitsResponseBodyTypedDict,
+    )
+    from .v2analyticsgetruntimelogsrequestbody import (
+        V2AnalyticsGetRuntimeLogsRequestBody,
+        V2AnalyticsGetRuntimeLogsRequestBodyTypedDict,
+    )
+    from .v2analyticsgetruntimelogsresponsebody import (
+        V2AnalyticsGetRuntimeLogsResponseBody,
+        V2AnalyticsGetRuntimeLogsResponseBodyTypedDict,
     )
     from .v2analyticsgetverificationsrequestbody import (
         V2AnalyticsGetVerificationsRequestBody,
@@ -275,8 +312,8 @@ if TYPE_CHECKING:
         V2DeployGetDeploymentResponseBodyTypedDict,
     )
     from .v2deploygetdeploymentresponsedata import (
-        Status,
         V2DeployGetDeploymentResponseData,
+        V2DeployGetDeploymentResponseDataStatus,
         V2DeployGetDeploymentResponseDataTypedDict,
     )
     from .v2deploygitcommit import V2DeployGitCommit, V2DeployGitCommitTypedDict
@@ -345,6 +382,50 @@ if TYPE_CHECKING:
     from .v2deploymentsstopdeploymentresponsebody import (
         V2DeploymentsStopDeploymentResponseBody,
         V2DeploymentsStopDeploymentResponseBodyTypedDict,
+    )
+    from .v2domainscreatedomainrequestbody import (
+        V2DomainsCreateDomainRequestBody,
+        V2DomainsCreateDomainRequestBodyTypedDict,
+    )
+    from .v2domainscreatedomainresponsebody import (
+        V2DomainsCreateDomainResponseBody,
+        V2DomainsCreateDomainResponseBodyTypedDict,
+    )
+    from .v2domainscreatedomainresponsedata import (
+        V2DomainsCreateDomainResponseData,
+        V2DomainsCreateDomainResponseDataTypedDict,
+    )
+    from .v2domainsdeletedomainrequestbody import (
+        V2DomainsDeleteDomainRequestBody,
+        V2DomainsDeleteDomainRequestBodyTypedDict,
+    )
+    from .v2domainsdeletedomainresponsebody import (
+        V2DomainsDeleteDomainResponseBody,
+        V2DomainsDeleteDomainResponseBodyTypedDict,
+    )
+    from .v2domainsgetdomainrequestbody import (
+        V2DomainsGetDomainRequestBody,
+        V2DomainsGetDomainRequestBodyTypedDict,
+    )
+    from .v2domainsgetdomainresponsebody import (
+        V2DomainsGetDomainResponseBody,
+        V2DomainsGetDomainResponseBodyTypedDict,
+    )
+    from .v2domainslistdomainsrequestbody import (
+        V2DomainsListDomainsRequestBody,
+        V2DomainsListDomainsRequestBodyTypedDict,
+    )
+    from .v2domainslistdomainsresponsebody import (
+        V2DomainsListDomainsResponseBody,
+        V2DomainsListDomainsResponseBodyTypedDict,
+    )
+    from .v2domainsverifydomainrequestbody import (
+        V2DomainsVerifyDomainRequestBody,
+        V2DomainsVerifyDomainRequestBodyTypedDict,
+    )
+    from .v2domainsverifydomainresponsebody import (
+        V2DomainsVerifyDomainResponseBody,
+        V2DomainsVerifyDomainResponseBodyTypedDict,
     )
     from .v2environmentsgetenvironmentrequestbody import (
         V2EnvironmentsGetEnvironmentRequestBody,
@@ -417,6 +498,14 @@ if TYPE_CHECKING:
     from .v2gatewayupdatepolicyresponsebody import (
         V2GatewayUpdatePolicyResponseBody,
         V2GatewayUpdatePolicyResponseBodyTypedDict,
+    )
+    from .v2githubinstallappresponsebody import (
+        V2GithubInstallAppResponseBody,
+        V2GithubInstallAppResponseBodyTypedDict,
+    )
+    from .v2githubinstallappresponsedata import (
+        V2GithubInstallAppResponseData,
+        V2GithubInstallAppResponseDataTypedDict,
     )
     from .v2identitiescreateidentityrequestbody import (
         V2IdentitiesCreateIdentityRequestBody,
@@ -680,8 +769,16 @@ if TYPE_CHECKING:
         V2PermissionsListRolesResponseBody,
         V2PermissionsListRolesResponseBodyTypedDict,
     )
+    from .v2permissionssetrolepermissionsrequestbody import (
+        V2PermissionsSetRolePermissionsRequestBody,
+        V2PermissionsSetRolePermissionsRequestBodyTypedDict,
+    )
+    from .v2permissionssetrolepermissionsresponsebody import (
+        V2PermissionsSetRolePermissionsResponseBody,
+        V2PermissionsSetRolePermissionsResponseBodyTypedDict,
+    )
     from .v2portalcreatesessionrequestbody import (
-        PermissionEnum,
+        Scope,
         V2PortalCreateSessionRequestBody,
         V2PortalCreateSessionRequestBodyTypedDict,
     )
@@ -693,17 +790,17 @@ if TYPE_CHECKING:
         V2PortalCreateSessionResponseData,
         V2PortalCreateSessionResponseDataTypedDict,
     )
-    from .v2portalexchangesessionrequestbody import (
-        V2PortalExchangeSessionRequestBody,
-        V2PortalExchangeSessionRequestBodyTypedDict,
+    from .v2portalexchangecoderequestbody import (
+        V2PortalExchangeCodeRequestBody,
+        V2PortalExchangeCodeRequestBodyTypedDict,
     )
-    from .v2portalexchangesessionresponsebody import (
-        V2PortalExchangeSessionResponseBody,
-        V2PortalExchangeSessionResponseBodyTypedDict,
+    from .v2portalexchangecoderesponsebody import (
+        V2PortalExchangeCodeResponseBody,
+        V2PortalExchangeCodeResponseBodyTypedDict,
     )
-    from .v2portalexchangesessionresponsedata import (
-        V2PortalExchangeSessionResponseData,
-        V2PortalExchangeSessionResponseDataTypedDict,
+    from .v2portalexchangecoderesponsedata import (
+        V2PortalExchangeCodeResponseData,
+        V2PortalExchangeCodeResponseDataTypedDict,
     )
     from .v2portalgetverificationsdatapoint import (
         V2PortalGetVerificationsDataPoint,
@@ -844,6 +941,12 @@ __all__ = [
     "ApisListKeysResponse",
     "ApisListKeysResponseTypedDict",
     "App",
+    "AppGit",
+    "AppGitCreateInput",
+    "AppGitCreateInputTypedDict",
+    "AppGitTypedDict",
+    "AppGitUpdateInput",
+    "AppGitUpdateInputTypedDict",
     "AppTypedDict",
     "AppsListAppsResponse",
     "AppsListAppsResponseTypedDict",
@@ -856,6 +959,8 @@ __all__ = [
     "BearerTokenLocation",
     "BearerTokenLocationTypedDict",
     "Code",
+    "DNSRecord",
+    "DNSRecordTypedDict",
     "Deployment",
     "DeploymentAction",
     "DeploymentDocker",
@@ -877,6 +982,11 @@ __all__ = [
     "DeploymentTypedDict",
     "DeploymentsListDeploymentsResponse",
     "DeploymentsListDeploymentsResponseTypedDict",
+    "Domain",
+    "DomainConnect",
+    "DomainConnectTypedDict",
+    "DomainStatus",
+    "DomainTypedDict",
     "EmptyResponse",
     "EmptyResponseTypedDict",
     "Environment",
@@ -885,6 +995,7 @@ __all__ = [
     "EnvironmentHealthcheck",
     "EnvironmentHealthcheckMethod",
     "EnvironmentHealthcheckTypedDict",
+    "EnvironmentKind",
     "EnvironmentRegion",
     "EnvironmentRegionTypedDict",
     "EnvironmentRuntime",
@@ -905,6 +1016,8 @@ __all__ = [
     "HeaderKeyLocation",
     "HeaderKeyLocationTypedDict",
     "HeaderKeyTypedDict",
+    "Identifier",
+    "IdentifierTypedDict",
     "IdentitiesListIdentitiesResponse",
     "IdentitiesListIdentitiesResponseTypedDict",
     "Identity",
@@ -927,6 +1040,8 @@ __all__ = [
     "KeysVerifyKeyRatelimit",
     "KeysVerifyKeyRatelimitTypedDict",
     "Kind",
+    "LoggingPolicy",
+    "LoggingPolicyTypedDict",
     "MatchExpr",
     "MatchExprTypedDict",
     "Meta",
@@ -944,7 +1059,6 @@ __all__ = [
     "PathMatch",
     "PathMatchTypedDict",
     "Permission",
-    "PermissionEnum",
     "PermissionTypedDict",
     "PermissionsListPermissionsResponse",
     "PermissionsListPermissionsResponseTypedDict",
@@ -956,8 +1070,8 @@ __all__ = [
     "PolicyTypedDict",
     "PortalCreateSessionResponse",
     "PortalCreateSessionResponseTypedDict",
-    "PortalExchangeSessionResponse",
-    "PortalExchangeSessionResponseTypedDict",
+    "PortalExchangeCodeResponse",
+    "PortalExchangeCodeResponseTypedDict",
     "PortalGetVerificationsSecurity",
     "PortalGetVerificationsSecurityTypedDict",
     "PortalListKeysResponse",
@@ -992,16 +1106,29 @@ __all__ = [
     "ReplicasTypedDict",
     "Role",
     "RoleTypedDict",
+    "Scope",
     "Security",
     "SecurityTypedDict",
-    "Status",
     "StringMatch",
     "StringMatchTypedDict",
+    "Type",
     "UpdateKeyCreditsData",
     "UpdateKeyCreditsDataTypedDict",
     "UpdateKeyCreditsRefill",
     "UpdateKeyCreditsRefillInterval",
     "UpdateKeyCreditsRefillTypedDict",
+    "V2AnalyticsGetGatewayRequestsRequestBody",
+    "V2AnalyticsGetGatewayRequestsRequestBodyTypedDict",
+    "V2AnalyticsGetGatewayRequestsResponseBody",
+    "V2AnalyticsGetGatewayRequestsResponseBodyTypedDict",
+    "V2AnalyticsGetRatelimitsRequestBody",
+    "V2AnalyticsGetRatelimitsRequestBodyTypedDict",
+    "V2AnalyticsGetRatelimitsResponseBody",
+    "V2AnalyticsGetRatelimitsResponseBodyTypedDict",
+    "V2AnalyticsGetRuntimeLogsRequestBody",
+    "V2AnalyticsGetRuntimeLogsRequestBodyTypedDict",
+    "V2AnalyticsGetRuntimeLogsResponseBody",
+    "V2AnalyticsGetRuntimeLogsResponseBodyTypedDict",
     "V2AnalyticsGetVerificationsRequestBody",
     "V2AnalyticsGetVerificationsRequestBodyTypedDict",
     "V2AnalyticsGetVerificationsResponseBody",
@@ -1061,6 +1188,7 @@ __all__ = [
     "V2DeployGetDeploymentResponseBody",
     "V2DeployGetDeploymentResponseBodyTypedDict",
     "V2DeployGetDeploymentResponseData",
+    "V2DeployGetDeploymentResponseDataStatus",
     "V2DeployGetDeploymentResponseDataTypedDict",
     "V2DeployGitCommit",
     "V2DeployGitCommitTypedDict",
@@ -1100,6 +1228,28 @@ __all__ = [
     "V2DeploymentsStopDeploymentRequestBodyTypedDict",
     "V2DeploymentsStopDeploymentResponseBody",
     "V2DeploymentsStopDeploymentResponseBodyTypedDict",
+    "V2DomainsCreateDomainRequestBody",
+    "V2DomainsCreateDomainRequestBodyTypedDict",
+    "V2DomainsCreateDomainResponseBody",
+    "V2DomainsCreateDomainResponseBodyTypedDict",
+    "V2DomainsCreateDomainResponseData",
+    "V2DomainsCreateDomainResponseDataTypedDict",
+    "V2DomainsDeleteDomainRequestBody",
+    "V2DomainsDeleteDomainRequestBodyTypedDict",
+    "V2DomainsDeleteDomainResponseBody",
+    "V2DomainsDeleteDomainResponseBodyTypedDict",
+    "V2DomainsGetDomainRequestBody",
+    "V2DomainsGetDomainRequestBodyTypedDict",
+    "V2DomainsGetDomainResponseBody",
+    "V2DomainsGetDomainResponseBodyTypedDict",
+    "V2DomainsListDomainsRequestBody",
+    "V2DomainsListDomainsRequestBodyTypedDict",
+    "V2DomainsListDomainsResponseBody",
+    "V2DomainsListDomainsResponseBodyTypedDict",
+    "V2DomainsVerifyDomainRequestBody",
+    "V2DomainsVerifyDomainRequestBodyTypedDict",
+    "V2DomainsVerifyDomainResponseBody",
+    "V2DomainsVerifyDomainResponseBodyTypedDict",
     "V2EnvironmentsGetEnvironmentRequestBody",
     "V2EnvironmentsGetEnvironmentRequestBodyTypedDict",
     "V2EnvironmentsGetEnvironmentResponseBody",
@@ -1136,6 +1286,10 @@ __all__ = [
     "V2GatewayUpdatePolicyRequestBodyTypedDict",
     "V2GatewayUpdatePolicyResponseBody",
     "V2GatewayUpdatePolicyResponseBodyTypedDict",
+    "V2GithubInstallAppResponseBody",
+    "V2GithubInstallAppResponseBodyTypedDict",
+    "V2GithubInstallAppResponseData",
+    "V2GithubInstallAppResponseDataTypedDict",
     "V2IdentitiesCreateIdentityRequestBody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict",
     "V2IdentitiesCreateIdentityResponseBody",
@@ -1266,18 +1420,22 @@ __all__ = [
     "V2PermissionsListRolesRequestBodyTypedDict",
     "V2PermissionsListRolesResponseBody",
     "V2PermissionsListRolesResponseBodyTypedDict",
+    "V2PermissionsSetRolePermissionsRequestBody",
+    "V2PermissionsSetRolePermissionsRequestBodyTypedDict",
+    "V2PermissionsSetRolePermissionsResponseBody",
+    "V2PermissionsSetRolePermissionsResponseBodyTypedDict",
     "V2PortalCreateSessionRequestBody",
     "V2PortalCreateSessionRequestBodyTypedDict",
     "V2PortalCreateSessionResponseBody",
     "V2PortalCreateSessionResponseBodyTypedDict",
     "V2PortalCreateSessionResponseData",
     "V2PortalCreateSessionResponseDataTypedDict",
-    "V2PortalExchangeSessionRequestBody",
-    "V2PortalExchangeSessionRequestBodyTypedDict",
-    "V2PortalExchangeSessionResponseBody",
-    "V2PortalExchangeSessionResponseBodyTypedDict",
-    "V2PortalExchangeSessionResponseData",
-    "V2PortalExchangeSessionResponseDataTypedDict",
+    "V2PortalExchangeCodeRequestBody",
+    "V2PortalExchangeCodeRequestBodyTypedDict",
+    "V2PortalExchangeCodeResponseBody",
+    "V2PortalExchangeCodeResponseBodyTypedDict",
+    "V2PortalExchangeCodeResponseData",
+    "V2PortalExchangeCodeResponseDataTypedDict",
     "V2PortalGetVerificationsDataPoint",
     "V2PortalGetVerificationsDataPointTypedDict",
     "V2PortalGetVerificationsRequestBody",
@@ -1353,6 +1511,12 @@ _dynamic_imports: dict[str, str] = {
     "ApisListKeysResponseTypedDict": ".apis_listkeysop",
     "App": ".app",
     "AppTypedDict": ".app",
+    "AppGit": ".appgit",
+    "AppGitTypedDict": ".appgit",
+    "AppGitCreateInput": ".appgitcreateinput",
+    "AppGitCreateInputTypedDict": ".appgitcreateinput",
+    "AppGitUpdateInput": ".appgitupdateinput",
+    "AppGitUpdateInputTypedDict": ".appgitupdateinput",
     "AppsListAppsResponse": ".apps_listappsop",
     "AppsListAppsResponseTypedDict": ".apps_listappsop",
     "AuthenticatedSubjectKey": ".authenticatedsubjectkey",
@@ -1384,6 +1548,14 @@ _dynamic_imports: dict[str, str] = {
     "DeploymentSourceImage": ".deploymentsourceimage",
     "DeploymentSourceImageTypedDict": ".deploymentsourceimage",
     "DeploymentStatus": ".deploymentstatus",
+    "DNSRecord": ".dnsrecord",
+    "DNSRecordTypedDict": ".dnsrecord",
+    "Type": ".dnsrecord",
+    "Domain": ".domain",
+    "DomainStatus": ".domain",
+    "DomainTypedDict": ".domain",
+    "DomainConnect": ".domainconnect",
+    "DomainConnectTypedDict": ".domainconnect",
     "EmptyResponse": ".emptyresponse",
     "EmptyResponseTypedDict": ".emptyresponse",
     "Environment": ".environment",
@@ -1393,6 +1565,7 @@ _dynamic_imports: dict[str, str] = {
     "EnvironmentHealthcheck": ".environmenthealthcheck",
     "EnvironmentHealthcheckMethod": ".environmenthealthcheck",
     "EnvironmentHealthcheckTypedDict": ".environmenthealthcheck",
+    "EnvironmentKind": ".environmentkind",
     "EnvironmentRegion": ".environmentregion",
     "EnvironmentRegionTypedDict": ".environmentregion",
     "EnvironmentRuntime": ".environmentruntime",
@@ -1435,6 +1608,8 @@ _dynamic_imports: dict[str, str] = {
     "KeysVerifyKeyCreditsTypedDict": ".keysverifykeycredits",
     "KeysVerifyKeyRatelimit": ".keysverifykeyratelimit",
     "KeysVerifyKeyRatelimitTypedDict": ".keysverifykeyratelimit",
+    "LoggingPolicy": ".loggingpolicy",
+    "LoggingPolicyTypedDict": ".loggingpolicy",
     "MatchExpr": ".matchexpr",
     "MatchExprTypedDict": ".matchexpr",
     "Meta": ".meta",
@@ -1462,8 +1637,8 @@ _dynamic_imports: dict[str, str] = {
     "PolicyResponseTypedDict": ".policyresponse",
     "PortalCreateSessionResponse": ".portal_createsessionop",
     "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
-    "PortalExchangeSessionResponse": ".portal_exchangesessionop",
-    "PortalExchangeSessionResponseTypedDict": ".portal_exchangesessionop",
+    "PortalExchangeCodeResponse": ".portal_exchangecodeop",
+    "PortalExchangeCodeResponseTypedDict": ".portal_exchangecodeop",
     "PortalGetVerificationsSecurity": ".portal_getverificationsop",
     "PortalGetVerificationsSecurityTypedDict": ".portal_getverificationsop",
     "PortalListKeysResponse": ".portal_listkeysop",
@@ -1486,6 +1661,8 @@ _dynamic_imports: dict[str, str] = {
     "RatelimitIdentifierTypedDict": ".ratelimitidentifier",
     "RatelimitOverride": ".ratelimitoverride",
     "RatelimitOverrideTypedDict": ".ratelimitoverride",
+    "Identifier": ".ratelimitpolicy",
+    "IdentifierTypedDict": ".ratelimitpolicy",
     "RatelimitPolicy": ".ratelimitpolicy",
     "RatelimitPolicyTypedDict": ".ratelimitpolicy",
     "RatelimitRequest": ".ratelimitrequest",
@@ -1507,6 +1684,18 @@ _dynamic_imports: dict[str, str] = {
     "UpdateKeyCreditsRefill": ".updatekeycreditsrefill",
     "UpdateKeyCreditsRefillInterval": ".updatekeycreditsrefill",
     "UpdateKeyCreditsRefillTypedDict": ".updatekeycreditsrefill",
+    "V2AnalyticsGetGatewayRequestsRequestBody": ".v2analyticsgetgatewayrequestsrequestbody",
+    "V2AnalyticsGetGatewayRequestsRequestBodyTypedDict": ".v2analyticsgetgatewayrequestsrequestbody",
+    "V2AnalyticsGetGatewayRequestsResponseBody": ".v2analyticsgetgatewayrequestsresponsebody",
+    "V2AnalyticsGetGatewayRequestsResponseBodyTypedDict": ".v2analyticsgetgatewayrequestsresponsebody",
+    "V2AnalyticsGetRatelimitsRequestBody": ".v2analyticsgetratelimitsrequestbody",
+    "V2AnalyticsGetRatelimitsRequestBodyTypedDict": ".v2analyticsgetratelimitsrequestbody",
+    "V2AnalyticsGetRatelimitsResponseBody": ".v2analyticsgetratelimitsresponsebody",
+    "V2AnalyticsGetRatelimitsResponseBodyTypedDict": ".v2analyticsgetratelimitsresponsebody",
+    "V2AnalyticsGetRuntimeLogsRequestBody": ".v2analyticsgetruntimelogsrequestbody",
+    "V2AnalyticsGetRuntimeLogsRequestBodyTypedDict": ".v2analyticsgetruntimelogsrequestbody",
+    "V2AnalyticsGetRuntimeLogsResponseBody": ".v2analyticsgetruntimelogsresponsebody",
+    "V2AnalyticsGetRuntimeLogsResponseBodyTypedDict": ".v2analyticsgetruntimelogsresponsebody",
     "V2AnalyticsGetVerificationsRequestBody": ".v2analyticsgetverificationsrequestbody",
     "V2AnalyticsGetVerificationsRequestBodyTypedDict": ".v2analyticsgetverificationsrequestbody",
     "V2AnalyticsGetVerificationsResponseBody": ".v2analyticsgetverificationsresponsebody",
@@ -1565,8 +1754,8 @@ _dynamic_imports: dict[str, str] = {
     "V2DeployGetDeploymentRequestBodyTypedDict": ".v2deploygetdeploymentrequestbody",
     "V2DeployGetDeploymentResponseBody": ".v2deploygetdeploymentresponsebody",
     "V2DeployGetDeploymentResponseBodyTypedDict": ".v2deploygetdeploymentresponsebody",
-    "Status": ".v2deploygetdeploymentresponsedata",
     "V2DeployGetDeploymentResponseData": ".v2deploygetdeploymentresponsedata",
+    "V2DeployGetDeploymentResponseDataStatus": ".v2deploygetdeploymentresponsedata",
     "V2DeployGetDeploymentResponseDataTypedDict": ".v2deploygetdeploymentresponsedata",
     "V2DeployGitCommit": ".v2deploygitcommit",
     "V2DeployGitCommitTypedDict": ".v2deploygitcommit",
@@ -1606,6 +1795,28 @@ _dynamic_imports: dict[str, str] = {
     "V2DeploymentsStopDeploymentRequestBodyTypedDict": ".v2deploymentsstopdeploymentrequestbody",
     "V2DeploymentsStopDeploymentResponseBody": ".v2deploymentsstopdeploymentresponsebody",
     "V2DeploymentsStopDeploymentResponseBodyTypedDict": ".v2deploymentsstopdeploymentresponsebody",
+    "V2DomainsCreateDomainRequestBody": ".v2domainscreatedomainrequestbody",
+    "V2DomainsCreateDomainRequestBodyTypedDict": ".v2domainscreatedomainrequestbody",
+    "V2DomainsCreateDomainResponseBody": ".v2domainscreatedomainresponsebody",
+    "V2DomainsCreateDomainResponseBodyTypedDict": ".v2domainscreatedomainresponsebody",
+    "V2DomainsCreateDomainResponseData": ".v2domainscreatedomainresponsedata",
+    "V2DomainsCreateDomainResponseDataTypedDict": ".v2domainscreatedomainresponsedata",
+    "V2DomainsDeleteDomainRequestBody": ".v2domainsdeletedomainrequestbody",
+    "V2DomainsDeleteDomainRequestBodyTypedDict": ".v2domainsdeletedomainrequestbody",
+    "V2DomainsDeleteDomainResponseBody": ".v2domainsdeletedomainresponsebody",
+    "V2DomainsDeleteDomainResponseBodyTypedDict": ".v2domainsdeletedomainresponsebody",
+    "V2DomainsGetDomainRequestBody": ".v2domainsgetdomainrequestbody",
+    "V2DomainsGetDomainRequestBodyTypedDict": ".v2domainsgetdomainrequestbody",
+    "V2DomainsGetDomainResponseBody": ".v2domainsgetdomainresponsebody",
+    "V2DomainsGetDomainResponseBodyTypedDict": ".v2domainsgetdomainresponsebody",
+    "V2DomainsListDomainsRequestBody": ".v2domainslistdomainsrequestbody",
+    "V2DomainsListDomainsRequestBodyTypedDict": ".v2domainslistdomainsrequestbody",
+    "V2DomainsListDomainsResponseBody": ".v2domainslistdomainsresponsebody",
+    "V2DomainsListDomainsResponseBodyTypedDict": ".v2domainslistdomainsresponsebody",
+    "V2DomainsVerifyDomainRequestBody": ".v2domainsverifydomainrequestbody",
+    "V2DomainsVerifyDomainRequestBodyTypedDict": ".v2domainsverifydomainrequestbody",
+    "V2DomainsVerifyDomainResponseBody": ".v2domainsverifydomainresponsebody",
+    "V2DomainsVerifyDomainResponseBodyTypedDict": ".v2domainsverifydomainresponsebody",
     "V2EnvironmentsGetEnvironmentRequestBody": ".v2environmentsgetenvironmentrequestbody",
     "V2EnvironmentsGetEnvironmentRequestBodyTypedDict": ".v2environmentsgetenvironmentrequestbody",
     "V2EnvironmentsGetEnvironmentResponseBody": ".v2environmentsgetenvironmentresponsebody",
@@ -1642,6 +1853,10 @@ _dynamic_imports: dict[str, str] = {
     "V2GatewayUpdatePolicyRequestBodyTypedDict": ".v2gatewayupdatepolicyrequestbody",
     "V2GatewayUpdatePolicyResponseBody": ".v2gatewayupdatepolicyresponsebody",
     "V2GatewayUpdatePolicyResponseBodyTypedDict": ".v2gatewayupdatepolicyresponsebody",
+    "V2GithubInstallAppResponseBody": ".v2githubinstallappresponsebody",
+    "V2GithubInstallAppResponseBodyTypedDict": ".v2githubinstallappresponsebody",
+    "V2GithubInstallAppResponseData": ".v2githubinstallappresponsedata",
+    "V2GithubInstallAppResponseDataTypedDict": ".v2githubinstallappresponsedata",
     "V2IdentitiesCreateIdentityRequestBody": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityRequestBodyTypedDict": ".v2identitiescreateidentityrequestbody",
     "V2IdentitiesCreateIdentityResponseBody": ".v2identitiescreateidentityresponsebody",
@@ -1774,19 +1989,23 @@ _dynamic_imports: dict[str, str] = {
     "V2PermissionsListRolesRequestBodyTypedDict": ".v2permissionslistrolesrequestbody",
     "V2PermissionsListRolesResponseBody": ".v2permissionslistrolesresponsebody",
     "V2PermissionsListRolesResponseBodyTypedDict": ".v2permissionslistrolesresponsebody",
-    "PermissionEnum": ".v2portalcreatesessionrequestbody",
+    "V2PermissionsSetRolePermissionsRequestBody": ".v2permissionssetrolepermissionsrequestbody",
+    "V2PermissionsSetRolePermissionsRequestBodyTypedDict": ".v2permissionssetrolepermissionsrequestbody",
+    "V2PermissionsSetRolePermissionsResponseBody": ".v2permissionssetrolepermissionsresponsebody",
+    "V2PermissionsSetRolePermissionsResponseBodyTypedDict": ".v2permissionssetrolepermissionsresponsebody",
+    "Scope": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBody": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBodyTypedDict": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionResponseBody": ".v2portalcreatesessionresponsebody",
     "V2PortalCreateSessionResponseBodyTypedDict": ".v2portalcreatesessionresponsebody",
     "V2PortalCreateSessionResponseData": ".v2portalcreatesessionresponsedata",
     "V2PortalCreateSessionResponseDataTypedDict": ".v2portalcreatesessionresponsedata",
-    "V2PortalExchangeSessionRequestBody": ".v2portalexchangesessionrequestbody",
-    "V2PortalExchangeSessionRequestBodyTypedDict": ".v2portalexchangesessionrequestbody",
-    "V2PortalExchangeSessionResponseBody": ".v2portalexchangesessionresponsebody",
-    "V2PortalExchangeSessionResponseBodyTypedDict": ".v2portalexchangesessionresponsebody",
-    "V2PortalExchangeSessionResponseData": ".v2portalexchangesessionresponsedata",
-    "V2PortalExchangeSessionResponseDataTypedDict": ".v2portalexchangesessionresponsedata",
+    "V2PortalExchangeCodeRequestBody": ".v2portalexchangecoderequestbody",
+    "V2PortalExchangeCodeRequestBodyTypedDict": ".v2portalexchangecoderequestbody",
+    "V2PortalExchangeCodeResponseBody": ".v2portalexchangecoderesponsebody",
+    "V2PortalExchangeCodeResponseBodyTypedDict": ".v2portalexchangecoderesponsebody",
+    "V2PortalExchangeCodeResponseData": ".v2portalexchangecoderesponsedata",
+    "V2PortalExchangeCodeResponseDataTypedDict": ".v2portalexchangecoderesponsedata",
     "V2PortalGetVerificationsDataPoint": ".v2portalgetverificationsdatapoint",
     "V2PortalGetVerificationsDataPointTypedDict": ".v2portalgetverificationsdatapoint",
     "V2PortalGetVerificationsRequestBody": ".v2portalgetverificationsrequestbody",

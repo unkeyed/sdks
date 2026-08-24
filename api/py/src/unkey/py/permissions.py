@@ -2,7 +2,7 @@
 
 from .basesdk import BaseSDK
 from jsonpath import JSONPath
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
 from unkey.py.types import OptionalNullable, UNSET
@@ -357,6 +357,7 @@ class Permissions(BaseSDK):
         *,
         name: str,
         description: Optional[str] = None,
+        permissions: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -364,21 +365,27 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsCreateRoleResponseBody:
         r"""Create role
 
-        Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys.
+        Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys. Permission slugs supplied in `permissions` are attached during creation. Missing permissions are created automatically.
 
         **Important:** Role names must be unique within the workspace. Once created, roles are immediately available for assignment.
 
         **Required Permissions**
 
-        Your root key must have the following permission:
+        Your root key must always have:
         - `rbac.*.create_role`
+
+        When `permissions` is not empty, it must also have:
+        - `rbac.*.add_permission_to_role`
+
+        When any requested permission slug does not exist, it must also have:
+        - `rbac.*.create_permission`
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'Billing Manager'.
 
-            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'Billing Manager'
 
         :param description: Provides comprehensive documentation of what this role encompasses and what access it grants.
             Include information about the intended use case, what permissions should be assigned, and any important considerations.
@@ -391,6 +398,10 @@ class Permissions(BaseSDK):
             - What permissions are typically associated with it
             - Any security considerations or limitations
             - Related roles that might be used together
+
+        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+
+            Omit this field or provide an empty array to create the role without permissions.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -410,6 +421,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsCreateRoleRequestBody(
             name=name,
             description=description,
+            permissions=utils.unmarshal(permissions, Optional[List[str]]),
         )
 
         req = self._build_request(
@@ -509,6 +521,7 @@ class Permissions(BaseSDK):
         *,
         name: str,
         description: Optional[str] = None,
+        permissions: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -516,21 +529,27 @@ class Permissions(BaseSDK):
     ) -> models.V2PermissionsCreateRoleResponseBody:
         r"""Create role
 
-        Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys.
+        Create a new role to group related permissions for easier management. Roles enable consistent permission assignment across multiple API keys. Permission slugs supplied in `permissions` are attached during creation. Missing permissions are created automatically.
 
         **Important:** Role names must be unique within the workspace. Once created, roles are immediately available for assignment.
 
         **Required Permissions**
 
-        Your root key must have the following permission:
+        Your root key must always have:
         - `rbac.*.create_role`
+
+        When `permissions` is not empty, it must also have:
+        - `rbac.*.add_permission_to_role`
+
+        When any requested permission slug does not exist, it must also have:
+        - `rbac.*.create_permission`
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+        :param name: The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'Billing Manager'.
 
-            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+            Examples: 'admin.billing', 'support.readonly', 'developer.api', 'Billing Manager'
 
         :param description: Provides comprehensive documentation of what this role encompasses and what access it grants.
             Include information about the intended use case, what permissions should be assigned, and any important considerations.
@@ -543,6 +562,10 @@ class Permissions(BaseSDK):
             - What permissions are typically associated with it
             - Any security considerations or limitations
             - Related roles that might be used together
+
+        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+
+            Omit this field or provide an empty array to create the role without permissions.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -562,6 +585,7 @@ class Permissions(BaseSDK):
         request = models.V2PermissionsCreateRoleRequestBody(
             name=name,
             description=description,
+            permissions=utils.unmarshal(permissions, Optional[List[str]]),
         )
 
         req = self._build_request_async(
@@ -2442,6 +2466,292 @@ class Permissions(BaseSDK):
                     models.V2PermissionsListRolesResponseBody, http_res
                 ),
                 next=next_func,
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def set_role_permissions(
+        self,
+        *,
+        role_id: str,
+        permissions: Iterable[str],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsSetRolePermissionsResponseBody:
+        r"""Set role permissions
+
+        Atomically replaces all permissions directly assigned to a role. An empty `permissions` array removes every permission from the role. Permissions that do not exist are created when the caller has permission to create them.
+
+        **Required Permissions**
+
+        Your root key must have:
+        - `rbac.*.add_permission_to_role`
+        - `rbac.*.remove_permission_from_role`
+
+        When any requested permission slug does not exist, it must also have:
+        - `rbac.*.create_permission`
+
+
+        :param role_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param permissions: The complete set of permission slugs to assign directly to the role. Missing permissions are created when authorized. An empty array clears all direct permissions.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsSetRolePermissionsRequestBody(
+            role_id=role_id,
+            permissions=utils.unmarshal(permissions, List[str]),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/permissions.setRolePermissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2PermissionsSetRolePermissionsRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.setRolePermissions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsSetRolePermissionsResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def set_role_permissions_async(
+        self,
+        *,
+        role_id: str,
+        permissions: Iterable[str],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsSetRolePermissionsResponseBody:
+        r"""Set role permissions
+
+        Atomically replaces all permissions directly assigned to a role. An empty `permissions` array removes every permission from the role. Permissions that do not exist are created when the caller has permission to create them.
+
+        **Required Permissions**
+
+        Your root key must have:
+        - `rbac.*.add_permission_to_role`
+        - `rbac.*.remove_permission_from_role`
+
+        When any requested permission slug does not exist, it must also have:
+        - `rbac.*.create_permission`
+
+
+        :param role_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param permissions: The complete set of permission slugs to assign directly to the role. Missing permissions are created when authorized. An empty array clears all direct permissions.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsSetRolePermissionsRequestBody(
+            role_id=role_id,
+            permissions=utils.unmarshal(permissions, List[str]),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/permissions.setRolePermissions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2PermissionsSetRolePermissionsRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.setRolePermissions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsSetRolePermissionsResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(

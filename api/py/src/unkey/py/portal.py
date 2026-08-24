@@ -15,10 +15,11 @@ class Portal(BaseSDK):
     def create_session(
         self,
         *,
-        slug: str,
+        portal: str,
         external_id: str,
-        permissions: Iterable[models.PermissionEnum],
+        scopes: Iterable[models.Scope],
         preview: Optional[bool] = False,
+        return_url: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -26,40 +27,74 @@ class Portal(BaseSDK):
     ) -> models.PortalCreateSessionResponse:
         r"""Create portal session
 
-        Create a short-lived session token for an end user to access the Customer Portal.
+        Create a portal session for an end user and get the URL to redirect them to.
 
-        The returned session ID is valid for 15 minutes and can be exchanged exactly once
-        for a 24-hour browser session via `portal.exchangeSession`. Redirect the end user
-        to the returned URL to start the portal experience.
+        The URL carries a single-use exchange code valid for 15 minutes, which the portal
+        redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 
         **Required Permissions**
 
-        Your root key must be associated with a workspace that has an enabled portal configuration.
+        Authorization runs in two stages, and both must pass.
+
+        First, your root key must have one of the following permissions:
+        - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+
+        Second, a session can never carry a capability your root key does not itself
+        hold. Each requested scope additionally requires the equivalent permission on
+        every keyspace the portal resolves to:
+        - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
+        - `keys:reroll` and `keys:create` require `api.<api_id>.create_key`, plus
+        `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
+        - `analytics:read` requires `api.<api_id>.read_analytics`
+
+        The `*` form of each is also accepted. Requesting a scope you do not hold
+        returns 403 for the whole request rather than minting a reduced session, so a
+        missing grant is visible instead of surfacing later as a broken portal.
+
+        Missing the portal permission itself returns **404**, not 403: a caller who
+        cannot mint for a portal is not told whether it exists.
+
+        Your root key must also be associated with a workspace that has an enabled portal.
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param slug: The human-readable slug of the portal configuration to create the session against.
-            Identifies which app's portal the end user will access.
-            Must be 3-64 characters, lowercase alphanumeric and hyphens only,
-            must not start or end with a hyphen, and must not contain consecutive hyphens.
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
         :param external_id: The end user's identifier in the customer's system.
             Accepts arbitrary string values (user IDs, emails, UUIDs, etc.).
 
-        :param permissions: The capabilities granted to the end user in the Portal, from a fixed
+        :param scopes: The capabilities granted to the end user in the Portal, from a fixed
             vocabulary. All capabilities are scoped to this end user: key capabilities
             (`keys:*`) apply only to keys the end user owns within the keyspace
-            configured on the portal configuration, and `analytics:read` returns only
-            the end user's own verification events. An end user can never see another
-            identity's keys or analytics.
+            configured on the portal, and `analytics:read` returns only the end user's
+            own verification events. An end user can never see another identity's keys
+            or analytics.
 
-            Tab visibility is derived from the capabilities:
-            - Keys tab: any `keys:*` capability
+            Tab visibility is derived from the scopes:
+            - Keys tab: any `keys:*` scope
             - Analytics tab: `analytics:read`
-            - Docs tab: visible when any capability is present
+            - Docs tab: visible when any scope is present
+
+            `keys:create` is accepted but has no portal route behind it yet. It is
+            still authorized like the others, so a session minted with it required
+            `create_key` on the keyspace at mint time, and a future portal create-key
+            route inherits an enforced ceiling rather than trusting sessions minted
+            while the capability was inert.
+
+            Each scope requires the equivalent permission on your own root key. See
+            Required Permissions on this operation.
 
         :param preview: When true, creates a preview session for testing the portal experience.
+
+        :param return_url: Absolute URL the end user is sent back to when they leave the portal, or
+            when their session expires mid-visit. Set per session rather than per
+            portal, so one portal can serve several entry points and return each user
+            to the page they came from.
+
+            When omitted, the portal shows no return link.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -77,10 +112,11 @@ class Portal(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2PortalCreateSessionRequestBody(
-            slug=slug,
+            portal=portal,
             external_id=external_id,
-            permissions=utils.unmarshal(permissions, List[models.PermissionEnum]),
+            scopes=utils.unmarshal(scopes, List[models.Scope]),
             preview=preview,
+            return_url=return_url,
         )
 
         req = self._build_request(
@@ -124,7 +160,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -181,10 +217,11 @@ class Portal(BaseSDK):
     async def create_session_async(
         self,
         *,
-        slug: str,
+        portal: str,
         external_id: str,
-        permissions: Iterable[models.PermissionEnum],
+        scopes: Iterable[models.Scope],
         preview: Optional[bool] = False,
+        return_url: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -192,40 +229,74 @@ class Portal(BaseSDK):
     ) -> models.PortalCreateSessionResponse:
         r"""Create portal session
 
-        Create a short-lived session token for an end user to access the Customer Portal.
+        Create a portal session for an end user and get the URL to redirect them to.
 
-        The returned session ID is valid for 15 minutes and can be exchanged exactly once
-        for a 24-hour browser session via `portal.exchangeSession`. Redirect the end user
-        to the returned URL to start the portal experience.
+        The URL carries a single-use exchange code valid for 15 minutes, which the portal
+        redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 
         **Required Permissions**
 
-        Your root key must be associated with a workspace that has an enabled portal configuration.
+        Authorization runs in two stages, and both must pass.
+
+        First, your root key must have one of the following permissions:
+        - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+
+        Second, a session can never carry a capability your root key does not itself
+        hold. Each requested scope additionally requires the equivalent permission on
+        every keyspace the portal resolves to:
+        - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
+        - `keys:reroll` and `keys:create` require `api.<api_id>.create_key`, plus
+        `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
+        - `analytics:read` requires `api.<api_id>.read_analytics`
+
+        The `*` form of each is also accepted. Requesting a scope you do not hold
+        returns 403 for the whole request rather than minting a reduced session, so a
+        missing grant is visible instead of surfacing later as a broken portal.
+
+        Missing the portal permission itself returns **404**, not 403: a caller who
+        cannot mint for a portal is not told whether it exists.
+
+        Your root key must also be associated with a workspace that has an enabled portal.
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param slug: The human-readable slug of the portal configuration to create the session against.
-            Identifies which app's portal the end user will access.
-            Must be 3-64 characters, lowercase alphanumeric and hyphens only,
-            must not start or end with a hyphen, and must not contain consecutive hyphens.
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
         :param external_id: The end user's identifier in the customer's system.
             Accepts arbitrary string values (user IDs, emails, UUIDs, etc.).
 
-        :param permissions: The capabilities granted to the end user in the Portal, from a fixed
+        :param scopes: The capabilities granted to the end user in the Portal, from a fixed
             vocabulary. All capabilities are scoped to this end user: key capabilities
             (`keys:*`) apply only to keys the end user owns within the keyspace
-            configured on the portal configuration, and `analytics:read` returns only
-            the end user's own verification events. An end user can never see another
-            identity's keys or analytics.
+            configured on the portal, and `analytics:read` returns only the end user's
+            own verification events. An end user can never see another identity's keys
+            or analytics.
 
-            Tab visibility is derived from the capabilities:
-            - Keys tab: any `keys:*` capability
+            Tab visibility is derived from the scopes:
+            - Keys tab: any `keys:*` scope
             - Analytics tab: `analytics:read`
-            - Docs tab: visible when any capability is present
+            - Docs tab: visible when any scope is present
+
+            `keys:create` is accepted but has no portal route behind it yet. It is
+            still authorized like the others, so a session minted with it required
+            `create_key` on the keyspace at mint time, and a future portal create-key
+            route inherits an enforced ceiling rather than trusting sessions minted
+            while the capability was inert.
+
+            Each scope requires the equivalent permission on your own root key. See
+            Required Permissions on this operation.
 
         :param preview: When true, creates a preview session for testing the portal experience.
+
+        :param return_url: Absolute URL the end user is sent back to when they leave the portal, or
+            when their session expires mid-visit. Set per session rather than per
+            portal, so one portal can serve several entry points and return each user
+            to the page they came from.
+
+            When omitted, the portal shows no return link.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -243,10 +314,11 @@ class Portal(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2PortalCreateSessionRequestBody(
-            slug=slug,
+            portal=portal,
             external_id=external_id,
-            permissions=utils.unmarshal(permissions, List[models.PermissionEnum]),
+            scopes=utils.unmarshal(scopes, List[models.Scope]),
             preview=preview,
+            return_url=return_url,
         )
 
         req = self._build_request_async(
@@ -290,7 +362,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -344,28 +416,28 @@ class Portal(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    def exchange_session(
+    def exchange_code(
         self,
         *,
-        session_id: str,
+        code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PortalExchangeSessionResponse:
-        r"""Exchange session token
+    ) -> models.PortalExchangeCodeResponse:
+        r"""Exchange portal code
 
-        Exchange a short-lived session token for a long-lived browser session.
+        Exchange a short-lived code for a long-lived portal access token.
 
-        This endpoint is unauthenticated. The session token itself serves as proof of authorization.
-        Each token can only be exchanged once; subsequent attempts return 401.
+        This endpoint is unauthenticated. The code itself serves as proof of authorization.
+        Each code can only be redeemed once; subsequent attempts return 401.
 
-        The returned browser session token is valid for 24 hours and should be stored as an
+        The returned access token is valid for 24 hours and should be stored as an
         httpOnly cookie or used in the Authorization header for subsequent API calls.
 
 
-        :param session_id: The session token ID received from `portal.createSession`.
-            Must be valid, unexpired, and not previously exchanged.
+        :param code: The exchange code carried by the portal URL from `portal.createSession`.
+            Must be valid, unexpired, and not previously redeemed.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -382,13 +454,13 @@ class Portal(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2PortalExchangeSessionRequestBody(
-            session_id=session_id,
+        request = models.V2PortalExchangeCodeRequestBody(
+            code=code,
         )
 
         req = self._build_request(
             method="POST",
-            path="/v2/portal.exchangeSession",
+            path="/v2/portal.exchangeCode",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -399,7 +471,7 @@ class Portal(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2PortalExchangeSessionRequestBody
+                request, False, False, "json", models.V2PortalExchangeCodeRequestBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -421,11 +493,11 @@ class Portal(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="portal.exchangeSession",
+                operation_id="portal.exchangeCode",
                 oauth2_scopes=None,
                 security_source=None,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -434,9 +506,9 @@ class Portal(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.PortalExchangeSessionResponse(
+            return models.PortalExchangeCodeResponse(
                 result=unmarshal_json_response(
-                    models.V2PortalExchangeSessionResponseBody, http_res
+                    models.V2PortalExchangeCodeResponseBody, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -469,28 +541,28 @@ class Portal(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    async def exchange_session_async(
+    async def exchange_code_async(
         self,
         *,
-        session_id: str,
+        code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PortalExchangeSessionResponse:
-        r"""Exchange session token
+    ) -> models.PortalExchangeCodeResponse:
+        r"""Exchange portal code
 
-        Exchange a short-lived session token for a long-lived browser session.
+        Exchange a short-lived code for a long-lived portal access token.
 
-        This endpoint is unauthenticated. The session token itself serves as proof of authorization.
-        Each token can only be exchanged once; subsequent attempts return 401.
+        This endpoint is unauthenticated. The code itself serves as proof of authorization.
+        Each code can only be redeemed once; subsequent attempts return 401.
 
-        The returned browser session token is valid for 24 hours and should be stored as an
+        The returned access token is valid for 24 hours and should be stored as an
         httpOnly cookie or used in the Authorization header for subsequent API calls.
 
 
-        :param session_id: The session token ID received from `portal.createSession`.
-            Must be valid, unexpired, and not previously exchanged.
+        :param code: The exchange code carried by the portal URL from `portal.createSession`.
+            Must be valid, unexpired, and not previously redeemed.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -507,13 +579,13 @@ class Portal(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2PortalExchangeSessionRequestBody(
-            session_id=session_id,
+        request = models.V2PortalExchangeCodeRequestBody(
+            code=code,
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/v2/portal.exchangeSession",
+            path="/v2/portal.exchangeCode",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -524,7 +596,7 @@ class Portal(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2PortalExchangeSessionRequestBody
+                request, False, False, "json", models.V2PortalExchangeCodeRequestBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -546,11 +618,11 @@ class Portal(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="portal.exchangeSession",
+                operation_id="portal.exchangeCode",
                 oauth2_scopes=None,
                 security_source=None,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -559,9 +631,9 @@ class Portal(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.PortalExchangeSessionResponse(
+            return models.PortalExchangeCodeResponse(
                 result=unmarshal_json_response(
-                    models.V2PortalExchangeSessionResponseBody, http_res
+                    models.V2PortalExchangeCodeResponseBody, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -699,7 +771,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -855,7 +927,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -998,7 +1070,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1165,7 +1237,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1347,7 +1419,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1503,7 +1575,7 @@ class Portal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-excluded": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
