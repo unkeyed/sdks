@@ -7,7 +7,7 @@ Protocol used to reach the container.
 
 ```go
 import (
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 value := components.EnvironmentUpstreamProtocolHttp1

@@ -3,7 +3,8 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
 type V2AppsUpdateAppRequestBody struct {
@@ -28,7 +29,7 @@ type V2AppsUpdateAppRequestBody struct {
 	// "repository" to connect or replace it and/or a "defaultBranch" to set which
 	// branch it tracks. Fields are independent, so send only the one you change.
 	//
-	Git *AppGitUpdateInput `json:"git,omitzero"`
+	Git optionalnullable.OptionalNullable[AppGitUpdateInput] `json:"git,omitzero"`
 	// Enable or disable delete protection for the app.
 	// Omit this field to leave the current setting unchanged.
 	//
@@ -74,7 +75,7 @@ func (v *V2AppsUpdateAppRequestBody) GetSlug() *string {
 	return v.Slug
 }
 
-func (v *V2AppsUpdateAppRequestBody) GetGit() *AppGitUpdateInput {
+func (v *V2AppsUpdateAppRequestBody) GetGit() optionalnullable.OptionalNullable[AppGitUpdateInput] {
 	if v == nil {
 		return nil
 	}

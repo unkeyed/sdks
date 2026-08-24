@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // ForbiddenErrorResponse - Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when:

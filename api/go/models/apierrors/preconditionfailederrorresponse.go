@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // PreconditionFailedErrorResponse - Error response when one or more conditions specified in the request headers are not met. This typically occurs when:

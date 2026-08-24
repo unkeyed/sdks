@@ -116,7 +116,7 @@ This structure ensures you always have the context needed to debug issues and ta
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/unkeyed/sdks/api/go/v2
+go get github.com/unkeyed/sdks/api/go/v3
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -130,8 +130,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -174,8 +174,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -208,9 +208,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/models/operations"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/operations"
 	"log"
 	"os"
 )
@@ -387,8 +387,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -439,9 +439,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/retry"
 	"log"
 	"models/operations"
 	"os"
@@ -483,9 +483,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/retry"
 	"log"
 	"os"
 )
@@ -551,9 +551,9 @@ package main
 import (
 	"context"
 	"errors"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/apierrors"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/apierrors"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -640,8 +640,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -686,7 +686,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v3"
 )
 
 var (

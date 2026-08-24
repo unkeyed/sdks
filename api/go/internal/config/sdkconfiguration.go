@@ -4,7 +4,7 @@ package config
 
 import (
 	"context"
-	"github.com/unkeyed/sdks/api/go/v2/retry"
+	"github.com/unkeyed/sdks/api/go/v3/retry"
 	"net/http"
 	"time"
 )

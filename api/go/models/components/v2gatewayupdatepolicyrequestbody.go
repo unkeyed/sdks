@@ -3,7 +3,8 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
 // V2GatewayUpdatePolicyRequestBody - Partial update of a single policy. Omitted fields keep their stored
@@ -35,7 +36,7 @@ type V2GatewayUpdatePolicyRequestBody struct {
 	Enabled *bool `json:"enabled,omitzero"`
 	// Replaces all match expressions. Set null to remove them so the policy
 	// applies to every request. Omit to keep the current expressions.
-	Match []MatchExpr `json:"match,omitzero"`
+	Match optionalnullable.OptionalNullable[[]MatchExpr] `json:"match,omitzero"`
 	// Verifies Unkey API keys on matching requests.
 	Keyauth *KeyauthPolicy `json:"keyauth,omitzero"`
 	// Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
@@ -113,7 +114,7 @@ func (v *V2GatewayUpdatePolicyRequestBody) GetEnabled() *bool {
 	return v.Enabled
 }
 
-func (v *V2GatewayUpdatePolicyRequestBody) GetMatch() []MatchExpr {
+func (v *V2GatewayUpdatePolicyRequestBody) GetMatch() optionalnullable.OptionalNullable[[]MatchExpr] {
 	if v == nil {
 		return nil
 	}

@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 type AppsCreateAppResponse struct {
