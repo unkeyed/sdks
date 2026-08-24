@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
-class PermissionEnum(str, Enum):
+class Scope(str, Enum):
     KEYS_READ = "keys:read"
     KEYS_CREATE = "keys:create"
     KEYS_REROLL = "keys:reroll"
@@ -17,11 +17,9 @@ class PermissionEnum(str, Enum):
 
 
 class V2PortalCreateSessionRequestBodyTypedDict(TypedDict):
-    slug: str
-    r"""The human-readable slug of the portal configuration to create the session against.
-    Identifies which app's portal the end user will access.
-    Must be 3-64 characters, lowercase alphanumeric and hyphens only,
-    must not start or end with a hyphen, and must not contain consecutive hyphens.
+    portal: str
+    r"""Identifies a resource by either its unique ID or its slug.
+    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
     """
     external_id: str
@@ -29,32 +27,48 @@ class V2PortalCreateSessionRequestBodyTypedDict(TypedDict):
     Accepts arbitrary string values (user IDs, emails, UUIDs, etc.).
 
     """
-    permissions: List[PermissionEnum]
+    scopes: List[Scope]
     r"""The capabilities granted to the end user in the Portal, from a fixed
     vocabulary. All capabilities are scoped to this end user: key capabilities
     (`keys:*`) apply only to keys the end user owns within the keyspace
-    configured on the portal configuration, and `analytics:read` returns only
-    the end user's own verification events. An end user can never see another
-    identity's keys or analytics.
+    configured on the portal, and `analytics:read` returns only the end user's
+    own verification events. An end user can never see another identity's keys
+    or analytics.
 
-    Tab visibility is derived from the capabilities:
-    - Keys tab: any `keys:*` capability
+    Tab visibility is derived from the scopes:
+    - Keys tab: any `keys:*` scope
     - Analytics tab: `analytics:read`
-    - Docs tab: visible when any capability is present
+    - Docs tab: visible when any scope is present
+
+    `keys:create` is accepted but has no portal route behind it yet. It is
+    still authorized like the others, so a session minted with it required
+    `create_key` on the keyspace at mint time, and a future portal create-key
+    route inherits an enforced ceiling rather than trusting sessions minted
+    while the capability was inert.
+
+    Each scope requires the equivalent permission on your own root key. See
+    Required Permissions on this operation.
 
     """
     preview: NotRequired[bool]
     r"""When true, creates a preview session for testing the portal experience.
 
     """
+    return_url: NotRequired[str]
+    r"""Absolute URL the end user is sent back to when they leave the portal, or
+    when their session expires mid-visit. Set per session rather than per
+    portal, so one portal can serve several entry points and return each user
+    to the page they came from.
+
+    When omitted, the portal shows no return link.
+
+    """
 
 
 class V2PortalCreateSessionRequestBody(BaseModel):
-    slug: str
-    r"""The human-readable slug of the portal configuration to create the session against.
-    Identifies which app's portal the end user will access.
-    Must be 3-64 characters, lowercase alphanumeric and hyphens only,
-    must not start or end with a hyphen, and must not contain consecutive hyphens.
+    portal: str
+    r"""Identifies a resource by either its unique ID or its slug.
+    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 
     """
 
@@ -64,18 +78,27 @@ class V2PortalCreateSessionRequestBody(BaseModel):
 
     """
 
-    permissions: List[PermissionEnum]
+    scopes: List[Scope]
     r"""The capabilities granted to the end user in the Portal, from a fixed
     vocabulary. All capabilities are scoped to this end user: key capabilities
     (`keys:*`) apply only to keys the end user owns within the keyspace
-    configured on the portal configuration, and `analytics:read` returns only
-    the end user's own verification events. An end user can never see another
-    identity's keys or analytics.
+    configured on the portal, and `analytics:read` returns only the end user's
+    own verification events. An end user can never see another identity's keys
+    or analytics.
 
-    Tab visibility is derived from the capabilities:
-    - Keys tab: any `keys:*` capability
+    Tab visibility is derived from the scopes:
+    - Keys tab: any `keys:*` scope
     - Analytics tab: `analytics:read`
-    - Docs tab: visible when any capability is present
+    - Docs tab: visible when any scope is present
+
+    `keys:create` is accepted but has no portal route behind it yet. It is
+    still authorized like the others, so a session minted with it required
+    `create_key` on the keyspace at mint time, and a future portal create-key
+    route inherits an enforced ceiling rather than trusting sessions minted
+    while the capability was inert.
+
+    Each scope requires the equivalent permission on your own root key. See
+    Required Permissions on this operation.
 
     """
 
@@ -84,9 +107,19 @@ class V2PortalCreateSessionRequestBody(BaseModel):
 
     """
 
+    return_url: Annotated[Optional[str], pydantic.Field(alias="returnUrl")] = None
+    r"""Absolute URL the end user is sent back to when they leave the portal, or
+    when their session expires mid-visit. Set per session rather than per
+    portal, so one portal can serve several entry points and return each user
+    to the page they came from.
+
+    When omitted, the portal shows no return link.
+
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["preview"])
+        optional_fields = set(["preview", "returnUrl"])
         serialized = handler(self)
         m = {}
 

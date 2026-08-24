@@ -7,15 +7,15 @@ from unkey.py.types import BaseModel
 
 class V2ApisCreateAPIRequestBodyTypedDict(TypedDict):
     name: str
-    r"""Unique identifier for this API namespace within your workspace.
-    Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+    r"""Human-readable name for this API within your workspace.
+    Use descriptive names like 'Payment Service (prod)' or 'user-api-dev' to clearly identify purpose and environment.
 
     """
 
 
 class V2ApisCreateAPIRequestBody(BaseModel):
     name: str
-    r"""Unique identifier for this API namespace within your workspace.
-    Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+    r"""Human-readable name for this API within your workspace.
+    Use descriptive names like 'Payment Service (prod)' or 'user-api-dev' to clearly identify purpose and environment.
 
     """

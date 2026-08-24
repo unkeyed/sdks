@@ -3854,12 +3854,12 @@ class Keys(BaseSDK):
         credits: OptionalNullable[
             Union[models.UpdateKeyCreditsData, models.UpdateKeyCreditsDataTypedDict]
         ] = UNSET,
-        ratelimits: Optional[
+        ratelimits: OptionalNullable[
             Union[
                 Iterable[models.RatelimitRequest],
                 Iterable[models.RatelimitRequestTypedDict],
             ]
-        ] = None,
+        ] = UNSET,
         enabled: Optional[bool] = None,
         roles: Optional[Iterable[str]] = None,
         permissions: Optional[Iterable[str]] = None,
@@ -3953,7 +3953,7 @@ class Keys(BaseSDK):
                 credits, OptionalNullable[models.UpdateKeyCreditsData]
             ),
             ratelimits=utils.get_pydantic_model(
-                ratelimits, Optional[List[models.RatelimitRequest]]
+                ratelimits, OptionalNullable[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=utils.unmarshal(roles, Optional[List[str]]),
@@ -4060,12 +4060,12 @@ class Keys(BaseSDK):
         credits: OptionalNullable[
             Union[models.UpdateKeyCreditsData, models.UpdateKeyCreditsDataTypedDict]
         ] = UNSET,
-        ratelimits: Optional[
+        ratelimits: OptionalNullable[
             Union[
                 Iterable[models.RatelimitRequest],
                 Iterable[models.RatelimitRequestTypedDict],
             ]
-        ] = None,
+        ] = UNSET,
         enabled: Optional[bool] = None,
         roles: Optional[Iterable[str]] = None,
         permissions: Optional[Iterable[str]] = None,
@@ -4159,7 +4159,7 @@ class Keys(BaseSDK):
                 credits, OptionalNullable[models.UpdateKeyCreditsData]
             ),
             ratelimits=utils.get_pydantic_model(
-                ratelimits, Optional[List[models.RatelimitRequest]]
+                ratelimits, OptionalNullable[List[models.RatelimitRequest]]
             ),
             enabled=enabled,
             roles=utils.unmarshal(roles, Optional[List[str]]),

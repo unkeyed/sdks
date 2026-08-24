@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class V2PermissionsCreateRoleRequestBodyTypedDict(TypedDict):
     name: str
-    r"""The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+    r"""The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'Billing Manager'.
 
-    Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+    Examples: 'admin.billing', 'support.readonly', 'developer.api', 'Billing Manager'
 
     """
     description: NotRequired[str]
@@ -28,13 +28,19 @@ class V2PermissionsCreateRoleRequestBodyTypedDict(TypedDict):
     - Related roles that might be used together
 
     """
+    permissions: NotRequired[List[str]]
+    r"""Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+
+    Omit this field or provide an empty array to create the role without permissions.
+
+    """
 
 
 class V2PermissionsCreateRoleRequestBody(BaseModel):
     name: str
-    r"""The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+    r"""The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'Billing Manager'.
 
-    Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+    Examples: 'admin.billing', 'support.readonly', 'developer.api', 'Billing Manager'
 
     """
 
@@ -53,9 +59,16 @@ class V2PermissionsCreateRoleRequestBody(BaseModel):
 
     """
 
+    permissions: Optional[List[str]] = None
+    r"""Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+
+    Omit this field or provide an empty array to create the role without permissions.
+
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description"])
+        optional_fields = set(["description", "permissions"])
         serialized = handler(self)
         m = {}
 

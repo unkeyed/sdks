@@ -27,6 +27,12 @@ class KeyauthPolicyTypedDict(TypedDict):
     """
     ratelimits: NotRequired[List[KeyRatelimitTypedDict]]
     r"""Rate limits applied during key verification."""
+    credits: NotRequired[int]
+    r"""Usage credits a matching request deducts from the verified key. Defaults
+    to 1. Set to 0 to verify the key without spending credits, or to a higher
+    value to charge more per request. Keys with unlimited usage are
+    unaffected.
+    """
 
 
 class KeyauthPolicy(BaseModel):
@@ -52,9 +58,16 @@ class KeyauthPolicy(BaseModel):
     ratelimits: Optional[List[KeyRatelimit]] = None
     r"""Rate limits applied during key verification."""
 
+    credits: Optional[int] = None
+    r"""Usage credits a matching request deducts from the verified key. Defaults
+    to 1. Set to 0 to verify the key without spending credits, or to a higher
+    value to charge more per request. Keys with unlimited usage are
+    unaffected.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["locations", "permissionQuery", "ratelimits"])
+        optional_fields = set(["locations", "permissionQuery", "ratelimits", "credits"])
         serialized = handler(self)
         m = {}
 

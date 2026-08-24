@@ -19,8 +19,10 @@ if TYPE_CHECKING:
     from unkey.py.apis import Apis
     from unkey.py.apps import Apps
     from unkey.py.deployments import Deployments
+    from unkey.py.domains import Domains
     from unkey.py.environments import Environments
     from unkey.py.gateway import Gateway
+    from unkey.py.github import Github
     from unkey.py.identities import Identities
     from unkey.py.internal import Internal
     from unkey.py.keys import Keys
@@ -118,10 +120,14 @@ class Unkey(BaseSDK):
     internal: "Internal"
     deployments: "Deployments"
     r"""Deployment operations"""
+    domains: "Domains"
+    r"""Custom domain operations"""
     environments: "Environments"
     r"""Environment management operations"""
     gateway: "Gateway"
     r"""Gateway policy operations"""
+    github: "Github"
+    r"""GitHub App installation operations"""
     identities: "Identities"
     r"""Identity management operations"""
     keys: "Keys"
@@ -139,8 +145,10 @@ class Unkey(BaseSDK):
         "apps": ("unkey.py.apps", "Apps"),
         "internal": ("unkey.py.internal", "Internal"),
         "deployments": ("unkey.py.deployments", "Deployments"),
+        "domains": ("unkey.py.domains", "Domains"),
         "environments": ("unkey.py.environments", "Environments"),
         "gateway": ("unkey.py.gateway", "Gateway"),
+        "github": ("unkey.py.github", "Github"),
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),
         "permissions": ("unkey.py.permissions", "Permissions"),

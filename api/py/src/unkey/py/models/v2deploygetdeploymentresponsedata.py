@@ -14,7 +14,7 @@ from unkey.py import models, utils
 from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
-class Status(str, Enum, metaclass=utils.OpenEnumMeta):
+class V2DeployGetDeploymentResponseDataStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Current deployment status"""
 
     UNSPECIFIED = "UNSPECIFIED"
@@ -36,7 +36,7 @@ class Status(str, Enum, metaclass=utils.OpenEnumMeta):
 class V2DeployGetDeploymentResponseDataTypedDict(TypedDict):
     id: str
     r"""Unique deployment identifier"""
-    status: Status
+    status: V2DeployGetDeploymentResponseDataStatus
     r"""Current deployment status"""
     error_message: NotRequired[str]
     r"""Error message if deployment failed"""
@@ -50,7 +50,7 @@ class V2DeployGetDeploymentResponseData(BaseModel):
     id: str
     r"""Unique deployment identifier"""
 
-    status: Status
+    status: V2DeployGetDeploymentResponseDataStatus
     r"""Current deployment status"""
 
     error_message: Annotated[Optional[str], pydantic.Field(alias="errorMessage")] = None
@@ -66,7 +66,7 @@ class V2DeployGetDeploymentResponseData(BaseModel):
     def serialize_status(self, value):
         if isinstance(value, str):
             try:
-                return models.Status(value)
+                return models.V2DeployGetDeploymentResponseDataStatus(value)
             except ValueError:
                 return value
         return value

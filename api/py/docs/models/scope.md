@@ -1,11 +1,11 @@
-# PermissionEnum
+# Scope
 
 ## Example Usage
 
 ```python
-from unkey.py.models import PermissionEnum
+from unkey.py.models import Scope
 
-value = PermissionEnum.KEYS_READ
+value = Scope.KEYS_READ
 ```
 
 

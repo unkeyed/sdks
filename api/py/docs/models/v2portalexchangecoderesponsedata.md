@@ -1,0 +1,9 @@
+# V2PortalExchangeCodeResponseData
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `access_token`                                                                             | *str*                                                                                      | :heavy_check_mark:                                                                         | The portal access token. Store this as an httpOnly cookie for subsequent portal requests.<br/> | pat_xyz789abc123                                                                           |
+| `expires_at`                                                                               | *int*                                                                                      | :heavy_check_mark:                                                                         | Unix timestamp in milliseconds when the access token expires (24 hours from creation).<br/> | 1711386400000                                                                              |

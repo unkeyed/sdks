@@ -2,22 +2,22 @@
 
 from __future__ import annotations
 from .meta import Meta, MetaTypedDict
-from .v2portalexchangesessionresponsedata import (
-    V2PortalExchangeSessionResponseData,
-    V2PortalExchangeSessionResponseDataTypedDict,
-)
+from .permission import Permission, PermissionTypedDict
+from typing import List
 from typing_extensions import TypedDict
 from unkey.py.types import BaseModel
 
 
-class V2PortalExchangeSessionResponseBodyTypedDict(TypedDict):
+class V2PermissionsSetRolePermissionsResponseBodyTypedDict(TypedDict):
     meta: MetaTypedDict
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-    data: V2PortalExchangeSessionResponseDataTypedDict
+    data: List[PermissionTypedDict]
+    r"""Complete list of permissions now directly assigned to the role."""
 
 
-class V2PortalExchangeSessionResponseBody(BaseModel):
+class V2PermissionsSetRolePermissionsResponseBody(BaseModel):
     meta: Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
-    data: V2PortalExchangeSessionResponseData
+    data: List[Permission]
+    r"""Complete list of permissions now directly assigned to the role."""

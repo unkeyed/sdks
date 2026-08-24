@@ -48,7 +48,7 @@ class V2KeysUpdateKeyRequestBodyTypedDict(TypedDict):
     """
     credits: NotRequired[Nullable[UpdateKeyCreditsDataTypedDict]]
     r"""Credit configuration and remaining balance for this key."""
-    ratelimits: NotRequired[List[RatelimitRequestTypedDict]]
+    ratelimits: NotRequired[Nullable[List[RatelimitRequestTypedDict]]]
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Omitting this field preserves existing rate limits, while setting null removes all rate limits.
     Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -112,7 +112,7 @@ class V2KeysUpdateKeyRequestBody(BaseModel):
     credits: OptionalNullable[UpdateKeyCreditsData] = UNSET
     r"""Credit configuration and remaining balance for this key."""
 
-    ratelimits: Optional[List[RatelimitRequest]] = None
+    ratelimits: OptionalNullable[List[RatelimitRequest]] = UNSET
     r"""Defines time-based rate limits that protect against abuse by controlling request frequency.
     Omitting this field preserves existing rate limits, while setting null removes all rate limits.
     Unlike credits which track total usage, rate limits reset automatically after each window expires.
@@ -147,7 +147,9 @@ class V2KeysUpdateKeyRequestBody(BaseModel):
                 "permissions",
             ]
         )
-        nullable_fields = set(["name", "externalId", "meta", "expires", "credits"])
+        nullable_fields = set(
+            ["name", "externalId", "meta", "expires", "credits", "ratelimits"]
+        )
         serialized = handler(self)
         m = {}
 

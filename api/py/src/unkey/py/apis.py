@@ -37,8 +37,8 @@ class Apis(BaseSDK):
 
         If set, this operation will use `root_key` from the global security.
 
-        :param name: Unique identifier for this API namespace within your workspace.
-            Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+        :param name: Human-readable name for this API within your workspace.
+            Use descriptive names like 'Payment Service (prod)' or 'user-api-dev' to clearly identify purpose and environment.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -169,8 +169,8 @@ class Apis(BaseSDK):
 
         If set, this operation will use `root_key` from the global security.
 
-        :param name: Unique identifier for this API namespace within your workspace.
-            Use descriptive names like 'payment-service-prod' or 'user-api-dev' to clearly identify purpose and environment.
+        :param name: Human-readable name for this API within your workspace.
+            Use descriptive names like 'Payment Service (prod)' or 'user-api-dev' to clearly identify purpose and environment.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

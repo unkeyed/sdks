@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: d76e6914313b6948d7d28a2a92a49a10
+  docChecksum: 425cc43de15c93c3d48f1b6b2f9e22d7
   docVersion: 2.0.0
-  speakeasyVersion: 1.790.3
-  generationVersion: 2.918.4
-  releaseVersion: 3.1.0
-  configChecksum: 9e9a7c3450c1c6eb5051fcbcddef1dc2
+  speakeasyVersion: 1.795.2
+  generationVersion: 2.932.9
+  releaseVersion: 3.2.0
+  configChecksum: 4a18c1cdcce8cc136283aa5416e767d6
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
   published: true
 persistentEdits:
-  generation_id: eeaba18e-9aa5-4878-b51e-eeb6e9c75b66
-  pristine_commit_hash: f9f2cb1232dd6450c39d61afe5a8c3310bf7c236
-  pristine_tree_hash: f33b7aafb9faf57b2dc5574dfa1e7e09376ec4ed
+  generation_id: f661bd4b-b0ff-4477-a8b3-07bf237b063f
+  pristine_commit_hash: 85f49d4b82433a8b2a627f563c4c8807bc53713d
+  pristine_tree_hash: 2df3656fdaeb7f323c820d13ba1807ee845d6a58
 features:
   python:
     additionalDependencies: 1.1.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.7
-    core: 6.0.34
+    core: 6.1.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.1
@@ -39,9 +39,9 @@ features:
     openEnums: 1.0.4
     pagination: 3.0.10
     responseFormat: 1.1.0
-    retries: 3.0.7
+    retries: 3.1.0
     sdkHooks: 1.3.0
-    unions: 3.1.7
+    unions: 3.1.9
 trackedFiles:
   .gitattributes:
     id: 24139dae6567
@@ -53,8 +53,8 @@ trackedFiles:
     pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:380bab7af7a6cfd171968d0bc2f8e15a402ec584
-    pristine_git_object: 0e119fafd47106a86c686da6fa8188a4e3e3a6a2
+    last_write_checksum: sha1:f3df2aeb0058b256696841d96d725859e7c33557
+    pristine_git_object: 7b0e0c5c43b2a4795dbb4fc71f5c61cc39158a3c
   docs/errors/badrequesterrorresponse.md:
     id: 4261460b6f0e
     last_write_checksum: sha1:5637143bb840c60f4815611ed09b8d0aed1973fc
@@ -109,8 +109,20 @@ trackedFiles:
     pristine_git_object: 672440b32c481de598229d95164a771299ee7d84
   docs/models/app.md:
     id: 44d35edc581b
-    last_write_checksum: sha1:3cbcc0dbfb09acc5eb3a157ebdd1590f57a6c086
-    pristine_git_object: e2a56d743e76be6b380f6ce9169663ef7b3767a0
+    last_write_checksum: sha1:d0e2ac75fab72d588e1daf5c0a5d1d5e17258ccf
+    pristine_git_object: 0db06906fcf4fd2277d068e48035fea75e3f02c2
+  docs/models/appgit.md:
+    id: 2aa27c74a884
+    last_write_checksum: sha1:ea4618a9bdc0d458752b45846fc4a597ca6d1a1c
+    pristine_git_object: 1cf6bccda2504334b5a2e46123142f844943e9f6
+  docs/models/appgitcreateinput.md:
+    id: 2544b563846b
+    last_write_checksum: sha1:cccc72c55cbe1ebc4b24c5ede75437284555d1e8
+    pristine_git_object: 6d80e2bd3f66b9cc04fa4aab1076a2928874b65f
+  docs/models/appgitupdateinput.md:
+    id: df2dcf8ba638
+    last_write_checksum: sha1:d8ff2f65a7bc01ac5334639c753306aa461bb48c
+    pristine_git_object: 8ed6fe0f67183ff6228580538efd7981cd020152
   docs/models/appslistappsresponse.md:
     id: 568e7bf3e47d
     last_write_checksum: sha1:977304668f73c44c0fdaa39345b080ff38561cf5
@@ -183,14 +195,30 @@ trackedFiles:
     id: b039895c72a9
     last_write_checksum: sha1:baec3f689b577724d77382993e6777f1cae7d31e
     pristine_git_object: 1fff62c12c5bb397aa6b3e55198025b385964a25
+  docs/models/dnsrecord.md:
+    id: 5e2844a08c0f
+    last_write_checksum: sha1:c2ad197b5b0e8b5327f34df13485c4aff704efd7
+    pristine_git_object: 6aaeab6ee2d6e2d8fbc33854dcebfedb84736787
+  docs/models/domain.md:
+    id: 8fe01d6f9715
+    last_write_checksum: sha1:ca5ed49ff0199b53d9998dfaf8e7dcebb854d14e
+    pristine_git_object: b6dc3aa5c345a26e1fe3546c219db319c73cf789
+  docs/models/domainconnect.md:
+    id: 30ee6e8bcd33
+    last_write_checksum: sha1:b9ee62567edaf1d649a87b872bd16fa302f701d1
+    pristine_git_object: 1a14dcf28de0a162b59946dcbb696d8c61c11133
+  docs/models/domainstatus.md:
+    id: 93866d25cdf9
+    last_write_checksum: sha1:dd2db66ace1135f5c370939a044a78af02d56c1d
+    pristine_git_object: 3f0b1c2fd5859bb36485786b06861dd1fdf7dd53
   docs/models/emptyresponse.md:
     id: f674d0787a16
     last_write_checksum: sha1:868dd998e03e8e5ea1e1e6738e1bd6f0508ff89a
     pristine_git_object: 1915db5c52be9eb267cddf60dd7b0cc43e4dcefb
   docs/models/environment.md:
     id: 6a34665c56a8
-    last_write_checksum: sha1:1983f9976a31a93167f0dda49125ec44a485b851
-    pristine_git_object: 6b1e95956bef56af16b3c6c7ebe74f29122b34e5
+    last_write_checksum: sha1:af6c7668f094e65bdc065f4f29219cfeb647b5c2
+    pristine_git_object: 57fd118647186851316b46fd07074a477c8fc928
   docs/models/environmentbuild.md:
     id: 2fb9f9269207
     last_write_checksum: sha1:4c1516f3664686503455636ce2d65c93b6fd25a0
@@ -203,6 +231,10 @@ trackedFiles:
     id: e4e468c98d95
     last_write_checksum: sha1:6e58520b17a5770b3591f968bd771627618f52d7
     pristine_git_object: 8b911682768e8f969fb1bdafda6f32ecb52fc871
+  docs/models/environmentkind.md:
+    id: 9a026ef9205e
+    last_write_checksum: sha1:d7fa1a83976ce1964979c6a6d2494558f99b92af
+    pristine_git_object: a0b0930e9cbd6df13cbf84a81825f5d8efbed633
   docs/models/environmentregion.md:
     id: dc530418b836
     last_write_checksum: sha1:761a12f900c9d8f2a375b3bfc5b5f8dabefeb713
@@ -247,6 +279,10 @@ trackedFiles:
     id: 122392c1f900
     last_write_checksum: sha1:4cd3f5887b30903966002cc3fe0381cdb090a9fa
     pristine_git_object: 66547a3c2d95ed65a66977d57a4928856524d869
+  docs/models/identifier.md:
+    id: c153cfa779eb
+    last_write_checksum: sha1:3b4c9b87fa12a74c42f821feeb90d2c4a22d8ebf
+    pristine_git_object: 0d4df34d7f596cf1483fdbfb89ed2ac867d7dc8d
   docs/models/identitieslistidentitiesresponse.md:
     id: 117981db2318
     last_write_checksum: sha1:21e3437b1c2354906c5cdfa1f6d8e3520ea1e05b
@@ -257,8 +293,8 @@ trackedFiles:
     pristine_git_object: 3fb6f8b3d445f65f1d8fb2c4444b86e217ebd999
   docs/models/keyauthpolicy.md:
     id: 0f8f739ec409
-    last_write_checksum: sha1:e171e8df61d9294d6f0a90bb0823f74ddbb0c802
-    pristine_git_object: 8b1936f9370635aeea850fc4aa5e7985ab66ea3f
+    last_write_checksum: sha1:89823947b341b9d45d3bb5d6431ba01b6670047d
+    pristine_git_object: d54faf34f48db23ed9a1f3dc472b6861d4f3bcc7
   docs/models/keycreditsdata.md:
     id: 0051fa739cca
     last_write_checksum: sha1:361fb7f21ea251c95a8a903f4eb273e379bfdb4e
@@ -295,6 +331,10 @@ trackedFiles:
     id: a1293dccee77
     last_write_checksum: sha1:d0b7f7a6ccfe0e05058f738375691db366857a75
     pristine_git_object: d2ed5475db71eede1d01ce9e02a026e137b1794d
+  docs/models/loggingpolicy.md:
+    id: b51991d8ec44
+    last_write_checksum: sha1:ff77e3b331a1b61090df5be33f66ee8a06b90a35
+    pristine_git_object: ad239fbf1e4da224339b74d9fbb7bff998b35fc6
   docs/models/matchexpr.md:
     id: 83b7914f9c7d
     last_write_checksum: sha1:9da1b6a4010d2e6eac7089a22d8c06fcebba8ae3
@@ -335,10 +375,6 @@ trackedFiles:
     id: 2e72d664ef50
     last_write_checksum: sha1:798712e0d30a04e90647d2710d6505bb06bffef0
     pristine_git_object: 4e0c58fd0af70d4bb6e5645d46607d100daa00c7
-  docs/models/permissionenum.md:
-    id: 3096abd0b9ad
-    last_write_checksum: sha1:8488292fe1b1a6a9c7f8bd709f4991774c07cb31
-    pristine_git_object: 603549c44930b6ad38cfc6d67b2538e2edeeea1b
   docs/models/permissionslistpermissionsresponse.md:
     id: 009eb7dd738a
     last_write_checksum: sha1:adf05a1a3e555a3ccb5d7234baf362c077bfb587
@@ -349,20 +385,20 @@ trackedFiles:
     pristine_git_object: 9754b3b7b49344181ee72b240c328983bdea6f43
   docs/models/policy.md:
     id: c32c4f30cd71
-    last_write_checksum: sha1:6877d6b267e79ecfd8a13ca7fb38d2f96af1b3c4
-    pristine_git_object: a918ee7aad0961e1f3af6e73115aee5b295e561f
+    last_write_checksum: sha1:faed17871fbadf2942cc1934d9d63654914b895d
+    pristine_git_object: 52952fafe773bee008289b72c2d5df8ab10d4dcb
   docs/models/policyresponse.md:
     id: aafefd192ae9
-    last_write_checksum: sha1:eb018a8acdbfa390f87a34f9ac71f175847b855d
-    pristine_git_object: e2ed0c0efbe2a9a5151edee7fe53f95c3c7e40c9
+    last_write_checksum: sha1:38c727c3bc71b4e674b7ea736bbeb000f90c915d
+    pristine_git_object: 2e409c5d6005156f22afdb3a62d65e7641856edb
   docs/models/portalcreatesessionresponse.md:
     id: 744cd7e67770
     last_write_checksum: sha1:e4ab69861fd52ebe986dff82b2b9a53147120cc4
     pristine_git_object: 18f97f2498bed31e186e4aa72318ac1b3aad1c69
-  docs/models/portalexchangesessionresponse.md:
-    id: 4ad919797fe8
-    last_write_checksum: sha1:b3320d3dc5f7b3dfae0f113400b10db7022e881a
-    pristine_git_object: 7604f81a6609e904f53ff4e09ce9c26a94a3938c
+  docs/models/portalexchangecoderesponse.md:
+    id: c4431a0bf71b
+    last_write_checksum: sha1:ab4e1b98ebf92ca6a158fd7996f4f28c31595e91
+    pristine_git_object: 16328f8418fa3e506cc18078038687390c716a11
   docs/models/portalgetverificationssecurity.md:
     id: d5115b3d4b59
     last_write_checksum: sha1:5e5b3cc08b5f7b65557771addf951ae05c383c5c
@@ -409,8 +445,8 @@ trackedFiles:
     pristine_git_object: 80ba5c2d08c27361e786d742834dc344b145d9d2
   docs/models/ratelimitpolicy.md:
     id: 43f3adc6699c
-    last_write_checksum: sha1:ef8126b2e22a385f134854e321f908e4dcce64d4
-    pristine_git_object: 96e2ca3f08baa2419c440865ef04ff81c751cf32
+    last_write_checksum: sha1:079d1e21449d4efc609d50c28278620d9db019d3
+    pristine_git_object: 4d8384d24db45b96756a7ec0215bfa850f84bc2c
   docs/models/ratelimitrequest.md:
     id: 5750707d17cb
     last_write_checksum: sha1:ab93303fd8c969cc9a0e83d234195bb4dc0ee9f1
@@ -431,18 +467,22 @@ trackedFiles:
     id: b694540a5b1e
     last_write_checksum: sha1:78549b7572b64cfe69d7a01789de31f73ea370e5
     pristine_git_object: 5305481caa48c3ba57b6c3649a227430834998aa
+  docs/models/scope.md:
+    id: c7d8338540ba
+    last_write_checksum: sha1:5ae0fdf0f7511ef3a4ffca2a83b5d76ea7c542bd
+    pristine_git_object: a464d55dd4e0cf0f75d803ce62a3cce906c9b15b
   docs/models/security.md:
     id: 452e4d4eb67a
     last_write_checksum: sha1:6926eb15c40c5cabbe72f6159a4e1243402b6242
     pristine_git_object: 6d3133d8230ed3d6ba1ede614207deace92423b8
-  docs/models/status.md:
-    id: 959cd204aadf
-    last_write_checksum: sha1:a06295e86fe0ef34ba86f0b651006526b8f7cd6f
-    pristine_git_object: 4f747e420046de27ed3d0c08c0136e9f4e98a14d
   docs/models/stringmatch.md:
     id: dc86e10841b3
     last_write_checksum: sha1:4381cc9cf0a5d3b99d29cd2d93e097fd4d054c1c
     pristine_git_object: 62ba10eee6b160582316e73b48550a7d16fa922a
+  docs/models/type.md:
+    id: 98c32f09b2c8
+    last_write_checksum: sha1:eef7e0bb4f65ae475a8aa587982c79a71ca80a93
+    pristine_git_object: 56ccedd4b8fe85a4c5c23bc18d5c33540f4a3d7d
   docs/models/updatekeycreditsdata.md:
     id: 803a3b0d4b55
     last_write_checksum: sha1:47573358cedada27e68876fd6338601f641832b3
@@ -459,18 +499,42 @@ trackedFiles:
     id: 4343ac43161c
     last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
     pristine_git_object: 69dd549ec7f5f885101d08dd502e25748183aebf
+  docs/models/v2analyticsgetgatewayrequestsrequestbody.md:
+    id: 203eec382009
+    last_write_checksum: sha1:04af9d45d03ad82267a238ce88b27ed8a2bb0c62
+    pristine_git_object: 84b0ccc71338b55de1fd4634e01f6fb5e09bd235
+  docs/models/v2analyticsgetgatewayrequestsresponsebody.md:
+    id: 9ad683df1db5
+    last_write_checksum: sha1:eb5af1b608e72218589ad89f8879ad5371735858
+    pristine_git_object: bf5fedc29e087c5e2cad58c9e5a36510e6dd2c1a
+  docs/models/v2analyticsgetratelimitsrequestbody.md:
+    id: a3fd625ac3b5
+    last_write_checksum: sha1:06ec99b354ad47c1f8ddb2fa1a0fe492d59f0b3c
+    pristine_git_object: d8ade1728ee96f9da902309d4a99605ce207a38d
+  docs/models/v2analyticsgetratelimitsresponsebody.md:
+    id: 1a6d0111b1b0
+    last_write_checksum: sha1:6375c57eb3540f4c3bf928bb253897248628fe71
+    pristine_git_object: cd2f8f5bfcc89e47ee0bb15bc931614e3c907c82
+  docs/models/v2analyticsgetruntimelogsrequestbody.md:
+    id: a80147bc969c
+    last_write_checksum: sha1:e2e1dc9b395523e2b327c2ced4ac85e33bd72e38
+    pristine_git_object: 18df5c4764de02eb76e1fb2dbe768a59138c7be4
+  docs/models/v2analyticsgetruntimelogsresponsebody.md:
+    id: bcb2471397eb
+    last_write_checksum: sha1:9e069b49b6c64c83bde53c08cbf673dd0843ca7c
+    pristine_git_object: 339d33cdd0b9a484d8064dfc1fcf21aa079d3a0f
   docs/models/v2analyticsgetverificationsrequestbody.md:
     id: 13fff08eae84
-    last_write_checksum: sha1:c2ea4f101e057d8f65369bad401a724293a7ccf9
-    pristine_git_object: be4f8ea3a8aad5cf6f3813328d0489c60e84bb9a
+    last_write_checksum: sha1:751e0df28b66f6fe81a12bcaa56706dd4dc281ec
+    pristine_git_object: 7fd427c8fdf1ae4938cb920a486ce6042ff6034c
   docs/models/v2analyticsgetverificationsresponsebody.md:
     id: d6424509f371
     last_write_checksum: sha1:5c2cf87a55aa2c862c1d70c41eb950df7a1d120f
     pristine_git_object: 05c7b0ec579fef9208f5a4fc76deb7b564c3660c
   docs/models/v2apiscreateapirequestbody.md:
     id: 5f22748de78b
-    last_write_checksum: sha1:bf8ee12fc29c39cbc44a49844813856176bd5918
-    pristine_git_object: ec3f5cad36106671727e0650be106cf4253164e3
+    last_write_checksum: sha1:9fbd25242527c1240279f446bcd45b155aaf4a0c
+    pristine_git_object: df647174c0fb55136b3ea4abcaa4ff30cf2e02b9
   docs/models/v2apiscreateapiresponsebody.md:
     id: 96abe986757a
     last_write_checksum: sha1:63fb121e1d455db78b59dc125da7da149c26008b
@@ -509,8 +573,8 @@ trackedFiles:
     pristine_git_object: 4f0a10da1b4b1585ca23d5f7926d10dc0c2b9bff
   docs/models/v2appscreateapprequestbody.md:
     id: 4c7aa09e523b
-    last_write_checksum: sha1:4d4c594a98fc6719815aed7cdf4241d8cf755186
-    pristine_git_object: 862aaf71af18216c1244cac5beab5b3c4bd0e30c
+    last_write_checksum: sha1:78dd6e6b831fd611415b5a089841ff080bfccee6
+    pristine_git_object: 7d9d25aa781b96fbf588503b050a31ca271959eb
   docs/models/v2appscreateappresponsebody.md:
     id: 4cfbd4a089a2
     last_write_checksum: sha1:86994c53a5356daef64d5e1c24b77517611fb989
@@ -545,8 +609,8 @@ trackedFiles:
     pristine_git_object: 28899cf133302a829d1b21b1a261f9adb2e4e6df
   docs/models/v2appsupdateapprequestbody.md:
     id: f1be2f287b98
-    last_write_checksum: sha1:42afc94d9cca125f996c5ae5ca509c165f0ec928
-    pristine_git_object: 956c52f3582644edb22aea1b13aad487dc1fa3e1
+    last_write_checksum: sha1:8e1662e39fe81a32695e43c0d6a015e5acbd3911
+    pristine_git_object: a6e23d99f3e55743b7d80024ff28db61b654f218
   docs/models/v2appsupdateappresponsebody.md:
     id: b50afba01558
     last_write_checksum: sha1:1944adcb661ab9b781467d784c461622c27e5e64
@@ -577,8 +641,12 @@ trackedFiles:
     pristine_git_object: d631d2dc087d131537787b0115c4277749398c3f
   docs/models/v2deploygetdeploymentresponsedata.md:
     id: 80019fb4302e
-    last_write_checksum: sha1:e786c2914d5167af3142c5c55916a0292f9ec61a
-    pristine_git_object: 0f759e18ca99639ff0d842365897603689e699d3
+    last_write_checksum: sha1:fe1b7f5a0e2f1b319537bd29ed77a7bd1527d0cb
+    pristine_git_object: 431d3466ce94d57477eae0b31e72ebf98207f86a
+  docs/models/v2deploygetdeploymentresponsedatastatus.md:
+    id: 3b23faf2196c
+    last_write_checksum: sha1:1ec033c790dc9000c49a20ce9d6c7618ea9958d9
+    pristine_git_object: 64c08c8221416c17d47b7f5d78bd83bf55e8c064
   docs/models/v2deploygitcommit.md:
     id: e3951f607df7
     last_write_checksum: sha1:07077ae05662492703287229d59fd359479deb04
@@ -655,6 +723,50 @@ trackedFiles:
     id: 967d83b88bd8
     last_write_checksum: sha1:3fde282eda8b26897ef61316546d447c637847f8
     pristine_git_object: 1fd41e9175d84d0bab17f988e35cc7d2747f14db
+  docs/models/v2domainscreatedomainrequestbody.md:
+    id: e90157028714
+    last_write_checksum: sha1:f78cc505e34c743337a8c052fc21a4cbf049cb5c
+    pristine_git_object: 3c6928f101849e0ed12e6c1b2a8b47a5ac9bce46
+  docs/models/v2domainscreatedomainresponsebody.md:
+    id: 068c84556ec3
+    last_write_checksum: sha1:1d1161e24e32b38ad303f3c6e4462e3cc4539e0f
+    pristine_git_object: 77d065d9912d83320c29d8735e3793b004a69d2c
+  docs/models/v2domainscreatedomainresponsedata.md:
+    id: a204591b3040
+    last_write_checksum: sha1:f00a0de4f2774ba424210fcba9e80b237b817c15
+    pristine_git_object: 511c8469a41624bfc33b57e6fb0f317bca8168e9
+  docs/models/v2domainsdeletedomainrequestbody.md:
+    id: 70ba75ca08e3
+    last_write_checksum: sha1:6230c6c9dfb27a0a708948cbc9f4c215d9a9e0e0
+    pristine_git_object: 3dfe0244826c50ebd464fb0739af06d741b48d4e
+  docs/models/v2domainsdeletedomainresponsebody.md:
+    id: dc5e98ef0cb1
+    last_write_checksum: sha1:8a9f39718af9631bb4d22b7445ee85048410de23
+    pristine_git_object: 48fcf471ddb0a183e2b3096fec0890d3408095d2
+  docs/models/v2domainsgetdomainrequestbody.md:
+    id: 727bb8bde875
+    last_write_checksum: sha1:0f3ec07e03444c507cd119cef148cee1d3b7a680
+    pristine_git_object: 6c5492cf28e6f85ca83e07ca01e0d5a6ce0967f3
+  docs/models/v2domainsgetdomainresponsebody.md:
+    id: 7a188eee4e31
+    last_write_checksum: sha1:c9f4767565461c3eb0c06a4b83be20b747081350
+    pristine_git_object: 440d9bd774117115c5d71e89cd7fd8ad4f18497a
+  docs/models/v2domainslistdomainsrequestbody.md:
+    id: 33947a11325c
+    last_write_checksum: sha1:829d029ccef8521bc741f7a38f92ca975bf8677f
+    pristine_git_object: e79bac6fb7e87367f98deb3b34bd2ab51c838d8b
+  docs/models/v2domainslistdomainsresponsebody.md:
+    id: 979fa6e8c3d9
+    last_write_checksum: sha1:9b671a52db44d94e40e123a6b76c545a3450f413
+    pristine_git_object: 84bf67cac0ad3322e6f799a8ab9a8fe57672c4f9
+  docs/models/v2domainsverifydomainrequestbody.md:
+    id: 30b0b9bfa5d8
+    last_write_checksum: sha1:e4affd84358a2cd3ca05c7b74900ff281cce06eb
+    pristine_git_object: 5fdbd06ca8a1d3e2045f327de7bc6f1812755c87
+  docs/models/v2domainsverifydomainresponsebody.md:
+    id: 9ecef9e50df9
+    last_write_checksum: sha1:967ff14f1862e884a7582678d1a082fee1d79438
+    pristine_git_object: 9a457b6778962087c1a6e1120223dcd8a8e814b0
   docs/models/v2environmentsgetenvironmentrequestbody.md:
     id: 4edd9367e3fc
     last_write_checksum: sha1:26fbb7bd98b6334d980073acd4362877aa36ce94
@@ -721,12 +833,20 @@ trackedFiles:
     pristine_git_object: aa23018d6d3803ddf047b10e92575e6ac065782c
   docs/models/v2gatewayupdatepolicyrequestbody.md:
     id: 77a02ae204d3
-    last_write_checksum: sha1:620b11aa95e7d3bb570fe02490ec982c1d402ed8
-    pristine_git_object: 5847cbf07638d3d79be682b33e3cb0c8c2ff96dc
+    last_write_checksum: sha1:24c3739956cdae47441959f20d1d1b661cb9d71e
+    pristine_git_object: cd55f4f8a02d6aa1f2aec9003319c06a194d0ce3
   docs/models/v2gatewayupdatepolicyresponsebody.md:
     id: 7f502c9e2cd2
     last_write_checksum: sha1:72a2d21839bcb72636eef96388b3eecc6f71e437
     pristine_git_object: 082ecb99829f4a8306070aa1d90d2f383ec7249f
+  docs/models/v2githubinstallappresponsebody.md:
+    id: 2f46ed68b394
+    last_write_checksum: sha1:6ff44ff546888f1b440f7973fabdded801615d71
+    pristine_git_object: 11cab92cc279664ee238c103b6ce7792d4f1b4c9
+  docs/models/v2githubinstallappresponsedata.md:
+    id: 7a1de0ef9cb6
+    last_write_checksum: sha1:3a8cc891be3dfb2ed652247c67236717a0cc6b01
+    pristine_git_object: 32377d64961c6c05c0d8a0e2aa20b5ec86f06be9
   docs/models/v2identitiescreateidentityrequestbody.md:
     id: 8ec73ac6475f
     last_write_checksum: sha1:4207505f76d632f2b5899eb3db66dd33dfddbe62
@@ -929,8 +1049,8 @@ trackedFiles:
     pristine_git_object: 1f5bf72dcef0c61c2941e5642b847d747ba628c3
   docs/models/v2permissionscreaterolerequestbody.md:
     id: 6c3875980b38
-    last_write_checksum: sha1:78df05c02162d3a35acd5d7624d374855d5d59d6
-    pristine_git_object: 4b8ab34926404dfdeb8060fb9a08547a1d6508a7
+    last_write_checksum: sha1:58a2a25534a9859e7ea8ebbacc2061bbaf4e3b62
+    pristine_git_object: 2f6b3e5c440b0f9704935e2268c81a66515d5f17
   docs/models/v2permissionscreateroleresponsebody.md:
     id: a0b7b43c3374
     last_write_checksum: sha1:ec29bf181d900064e260f1f6854ec7c3ee933ce6
@@ -987,30 +1107,38 @@ trackedFiles:
     id: 07be4a8fbb27
     last_write_checksum: sha1:c1b0c26c3387db9b0bec2538cbaf02940fbc6145
     pristine_git_object: 5ccecc0e69e53b4320bfcc0ae4def8d6c54002f4
+  docs/models/v2permissionssetrolepermissionsrequestbody.md:
+    id: d7d91f18ec77
+    last_write_checksum: sha1:41431f23813ac164abcb7db1f3af118a4f13b4c2
+    pristine_git_object: e0ec3ea9ff0820779415772d40110a9ec84092a5
+  docs/models/v2permissionssetrolepermissionsresponsebody.md:
+    id: 68aad5fe3e3e
+    last_write_checksum: sha1:3b2418572d86ed3696d077ecad7019d10cae31ec
+    pristine_git_object: d44f77192601869945111f1531366eb60560bfd2
   docs/models/v2portalcreatesessionrequestbody.md:
     id: 5d616e7b8955
-    last_write_checksum: sha1:d0bdcefba9d007a13e67ff4283a1e070638e8e38
-    pristine_git_object: a8e213ba9fa00c399407bfca78848ad994a45437
+    last_write_checksum: sha1:d4c729a1d28f49e4e5a27167e034076f674bd421
+    pristine_git_object: 1775260377e2bb58e411a0d0770ba0168634c66a
   docs/models/v2portalcreatesessionresponsebody.md:
     id: c3556a87ac81
     last_write_checksum: sha1:d517f72e6e0861259b15cbd12f57a83ae5b73672
     pristine_git_object: 432200fae97cf7e58f29b4a8b33a1ee62a0e3f58
   docs/models/v2portalcreatesessionresponsedata.md:
     id: 24e9a4cd2cdf
-    last_write_checksum: sha1:39bcc15ed4856701f6efea7e56195d5709b2aa34
-    pristine_git_object: 8685f7cbc17e835b324e5d3b30a99636bc80864e
-  docs/models/v2portalexchangesessionrequestbody.md:
-    id: 2fc8cb870928
-    last_write_checksum: sha1:7254789d4dabb12860cc6f9c07b58498f3d9f520
-    pristine_git_object: a8932e2d3c69b344745649665ae9ba143cd95275
-  docs/models/v2portalexchangesessionresponsebody.md:
-    id: 448fcc0d8d97
-    last_write_checksum: sha1:f5e424124c481d1c058c7a5610529a37d2237365
-    pristine_git_object: 5344170a9b92329d764ff25d3238d17c6a5562b7
-  docs/models/v2portalexchangesessionresponsedata.md:
-    id: f8aa3af12dc6
-    last_write_checksum: sha1:956e647e96ff0e5d6d087fb65dbdfcf460667482
-    pristine_git_object: 25b9fdf4034aaa58b29b087183e89983f2f5f248
+    last_write_checksum: sha1:ae5ed12dd05f3a94ecb1b558ee8334245d973985
+    pristine_git_object: cc90a429137b9ddcfffb9559c7607e26cd3e2a6d
+  docs/models/v2portalexchangecoderequestbody.md:
+    id: 6d8a3c546cec
+    last_write_checksum: sha1:49229d4ae1b318e91b755e60b93daf06e689f855
+    pristine_git_object: 9b9c1f78a8ccdc6d94a2ab872b0fa624110e06c8
+  docs/models/v2portalexchangecoderesponsebody.md:
+    id: eba40f5a1429
+    last_write_checksum: sha1:cac444f599f617d48a642b99dc647526443b4b46
+    pristine_git_object: 598a579205a143cc5bccd607bccf4947ee555864
+  docs/models/v2portalexchangecoderesponsedata.md:
+    id: abb2eb2c5bb0
+    last_write_checksum: sha1:b8684dcff3051fd89dbd36e421d2883533ace82f
+    pristine_git_object: d66f0811c700e0e6c07fd536d3c5efef4ff82a92
   docs/models/v2portalgetverificationsdatapoint.md:
     id: a55042ea4256
     last_write_checksum: sha1:b8e25ab7260aef2861afeb8fa0256bfd4117c315
@@ -1149,28 +1277,36 @@ trackedFiles:
     pristine_git_object: d8287c3f9378a956ff986053cccb2a4805a31e75
   docs/sdks/analytics/README.md:
     id: 4c84abb05030
-    last_write_checksum: sha1:0fbf0b3e87ab8dd7b18754be81004ea1a6664f03
-    pristine_git_object: 8560bb8b4e8fdc0307bf1ec46960b2d567e86829
+    last_write_checksum: sha1:3d1b2c73065ae9dd5e9e22b72dc88a23111aeba0
+    pristine_git_object: 857ddb8a84739434b466b881462f825c52d96171
   docs/sdks/apis/README.md:
     id: 23f09d8da686
-    last_write_checksum: sha1:434a7dea8833bdc8f6588cd0d445d8749e9db017
-    pristine_git_object: 9108578bee3fd5756f4e57a602324714bacaabd2
+    last_write_checksum: sha1:19e85ba725dc48276a348b9c00fdf6e8d6d4486e
+    pristine_git_object: 989df07297a4eeeef58fc0766fd58c99fd62042d
   docs/sdks/apps/README.md:
     id: 9c9c1a6527a3
-    last_write_checksum: sha1:e95c5b905ef97611aef34d8566d0c0e19950bd7b
-    pristine_git_object: 163043a982e77900ff05a1db08d257f935c08bd3
+    last_write_checksum: sha1:d61353c1af34e545aba42520198c550ae81f8374
+    pristine_git_object: 1545fea280cb82eda34526c64325fedefad31eb6
   docs/sdks/deployments/README.md:
     id: e7c5559ab768
     last_write_checksum: sha1:3e93cb4d68991f95024adac61f5c2adde44c2020
     pristine_git_object: 81debfc9b5eb14b5499442b1ce1ab47cc3077d0e
+  docs/sdks/domains/README.md:
+    id: 06e9beb4063b
+    last_write_checksum: sha1:f36b1f8529b1a09271a3f2b2cea04bbcece688c5
+    pristine_git_object: b2c4cc24356823bb118bc5a3e93c0eb4718c5b7b
   docs/sdks/environments/README.md:
     id: d15fc95481b6
     last_write_checksum: sha1:0f9b3b6f51908f12a748c1b0f0f4f4165cad13f7
     pristine_git_object: b439360b965c8a4ecbac77e0d66d1d7f3e4252da
   docs/sdks/gateway/README.md:
     id: 61f4d543d34b
-    last_write_checksum: sha1:6453fa6c169e71bfe5f22b6eb372ffeee1cd1431
-    pristine_git_object: 35001e8dd4b997410a2058a9c12758295e80a358
+    last_write_checksum: sha1:83c18e7ed5838b12c6ba4c87196cd1f6c7981fa2
+    pristine_git_object: 73ba1de4024132f40594be0a4a248005436dfcc7
+  docs/sdks/github/README.md:
+    id: 52292810cfa2
+    last_write_checksum: sha1:ffa5ec6b81b8e548e3b229ff12ea5ea362ef09fb
+    pristine_git_object: 88a1e120097ba033ab752e8074f6e9c611d6bf4f
   docs/sdks/identities/README.md:
     id: 751b50358a28
     last_write_checksum: sha1:65e382c0592d4d94aa700c0bbcfbccf3f56e7d74
@@ -1185,12 +1321,12 @@ trackedFiles:
     pristine_git_object: 6b6b55ae099efda71d0c0dcfdd629486a7ffc07f
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
-    last_write_checksum: sha1:57d9d11e214bd70a2bdfccba9ea5af12daedfcf1
-    pristine_git_object: 1622dc144008fd926f5d920a3dbb23b22f2016c7
+    last_write_checksum: sha1:873761254d6e3b6abc0542a44d90c2bb993464f3
+    pristine_git_object: dab5af5a85ab9028bafbab3ff054af5277a89df8
   docs/sdks/portal/README.md:
     id: 130ac1af4c35
-    last_write_checksum: sha1:58c8b546c1d94ef5d6443db29dfc57896c7879e6
-    pristine_git_object: fd43c9b49c60fa457a863a577ecd48562b4b9bf1
+    last_write_checksum: sha1:76013e766a541a437e4de7345803769d95025332
+    pristine_git_object: 839c7e7742ca6dc5f91c053096b24da70d9feba5
   docs/sdks/projects/README.md:
     id: 1c5f71754e17
     last_write_checksum: sha1:a8d05e934c7a07564fb5feba5552cb6cc5c818a9
@@ -1213,8 +1349,8 @@ trackedFiles:
     pristine_git_object: 42a9de7b4883572d33fd257118d55ff12faf0acb
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b43156e9c68a409571b818c19f032c14374373eb
-    pristine_git_object: df53f50947471c4fa8e706d2191d23eafa34cc31
+    last_write_checksum: sha1:abd562c3224eb09c5b0479cab84899f76ab6cf81
+    pristine_git_object: c1a9c54db5ff73c51cc8129d9130a32e48a5f53f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:623648abfc037d1a6a3a146251169d77b83801ae
@@ -1241,20 +1377,20 @@ trackedFiles:
     pristine_git_object: e3bace255cef14ba5daa2e931aa3c0974a372218
   src/unkey/py/_version.py:
     id: dd5769ea5724
-    last_write_checksum: sha1:593b77557cebc6ced598ed7e1aa7e3a222cf6e2d
-    pristine_git_object: 1aa9a2a83c4a74db7b208f1cdfd7a6c4b18c7828
+    last_write_checksum: sha1:3dd20316bdfbcac2bf46620872a1804be0d3790d
+    pristine_git_object: c6e2ef04b174d12e51d6b9a35bdbcdc9aaafd868
   src/unkey/py/analytics.py:
     id: 8a9a23d68313
-    last_write_checksum: sha1:2a8affe5665988e7cc7666ef4d132a794b8df1fb
-    pristine_git_object: 6070f0f4ed8750bb7c5d5af30c7fe3516700a4f6
+    last_write_checksum: sha1:64a1592364a7045479f8c556fd9b1ad995d24e6f
+    pristine_git_object: 66efc6297f4772517c6a1a18042a0cb47649462d
   src/unkey/py/apis.py:
     id: fe64a9c06fa5
-    last_write_checksum: sha1:47c7c33c76721931a70d4ad655166c6c3ecfced9
-    pristine_git_object: e78ba9f3c585d98c84f46279626346b4c11c1ed6
+    last_write_checksum: sha1:6735ebd8272667ebbe194fc6064f0cfdc1f53891
+    pristine_git_object: 0c465f42b58c0fb56e70b063c39d8658ee8a458b
   src/unkey/py/apps.py:
     id: 7c8e40493ad7
-    last_write_checksum: sha1:cd3bd0a7ffab5cef4f3d13672fcc19667345c9e7
-    pristine_git_object: 8f245db53b5b5b782861c82325f9242645d9a774
+    last_write_checksum: sha1:b16c2126313ff0c1f8dbec0036cfe9b458b96c08
+    pristine_git_object: f98bc780f8e1810777d4f95e743d1bd5a244ed40
   src/unkey/py/basesdk.py:
     id: 2abc2fe2b4e1
     last_write_checksum: sha1:92bef75edf78724e08e361ef36c0187057c180f7
@@ -1263,6 +1399,10 @@ trackedFiles:
     id: 131f48143066
     last_write_checksum: sha1:c2d27ce3cf961b7bd4c909955830ab0cba4471d2
     pristine_git_object: 0723b9cd250815520bbbaa41d2796f9a23440229
+  src/unkey/py/domains.py:
+    id: b7d9eb8c67ab
+    last_write_checksum: sha1:3ffdff152f9faec6a1943261f7921ca86b611a0f
+    pristine_git_object: e89e507612326516687a43cf9b1c50b48be6d91e
   src/unkey/py/environments.py:
     id: aa9b10441ddd
     last_write_checksum: sha1:7e557511e0803950158d90ae7211e9c6787bf590
@@ -1333,8 +1473,12 @@ trackedFiles:
     pristine_git_object: b1af3af289e65337b08df0eb337ba4edb1684b3b
   src/unkey/py/gateway.py:
     id: 661f130d9093
-    last_write_checksum: sha1:bdac2b4e04460c59107305510afbc346a28fe9a5
-    pristine_git_object: e9bf3d8befedd2ce41b28483affa90019e82291a
+    last_write_checksum: sha1:9ad4bbef2d4c6345893e1059a9af3f040e000590
+    pristine_git_object: 81cfdb001ae183e45068e1c80c40fb4a82e70c67
+  src/unkey/py/github.py:
+    id: 2c3592b1fde5
+    last_write_checksum: sha1:84ed353572d8c508066fc177a06afca1b0a9765e
+    pristine_git_object: d37e08d6df131f0eb9ae260b0bba1d7b6f4798b7
   src/unkey/py/httpclient.py:
     id: 6a3c9f40d08b
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -1349,20 +1493,32 @@ trackedFiles:
     pristine_git_object: 64541c76f08b6718d25e4a68f0a223f0ec13b5fa
   src/unkey/py/keys.py:
     id: 16399d9cff4f
-    last_write_checksum: sha1:abab87aa132797b9f93c452a45d3be7dd5a5c08a
-    pristine_git_object: f21840170643099bf3314b981494a582e4d2c925
+    last_write_checksum: sha1:96ebc1d3baa90bf326bc69538fe47d54957f4f8d
+    pristine_git_object: 991f56deb7e525f47fe95f64ed70377fababb03d
   src/unkey/py/models/__init__.py:
     id: ed00b9cad2ec
-    last_write_checksum: sha1:54c5d94b92c5849afc11ccc82f346152e9af1051
-    pristine_git_object: 1c119a02d94ce38aa63e3370a6b6dc489da23311
+    last_write_checksum: sha1:feee0f14574880ae70e60700804d1058e3e63121
+    pristine_git_object: b70d99547fd5aa10b1fee938c5fd222015ed559a
   src/unkey/py/models/apis_listkeysop.py:
     id: a38366224da8
     last_write_checksum: sha1:bcd9bee2c958ec4e5acfd0c521ac243fc54ca491
     pristine_git_object: 78e7b7a017b5c13299bccc3759231993e11afb3e
   src/unkey/py/models/app.py:
     id: 97bb37b2d313
-    last_write_checksum: sha1:028c8b46c3578beb010dbfc377e9b8695eeceb17
-    pristine_git_object: fb0a04937e1b9f90aa02878d3051bb11ca1ecd8a
+    last_write_checksum: sha1:362146897801904256248494547a8707a6f64a58
+    pristine_git_object: 1a3e3718a7ae29041345e7d1d48dbcba0083982e
+  src/unkey/py/models/appgit.py:
+    id: 7ddac08ec662
+    last_write_checksum: sha1:5a78871ed4901f2737dd22b5711e2d80dd4f35cc
+    pristine_git_object: 56a8f35686be7e57b581e3d596a2d3e85d0e017c
+  src/unkey/py/models/appgitcreateinput.py:
+    id: ac553726c739
+    last_write_checksum: sha1:f0df66965d54526d1cd4b0c72c36da526d269d36
+    pristine_git_object: d5d0a6e623551f1370e7c0c77a91b320b4a54e99
+  src/unkey/py/models/appgitupdateinput.py:
+    id: bcdc56258444
+    last_write_checksum: sha1:2ae244a4e09ecbbaba63f4ff4dfbb0a5f33ed099
+    pristine_git_object: fa1985ba386b0d2557744fb2ecb8274b7a060bab
   src/unkey/py/models/apps_listappsop.py:
     id: bc8a57f04561
     last_write_checksum: sha1:ffc6c96fd5fe4514bc1ce82faef230cbc57606f8
@@ -1431,14 +1587,26 @@ trackedFiles:
     id: 74a102324dd3
     last_write_checksum: sha1:ee6be7f34db653444347201a582da9066a853388
     pristine_git_object: 24bd5661d8b2fd8e6e54449021fb8e594658d602
+  src/unkey/py/models/dnsrecord.py:
+    id: 7f12c6dbe37e
+    last_write_checksum: sha1:5ebbfb9dafb1718853ac47cd7c676f7973fda014
+    pristine_git_object: 2a5971ea8697a934fbb19a83dfc0123dfab8576a
+  src/unkey/py/models/domain.py:
+    id: 45668372826a
+    last_write_checksum: sha1:91dfee5e79e9e294f0e91e284896df77c50d2b97
+    pristine_git_object: 3fbbf2f94e64c19985f70b6b0e250f6ef6c92e8d
+  src/unkey/py/models/domainconnect.py:
+    id: 0590b66e83e4
+    last_write_checksum: sha1:4a929f306097555375b543e2da176048a75e42a0
+    pristine_git_object: 2538e191482de70b61285340d1a19bf67cce960c
   src/unkey/py/models/emptyresponse.py:
     id: e663fa18fad1
     last_write_checksum: sha1:bb64b3ba32144141b8a91af22930cbb0f06e1ca3
     pristine_git_object: d60bee10c70e16aca1d4bd71576ffea43750cd83
   src/unkey/py/models/environment.py:
     id: 8bca1c6a24be
-    last_write_checksum: sha1:3eecfffb21e6ec1b1844c6965c5ac62b4531bcfd
-    pristine_git_object: d611d66941f306b5f6f4529328eaf722a3a310a7
+    last_write_checksum: sha1:16059017883ef85b8a77517ea3933779c75e72d0
+    pristine_git_object: 7cde5634d9e4704c338b6f2d97fc3a89cd6d5425
   src/unkey/py/models/environmentbuild.py:
     id: 6a2ae8e59e54
     last_write_checksum: sha1:f37a44bd4841949b4dccd8d569ec96aef142f344
@@ -1447,6 +1615,10 @@ trackedFiles:
     id: 21875d026e01
     last_write_checksum: sha1:a6eb61781e204903afe660dc87a823eda6b7954c
     pristine_git_object: 43b6d2644adb696e1a46efe234185654da355abe
+  src/unkey/py/models/environmentkind.py:
+    id: 47e9f9c19b06
+    last_write_checksum: sha1:88d01b4f827225988b8953fc4d3297650e64bfb0
+    pristine_git_object: 958cfd2fb9a2872c02f8afd1e1d4998b5875ac09
   src/unkey/py/models/environmentregion.py:
     id: f16b42af7e70
     last_write_checksum: sha1:ed542c833598f5d9efafad10d2ef44ee971af220
@@ -1501,8 +1673,8 @@ trackedFiles:
     pristine_git_object: e7c6c5e752af0ce80724b5c7713efb66184d5424
   src/unkey/py/models/keyauthpolicy.py:
     id: 3fc3bf1dd33d
-    last_write_checksum: sha1:0779914c823be9d3f3a5239d0d59342919a6e2c4
-    pristine_git_object: ff45c9faf95423fd531860ef18a7a172299a7479
+    last_write_checksum: sha1:35c118f7972f999e3cfc89e6084f017c124ce129
+    pristine_git_object: a8452b0a3f748652304f040544c410e0d43788c0
   src/unkey/py/models/keycreditsdata.py:
     id: ae33aaadc33f
     last_write_checksum: sha1:225741c31d7b1f28b0c4e4f71929d88ca5e7ea04
@@ -1531,6 +1703,10 @@ trackedFiles:
     id: 68853c2535d7
     last_write_checksum: sha1:9617c018214d7f973c4f2dd5594f911ea33a0238
     pristine_git_object: 2197b67251e9f120b749acf4555b76612a90f263
+  src/unkey/py/models/loggingpolicy.py:
+    id: fc0d5cfd9bdc
+    last_write_checksum: sha1:9208f625ca91477bc562f7ee9f7b0f5f42f0d4b8
+    pristine_git_object: e60f2811358e33abd1db5506558270d236bc434c
   src/unkey/py/models/matchexpr.py:
     id: 599a751273b3
     last_write_checksum: sha1:4abf06ac65edc44d5eda29d906e3381df5d5839d
@@ -1573,20 +1749,20 @@ trackedFiles:
     pristine_git_object: 5b316b41407247e1fe2f91c2c79836531ea27bd4
   src/unkey/py/models/policy.py:
     id: b097ad5e12b1
-    last_write_checksum: sha1:b4314f984a722aa4d6d09d3b079f56eec49cc510
-    pristine_git_object: 636e3cec8efb90b8a342a880d2bdbae9f50073d4
+    last_write_checksum: sha1:535c6d5504c91cfefe7d499d1dc84d16dbf459db
+    pristine_git_object: 7bc66a734b60e1be9d7afe8581043ec8099b6248
   src/unkey/py/models/policyresponse.py:
     id: 20d204e925fd
-    last_write_checksum: sha1:b2fef7a609aa3d68b4d13aa4e2033ae148665b0d
-    pristine_git_object: 463b703c792281a50a15ca86ffa49af00a8aa590
+    last_write_checksum: sha1:d6d17273c7a1c5f1a5b6b804bb8832b0eacd2476
+    pristine_git_object: 640507cec2eba4d942495540660cc5af740d617b
   src/unkey/py/models/portal_createsessionop.py:
     id: 23da430e6da7
     last_write_checksum: sha1:80e86ae5bbed2b3cfe07221746005b2d5b3630de
     pristine_git_object: 0a7cb6af808ac246a5dde3c7085dd344f9a4b074
-  src/unkey/py/models/portal_exchangesessionop.py:
-    id: 314e1bcdf138
-    last_write_checksum: sha1:d8b478167890da663ddce4da2dd11e2812bb2205
-    pristine_git_object: 5c530581c1aaea8a5b957040d32da3fce391918b
+  src/unkey/py/models/portal_exchangecodeop.py:
+    id: c63881b213fb
+    last_write_checksum: sha1:f231815538c1fafa2e5a71e0f9b881357bec6c67
+    pristine_git_object: ad5ac52b0675df256267b82a2b62106b07276c32
   src/unkey/py/models/portal_getverificationsop.py:
     id: 46c24ec719d1
     last_write_checksum: sha1:21ffb7e3edf7d348819d39a3bf17010d74850277
@@ -1629,8 +1805,8 @@ trackedFiles:
     pristine_git_object: 945499dde299b0684b76e83e5a0916e894a39e08
   src/unkey/py/models/ratelimitpolicy.py:
     id: e4df351e7b85
-    last_write_checksum: sha1:2bd3fd33220bbf5c54a8eefddb96535c9b8c7450
-    pristine_git_object: c97a7c02fbccc0e449c8ef4113305fa12eda8d6a
+    last_write_checksum: sha1:1d5ba48a62fa0a592676898aa2c732ee59afb92c
+    pristine_git_object: bf5f4a549d194395f8253df9463522fc4388900e
   src/unkey/py/models/ratelimitrequest.py:
     id: 2c441be8c30b
     last_write_checksum: sha1:ae5bb976b5677ca7c7a96d6ee4683c47f8978b72
@@ -1667,18 +1843,42 @@ trackedFiles:
     id: 8e1c81b0b02c
     last_write_checksum: sha1:afbb4ec0f01b0ea7d5771863ff6cb149c53e2f88
     pristine_git_object: 3d899f9d3822c5ca3e4a4459a384e7e2fba7d22a
+  src/unkey/py/models/v2analyticsgetgatewayrequestsrequestbody.py:
+    id: c1db449138d3
+    last_write_checksum: sha1:66e3cbfbd277b1c10f4d80f434266a8e1e207d5b
+    pristine_git_object: f2029316307d2a056c56d47c954148f2649327a7
+  src/unkey/py/models/v2analyticsgetgatewayrequestsresponsebody.py:
+    id: 321b3da50789
+    last_write_checksum: sha1:8b462151e577fdd83bec2dc894f8f312c40206de
+    pristine_git_object: 3a2b532ea00bee40bfb31121b2aa795061841d86
+  src/unkey/py/models/v2analyticsgetratelimitsrequestbody.py:
+    id: eeed47112c04
+    last_write_checksum: sha1:afe02ba6c66f1e6317bb35fcef5636815c5acf60
+    pristine_git_object: 6026c53cd87615ac2fec15d009ca875285c6e0f5
+  src/unkey/py/models/v2analyticsgetratelimitsresponsebody.py:
+    id: b8f36fd55cba
+    last_write_checksum: sha1:539c2cd8627c3c661d1c4f531f3214faf79845d2
+    pristine_git_object: 29445e0a64ea7d97329df126279eaa66b34dabdf
+  src/unkey/py/models/v2analyticsgetruntimelogsrequestbody.py:
+    id: 33c34a004448
+    last_write_checksum: sha1:b92374122c82dd4c2403f4fd5a2dbf49394ee162
+    pristine_git_object: 0cd5153324a08b662493222e3bfdf2d9193fab03
+  src/unkey/py/models/v2analyticsgetruntimelogsresponsebody.py:
+    id: 0e2f1558e833
+    last_write_checksum: sha1:433ffc6ff3a1a6e7b763eb97d4887e82fedb504e
+    pristine_git_object: fdba70a7915b97bab95399a45ef6c1f408bd2af9
   src/unkey/py/models/v2analyticsgetverificationsrequestbody.py:
     id: 1e251e193d2b
-    last_write_checksum: sha1:2a013212ee894b3c46eac5a5ed4474076a278cf3
-    pristine_git_object: c2f40f3ffaf1daa02cdf7e979186a6d9bc480e2f
+    last_write_checksum: sha1:23847fc6b5cbbcf2ef07b51507d0b3cc327f505f
+    pristine_git_object: d0779e3edd1f02d9ac43d8406ff700767a5b4988
   src/unkey/py/models/v2analyticsgetverificationsresponsebody.py:
     id: dcbd42c34e44
     last_write_checksum: sha1:e35c53098f7d2b919e5d8cffd91f570074697a3f
     pristine_git_object: 55fdaf854aa42c7549cee31a286d349afb42973d
   src/unkey/py/models/v2apiscreateapirequestbody.py:
     id: 98028e0f3d4e
-    last_write_checksum: sha1:146067890c53d6caab43345ccbe1cdf949c46e5e
-    pristine_git_object: f553c75b8c6182d228223da3e6ef2cf2f6a32746
+    last_write_checksum: sha1:97956162205197d71dd540a011dc17b745e4af02
+    pristine_git_object: c92fc3be44f70023037715a809638d23a83776a9
   src/unkey/py/models/v2apiscreateapiresponsebody.py:
     id: 5a737bed2362
     last_write_checksum: sha1:0231d5d26fcb86270eceb74ad9614bca195a9c6b
@@ -1717,8 +1917,8 @@ trackedFiles:
     pristine_git_object: 021ff2d5f5ca226b949e5c808a96c97b534f0088
   src/unkey/py/models/v2appscreateapprequestbody.py:
     id: 29fd46d2f1ac
-    last_write_checksum: sha1:7109d854cece910883aeef92a66d0b1a5d96d169
-    pristine_git_object: 5ae49d306127e91da7d8d94b25fd92c3a6a25ed6
+    last_write_checksum: sha1:b00fdf44fd33aa2a932362e59cd94eedd04b78c5
+    pristine_git_object: bac17702eeb28a00955489f6342a5dae914c84ba
   src/unkey/py/models/v2appscreateappresponsebody.py:
     id: 9bfb63778fbd
     last_write_checksum: sha1:c7c7b563b3e7daf1385a70ba5962f54ad015d855
@@ -1753,8 +1953,8 @@ trackedFiles:
     pristine_git_object: 375ad539b464bedc3f20998690ad53200d6d123a
   src/unkey/py/models/v2appsupdateapprequestbody.py:
     id: d04a874b93b7
-    last_write_checksum: sha1:c6d323614cdafd9d7f86224cf2e67c00e29c00b5
-    pristine_git_object: 6955ffbfb471edbdab2b68194b58359f670552fe
+    last_write_checksum: sha1:3d552e9e0dad721bdd68ffbcd6bc496e168886c3
+    pristine_git_object: 6a5dd43c1f2ecb9c73b491c3894a133347de6583
   src/unkey/py/models/v2appsupdateappresponsebody.py:
     id: 4183dbb48bb9
     last_write_checksum: sha1:9c12904664ba35dcc76c44aefb45c04dedc83797
@@ -1785,8 +1985,8 @@ trackedFiles:
     pristine_git_object: 83af8435a5cff31bca2a20775182f1205e26afb8
   src/unkey/py/models/v2deploygetdeploymentresponsedata.py:
     id: d9e4ae97041f
-    last_write_checksum: sha1:b433580f585af1eee7c5401fc303643657fa97b6
-    pristine_git_object: cd4f971b1d4f9c2ed8743579428fee186df5f9aa
+    last_write_checksum: sha1:101c2782e092526b99a3e361136dc779725d7a9d
+    pristine_git_object: 8f56f8d8032c871cb4d9427ca073e71fa3bc9927
   src/unkey/py/models/v2deploygitcommit.py:
     id: a31e6067ef25
     last_write_checksum: sha1:ac80449312f5ef44b8ac270aac65808866bd0ae0
@@ -1851,6 +2051,50 @@ trackedFiles:
     id: ba1af62ca519
     last_write_checksum: sha1:bd04081655260baf94c1224ebadef4670da77707
     pristine_git_object: 743ec82ac337480b1133bccde6ecdf20ebdf4324
+  src/unkey/py/models/v2domainscreatedomainrequestbody.py:
+    id: 552c002f2199
+    last_write_checksum: sha1:b1b508d2b4531c956871778e1064d02b42d7f2bc
+    pristine_git_object: d9a64931c5c1bd337e0698a325f1d44764b71c90
+  src/unkey/py/models/v2domainscreatedomainresponsebody.py:
+    id: d7f347476e23
+    last_write_checksum: sha1:67279af02b70001d4bbe3f18602ab4d4e93b9feb
+    pristine_git_object: 9f820338ea12aa1642e5f2e99d752f28e69c715a
+  src/unkey/py/models/v2domainscreatedomainresponsedata.py:
+    id: 0406459f282d
+    last_write_checksum: sha1:9c9b4142a7428f1a0ef4f224d85db48494bd237d
+    pristine_git_object: 3ae7ad2a99f6b89822d7dbd7084b19dc0371c475
+  src/unkey/py/models/v2domainsdeletedomainrequestbody.py:
+    id: 6757a0b3696b
+    last_write_checksum: sha1:e4fc0bd54ffb0e7c68aa4e115e143d6495a8179a
+    pristine_git_object: c3f8d40d93c875f80807617002d21fcc849a1d8b
+  src/unkey/py/models/v2domainsdeletedomainresponsebody.py:
+    id: 095803e097c4
+    last_write_checksum: sha1:85b37d2475d0cb587ce35fda58390059e268251b
+    pristine_git_object: eff860798eb23bf46b82265c1435521b11a70fde
+  src/unkey/py/models/v2domainsgetdomainrequestbody.py:
+    id: b98d8ce9ef9e
+    last_write_checksum: sha1:1a56a21481e9a46793422ceb55040d57941bbe7d
+    pristine_git_object: 3f6d5b83917de8c37e72159de4962bea024b1aaf
+  src/unkey/py/models/v2domainsgetdomainresponsebody.py:
+    id: 27eda642d8c4
+    last_write_checksum: sha1:8c7f0ba857896c6fb3fe6228472b6acadd9ed382
+    pristine_git_object: d5a1af25bad99b8f5a7a3fea0566f70368ff9c9c
+  src/unkey/py/models/v2domainslistdomainsrequestbody.py:
+    id: 727e4bbed6c5
+    last_write_checksum: sha1:620b04dff8f03eb7c7c2dc79ef0ea6cea4e56322
+    pristine_git_object: b6dc33294113481544cef4624ce6aa75ef237d8d
+  src/unkey/py/models/v2domainslistdomainsresponsebody.py:
+    id: 0fd71db1047e
+    last_write_checksum: sha1:d102287635d429e2eb9226fe6ef35ec2674780ef
+    pristine_git_object: 11b56214ed67f4d18d0e526d9050ee1062529292
+  src/unkey/py/models/v2domainsverifydomainrequestbody.py:
+    id: 0a1dbeb8fa57
+    last_write_checksum: sha1:8de7dbc9360473bf8d8cc25f6ae296aaaeeb6bfd
+    pristine_git_object: 758cbf68edcdebda06d1580a5aa3530e522fbc0d
+  src/unkey/py/models/v2domainsverifydomainresponsebody.py:
+    id: 1513aad4a7ec
+    last_write_checksum: sha1:e01a30ad827819f67e85c79e9641e52e97a36db9
+    pristine_git_object: 9fc9a6b246130b73c0c80dabb40311e3b89ec8b9
   src/unkey/py/models/v2environmentsgetenvironmentrequestbody.py:
     id: fed7d9460ca8
     last_write_checksum: sha1:19a742a49339141893ac6168c5b0abd881ba2371
@@ -1917,12 +2161,20 @@ trackedFiles:
     pristine_git_object: 5002be568bf6e1453ae1e6e8b827be1fd2e9b2f9
   src/unkey/py/models/v2gatewayupdatepolicyrequestbody.py:
     id: b70ff5616839
-    last_write_checksum: sha1:a86d6d95d2d13f726253d93282acfb63b2588f0c
-    pristine_git_object: 86fde2011d14db6d0b97eecc82341012501ddbf8
+    last_write_checksum: sha1:426dd9f96f7f5971fbe1554ba07e7531b787171e
+    pristine_git_object: bc7d9ef0f9b9adbf73e508a496c76ed5aa8477cd
   src/unkey/py/models/v2gatewayupdatepolicyresponsebody.py:
     id: 66823d5eff29
     last_write_checksum: sha1:e3e21e284d63838ef22b2ca1a13a0a688edf2cb5
     pristine_git_object: 349b5518a4c7b3f7d3ce4046dbc33b4b3581dcb0
+  src/unkey/py/models/v2githubinstallappresponsebody.py:
+    id: c3f469cff913
+    last_write_checksum: sha1:b4647c0d46d55fdd821fd2287541fc701f04e1c4
+    pristine_git_object: 53cebe273395f5c64fa944eb16d3c32735a4d3e6
+  src/unkey/py/models/v2githubinstallappresponsedata.py:
+    id: cc1a71872620
+    last_write_checksum: sha1:728650215554a6f94f713340afc4df0d919d92bd
+    pristine_git_object: 5c01814bfe314804fa02eb2aa2178f73e99c0508
   src/unkey/py/models/v2identitiescreateidentityrequestbody.py:
     id: 65d71ad81f1a
     last_write_checksum: sha1:7381cfb4306489afcb8a097ef22bfcd8b9d43158
@@ -2085,8 +2337,8 @@ trackedFiles:
     pristine_git_object: 7e74f91a67601590413c20f1a893c402f348708b
   src/unkey/py/models/v2keysupdatekeyrequestbody.py:
     id: 109693b81b27
-    last_write_checksum: sha1:3be82ce1739cda0e903ef951f0059df140511721
-    pristine_git_object: 0e0f3466217f2673d823469e6752de2d8f3abc53
+    last_write_checksum: sha1:9830b74262b5863af01e0ebaccdb6c09a3a967e2
+    pristine_git_object: 4ed28f7e653b4d75dab856ec66130b752ad5596a
   src/unkey/py/models/v2keysupdatekeyresponsebody.py:
     id: d272f545f4d2
     last_write_checksum: sha1:3ca337af911f63598f5a6baf94981b7f2da5957b
@@ -2125,8 +2377,8 @@ trackedFiles:
     pristine_git_object: 7ffc939bfd7a30e1424f35a1314cc87a7c63c75c
   src/unkey/py/models/v2permissionscreaterolerequestbody.py:
     id: 167b9ccf98f5
-    last_write_checksum: sha1:029bc080496d9c41d7dc91355725aa5b272d3224
-    pristine_git_object: 95f6e7c79997f9f9da2e1229b7b7c50dcf5beb43
+    last_write_checksum: sha1:3c4914831e1c34f1ffe266e834c5f400a2bdb3e0
+    pristine_git_object: 633a55f03ec4e765b93e3842b88ed92ce1e904b0
   src/unkey/py/models/v2permissionscreateroleresponsebody.py:
     id: 718e361b5a6b
     last_write_checksum: sha1:7dc11442318ef8b359164c755f67260195deea54
@@ -2183,30 +2435,38 @@ trackedFiles:
     id: 15bcb5136371
     last_write_checksum: sha1:cc0d09df7399a8017fdb9362837150618cd334ec
     pristine_git_object: 2a9ba292e1059834c960caec5f64e04f50da4f1a
+  src/unkey/py/models/v2permissionssetrolepermissionsrequestbody.py:
+    id: 20d84c19f132
+    last_write_checksum: sha1:7ac2796bd141882f9ee569d13fab40016db557d9
+    pristine_git_object: 85fd0170d6a9098cd996d8e00d47446fee7b389e
+  src/unkey/py/models/v2permissionssetrolepermissionsresponsebody.py:
+    id: 084e092109bd
+    last_write_checksum: sha1:1eb9bfd48db854e2077fa64f7e3e11e72d16a445
+    pristine_git_object: 1c8c53af53b16f6b3d555808a4170c44b28c775f
   src/unkey/py/models/v2portalcreatesessionrequestbody.py:
     id: 79235e5b469e
-    last_write_checksum: sha1:f661b695ef6f498a83f960480772dc09b2837bb1
-    pristine_git_object: 55aa52c0509a1a7b11c784544f61d5145f274078
+    last_write_checksum: sha1:56b2a12ad1fe115dc681c4207c18d3faf4443c64
+    pristine_git_object: 658cccb38a4bc321cd29b7d2348862dfe5d6a07c
   src/unkey/py/models/v2portalcreatesessionresponsebody.py:
     id: d93ef663421e
     last_write_checksum: sha1:777cb1280495824eea6f63a4f989db8057e58300
     pristine_git_object: 6c20025c16d7529d30cf6be81b89228d2a900e07
   src/unkey/py/models/v2portalcreatesessionresponsedata.py:
     id: eeee33681d90
-    last_write_checksum: sha1:9d8346c012f75a558aec69193b2de25fa2f9df27
-    pristine_git_object: 2860563a9703f22091f6c83c0756039dfba561a1
-  src/unkey/py/models/v2portalexchangesessionrequestbody.py:
-    id: 27453eb17b4a
-    last_write_checksum: sha1:53a02e63843dae8265ed63cff8fe5b1c5bff827b
-    pristine_git_object: 2bf4dcbe2e6becea5ca3e2f53c6a8468ae70adcc
-  src/unkey/py/models/v2portalexchangesessionresponsebody.py:
-    id: f462d8061778
-    last_write_checksum: sha1:364abee6502ab4f7e800cfd92ede61cda82d1231
-    pristine_git_object: a2da66500da34dfc42501659dd26dd4684b25938
-  src/unkey/py/models/v2portalexchangesessionresponsedata.py:
-    id: 2295bb3cedc2
-    last_write_checksum: sha1:253d863df642ec42242156b8344c0c332a7a91a8
-    pristine_git_object: 73c3d719f81aa08b06d7e99f02c50b4756da5379
+    last_write_checksum: sha1:89db88ecf9b392feb977df0e8d91f9176036e589
+    pristine_git_object: 24e466b6221f6c9a3e038aeece993665c20548af
+  src/unkey/py/models/v2portalexchangecoderequestbody.py:
+    id: a62b54ec33ad
+    last_write_checksum: sha1:520eef0c4f9986d83c96d1c8bef4184de848c857
+    pristine_git_object: de9b8089c72f0a2288d57802a2f7fe0a96da0c5b
+  src/unkey/py/models/v2portalexchangecoderesponsebody.py:
+    id: 43d644bb07d2
+    last_write_checksum: sha1:975984f1cbbbb0189d61ba93201e87b7f1d06d3f
+    pristine_git_object: a23596dc9795586897e35f3e1b14ee717247bb03
+  src/unkey/py/models/v2portalexchangecoderesponsedata.py:
+    id: 9431d0361191
+    last_write_checksum: sha1:3196ffcfd4be69a2d26ac85b181283f528339260
+    pristine_git_object: 640b02d7d8f21876fd071edb6c19ce931cad17ca
   src/unkey/py/models/v2portalgetverificationsdatapoint.py:
     id: 875ffddd4511
     last_write_checksum: sha1:fe222bd459f9503b8c081fb416e62be1075890f0
@@ -2345,12 +2605,12 @@ trackedFiles:
     pristine_git_object: 8b65ac6eee33b929aca0b0dc51690a5248208393
   src/unkey/py/permissions.py:
     id: d4f3a7f81197
-    last_write_checksum: sha1:21722b96560b15bd1b24eef26918933be0e5bd37
-    pristine_git_object: 3eea1f11de2a8022a8082c09a66beaf5bfd763e9
+    last_write_checksum: sha1:39bf3d9724bca4ea76aa37329746a45d05bbfbcc
+    pristine_git_object: b4ee9426d4d2f276cbdd37e26694776739b94d2b
   src/unkey/py/portal.py:
     id: 5864748454ff
-    last_write_checksum: sha1:70fe288aae66840b29382fd54ee50b28efeb2109
-    pristine_git_object: 046b1ae57bc799be92c0884cca3bbf4fa8be235c
+    last_write_checksum: sha1:f0fbc59bbed4517eff2ab1ddc42b47c3b5006dd9
+    pristine_git_object: 55df2b7f9fefddb3db6edc1a4f678c48bf6de367
   src/unkey/py/projects.py:
     id: 328bff1fa3e5
     last_write_checksum: sha1:c605be8432153bd255cd09c3e3a5e034a4bbb864
@@ -2365,8 +2625,8 @@ trackedFiles:
     pristine_git_object: ff5ff0a7c97b5fecb796185ff249e9eaac09d971
   src/unkey/py/sdk.py:
     id: 62460043018c
-    last_write_checksum: sha1:9cbf354d17c6cacfaace5b2bac0745ed7e89c3b5
-    pristine_git_object: a15cec424e6227af16fd1e665c6894f3ec895b7d
+    last_write_checksum: sha1:1799c03894d5271f9ee2d0202daa7ea8c74aba57
+    pristine_git_object: 2cba5f6255e6130ac6323601161ea5477e43fab1
   src/unkey/py/sdkconfiguration.py:
     id: 03c497eeccaa
     last_write_checksum: sha1:7ec37a17c10d68c902d6b4e6b0317505c04b50ee
@@ -2433,8 +2693,8 @@ trackedFiles:
     pristine_git_object: 591415af8e64baa410627b507d2740afb5387d13
   src/unkey/py/utils/retries.py:
     id: 2084d1e173e6
-    last_write_checksum: sha1:3585b891142f30a597fbf7a2f0340700babef8e4
-    pristine_git_object: ca7b59efebbbd9545744d0207ef42725c4cc5143
+    last_write_checksum: sha1:481dfc7cd6a07a3987f0f443e91bee72888ae41d
+    pristine_git_object: c7418a62826fc73990a52e70df0d54093c5e2a57
   src/unkey/py/utils/security.py:
     id: 4ecc8356a3a9
     last_write_checksum: sha1:c11eef495b6aaa249178c24c796940cc540b7a00
@@ -2453,8 +2713,8 @@ trackedFiles:
     pristine_git_object: c78ccbae426ce6d385709d97ce0b1c2813ea2418
   src/unkey/py/utils/values.py:
     id: ff8f4fa2eda1
-    last_write_checksum: sha1:acaa178a7c41ddd000f58cc691e4632d925b2553
-    pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
+    last_write_checksum: sha1:65e1ee8607767a4fc1ae7a55c74d77a23ab3cef1
+    pristine_git_object: ac217f473c5d52a454a2979b3eb35e66175d365c
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -4131,7 +4391,7 @@ examples:
   permissions.createRole:
     basic:
       requestBody:
-        application/json: {"name": "content.editor", "description": "Can read and write content"}
+        application/json: {"name": "content.editor", "description": "Can read and write content", "permissions": ["content.read", "content.write"]}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"roleId": "role_1234567890abcdef"}}
@@ -4314,10 +4574,10 @@ examples:
   portal.createSession:
     speakeasy-default-portal-create-session:
       requestBody:
-        application/json: {"slug": "my-portal", "externalId": "user_123", "permissions": ["keys:create", "analytics:read", "keys:create"], "preview": false}
+        application/json: {"portal": "proj_1234abcd", "externalId": "user_123", "scopes": ["keys:read", "keys:reroll", "analytics:read"], "preview": false, "returnUrl": "https://app.example.com/settings/api-keys"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"sessionId": "pst_abc123def456", "url": "https://portal.unkey.com/?session=pst_abc123def456"}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "ps_abc123def456", "url": "https://portal.unkey.com/?session=pst_abc123def456"}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4368,31 +4628,31 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     success:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"appId": "app_1234abcd"}}
     invalidSlug:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}}
       responses:
         "400":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The slug must match the pattern ^[a-z0-9]+(-[a-z0-9]+)*$.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.slug", "message": "must match ^[a-z0-9]+(-[a-z0-9]+)*$", "fix": "Use lowercase letters, numbers, and hyphens, starting and ending with a letter or number (no leading, trailing, or consecutive hyphens)"}]}}
     missingPermission:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}}
       responses:
         "403":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.create_app' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     projectNotFound:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}}
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested project does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
     appExists:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd"}
+        application/json: {"project": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}}
       responses:
         "409":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An app with slug 'payments-api' already exists in this project.", "status": 409, "title": "Conflict", "type": "conflict"}}
@@ -4461,7 +4721,7 @@ examples:
         application/json: {"project": "payments", "app": "app_1234abcd"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4479,7 +4739,7 @@ examples:
         application/json: {"project": "payments", "app": "payments-api"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4497,7 +4757,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
     missingPermission:
       requestBody:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
@@ -4516,7 +4776,7 @@ examples:
         application/json: {"project": "payments-service", "limit": 100}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -4534,7 +4794,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd", "search": "checkout"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}, {"id": "app_5678efgh", "name": "Billing API", "slug": "billing-api", "defaultBranch": "main", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704240000000}], "pagination": {"hasMore": false}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}, {"id": "app_5678efgh", "name": "Billing API", "slug": "billing-api", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704240000000}], "pagination": {"hasMore": false}}
     invalidLimit:
       requestBody:
         application/json: {"project": "proj_1234abcd", "limit": 100, "cursor": "app_1234abcd", "search": "checkout"}
@@ -4559,7 +4819,7 @@ examples:
         application/json: {"project": "payments", "app": "payments-service", "slug": "payments-api"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -4579,7 +4839,7 @@ examples:
         application/json: {"project": "payments", "app": "app_1234abcd", "name": "Payments API"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "currentDeploymentId": "d_1234abcd", "isRolledBack": false, "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
         "401":
@@ -4596,25 +4856,25 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     app:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "deleteProtection": true}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "defaultBranch": "main", "isRolledBack": false, "deleteProtection": true, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "app_1234abcd", "name": "Payments API", "slug": "payments-api", "isRolledBack": false, "deleteProtection": true, "createdAt": 1704067200000, "updatedAt": 1704153600000}}
     missingPermission:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "deleteProtection": true}
       responses:
         "403":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'update_app' permission on the target app to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     appNotFound:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "deleteProtection": true}
       responses:
         "404":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested app does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
     appExists:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "defaultBranch": "main", "deleteProtection": true}
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "deleteProtection": true}
       responses:
         "409":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An app with slug 'payments-api' already exists in this project.", "status": 409, "title": "Conflict", "type": "conflict"}}
@@ -4835,7 +5095,7 @@ examples:
         application/json: {"project": "payments", "app": "payments-api", "environment": "env_1234abcd"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "kind": "production", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4853,7 +5113,7 @@ examples:
         application/json: {"project": "payments", "app": "payments-api", "environment": "production"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "kind": "production", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4871,7 +5131,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "env_1234abcd", "slug": "production", "description": "Production environment", "kind": "production", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}}
     missingPermission:
       requestBody:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd"}
@@ -4927,7 +5187,7 @@ examples:
         application/json: {"project": "payments-service", "app": "payments-api"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "env_1234abcd", "slug": "production", "description": "Production environment", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}]}
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "env_1234abcd", "slug": "production", "description": "Production environment", "kind": "production", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}]}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -4945,7 +5205,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "env_1234abcd", "slug": "production", "description": "Production environment", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}, {"id": "env_5678efgh", "slug": "staging", "description": "Staging environment", "deleteProtection": false, "createdAt": 1704240000000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}}]}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "env_1234abcd", "slug": "production", "description": "Production environment", "kind": "production", "deleteProtection": false, "createdAt": 1704067200000, "updatedAt": 1704153600000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"dockerfile": "Dockerfile", "rootDirectory": ".", "watchPaths": ["src/**"], "autoDeploy": true}, "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}, {"id": "env_5678efgh", "slug": "staging", "description": "Staging environment", "kind": "production", "deleteProtection": false, "createdAt": 1704240000000, "runtime": {"port": 8080, "vCpus": 0.25, "memoryMib": 256, "storageMib": 0, "command": ["node", "server.js"], "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1"}, "build": {"rootDirectory": ".", "buildCommand": "pnpm --filter api build", "watchPaths": ["src/**"], "autoDeploy": true}}]}
     missingApp:
       requestBody:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd"}
@@ -5314,7 +5574,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     speakeasy-default-gateway-update-policy:
       requestBody:
-        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "policyId": "pol_9d2Fk1LmQ", "match": [{"path": {"path": {"prefix": "/api/"}}}], "keyauth": {"keyspaces": ["ks_1234abcd"]}, "ratelimit": {"limit": 100, "windowMs": 60000, "identifier": {"remoteIp": {}}}, "firewall": {"action": "ACTION_DENY"}, "openapi": {}}
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "policyId": "pol_9d2Fk1LmQ", "match": [{"path": {"path": {"prefix": "/api/"}}}], "keyauth": {"keyspaces": ["ks_1234abcd"]}, "ratelimit": {"limit": 100, "windowMs": 60000, "identifiers": [{"remoteIp": {}}]}, "firewall": {"action": "ACTION_DENY"}, "openapi": {}, "logging": {"requestHeaders": true, "responseHeaders": true, "requestBody": true, "responseBody": true, "query": true}}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {}}
@@ -5644,9 +5904,616 @@ examples:
       responses:
         "409":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A project with slug 'payments-api' already exists in this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
+  analytics.getGatewayRequests:
+    speakeasy-default-analytics-get-gateway-requests:
+      requestBody:
+        application/json: {"query": "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"path": "/v1/orders", "total": 1234}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  analytics.getRatelimits:
+    speakeasy-default-analytics-get-ratelimits:
+      requestBody:
+        application/json: {"query": "SELECT namespace_id, COUNT(*) AS total FROM ratelimits_v1 WHERE namespace_id = 'rlns_123' GROUP BY namespace_id"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"namespace_id": "rlns_123", "total": 1234}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  analytics.getRuntimeLogs:
+    speakeasy-default-analytics-get-runtime-logs:
+      requestBody:
+        application/json: {"query": "SELECT time, severity, message FROM runtime_logs_v1 WHERE lower(message) LIKE '%timeout%' ORDER BY time DESC LIMIT 100"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"time": 1755000000000, "severity": "error", "message": "upstream timeout after 30s"}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "422":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "503":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  domains.createDomain:
+    apex:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api", "environment": "production", "domain": "acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"domainId": "dom_1234abcd", "dnsRecords": [{"type": "ALIAS", "name": "acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Apex domains cannot hold a CNAME. Use ALIAS, ANAME, or a flattened CNAME depending on your provider."}, {"type": "TXT", "name": "_unkey.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. An apex domain cannot be verified through its routing record, so this is the only proof available."}]}}
+    byId:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "app_1234abcd", "environment": "env_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"domainId": "proj_1234abcd", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}], "domainConnect": {"provider": "Cloudflare", "url": "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api"}}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    bySlug:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api", "environment": "production", "domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"domainId": "proj_1234abcd", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}], "domainConnect": {"provider": "Cloudflare", "url": "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api"}}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    domainConnect:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"domainId": "dom_1234abcd", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "domainConnect": {"provider": "Cloudflare", "url": "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api"}}}
+    subdomain:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"domainId": "dom_1234abcd", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}]}}
+    invalidDomain:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain 'https://api.acme.com' is not a valid fully qualified domain name. Pass a name such as 'api.acme.com', without a scheme, port, or path.", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": []}}
+    publicSuffix:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain 'co.uk' is a public suffix that nobody can own. Pass a domain registered to you, such as 'api.acme.com'.", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": []}}
+    invalidRootKey:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "401":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is invalid.", "status": 401, "title": "Unauthorized", "type": "unauthorized"}}
+    allowanceExceeded:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your plan does not allow another custom domain. Upgrade your plan, or remove a domain you no longer need, then retry.", "status": 403, "title": "Forbidden", "type": "https://unkey.com/docs/errors/unkey/limits/custom_domain_limit_exceeded"}}
+    keyDisabled:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is disabled.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    environmentNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested environment does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    domainExists:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain 'api.acme.com' is already attached to this workspace.", "status": 409, "title": "Conflict", "type": "conflict"}}
+    rateLimited:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "429":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "You have exceeded the rate limit for this operation. Retry after the window resets.", "status": 429, "title": "Too Many Requests", "type": "rate-limited"}}
+    internalError:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "domain": "api.acme.com"}
+      responses:
+        "500":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An unexpected error occurred. Contact support@unkey.com with the requestId.", "status": 500, "title": "Internal Server Error", "type": "internal-server-error"}}
+  domains.deleteDomain:
+    byId:
+      requestBody:
+        application/json: {"domain": "dom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    byName:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    invalidIdentifier:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain identifier must be between 4 and 253 characters.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.domain", "message": "minLength must be at least 4 characters", "fix": "Pass a domain name such as 'api.acme.com' or an id such as 'dom_1234abcd'"}]}}
+    invalidRootKey:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "401":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is invalid.", "status": 401, "title": "Unauthorized", "type": "unauthorized"}}
+    keyDisabled:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is disabled.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    domainNotFound:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested domain does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    rateLimited:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "429":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "You have exceeded the rate limit for this operation. Retry after the window resets.", "status": 429, "title": "Too Many Requests", "type": "rate-limited"}}
+    internalError:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "500":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An unexpected error occurred. Contact support@unkey.com with the requestId.", "status": 500, "title": "Internal Server Error", "type": "internal-server-error"}}
+  domains.getDomain:
+    byId:
+      requestBody:
+        application/json: {"domain": "dom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "verificationError": "domain verification timed out after 24 hours", "dnsRecords": [], "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    byName:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "proj_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "verificationError": "domain verification timed out after 24 hours", "dnsRecords": [], "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    failed:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "dom_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "failed", "verificationError": "domain verification timed out after 24 hours", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+    pending:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "dom_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "pending", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000}}
+    verified:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "dom_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": true, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}}
+    verifiedThroughOwnership:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "dom_1234abcd", "domain": "acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "dnsRecords": [{"type": "ALIAS", "name": "acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Apex domains cannot hold a CNAME. Use ALIAS, ANAME, or a flattened CNAME depending on your provider."}, {"type": "TXT", "name": "_unkey.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": true, "note": "Proves ownership. An apex domain cannot be verified through its routing record, so this is the only proof available."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}}
+    invalidIdentifier:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain identifier must be between 4 and 253 characters.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.domain", "message": "minLength must be at least 4 characters", "fix": "Pass a domain name such as 'api.acme.com' or an id such as 'dom_1234abcd'"}]}}
+    invalidRootKey:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "401":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is invalid.", "status": 401, "title": "Unauthorized", "type": "unauthorized"}}
+    keyDisabled:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is disabled.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    domainNotFound:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested domain does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    rateLimited:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "429":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "You have exceeded the rate limit for this operation. Retry after the window resets.", "status": 429, "title": "Too Many Requests", "type": "rate-limited"}}
+    internalError:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "500":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An unexpected error occurred. Contact support@unkey.com with the requestId.", "status": 500, "title": "Internal Server Error", "type": "internal-server-error"}}
+  domains.listDomains:
+    byIds:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "app_1234abcd", "environment": "env_1234abcd", "limit": 100}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    bySlugs:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api", "environment": "production", "limit": 100}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    paginated:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api", "environment": "production", "limit": 20, "cursor": "dom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    search:
+      requestBody:
+        application/json: {"project": "payments", "app": "payments-api", "environment": "production", "limit": 100, "search": "acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    domainList:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "dom_1234abcd", "domain": "api.acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": true, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.api.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}, {"id": "dom_5678efgh", "domain": "acme.com", "projectId": "proj_1234abcd", "appId": "app_1234abcd", "environmentId": "env_1234abcd", "status": "verified", "dnsRecords": [{"type": "ALIAS", "name": "acme.com", "value": "i9j8k7l6m5n4o3p2.cname.unkey.com", "ttl": 60, "verified": false, "note": "Apex domains cannot hold a CNAME. Use ALIAS, ANAME, or a flattened CNAME depending on your provider."}, {"type": "TXT", "name": "_unkey.acme.com", "value": "unkey-domain-verify=7Kp2Rq9wZx4mB6nT1yL8vJ3h", "ttl": 60, "verified": true, "note": "Proves ownership. An apex domain cannot be verified through its routing record, so this is the only proof available."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}], "pagination": {"hasMore": false}}
+    empty:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": false}}
+    searchTooLong:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The search string must be at most 256 characters.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.search", "message": "must be at most 256 characters", "fix": "Shorten the search string, or omit it to return the environment's domains unfiltered"}]}}
+    invalidRootKey:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "401":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is invalid.", "status": 401, "title": "Unauthorized", "type": "unauthorized"}}
+    keyDisabled:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is disabled.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    environmentNotFound:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested environment does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    rateLimited:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "429":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "You have exceeded the rate limit for this operation. Retry after the window resets.", "status": 429, "title": "Too Many Requests", "type": "rate-limited"}}
+    internalError:
+      requestBody:
+        application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "limit": 100, "cursor": "dom_1234abcd", "search": "acme.com"}
+      responses:
+        "500":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An unexpected error occurred. Contact support@unkey.com with the requestId.", "status": 500, "title": "Internal Server Error", "type": "internal-server-error"}}
+  domains.verifyDomain:
+    byId:
+      requestBody:
+        application/json: {"domain": "dom_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    byName:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "412":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    accepted:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    invalidIdentifier:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain identifier must be between 4 and 253 characters.", "status": 400, "title": "Bad Request", "type": "validation-error", "errors": [{"location": "body.domain", "message": "minLength must be at least 4 characters", "fix": "Pass a domain name such as 'api.acme.com' or an id such as 'dom_1234abcd'"}]}}
+    invalidRootKey:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "401":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is invalid.", "status": 401, "title": "Unauthorized", "type": "unauthorized"}}
+    keyDisabled:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The provided root key is disabled.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+    domainNotFound:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested domain does not exist.", "status": 404, "title": "Not Found", "type": "not-found"}}
+    alreadyVerified:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "412":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The domain 'api.acme.com' is already verified. No action is needed.", "status": 412, "title": "Precondition Failed", "type": "precondition-failed"}}
+    rateLimited:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "429":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "You have exceeded the rate limit for this operation. Retry after the window resets.", "status": 429, "title": "Too Many Requests", "type": "rate-limited"}}
+    internalError:
+      requestBody:
+        application/json: {"domain": "api.acme.com"}
+      responses:
+        "500":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "An unexpected error occurred. Contact support@unkey.com with the requestId.", "status": 500, "title": "Internal Server Error", "type": "internal-server-error"}}
+  github.installApp:
+    success:
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"url": "https://github.com/apps/unkey/installations/new?state=eyJ...", "expiresAt": 1700000900000}}
+  permissions.setRolePermissions:
+    speakeasy-default-permissions-set-role-permissions:
+      requestBody:
+        application/json: {"roleId": "proj_1234abcd", "permissions": ["<value 1>"]}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [{"id": "perm_1234567890abcdef", "name": "users.read", "slug": "users-read", "description": "Allows reading user profile information and account details"}]}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  portal.exchangeCode:
+    speakeasy-default-portal-exchange-code:
+      requestBody:
+        application/json: {"code": "pst_abc123def456"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"accessToken": "pat_xyz789abc123", "expiresAt": 1711386400000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `unkey.portal.create_session()`: \n  *  `request.permissions[]` **Changed** (Breaking ⚠️)\n* `unkey.gateway.list_policies()`: **Added**\n* `unkey.apps.get_app()`: **Added**\n* `unkey.apps.list_apps()`: **Added**\n* `unkey.apps.update_app()`: **Added**\n* `unkey.deployments.create_deployment()`: **Added**\n* `unkey.deployments.get_deployment()`: **Added**\n* `unkey.deployments.list_deployments()`: **Added**\n* `unkey.deployments.promote_deployment()`: **Added**\n* `unkey.deployments.rollback_deployment()`: **Added**\n* `unkey.deployments.start_deployment()`: **Added**\n* `unkey.deployments.stop_deployment()`: **Added**\n* `unkey.environments.get_environment()`: **Added**\n* `unkey.environments.list_environment_variables()`: **Added**\n* `unkey.environments.list_environments()`: **Added**\n* `unkey.environments.remove_environment_variables()`: **Added**\n* `unkey.environments.set_environment_variables()`: **Added**\n* `unkey.apps.create_app()`: **Added**\n* `unkey.environments.update_settings()`: **Added**\n* `unkey.apis.list_keys()`:  `response.pagination` **Changed**\n* `unkey.gateway.update_policy()`: **Added**\n* `unkey.portal.get_verifications()`: **Added**\n* `unkey.portal.list_keys()`: **Added**\n* `unkey.portal.reroll_key()`: **Added**\n* `unkey.projects.create_project()`: **Added**\n* `unkey.projects.delete_project()`: **Added**\n* `unkey.projects.get_project()`: **Added**\n* `unkey.projects.list_projects()`: **Added**\n* `unkey.projects.update_project()`: **Added**\n* `unkey.gateway.set_policies()`: **Added**\n* `unkey.internal.create_deployment()`: **Deprecated**\n* `unkey.internal.get_deployment()`: **Deprecated**\n* `unkey.identities.list_identities()`:  `request.search` **Added**\n* `unkey.permissions.list_permissions()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.permissions.list_roles()`: \n  *  `request.search` **Added**\n  *  `response.pagination` **Changed**\n* `unkey.apps.delete_app()`: **Added**\n* `unkey.ratelimit.list_overrides()`:  `response.pagination` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `unkey.analytics.get_verifications()`:  `error.status[404]` **Removed** (Breaking ⚠️)\n* `unkey.portal.create_session()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data` **Changed** (Breaking ⚠️)\n* `unkey.apps.update_app()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data` **Changed** (Breaking ⚠️)\n* `unkey.apps.list_apps()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `unkey.apps.get_app()`:  `response.data` **Changed** (Breaking ⚠️)\n* `unkey.domains.list_domains()`: **Added**\n* `unkey.domains.delete_domain()`: **Added**\n* `unkey.domains.verify_domain()`: **Added**\n* `unkey.github.install_app()`: **Added**\n* `unkey.permissions.set_role_permissions()`: **Added**\n* `unkey.portal.exchange_code()`: **Added**\n* `unkey.portal.exchange_session()`: **Removed** (Breaking ⚠️)\n* `unkey.domains.get_domain()`: **Added**\n* `unkey.apps.create_app()`:  `request.git` **Added**\n* `unkey.analytics.get_gateway_requests()`: **Added**\n* `unkey.domains.create_domain()`: **Added**\n* `unkey.analytics.get_runtime_logs()`: **Added**\n* `unkey.environments.get_environment()`:  `response.data.kind` **Added**\n* `unkey.environments.list_environments()`:  `response.data[].kind` **Added**\n* `unkey.gateway.list_policies()`:  `response.data[]` **Changed**\n* `unkey.gateway.set_policies()`: \n  *  `request.policies[]` **Changed**\n* `unkey.gateway.update_policy()`:  `request` **Changed**\n* `unkey.keys.update_key()`:  `request.ratelimits` **Changed**\n* `unkey.permissions.create_role()`:  `request.permissions` **Added**\n* `unkey.analytics.get_ratelimits()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - go</title>
+    <title>SDK Changelog - python</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,114 +95,102 @@
         }
     </style>
 </head>
-<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
+<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>Unkey.Analytics.GetVerifications()</code>:  <code>error.status[404]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Portal.CreateSession()</code>:
+<li><code>unkey.analytics.get_verifications()</code>:  <code>error.status[404]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.portal.create_session()</code>:
 
 <ul>
-<li><code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>Permissions</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Portal</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>ReturnUrl</code> <strong>Added</strong></li>
-<li><code>Scopes</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>Slug</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>permissions</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>portal</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>return_url</code> <strong>Added</strong></li>
+<li><code>scopes</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>slug</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>response.Data</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>response.data</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>Id</code> <strong>Added</strong></li>
-<li><code>SessionId</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-</ul></li>
-</ul></li>
-<li><code>Unkey.Apps.UpdateApp()</code>:
-
-<ul>
-<li><code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>DefaultBranch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Git</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>response.Data</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>DefaultBranch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Git</code> <strong>Added</strong></li>
+<li><code>id</code> <strong>Added</strong></li>
+<li><code>session_id</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
 </ul></li>
-<li><code>Unkey.Apps.ListApps()</code>: <code>response.Data[]</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>unkey.apps.update_app()</code>:
 
 <ul>
-<li><code>DefaultBranch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Git</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>Unkey.Apps.GetApp()</code>: <code>response.Data</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>request</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>DefaultBranch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Git</code> <strong>Added</strong></li>
+<li><code>default_branch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>git</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Domains.ListDomains()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Domains.DeleteDomain()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Domains.VerifyDomain()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Github.InstallApp()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Permissions.SetRolePermissions()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.ExchangeCode()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.ExchangeSession()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Domains.GetDomain()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Apps.CreateApp()</code>:
+<li><code>response.data</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.Request.Git</code> <strong>Added</strong></li>
+<li><code>default_branch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>git</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Analytics.GetGatewayRequests()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Domains.CreateDomain()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Analytics.GetRuntimeLogs()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Environments.GetEnvironment()</code>:  <code>response.Data.Kind</code> <strong>Added</strong></li>
-<li><code>Unkey.Environments.ListEnvironments()</code>:  <code>response.Data[].Kind</code> <strong>Added</strong></li>
-<li><code>Unkey.Gateway.ListPolicies()</code>: <code>response.Data[]</code> <strong>Changed</strong>
+</ul></li>
+<li><code>unkey.apps.list_apps()</code>: <code>response.data[]</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>Keyauth.Credits</code> <strong>Added</strong></li>
-<li><code>Logging</code> <strong>Added</strong></li>
-<li><code>Ratelimit.Identifier</code> <strong>Changed</strong></li>
-<li><code>Ratelimit.Identifiers</code> <strong>Added</strong></li>
+<li><code>default_branch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>git</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Gateway.SetPolicies()</code>:
+<li><code>unkey.apps.get_app()</code>: <code>response.data</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>request.Request.Policies[]</code> <strong>Changed</strong>
+<li><code>default_branch</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>git</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>unkey.domains.list_domains()</code>: <strong>Added</strong></li>
+<li><code>unkey.domains.delete_domain()</code>: <strong>Added</strong></li>
+<li><code>unkey.domains.verify_domain()</code>: <strong>Added</strong></li>
+<li><code>unkey.github.install_app()</code>: <strong>Added</strong></li>
+<li><code>unkey.permissions.set_role_permissions()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.exchange_code()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.exchange_session()</code>: <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.domains.get_domain()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.create_app()</code>:  <code>request.git</code> <strong>Added</strong></li>
+<li><code>unkey.analytics.get_gateway_requests()</code>: <strong>Added</strong></li>
+<li><code>unkey.domains.create_domain()</code>: <strong>Added</strong></li>
+<li><code>unkey.analytics.get_runtime_logs()</code>: <strong>Added</strong></li>
+<li><code>unkey.environments.get_environment()</code>:  <code>response.data.kind</code> <strong>Added</strong></li>
+<li><code>unkey.environments.list_environments()</code>:  <code>response.data[].kind</code> <strong>Added</strong></li>
+<li><code>unkey.gateway.list_policies()</code>: <code>response.data[]</code> <strong>Changed</strong>
 
 <ul>
-<li><code>Keyauth.Credits</code> <strong>Added</strong></li>
-<li><code>Logging</code> <strong>Added</strong></li>
-<li><code>Ratelimit.Identifier</code> <strong>Changed</strong></li>
-<li><code>Ratelimit.Identifiers</code> <strong>Added</strong></li>
+<li><code>keyauth.credits</code> <strong>Added</strong></li>
+<li><code>logging</code> <strong>Added</strong></li>
+<li><code>ratelimit.identifier</code> <strong>Changed</strong></li>
+<li><code>ratelimit.identifiers</code> <strong>Added</strong></li>
 </ul></li>
-</ul></li>
-<li><code>Unkey.Gateway.UpdatePolicy()</code>: <code>request.Request</code> <strong>Changed</strong>
+<li><code>unkey.gateway.set_policies()</code>:
 
 <ul>
-<li><code>Keyauth.Credits</code> <strong>Added</strong></li>
-<li><code>Logging</code> <strong>Added</strong></li>
-<li><code>Ratelimit.Identifier</code> <strong>Changed</strong></li>
-<li><code>Ratelimit.Identifiers</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>Unkey.Keys.UpdateKey()</code>:
+<li><code>request.policies[]</code> <strong>Changed</strong>
 
 <ul>
-<li><code>request.Request.Ratelimits</code> <strong>Changed</strong></li>
+<li><code>keyauth.credits</code> <strong>Added</strong></li>
+<li><code>logging</code> <strong>Added</strong></li>
+<li><code>ratelimit.identifier</code> <strong>Changed</strong></li>
+<li><code>ratelimit.identifiers</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Permissions.CreateRole()</code>:
+</ul></li>
+<li><code>unkey.gateway.update_policy()</code>: <code>request</code> <strong>Changed</strong>
 
 <ul>
-<li><code>request.Request.Permissions</code> <strong>Added</strong></li>
+<li><code>keyauth.credits</code> <strong>Added</strong></li>
+<li><code>logging</code> <strong>Added</strong></li>
+<li><code>ratelimit.identifier</code> <strong>Changed</strong></li>
+<li><code>ratelimit.identifiers</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Analytics.GetRatelimits()</code>: <strong>Added</strong></li>
+<li><code>unkey.keys.update_key()</code>:  <code>request.ratelimits</code> <strong>Changed</strong></li>
+<li><code>unkey.permissions.create_role()</code>:  <code>request.permissions</code> <strong>Added</strong></li>
+<li><code>unkey.analytics.get_ratelimits()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>

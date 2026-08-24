@@ -8,7 +8,7 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.analytics.get_verifications(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+    res = unkey.analytics.get_gateway_requests(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
     # Handle response
     print(res)
@@ -29,7 +29,7 @@ async def main():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
 
-        res = await unkey.analytics.get_verifications_async(query="SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY")
+        res = await unkey.analytics.get_gateway_requests_async(query="SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10")
 
         # Handle response
         print(res)
