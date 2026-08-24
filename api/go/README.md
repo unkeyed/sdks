@@ -116,7 +116,7 @@ This structure ensures you always have the context needed to debug issues and ta
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/unkeyed/sdks/api/go/v2
+go get github.com/unkeyed/sdks/api/go/v3
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -130,8 +130,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -143,13 +143,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }
@@ -174,8 +174,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -187,13 +187,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }
@@ -208,9 +208,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/models/operations"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/operations"
 	"log"
 	"os"
 )
@@ -246,6 +246,9 @@ func main() {
 
 ### [Analytics](docs/sdks/analytics/README.md)
 
+* [GetGatewayRequests](docs/sdks/analytics/README.md#getgatewayrequests) - Query gateway request data
+* [GetRatelimits](docs/sdks/analytics/README.md#getratelimits) - Query rate limit data
+* [GetRuntimeLogs](docs/sdks/analytics/README.md#getruntimelogs) - Query runtime log data
 * [GetVerifications](docs/sdks/analytics/README.md#getverifications) - Query key verification data
 
 ### [Apis](docs/sdks/apis/README.md)
@@ -273,6 +276,14 @@ func main() {
 * [StartDeployment](docs/sdks/deployments/README.md#startdeployment) - Start deployment
 * [StopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
 
+### [Domains](docs/sdks/domains/README.md)
+
+* [CreateDomain](docs/sdks/domains/README.md#createdomain) - Create domain
+* [DeleteDomain](docs/sdks/domains/README.md#deletedomain) - Delete domain
+* [GetDomain](docs/sdks/domains/README.md#getdomain) - Get domain
+* [ListDomains](docs/sdks/domains/README.md#listdomains) - List domains
+* [VerifyDomain](docs/sdks/domains/README.md#verifydomain) - Verify domain
+
 ### [Environments](docs/sdks/environments/README.md)
 
 * [GetEnvironment](docs/sdks/environments/README.md#getenvironment) - Get environment
@@ -287,6 +298,10 @@ func main() {
 * [ListPolicies](docs/sdks/gateway/README.md#listpolicies) - List policies
 * [SetPolicies](docs/sdks/gateway/README.md#setpolicies) - Set policies
 * [UpdatePolicy](docs/sdks/gateway/README.md#updatepolicy) - Update policy
+
+### [Github](docs/sdks/github/README.md)
+
+* [InstallApp](docs/sdks/github/README.md#installapp) - Install GitHub App
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -329,11 +344,12 @@ func main() {
 * [GetRole](docs/sdks/permissions/README.md#getrole) - Get role
 * [ListPermissions](docs/sdks/permissions/README.md#listpermissions) - List permissions
 * [ListRoles](docs/sdks/permissions/README.md#listroles) - List roles
+* [SetRolePermissions](docs/sdks/permissions/README.md#setrolepermissions) - Set role permissions
 
 ### [Portal](docs/sdks/portal/README.md)
 
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
-* [ExchangeSession](docs/sdks/portal/README.md#exchangesession) - Exchange session token
+* [ExchangeCode](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
 * [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 * [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
 * [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
@@ -371,8 +387,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -423,9 +439,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/retry"
 	"log"
 	"models/operations"
 	"os"
@@ -438,8 +454,8 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
@@ -454,7 +470,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }
@@ -467,9 +483,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
-	"github.com/unkeyed/sdks/api/go/v2/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/retry"
 	"log"
 	"os"
 )
@@ -492,13 +508,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }
@@ -513,14 +529,14 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `GetVerifications` function may return the following errors:
+For example, the `GetGatewayRequests` function may return the following errors:
 
 | Error Type                                 | Status Code | Content Type             |
 | ------------------------------------------ | ----------- | ------------------------ |
 | apierrors.BadRequestErrorResponse          | 400         | application/json         |
 | apierrors.UnauthorizedErrorResponse        | 401         | application/json         |
 | apierrors.ForbiddenErrorResponse           | 403         | application/json         |
-| apierrors.NotFoundErrorResponse            | 404         | application/json         |
+| apierrors.PreconditionFailedErrorResponse  | 412         | application/json         |
 | apierrors.UnprocessableEntityErrorResponse | 422         | application/json         |
 | apierrors.TooManyRequestsErrorResponse     | 429         | application/problem+json |
 | apierrors.InternalServerErrorResponse      | 500         | application/json         |
@@ -535,9 +551,9 @@ package main
 import (
 	"context"
 	"errors"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/apierrors"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/apierrors"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -549,8 +565,8 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 
@@ -572,7 +588,7 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
-		var e *apierrors.NotFoundErrorResponse
+		var e *apierrors.PreconditionFailedErrorResponse
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -624,8 +640,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -638,13 +654,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }
@@ -670,7 +686,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v2"
+	"github.com/unkeyed/sdks/api/go/v3"
 )
 
 var (

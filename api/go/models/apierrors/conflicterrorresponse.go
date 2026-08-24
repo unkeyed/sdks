@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // ConflictErrorResponse - Error response when the request conflicts with the current state of the resource. This occurs when:

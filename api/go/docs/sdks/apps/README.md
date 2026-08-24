@@ -36,8 +36,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -52,6 +52,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -70,8 +74,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -104,8 +108,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -120,6 +124,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -138,8 +146,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -154,6 +162,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -172,8 +184,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -188,6 +200,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -206,8 +222,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -222,6 +238,10 @@ func main() {
         Project: "proj_1234abcd",
         Name: "Payments API",
         Slug: "proj_1234abcd",
+        Git: &components.AppGitCreateInput{
+            Repository: "unkeyed/unkey",
+            DefaultBranch: unkey.Pointer("main"),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -281,8 +301,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -314,8 +334,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -347,8 +367,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -380,8 +400,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -413,8 +433,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -485,8 +505,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -518,8 +538,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -551,8 +571,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -584,8 +604,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -617,8 +637,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -687,8 +707,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -733,8 +753,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -777,8 +797,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -823,8 +843,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -869,8 +889,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -955,8 +975,9 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 	"log"
 )
 
@@ -972,7 +993,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -992,8 +1016,9 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 	"log"
 )
 
@@ -1009,7 +1034,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1029,8 +1057,9 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 	"log"
 )
 
@@ -1046,7 +1075,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1066,8 +1098,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 
@@ -1100,8 +1132,9 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 	"log"
 )
 
@@ -1117,7 +1150,10 @@ func main() {
         App: "proj_1234abcd",
         Name: unkey.Pointer("Payments API"),
         Slug: unkey.Pointer("proj_1234abcd"),
-        DefaultBranch: unkey.Pointer("main"),
+        Git: optionalnullable.From(&components.AppGitUpdateInput{
+            Repository: unkey.Pointer("unkeyed/unkey"),
+            DefaultBranch: unkey.Pointer("main"),
+        }),
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1137,8 +1173,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 )
 

@@ -1,0 +1,9 @@
+# AnalyticsGetRatelimitsResponse
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                  | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| `V2AnalyticsGetRatelimitsResponseBody`                                                                              | [*components.V2AnalyticsGetRatelimitsResponseBody](../../models/components/v2analyticsgetratelimitsresponsebody.md) | :heavy_minus_sign:                                                                                                  | Query executed successfully                                                                                         |

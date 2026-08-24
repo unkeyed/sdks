@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // UnprocessableEntityErrorResponse - Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when:

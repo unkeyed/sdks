@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
 func PopulateHeaders(_ context.Context, req *http.Request, headers interface{}, globals interface{}) {

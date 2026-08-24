@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+)
+
 type V2AppsUpdateAppRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -19,14 +24,27 @@ type V2AppsUpdateAppRequestBody struct {
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
 	Slug *string `json:"slug,omitzero"`
-	// New default git branch deployments track for this app.
-	// Omit this field to leave the current branch unchanged.
+	// Connect, reconfigure, or disconnect this app's GitHub repository.
+	// Omit to leave unchanged, set null to disconnect, or set an object with a
+	// "repository" to connect or replace it and/or a "defaultBranch" to set which
+	// branch it tracks. Fields are independent, so send only the one you change.
 	//
-	DefaultBranch *string `json:"defaultBranch,omitzero"`
+	Git optionalnullable.OptionalNullable[AppGitUpdateInput] `json:"git,omitzero"`
 	// Enable or disable delete protection for the app.
 	// Omit this field to leave the current setting unchanged.
 	//
 	DeleteProtection *bool `json:"deleteProtection,omitzero"`
+}
+
+func (v V2AppsUpdateAppRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2AppsUpdateAppRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2AppsUpdateAppRequestBody) GetProject() string {
@@ -57,11 +75,11 @@ func (v *V2AppsUpdateAppRequestBody) GetSlug() *string {
 	return v.Slug
 }
 
-func (v *V2AppsUpdateAppRequestBody) GetDefaultBranch() *string {
+func (v *V2AppsUpdateAppRequestBody) GetGit() optionalnullable.OptionalNullable[AppGitUpdateInput] {
 	if v == nil {
 		return nil
 	}
-	return v.DefaultBranch
+	return v.Git
 }
 
 func (v *V2AppsUpdateAppRequestBody) GetDeleteProtection() *bool {

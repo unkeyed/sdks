@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+)
+
 // Operation - Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 type Operation string
 
@@ -35,7 +39,7 @@ type V2KeysUpdateCreditsRequestBody struct {
 	//
 	// Required when using 'increment' or 'decrement' operations. Optional for 'set' operation (null creates unlimited usage).
 	//
-	Value *int64 `json:"value,omitzero"`
+	Value optionalnullable.OptionalNullable[int64] `json:"value,omitzero"`
 	// Defines how to modify the key's remaining credits. Use 'set' to replace current credits with a specific value or unlimited usage, 'increment' to add credits for plan upgrades or credit purchases, and 'decrement' to reduce credits for refunds or policy violations.
 	//
 	Operation Operation `json:"operation"`
@@ -48,7 +52,7 @@ func (v *V2KeysUpdateCreditsRequestBody) GetKeyID() string {
 	return v.KeyID
 }
 
-func (v *V2KeysUpdateCreditsRequestBody) GetValue() *int64 {
+func (v *V2KeysUpdateCreditsRequestBody) GetValue() optionalnullable.OptionalNullable[int64] {
 	if v == nil {
 		return nil
 	}

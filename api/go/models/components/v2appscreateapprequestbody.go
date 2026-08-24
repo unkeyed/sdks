@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+)
+
 type V2AppsCreateAppRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -15,6 +19,21 @@ type V2AppsCreateAppRequestBody struct {
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
 	Slug string `json:"slug"`
+	// Connect a GitHub repository to the app on creation. Omit to create the app
+	// without a repository and connect one later with apps.updateApp.
+	//
+	Git *AppGitCreateInput `json:"git,omitzero"`
+}
+
+func (v V2AppsCreateAppRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2AppsCreateAppRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2AppsCreateAppRequestBody) GetProject() string {
@@ -36,6 +55,13 @@ func (v *V2AppsCreateAppRequestBody) GetSlug() string {
 		return ""
 	}
 	return v.Slug
+}
+
+func (v *V2AppsCreateAppRequestBody) GetGit() *AppGitCreateInput {
+	if v == nil {
+		return nil
+	}
+	return v.Git
 }
 
 // #region class-body-v2appscreateapprequestbody

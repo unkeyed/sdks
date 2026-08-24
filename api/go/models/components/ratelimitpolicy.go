@@ -2,15 +2,103 @@
 
 package components
 
-// RatelimitPolicy - Rate limits matching requests.
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+)
+
+// Identifier - Deprecated. Accepted for compatibility with old clients. Use
+// `identifiers` with one entry. Responses always return `identifiers`.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+type Identifier struct {
+	// Rate limit by the client's IP address.
+	RemoteIP *RemoteIPKey `json:"remoteIp,omitzero"`
+	// Rate limit by the value of a request header.
+	Header *HeaderKey `json:"header,omitzero"`
+	// Rate limit by the authenticated subject (e.g. the verified key).
+	AuthenticatedSubject *AuthenticatedSubjectKey `json:"authenticatedSubject,omitzero"`
+	// Rate limit by the request path.
+	Path *PathKey `json:"path,omitzero"`
+	// Rate limit by a field extracted from the authenticated principal.
+	PrincipalField *PrincipalFieldKey `json:"principalField,omitzero"`
+}
+
+func (i Identifier) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *Identifier) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *Identifier) GetRemoteIP() *RemoteIPKey {
+	if i == nil {
+		return nil
+	}
+	return i.RemoteIP
+}
+
+func (i *Identifier) GetHeader() *HeaderKey {
+	if i == nil {
+		return nil
+	}
+	return i.Header
+}
+
+func (i *Identifier) GetAuthenticatedSubject() *AuthenticatedSubjectKey {
+	if i == nil {
+		return nil
+	}
+	return i.AuthenticatedSubject
+}
+
+func (i *Identifier) GetPath() *PathKey {
+	if i == nil {
+		return nil
+	}
+	return i.Path
+}
+
+func (i *Identifier) GetPrincipalField() *PrincipalFieldKey {
+	if i == nil {
+		return nil
+	}
+	return i.PrincipalField
+}
+
+// RatelimitPolicy - Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+// The deprecated `identifier` field is accepted in place of a one-entry
+// `identifiers` list; set exactly one of the two.
 type RatelimitPolicy struct {
 	// Maximum number of requests per window.
 	Limit int64 `json:"limit"`
 	// Window duration in milliseconds.
 	WindowMs int64 `json:"windowMs"`
-	// How requests are grouped for rate limiting. Exactly one of `remoteIp`,
-	// `header`, `authenticatedSubject`, `path` or `principalField` must be set.
-	Identifier RatelimitIdentifier `json:"identifier"`
+	// Deprecated. Accepted for compatibility with old clients. Use
+	// `identifiers` with one entry. Responses always return `identifiers`.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Identifier *Identifier `json:"identifier,omitzero"`
+	// Ordered list of sources that form a compound rate limit key. The
+	// gateway resolves each source for each request. Each unique
+	// combination of resolved values has its own counter. All counters use
+	// the same limit and window. Example: `[authenticatedSubject, path]`
+	// limits each subject separately on each path.
+	Identifiers []RatelimitIdentifier `json:"identifiers,omitzero"`
+}
+
+func (r RatelimitPolicy) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RatelimitPolicy) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *RatelimitPolicy) GetLimit() int64 {
@@ -27,9 +115,16 @@ func (r *RatelimitPolicy) GetWindowMs() int64 {
 	return r.WindowMs
 }
 
-func (r *RatelimitPolicy) GetIdentifier() RatelimitIdentifier {
+func (r *RatelimitPolicy) GetIdentifier() *Identifier {
 	if r == nil {
-		return RatelimitIdentifier{}
+		return nil
 	}
 	return r.Identifier
+}
+
+func (r *RatelimitPolicy) GetIdentifiers() []RatelimitIdentifier {
+	if r == nil {
+		return nil
+	}
+	return r.Identifiers
 }

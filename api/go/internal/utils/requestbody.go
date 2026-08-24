@@ -15,7 +15,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
 const (

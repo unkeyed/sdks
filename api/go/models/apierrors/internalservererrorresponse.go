@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // InternalServerErrorResponse - Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.
