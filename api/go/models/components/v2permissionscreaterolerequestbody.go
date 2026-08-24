@@ -2,10 +2,14 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+)
+
 type V2PermissionsCreateRoleRequestBody struct {
-	// The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'billing_manager'.
+	// The unique name for this role. Must be unique within your workspace and clearly indicate the role's purpose. Use descriptive names like 'admin', 'editor', or 'Billing Manager'.
 	//
-	// Examples: 'admin.billing', 'support.readonly', 'developer.api', 'manager.analytics'
+	// Examples: 'admin.billing', 'support.readonly', 'developer.api', 'Billing Manager'
 	//
 	Name string `json:"name"`
 	// Provides comprehensive documentation of what this role encompasses and what access it grants.
@@ -21,6 +25,22 @@ type V2PermissionsCreateRoleRequestBody struct {
 	// - Related roles that might be used together
 	//
 	Description *string `json:"description,omitzero"`
+	// Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+	//
+	// Omit this field or provide an empty array to create the role without permissions.
+	//
+	Permissions []string `json:"permissions,omitzero"`
+}
+
+func (v V2PermissionsCreateRoleRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2PermissionsCreateRoleRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2PermissionsCreateRoleRequestBody) GetName() string {
@@ -35,6 +55,13 @@ func (v *V2PermissionsCreateRoleRequestBody) GetDescription() *string {
 		return nil
 	}
 	return v.Description
+}
+
+func (v *V2PermissionsCreateRoleRequestBody) GetPermissions() []string {
+	if v == nil {
+		return nil
+	}
+	return v.Permissions
 }
 
 // #region class-body-v2permissionscreaterolerequestbody

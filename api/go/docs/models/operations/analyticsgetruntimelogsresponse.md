@@ -1,0 +1,9 @@
+# AnalyticsGetRuntimeLogsResponse
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                    | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
+| `V2AnalyticsGetRuntimeLogsResponseBody`                                                                               | [*components.V2AnalyticsGetRuntimeLogsResponseBody](../../models/components/v2analyticsgetruntimelogsresponsebody.md) | :heavy_minus_sign:                                                                                                    | Query executed successfully                                                                                           |

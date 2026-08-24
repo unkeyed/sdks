@@ -1,0 +1,9 @@
+# DomainsCreateDomainResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2DomainsCreateDomainResponseBody`                                                                           | [*components.V2DomainsCreateDomainResponseBody](../../models/components/v2domainscreatedomainresponsebody.md) | :heavy_minus_sign:                                                                                            | Domain created and verification started. The domain is `pending` until the DNS records resolve.<br/>          |

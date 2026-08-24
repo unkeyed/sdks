@@ -238,7 +238,7 @@ func main() {
                 Ratelimit: &components.RatelimitPolicy{
                     Limit: 100,
                     WindowMs: 60000,
-                    Identifier: components.RatelimitIdentifier{
+                    Identifier: &components.Identifier{
                         RemoteIP: &components.RemoteIPKey{},
                     },
                 },

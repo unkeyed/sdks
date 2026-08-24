@@ -36,15 +36,35 @@ func newPortal(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.H
 }
 
 // CreateSession - Create portal session
-// Create a short-lived session token for an end user to access the Customer Portal.
+// Create a portal session for an end user and get the URL to redirect them to.
 //
-// The returned session ID is valid for 15 minutes and can be exchanged exactly once
-// for a 24-hour browser session via `portal.exchangeSession`. Redirect the end user
-// to the returned URL to start the portal experience.
+// The URL carries a single-use exchange code valid for 15 minutes, which the portal
+// redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 //
 // **Required Permissions**
 //
-// Your root key must be associated with a workspace that has an enabled portal configuration.
+// Authorization runs in two stages, and both must pass.
+//
+// First, your root key must have one of the following permissions:
+// - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
+// - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+//
+// Second, a session can never carry a capability your root key does not itself
+// hold. Each requested scope additionally requires the equivalent permission on
+// every keyspace the portal resolves to:
+//   - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
+//   - `keys:reroll` and `keys:create` require `api.<api_id>.create_key`, plus
+//     `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
+//   - `analytics:read` requires `api.<api_id>.read_analytics`
+//
+// The `*` form of each is also accepted. Requesting a scope you do not hold
+// returns 403 for the whole request rather than minting a reduced session, so a
+// missing grant is visible instead of surfacing later as a broken portal.
+//
+// Missing the portal permission itself returns **404**, not 403: a caller who
+// cannot mint for a portal is not told whether it exists.
+//
+// Your root key must also be associated with a workspace that has an enabled portal.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Portal) CreateSession(ctx context.Context, request components.V2PortalCreateSessionRequestBody, opts ...operations.Option) (*operations.PortalCreateSessionResponse, error) {
@@ -392,15 +412,15 @@ func (s *Portal) CreateSession(ctx context.Context, request components.V2PortalC
 
 }
 
-// ExchangeSession - Exchange session token
-// Exchange a short-lived session token for a long-lived browser session.
+// ExchangeCode - Exchange portal code
+// Exchange a short-lived code for a long-lived portal access token.
 //
-// This endpoint is unauthenticated. The session token itself serves as proof of authorization.
-// Each token can only be exchanged once; subsequent attempts return 401.
+// This endpoint is unauthenticated. The code itself serves as proof of authorization.
+// Each code can only be redeemed once; subsequent attempts return 401.
 //
-// The returned browser session token is valid for 24 hours and should be stored as an
+// The returned access token is valid for 24 hours and should be stored as an
 // httpOnly cookie or used in the Authorization header for subsequent API calls.
-func (s *Portal) ExchangeSession(ctx context.Context, request components.V2PortalExchangeSessionRequestBody, opts ...operations.Option) (*operations.PortalExchangeSessionResponse, error) {
+func (s *Portal) ExchangeCode(ctx context.Context, request components.V2PortalExchangeCodeRequestBody, opts ...operations.Option) (*operations.PortalExchangeCodeResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -419,7 +439,7 @@ func (s *Portal) ExchangeSession(ctx context.Context, request components.V2Porta
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := url.JoinPath(baseURL, "/v2/portal.exchangeSession")
+	opURL, err := url.JoinPath(baseURL, "/v2/portal.exchangeCode")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -429,7 +449,7 @@ func (s *Portal) ExchangeSession(ctx context.Context, request components.V2Porta
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "portal.exchangeSession",
+		OperationID:      "portal.exchangeCode",
 		OAuth2Scopes:     nil,
 		SecuritySource:   nil,
 	}
@@ -560,7 +580,7 @@ func (s *Portal) ExchangeSession(ctx context.Context, request components.V2Porta
 		}
 	}
 
-	res := &operations.PortalExchangeSessionResponse{
+	res := &operations.PortalExchangeCodeResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -578,12 +598,12 @@ func (s *Portal) ExchangeSession(ctx context.Context, request components.V2Porta
 				return nil, err
 			}
 
-			var out components.V2PortalExchangeSessionResponseBody
+			var out components.V2PortalExchangeCodeResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.V2PortalExchangeSessionResponseBody = &out
+			res.V2PortalExchangeCodeResponseBody = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

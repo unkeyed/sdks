@@ -7,7 +7,7 @@ import (
 )
 
 // PolicyResponse - A stored gateway policy as returned by list endpoints. Exactly one of
-// `keyauth`, `ratelimit`, `firewall` or `openapi` is set.
+// `keyauth`, `ratelimit`, `firewall`, `openapi` or `logging` is set.
 type PolicyResponse struct {
 	// Server-generated policy id. Regenerated on every `gateway.setPolicies` call, so treat it as stable only until the environment's policies are next replaced.
 	ID string `json:"id"`
@@ -20,7 +20,9 @@ type PolicyResponse struct {
 	Match []MatchExpr `json:"match,omitzero"`
 	// Verifies Unkey API keys on matching requests.
 	Keyauth *KeyauthPolicy `json:"keyauth,omitzero"`
-	// Rate limits matching requests.
+	// Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+	// The deprecated `identifier` field is accepted in place of a one-entry
+	// `identifiers` list; set exactly one of the two.
 	Ratelimit *RatelimitPolicy `json:"ratelimit,omitzero"`
 	// Blocks matching requests.
 	Firewall *FirewallPolicy `json:"firewall,omitzero"`
@@ -28,6 +30,16 @@ type PolicyResponse struct {
 	// configuration of its own. If no spec has been uploaded for the deployment,
 	// the policy is a no-op and requests pass through unvalidated.
 	Openapi *OpenapiPolicy `json:"openapi,omitzero"`
+	// Adds request data to the log entries of matching requests. The gateway
+	// always records a basic log entry for every request: method, host, path,
+	// status, and latency. Each capture setting is a separate opt-in: request
+	// headers, response headers, request body, response body, and query data.
+	// The policy's `match` expressions select the requests. A policy without
+	// `match` expressions matches every request. If more than one enabled
+	// logging policy matches a request, the gateway combines their settings.
+	// The gateway always redacts the `Authorization` header and configured key
+	// locations before it stores headers or query data.
+	Logging *LoggingPolicy `json:"logging,omitzero"`
 }
 
 func (p PolicyResponse) MarshalJSON() ([]byte, error) {
@@ -95,4 +107,11 @@ func (p *PolicyResponse) GetOpenapi() *OpenapiPolicy {
 		return nil
 	}
 	return p.Openapi
+}
+
+func (p *PolicyResponse) GetLogging() *LoggingPolicy {
+	if p == nil {
+		return nil
+	}
+	return p.Logging
 }

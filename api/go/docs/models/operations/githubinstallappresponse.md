@@ -1,0 +1,9 @@
+# GithubInstallAppResponse
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                     | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `V2GithubInstallAppResponseBody`                                                                               | [*components.V2GithubInstallAppResponseBody](../../models/components/v2githubinstallappresponsebody.md)        | :heavy_minus_sign:                                                                                             | Install URL created. Open the returned url to install the GitHub App and<br/>finish binding it to your workspace.<br/> |

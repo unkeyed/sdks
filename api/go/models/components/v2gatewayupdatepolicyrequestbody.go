@@ -8,8 +8,9 @@ import (
 
 // V2GatewayUpdatePolicyRequestBody - Partial update of a single policy. Omitted fields keep their stored
 // values; at least one updatable field must be provided. Providing one of
-// `keyauth`, `ratelimit`, `firewall` or `openapi` replaces the policy's
-// rule entirely, including switching its type; at most one may be set.
+// `keyauth`, `ratelimit`, `firewall`, `openapi` or `logging` replaces the
+// policy's rule entirely, including switching its type; at most one may be
+// set.
 type V2GatewayUpdatePolicyRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -37,7 +38,9 @@ type V2GatewayUpdatePolicyRequestBody struct {
 	Match []MatchExpr `json:"match,omitzero"`
 	// Verifies Unkey API keys on matching requests.
 	Keyauth *KeyauthPolicy `json:"keyauth,omitzero"`
-	// Rate limits matching requests.
+	// Rate limits matching requests. Set `identifiers` with 1 to 5 sources.
+	// The deprecated `identifier` field is accepted in place of a one-entry
+	// `identifiers` list; set exactly one of the two.
 	Ratelimit *RatelimitPolicy `json:"ratelimit,omitzero"`
 	// Blocks matching requests.
 	Firewall *FirewallPolicy `json:"firewall,omitzero"`
@@ -45,6 +48,16 @@ type V2GatewayUpdatePolicyRequestBody struct {
 	// configuration of its own. If no spec has been uploaded for the deployment,
 	// the policy is a no-op and requests pass through unvalidated.
 	Openapi *OpenapiPolicy `json:"openapi,omitzero"`
+	// Adds request data to the log entries of matching requests. The gateway
+	// always records a basic log entry for every request: method, host, path,
+	// status, and latency. Each capture setting is a separate opt-in: request
+	// headers, response headers, request body, response body, and query data.
+	// The policy's `match` expressions select the requests. A policy without
+	// `match` expressions matches every request. If more than one enabled
+	// logging policy matches a request, the gateway combines their settings.
+	// The gateway always redacts the `Authorization` header and configured key
+	// locations before it stores headers or query data.
+	Logging *LoggingPolicy `json:"logging,omitzero"`
 }
 
 func (v V2GatewayUpdatePolicyRequestBody) MarshalJSON() ([]byte, error) {
@@ -133,6 +146,13 @@ func (v *V2GatewayUpdatePolicyRequestBody) GetOpenapi() *OpenapiPolicy {
 		return nil
 	}
 	return v.Openapi
+}
+
+func (v *V2GatewayUpdatePolicyRequestBody) GetLogging() *LoggingPolicy {
+	if v == nil {
+		return nil
+	}
+	return v.Logging
 }
 
 // #region class-body-v2gatewayupdatepolicyrequestbody
