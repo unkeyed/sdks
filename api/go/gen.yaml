@@ -56,7 +56,7 @@ go:
   methodArguments: require-security-and-request
   modulePath: github.com/unkeyed/sdks/api/go
   multipartArrayFormat: legacy
-  nullableOptionalWrapper: false
+  nullableOptionalWrapper: true
   outputModelSuffix: output
   respectRequiredFields: false
   respectTitlesForPrimitiveUnionMembers: false
