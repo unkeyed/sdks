@@ -1,43 +1,59 @@
-## Python SDK Changes:
-* `unkey.portal.create_session()`: 
-  *  `request.permissions[]` **Changed** (Breaking ⚠️)
-* `unkey.gateway.list_policies()`: **Added**
-* `unkey.apps.get_app()`: **Added**
-* `unkey.apps.list_apps()`: **Added**
-* `unkey.apps.update_app()`: **Added**
-* `unkey.deployments.create_deployment()`: **Added**
-* `unkey.deployments.get_deployment()`: **Added**
-* `unkey.deployments.list_deployments()`: **Added**
-* `unkey.deployments.promote_deployment()`: **Added**
-* `unkey.deployments.rollback_deployment()`: **Added**
-* `unkey.deployments.start_deployment()`: **Added**
-* `unkey.deployments.stop_deployment()`: **Added**
-* `unkey.environments.get_environment()`: **Added**
-* `unkey.environments.list_environment_variables()`: **Added**
-* `unkey.environments.list_environments()`: **Added**
-* `unkey.environments.remove_environment_variables()`: **Added**
-* `unkey.environments.set_environment_variables()`: **Added**
-* `unkey.apps.create_app()`: **Added**
-* `unkey.environments.update_settings()`: **Added**
-* `unkey.apis.list_keys()`:  `response.pagination` **Changed**
-* `unkey.gateway.update_policy()`: **Added**
-* `unkey.portal.get_verifications()`: **Added**
-* `unkey.portal.list_keys()`: **Added**
-* `unkey.portal.reroll_key()`: **Added**
-* `unkey.projects.create_project()`: **Added**
-* `unkey.projects.delete_project()`: **Added**
-* `unkey.projects.get_project()`: **Added**
-* `unkey.projects.list_projects()`: **Added**
-* `unkey.projects.update_project()`: **Added**
-* `unkey.gateway.set_policies()`: **Added**
-* `unkey.internal.create_deployment()`: **Deprecated**
-* `unkey.internal.get_deployment()`: **Deprecated**
-* `unkey.identities.list_identities()`:  `request.search` **Added**
-* `unkey.permissions.list_permissions()`: 
-  *  `request.search` **Added**
-  *  `response.pagination` **Changed**
-* `unkey.permissions.list_roles()`: 
-  *  `request.search` **Added**
-  *  `response.pagination` **Changed**
-* `unkey.apps.delete_app()`: **Added**
-* `unkey.ratelimit.list_overrides()`:  `response.pagination` **Changed**
+## Typescript SDK Changes:
+* `unkey.analytics.getVerifications()`:  `error.status[404]` **Removed** (Breaking ⚠️)
+* `unkey.portal.createSession()`: 
+  * `request` **Changed** (Breaking ⚠️)
+    - `permissions` **Removed** (Breaking ⚠️)
+    - `portal` **Added** (Breaking ⚠️)
+    - `returnUrl` **Added**
+    - `scopes` **Added** (Breaking ⚠️)
+    - `slug` **Removed** (Breaking ⚠️)
+  * `response.data` **Changed** (Breaking ⚠️)
+    - `id` **Added**
+    - `sessionId` **Removed** (Breaking ⚠️)
+* `unkey.apps.updateApp()`: 
+  * `request` **Changed** (Breaking ⚠️)
+    - `defaultBranch` **Removed** (Breaking ⚠️)
+    - `git` **Added**
+  * `response.data` **Changed** (Breaking ⚠️)
+    - `defaultBranch` **Removed** (Breaking ⚠️)
+    - `git` **Added**
+* `unkey.apps.listApps()`: `response.data[]` **Changed** (Breaking ⚠️)
+    - `defaultBranch` **Removed** (Breaking ⚠️)
+    - `git` **Added**
+* `unkey.apps.getApp()`: `response.data` **Changed** (Breaking ⚠️)
+    - `defaultBranch` **Removed** (Breaking ⚠️)
+    - `git` **Added**
+* `unkey.domains.listDomains()`: **Added**
+* `unkey.domains.deleteDomain()`: **Added**
+* `unkey.domains.verifyDomain()`: **Added**
+* `unkey.github.installApp()`: **Added**
+* `unkey.permissions.setRolePermissions()`: **Added**
+* `unkey.portal.exchangeCode()`: **Added**
+* `unkey.portal.exchangeSession()`: **Removed** (Breaking ⚠️)
+* `unkey.domains.getDomain()`: **Added**
+* `unkey.apps.createApp()`: 
+  *  `request.git` **Added**
+* `unkey.analytics.getGatewayRequests()`: **Added**
+* `unkey.domains.createDomain()`: **Added**
+* `unkey.analytics.getRuntimeLogs()`: **Added**
+* `unkey.environments.getEnvironment()`:  `response.data.kind` **Added**
+* `unkey.environments.listEnvironments()`:  `response.data[].kind` **Added**
+* `unkey.gateway.listPolicies()`: `response.data[]` **Changed**
+    - `keyauth.credits` **Added**
+    - `logging` **Added**
+    - `ratelimit.identifier` **Changed**
+    - `ratelimit.identifiers` **Added**
+* `unkey.gateway.setPolicies()`: 
+  * `request.policies[]` **Changed**
+    - `keyauth.credits` **Added**
+    - `logging` **Added**
+    - `ratelimit.identifier` **Changed**
+    - `ratelimit.identifiers` **Added**
+* `unkey.gateway.updatePolicy()`: `request` **Changed**
+    - `keyauth.credits` **Added**
+    - `logging` **Added**
+    - `ratelimit.identifier` **Changed**
+    - `ratelimit.identifiers` **Added**
+* `unkey.permissions.createRole()`: 
+  *  `request.permissions` **Added**
+* `unkey.analytics.getRatelimits()`: **Added**

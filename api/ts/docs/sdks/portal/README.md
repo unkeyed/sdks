@@ -7,22 +7,42 @@ Customer Portal session management
 ### Available Operations
 
 * [createSession](#createsession) - Create portal session
-* [exchangeSession](#exchangesession) - Exchange session token
+* [exchangeCode](#exchangecode) - Exchange portal code
 * [getVerifications](#getverifications) - Get portal verifications
 * [listKeys](#listkeys) - List portal keys
 * [rerollKey](#rerollkey) - Reroll portal key
 
 ## createSession
 
-Create a short-lived session token for an end user to access the Customer Portal.
+Create a portal session for an end user and get the URL to redirect them to.
 
-The returned session ID is valid for 15 minutes and can be exchanged exactly once
-for a 24-hour browser session via `portal.exchangeSession`. Redirect the end user
-to the returned URL to start the portal experience.
+The URL carries a single-use exchange code valid for 15 minutes, which the portal
+redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 
 **Required Permissions**
 
-Your root key must be associated with a workspace that has an enabled portal configuration.
+Authorization runs in two stages, and both must pass.
+
+First, your root key must have one of the following permissions:
+- `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
+- `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+
+Second, a session can never carry a capability your root key does not itself
+hold. Each requested scope additionally requires the equivalent permission on
+every keyspace the portal resolves to:
+- `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
+- `keys:reroll` and `keys:create` require `api.<api_id>.create_key`, plus
+  `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
+- `analytics:read` requires `api.<api_id>.read_analytics`
+
+The `*` form of each is also accepted. Requesting a scope you do not hold
+returns 403 for the whole request rather than minting a reduced session, so a
+missing grant is visible instead of surfacing later as a broken portal.
+
+Missing the portal permission itself returns **404**, not 403: a caller who
+cannot mint for a portal is not told whether it exists.
+
+Your root key must also be associated with a workspace that has an enabled portal.
 
 
 ### Example Usage
@@ -37,13 +57,14 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.portal.createSession({
-    slug: "my-portal",
+    portal: "proj_1234abcd",
     externalId: "user_123",
-    permissions: [
-      "keys:create",
+    scopes: [
+      "keys:read",
+      "keys:reroll",
       "analytics:read",
-      "keys:create",
     ],
+    returnUrl: "https://app.example.com/settings/api-keys",
   });
 
   console.log(result);
@@ -68,13 +89,14 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await portalCreateSession(unkey, {
-    slug: "my-portal",
+    portal: "proj_1234abcd",
     externalId: "user_123",
-    permissions: [
-      "keys:create",
+    scopes: [
+      "keys:read",
+      "keys:reroll",
       "analytics:read",
-      "keys:create",
     ],
+    returnUrl: "https://app.example.com/settings/api-keys",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -112,28 +134,28 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## exchangeSession
+## exchangeCode
 
-Exchange a short-lived session token for a long-lived browser session.
+Exchange a short-lived code for a long-lived portal access token.
 
-This endpoint is unauthenticated. The session token itself serves as proof of authorization.
-Each token can only be exchanged once; subsequent attempts return 401.
+This endpoint is unauthenticated. The code itself serves as proof of authorization.
+Each code can only be redeemed once; subsequent attempts return 401.
 
-The returned browser session token is valid for 24 hours and should be stored as an
+The returned access token is valid for 24 hours and should be stored as an
 httpOnly cookie or used in the Authorization header for subsequent API calls.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="portal.exchangeSession" method="post" path="/v2/portal.exchangeSession" -->
+<!-- UsageSnippet language="typescript" operationID="portal.exchangeCode" method="post" path="/v2/portal.exchangeCode" -->
 ```typescript
 import { Unkey } from "@unkey/api";
 
 const unkey = new Unkey();
 
 async function run() {
-  const result = await unkey.portal.exchangeSession({
-    sessionId: "pst_abc123def456",
+  const result = await unkey.portal.exchangeCode({
+    code: "pst_abc123def456",
   });
 
   console.log(result);
@@ -148,21 +170,21 @@ The standalone function version of this method:
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { portalExchangeSession } from "@unkey/api/funcs/portalExchangeSession.js";
+import { portalExchangeCode } from "@unkey/api/funcs/portalExchangeCode.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const unkey = new UnkeyCore();
 
 async function run() {
-  const res = await portalExchangeSession(unkey, {
-    sessionId: "pst_abc123def456",
+  const res = await portalExchangeCode(unkey, {
+    code: "pst_abc123def456",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("portalExchangeSession failed:", res.error);
+    console.log("portalExchangeCode failed:", res.error);
   }
 }
 
@@ -173,14 +195,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.V2PortalExchangeSessionRequestBody](../../models/components/v2portalexchangesessionrequestbody.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.V2PortalExchangeCodeRequestBody](../../models/components/v2portalexchangecoderequestbody.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PortalExchangeSessionResponse](../../models/operations/portalexchangesessionresponse.md)\>**
+**Promise\<[operations.PortalExchangeCodeResponse](../../models/operations/portalexchangecoderesponse.md)\>**
 
 ### Errors
 

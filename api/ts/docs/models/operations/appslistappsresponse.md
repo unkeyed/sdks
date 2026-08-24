@@ -15,7 +15,10 @@ let value: AppsListAppsResponse = {
         id: "app_1234abcd",
         name: "Payments API",
         slug: "payments-api",
-        defaultBranch: "main",
+        git: {
+          repository: "unkeyed/unkey",
+          defaultBranch: "main",
+        },
         currentDeploymentId: "d_1234abcd",
         isRolledBack: false,
         deleteProtection: false,

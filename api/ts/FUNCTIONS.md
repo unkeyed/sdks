@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { UnkeyCore } from "@unkey/api/core.js";
-import { analyticsGetVerifications } from "@unkey/api/funcs/analyticsGetVerifications.js";
+import { analyticsGetGatewayRequests } from "@unkey/api/funcs/analyticsGetGatewayRequests.js";
 
 // Use `UnkeyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,14 +29,14 @@ const unkey = new UnkeyCore({
 });
 
 async function run() {
-  const res = await analyticsGetVerifications(unkey, {
-    query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+  const res = await analyticsGetGatewayRequests(unkey, {
+    query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("analyticsGetVerifications failed:", res.error);
+    console.log("analyticsGetGatewayRequests failed:", res.error);
   }
 }
 

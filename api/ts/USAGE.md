@@ -7,9 +7,9 @@ const unkey = new Unkey({
 });
 
 async function run() {
-  const result = await unkey.analytics.getVerifications({
+  const result = await unkey.analytics.getGatewayRequests({
     query:
-      "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+      "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
   });
 
   console.log(result);
