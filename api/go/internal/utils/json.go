@@ -14,7 +14,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/unkeyed/sdks/api/go/v2/types"
+	"github.com/unkeyed/sdks/api/go/v3/types"
 )
 
 func MarshalJSON(v interface{}, tag reflect.StructTag, topLevel bool) ([]byte, error) {

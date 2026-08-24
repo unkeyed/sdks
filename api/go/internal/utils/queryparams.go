@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
-	"github.com/unkeyed/sdks/api/go/v2/types"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/types"
 )
 
 func PopulateQueryParams(_ context.Context, req *http.Request, queryParams interface{}, globals interface{}, allowEmptyValue map[string]struct{}) error {

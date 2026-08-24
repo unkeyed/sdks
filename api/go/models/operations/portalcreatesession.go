@@ -3,13 +3,13 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 type PortalCreateSessionResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Session token created successfully. Redirect the end user to the returned URL.
+	// Session created successfully. Redirect the end user to the returned URL.
 	//
 	V2PortalCreateSessionResponseBody *components.V2PortalCreateSessionResponseBody
 	Headers                           map[string][]string

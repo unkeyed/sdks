@@ -3,35 +3,35 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
-// Status - Current deployment status
-type Status string
+// V2DeployGetDeploymentResponseDataStatus - Current deployment status
+type V2DeployGetDeploymentResponseDataStatus string
 
 const (
-	StatusUnspecified      Status = "UNSPECIFIED"
-	StatusPending          Status = "PENDING"
-	StatusStarting         Status = "STARTING"
-	StatusBuilding         Status = "BUILDING"
-	StatusDeploying        Status = "DEPLOYING"
-	StatusNetwork          Status = "NETWORK"
-	StatusFinalizing       Status = "FINALIZING"
-	StatusReady            Status = "READY"
-	StatusFailed           Status = "FAILED"
-	StatusSkipped          Status = "SKIPPED"
-	StatusAwaitingApproval Status = "AWAITING_APPROVAL"
-	StatusStopped          Status = "STOPPED"
-	StatusSuperseded       Status = "SUPERSEDED"
-	StatusCancelled        Status = "CANCELLED"
+	V2DeployGetDeploymentResponseDataStatusUnspecified      V2DeployGetDeploymentResponseDataStatus = "UNSPECIFIED"
+	V2DeployGetDeploymentResponseDataStatusPending          V2DeployGetDeploymentResponseDataStatus = "PENDING"
+	V2DeployGetDeploymentResponseDataStatusStarting         V2DeployGetDeploymentResponseDataStatus = "STARTING"
+	V2DeployGetDeploymentResponseDataStatusBuilding         V2DeployGetDeploymentResponseDataStatus = "BUILDING"
+	V2DeployGetDeploymentResponseDataStatusDeploying        V2DeployGetDeploymentResponseDataStatus = "DEPLOYING"
+	V2DeployGetDeploymentResponseDataStatusNetwork          V2DeployGetDeploymentResponseDataStatus = "NETWORK"
+	V2DeployGetDeploymentResponseDataStatusFinalizing       V2DeployGetDeploymentResponseDataStatus = "FINALIZING"
+	V2DeployGetDeploymentResponseDataStatusReady            V2DeployGetDeploymentResponseDataStatus = "READY"
+	V2DeployGetDeploymentResponseDataStatusFailed           V2DeployGetDeploymentResponseDataStatus = "FAILED"
+	V2DeployGetDeploymentResponseDataStatusSkipped          V2DeployGetDeploymentResponseDataStatus = "SKIPPED"
+	V2DeployGetDeploymentResponseDataStatusAwaitingApproval V2DeployGetDeploymentResponseDataStatus = "AWAITING_APPROVAL"
+	V2DeployGetDeploymentResponseDataStatusStopped          V2DeployGetDeploymentResponseDataStatus = "STOPPED"
+	V2DeployGetDeploymentResponseDataStatusSuperseded       V2DeployGetDeploymentResponseDataStatus = "SUPERSEDED"
+	V2DeployGetDeploymentResponseDataStatusCancelled        V2DeployGetDeploymentResponseDataStatus = "CANCELLED"
 )
 
-func (e Status) ToPointer() *Status {
+func (e V2DeployGetDeploymentResponseDataStatus) ToPointer() *V2DeployGetDeploymentResponseDataStatus {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Status) IsExact() bool {
+func (e *V2DeployGetDeploymentResponseDataStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "UNSPECIFIED", "PENDING", "STARTING", "BUILDING", "DEPLOYING", "NETWORK", "FINALIZING", "READY", "FAILED", "SKIPPED", "AWAITING_APPROVAL", "STOPPED", "SUPERSEDED", "CANCELLED":
@@ -45,7 +45,7 @@ type V2DeployGetDeploymentResponseData struct {
 	// Unique deployment identifier
 	ID string `json:"id"`
 	// Current deployment status
-	Status Status `json:"status"`
+	Status V2DeployGetDeploymentResponseDataStatus `json:"status"`
 	// Error message if deployment failed
 	ErrorMessage *string `json:"errorMessage,omitzero"`
 	// Hostnames associated with this deployment
@@ -72,9 +72,9 @@ func (v *V2DeployGetDeploymentResponseData) GetID() string {
 	return v.ID
 }
 
-func (v *V2DeployGetDeploymentResponseData) GetStatus() Status {
+func (v *V2DeployGetDeploymentResponseData) GetStatus() V2DeployGetDeploymentResponseDataStatus {
 	if v == nil {
-		return Status("")
+		return V2DeployGetDeploymentResponseDataStatus("")
 	}
 	return v.Status
 }

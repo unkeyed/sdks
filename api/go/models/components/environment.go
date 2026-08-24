@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 type Environment struct {
@@ -17,6 +17,12 @@ type Environment struct {
 	// Empty string if none was provided.
 	//
 	Description string `json:"description"`
+	// The deployment lifecycle role of an environment.
+	//
+	// - `production`: Deployments serve production traffic, support promotion and rollback, and cannot be stopped.
+	// - `preview`: Deployments can be stopped and started and are eligible for preview lifecycle automation.
+	//
+	Kind EnvironmentKind `json:"kind"`
 	// Whether delete protection is enabled for this environment.
 	// When true, the environment cannot be deleted until protection is disabled.
 	//
@@ -72,6 +78,13 @@ func (e *Environment) GetDescription() string {
 		return ""
 	}
 	return e.Description
+}
+
+func (e *Environment) GetKind() EnvironmentKind {
+	if e == nil {
+		return EnvironmentKind("")
+	}
+	return e.Kind
 }
 
 func (e *Environment) GetDeleteProtection() bool {

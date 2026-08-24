@@ -5,22 +5,22 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
-type PermissionEnum string
+type Scope string
 
 const (
-	PermissionEnumKeysRead      PermissionEnum = "keys:read"
-	PermissionEnumKeysCreate    PermissionEnum = "keys:create"
-	PermissionEnumKeysReroll    PermissionEnum = "keys:reroll"
-	PermissionEnumAnalyticsRead PermissionEnum = "analytics:read"
+	ScopeKeysRead      Scope = "keys:read"
+	ScopeKeysCreate    Scope = "keys:create"
+	ScopeKeysReroll    Scope = "keys:reroll"
+	ScopeAnalyticsRead Scope = "analytics:read"
 )
 
-func (e PermissionEnum) ToPointer() *PermissionEnum {
+func (e Scope) ToPointer() *Scope {
 	return &e
 }
-func (e *PermissionEnum) UnmarshalJSON(data []byte) error {
+func (e *Scope) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,20 +33,18 @@ func (e *PermissionEnum) UnmarshalJSON(data []byte) error {
 	case "keys:reroll":
 		fallthrough
 	case "analytics:read":
-		*e = PermissionEnum(v)
+		*e = Scope(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PermissionEnum: %v", v)
+		return fmt.Errorf("invalid value for Scope: %v", v)
 	}
 }
 
 type V2PortalCreateSessionRequestBody struct {
-	// The human-readable slug of the portal configuration to create the session against.
-	// Identifies which app's portal the end user will access.
-	// Must be 3-64 characters, lowercase alphanumeric and hyphens only,
-	// must not start or end with a hyphen, and must not contain consecutive hyphens.
+	// Identifies a resource by either its unique ID or its slug.
+	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
 	//
-	Slug string `json:"slug"`
+	Portal string `json:"portal"`
 	// The end user's identifier in the customer's system.
 	// Accepts arbitrary string values (user IDs, emails, UUIDs, etc.).
 	//
@@ -54,19 +52,36 @@ type V2PortalCreateSessionRequestBody struct {
 	// The capabilities granted to the end user in the Portal, from a fixed
 	// vocabulary. All capabilities are scoped to this end user: key capabilities
 	// (`keys:*`) apply only to keys the end user owns within the keyspace
-	// configured on the portal configuration, and `analytics:read` returns only
-	// the end user's own verification events. An end user can never see another
-	// identity's keys or analytics.
+	// configured on the portal, and `analytics:read` returns only the end user's
+	// own verification events. An end user can never see another identity's keys
+	// or analytics.
 	//
-	// Tab visibility is derived from the capabilities:
-	// - Keys tab: any `keys:*` capability
+	// Tab visibility is derived from the scopes:
+	// - Keys tab: any `keys:*` scope
 	// - Analytics tab: `analytics:read`
-	// - Docs tab: visible when any capability is present
+	// - Docs tab: visible when any scope is present
 	//
-	Permissions []PermissionEnum `json:"permissions"`
+	// `keys:create` is accepted but has no portal route behind it yet. It is
+	// still authorized like the others, so a session minted with it required
+	// `create_key` on the keyspace at mint time, and a future portal create-key
+	// route inherits an enforced ceiling rather than trusting sessions minted
+	// while the capability was inert.
+	//
+	// Each scope requires the equivalent permission on your own root key. See
+	// Required Permissions on this operation.
+	//
+	Scopes []Scope `json:"scopes"`
 	// When true, creates a preview session for testing the portal experience.
 	//
 	Preview *bool `default:"false" json:"preview"`
+	// Absolute URL the end user is sent back to when they leave the portal, or
+	// when their session expires mid-visit. Set per session rather than per
+	// portal, so one portal can serve several entry points and return each user
+	// to the page they came from.
+	//
+	// When omitted, the portal shows no return link.
+	//
+	ReturnURL *string `json:"returnUrl,omitzero"`
 }
 
 func (v V2PortalCreateSessionRequestBody) MarshalJSON() ([]byte, error) {
@@ -80,11 +95,11 @@ func (v *V2PortalCreateSessionRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2PortalCreateSessionRequestBody) GetSlug() string {
+func (v *V2PortalCreateSessionRequestBody) GetPortal() string {
 	if v == nil {
 		return ""
 	}
-	return v.Slug
+	return v.Portal
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetExternalID() string {
@@ -94,11 +109,11 @@ func (v *V2PortalCreateSessionRequestBody) GetExternalID() string {
 	return v.ExternalID
 }
 
-func (v *V2PortalCreateSessionRequestBody) GetPermissions() []PermissionEnum {
+func (v *V2PortalCreateSessionRequestBody) GetScopes() []Scope {
 	if v == nil {
-		return []PermissionEnum{}
+		return []Scope{}
 	}
-	return v.Permissions
+	return v.Scopes
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetPreview() *bool {
@@ -106,6 +121,13 @@ func (v *V2PortalCreateSessionRequestBody) GetPreview() *bool {
 		return nil
 	}
 	return v.Preview
+}
+
+func (v *V2PortalCreateSessionRequestBody) GetReturnURL() *string {
+	if v == nil {
+		return nil
+	}
+	return v.ReturnURL
 }
 
 // #region class-body-v2portalcreatesessionrequestbody

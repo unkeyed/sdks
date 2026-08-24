@@ -5,7 +5,7 @@ package hooks
 import (
 	"context"
 	"errors"
-	"github.com/unkeyed/sdks/api/go/v2/internal/config"
+	"github.com/unkeyed/sdks/api/go/v3/internal/config"
 	"net/http"
 )
 

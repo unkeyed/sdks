@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 // KeyLocation - Where to look for the API key on incoming requests. Exactly one of

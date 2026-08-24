@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v2/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 // KeyauthPolicy - Verifies Unkey API keys on matching requests.
@@ -19,6 +19,11 @@ type KeyauthPolicy struct {
 	PermissionQuery *string `json:"permissionQuery,omitzero"`
 	// Rate limits applied during key verification.
 	Ratelimits []KeyRatelimit `json:"ratelimits,omitzero"`
+	// Usage credits a matching request deducts from the verified key. Defaults
+	// to 1. Set to 0 to verify the key without spending credits, or to a higher
+	// value to charge more per request. Keys with unlimited usage are
+	// unaffected.
+	Credits *int64 `json:"credits,omitzero"`
 }
 
 func (k KeyauthPolicy) MarshalJSON() ([]byte, error) {
@@ -58,4 +63,11 @@ func (k *KeyauthPolicy) GetRatelimits() []KeyRatelimit {
 		return nil
 	}
 	return k.Ratelimits
+}
+
+func (k *KeyauthPolicy) GetCredits() *int64 {
+	if k == nil {
+		return nil
+	}
+	return k.Credits
 }

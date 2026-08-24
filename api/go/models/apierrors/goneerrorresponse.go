@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // GoneErrorResponse - Error response when the requested resource has been soft-deleted and is no longer available. This occurs when:

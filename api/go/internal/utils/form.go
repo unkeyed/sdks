@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v2/optionalnullable"
-	"github.com/unkeyed/sdks/api/go/v2/types"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/types"
 )
 
 func populateForm(paramName string, explode bool, objType reflect.Type, objValue reflect.Value, delimiter string, defaultValue *string, allowEmptyValue map[string]struct{}, getFieldName func(reflect.StructField) string) url.Values {

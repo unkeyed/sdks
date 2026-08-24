@@ -1,0 +1,9 @@
+# DomainsDeleteDomainResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2DomainsDeleteDomainResponseBody`                                                                           | [*components.V2DomainsDeleteDomainResponseBody](../../models/components/v2domainsdeletedomainresponsebody.md) | :heavy_minus_sign:                                                                                            | Successfully deleted the domain.<br/>                                                                         |

@@ -4,7 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 )
 
 // ServiceUnavailableErrorResponse - Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.

@@ -4,8 +4,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v2"
-	"github.com/unkeyed/sdks/api/go/v2/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
 	"log"
 	"os"
 )
@@ -17,13 +17,13 @@ func main() {
 		unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
 	)
 
-	res, err := s.Analytics.GetVerifications(ctx, components.V2AnalyticsGetVerificationsRequestBody{
-		Query: "SELECT COUNT(*) as total FROM key_verifications_v1 WHERE outcome = 'VALID' AND time >= now() - INTERVAL 7 DAY",
+	res, err := s.Analytics.GetGatewayRequests(ctx, components.V2AnalyticsGetGatewayRequestsRequestBody{
+		Query: "SELECT path, count() AS total FROM gateway_requests_v1 WHERE response_status >= 500 AND time >= toUnixTimestamp64Milli(now64(3) - INTERVAL 24 HOUR) GROUP BY path ORDER BY total DESC LIMIT 10",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2AnalyticsGetVerificationsResponseBody != nil {
+	if res.V2AnalyticsGetGatewayRequestsResponseBody != nil {
 		// handle response
 	}
 }

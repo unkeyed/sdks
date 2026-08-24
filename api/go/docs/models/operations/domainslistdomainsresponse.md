@@ -1,0 +1,9 @@
+# DomainsListDomainsResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2DomainsListDomainsResponseBody`                                                                          | [*components.V2DomainsListDomainsResponseBody](../../models/components/v2domainslistdomainsresponsebody.md) | :heavy_minus_sign:                                                                                          | Successfully retrieved the environment's domains.<br/>                                                      |
