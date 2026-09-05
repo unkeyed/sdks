@@ -1171,6 +1171,7 @@ func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2Rate
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -1338,7 +1339,7 @@ func (s *Ratelimit) ListOverrides(ctx context.Context, request components.V2Rate
 		request.Cursor = &nCVal
 
 		return s.ListOverrides(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)

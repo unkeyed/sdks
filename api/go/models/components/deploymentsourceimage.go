@@ -8,7 +8,9 @@ import (
 
 // DeploymentSourceImage - Deploy a prebuilt Docker image as-is.
 type DeploymentSourceImage struct {
-	// Docker image to deploy as-is.
+	// Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy as-is. Qualify the version with a tag (ghcr.io/acme/api:v1.2.3) or a digest (ghcr.io/acme/api@sha256:...). Without either, the registry serves the latest tag.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DockerImage string `json:"dockerImage"`
 }
 

@@ -670,12 +670,14 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Permissions.SetRolePermissions(ctx, components.V2PermissionsSetRolePermissionsRequestBody{
-        RoleID: "proj_1234abcd",
-        Permissions: []string{
-            "<value 1>",
+    res, err := s.Permissions.SetRolePermissions(ctx, components.CreateV2PermissionsSetRolePermissionsRequestBodyUnionV2PermissionsSetRolePermissionsRequestBody2(
+        components.V2PermissionsSetRolePermissionsRequestBody2{
+            RoleID: "proj_1234abcd",
+            Permissions: []string{
+                "<value 1>",
+            },
         },
-    })
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -687,11 +689,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
-| `request`                                                                                                                      | [components.V2PermissionsSetRolePermissionsRequestBody](../../models/components/v2permissionssetrolepermissionsrequestbody.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
-| `opts`                                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
+| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                    | :heavy_check_mark:                                                                                                                       | The context to use for the request.                                                                                                      |
+| `request`                                                                                                                                | [components.V2PermissionsSetRolePermissionsRequestBodyUnion](../../models/components/v2permissionssetrolepermissionsrequestbodyunion.md) | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
+| `opts`                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                 | :heavy_minus_sign:                                                                                                                       | The options for this request.                                                                                                            |
 
 ### Response
 

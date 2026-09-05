@@ -283,7 +283,14 @@ func CreateV2DeploymentsCreateDeploymentRequestBodyUnionV2DeploymentsCreateDeplo
 	}
 }
 
-func (u *V2DeploymentsCreateDeploymentRequestBodyUnion) UnmarshalJSON(data []byte) error {
+func (u *V2DeploymentsCreateDeploymentRequestBodyUnion) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = V2DeploymentsCreateDeploymentRequestBodyUnion{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var v2DeploymentsCreateDeploymentRequestBody1 V2DeploymentsCreateDeploymentRequestBody1 = V2DeploymentsCreateDeploymentRequestBody1{}
 	if err := utils.UnmarshalJSON(data, &v2DeploymentsCreateDeploymentRequestBody1, "", true, nil); err == nil {

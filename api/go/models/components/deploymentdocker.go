@@ -3,7 +3,7 @@
 package components
 
 type DeploymentDocker struct {
-	// The Docker image this deployment runs.
+	// The OCI image reference requested for this deployment.
 	Image string `json:"image"`
 }
 
