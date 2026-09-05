@@ -28,6 +28,11 @@ let value: V2DomainsListDomainsResponseBody = {
           note: "Create as DNS-only if your provider offers the choice.",
         },
       ],
+      domainConnect: {
+        provider: "Cloudflare",
+        url:
+          "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api",
+      },
       createdAt: 1704067200000,
       updatedAt: 1704153600000,
     },

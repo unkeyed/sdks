@@ -18,6 +18,11 @@ let value: V2DomainsGetDomainResponseBody = {
     status: "verified",
     verificationError: "domain verification timed out after 24 hours",
     dnsRecords: [],
+    domainConnect: {
+      provider: "Cloudflare",
+      url:
+        "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api",
+    },
     createdAt: 1704067200000,
     updatedAt: 1704153600000,
   },
