@@ -9,46 +9,48 @@ from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class AppGitCreateInputTypedDict(TypedDict):
-    r"""Connect a GitHub repository to the app on creation. Omit to create the app
-    without a repository and connect one later with apps.updateApp.
+    r"""Configure Git as the app source. Provide `repository` to connect it during
+    creation, or use an empty object to connect a repository later.
 
     """
 
-    repository: str
+    repository: NotRequired[str]
     r"""The GitHub repository to connect, as \"owner/repo\". The workspace must have
-    the Unkey GitHub App installed with access to it.
+    the Unkey GitHub App installed with access to it. Omit this field to create
+    the Git app before selecting its repository.
 
     """
     default_branch: NotRequired[str]
-    r"""The branch this app's deployments track. Omit to adopt the repository's
-    default branch on GitHub.
+    r"""The branch this app's deployments track. This requires `repository`.
+    Omit it to adopt the repository's default branch on GitHub.
 
     """
 
 
 class AppGitCreateInput(BaseModel):
-    r"""Connect a GitHub repository to the app on creation. Omit to create the app
-    without a repository and connect one later with apps.updateApp.
+    r"""Configure Git as the app source. Provide `repository` to connect it during
+    creation, or use an empty object to connect a repository later.
 
     """
 
-    repository: str
+    repository: Optional[str] = None
     r"""The GitHub repository to connect, as \"owner/repo\". The workspace must have
-    the Unkey GitHub App installed with access to it.
+    the Unkey GitHub App installed with access to it. Omit this field to create
+    the Git app before selecting its repository.
 
     """
 
     default_branch: Annotated[Optional[str], pydantic.Field(alias="defaultBranch")] = (
         None
     )
-    r"""The branch this app's deployments track. Omit to adopt the repository's
-    default branch on GitHub.
+    r"""The branch this app's deployments track. This requires `repository`.
+    Omit it to adopt the repository's default branch on GitHub.
 
     """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["defaultBranch"])
+        optional_fields = set(["repository", "defaultBranch"])
         serialized = handler(self)
         m = {}
 

@@ -2,11 +2,23 @@
 
 from __future__ import annotations
 from .appgit import AppGit, AppGitTypedDict
+from .appoci import AppOCI, AppOCITypedDict
+from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
+
+
+class SourceType(str, Enum):
+    r"""The configured source used to create deployments. Omitted for historical
+    apps whose source could not be classified.
+
+    """
+
+    GIT = "git"
+    OCI = "oci"
 
 
 class AppTypedDict(TypedDict):
@@ -36,10 +48,19 @@ class AppTypedDict(TypedDict):
     r"""Unix timestamp in milliseconds when the app was created.
 
     """
+    source_type: NotRequired[SourceType]
+    r"""The configured source used to create deployments. Omitted for historical
+    apps whose source could not be classified.
+
+    """
     git: NotRequired[AppGitTypedDict]
     r"""The connected GitHub repository and the branch its deployments track.
     Omitted when the app has no repository connected (for example a
-    Docker-based app).
+    prebuilt OCI image app).
+
+    """
+    oci: NotRequired[AppOCITypedDict]
+    r"""The configured OCI image source. Omitted when the app is not OCI-sourced.
 
     """
     current_deployment_id: NotRequired[str]
@@ -87,10 +108,23 @@ class App(BaseModel):
 
     """
 
+    source_type: Annotated[Optional[SourceType], pydantic.Field(alias="sourceType")] = (
+        None
+    )
+    r"""The configured source used to create deployments. Omitted for historical
+    apps whose source could not be classified.
+
+    """
+
     git: Optional[AppGit] = None
     r"""The connected GitHub repository and the branch its deployments track.
     Omitted when the app has no repository connected (for example a
-    Docker-based app).
+    prebuilt OCI image app).
+
+    """
+
+    oci: Optional[AppOCI] = None
+    r"""The configured OCI image source. Omitted when the app is not OCI-sourced.
 
     """
 
@@ -110,7 +144,9 @@ class App(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["git", "currentDeploymentId", "updatedAt"])
+        optional_fields = set(
+            ["sourceType", "git", "oci", "currentDeploymentId", "updatedAt"]
+        )
         serialized = handler(self)
         m = {}
 

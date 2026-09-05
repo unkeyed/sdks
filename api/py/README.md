@@ -310,13 +310,14 @@ with Unkey() as unkey:
 
 ### [Deployments](docs/sdks/deployments/README.md)
 
-* [create_deployment](docs/sdks/deployments/README.md#create_deployment) - Create deployment
+* [~~create_deployment~~](docs/sdks/deployments/README.md#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](docs/sdks/deployments/README.md#get_deployment) - Get deployment
 * [list_deployments](docs/sdks/deployments/README.md#list_deployments) - List deployments
 * [promote_deployment](docs/sdks/deployments/README.md#promote_deployment) - Promote deployment
 * [rollback_deployment](docs/sdks/deployments/README.md#rollback_deployment) - Rollback deployment
 * [start_deployment](docs/sdks/deployments/README.md#start_deployment) - Start deployment
 * [stop_deployment](docs/sdks/deployments/README.md#stop_deployment) - Stop deployment
+* [create_deployment_v3](docs/sdks/deployments/README.md#create_deployment_v3) - Create deployment
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -388,13 +389,17 @@ with Unkey() as unkey:
 * [list_roles](docs/sdks/permissions/README.md#list_roles) - List roles
 * [set_role_permissions](docs/sdks/permissions/README.md#set_role_permissions) - Set role permissions
 
-### [Portal](docs/sdks/portal/README.md)
+### [Portal](docs/sdks/portalsdk/README.md)
 
-* [create_session](docs/sdks/portal/README.md#create_session) - Create portal session
-* [exchange_code](docs/sdks/portal/README.md#exchange_code) - Exchange portal code
-* [get_verifications](docs/sdks/portal/README.md#get_verifications) - Get portal verifications
-* [list_keys](docs/sdks/portal/README.md#list_keys) - List portal keys
-* [reroll_key](docs/sdks/portal/README.md#reroll_key) - Reroll portal key
+* [create_portal](docs/sdks/portalsdk/README.md#create_portal) - Create portal
+* [create_session](docs/sdks/portalsdk/README.md#create_session) - Create portal session
+* [delete_portal](docs/sdks/portalsdk/README.md#delete_portal) - Delete portal
+* [exchange_code](docs/sdks/portalsdk/README.md#exchange_code) - Exchange portal code
+* [get_portal](docs/sdks/portalsdk/README.md#get_portal) - Get portal
+* [get_verifications](docs/sdks/portalsdk/README.md#get_verifications) - Get portal verifications
+* [list_keys](docs/sdks/portalsdk/README.md#list_keys) - List portal keys
+* [reroll_key](docs/sdks/portalsdk/README.md#reroll_key) - Reroll portal key
+* [update_portal](docs/sdks/portalsdk/README.md#update_portal) - Update portal
 
 ### [Projects](docs/sdks/projects/README.md)
 
@@ -550,11 +555,11 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
-* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 12 of 82 methods.*
-* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 8 of 82 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 4 of 82 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 4 of 82 methods.*
-* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 82 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 87 methods.*
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 10 of 87 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 4 of 87 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 4 of 87 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 87 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
