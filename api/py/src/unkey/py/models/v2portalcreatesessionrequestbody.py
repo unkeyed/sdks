@@ -11,9 +11,7 @@ from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 class Scope(str, Enum):
     KEYS_READ = "keys:read"
-    KEYS_CREATE = "keys:create"
     KEYS_REROLL = "keys:reroll"
-    ANALYTICS_READ = "analytics:read"
 
 
 class V2PortalCreateSessionRequestBodyTypedDict(TypedDict):
@@ -31,20 +29,13 @@ class V2PortalCreateSessionRequestBodyTypedDict(TypedDict):
     r"""The capabilities granted to the end user in the Portal, from a fixed
     vocabulary. All capabilities are scoped to this end user: key capabilities
     (`keys:*`) apply only to keys the end user owns within the keyspace
-    configured on the portal, and `analytics:read` returns only the end user's
-    own verification events. An end user can never see another identity's keys
-    or analytics.
+    configured on the portal. An end user can never see another identity's
+    keys.
 
-    Tab visibility is derived from the scopes:
-    - Keys tab: any `keys:*` scope
-    - Analytics tab: `analytics:read`
-    - Docs tab: visible when any scope is present
-
-    `keys:create` is accepted but has no portal route behind it yet. It is
-    still authorized like the others, so a session minted with it required
-    `create_key` on the keyspace at mint time, and a future portal create-key
-    route inherits an enforced ceiling rather than trusting sessions minted
-    while the capability was inert.
+    The portal currently exposes only the keys page, so these scopes gate
+    what the end user can do there rather than which pages they see. Because
+    rerolling is reached from that page, `keys:reroll` requires `keys:read`
+    in the same session; requesting it alone is rejected.
 
     Each scope requires the equivalent permission on your own root key. See
     Required Permissions on this operation.
@@ -82,20 +73,13 @@ class V2PortalCreateSessionRequestBody(BaseModel):
     r"""The capabilities granted to the end user in the Portal, from a fixed
     vocabulary. All capabilities are scoped to this end user: key capabilities
     (`keys:*`) apply only to keys the end user owns within the keyspace
-    configured on the portal, and `analytics:read` returns only the end user's
-    own verification events. An end user can never see another identity's keys
-    or analytics.
+    configured on the portal. An end user can never see another identity's
+    keys.
 
-    Tab visibility is derived from the scopes:
-    - Keys tab: any `keys:*` scope
-    - Analytics tab: `analytics:read`
-    - Docs tab: visible when any scope is present
-
-    `keys:create` is accepted but has no portal route behind it yet. It is
-    still authorized like the others, so a session minted with it required
-    `create_key` on the keyspace at mint time, and a future portal create-key
-    route inherits an enforced ceiling rather than trusting sessions minted
-    while the capability was inert.
+    The portal currently exposes only the keys page, so these scopes gate
+    what the end user can do there rather than which pages they see. Because
+    rerolling is reached from that page, `keys:reroll` requires `keys:read`
+    in the same session; requesting it alone is rejected.
 
     Each scope requires the equivalent permission on your own root key. See
     Required Permissions on this operation.

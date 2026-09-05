@@ -48,8 +48,11 @@ class V2EnvironmentsUpdateSettingsRequestBodyTypedDict(TypedDict):
 
     """
     watch_paths: NotRequired[List[str]]
-    r"""Glob paths that trigger auto-deploys when changed.
-    Omit to leave unchanged.
+    r"""Glob patterns that trigger auto-deploys when matching files change.
+    Do not start a pattern with \"/\" or \"./\".
+    Use \"src/**\" for everything under a directory and \"**/*.go\" for a file type.
+    A pattern with no wildcard matches only that exact file, so \"src\" is not \"src/**\".
+    Omit to leave unchanged. Invalid patterns are rejected with a 400.
 
     """
     auto_deploy: NotRequired[bool]
@@ -157,8 +160,11 @@ class V2EnvironmentsUpdateSettingsRequestBody(BaseModel):
     watch_paths: Annotated[Optional[List[str]], pydantic.Field(alias="watchPaths")] = (
         None
     )
-    r"""Glob paths that trigger auto-deploys when changed.
-    Omit to leave unchanged.
+    r"""Glob patterns that trigger auto-deploys when matching files change.
+    Do not start a pattern with \"/\" or \"./\".
+    Use \"src/**\" for everything under a directory and \"**/*.go\" for a file type.
+    A pattern with no wildcard matches only that exact file, so \"src\" is not \"src/**\".
+    Omit to leave unchanged. Invalid patterns are rejected with a 400.
 
     """
 

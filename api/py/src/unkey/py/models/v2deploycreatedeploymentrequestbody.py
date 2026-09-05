@@ -21,7 +21,7 @@ class V2DeployCreateDeploymentRequestBodyTypedDict(TypedDict):
     environment_slug: str
     r"""Environment slug (e.g., \"production\", \"staging\")"""
     docker_image: str
-    r"""Docker image reference to deploy"""
+    r"""Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy. Qualify the version with a tag (ghcr.io/user/app:v1.0.0) or a digest (ghcr.io/user/app@sha256:...). Without either, the registry serves the latest tag."""
     keyspace_id: NotRequired[str]
     r"""Optional keyspace ID for authentication context"""
     git_commit: NotRequired[V2DeployGitCommitTypedDict]
@@ -43,8 +43,14 @@ class V2DeployCreateDeploymentRequestBody(BaseModel):
     environment_slug: Annotated[str, pydantic.Field(alias="environmentSlug")]
     r"""Environment slug (e.g., \"production\", \"staging\")"""
 
-    docker_image: Annotated[str, pydantic.Field(alias="dockerImage")]
-    r"""Docker image reference to deploy"""
+    docker_image: Annotated[
+        str,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="dockerImage",
+        ),
+    ]
+    r"""Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy. Qualify the version with a tag (ghcr.io/user/app:v1.0.0) or a digest (ghcr.io/user/app@sha256:...). Without either, the registry serves the latest tag."""
 
     keyspace_id: Annotated[Optional[str], pydantic.Field(alias="keyspaceId")] = None
     r"""Optional keyspace ID for authentication context"""
