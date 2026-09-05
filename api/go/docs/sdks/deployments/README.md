@@ -6,15 +6,16 @@ Deployment operations
 
 ### Available Operations
 
-* [CreateDeployment](#createdeployment) - Create deployment
+* [~~CreateDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [GetDeployment](#getdeployment) - Get deployment
 * [ListDeployments](#listdeployments) - List deployments
 * [PromoteDeployment](#promotedeployment) - Promote deployment
 * [RollbackDeployment](#rollbackdeployment) - Rollback deployment
 * [StartDeployment](#startdeployment) - Start deployment
 * [StopDeployment](#stopdeployment) - Stop deployment
+* [CreateDeploymentV3](#createdeploymentv3) - Create deployment
 
-## CreateDeployment
+## ~~CreateDeployment~~
 
 Create a deployment for an app in a project.
 
@@ -27,6 +28,8 @@ Returns immediately with a `deploymentId`. The build and rollout run asynchronou
 
 **Authentication**: requires a root key with permission to create deployments.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1003,6 +1006,93 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
+| apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
+| apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |
+| apierrors.InternalServerErrorResponse     | 500                                       | application/json                          |
+| apierrors.APIError                        | 4XX, 5XX                                  | \*/\*                                     |
+
+## CreateDeploymentV3
+
+Create a deployment for an app in a project.
+
+Omit the source to use the app's configured default. A Git app builds its default branch. An OCI app deploys its default image.
+
+Optionally provide one source override:
+- `oci`: deploy a prebuilt OCI image without a build. Mutable tags are resolved to immutable digests before rollout.
+- `git`: build and deploy from the app's connected GitHub repository, a branch, a specific commit, or a fork commit. Requires the app to have a repository connected.
+- `deployment`: re-run an existing deployment by its id. Git deployments rebuild from the recorded commit; OCI deployments reuse the recorded resolved image.
+
+Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
+
+**Authentication**: requires a root key with permission to create deployments.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="deployments.createDeploymentV3" method="post" path="/v3/deployments.createDeployment" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CreateDeploymentV3(ctx, components.V3DeploymentsCreateDeploymentRequestBody{
+        Project: "proj_1234abcd",
+        App: "proj_1234abcd",
+        Environment: "proj_1234abcd",
+        Git: &components.DeploymentSourceGit{
+            Branch: unkey.Pointer("main"),
+            CommitSha: unkey.Pointer("9f2c1a7"),
+            Repository: unkey.Pointer("contributor/acme-api"),
+        },
+        Oci: &components.DeploymentSourceOCI{
+            Image: "ghcr.io/acme/api:v1.2.3",
+        },
+        Deployment: &components.DeploymentSourceDeployment{
+            DeploymentID: "proj_1234abcd",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3DeploymentsCreateDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `request`                                                                                                                  | [components.V3DeploymentsCreateDeploymentRequestBody](../../models/components/v3deploymentscreatedeploymentrequestbody.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+
+### Response
+
+**[*operations.DeploymentsCreateDeploymentV3Response](../../models/operations/deploymentscreatedeploymentv3response.md), error**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
+| apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |

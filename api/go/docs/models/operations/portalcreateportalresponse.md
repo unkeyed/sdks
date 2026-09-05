@@ -1,0 +1,9 @@
+# PortalCreatePortalResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalCreatePortalResponseBody`                                                                          | [*components.V2PortalCreatePortalResponseBody](../../models/components/v2portalcreateportalresponsebody.md) | :heavy_minus_sign:                                                                                          | Portal created successfully.<br/>                                                                           |

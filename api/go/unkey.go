@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.932.9
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.935.1
 
 import (
 	"context"
@@ -234,10 +234,13 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "3.0.0",
+		SDKVersion: "3.0.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.0.0 2.932.9 2.0.0 github.com/unkeyed/sdks/api/go/v3",
-			ServerList: ServerList,
+			UserAgent:         "speakeasy-sdk/go 3.0.1 2.935.1 2.0.0 github.com/unkeyed/sdks/api/go/v3",
+			SDKVersion:        "3.0.1",
+			GenVersion:        "2.935.1",
+			OpenAPIDocVersion: "2.0.0",
+			ServerList:        ServerList,
 		},
 		hooks: hooks.New(),
 	}
