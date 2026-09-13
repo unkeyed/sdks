@@ -2,22 +2,38 @@
 
 package components
 
-// AppGitCreateInput - Connect a GitHub repository to the app on creation. Omit to create the app
-// without a repository and connect one later with apps.updateApp.
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+)
+
+// AppGitCreateInput - Configure Git as the app source. Provide `repository` to connect it during
+// creation, or use an empty object to connect a repository later.
 type AppGitCreateInput struct {
 	// The GitHub repository to connect, as "owner/repo". The workspace must have
-	// the Unkey GitHub App installed with access to it.
+	// the Unkey GitHub App installed with access to it. Omit this field to create
+	// the Git app before selecting its repository.
 	//
-	Repository string `json:"repository"`
-	// The branch this app's deployments track. Omit to adopt the repository's
-	// default branch on GitHub.
+	Repository *string `json:"repository,omitzero"`
+	// The branch this app's deployments track. This requires `repository`.
+	// Omit it to adopt the repository's default branch on GitHub.
 	//
 	DefaultBranch *string `json:"defaultBranch,omitzero"`
 }
 
-func (a *AppGitCreateInput) GetRepository() string {
+func (a AppGitCreateInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AppGitCreateInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AppGitCreateInput) GetRepository() *string {
 	if a == nil {
-		return ""
+		return nil
 	}
 	return a.Repository
 }

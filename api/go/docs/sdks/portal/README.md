@@ -6,11 +6,99 @@ Customer Portal session management
 
 ### Available Operations
 
+* [CreatePortal](#createportal) - Create portal
 * [CreateSession](#createsession) - Create portal session
+* [DeletePortal](#deleteportal) - Delete portal
 * [ExchangeCode](#exchangecode) - Exchange portal code
+* [GetPortal](#getportal) - Get portal
 * [GetVerifications](#getverifications) - Get portal verifications
 * [ListKeys](#listkeys) - List portal keys
 * [RerollKey](#rerollkey) - Reroll portal key
+* [UpdatePortal](#updateportal) - Update portal
+
+## CreatePortal
+
+Create a portal for one app or keyspace in your workspace.
+
+Unreleased and subject to change without notice.
+
+Send exactly one of `keyspaceId` or `appId`. That resource must belong to your
+workspace, and it can back only one portal, so a second portal for the same
+resource is a **409**.
+
+`displayName` is what your end users see. It is yours to set and change
+independently of the resource the portal serves.
+
+**Required Permissions**
+
+Your root key must have `portal.*.create_portal`. A grant scoped to a specific
+portal id does not authorize creation, because the id does not exist yet.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.createPortal" method="post" path="/v2/portal.createPortal" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.CreatePortal(ctx, components.CreateV2PortalCreatePortalRequestBodyUnionV2PortalCreatePortalRequestBody1(
+        components.V2PortalCreatePortalRequestBody1{
+            Slug: "acme-portal",
+            DisplayName: "Acme",
+            KeyspaceID: "ks_1234abcd",
+            AppID: unkey.Pointer("app_1234abcd"),
+            LogoURL: unkey.Pointer("https://cdn.example.com/logo.svg"),
+            PrimaryColor: unkey.Pointer("#6366f1"),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalCreatePortalResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
+| `request`                                                                                                          | [components.V2PortalCreatePortalRequestBodyUnion](../../models/components/v2portalcreateportalrequestbodyunion.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
+
+### Response
+
+**[*operations.PortalCreatePortalResponse](../../models/operations/portalcreateportalresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## CreateSession
 
@@ -31,9 +119,8 @@ Second, a session can never carry a capability your root key does not itself
 hold. Each requested scope additionally requires the equivalent permission on
 every keyspace the portal resolves to:
 - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
-- `keys:reroll` and `keys:create` require `api.<api_id>.create_key`, plus
+- `keys:reroll` requires `api.<api_id>.create_key`, plus
   `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
-- `analytics:read` requires `api.<api_id>.read_analytics`
 
 The `*` form of each is also accepted. Requesting a scope you do not hold
 returns 403 for the whole request rather than minting a reduced session, so a
@@ -72,7 +159,7 @@ func main() {
         Scopes: []components.Scope{
             components.ScopeKeysRead,
             components.ScopeKeysReroll,
-            components.ScopeAnalyticsRead,
+            components.ScopeKeysRead,
         },
         ReturnURL: unkey.Pointer("https://app.example.com/settings/api-keys"),
     })
@@ -104,6 +191,84 @@ func main() {
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## DeletePortal
+
+Delete a portal and revoke the sessions it minted.
+
+Unreleased and subject to change without notice.
+
+Its end users lose access rather than keeping it until their tokens expire.
+Revocation is not instantaneous: session lookups are cached briefly, so a
+request already in flight may still succeed.
+
+The app or keyspace it served is untouched, and its slug becomes free for a
+new portal.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.delete_portal` (to delete any portal in the workspace)
+- `portal.<portal_id>.delete_portal` (to delete a specific portal)
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.deletePortal" method="post" path="/v2/portal.deletePortal" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.DeletePortal(ctx, components.V2PortalDeletePortalRequestBody{
+        Portal: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalDeletePortalResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalDeletePortalRequestBody](../../models/components/v2portaldeleteportalrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalDeletePortalResponse](../../models/operations/portaldeleteportalresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
@@ -168,6 +333,84 @@ func main() {
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## GetPortal
+
+Read one portal, by its id or slug, or by the resource it serves.
+
+Unreleased and subject to change without notice.
+
+Send exactly one of `portal`, `keyspaceId`, or `appId`. Sending more than one
+is a **400**.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.read_portal` (to read any portal in the workspace)
+- `portal.<portal_id>.read_portal` (to read a specific portal)
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.getPortal" method="post" path="/v2/portal.getPortal" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.GetPortal(ctx, components.CreateV2PortalGetPortalRequestBodyUnionV2PortalGetPortalRequestBody1(
+        components.V2PortalGetPortalRequestBody1{
+            Portal: "proj_1234abcd",
+            KeyspaceID: unkey.Pointer("ks_1234abcd"),
+            AppID: unkey.Pointer("app_1234abcd"),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalGetPortalResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [components.V2PortalGetPortalRequestBodyUnion](../../models/components/v2portalgetportalrequestbodyunion.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
+
+### Response
+
+**[*operations.PortalGetPortalResponse](../../models/operations/portalgetportalresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
@@ -394,6 +637,95 @@ func main() {
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## UpdatePortal
+
+Change a portal's slug, display name, the resource it serves, its enabled
+state, or its branding.
+
+Unreleased and subject to change without notice.
+
+Only the fields you send change. Omitting a field leaves it as it is, and for
+branding, sending null clears it. Send at most one of `keyspaceId` or `appId`.
+
+Two changes affect your end users immediately:
+- Re-pointing at a different resource revokes the portal's live sessions,
+  because a session carries the scope it was minted with.
+- Disabling stops new sessions but leaves live ones running until they expire.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.update_portal` (to update any portal in the workspace)
+- `portal.<portal_id>.update_portal` (to update a specific portal)
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.updatePortal" method="post" path="/v2/portal.updatePortal" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.UpdatePortal(ctx, components.V2PortalUpdatePortalRequestBody{
+        Portal: "proj_1234abcd",
+        Slug: unkey.Pointer("acme-portal"),
+        DisplayName: unkey.Pointer("Acme"),
+        KeyspaceID: unkey.Pointer("ks_1234abcd"),
+        AppID: unkey.Pointer("app_1234abcd"),
+        Enabled: unkey.Pointer(false),
+        LogoURL: optionalnullable.From(unkey.Pointer("https://cdn.example.com/logo.svg")),
+        PrimaryColor: optionalnullable.From(unkey.Pointer("#6366f1")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalUpdatePortalResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalUpdatePortalRequestBody](../../models/components/v2portalupdateportalrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalUpdatePortalResponse](../../models/operations/portalupdateportalresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

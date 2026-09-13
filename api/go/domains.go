@@ -1150,11 +1150,15 @@ func (s *Domains) GetDomain(ctx context.Context, request components.V2DomainsGet
 }
 
 // ListDomains - List domains
-// List the custom domains attached to an environment and their verification status.
+// List your custom domains with their verification status and DNS records.
+// Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+// domains across your workspace.
 //
-// Results are paginated and sorted by their id. When `hasMore` is true, send the
-// returned `cursor` to get the next page. An environment with no domains returns an
-// empty array, not a 404.
+// Use any filter on its own or combine filters to narrow the results.
+// Results match all supplied filters. Omitting `environment` includes all matching environments.
+//
+// Results include only domains you have permission to read, sorted by ID.
+// When `hasMore` is true, send the returned `cursor` to get the next page.
 //
 // `status: verified` means the domain is verified. Unkey has configured routing and requested a
 // certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -1164,9 +1168,8 @@ func (s *Domains) GetDomain(ctx context.Context, request components.V2DomainsGet
 //
 // **Required Permissions**
 //
-// Your root key must have one of the following permissions:
-// - `environment.*.read_domain` (to read domains in any environment)
-// - `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+// Use a root key with the `environment.*.read_domain` permission.
+// A successful request returns an empty list if no matching domains are readable by your key.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Domains) ListDomains(ctx context.Context, request components.V2DomainsListDomainsRequestBody, opts ...operations.Option) (*operations.DomainsListDomainsResponse, error) {
@@ -1476,6 +1479,27 @@ func (s *Domains) ListDomains(ctx context.Context, request components.V2DomainsL
 			}
 
 			var out apierrors.InternalServerErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 503:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ServiceUnavailableErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

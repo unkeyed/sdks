@@ -7,6 +7,7 @@ import (
 	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
+// V2AppsUpdateAppRequestBody - Provide at least one field to update. Omitted fields remain unchanged.
 type V2AppsUpdateAppRequestBody struct {
 	// Identifies a resource by either its unique ID or its slug.
 	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -30,6 +31,11 @@ type V2AppsUpdateAppRequestBody struct {
 	// branch it tracks. Fields are independent, so send only the one you change.
 	//
 	Git optionalnullable.OptionalNullable[AppGitUpdateInput] `json:"git,omitzero"`
+	// Change the default image reference for an OCI-sourced app. This does not
+	// create a deployment. It can be combined with other app settings. Source
+	// switching is not supported.
+	//
+	Oci *AppOCI `json:"oci,omitzero"`
 	// Enable or disable delete protection for the app.
 	// Omit this field to leave the current setting unchanged.
 	//
@@ -80,6 +86,13 @@ func (v *V2AppsUpdateAppRequestBody) GetGit() optionalnullable.OptionalNullable[
 		return nil
 	}
 	return v.Git
+}
+
+func (v *V2AppsUpdateAppRequestBody) GetOci() *AppOCI {
+	if v == nil {
+		return nil
+	}
+	return v.Oci
 }
 
 func (v *V2AppsUpdateAppRequestBody) GetDeleteProtection() *bool {

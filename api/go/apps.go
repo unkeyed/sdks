@@ -38,6 +38,8 @@ func newApps(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 // CreateApp - Create app
 // Create an app within a project. The app is created with default `production` and `preview` environments.
 //
+// Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
+//
 // The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 //
 // **Important**: The slug cannot collide with an existing app in the same project. A duplicate slug returns a 409 conflict.
@@ -49,7 +51,7 @@ func newApps(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 // - `project.<project_id>.create_app` (to create apps in a specific project)
 //
 // If set, this operation will use [Security.RootKey] from the global security.
-func (s *Apps) CreateApp(ctx context.Context, request components.V2AppsCreateAppRequestBody, opts ...operations.Option) (*operations.AppsCreateAppResponse, error) {
+func (s *Apps) CreateApp(ctx context.Context, request components.V2AppsCreateAppRequestBodyUnion, opts ...operations.Option) (*operations.AppsCreateAppResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1199,6 +1201,7 @@ func (s *Apps) ListApps(ctx context.Context, request components.V2AppsListAppsRe
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -1366,7 +1369,7 @@ func (s *Apps) ListApps(ctx context.Context, request components.V2AppsListAppsRe
 		request.Cursor = &nCVal
 
 		return s.ListApps(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)
