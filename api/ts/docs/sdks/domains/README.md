@@ -1962,11 +1962,15 @@ run();
 
 ## listDomains
 
-List the custom domains attached to an environment and their verification status.
+List your custom domains with their verification status and DNS records.
+Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+domains across your workspace.
 
-Results are paginated and sorted by their id. When `hasMore` is true, send the
-returned `cursor` to get the next page. An environment with no domains returns an
-empty array, not a 404.
+Use any filter on its own or combine filters to narrow the results.
+Results match all supplied filters. Omitting `environment` includes all matching environments.
+
+Results include only domains you have permission to read, sorted by ID.
+When `hasMore` is true, send the returned `cursor` to get the next page.
 
 `status: verified` means the domain is verified. Unkey has configured routing and requested a
 certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -1976,11 +1980,159 @@ proxied or flattened routing record. Such a record stays `false` while it serves
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_domain` (to read domains in any environment)
-- `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+Use a root key with the `environment.*.read_domain` permission.
+A successful request returns an empty list if no matching domains are readable by your key.
 
 
+### Example Usage: byApp
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byApp" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    app: "payments-api",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    app: "payments-api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byAppAndEnvironment
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byAppAndEnvironment" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    app: "payments-api",
+    environment: "production",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    app: "payments-api",
+    environment: "production",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byEnvironment
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byEnvironment" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    environment: "production",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    environment: "production",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
 ### Example Usage: byIds
 
 <!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byIds" -->
@@ -1993,8 +2145,6 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.domains.listDomains({
-    project: "proj_1234abcd",
-    app: "app_1234abcd",
     environment: "env_1234abcd",
   });
 
@@ -2020,9 +2170,158 @@ const unkey = new UnkeyCore({
 
 async function run() {
   const res = await domainsListDomains(unkey, {
-    project: "proj_1234abcd",
-    app: "app_1234abcd",
     environment: "env_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byProject
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProject" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    project: "payments",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    project: "payments",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byProjectAndApp
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndApp" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    project: "payments",
+    app: "payments-api",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    project: "payments",
+    app: "payments-api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byProjectAndEnvironment
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndEnvironment" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    project: "payments",
+    environment: "production",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    project: "payments",
+    environment: "production",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2543,6 +2842,63 @@ async function run() {
 
 run();
 ```
+### Example Usage: scanBudgetExhausted
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="scanBudgetExhausted" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({
+    project: "proj_1234abcd",
+    app: "proj_1234abcd",
+    environment: "proj_1234abcd",
+    cursor: "dom_1234abcd",
+    search: "acme.com",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {
+    project: "proj_1234abcd",
+    app: "proj_1234abcd",
+    environment: "proj_1234abcd",
+    cursor: "dom_1234abcd",
+    search: "acme.com",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
 ### Example Usage: search
 
 <!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="search" -->
@@ -2655,6 +3011,51 @@ async function run() {
 
 run();
 ```
+### Example Usage: workspaceWide
+
+<!-- UsageSnippet language="typescript" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="workspaceWide" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.domains.listDomains({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { domainsListDomains } from "@unkey/api/funcs/domainsListDomains.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await domainsListDomains(unkey, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("domainsListDomains failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -2671,15 +3072,16 @@ run();
 
 ### Errors
 
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.ServiceUnavailableErrorResponse | 503                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## verifyDomain
 

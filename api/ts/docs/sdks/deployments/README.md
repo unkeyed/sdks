@@ -6,15 +6,16 @@ Deployment operations
 
 ### Available Operations
 
-* [createDeployment](#createdeployment) - Create deployment
+* [~~createDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [getDeployment](#getdeployment) - Get deployment
 * [listDeployments](#listdeployments) - List deployments
 * [promoteDeployment](#promotedeployment) - Promote deployment
 * [rollbackDeployment](#rollbackdeployment) - Rollback deployment
 * [startDeployment](#startdeployment) - Start deployment
 * [stopDeployment](#stopdeployment) - Stop deployment
+* [createDeploymentV3](#createdeploymentv3) - Create deployment
 
-## createDeployment
+## ~~createDeployment~~
 
 Create a deployment for an app in a project.
 
@@ -27,6 +28,8 @@ Returns immediately with a `deploymentId`. The build and rollout run asynchronou
 
 **Authentication**: requires a root key with permission to create deployments.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1303,6 +1306,124 @@ run();
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## createDeploymentV3
+
+Create a deployment for an app in a project.
+
+Omit the source to use the app's configured default. A Git app builds its default branch. An OCI app deploys its default image.
+
+Optionally provide one source override:
+- `oci`: deploy a prebuilt OCI image without a build. Mutable tags are resolved to immutable digests before rollout.
+- `git`: build and deploy from the app's connected GitHub repository, a branch, a specific commit, or a fork commit. Requires the app to have a repository connected.
+- `deployment`: re-run an existing deployment by its id. Git deployments rebuild from the recorded commit; OCI deployments reuse the recorded resolved image.
+
+Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
+
+**Authentication**: requires a root key with permission to create deployments.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="deployments.createDeploymentV3" method="post" path="/v3/deployments.createDeployment" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.createDeploymentV3({
+    project: "proj_1234abcd",
+    app: "proj_1234abcd",
+    environment: "proj_1234abcd",
+    git: {
+      branch: "main",
+      commitSha: "9f2c1a7",
+      repository: "contributor/acme-api",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
+    deployment: {
+      deploymentId: "proj_1234abcd",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCreateDeploymentV3 } from "@unkey/api/funcs/deploymentsCreateDeploymentV3.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCreateDeploymentV3(unkey, {
+    project: "proj_1234abcd",
+    app: "proj_1234abcd",
+    environment: "proj_1234abcd",
+    git: {
+      branch: "main",
+      commitSha: "9f2c1a7",
+      repository: "contributor/acme-api",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
+    deployment: {
+      deploymentId: "proj_1234abcd",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCreateDeploymentV3 failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V3DeploymentsCreateDeploymentRequestBody](../../models/components/v3deploymentscreatedeploymentrequestbody.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V3DeploymentsCreateDeploymentResponseBody](../../models/components/v3deploymentscreatedeploymentresponsebody.md)\>**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |

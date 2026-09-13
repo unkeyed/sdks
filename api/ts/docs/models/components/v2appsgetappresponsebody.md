@@ -13,9 +13,13 @@ let value: V2AppsGetAppResponseBody = {
     id: "app_1234abcd",
     name: "Payments API",
     slug: "payments-api",
+    sourceType: "oci",
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
     },
     currentDeploymentId: "d_1234abcd",
     isRolledBack: false,
