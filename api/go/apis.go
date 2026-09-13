@@ -1165,6 +1165,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -1332,7 +1333,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 		request.Cursor = &nCVal
 
 		return s.ListKeys(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)

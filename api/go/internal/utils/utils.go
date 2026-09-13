@@ -14,6 +14,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -383,4 +384,37 @@ func ConsumeRawBody(res *http.Response) ([]byte, error) {
 	res.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	return rawBody, nil
+}
+
+type bodyWithCancel struct {
+	io.ReadCloser
+	cancel context.CancelFunc
+	once   sync.Once
+}
+
+func (b *bodyWithCancel) Read(p []byte) (int, error) {
+	n, err := b.ReadCloser.Read(p)
+	if err != nil {
+		b.release()
+	}
+	return n, err
+}
+
+func (b *bodyWithCancel) Close() error {
+	err := b.ReadCloser.Close()
+	b.release()
+	return err
+}
+
+func (b *bodyWithCancel) release() {
+	b.once.Do(b.cancel)
+}
+
+// BodyWithCancel returns body wrapped so that cancel runs once reading ends or
+// the body is closed. A nil cancel returns body unchanged.
+func BodyWithCancel(body io.ReadCloser, cancel context.CancelFunc) io.ReadCloser {
+	if cancel == nil {
+		return body
+	}
+	return &bodyWithCancel{ReadCloser: body, cancel: cancel}
 }

@@ -1322,11 +1322,15 @@ func main() {
 
 ## ListDomains
 
-List the custom domains attached to an environment and their verification status.
+List your custom domains with their verification status and DNS records.
+Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+domains across your workspace.
 
-Results are paginated and sorted by their id. When `hasMore` is true, send the
-returned `cursor` to get the next page. An environment with no domains returns an
-empty array, not a 404.
+Use any filter on its own or combine filters to narrow the results.
+Results match all supplied filters. Omitting `environment` includes all matching environments.
+
+Results include only domains you have permission to read, sorted by ID.
+When `hasMore` is true, send the returned `cursor` to get the next page.
 
 `status: verified` means the domain is verified. Unkey has configured routing and requested a
 certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -1336,11 +1340,107 @@ proxied or flattened routing record. Such a record stays `false` while it serves
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_domain` (to read domains in any environment)
-- `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+Use a root key with the `environment.*.read_domain` permission.
+A successful request returns an empty list if no matching domains are readable by your key.
 
 
+### Example Usage: byApp
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byApp" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        App: unkey.Pointer("payments-api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byAppAndEnvironment
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byAppAndEnvironment" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        App: unkey.Pointer("payments-api"),
+        Environment: unkey.Pointer("production"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byEnvironment
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byEnvironment" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        Environment: unkey.Pointer("production"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
 ### Example Usage: byIds
 
 <!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byIds" -->
@@ -1363,9 +1463,105 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "app_1234abcd",
-        Environment: "env_1234abcd",
+        Environment: unkey.Pointer("env_1234abcd"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byProject
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProject" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        Project: unkey.Pointer("payments"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byProjectAndApp
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndApp" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        Project: unkey.Pointer("payments"),
+        App: unkey.Pointer("payments-api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byProjectAndEnvironment
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndEnvironment" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        Project: unkey.Pointer("payments"),
+        Environment: unkey.Pointer("production"),
     })
     if err != nil {
         log.Fatal(err)
@@ -1397,9 +1593,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "payments",
-        App: "payments-api",
-        Environment: "production",
+        Project: unkey.Pointer("payments"),
+        App: unkey.Pointer("payments-api"),
+        Environment: unkey.Pointer("production"),
     })
     if err != nil {
         log.Fatal(err)
@@ -1431,9 +1627,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1467,9 +1663,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1503,9 +1699,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1539,9 +1735,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1575,9 +1771,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1611,9 +1807,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1647,9 +1843,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "payments",
-        App: "payments-api",
-        Environment: "production",
+        Project: unkey.Pointer("payments"),
+        App: unkey.Pointer("payments-api"),
+        Environment: unkey.Pointer("production"),
         Limit: unkey.Pointer[int64](20),
         Cursor: unkey.Pointer("dom_1234abcd"),
     })
@@ -1683,9 +1879,45 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
+        Cursor: unkey.Pointer("dom_1234abcd"),
+        Search: unkey.Pointer("acme.com"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: scanBudgetExhausted
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="scanBudgetExhausted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
@@ -1719,9 +1951,9 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "payments",
-        App: "payments-api",
-        Environment: "production",
+        Project: unkey.Pointer("payments"),
+        App: unkey.Pointer("payments-api"),
+        Environment: unkey.Pointer("production"),
         Search: unkey.Pointer("acme.com"),
     })
     if err != nil {
@@ -1754,12 +1986,42 @@ func main() {
     )
 
     res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{
-        Project: "proj_1234abcd",
-        App: "proj_1234abcd",
-        Environment: "proj_1234abcd",
+        Project: unkey.Pointer("proj_1234abcd"),
+        App: unkey.Pointer("proj_1234abcd"),
+        Environment: unkey.Pointer("proj_1234abcd"),
         Cursor: unkey.Pointer("dom_1234abcd"),
         Search: unkey.Pointer("acme.com"),
     })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DomainsListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: workspaceWide
+
+<!-- UsageSnippet language="go" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="workspaceWide" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Domains.ListDomains(ctx, components.V2DomainsListDomainsRequestBody{})
     if err != nil {
         log.Fatal(err)
     }
@@ -1783,15 +2045,16 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
-| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
-| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
-| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
-| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
-| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
+| apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
+| apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
+| apierrors.TooManyRequestsErrorResponse    | 429                                       | application/json                          |
+| apierrors.InternalServerErrorResponse     | 500                                       | application/json                          |
+| apierrors.ServiceUnavailableErrorResponse | 503                                       | application/json                          |
+| apierrors.APIError                        | 4XX, 5XX                                  | \*/\*                                     |
 
 ## VerifyDomain
 

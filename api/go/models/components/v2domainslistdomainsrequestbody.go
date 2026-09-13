@@ -6,19 +6,22 @@ import (
 	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
+// V2DomainsListDomainsRequestBody - Filter domains within a workspace. All filters are optional and combine with AND. Each resource
+// filter matches its ID or slug directly, even when its parent filters are omitted. A missing
+// resource or a resource that does not match the other filters produces an empty list.
 type V2DomainsListDomainsRequestBody struct {
-	// Identifies a resource by either its unique ID or its slug.
-	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+	// Match domains whose project ID or slug equals this value. This filter does not require
+	// an app or environment filter.
 	//
-	Project string `json:"project"`
-	// Identifies a resource by either its unique ID or its slug.
-	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+	Project *string `json:"project,omitzero"`
+	// Match domains whose app ID or slug equals this value. This filter does not require a
+	// project or environment filter.
 	//
-	App string `json:"app"`
-	// Identifies a resource by either its unique ID or its slug.
-	// Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+	App *string `json:"app,omitzero"`
+	// Match domains whose environment ID or slug equals this value. This filter does not require
+	// a project or app filter.
 	//
-	Environment string `json:"environment"`
+	Environment *string `json:"environment,omitzero"`
 	// The maximum number of domains one response contains.
 	// A small limit makes the response smaller, but makes more requests necessary.
 	//
@@ -42,23 +45,23 @@ func (v *V2DomainsListDomainsRequestBody) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2DomainsListDomainsRequestBody) GetProject() string {
+func (v *V2DomainsListDomainsRequestBody) GetProject() *string {
 	if v == nil {
-		return ""
+		return nil
 	}
 	return v.Project
 }
 
-func (v *V2DomainsListDomainsRequestBody) GetApp() string {
+func (v *V2DomainsListDomainsRequestBody) GetApp() *string {
 	if v == nil {
-		return ""
+		return nil
 	}
 	return v.App
 }
 
-func (v *V2DomainsListDomainsRequestBody) GetEnvironment() string {
+func (v *V2DomainsListDomainsRequestBody) GetEnvironment() *string {
 	if v == nil {
-		return ""
+		return nil
 	}
 	return v.Environment
 }
