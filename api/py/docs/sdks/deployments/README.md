@@ -6,15 +6,16 @@ Deployment operations
 
 ### Available Operations
 
-* [create_deployment](#create_deployment) - Create deployment
+* [~~create_deployment~~](#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](#get_deployment) - Get deployment
 * [list_deployments](#list_deployments) - List deployments
 * [promote_deployment](#promote_deployment) - Promote deployment
 * [rollback_deployment](#rollback_deployment) - Rollback deployment
 * [start_deployment](#start_deployment) - Start deployment
 * [stop_deployment](#stop_deployment) - Stop deployment
+* [create_deployment_v3](#create_deployment_v3) - Create deployment
 
-## create_deployment
+## ~~create_deployment~~
 
 Create a deployment for an app in a project.
 
@@ -27,6 +28,8 @@ Returns immediately with a `deploymentId`. The build and rollout run asynchronou
 
 **Authentication**: requires a root key with permission to create deployments.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -665,6 +668,77 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## create_deployment_v3
+
+Create a deployment for an app in a project.
+
+Omit the source to use the app's configured default. A Git app builds its default branch. An OCI app deploys its default image.
+
+Optionally provide one source override:
+- `oci`: deploy a prebuilt OCI image without a build. Mutable tags are resolved to immutable digests before rollout.
+- `git`: build and deploy from the app's connected GitHub repository, a branch, a specific commit, or a fork commit. Requires the app to have a repository connected.
+- `deployment`: re-run an existing deployment by its id. Git deployments rebuild from the recorded commit; OCI deployments reuse the recorded resolved image.
+
+Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
+
+**Authentication**: requires a root key with permission to create deployments.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="deployments.createDeploymentV3" method="post" path="/v3/deployments.createDeployment" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.create_deployment_v3(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", git={
+        "branch": "main",
+        "commit_sha": "9f2c1a7",
+        "repository": "contributor/acme-api",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
+    }, deployment={
+        "deployment_id": "proj_1234abcd",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `project`                                                                                                                | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `app`                                                                                                                    | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `environment`                                                                                                            | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `git`                                                                                                                    | [Optional[models.DeploymentSourceGit]](../../models/deploymentsourcegit.md)                                              | :heavy_minus_sign:                                                                                                       | Build from the app's connected GitHub repository.                                                                        |                                                                                                                          |
+| `oci`                                                                                                                    | [Optional[models.DeploymentSourceOCI]](../../models/deploymentsourceoci.md)                                              | :heavy_minus_sign:                                                                                                       | Deploy a prebuilt OCI image without a build.                                                                             |                                                                                                                          |
+| `deployment`                                                                                                             | [Optional[models.DeploymentSourceDeployment]](../../models/deploymentsourcedeployment.md)                                | :heavy_minus_sign:                                                                                                       | Re-run an existing deployment.                                                                                           |                                                                                                                          |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V3DeploymentsCreateDeploymentResponseBody](../../models/v3deploymentscreatedeploymentresponsebody.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |

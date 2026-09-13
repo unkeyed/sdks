@@ -1735,8 +1735,11 @@ class Environments(BaseSDK):
         :param build_command: Overrides the build command auto-detected by Railpack.
             Omit to leave unchanged; set null to clear and fall back to auto-detection.
 
-        :param watch_paths: Glob paths that trigger auto-deploys when changed.
-            Omit to leave unchanged.
+        :param watch_paths: Glob patterns that trigger auto-deploys when matching files change.
+            Do not start a pattern with \"/\" or \"./\".
+            Use \"src/**\" for everything under a directory and \"**/*.go\" for a file type.
+            A pattern with no wildcard matches only that exact file, so \"src\" is not \"src/**\".
+            Omit to leave unchanged. Invalid patterns are rejected with a 400.
 
         :param auto_deploy: Whether pushes auto-deploy.
             Omit to leave unchanged.
@@ -1980,8 +1983,11 @@ class Environments(BaseSDK):
         :param build_command: Overrides the build command auto-detected by Railpack.
             Omit to leave unchanged; set null to clear and fall back to auto-detection.
 
-        :param watch_paths: Glob paths that trigger auto-deploys when changed.
-            Omit to leave unchanged.
+        :param watch_paths: Glob patterns that trigger auto-deploys when matching files change.
+            Do not start a pattern with \"/\" or \"./\".
+            Use \"src/**\" for everything under a directory and \"**/*.go\" for a file type.
+            A pattern with no wildcard matches only that exact file, so \"src\" is not \"src/**\".
+            Omit to leave unchanged. Invalid patterns are rejected with a 400.
 
         :param auto_deploy: Whether pushes auto-deploy.
             Omit to leave unchanged.

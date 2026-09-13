@@ -8,19 +8,25 @@ from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
 class V2DomainsListDomainsRequestBodyTypedDict(TypedDict):
-    project: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+    r"""Filter domains within a workspace. All filters are optional and combine with AND. Each resource
+    filter matches its ID or slug directly, even when its parent filters are omitted. A missing
+    resource or a resource that does not match the other filters produces an empty list.
 
     """
-    app: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+    project: NotRequired[str]
+    r"""Match domains whose project ID or slug equals this value. This filter does not require
+    an app or environment filter.
 
     """
-    environment: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+    app: NotRequired[str]
+    r"""Match domains whose app ID or slug equals this value. This filter does not require a
+    project or environment filter.
+
+    """
+    environment: NotRequired[str]
+    r"""Match domains whose environment ID or slug equals this value. This filter does not require
+    a project or app filter.
 
     """
     limit: NotRequired[int]
@@ -38,21 +44,27 @@ class V2DomainsListDomainsRequestBodyTypedDict(TypedDict):
 
 
 class V2DomainsListDomainsRequestBody(BaseModel):
-    project: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+    r"""Filter domains within a workspace. All filters are optional and combine with AND. Each resource
+    filter matches its ID or slug directly, even when its parent filters are omitted. A missing
+    resource or a resource that does not match the other filters produces an empty list.
 
     """
 
-    app: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+    project: Optional[str] = None
+    r"""Match domains whose project ID or slug equals this value. This filter does not require
+    an app or environment filter.
 
     """
 
-    environment: str
-    r"""Identifies a resource by either its unique ID or its slug.
-    Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+    app: Optional[str] = None
+    r"""Match domains whose app ID or slug equals this value. This filter does not require a
+    project or environment filter.
+
+    """
+
+    environment: Optional[str] = None
+    r"""Match domains whose environment ID or slug equals this value. This filter does not require
+    a project or app filter.
 
     """
 
@@ -73,7 +85,9 @@ class V2DomainsListDomainsRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["limit", "cursor", "search"])
+        optional_fields = set(
+            ["project", "app", "environment", "limit", "cursor", "search"]
+        )
         serialized = handler(self)
         m = {}
 

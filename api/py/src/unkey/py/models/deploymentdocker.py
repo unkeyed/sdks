@@ -7,9 +7,9 @@ from unkey.py.types import BaseModel
 
 class DeploymentDockerTypedDict(TypedDict):
     image: str
-    r"""The Docker image this deployment runs."""
+    r"""The OCI image reference requested for this deployment."""
 
 
 class DeploymentDocker(BaseModel):
     image: str
-    r"""The Docker image this deployment runs."""
+    r"""The OCI image reference requested for this deployment."""
