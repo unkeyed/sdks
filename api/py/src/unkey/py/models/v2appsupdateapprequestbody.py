@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .appgitupdateinput import AppGitUpdateInput, AppGitUpdateInputTypedDict
+from .appoci import AppOCI, AppOCITypedDict
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -10,6 +11,8 @@ from unkey.py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_S
 
 
 class V2AppsUpdateAppRequestBodyTypedDict(TypedDict):
+    r"""Provide at least one field to update. Omitted fields remain unchanged."""
+
     project: str
     r"""Identifies a resource by either its unique ID or its slug.
     Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -37,6 +40,12 @@ class V2AppsUpdateAppRequestBodyTypedDict(TypedDict):
     branch it tracks. Fields are independent, so send only the one you change.
 
     """
+    oci: NotRequired[AppOCITypedDict]
+    r"""Change the default image reference for an OCI-sourced app. This does not
+    create a deployment. It can be combined with other app settings. Source
+    switching is not supported.
+
+    """
     delete_protection: NotRequired[bool]
     r"""Enable or disable delete protection for the app.
     Omit this field to leave the current setting unchanged.
@@ -45,6 +54,8 @@ class V2AppsUpdateAppRequestBodyTypedDict(TypedDict):
 
 
 class V2AppsUpdateAppRequestBody(BaseModel):
+    r"""Provide at least one field to update. Omitted fields remain unchanged."""
+
     project: str
     r"""Identifies a resource by either its unique ID or its slug.
     Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
@@ -77,6 +88,13 @@ class V2AppsUpdateAppRequestBody(BaseModel):
 
     """
 
+    oci: Optional[AppOCI] = None
+    r"""Change the default image reference for an OCI-sourced app. This does not
+    create a deployment. It can be combined with other app settings. Source
+    switching is not supported.
+
+    """
+
     delete_protection: Annotated[
         Optional[bool], pydantic.Field(alias="deleteProtection")
     ] = None
@@ -87,7 +105,7 @@ class V2AppsUpdateAppRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "slug", "git", "deleteProtection"])
+        optional_fields = set(["name", "slug", "git", "oci", "deleteProtection"])
         nullable_fields = set(["git"])
         serialized = handler(self)
         m = {}

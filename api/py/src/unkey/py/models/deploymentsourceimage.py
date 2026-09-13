@@ -10,14 +10,20 @@ class DeploymentSourceImageTypedDict(TypedDict):
     r"""Deploy a prebuilt Docker image as-is."""
 
     docker_image: str
-    r"""Docker image to deploy as-is."""
+    r"""Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy as-is. Qualify the version with a tag (ghcr.io/acme/api:v1.2.3) or a digest (ghcr.io/acme/api@sha256:...). Without either, the registry serves the latest tag."""
 
 
 class DeploymentSourceImage(BaseModel):
     r"""Deploy a prebuilt Docker image as-is."""
 
-    docker_image: Annotated[str, pydantic.Field(alias="dockerImage")]
-    r"""Docker image to deploy as-is."""
+    docker_image: Annotated[
+        str,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="dockerImage",
+        ),
+    ]
+    r"""Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy as-is. Qualify the version with a tag (ghcr.io/acme/api:v1.2.3) or a digest (ghcr.io/acme/api@sha256:...). Without either, the registry serves the latest tag."""
 
 
 try:

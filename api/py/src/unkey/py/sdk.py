@@ -27,7 +27,7 @@ if TYPE_CHECKING:
     from unkey.py.internal import Internal
     from unkey.py.keys import Keys
     from unkey.py.permissions import Permissions
-    from unkey.py.portal import Portal
+    from unkey.py.portal_sdk import PortalSDK
     from unkey.py.projects import Projects
     from unkey.py.ratelimit import Ratelimit
 
@@ -134,7 +134,7 @@ class Unkey(BaseSDK):
     r"""API key management operations"""
     permissions: "Permissions"
     r"""Permission and role management operations"""
-    portal: "Portal"
+    portal: "PortalSDK"
     r"""Customer Portal session management"""
     projects: "Projects"
     ratelimit: "Ratelimit"
@@ -152,7 +152,7 @@ class Unkey(BaseSDK):
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),
         "permissions": ("unkey.py.permissions", "Permissions"),
-        "portal": ("unkey.py.portal", "Portal"),
+        "portal": ("unkey.py.portal_sdk", "PortalSDK"),
         "projects": ("unkey.py.projects", "Projects"),
         "ratelimit": ("unkey.py.ratelimit", "Ratelimit"),
     }

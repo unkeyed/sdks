@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .dnsrecord import DNSRecord, DNSRecordTypedDict
+from .domainconnect import DomainConnect, DomainConnectTypedDict
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -65,6 +66,12 @@ class DomainTypedDict(TypedDict):
     Omitted while verification is progressing normally.
 
     """
+    domain_connect: NotRequired[DomainConnectTypedDict]
+    r"""One-click setup at the domain's DNS provider. Omitted entirely when the provider does not support
+    Domain Connect or discovery failed, so the object's presence is the signal that the shortcut is
+    available and both of its fields are filled.
+
+    """
     updated_at: NotRequired[int]
     r"""Unix timestamp in milliseconds of the last change to this domain. Omitted if it has never changed."""
 
@@ -119,12 +126,21 @@ class Domain(BaseModel):
 
     """
 
+    domain_connect: Annotated[
+        Optional[DomainConnect], pydantic.Field(alias="domainConnect")
+    ] = None
+    r"""One-click setup at the domain's DNS provider. Omitted entirely when the provider does not support
+    Domain Connect or discovery failed, so the object's presence is the signal that the shortcut is
+    available and both of its fields are filled.
+
+    """
+
     updated_at: Annotated[Optional[int], pydantic.Field(alias="updatedAt")] = None
     r"""Unix timestamp in milliseconds of the last change to this domain. Omitted if it has never changed."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["verificationError", "updatedAt"])
+        optional_fields = set(["verificationError", "domainConnect", "updatedAt"])
         serialized = handler(self)
         m = {}
 
