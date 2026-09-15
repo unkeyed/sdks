@@ -5,8 +5,9 @@ package components
 type V2DomainsListDomainsResponseBody struct {
 	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
 	Meta Meta `json:"meta"`
-	// The domains attached to the environment, sorted by their id.
-	// The array is empty when the environment has no domains. This is not an error.
+	// Domains that match every request filter and that you have permission to read, sorted by ID.
+	// The array is empty when no readable domains match, including when a filtered resource
+	// is missing or mismatched.
 	//
 	Data []Domain `json:"data"`
 	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
