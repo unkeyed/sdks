@@ -13,8 +13,9 @@ class V2DomainsListDomainsResponseBodyTypedDict(TypedDict):
     meta: MetaTypedDict
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
     data: List[DomainTypedDict]
-    r"""The domains attached to the environment, sorted by their id.
-    The array is empty when the environment has no domains. This is not an error.
+    r"""Domains that match every request filter and that you have permission to read, sorted by ID.
+    The array is empty when no readable domains match, including when a filtered resource
+    is missing or mismatched.
 
     """
     pagination: PaginationTypedDict
@@ -26,8 +27,9 @@ class V2DomainsListDomainsResponseBody(BaseModel):
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
     data: List[Domain]
-    r"""The domains attached to the environment, sorted by their id.
-    The array is empty when the environment has no domains. This is not an error.
+    r"""Domains that match every request filter and that you have permission to read, sorted by ID.
+    The array is empty when no readable domains match, including when a filtered resource
+    is missing or mismatched.
 
     """
 
