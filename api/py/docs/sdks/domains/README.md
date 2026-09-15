@@ -755,11 +755,15 @@ with Unkey(
 
 ## list_domains
 
-List the custom domains attached to an environment and their verification status.
+List your custom domains with their verification status and DNS records.
+Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+domains across your workspace.
 
-Results are paginated and sorted by their id. When `hasMore` is true, send the
-returned `cursor` to get the next page. An environment with no domains returns an
-empty array, not a 404.
+Use any filter on its own or combine filters to narrow the results.
+Results match all supplied filters. Omitting `environment` includes all matching environments.
+
+Results include only domains you have permission to read, sorted by ID.
+When `hasMore` is true, send the returned `cursor` to get the next page.
 
 `status: verified` means the domain is verified. Unkey has configured routing and requested a
 certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -769,11 +773,61 @@ proxied or flattened routing record. Such a record stays `false` while it serves
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_domain` (to read domains in any environment)
-- `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+Use a root key with the `environment.*.read_domain` permission.
+A successful request returns an empty list if no matching domains are readable by your key.
 
 
+### Example Usage: byApp
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byApp" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="payments-api", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byAppAndEnvironment
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byAppAndEnvironment" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="payments-api", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byEnvironment
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byEnvironment" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: byIds
 
 <!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byIds" -->
@@ -785,7 +839,58 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.domains.list_domains(project="proj_1234abcd", app="app_1234abcd", environment="env_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="env_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byProject
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProject" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="payments", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byProjectAndApp
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndApp" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="payments", app="payments-api", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byProjectAndEnvironment
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="byProjectAndEnvironment" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="payments", app="proj_1234abcd", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
     # Handle response
     print(res)
@@ -944,6 +1049,23 @@ with Unkey(
     print(res)
 
 ```
+### Example Usage: scanBudgetExhausted
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="scanBudgetExhausted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: search
 
 <!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="search" -->
@@ -978,14 +1100,31 @@ with Unkey(
     print(res)
 
 ```
+### Example Usage: workspaceWide
+
+<!-- UsageSnippet language="python" operationID="domains.listDomains" method="post" path="/v2/domains.listDomains" example="workspaceWide" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
+
+    # Handle response
+    print(res)
+
+```
 
 ### Parameters
 
 | Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        | Example                                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `project`                                                                                                                          | *str*                                                                                                                              | :heavy_check_mark:                                                                                                                 | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>   | proj_1234abcd                                                                                                                      |
-| `app`                                                                                                                              | *str*                                                                                                                              | :heavy_check_mark:                                                                                                                 | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>   | proj_1234abcd                                                                                                                      |
-| `environment`                                                                                                                      | *str*                                                                                                                              | :heavy_check_mark:                                                                                                                 | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>   | proj_1234abcd                                                                                                                      |
+| `project`                                                                                                                          | *Optional[str]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | Match domains whose project ID or slug equals this value. This filter does not require<br/>an app or environment filter.<br/>      | proj_1234abcd                                                                                                                      |
+| `app`                                                                                                                              | *Optional[str]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | Match domains whose app ID or slug equals this value. This filter does not require a<br/>project or environment filter.<br/>       | proj_1234abcd                                                                                                                      |
+| `environment`                                                                                                                      | *Optional[str]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | Match domains whose environment ID or slug equals this value. This filter does not require<br/>a project or app filter.<br/>       | proj_1234abcd                                                                                                                      |
 | `limit`                                                                                                                            | *Optional[int]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | The maximum number of domains one response contains.<br/>A small limit makes the response smaller, but makes more requests necessary.<br/> |                                                                                                                                    |
 | `cursor`                                                                                                                           | *Optional[str]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | The pagination cursor from the response that came before.<br/>Send it to get the next page when that response has `hasMore: true`.<br/> | dom_1234abcd                                                                                                                       |
 | `search`                                                                                                                           | *Optional[str]*                                                                                                                    | :heavy_minus_sign:                                                                                                                 | Free-form text to filter domains. Returns domains whose ID or name contains the search string. Matching is case-insensitive.       | acme.com                                                                                                                           |
@@ -997,15 +1136,16 @@ with Unkey(
 
 ### Errors
 
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.ServiceUnavailableErrorResponse | 503                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## verify_domain
 
