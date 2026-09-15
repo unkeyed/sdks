@@ -9,7 +9,8 @@ import (
 
 type DomainsListDomainsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successfully retrieved the environment's domains.
+	// Successfully retrieved the permitted domains that match every filter. Missing or
+	// mismatched filtered resources return an empty list.
 	//
 	V2DomainsListDomainsResponseBody *components.V2DomainsListDomainsResponseBody
 }

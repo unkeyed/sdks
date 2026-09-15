@@ -1,0 +1,9 @@
+# PortalGetPortalResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                    | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `V2PortalGetPortalResponseBody`                                                                       | [*components.V2PortalGetPortalResponseBody](../../models/components/v2portalgetportalresponsebody.md) | :heavy_minus_sign:                                                                                    | The portal.<br/>                                                                                      |
