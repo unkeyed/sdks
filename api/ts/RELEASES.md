@@ -219,3 +219,13 @@ Based on:
 - [typescript v2.5.1] api/ts
 ### Releases
 - [NPM v2.5.1] https://www.npmjs.com/package/@unkey/api/v/2.5.1 - api/ts
+
+## 2026-09-15 00:43:07
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.797.0 (2.937.18) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.5.2] api/ts
+### Releases
+- [NPM v2.5.2] https://www.npmjs.com/package/@unkey/api/v/2.5.2 - api/ts
