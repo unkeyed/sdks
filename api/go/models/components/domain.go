@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 // DomainStatus - The verification status of the domain.
@@ -77,10 +78,26 @@ type Domain struct {
 	// so it tells you which records are still missing.
 	//
 	DNSRecords []DNSRecord `json:"dnsRecords"`
+	// One-click setup at the domain's DNS provider. Omitted entirely when the provider does not support
+	// Domain Connect or discovery failed, so the object's presence is the signal that the shortcut is
+	// available and both of its fields are filled.
+	//
+	DomainConnect *DomainConnect `json:"domainConnect,omitzero"`
 	// Unix timestamp in milliseconds when the domain was created. The 24 hour verification window runs from here.
 	CreatedAt int64 `json:"createdAt"`
 	// Unix timestamp in milliseconds of the last change to this domain. Omitted if it has never changed.
 	UpdatedAt *int64 `json:"updatedAt,omitzero"`
+}
+
+func (d Domain) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *Domain) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *Domain) GetID() string {
@@ -137,6 +154,13 @@ func (d *Domain) GetDNSRecords() []DNSRecord {
 		return []DNSRecord{}
 	}
 	return d.DNSRecords
+}
+
+func (d *Domain) GetDomainConnect() *DomainConnect {
+	if d == nil {
+		return nil
+	}
+	return d.DomainConnect
 }
 
 func (d *Domain) GetCreatedAt() int64 {

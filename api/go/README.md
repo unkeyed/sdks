@@ -268,13 +268,14 @@ func main() {
 
 ### [Deployments](docs/sdks/deployments/README.md)
 
-* [CreateDeployment](docs/sdks/deployments/README.md#createdeployment) - Create deployment
+* [~~CreateDeployment~~](docs/sdks/deployments/README.md#createdeployment) - Create deployment :warning: **Deprecated**
 * [GetDeployment](docs/sdks/deployments/README.md#getdeployment) - Get deployment
 * [ListDeployments](docs/sdks/deployments/README.md#listdeployments) - List deployments
 * [PromoteDeployment](docs/sdks/deployments/README.md#promotedeployment) - Promote deployment
 * [RollbackDeployment](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
 * [StartDeployment](docs/sdks/deployments/README.md#startdeployment) - Start deployment
 * [StopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop deployment
+* [CreateDeploymentV3](docs/sdks/deployments/README.md#createdeploymentv3) - Create deployment
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -348,11 +349,15 @@ func main() {
 
 ### [Portal](docs/sdks/portal/README.md)
 
+* [CreatePortal](docs/sdks/portal/README.md#createportal) - Create portal
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
+* [DeletePortal](docs/sdks/portal/README.md#deleteportal) - Delete portal
 * [ExchangeCode](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
+* [GetPortal](docs/sdks/portal/README.md#getportal) - Get portal
 * [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 * [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
 * [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+* [UpdatePortal](docs/sdks/portal/README.md#updateportal) - Update portal
 
 ### [Projects](docs/sdks/projects/README.md)
 

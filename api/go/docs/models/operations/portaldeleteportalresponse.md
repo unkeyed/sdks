@@ -1,0 +1,9 @@
+# PortalDeletePortalResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalDeletePortalResponseBody`                                                                          | [*components.V2PortalDeletePortalResponseBody](../../models/components/v2portaldeleteportalresponsebody.md) | :heavy_minus_sign:                                                                                          | Portal deleted and its sessions revoked.<br/>                                                               |

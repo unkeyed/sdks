@@ -16,6 +16,8 @@ App management operations
 
 Create an app within a project. The app is created with default `production` and `preview` environments.
 
+Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
+
 The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 
 **Important**: The slug cannot collide with an existing app in the same project. A duplicate slug returns a 409 conflict.
@@ -48,15 +50,17 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "proj_1234abcd",
-        Name: "Payments API",
-        Slug: "proj_1234abcd",
-        Git: &components.AppGitCreateInput{
-            Repository: "unkeyed/unkey",
-            DefaultBranch: unkey.Pointer("main"),
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
         },
-    })
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -86,11 +90,59 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "payments",
-        Name: "Payments API",
-        Slug: "payments-api",
-    })
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
+            Oci: &components.AppOCI{
+                Image: "ghcr.io/acme/api:v1.2.3",
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2AppsCreateAppResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: git
+
+<!-- UsageSnippet language="go" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="git" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "payments",
+            Name: "Payments API",
+            Slug: "payments-api",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+            },
+        },
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -120,15 +172,17 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "proj_1234abcd",
-        Name: "Payments API",
-        Slug: "proj_1234abcd",
-        Git: &components.AppGitCreateInput{
-            Repository: "unkeyed/unkey",
-            DefaultBranch: unkey.Pointer("main"),
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
         },
-    })
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -158,15 +212,56 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "proj_1234abcd",
-        Name: "Payments API",
-        Slug: "proj_1234abcd",
-        Git: &components.AppGitCreateInput{
-            Repository: "unkeyed/unkey",
-            DefaultBranch: unkey.Pointer("main"),
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
         },
-    })
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2AppsCreateAppResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: ociImage
+
+<!-- UsageSnippet language="go" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="ociImage" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody2(
+        components.V2AppsCreateAppRequestBody2{
+            Project: "payments",
+            Name: "Payments API",
+            Slug: "payments-api",
+            Oci: components.AppOCI{
+                Image: "ghcr.io/acme/payments:v1.2.3",
+            },
+        },
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -196,15 +291,17 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "proj_1234abcd",
-        Name: "Payments API",
-        Slug: "proj_1234abcd",
-        Git: &components.AppGitCreateInput{
-            Repository: "unkeyed/unkey",
-            DefaultBranch: unkey.Pointer("main"),
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
         },
-    })
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -234,15 +331,17 @@ func main() {
         unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
     )
 
-    res, err := s.Apps.CreateApp(ctx, components.V2AppsCreateAppRequestBody{
-        Project: "proj_1234abcd",
-        Name: "Payments API",
-        Slug: "proj_1234abcd",
-        Git: &components.AppGitCreateInput{
-            Repository: "unkeyed/unkey",
-            DefaultBranch: unkey.Pointer("main"),
+    res, err := s.Apps.CreateApp(ctx, components.CreateV2AppsCreateAppRequestBodyUnionV2AppsCreateAppRequestBody1(
+        components.V2AppsCreateAppRequestBody1{
+            Project: "proj_1234abcd",
+            Name: "Payments API",
+            Slug: "proj_1234abcd",
+            Git: components.AppGitCreateInput{
+                Repository: unkey.Pointer("unkeyed/unkey"),
+                DefaultBranch: unkey.Pointer("main"),
+            },
         },
-    })
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -254,11 +353,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [components.V2AppsCreateAppRequestBody](../../models/components/v2appscreateapprequestbody.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2AppsCreateAppRequestBodyUnion](../../models/components/v2appscreateapprequestbodyunion.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
 ### Response
 
@@ -997,6 +1096,9 @@ func main() {
             Repository: unkey.Pointer("unkeyed/unkey"),
             DefaultBranch: unkey.Pointer("main"),
         }),
+        Oci: &components.AppOCI{
+            Image: "ghcr.io/acme/api:v1.2.3",
+        },
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1038,6 +1140,9 @@ func main() {
             Repository: unkey.Pointer("unkeyed/unkey"),
             DefaultBranch: unkey.Pointer("main"),
         }),
+        Oci: &components.AppOCI{
+            Image: "ghcr.io/acme/api:v1.2.3",
+        },
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1079,6 +1184,9 @@ func main() {
             Repository: unkey.Pointer("unkeyed/unkey"),
             DefaultBranch: unkey.Pointer("main"),
         }),
+        Oci: &components.AppOCI{
+            Image: "ghcr.io/acme/api:v1.2.3",
+        },
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {
@@ -1154,6 +1262,9 @@ func main() {
             Repository: unkey.Pointer("unkeyed/unkey"),
             DefaultBranch: unkey.Pointer("main"),
         }),
+        Oci: &components.AppOCI{
+            Image: "ghcr.io/acme/api:v1.2.3",
+        },
         DeleteProtection: unkey.Pointer(true),
     })
     if err != nil {

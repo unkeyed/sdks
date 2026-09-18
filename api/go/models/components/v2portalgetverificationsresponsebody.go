@@ -5,11 +5,22 @@ package components
 type V2PortalGetVerificationsResponseBody struct {
 	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
 	Meta Meta `json:"meta"`
-	// Zero-filled verification timeseries for the authenticated end user, ordered
-	// by time ascending. Buckets with no verifications are present with zero
-	// counts so the series is contiguous across the requested window.
+	// Width of one bucket in milliseconds, chosen from the window size. Every
+	// series below is aligned to it, so a client can build the buckets for a
+	// window that returned no keys at all without restating the granularity
+	// rule.
 	//
-	Data []V2PortalGetVerificationsDataPoint `json:"data"`
+	BucketMillis int64 `json:"bucketMillis"`
+	// One entry per key the end user has verifications for in the window, each
+	// zero-filled across the whole window and ordered by time ascending. Sum
+	// them to get the account-wide series.
+	//
+	// Keys with no verifications anywhere in the window are omitted. Entries
+	// come from the verification events themselves, so a `keyId` may name a key
+	// that has since been deleted and will not appear in `portal.listKeys`;
+	// render those totals without assuming the key is still listable.
+	//
+	Keys []V2PortalGetVerificationsKeySeries `json:"keys"`
 }
 
 func (v *V2PortalGetVerificationsResponseBody) GetMeta() Meta {
@@ -19,11 +30,18 @@ func (v *V2PortalGetVerificationsResponseBody) GetMeta() Meta {
 	return v.Meta
 }
 
-func (v *V2PortalGetVerificationsResponseBody) GetData() []V2PortalGetVerificationsDataPoint {
+func (v *V2PortalGetVerificationsResponseBody) GetBucketMillis() int64 {
 	if v == nil {
-		return []V2PortalGetVerificationsDataPoint{}
+		return 0
 	}
-	return v.Data
+	return v.BucketMillis
+}
+
+func (v *V2PortalGetVerificationsResponseBody) GetKeys() []V2PortalGetVerificationsKeySeries {
+	if v == nil {
+		return []V2PortalGetVerificationsKeySeries{}
+	}
+	return v.Keys
 }
 
 // #region class-body-v2portalgetverificationsresponsebody
