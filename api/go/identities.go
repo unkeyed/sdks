@@ -1144,6 +1144,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -1311,7 +1312,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 		request.Cursor = &nCVal
 
 		return s.ListIdentities(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)

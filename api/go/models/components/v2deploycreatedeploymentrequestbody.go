@@ -18,7 +18,9 @@ type V2DeployCreateDeploymentRequestBody struct {
 	Branch string `json:"branch"`
 	// Environment slug (e.g., "production", "staging")
 	EnvironmentSlug string `json:"environmentSlug"`
-	// Docker image reference to deploy
+	// Deprecated. Use `oci.image` in v3 instead. This field is the full image reference to deploy. Qualify the version with a tag (ghcr.io/user/app:v1.0.0) or a digest (ghcr.io/user/app@sha256:...). Without either, the registry serves the latest tag.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DockerImage string `json:"dockerImage"`
 	// Optional git commit information
 	GitCommit *V2DeployGitCommit `json:"gitCommit,omitzero"`

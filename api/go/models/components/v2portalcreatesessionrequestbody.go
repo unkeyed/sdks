@@ -12,7 +12,6 @@ type Scope string
 
 const (
 	ScopeKeysRead      Scope = "keys:read"
-	ScopeKeysCreate    Scope = "keys:create"
 	ScopeKeysReroll    Scope = "keys:reroll"
 	ScopeAnalyticsRead Scope = "analytics:read"
 )
@@ -27,8 +26,6 @@ func (e *Scope) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "keys:read":
-		fallthrough
-	case "keys:create":
 		fallthrough
 	case "keys:reroll":
 		fallthrough
@@ -52,20 +49,12 @@ type V2PortalCreateSessionRequestBody struct {
 	// The capabilities granted to the end user in the Portal, from a fixed
 	// vocabulary. All capabilities are scoped to this end user: key capabilities
 	// (`keys:*`) apply only to keys the end user owns within the keyspace
-	// configured on the portal, and `analytics:read` returns only the end user's
-	// own verification events. An end user can never see another identity's keys
-	// or analytics.
+	// configured on the portal. An end user can never see another identity's
+	// keys.
 	//
-	// Tab visibility is derived from the scopes:
-	// - Keys tab: any `keys:*` scope
-	// - Analytics tab: `analytics:read`
-	// - Docs tab: visible when any scope is present
-	//
-	// `keys:create` is accepted but has no portal route behind it yet. It is
-	// still authorized like the others, so a session minted with it required
-	// `create_key` on the keyspace at mint time, and a future portal create-key
-	// route inherits an enforced ceiling rather than trusting sessions minted
-	// while the capability was inert.
+	// Rerolling and usage analytics are both reached from the keys page, so
+	// `keys:reroll` and `analytics:read` each require `keys:read` in the same
+	// session; requesting either without it is rejected.
 	//
 	// Each scope requires the equivalent permission on your own root key. See
 	// Required Permissions on this operation.

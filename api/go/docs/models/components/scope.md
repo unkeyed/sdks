@@ -16,6 +16,5 @@ value := components.ScopeKeysRead
 | Name                 | Value                |
 | -------------------- | -------------------- |
 | `ScopeKeysRead`      | keys:read            |
-| `ScopeKeysCreate`    | keys:create          |
 | `ScopeKeysReroll`    | keys:reroll          |
 | `ScopeAnalyticsRead` | analytics:read       |

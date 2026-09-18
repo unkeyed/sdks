@@ -2194,6 +2194,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -2361,7 +2362,7 @@ func (s *Permissions) ListPermissions(ctx context.Context, request components.V2
 		request.Cursor = &nCVal
 
 		return s.ListPermissions(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)
@@ -2570,6 +2571,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -2737,7 +2739,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 		request.Cursor = &nCVal
 
 		return s.ListRoles(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)
@@ -2926,7 +2928,7 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 //
 // When any requested permission slug does not exist, it must also have:
 // - `rbac.*.create_permission`
-func (s *Permissions) SetRolePermissions(ctx context.Context, request components.V2PermissionsSetRolePermissionsRequestBody, opts ...operations.Option) (*operations.PermissionsSetRolePermissionsResponse, error) {
+func (s *Permissions) SetRolePermissions(ctx context.Context, request components.V2PermissionsSetRolePermissionsRequestBodyUnion, opts ...operations.Option) (*operations.PermissionsSetRolePermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

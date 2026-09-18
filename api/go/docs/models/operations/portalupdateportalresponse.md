@@ -1,0 +1,9 @@
+# PortalUpdatePortalResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalUpdatePortalResponseBody`                                                                          | [*components.V2PortalUpdatePortalResponseBody](../../models/components/v2portalupdateportalresponsebody.md) | :heavy_minus_sign:                                                                                          | The portal as it now stands.<br/>                                                                           |

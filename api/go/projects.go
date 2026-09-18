@@ -1176,6 +1176,7 @@ func (s *Projects) ListProjects(ctx context.Context, request components.V2Projec
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -1343,7 +1344,7 @@ func (s *Projects) ListProjects(ctx context.Context, request components.V2Projec
 		request.Cursor = &nCVal
 
 		return s.ListProjects(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)
