@@ -5,15 +5,15 @@ management:
   docVersion: 2.0.0
   speakeasyVersion: 1.797.0
   generationVersion: 2.937.18
-  releaseVersion: 3.0.1
-  configChecksum: e0e41f6b6e2579de7d4e8e7375ccbd6d
+  releaseVersion: 3.0.2
+  configChecksum: 9b87d28d513f26eb8e420a6d86370526
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks
 persistentEdits:
-  generation_id: ec239895-26ce-470a-97bd-676b72375842
-  pristine_commit_hash: 823f4a6d18254aded4fe2b66697914b73d08993f
-  pristine_tree_hash: 0a33dd716aa5b97009288d5721c5f7493b898c0a
+  generation_id: ec4cbd0b-c9e9-4e04-8d61-f68956cec9ef
+  pristine_commit_hash: 9cfc6c19070d502f8186f027895ae10dea414f1d
+  pristine_tree_hash: 4d98871c499691b13198a15d0e2af689383d6222
 features:
   go:
     additionalDependencies: 0.1.0
@@ -3421,8 +3421,8 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:bf4a88e54ad37267713009a2ff64e74204ab4f86
-    pristine_git_object: e5fe65dd098be6dbdd07dadda7575169674a1870
+    last_write_checksum: sha1:078f3e13a88fa38feb95d5553c382ca6d83b90b7
+    pristine_git_object: 5491b199eab0da1d39147d223687183f0cd71c5d
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -7546,7 +7546,6 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Unkey.Apps.CreateApp()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Unkey.Portal.GetVerifications()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Unkey.Portal.CreateSession()`: \n  *  `request.Request.Scopes[].Enum(keys:create)` **Removed** (Breaking ⚠️)\n* `Unkey.Permissions.SetRolePermissions()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Unkey.Apps.GetApp()`:  `response.Data` **Changed**\n* `Unkey.Portal.UpdatePortal()`: **Added**\n* `Unkey.Deployments.CreateDeploymentV3()`: **Added**\n* `Unkey.Apps.ListApps()`:  `response.Data[]` **Changed**\n* `Unkey.Apps.UpdateApp()`: \n  *  `request.Request.Oci` **Added**\n  *  `response.Data` **Changed**\n* `Unkey.Deployments.CreateDeployment()`: **Deprecated**\n* `Unkey.Domains.GetDomain()`:  `response.Data.DomainConnect` **Added**\n* `Unkey.Domains.ListDomains()`: \n  *  `request.Request` **Changed**\n  *  `response.Data[].DomainConnect` **Added**\n  *  `error.status[503]` **Added**\n* `Unkey.Portal.GetPortal()`: **Added**\n* `Unkey.Portal.DeletePortal()`: **Added**\n* `Unkey.Portal.CreatePortal()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go
