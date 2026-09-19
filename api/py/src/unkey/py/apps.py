@@ -2,10 +2,10 @@
 
 from .basesdk import BaseSDK
 from jsonpath import JSONPath
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union, cast
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
-from unkey.py.types import OptionalNullable, UNSET
+from unkey.py.types import BaseModel, OptionalNullable, UNSET
 from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 
 
@@ -15,12 +15,10 @@ class Apps(BaseSDK):
     def create_app(
         self,
         *,
-        project: str,
-        name: str,
-        slug: str,
-        git: Optional[
-            Union[models.AppGitCreateInput, models.AppGitCreateInputTypedDict]
-        ] = None,
+        request: Union[
+            models.V2AppsCreateAppRequestBodyUnion,
+            models.V2AppsCreateAppRequestBodyUnionTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -29,6 +27,8 @@ class Apps(BaseSDK):
         r"""Create app
 
         Create an app within a project. The app is created with default `production` and `preview` environments.
+
+        Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
 
         The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 
@@ -43,18 +43,7 @@ class Apps(BaseSDK):
 
         If set, this operation will use `root_key` from the global security.
 
-        :param project: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param name: Human-readable name for this app.
-            Use a descriptive name like 'Payments API' to identify its purpose.
-
-        :param slug: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param git: Connect a GitHub repository to the app on creation. Omit to create the app
-            without a repository and connect one later with apps.updateApp.
-
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -70,12 +59,9 @@ class Apps(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2AppsCreateAppRequestBody(
-            project=project,
-            name=name,
-            slug=slug,
-            git=utils.get_pydantic_model(git, Optional[models.AppGitCreateInput]),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, models.V2AppsCreateAppRequestBodyUnion)
+        request = cast(models.V2AppsCreateAppRequestBodyUnion, request)
 
         req = self._build_request(
             method="POST",
@@ -91,7 +77,7 @@ class Apps(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2AppsCreateAppRequestBody
+                request, False, False, "json", models.V2AppsCreateAppRequestBodyUnion
             ),
             allow_empty_value=None,
             allowed_fields=["root_key"],
@@ -175,12 +161,10 @@ class Apps(BaseSDK):
     async def create_app_async(
         self,
         *,
-        project: str,
-        name: str,
-        slug: str,
-        git: Optional[
-            Union[models.AppGitCreateInput, models.AppGitCreateInputTypedDict]
-        ] = None,
+        request: Union[
+            models.V2AppsCreateAppRequestBodyUnion,
+            models.V2AppsCreateAppRequestBodyUnionTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -189,6 +173,8 @@ class Apps(BaseSDK):
         r"""Create app
 
         Create an app within a project. The app is created with default `production` and `preview` environments.
+
+        Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
 
         The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 
@@ -203,18 +189,7 @@ class Apps(BaseSDK):
 
         If set, this operation will use `root_key` from the global security.
 
-        :param project: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param name: Human-readable name for this app.
-            Use a descriptive name like 'Payments API' to identify its purpose.
-
-        :param slug: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param git: Connect a GitHub repository to the app on creation. Omit to create the app
-            without a repository and connect one later with apps.updateApp.
-
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -230,12 +205,9 @@ class Apps(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2AppsCreateAppRequestBody(
-            project=project,
-            name=name,
-            slug=slug,
-            git=utils.get_pydantic_model(git, Optional[models.AppGitCreateInput]),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, models.V2AppsCreateAppRequestBodyUnion)
+        request = cast(models.V2AppsCreateAppRequestBodyUnion, request)
 
         req = self._build_request_async(
             method="POST",
@@ -251,7 +223,7 @@ class Apps(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2AppsCreateAppRequestBody
+                request, False, False, "json", models.V2AppsCreateAppRequestBodyUnion
             ),
             allow_empty_value=None,
             allowed_fields=["root_key"],
@@ -1270,6 +1242,7 @@ class Apps(BaseSDK):
         git: OptionalNullable[
             Union[models.AppGitUpdateInput, models.AppGitUpdateInputTypedDict]
         ] = UNSET,
+        oci: Optional[Union[models.AppOCI, models.AppOCITypedDict]] = None,
         delete_protection: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1310,6 +1283,10 @@ class Apps(BaseSDK):
             \"repository\" to connect or replace it and/or a \"defaultBranch\" to set which
             branch it tracks. Fields are independent, so send only the one you change.
 
+        :param oci: Change the default image reference for an OCI-sourced app. This does not
+            create a deployment. It can be combined with other app settings. Source
+            switching is not supported.
+
         :param delete_protection: Enable or disable delete protection for the app.
             Omit this field to leave the current setting unchanged.
 
@@ -1336,6 +1313,7 @@ class Apps(BaseSDK):
             git=utils.get_pydantic_model(
                 git, OptionalNullable[models.AppGitUpdateInput]
             ),
+            oci=utils.get_pydantic_model(oci, Optional[models.AppOCI]),
             delete_protection=delete_protection,
         )
 
@@ -1444,6 +1422,7 @@ class Apps(BaseSDK):
         git: OptionalNullable[
             Union[models.AppGitUpdateInput, models.AppGitUpdateInputTypedDict]
         ] = UNSET,
+        oci: Optional[Union[models.AppOCI, models.AppOCITypedDict]] = None,
         delete_protection: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1484,6 +1463,10 @@ class Apps(BaseSDK):
             \"repository\" to connect or replace it and/or a \"defaultBranch\" to set which
             branch it tracks. Fields are independent, so send only the one you change.
 
+        :param oci: Change the default image reference for an OCI-sourced app. This does not
+            create a deployment. It can be combined with other app settings. Source
+            switching is not supported.
+
         :param delete_protection: Enable or disable delete protection for the app.
             Omit this field to leave the current setting unchanged.
 
@@ -1510,6 +1493,7 @@ class Apps(BaseSDK):
             git=utils.get_pydantic_model(
                 git, OptionalNullable[models.AppGitUpdateInput]
             ),
+            oci=utils.get_pydantic_model(oci, Optional[models.AppOCI]),
             delete_protection=delete_protection,
         )
 

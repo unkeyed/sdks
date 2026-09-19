@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - go</title>
+    <title>SDK Changelog - python</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,71 +95,85 @@
         }
     </style>
 </head>
-<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
+<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>Unkey.Apps.CreateApp()</code>:  <code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Portal.GetVerifications()</code>:
+<li><code>unkey.apps.create_app()</code>: <code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+
+<ul>
+<li><code>git</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>name</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>project</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>slug</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+</ul></li>
+<li><code>unkey.portal.get_verifications()</code>:
 
 <ul>
 <li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>BucketMillis</code> <strong>Added</strong></li>
-<li><code>Data</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Keys</code> <strong>Added</strong></li>
+<li><code>bucket_millis</code> <strong>Added</strong></li>
+<li><code>data</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>keys</code> <strong>Added</strong></li>
 </ul></li>
 <li><code>error.status[422]</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Portal.CreateSession()</code>:
+<li><code>unkey.portal.create_session()</code>:
 
 <ul>
-<li><code>request.Request.Scopes[].Enum(keys:create)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request.scopes[].enum(keys:create)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>Unkey.Permissions.SetRolePermissions()</code>:  <code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Apps.GetApp()</code>: <code>response.Data</code> <strong>Changed</strong>
+<li><code>unkey.permissions.set_role_permissions()</code>: <code>request</code> <strong>Changed</strong> (Breaking ⚠️)
 
 <ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
+<li><code>permissions</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request</code> <strong>Added</strong> (Breaking ⚠️)</li>
+<li><code>role_id</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>Unkey.Portal.UpdatePortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Deployments.CreateDeploymentV3()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Apps.ListApps()</code>: <code>response.Data[]</code> <strong>Changed</strong>
+<li><code>unkey.apps.get_app()</code>: <code>response.data</code> <strong>Changed</strong>
 
 <ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
+<li><code>oci</code> <strong>Added</strong></li>
+<li><code>source_type</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Apps.UpdateApp()</code>:
+<li><code>unkey.portal.update_portal()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.create_deployment_v3()</code>: <strong>Added</strong></li>
+<li><code>unkey.apps.list_apps()</code>: <code>response.data[]</code> <strong>Changed</strong>
 
 <ul>
-<li><code>request.Request.Oci</code> <strong>Added</strong></li>
-<li><code>response.Data</code> <strong>Changed</strong>
+<li><code>oci</code> <strong>Added</strong></li>
+<li><code>source_type</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>unkey.apps.update_app()</code>:
 
 <ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
+<li><code>request.oci</code> <strong>Added</strong></li>
+<li><code>response.data</code> <strong>Changed</strong>
+
+<ul>
+<li><code>oci</code> <strong>Added</strong></li>
+<li><code>source_type</code> <strong>Added</strong></li>
 </ul></li>
 </ul></li>
-<li><code>Unkey.Deployments.CreateDeployment()</code>: <strong>Deprecated</strong></li>
-<li><code>Unkey.Domains.GetDomain()</code>:  <code>response.Data.DomainConnect</code> <strong>Added</strong></li>
-<li><code>Unkey.Domains.ListDomains()</code>:
+<li><code>unkey.deployments.create_deployment()</code>: <strong>Deprecated</strong></li>
+<li><code>unkey.domains.get_domain()</code>:  <code>response.data.domain_connect</code> <strong>Added</strong></li>
+<li><code>unkey.domains.list_domains()</code>:
 
 <ul>
-<li><code>request.Request</code> <strong>Changed</strong>
+<li><code>request</code> <strong>Changed</strong>
 
 <ul>
-<li><code>App</code> <strong>Changed</strong></li>
-<li><code>Environment</code> <strong>Changed</strong></li>
-<li><code>Project</code> <strong>Changed</strong></li>
+<li><code>app</code> <strong>Changed</strong></li>
+<li><code>environment</code> <strong>Changed</strong></li>
+<li><code>project</code> <strong>Changed</strong></li>
 </ul></li>
-<li><code>response.Data[].DomainConnect</code> <strong>Added</strong></li>
+<li><code>response.data[].domain_connect</code> <strong>Added</strong></li>
 <li><code>error.status[503]</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Portal.GetPortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.DeletePortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.CreatePortal()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.get_portal()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.delete_portal()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.create_portal()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>
