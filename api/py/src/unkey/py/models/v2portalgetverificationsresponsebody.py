@@ -2,22 +2,35 @@
 
 from __future__ import annotations
 from .meta import Meta, MetaTypedDict
-from .v2portalgetverificationsdatapoint import (
-    V2PortalGetVerificationsDataPoint,
-    V2PortalGetVerificationsDataPointTypedDict,
+from .v2portalgetverificationskeyseries import (
+    V2PortalGetVerificationsKeySeries,
+    V2PortalGetVerificationsKeySeriesTypedDict,
 )
+import pydantic
 from typing import List
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 from unkey.py.types import BaseModel
 
 
 class V2PortalGetVerificationsResponseBodyTypedDict(TypedDict):
     meta: MetaTypedDict
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-    data: List[V2PortalGetVerificationsDataPointTypedDict]
-    r"""Zero-filled verification timeseries for the authenticated end user, ordered
-    by time ascending. Buckets with no verifications are present with zero
-    counts so the series is contiguous across the requested window.
+    bucket_millis: int
+    r"""Width of one bucket in milliseconds, chosen from the window size. Every
+    series below is aligned to it, so a client can build the buckets for a
+    window that returned no keys at all without restating the granularity
+    rule.
+
+    """
+    keys: List[V2PortalGetVerificationsKeySeriesTypedDict]
+    r"""One entry per key the end user has verifications for in the window, each
+    zero-filled across the whole window and ordered by time ascending. Sum
+    them to get the account-wide series.
+
+    Keys with no verifications anywhere in the window are omitted. Entries
+    come from the verification events themselves, so a `keyId` may name a key
+    that has since been deleted and will not appear in `portal.listKeys`;
+    render those totals without assuming the key is still listable.
 
     """
 
@@ -26,9 +39,28 @@ class V2PortalGetVerificationsResponseBody(BaseModel):
     meta: Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
-    data: List[V2PortalGetVerificationsDataPoint]
-    r"""Zero-filled verification timeseries for the authenticated end user, ordered
-    by time ascending. Buckets with no verifications are present with zero
-    counts so the series is contiguous across the requested window.
+    bucket_millis: Annotated[int, pydantic.Field(alias="bucketMillis")]
+    r"""Width of one bucket in milliseconds, chosen from the window size. Every
+    series below is aligned to it, so a client can build the buckets for a
+    window that returned no keys at all without restating the granularity
+    rule.
 
     """
+
+    keys: List[V2PortalGetVerificationsKeySeries]
+    r"""One entry per key the end user has verifications for in the window, each
+    zero-filled across the whole window and ordered by time ascending. Sum
+    them to get the account-wide series.
+
+    Keys with no verifications anywhere in the window are omitted. Entries
+    come from the verification events themselves, so a `keyId` may name a key
+    that has since been deleted and will not appear in `portal.listKeys`;
+    render those totals without assuming the key is still listable.
+
+    """
+
+
+try:
+    V2PortalGetVerificationsResponseBody.model_rebuild()
+except NameError:
+    pass

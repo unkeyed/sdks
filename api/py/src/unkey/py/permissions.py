@@ -2,10 +2,10 @@
 
 from .basesdk import BaseSDK
 from jsonpath import JSONPath
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union, cast
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
-from unkey.py.types import OptionalNullable, UNSET
+from unkey.py.types import BaseModel, OptionalNullable, UNSET
 from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 
 
@@ -2509,8 +2509,10 @@ class Permissions(BaseSDK):
     def set_role_permissions(
         self,
         *,
-        role_id: str,
-        permissions: Iterable[str],
+        request: Union[
+            models.V2PermissionsSetRolePermissionsRequestBodyUnion,
+            models.V2PermissionsSetRolePermissionsRequestBodyUnionTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2530,10 +2532,7 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
-        :param role_id: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param permissions: The complete set of permission slugs to assign directly to the role. Missing permissions are created when authorized. An empty array clears all direct permissions.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2549,10 +2548,11 @@ class Permissions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2PermissionsSetRolePermissionsRequestBody(
-            role_id=role_id,
-            permissions=utils.unmarshal(permissions, List[str]),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.V2PermissionsSetRolePermissionsRequestBodyUnion
+            )
+        request = cast(models.V2PermissionsSetRolePermissionsRequestBodyUnion, request)
 
         req = self._build_request(
             method="POST",
@@ -2572,7 +2572,7 @@ class Permissions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.V2PermissionsSetRolePermissionsRequestBody,
+                models.V2PermissionsSetRolePermissionsRequestBodyUnion,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2652,8 +2652,10 @@ class Permissions(BaseSDK):
     async def set_role_permissions_async(
         self,
         *,
-        role_id: str,
-        permissions: Iterable[str],
+        request: Union[
+            models.V2PermissionsSetRolePermissionsRequestBodyUnion,
+            models.V2PermissionsSetRolePermissionsRequestBodyUnionTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2673,10 +2675,7 @@ class Permissions(BaseSDK):
         - `rbac.*.create_permission`
 
 
-        :param role_id: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
-
-        :param permissions: The complete set of permission slugs to assign directly to the role. Missing permissions are created when authorized. An empty array clears all direct permissions.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2692,10 +2691,11 @@ class Permissions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.V2PermissionsSetRolePermissionsRequestBody(
-            role_id=role_id,
-            permissions=utils.unmarshal(permissions, List[str]),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.V2PermissionsSetRolePermissionsRequestBodyUnion
+            )
+        request = cast(models.V2PermissionsSetRolePermissionsRequestBodyUnion, request)
 
         req = self._build_request_async(
             method="POST",
@@ -2715,7 +2715,7 @@ class Permissions(BaseSDK):
                 False,
                 False,
                 "json",
-                models.V2PermissionsSetRolePermissionsRequestBody,
+                models.V2PermissionsSetRolePermissionsRequestBodyUnion,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

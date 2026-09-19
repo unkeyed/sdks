@@ -3,6 +3,7 @@
 from .basesdk import BaseSDK
 from jsonpath import JSONPath
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Union, cast
+from typing_extensions import deprecated
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
 from unkey.py.types import BaseModel, OptionalNullable, UNSET
@@ -12,6 +13,9 @@ from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 class Deployments(BaseSDK):
     r"""Deployment operations"""
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_deployment(
         self,
         *,
@@ -163,6 +167,9 @@ class Deployments(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_deployment_async(
         self,
         *,
@@ -2165,6 +2172,366 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def create_deployment_v3(
+        self,
+        *,
+        project: str,
+        app: str,
+        environment: str,
+        git: Optional[
+            Union[models.DeploymentSourceGit, models.DeploymentSourceGitTypedDict]
+        ] = None,
+        oci: Optional[
+            Union[models.DeploymentSourceOCI, models.DeploymentSourceOCITypedDict]
+        ] = None,
+        deployment: Optional[
+            Union[
+                models.DeploymentSourceDeployment,
+                models.DeploymentSourceDeploymentTypedDict,
+            ]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3DeploymentsCreateDeploymentResponseBody:
+        r"""Create deployment
+
+        Create a deployment for an app in a project.
+
+        Omit the source to use the app's configured default. A Git app builds its default branch. An OCI app deploys its default image.
+
+        Optionally provide one source override:
+        - `oci`: deploy a prebuilt OCI image without a build. Mutable tags are resolved to immutable digests before rollout.
+        - `git`: build and deploy from the app's connected GitHub repository, a branch, a specific commit, or a fork commit. Requires the app to have a repository connected.
+        - `deployment`: re-run an existing deployment by its id. Git deployments rebuild from the recorded commit; OCI deployments reuse the recorded resolved image.
+
+        Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
+
+        **Authentication**: requires a root key with permission to create deployments.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param project: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param app: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param environment: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param git: Build from the app's connected GitHub repository.
+        :param oci: Deploy a prebuilt OCI image without a build.
+        :param deployment: Re-run an existing deployment.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V3DeploymentsCreateDeploymentRequestBody(
+            project=project,
+            app=app,
+            environment=environment,
+            git=utils.get_pydantic_model(git, Optional[models.DeploymentSourceGit]),
+            oci=utils.get_pydantic_model(oci, Optional[models.DeploymentSourceOCI]),
+            deployment=utils.get_pydantic_model(
+                deployment, Optional[models.DeploymentSourceDeployment]
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v3/deployments.createDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V3DeploymentsCreateDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.createDeploymentV3",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.V3DeploymentsCreateDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def create_deployment_v3_async(
+        self,
+        *,
+        project: str,
+        app: str,
+        environment: str,
+        git: Optional[
+            Union[models.DeploymentSourceGit, models.DeploymentSourceGitTypedDict]
+        ] = None,
+        oci: Optional[
+            Union[models.DeploymentSourceOCI, models.DeploymentSourceOCITypedDict]
+        ] = None,
+        deployment: Optional[
+            Union[
+                models.DeploymentSourceDeployment,
+                models.DeploymentSourceDeploymentTypedDict,
+            ]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3DeploymentsCreateDeploymentResponseBody:
+        r"""Create deployment
+
+        Create a deployment for an app in a project.
+
+        Omit the source to use the app's configured default. A Git app builds its default branch. An OCI app deploys its default image.
+
+        Optionally provide one source override:
+        - `oci`: deploy a prebuilt OCI image without a build. Mutable tags are resolved to immutable digests before rollout.
+        - `git`: build and deploy from the app's connected GitHub repository, a branch, a specific commit, or a fork commit. Requires the app to have a repository connected.
+        - `deployment`: re-run an existing deployment by its id. Git deployments rebuild from the recorded commit; OCI deployments reuse the recorded resolved image.
+
+        Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
+
+        **Authentication**: requires a root key with permission to create deployments.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param project: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param app: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param environment: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param git: Build from the app's connected GitHub repository.
+        :param oci: Deploy a prebuilt OCI image without a build.
+        :param deployment: Re-run an existing deployment.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V3DeploymentsCreateDeploymentRequestBody(
+            project=project,
+            app=app,
+            environment=environment,
+            git=utils.get_pydantic_model(git, Optional[models.DeploymentSourceGit]),
+            oci=utils.get_pydantic_model(oci, Optional[models.DeploymentSourceOCI]),
+            deployment=utils.get_pydantic_model(
+                deployment, Optional[models.DeploymentSourceDeployment]
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v3/deployments.createDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V3DeploymentsCreateDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.createDeploymentV3",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.V3DeploymentsCreateDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res

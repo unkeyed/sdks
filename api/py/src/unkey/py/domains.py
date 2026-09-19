@@ -970,9 +970,9 @@ class Domains(BaseSDK):
     def list_domains(
         self,
         *,
-        project: str,
-        app: str,
-        environment: str,
+        project: Optional[str] = None,
+        app: Optional[str] = None,
+        environment: Optional[str] = None,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
         search: Optional[str] = None,
@@ -983,11 +983,15 @@ class Domains(BaseSDK):
     ) -> models.V2DomainsListDomainsResponseBody:
         r"""List domains
 
-        List the custom domains attached to an environment and their verification status.
+        List your custom domains with their verification status and DNS records.
+        Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+        domains across your workspace.
 
-        Results are paginated and sorted by their id. When `hasMore` is true, send the
-        returned `cursor` to get the next page. An environment with no domains returns an
-        empty array, not a 404.
+        Use any filter on its own or combine filters to narrow the results.
+        Results match all supplied filters. Omitting `environment` includes all matching environments.
+
+        Results include only domains you have permission to read, sorted by ID.
+        When `hasMore` is true, send the returned `cursor` to get the next page.
 
         `status: verified` means the domain is verified. Unkey has configured routing and requested a
         certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -997,21 +1001,20 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.read_domain` (to read domains in any environment)
-        - `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+        Use a root key with the `environment.*.read_domain` permission.
+        A successful request returns an empty list if no matching domains are readable by your key.
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param project: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param project: Match domains whose project ID or slug equals this value. This filter does not require
+            an app or environment filter.
 
-        :param app: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param app: Match domains whose app ID or slug equals this value. This filter does not require a
+            project or environment filter.
 
-        :param environment: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param environment: Match domains whose environment ID or slug equals this value. This filter does not require
+            a project or app filter.
 
         :param limit: The maximum number of domains one response contains.
             A small limit makes the response smaller, but makes more requests necessary.
@@ -1127,6 +1130,11 @@ class Domains(BaseSDK):
                 errors.InternalServerErrorResponseData, http_res
             )
             raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableErrorResponseData, http_res
+            )
+            raise errors.ServiceUnavailableErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
@@ -1139,9 +1147,9 @@ class Domains(BaseSDK):
     async def list_domains_async(
         self,
         *,
-        project: str,
-        app: str,
-        environment: str,
+        project: Optional[str] = None,
+        app: Optional[str] = None,
+        environment: Optional[str] = None,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
         search: Optional[str] = None,
@@ -1152,11 +1160,15 @@ class Domains(BaseSDK):
     ) -> models.V2DomainsListDomainsResponseBody:
         r"""List domains
 
-        List the custom domains attached to an environment and their verification status.
+        List your custom domains with their verification status and DNS records.
+        Filter by project, app, or environment using IDs or slugs, or send `{}` to list
+        domains across your workspace.
 
-        Results are paginated and sorted by their id. When `hasMore` is true, send the
-        returned `cursor` to get the next page. An environment with no domains returns an
-        empty array, not a 404.
+        Use any filter on its own or combine filters to narrow the results.
+        Results match all supplied filters. Omitting `environment` includes all matching environments.
+
+        Results include only domains you have permission to read, sorted by ID.
+        When `hasMore` is true, send the returned `cursor` to get the next page.
 
         `status: verified` means the domain is verified. Unkey has configured routing and requested a
         certificate. Each domain includes its full `dnsRecords`. Each record has a `verified` flag.
@@ -1166,21 +1178,20 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.read_domain` (to read domains in any environment)
-        - `environment.<environment_id>.read_domain` (to read domains in a specific environment)
+        Use a root key with the `environment.*.read_domain` permission.
+        A successful request returns an empty list if no matching domains are readable by your key.
 
 
         If set, this operation will use `root_key` from the global security.
 
-        :param project: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param project: Match domains whose project ID or slug equals this value. This filter does not require
+            an app or environment filter.
 
-        :param app: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param app: Match domains whose app ID or slug equals this value. This filter does not require a
+            project or environment filter.
 
-        :param environment: Identifies a resource by either its unique ID or its slug.
-            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+        :param environment: Match domains whose environment ID or slug equals this value. This filter does not require
+            a project or app filter.
 
         :param limit: The maximum number of domains one response contains.
             A small limit makes the response smaller, but makes more requests necessary.
@@ -1296,6 +1307,11 @@ class Domains(BaseSDK):
                 errors.InternalServerErrorResponseData, http_res
             )
             raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableErrorResponseData, http_res
+            )
+            raise errors.ServiceUnavailableErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
