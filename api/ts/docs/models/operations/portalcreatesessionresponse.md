@@ -21,7 +21,7 @@ let value: PortalCreateSessionResponse = {
     },
     data: {
       id: "ps_abc123def456",
-      url: "https://portal.unkey.com/?code=pst_abc123def456",
+      url: "https://portal.unkey.com/?code=pec_abc123def456",
     },
   },
 };

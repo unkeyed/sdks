@@ -16,6 +16,8 @@ App management operations
 
 Create an app within a project. The app is created with default `production` and `preview` environments.
 
+Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
+
 The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 
 **Important**: The slug cannot collide with an existing app in the same project. A duplicate slug returns a 409 conflict.
@@ -100,9 +102,79 @@ const unkey = new Unkey({
 
 async function run() {
   const result = await unkey.apps.createApp({
+    project: "proj_1234abcd",
+    name: "Payments API",
+    slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { appsCreateApp } from "@unkey/api/funcs/appsCreateApp.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await appsCreateApp(unkey, {
+    project: "proj_1234abcd",
+    name: "Payments API",
+    slug: "proj_1234abcd",
+    git: {
+      repository: "unkeyed/unkey",
+      defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appsCreateApp failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: git
+
+<!-- UsageSnippet language="typescript" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="git" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.apps.createApp({
     project: "payments",
     name: "Payments API",
     slug: "payments-api",
+    git: {
+      repository: "unkeyed/unkey",
+    },
   });
 
   console.log(result);
@@ -130,6 +202,9 @@ async function run() {
     project: "payments",
     name: "Payments API",
     slug: "payments-api",
+    git: {
+      repository: "unkeyed/unkey",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -251,6 +326,65 @@ async function run() {
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appsCreateApp failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ociImage
+
+<!-- UsageSnippet language="typescript" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="ociImage" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.apps.createApp({
+    project: "payments",
+    name: "Payments API",
+    slug: "payments-api",
+    oci: {
+      image: "ghcr.io/acme/payments:v1.2.3",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { appsCreateApp } from "@unkey/api/funcs/appsCreateApp.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await appsCreateApp(unkey, {
+    project: "payments",
+    name: "Payments API",
+    slug: "payments-api",
+    oci: {
+      image: "ghcr.io/acme/payments:v1.2.3",
     },
   });
   if (res.ok) {
@@ -390,7 +524,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.V2AppsCreateAppRequestBody](../../models/components/v2appscreateapprequestbody.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.V2AppsCreateAppRequestBodyUnion](../../models/components/v2appscreateapprequestbodyunion.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -1357,6 +1491,9 @@ async function run() {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
     },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
     deleteProtection: true,
   });
 
@@ -1389,6 +1526,9 @@ async function run() {
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
     },
     deleteProtection: true,
   });
@@ -1422,6 +1562,9 @@ async function run() {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
     },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
     deleteProtection: true,
   });
 
@@ -1454,6 +1597,9 @@ async function run() {
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
     },
     deleteProtection: true,
   });
@@ -1487,6 +1633,9 @@ async function run() {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
     },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
     deleteProtection: true,
   });
 
@@ -1519,6 +1668,9 @@ async function run() {
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
     },
     deleteProtection: true,
   });
@@ -1605,6 +1757,9 @@ async function run() {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
     },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
+    },
     deleteProtection: true,
   });
 
@@ -1637,6 +1792,9 @@ async function run() {
     git: {
       repository: "unkeyed/unkey",
       defaultBranch: "main",
+    },
+    oci: {
+      image: "ghcr.io/acme/api:v1.2.3",
     },
     deleteProtection: true,
   });
