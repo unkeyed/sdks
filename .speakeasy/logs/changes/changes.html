@@ -98,68 +98,17 @@
 <body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
 
 <ul>
-<li><code>Unkey.Apps.CreateApp()</code>:  <code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Portal.GetVerifications()</code>:
-
-<ul>
-<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>BucketMillis</code> <strong>Added</strong></li>
-<li><code>Data</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Keys</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>error.status[422]</code> <strong>Added</strong></li>
-</ul></li>
 <li><code>Unkey.Portal.CreateSession()</code>:
 
 <ul>
-<li><code>request.Request.Scopes[].Enum(keys:create)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>request.Request.Preview</code> <strong>Removed</strong> (Breaking ⚠️)</li>
 </ul></li>
-<li><code>Unkey.Permissions.SetRolePermissions()</code>:  <code>request.Request</code> <strong>Changed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Apps.GetApp()</code>: <code>response.Data</code> <strong>Changed</strong>
+<li><code>Unkey.Keys.VerifyKey()</code>:
 
 <ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
+<li><code>request.Request.Keyspaces</code> <strong>Added</strong></li>
+<li><code>response.Data.KeyspaceId</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.Portal.UpdatePortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Deployments.CreateDeploymentV3()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Apps.ListApps()</code>: <code>response.Data[]</code> <strong>Changed</strong>
-
-<ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>Unkey.Apps.UpdateApp()</code>:
-
-<ul>
-<li><code>request.Request.Oci</code> <strong>Added</strong></li>
-<li><code>response.Data</code> <strong>Changed</strong>
-
-<ul>
-<li><code>Oci</code> <strong>Added</strong></li>
-<li><code>SourceType</code> <strong>Added</strong></li>
-</ul></li>
-</ul></li>
-<li><code>Unkey.Deployments.CreateDeployment()</code>: <strong>Deprecated</strong></li>
-<li><code>Unkey.Domains.GetDomain()</code>:  <code>response.Data.DomainConnect</code> <strong>Added</strong></li>
-<li><code>Unkey.Domains.ListDomains()</code>:
-
-<ul>
-<li><code>request.Request</code> <strong>Changed</strong>
-
-<ul>
-<li><code>App</code> <strong>Changed</strong></li>
-<li><code>Environment</code> <strong>Changed</strong></li>
-<li><code>Project</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>response.Data[].DomainConnect</code> <strong>Added</strong></li>
-<li><code>error.status[503]</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>Unkey.Portal.GetPortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.DeletePortal()</code>: <strong>Added</strong></li>
-<li><code>Unkey.Portal.CreatePortal()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>
