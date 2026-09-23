@@ -1648,6 +1648,9 @@ async function run() {
     credits: {
       cost: 5,
     },
+    keyspaces: [
+      "ks_1234abcd",
+    ],
     ratelimits: [
       {
         name: "tokens",
@@ -1693,6 +1696,9 @@ async function run() {
     credits: {
       cost: 5,
     },
+    keyspaces: [
+      "ks_1234abcd",
+    ],
     ratelimits: [
       {
         name: "tokens",

@@ -5,7 +5,6 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 type Scope string
@@ -60,9 +59,6 @@ type V2PortalCreateSessionRequestBody struct {
 	// Required Permissions on this operation.
 	//
 	Scopes []Scope `json:"scopes"`
-	// When true, creates a preview session for testing the portal experience.
-	//
-	Preview *bool `default:"false" json:"preview"`
 	// Absolute URL the end user is sent back to when they leave the portal, or
 	// when their session expires mid-visit. Set per session rather than per
 	// portal, so one portal can serve several entry points and return each user
@@ -71,17 +67,6 @@ type V2PortalCreateSessionRequestBody struct {
 	// When omitted, the portal shows no return link.
 	//
 	ReturnURL *string `json:"returnUrl,omitzero"`
-}
-
-func (v V2PortalCreateSessionRequestBody) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *V2PortalCreateSessionRequestBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetPortal() string {
@@ -103,13 +88,6 @@ func (v *V2PortalCreateSessionRequestBody) GetScopes() []Scope {
 		return []Scope{}
 	}
 	return v.Scopes
-}
-
-func (v *V2PortalCreateSessionRequestBody) GetPreview() *bool {
-	if v == nil {
-		return nil
-	}
-	return v.Preview
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetReturnURL() *string {
