@@ -55,6 +55,11 @@ class V2KeysVerifyKeyResponseDataTypedDict(TypedDict):
     is returned for both valid and invalid keys (except when `code=NOT_FOUND`).
 
     """
+    keyspace_id: NotRequired[str]
+    r"""The ID of the keyspace the key belongs to.
+    Returned for both valid and invalid keys, except when `code=NOT_FOUND`.
+
+    """
     name: NotRequired[str]
     r"""The human-readable name assigned to this key during creation.
     This is useful for displaying in logs or admin interfaces to identify
@@ -129,6 +134,12 @@ class V2KeysVerifyKeyResponseData(BaseModel):
 
     """
 
+    keyspace_id: Annotated[Optional[str], pydantic.Field(alias="keyspaceId")] = None
+    r"""The ID of the keyspace the key belongs to.
+    Returned for both valid and invalid keys, except when `code=NOT_FOUND`.
+
+    """
+
     name: Optional[str] = None
     r"""The human-readable name assigned to this key during creation.
     This is useful for displaying in logs or admin interfaces to identify
@@ -200,6 +211,7 @@ class V2KeysVerifyKeyResponseData(BaseModel):
         optional_fields = set(
             [
                 "keyId",
+                "keyspaceId",
                 "name",
                 "meta",
                 "expires",

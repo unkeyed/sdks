@@ -1,36 +1,48 @@
-## Go SDK Changes:
-* `Unkey.Apps.CreateApp()`:  `request.Request` **Changed** (Breaking ⚠️)
-* `Unkey.Portal.GetVerifications()`: 
+## Python SDK Changes:
+* `unkey.apps.create_app()`: `request` **Changed** (Breaking ⚠️)
+    - `git` **Removed** (Breaking ⚠️)
+    - `name` **Removed** (Breaking ⚠️)
+    - `project` **Removed** (Breaking ⚠️)
+    - `request` **Added** (Breaking ⚠️)
+    - `slug` **Removed** (Breaking ⚠️)
+* `unkey.portal.get_verifications()`: 
   * `response` **Changed** (Breaking ⚠️)
-    - `BucketMillis` **Added**
-    - `Data` **Removed** (Breaking ⚠️)
-    - `Keys` **Added**
+    - `bucket_millis` **Added**
+    - `data` **Removed** (Breaking ⚠️)
+    - `keys` **Added**
   *  `error.status[422]` **Added**
-* `Unkey.Portal.CreateSession()`: 
-  *  `request.Request.Scopes[].Enum(keys:create)` **Removed** (Breaking ⚠️)
-* `Unkey.Permissions.SetRolePermissions()`:  `request.Request` **Changed** (Breaking ⚠️)
-* `Unkey.Apps.GetApp()`: `response.Data` **Changed**
-    - `Oci` **Added**
-    - `SourceType` **Added**
-* `Unkey.Portal.UpdatePortal()`: **Added**
-* `Unkey.Deployments.CreateDeploymentV3()`: **Added**
-* `Unkey.Apps.ListApps()`: `response.Data[]` **Changed**
-    - `Oci` **Added**
-    - `SourceType` **Added**
-* `Unkey.Apps.UpdateApp()`: 
-  *  `request.Request.Oci` **Added**
-  * `response.Data` **Changed**
-    - `Oci` **Added**
-    - `SourceType` **Added**
-* `Unkey.Deployments.CreateDeployment()`: **Deprecated**
-* `Unkey.Domains.GetDomain()`:  `response.Data.DomainConnect` **Added**
-* `Unkey.Domains.ListDomains()`: 
-  * `request.Request` **Changed**
-    - `App` **Changed**
-    - `Environment` **Changed**
-    - `Project` **Changed**
-  *  `response.Data[].DomainConnect` **Added**
+* `unkey.portal.create_session()`: `request` **Changed** (Breaking ⚠️)
+    - `preview` **Removed** (Breaking ⚠️)
+    - `scopes[].enum(keys:create)` **Removed** (Breaking ⚠️)
+* `unkey.permissions.set_role_permissions()`: `request` **Changed** (Breaking ⚠️)
+    - `permissions` **Removed** (Breaking ⚠️)
+    - `request` **Added** (Breaking ⚠️)
+    - `role_id` **Removed** (Breaking ⚠️)
+* `unkey.apps.update_app()`: 
+  *  `request.oci` **Added**
+  * `response.data` **Changed**
+    - `oci` **Added**
+    - `source_type` **Added**
+* `unkey.portal.update_portal()`: **Added**
+* `unkey.apps.get_app()`: `response.data` **Changed**
+    - `oci` **Added**
+    - `source_type` **Added**
+* `unkey.apps.list_apps()`: `response.data[]` **Changed**
+    - `oci` **Added**
+    - `source_type` **Added**
+* `unkey.deployments.create_deployment_v3()`: **Added**
+* `unkey.deployments.create_deployment()`: **Deprecated**
+* `unkey.domains.get_domain()`:  `response.data.domain_connect` **Added**
+* `unkey.domains.list_domains()`: 
+  * `request` **Changed**
+    - `app` **Changed**
+    - `environment` **Changed**
+    - `project` **Changed**
+  *  `response.data[].domain_connect` **Added**
   *  `error.status[503]` **Added**
-* `Unkey.Portal.GetPortal()`: **Added**
-* `Unkey.Portal.DeletePortal()`: **Added**
-* `Unkey.Portal.CreatePortal()`: **Added**
+* `unkey.keys.verify_key()`: 
+  *  `request.keyspaces` **Added**
+  *  `response.data.keyspace_id` **Added**
+* `unkey.portal.get_portal()`: **Added**
+* `unkey.portal.delete_portal()`: **Added**
+* `unkey.portal.create_portal()`: **Added**

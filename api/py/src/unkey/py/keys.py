@@ -4264,6 +4264,7 @@ class Keys(BaseSDK):
         credits: Optional[
             Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
+        keyspaces: Optional[Iterable[str]] = None,
         ratelimits: Optional[
             Union[
                 Iterable[models.KeysVerifyKeyRatelimit],
@@ -4321,6 +4322,10 @@ class Keys(BaseSDK):
             Omitting this field uses the default cost of 1 credit per verification.
             Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 
+        :param keyspaces: Restricts verification to keys in these keyspaces, matched by exact ID.
+            Omit this field to verify without a keyspace restriction.
+            A failed keyspace check returns `NOT_FOUND` without consuming credits or rate limits.
+
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
             Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
@@ -4349,6 +4354,7 @@ class Keys(BaseSDK):
             credits=utils.get_pydantic_model(
                 credits, Optional[models.KeysVerifyKeyCredits]
             ),
+            keyspaces=utils.unmarshal(keyspaces, Optional[List[str]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),
@@ -4453,6 +4459,7 @@ class Keys(BaseSDK):
         credits: Optional[
             Union[models.KeysVerifyKeyCredits, models.KeysVerifyKeyCreditsTypedDict]
         ] = None,
+        keyspaces: Optional[Iterable[str]] = None,
         ratelimits: Optional[
             Union[
                 Iterable[models.KeysVerifyKeyRatelimit],
@@ -4510,6 +4517,10 @@ class Keys(BaseSDK):
             Omitting this field uses the default cost of 1 credit per verification.
             Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 
+        :param keyspaces: Restricts verification to keys in these keyspaces, matched by exact ID.
+            Omit this field to verify without a keyspace restriction.
+            A failed keyspace check returns `NOT_FOUND` without consuming credits or rate limits.
+
         :param ratelimits: Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
             Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
             Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
@@ -4538,6 +4549,7 @@ class Keys(BaseSDK):
             credits=utils.get_pydantic_model(
                 credits, Optional[models.KeysVerifyKeyCredits]
             ),
+            keyspaces=utils.unmarshal(keyspaces, Optional[List[str]]),
             ratelimits=utils.get_pydantic_model(
                 ratelimits, Optional[List[models.KeysVerifyKeyRatelimit]]
             ),

@@ -42,6 +42,12 @@ class V2KeysVerifyKeyRequestBodyTypedDict(TypedDict):
     Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 
     """
+    keyspaces: NotRequired[List[str]]
+    r"""Restricts verification to keys in these keyspaces, matched by exact ID.
+    Omit this field to verify without a keyspace restriction.
+    A failed keyspace check returns `NOT_FOUND` without consuming credits or rate limits.
+
+    """
     ratelimits: NotRequired[List[KeysVerifyKeyRatelimitTypedDict]]
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
@@ -86,6 +92,13 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
 
     """
 
+    keyspaces: Optional[List[str]] = None
+    r"""Restricts verification to keys in these keyspaces, matched by exact ID.
+    Omit this field to verify without a keyspace restriction.
+    A failed keyspace check returns `NOT_FOUND` without consuming credits or rate limits.
+
+    """
+
     ratelimits: Optional[List[KeysVerifyKeyRatelimit]] = None
     r"""Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
     Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
@@ -100,7 +113,7 @@ class V2KeysVerifyKeyRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["tags", "permissions", "credits", "ratelimits", "migrationId"]
+            ["tags", "permissions", "credits", "keyspaces", "ratelimits", "migrationId"]
         )
         serialized = handler(self)
         m = {}
