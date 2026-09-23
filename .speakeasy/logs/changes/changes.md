@@ -1,42 +1,48 @@
-## Typescript SDK Changes:
-* `unkey.apps.createApp()`:  `request` **Changed** (Breaking ⚠️)
-* `unkey.portal.getVerifications()`: 
+## Python SDK Changes:
+* `unkey.apps.create_app()`: `request` **Changed** (Breaking ⚠️)
+    - `git` **Removed** (Breaking ⚠️)
+    - `name` **Removed** (Breaking ⚠️)
+    - `project` **Removed** (Breaking ⚠️)
+    - `request` **Added** (Breaking ⚠️)
+    - `slug` **Removed** (Breaking ⚠️)
+* `unkey.portal.get_verifications()`: 
   * `response` **Changed** (Breaking ⚠️)
-    - `bucketMillis` **Added**
+    - `bucket_millis` **Added**
     - `data` **Removed** (Breaking ⚠️)
     - `keys` **Added**
   *  `error.status[422]` **Added**
-* `unkey.portal.createSession()`: `request` **Changed** (Breaking ⚠️)
+* `unkey.portal.create_session()`: `request` **Changed** (Breaking ⚠️)
     - `preview` **Removed** (Breaking ⚠️)
     - `scopes[].enum(keys:create)` **Removed** (Breaking ⚠️)
-* `unkey.permissions.setRolePermissions()`:  `request` **Changed** (Breaking ⚠️)
-* `unkey.apps.updateApp()`: 
+* `unkey.permissions.set_role_permissions()`: `request` **Changed** (Breaking ⚠️)
+    - `permissions` **Removed** (Breaking ⚠️)
+    - `request` **Added** (Breaking ⚠️)
+    - `role_id` **Removed** (Breaking ⚠️)
+* `unkey.apps.update_app()`: 
   *  `request.oci` **Added**
   * `response.data` **Changed**
     - `oci` **Added**
-    - `sourceType` **Added**
-* `unkey.portal.updatePortal()`: **Added**
-* `unkey.apps.getApp()`: `response.data` **Changed**
+    - `source_type` **Added**
+* `unkey.portal.update_portal()`: **Added**
+* `unkey.apps.get_app()`: `response.data` **Changed**
     - `oci` **Added**
-    - `sourceType` **Added**
-* `unkey.apps.listApps()`: `response.data[]` **Changed**
+    - `source_type` **Added**
+* `unkey.apps.list_apps()`: `response.data[]` **Changed**
     - `oci` **Added**
-    - `sourceType` **Added**
-* `unkey.deployments.createDeploymentV3()`: **Added**
-* `unkey.deployments.createDeployment()`: **Deprecated**
-* `unkey.domains.getDomain()`:  `response.data.domainConnect` **Added**
-* `unkey.domains.listDomains()`: 
+    - `source_type` **Added**
+* `unkey.deployments.create_deployment_v3()`: **Added**
+* `unkey.deployments.create_deployment()`: **Deprecated**
+* `unkey.domains.get_domain()`:  `response.data.domain_connect` **Added**
+* `unkey.domains.list_domains()`: 
   * `request` **Changed**
     - `app` **Changed**
     - `environment` **Changed**
     - `project` **Changed**
-  *  `response.data[].domainConnect` **Added**
+  *  `response.data[].domain_connect` **Added**
   *  `error.status[503]` **Added**
-* `unkey.keys.updateKey()`: 
-  *  `request.ratelimits` **Changed**
-* `unkey.keys.verifyKey()`: 
+* `unkey.keys.verify_key()`: 
   *  `request.keyspaces` **Added**
-  *  `response.data.keyspaceId` **Added**
-* `unkey.portal.getPortal()`: **Added**
-* `unkey.portal.deletePortal()`: **Added**
-* `unkey.portal.createPortal()`: **Added**
+  *  `response.data.keyspace_id` **Added**
+* `unkey.portal.get_portal()`: **Added**
+* `unkey.portal.delete_portal()`: **Added**
+* `unkey.portal.create_portal()`: **Added**

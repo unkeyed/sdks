@@ -16,6 +16,8 @@ App management operations
 
 Create an app within a project. The app is created with default `production` and `preview` environments.
 
+Set exactly one source. Use `git` to create a GitHub-sourced app and connect its repository. Use `oci` to create an app from a prebuilt OCI image.
+
 The slug you provide is the stable, caller-defined handle used to reference this app. It must be unique within the project.
 
 **Important**: The slug cannot collide with an existing app in the same project. A duplicate slug returns a 409 conflict.
@@ -38,9 +40,14 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
     })
 
     # Handle response
@@ -58,9 +65,41 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="payments", name="Payments API", slug="payments-api", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
+        "oci": {
+            "image": "ghcr.io/acme/api:v1.2.3",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: git
+
+<!-- UsageSnippet language="python" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="git" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.apps.create_app(request={
+        "project": "payments",
+        "name": "Payments API",
+        "slug": "payments-api",
+        "git": {
+            "repository": "unkeyed/unkey",
+        },
     })
 
     # Handle response
@@ -78,9 +117,14 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
     })
 
     # Handle response
@@ -98,9 +142,38 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ociImage
+
+<!-- UsageSnippet language="python" operationID="apps.createApp" method="post" path="/v2/apps.createApp" example="ociImage" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.apps.create_app(request={
+        "project": "payments",
+        "name": "Payments API",
+        "slug": "payments-api",
+        "oci": {
+            "image": "ghcr.io/acme/payments:v1.2.3",
+        },
     })
 
     # Handle response
@@ -118,9 +191,14 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
     })
 
     # Handle response
@@ -138,9 +216,14 @@ with Unkey(
     root_key="<YOUR_BEARER_TOKEN_HERE>",
 ) as unkey:
 
-    res = unkey.apps.create_app(project="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
-        "repository": "unkeyed/unkey",
-        "default_branch": "main",
+    res = unkey.apps.create_app(request={
+        "project": "proj_1234abcd",
+        "name": "Payments API",
+        "slug": "proj_1234abcd",
+        "git": {
+            "repository": "unkeyed/unkey",
+            "default_branch": "main",
+        },
     })
 
     # Handle response
@@ -150,13 +233,10 @@ with Unkey(
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 | Example                                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `project`                                                                                                                                   | *str*                                                                                                                                       | :heavy_check_mark:                                                                                                                          | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>            | proj_1234abcd                                                                                                                               |
-| `name`                                                                                                                                      | *str*                                                                                                                                       | :heavy_check_mark:                                                                                                                          | Human-readable name for this app.<br/>Use a descriptive name like 'Payments API' to identify its purpose.<br/>                              | Payments API                                                                                                                                |
-| `slug`                                                                                                                                      | *str*                                                                                                                                       | :heavy_check_mark:                                                                                                                          | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>            | proj_1234abcd                                                                                                                               |
-| `git`                                                                                                                                       | [Optional[models.AppGitCreateInput]](../../models/appgitcreateinput.md)                                                                     | :heavy_minus_sign:                                                                                                                          | Connect a GitHub repository to the app on creation. Omit to create the app<br/>without a repository and connect one later with apps.updateApp.<br/> |                                                                                                                                             |
-| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |                                                                                                                                             |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `request`                                                                                 | [models.V2AppsCreateAppRequestBodyUnion](../../models/v2appscreateapprequestbodyunion.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 
@@ -587,6 +667,8 @@ with Unkey(
     res = unkey.apps.update_app(project="proj_1234abcd", app="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -607,6 +689,8 @@ with Unkey(
     res = unkey.apps.update_app(project="proj_1234abcd", app="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -627,6 +711,8 @@ with Unkey(
     res = unkey.apps.update_app(project="proj_1234abcd", app="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -647,6 +733,8 @@ with Unkey(
     res = unkey.apps.update_app(project="payments", app="payments-service", name="Payments API", slug="payments-api", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -667,6 +755,8 @@ with Unkey(
     res = unkey.apps.update_app(project="proj_1234abcd", app="proj_1234abcd", name="Payments API", slug="proj_1234abcd", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -687,6 +777,8 @@ with Unkey(
     res = unkey.apps.update_app(project="payments", app="app_1234abcd", name="Payments API", slug="proj_1234abcd", git={
         "repository": "unkeyed/unkey",
         "default_branch": "main",
+    }, oci={
+        "image": "ghcr.io/acme/api:v1.2.3",
     }, delete_protection=True)
 
     # Handle response
@@ -703,6 +795,7 @@ with Unkey(
 | `name`                                                                                                                                                                                                                                                                                             | *Optional[str]*                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | New human-readable name for the app.<br/>Omit this field to leave the current name unchanged.<br/>                                                                                                                                                                                                 | Payments API                                                                                                                                                                                                                                                                                       |
 | `slug`                                                                                                                                                                                                                                                                                             | *Optional[str]*                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                                                                                                                                   | proj_1234abcd                                                                                                                                                                                                                                                                                      |
 | `git`                                                                                                                                                                                                                                                                                              | [OptionalNullable[models.AppGitUpdateInput]](../../models/appgitupdateinput.md)                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Connect, reconfigure, or disconnect this app's GitHub repository.<br/>Omit to leave unchanged, set null to disconnect, or set an object with a<br/>"repository" to connect or replace it and/or a "defaultBranch" to set which<br/>branch it tracks. Fields are independent, so send only the one you change.<br/> |                                                                                                                                                                                                                                                                                                    |
+| `oci`                                                                                                                                                                                                                                                                                              | [Optional[models.AppOCI]](../../models/appoci.md)                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Change the default image reference for an OCI-sourced app. This does not<br/>create a deployment. It can be combined with other app settings. Source<br/>switching is not supported.<br/>                                                                                                          |                                                                                                                                                                                                                                                                                                    |
 | `delete_protection`                                                                                                                                                                                                                                                                                | *Optional[bool]*                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Enable or disable delete protection for the app.<br/>Omit this field to leave the current setting unchanged.<br/>                                                                                                                                                                                  | true                                                                                                                                                                                                                                                                                               |
 | `retries`                                                                                                                                                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                    |
 

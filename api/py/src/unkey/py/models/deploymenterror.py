@@ -13,7 +13,7 @@ class DeploymentErrorTypedDict(TypedDict):
 
     """
     step: str
-    r"""The pipeline step that failed (e.g. `building`, `deploying`, `starting`).
+    r"""The pipeline step that failed (e.g. `queued`, `building`, `deploying`).
 
     """
     message: str
@@ -31,7 +31,7 @@ class DeploymentError(BaseModel):
     """
 
     step: str
-    r"""The pipeline step that failed (e.g. `building`, `deploying`, `starting`).
+    r"""The pipeline step that failed (e.g. `queued`, `building`, `deploying`).
 
     """
 
