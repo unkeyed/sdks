@@ -7,7 +7,7 @@ type DeploymentError struct {
 	// failure; see `message` for details.
 	//
 	Code DeploymentErrorCode `json:"code"`
-	// The pipeline step that failed (e.g. `building`, `deploying`, `starting`).
+	// The pipeline step that failed (e.g. `queued`, `building`, `deploying`).
 	//
 	Step string `json:"step"`
 	// Human-readable description of why the deployment failed. For programmatic
