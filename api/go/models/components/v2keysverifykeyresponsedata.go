@@ -57,6 +57,10 @@ type V2KeysVerifyKeyResponseData struct {
 	// is returned for both valid and invalid keys (except when `code=NOT_FOUND`).
 	//
 	KeyID *string `json:"keyId,omitzero"`
+	// The ID of the keyspace the key belongs to.
+	// Returned for both valid and invalid keys, except when `code=NOT_FOUND`.
+	//
+	KeyspaceID *string `json:"keyspaceId,omitzero"`
 	// The human-readable name assigned to this key during creation.
 	// This is useful for displaying in logs or admin interfaces to identify
 	// the key's purpose.
@@ -130,6 +134,13 @@ func (v *V2KeysVerifyKeyResponseData) GetKeyID() *string {
 		return nil
 	}
 	return v.KeyID
+}
+
+func (v *V2KeysVerifyKeyResponseData) GetKeyspaceID() *string {
+	if v == nil {
+		return nil
+	}
+	return v.KeyspaceID
 }
 
 func (v *V2KeysVerifyKeyResponseData) GetName() *string {

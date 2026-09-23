@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 3d72bd517f8355c3feb1a3f6d485fb59
+  docChecksum: 64c93b68c78e4f2cd3b228008bac6dc5
   docVersion: 2.0.0
-  speakeasyVersion: 1.797.0
-  generationVersion: 2.937.18
-  releaseVersion: 3.0.1
-  configChecksum: e0e41f6b6e2579de7d4e8e7375ccbd6d
+  speakeasyVersion: 1.798.0
+  generationVersion: 2.938.0
+  releaseVersion: 3.0.2
+  configChecksum: 9b87d28d513f26eb8e420a6d86370526
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks
 persistentEdits:
-  generation_id: ec239895-26ce-470a-97bd-676b72375842
-  pristine_commit_hash: 823f4a6d18254aded4fe2b66697914b73d08993f
-  pristine_tree_hash: 0a33dd716aa5b97009288d5721c5f7493b898c0a
+  generation_id: 7b84a12c-8019-456f-8e34-848e0c817dac
+  pristine_commit_hash: ea8e1bbef6f1f78bfd7f128eb84c9a6312ad642c
+  pristine_tree_hash: 9b6e1ff2449652639bda5d3d908618951fd1838c
 features:
   go:
     additionalDependencies: 0.1.0
@@ -165,8 +165,8 @@ trackedFiles:
     pristine_git_object: 0da8d2d7921996e978bc0f057e9e725bcc42599a
   docs/models/components/deploymenterror.md:
     id: d4de93a7c132
-    last_write_checksum: sha1:15a1c76f23b92892193a1d4ed83e67767b465e1a
-    pristine_git_object: 99594038dbd1e95494a118a40a9ae383c9649cbf
+    last_write_checksum: sha1:cb4d4b408738e0da813bf538f1690166d635d984
+    pristine_git_object: 2553e7db81f53f0f52a05a3671b7e2dd5663ef6c
   docs/models/components/deploymenterrorcode.md:
     id: 36663a23e42c
     last_write_checksum: sha1:2890988bed4b8384494d40853ae2707f987c10ee
@@ -997,16 +997,16 @@ trackedFiles:
     pristine_git_object: a4191409d43d434463bcd646224ca245a7058245
   docs/models/components/v2keysverifykeyrequestbody.md:
     id: 5a5042d886c7
-    last_write_checksum: sha1:3a95bd3bf69a1876e552637cf39dc8acd8ea4fb2
-    pristine_git_object: f1857bdf2ceaa7915546abb605f541927ac4159f
+    last_write_checksum: sha1:3a7fa1835d03471e7d15469ecf81bf4b21a13193
+    pristine_git_object: 7cdf1bf885b1e3d34cf61ba4572ef26f0ec5f878
   docs/models/components/v2keysverifykeyresponsebody.md:
     id: c6acbb885ae6
     last_write_checksum: sha1:803a935e9354f22693b4071f2eb1dc0a67b9538c
     pristine_git_object: ea5bc2a3741e367e2b8783553b11ee6065367e71
   docs/models/components/v2keysverifykeyresponsedata.md:
     id: 4ea1b7e9c35b
-    last_write_checksum: sha1:94afab346d99e70cb43c2967c7569bce1b772557
-    pristine_git_object: c2fd352cb1beddaa2044c04ce94cbabbc99359ea
+    last_write_checksum: sha1:3f258c586001d70b8594e6b57fcb8396bd5db255
+    pristine_git_object: 7d535fd8aed167b1bd5e57a230585a35ed2e962f
   docs/models/components/v2keyswhoamirequestbody.md:
     id: f2a5c55ba882
     last_write_checksum: sha1:544107f544ae828c25cd1c8a9e455f4a5a8f7a99
@@ -1125,8 +1125,8 @@ trackedFiles:
     pristine_git_object: 45d6463fa72b121c4ff31eef19767177c2f08ba3
   docs/models/components/v2portalcreatesessionrequestbody.md:
     id: 504b8c1640cf
-    last_write_checksum: sha1:8f182196ecc9fb2f0bce3a368da5c6732da9d646
-    pristine_git_object: a401d54bf88d0675e41ba88cdf76d13ed423f68a
+    last_write_checksum: sha1:5284e97ac2e588bc239c301f835d6c044a6aad7b
+    pristine_git_object: d836f0e90b7e788e9b2e0e3471780a00f195ffb8
   docs/models/components/v2portalcreatesessionresponsebody.md:
     id: 1128de96ff88
     last_write_checksum: sha1:723166ec2cfd34965fe5af95ba62874550455578
@@ -1741,8 +1741,8 @@ trackedFiles:
     pristine_git_object: 907bc4d8aadea1a6fbbaf59866a1ec93f91c30cc
   docs/sdks/keys/README.md:
     id: 9a567cd0daf2
-    last_write_checksum: sha1:964236c7f633d52371a281342900c0cce6777623
-    pristine_git_object: e691778ade2169fb9f8841eea9205ed8d882e6d7
+    last_write_checksum: sha1:fd6988eed486361ce7a9ffe4f385a16ba95c6531
+    pristine_git_object: 553b9091e7d7c5a837842a5a080589563ee44704
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
     last_write_checksum: sha1:6695b6e05ecf5a442956c641fb60e846111f02e9
@@ -1949,8 +1949,8 @@ trackedFiles:
     pristine_git_object: f1774efb5e200d84ef7605e2aa41d56e756da26e
   models/components/deploymenterror.go:
     id: b39e35327008
-    last_write_checksum: sha1:995f9fe2e4f536933ba739a684685bc4eaa7620b
-    pristine_git_object: 1f0e814686503dd2aaa765302beecdb1a0cae621
+    last_write_checksum: sha1:32554a42e6cae932dce915e1444272d1a38f5efe
+    pristine_git_object: f03db3429022d76b6884aa6f5591fa9048979657
   models/components/deploymenterrorcode.go:
     id: 85e5c7f7b39e
     last_write_checksum: sha1:1abbcd94695110b9eff735e54cfb8111418e6c29
@@ -2713,16 +2713,16 @@ trackedFiles:
     pristine_git_object: a2e0db6bc7ec2a03ee44580906831254dc248f32
   models/components/v2keysverifykeyrequestbody.go:
     id: ef3c69e937af
-    last_write_checksum: sha1:800a4e48829564a24bd332ae59c19fc9d7a82cf6
-    pristine_git_object: e21085836b8ee96133f86573a6c7d49633535286
+    last_write_checksum: sha1:8ba2a6ebf3cdf01d030d90c7e65ea2385832542c
+    pristine_git_object: e672adb5f07306c76eb2ca00fb361db51f431965
   models/components/v2keysverifykeyresponsebody.go:
     id: b34406c2c8f4
     last_write_checksum: sha1:2957cf7a160e202ba2ec9b3bd62e9b899f0176a6
     pristine_git_object: 2694bd3ebac86088495ceaefa638d939f99b2ec5
   models/components/v2keysverifykeyresponsedata.go:
     id: c87f1bbd63c4
-    last_write_checksum: sha1:91ac5f779938cc0dc3c3e65535905ca370291e3d
-    pristine_git_object: ce6c38195272a5376f06a331935a185f43c2aeee
+    last_write_checksum: sha1:8a8b197629d443d076c9d267139049ecff98d4be
+    pristine_git_object: 0ebb6c5a5b6703d4da22225e2faf1c001093ea3b
   models/components/v2keyswhoamirequestbody.go:
     id: 8dbef28b7f7c
     last_write_checksum: sha1:db34229a4b79077e86a657d04b914142623c201d
@@ -2825,8 +2825,8 @@ trackedFiles:
     pristine_git_object: 07d326ef4dd585cc5eceabccb9ab9eacb725d0ce
   models/components/v2portalcreatesessionrequestbody.go:
     id: 25cf7a72f322
-    last_write_checksum: sha1:48a399db23029e0cef41f7735e1df0d1b274978d
-    pristine_git_object: b2d006c2aadcadde9000866ba045981f15a0224c
+    last_write_checksum: sha1:551cbd459d9515671d129881d27666b0b78de107
+    pristine_git_object: c7f893b02e7790426e9fd416589b6c0a24413e7f
   models/components/v2portalcreatesessionresponsebody.go:
     id: 01cb6e5571e0
     last_write_checksum: sha1:bdf22699c17c7277f85d6a581fc1b525222f97ee
@@ -3421,8 +3421,8 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:bf4a88e54ad37267713009a2ff64e74204ab4f86
-    pristine_git_object: e5fe65dd098be6dbdd07dadda7575169674a1870
+    last_write_checksum: sha1:bd21688939e64ca71e35a656b111eb52dd1fe4da
+    pristine_git_object: 710b8f981430162071bd8b7af66dd1d9bbf90173
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -5053,13 +5053,13 @@ examples:
   keys.verifyKey:
     permissionsQuerySyntaxError:
       requestBody:
-        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "migrationId": "m_1234abcd"}
+        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "keyspaces": ["ks_1234abcd"], "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "migrationId": "m_1234abcd"}
       responses:
         "400":
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "error": {"detail": "Syntax error in permission query: unexpected token 'AND' at position 15. Expected permission name or opening parenthesis.", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/user/bad_request/permissions_query_syntax_error", "errors": [{"location": "body.permissions", "message": "unexpected token 'AND' at position 15", "fix": "Check your query syntax. AND/OR operators must be between permissions, not at the start or end"}]}}
     speakeasy-default-keys-verify-key:
       requestBody:
-        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "migrationId": "m_1234abcd"}
+        application/json: {"key": "sk_1234abcdef", "tags": ["endpoint=/users/profile", "method=GET", "region=us-east-1", "clientVersion=2.3.0", "feature=premium"], "permissions": "documents.read AND users.view", "credits": {"cost": 5}, "keyspaces": ["ks_1234abcd"], "ratelimits": [{"name": "tokens", "cost": 2, "limit": 50, "duration": 600000}], "migrationId": "m_1234abcd"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"valid": true, "code": "NOT_FOUND", "identity": {"id": "<id>", "externalId": "<id>", "ratelimits": [{"id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}, "ratelimits": [{"exceeded": false, "id": "rl_1234567890abcdef", "name": "api_requests", "limit": 1000, "duration": 3600000, "reset": 3600000, "remaining": 999, "autoApply": true}]}}
@@ -5316,7 +5316,7 @@ examples:
   portal.createSession:
     speakeasy-default-portal-create-session:
       requestBody:
-        application/json: {"portal": "proj_1234abcd", "externalId": "user_123", "scopes": ["keys:read", "keys:reroll", "analytics:read"], "preview": false, "returnUrl": "https://app.example.com/settings/api-keys"}
+        application/json: {"portal": "proj_1234abcd", "externalId": "user_123", "scopes": ["keys:read", "keys:reroll", "analytics:read"], "returnUrl": "https://app.example.com/settings/api-keys"}
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "ps_abc123def456", "url": "https://portal.unkey.com/?session=pst_abc123def456"}}
@@ -7546,7 +7546,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Unkey.Apps.CreateApp()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Unkey.Portal.GetVerifications()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Added**\n* `Unkey.Portal.CreateSession()`: \n  *  `request.Request.Scopes[].Enum(keys:create)` **Removed** (Breaking ⚠️)\n* `Unkey.Permissions.SetRolePermissions()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Unkey.Apps.GetApp()`:  `response.Data` **Changed**\n* `Unkey.Portal.UpdatePortal()`: **Added**\n* `Unkey.Deployments.CreateDeploymentV3()`: **Added**\n* `Unkey.Apps.ListApps()`:  `response.Data[]` **Changed**\n* `Unkey.Apps.UpdateApp()`: \n  *  `request.Request.Oci` **Added**\n  *  `response.Data` **Changed**\n* `Unkey.Deployments.CreateDeployment()`: **Deprecated**\n* `Unkey.Domains.GetDomain()`:  `response.Data.DomainConnect` **Added**\n* `Unkey.Domains.ListDomains()`: \n  *  `request.Request` **Changed**\n  *  `response.Data[].DomainConnect` **Added**\n  *  `error.status[503]` **Added**\n* `Unkey.Portal.GetPortal()`: **Added**\n* `Unkey.Portal.DeletePortal()`: **Added**\n* `Unkey.Portal.CreatePortal()`: **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Unkey.Portal.CreateSession()`: \n  *  `request.Request.Preview` **Removed** (Breaking ⚠️)\n* `Unkey.Keys.VerifyKey()`: \n  *  `request.Request.Keyspaces` **Added**\n  *  `response.Data.KeyspaceId` **Added**\n"
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go

@@ -1260,6 +1260,9 @@ func main() {
         Credits: &components.KeysVerifyKeyCredits{
             Cost: 5,
         },
+        Keyspaces: []string{
+            "ks_1234abcd",
+        },
         Ratelimits: []components.KeysVerifyKeyRatelimit{
             components.KeysVerifyKeyRatelimit{
                 Name: "tokens",

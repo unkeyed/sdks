@@ -31,6 +31,11 @@ type V2KeysVerifyKeyRequestBody struct {
 	// Credits provide globally consistent usage tracking, essential for paid APIs with strict quotas.
 	//
 	Credits *KeysVerifyKeyCredits `json:"credits,omitzero"`
+	// Restricts verification to keys in these keyspaces, matched by exact ID.
+	// Omit this field to verify without a keyspace restriction.
+	// A failed keyspace check returns `NOT_FOUND` without consuming credits or rate limits.
+	//
+	Keyspaces []string `json:"keyspaces,omitzero"`
 	// Enforces time-based rate limiting during verification to prevent abuse and ensure fair usage.
 	// Omitting this field skips rate limit checks entirely, relying only on configured key rate limits.
 	// Multiple rate limits can be checked simultaneously, each with different costs and temporary overrides.
@@ -78,6 +83,13 @@ func (v *V2KeysVerifyKeyRequestBody) GetCredits() *KeysVerifyKeyCredits {
 		return nil
 	}
 	return v.Credits
+}
+
+func (v *V2KeysVerifyKeyRequestBody) GetKeyspaces() []string {
+	if v == nil {
+		return nil
+	}
+	return v.Keyspaces
 }
 
 func (v *V2KeysVerifyKeyRequestBody) GetRatelimits() []KeysVerifyKeyRatelimit {
