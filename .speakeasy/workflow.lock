@@ -67,7 +67,7 @@ workflow:
             output: ./api/py
             publish:
                 pypi:
-                    token: $pypi_token
+                    useTrustedPublishing: true
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/unkey/unkey/api-python-code-samples
