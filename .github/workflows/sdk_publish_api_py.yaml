@@ -19,7 +19,6 @@ jobs:
       target: api-py
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      pypi_token: ${{ secrets.PYPI_TOKEN }}
       slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
   publish-pypi:
@@ -38,3 +37,4 @@ jobs:
           python-directory: ${{ needs.publish.outputs.python_directory }}
           speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
