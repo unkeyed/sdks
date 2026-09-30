@@ -19,22 +19,16 @@ jobs:
       target: api-py
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
   publish-pypi:
-    needs: publish
-    if: ${{ needs.publish.outputs.python_regenerated == 'true' &&
-      needs.publish.outputs.publish_python == 'true' &&
-      needs.publish.outputs.use_pypi_trusted_publishing == 'true' }}
+    needs:
+      - publish
+    if: ${{ needs.publish.outputs.python_regenerated == 'true' && needs.publish.outputs.publish_python == 'true' && needs.publish.outputs.use_pypi_trusted_publishing == 'true' }}
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: speakeasy-api/sdk-generation-action/publish-pypi@v15
         with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
           python-directory: ${{ needs.publish.outputs.python_directory }}
           speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
