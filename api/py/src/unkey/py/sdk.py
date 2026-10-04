@@ -30,6 +30,7 @@ if TYPE_CHECKING:
     from unkey.py.portal_sdk import PortalSDK
     from unkey.py.projects import Projects
     from unkey.py.ratelimit import Ratelimit
+    from unkey.py.rootkeys import RootKeys
 
 
 class Unkey(BaseSDK):
@@ -139,6 +140,7 @@ class Unkey(BaseSDK):
     projects: "Projects"
     ratelimit: "Ratelimit"
     r"""Rate limiting operations"""
+    root_keys: "RootKeys"
     _sub_sdk_map = {
         "analytics": ("unkey.py.analytics", "Analytics"),
         "apis": ("unkey.py.apis", "Apis"),
@@ -155,6 +157,7 @@ class Unkey(BaseSDK):
         "portal": ("unkey.py.portal_sdk", "PortalSDK"),
         "projects": ("unkey.py.projects", "Projects"),
         "ratelimit": ("unkey.py.ratelimit", "Ratelimit"),
+        "root_keys": ("unkey.py.rootkeys", "RootKeys"),
     }
 
     def __init__(
