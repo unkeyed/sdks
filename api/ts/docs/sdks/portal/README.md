@@ -13,7 +13,9 @@ Customer Portal session management
 * [getPortal](#getportal) - Get portal
 * [getVerifications](#getverifications) - Get portal verifications
 * [listKeys](#listkeys) - List portal keys
+* [listSessions](#listsessions) - List portal sessions
 * [rerollKey](#rerollkey) - Reroll portal key
+* [revokeSession](#revokesession) - Revoke portal sessions
 * [updatePortal](#updateportal) - Update portal
 
 ## createPortal
@@ -241,6 +243,7 @@ run();
 | errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
@@ -707,6 +710,107 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## listSessions
+
+List the end users holding a revocable session on a portal, with each
+end user's sessions.
+
+Unreleased and subject to change without notice.
+
+A session is revocable until it expires or is revoked. That includes
+sessions whose portal URL was created but not opened yet. Pass an end
+user's `externalId` to `portal.revokeSession` to end their sessions.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.create_portal_session` (for any portal in the workspace)
+- `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+with `#read` or `#write`. Reading the portal itself is not enough.
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="portal.listSessions" method="post" path="/v2/portal.listSessions" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.portal.listSessions({
+    portal: "proj_1234abcd",
+    cursor: "user_123",
+    search: "user_",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { portalListSessions } from "@unkey/api/funcs/portalListSessions.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await portalListSessions(unkey, {
+    portal: "proj_1234abcd",
+    cursor: "user_123",
+    search: "user_",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("portalListSessions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PortalListSessionsRequestBody](../../models/components/v2portallistsessionsrequestbody.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2PortalListSessionsResponseBody](../../models/components/v2portallistsessionsresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
 ## rerollKey
 
 Reroll an API key owned by the authenticated portal session's end user,
@@ -795,6 +899,110 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## revokeSession
+
+Revoke every live session an end user holds on a portal.
+
+Unreleased and subject to change without notice.
+
+Sessions that were created but not yet opened are revoked too, so their
+portal URLs stop working. Revocation is not instantaneous: session lookups
+are cached briefly, so a request already in flight may still succeed.
+
+Revoking ends existing sessions only. To keep the end user out, also stop
+calling `portal.createSession` for them.
+
+Calling this again for the same end user is safe and revokes nothing.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.create_portal_session` (for any portal in the workspace)
+- `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
+which dashboard roles carry. Unlike `portal.createSession`, a dashboard
+session can call this, not just a root key.
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="portal.revokeSession" method="post" path="/v2/portal.revokeSession" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.portal.revokeSession({
+    portal: "proj_1234abcd",
+    externalId: "user_123",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { portalRevokeSession } from "@unkey/api/funcs/portalRevokeSession.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await portalRevokeSession(unkey, {
+    portal: "proj_1234abcd",
+    externalId: "user_123",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("portalRevokeSession failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PortalRevokeSessionRequestBody](../../models/components/v2portalrevokesessionrequestbody.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2PortalRevokeSessionResponseBody](../../models/components/v2portalrevokesessionresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
 ## updatePortal
 
 Change a portal's slug, display name, the resource it serves, its enabled
@@ -808,7 +1016,8 @@ branding, sending null clears it. Send at most one of `keyspaceId` or `appId`.
 Two changes affect your end users immediately:
 - Re-pointing at a different resource revokes the portal's live sessions,
   because a session carries the scope it was minted with.
-- Disabling stops new sessions but leaves live ones running until they expire.
+- Disabling stops new sessions and revokes the live ones. Re-enabling does
+  not restore them.
 
 **Required Permissions**
 

@@ -1,0 +1,22 @@
+# V2PortalListSessionsRequestBody
+
+## Example Usage
+
+```typescript
+import { V2PortalListSessionsRequestBody } from "@unkey/api/models/components";
+
+let value: V2PortalListSessionsRequestBody = {
+  portal: "proj_1234abcd",
+  cursor: "user_123",
+  search: "user_",
+};
+```
+
+## Fields
+
+| Field                                                                                                                            | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      | Example                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `portal`                                                                                                                         | *string*                                                                                                                         | :heavy_check_mark:                                                                                                               | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                                    |
+| `limit`                                                                                                                          | *number*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Maximum number of end users to return per request.                                                                               |                                                                                                                                  |
+| `cursor`                                                                                                                         | *string*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Pagination cursor from a previous response to fetch the next page.<br/>Use when `hasMore: true` in the previous response.<br/>   | user_123                                                                                                                         |
+| `search`                                                                                                                         | *string*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Returns only end users whose `externalId` starts with this string.<br/>Matching is case-sensitive, and `%` and `_` match literally.<br/> | user_                                                                                                                            |
