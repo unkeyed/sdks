@@ -5,7 +5,7 @@ from jsonpath import JSONPath
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Union, cast
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
-from unkey.py.types import BaseModel, OptionalNullable, UNSET
+from unkey.py.types import BaseModel, Nullable, OptionalNullable, UNSET
 from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 
 
@@ -495,6 +495,11 @@ class PortalSDK(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
@@ -685,6 +690,11 @@ class PortalSDK(BaseSDK):
                 errors.NotFoundErrorResponseData, http_res
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
@@ -2182,6 +2192,318 @@ class PortalSDK(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def list_sessions(
+        self,
+        *,
+        portal: str,
+        limit: Optional[int] = 100,
+        cursor: Optional[str] = None,
+        search: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PortalListSessionsResponseBody:
+        r"""List portal sessions
+
+        List the end users holding a revocable session on a portal, with each
+        end user's sessions.
+
+        Unreleased and subject to change without notice.
+
+        A session is revocable until it expires or is revoked. That includes
+        sessions whose portal URL was created but not opened yet. Pass an end
+        user's `externalId` to `portal.revokeSession` to end their sessions.
+
+        **Required Permissions**
+
+        Your root key must have one of:
+        - `portal.*.create_portal_session` (for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+        with `#read` or `#write`. Reading the portal itself is not enough.
+
+        Without the permission this returns **404**, not 403.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param limit: Maximum number of end users to return per request.
+        :param cursor: Pagination cursor from a previous response to fetch the next page.
+            Use when `hasMore: true` in the previous response.
+
+        :param search: Returns only end users whose `externalId` starts with this string.
+            Matching is case-sensitive, and `%` and `_` match literally.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalListSessionsRequestBody(
+            portal=portal,
+            limit=limit,
+            cursor=cursor,
+            search=search,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/portal.listSessions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalListSessionsRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.listSessions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["portal"],
+                extensions={"x-excluded": True},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PortalListSessionsResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_sessions_async(
+        self,
+        *,
+        portal: str,
+        limit: Optional[int] = 100,
+        cursor: Optional[str] = None,
+        search: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PortalListSessionsResponseBody:
+        r"""List portal sessions
+
+        List the end users holding a revocable session on a portal, with each
+        end user's sessions.
+
+        Unreleased and subject to change without notice.
+
+        A session is revocable until it expires or is revoked. That includes
+        sessions whose portal URL was created but not opened yet. Pass an end
+        user's `externalId` to `portal.revokeSession` to end their sessions.
+
+        **Required Permissions**
+
+        Your root key must have one of:
+        - `portal.*.create_portal_session` (for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+        with `#read` or `#write`. Reading the portal itself is not enough.
+
+        Without the permission this returns **404**, not 403.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param limit: Maximum number of end users to return per request.
+        :param cursor: Pagination cursor from a previous response to fetch the next page.
+            Use when `hasMore: true` in the previous response.
+
+        :param search: Returns only end users whose `externalId` starts with this string.
+            Matching is case-sensitive, and `%` and `_` match literally.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalListSessionsRequestBody(
+            portal=portal,
+            limit=limit,
+            cursor=cursor,
+            search=search,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/portal.listSessions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalListSessionsRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.listSessions",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["portal"],
+                extensions={"x-excluded": True},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PortalListSessionsResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def reroll_key(
         self,
         *,
@@ -2189,7 +2511,7 @@ class PortalSDK(BaseSDK):
             models.PortalRerollKeySecurity, models.PortalRerollKeySecurityTypedDict
         ],
         key_id: str,
-        expiration: int,
+        expiration: Nullable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2220,6 +2542,7 @@ class PortalSDK(BaseSDK):
             This parameter controls the overlap period for key rotation:
             - Set to `0` to revoke the original key immediately
             - Positive values keep the original key active for the specified duration
+            - Set to `null` to keep the original key active; it keeps its current expiration, if any
             - Allows graceful migration by giving users time to update their credentials
 
             Common overlap periods:
@@ -2345,7 +2668,7 @@ class PortalSDK(BaseSDK):
             models.PortalRerollKeySecurity, models.PortalRerollKeySecurityTypedDict
         ],
         key_id: str,
-        expiration: int,
+        expiration: Nullable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2376,6 +2699,7 @@ class PortalSDK(BaseSDK):
             This parameter controls the overlap period for key rotation:
             - Set to `0` to revoke the original key immediately
             - Positive values keep the original key active for the specified duration
+            - Set to `null` to keep the original key active; it keeps its current expiration, if any
             - Allows graceful migration by giving users time to update their credentials
 
             Common overlap periods:
@@ -2494,6 +2818,314 @@ class PortalSDK(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def revoke_session(
+        self,
+        *,
+        portal: str,
+        external_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PortalRevokeSessionResponseBody:
+        r"""Revoke portal sessions
+
+        Revoke every live session an end user holds on a portal.
+
+        Unreleased and subject to change without notice.
+
+        Sessions that were created but not yet opened are revoked too, so their
+        portal URLs stop working. Revocation is not instantaneous: session lookups
+        are cached briefly, so a request already in flight may still succeed.
+
+        Revoking ends existing sessions only. To keep the end user out, also stop
+        calling `portal.createSession` for them.
+
+        Calling this again for the same end user is safe and revokes nothing.
+
+        **Required Permissions**
+
+        Your root key must have one of:
+        - `portal.*.create_portal_session` (for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
+        which dashboard roles carry. Unlike `portal.createSession`, a dashboard
+        session can call this, not just a root key.
+
+        Without the permission this returns **404**, not 403.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param external_id: The end user's identifier in your system, as passed to
+            `portal.createSession`. Every live session this end user holds on the
+            portal is revoked.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalRevokeSessionRequestBody(
+            portal=portal,
+            external_id=external_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/portal.revokeSession",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalRevokeSessionRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.revokeSession",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["portal"],
+                extensions={"x-excluded": True},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PortalRevokeSessionResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def revoke_session_async(
+        self,
+        *,
+        portal: str,
+        external_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PortalRevokeSessionResponseBody:
+        r"""Revoke portal sessions
+
+        Revoke every live session an end user holds on a portal.
+
+        Unreleased and subject to change without notice.
+
+        Sessions that were created but not yet opened are revoked too, so their
+        portal URLs stop working. Revocation is not instantaneous: session lookups
+        are cached briefly, so a request already in flight may still succeed.
+
+        Revoking ends existing sessions only. To keep the end user out, also stop
+        calling `portal.createSession` for them.
+
+        Calling this again for the same end user is safe and revokes nothing.
+
+        **Required Permissions**
+
+        Your root key must have one of:
+        - `portal.*.create_portal_session` (for any portal in the workspace)
+        - `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
+        which dashboard roles carry. Unlike `portal.createSession`, a dashboard
+        session can call this, not just a root key.
+
+        Without the permission this returns **404**, not 403.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param portal: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param external_id: The end user's identifier in your system, as passed to
+            `portal.createSession`. Every live session this end user holds on the
+            portal is revoked.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalRevokeSessionRequestBody(
+            portal=portal,
+            external_id=external_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/portal.revokeSession",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalRevokeSessionRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.revokeSession",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["portal"],
+                extensions={"x-excluded": True},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PortalRevokeSessionResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def update_portal(
         self,
         *,
@@ -2523,7 +3155,8 @@ class PortalSDK(BaseSDK):
         Two changes affect your end users immediately:
         - Re-pointing at a different resource revokes the portal's live sessions,
         because a session carries the scope it was minted with.
-        - Disabling stops new sessions but leaves live ones running until they expire.
+        - Disabling stops new sessions and revokes the live ones. Re-enabling does
+        not restore them.
 
         **Required Permissions**
 
@@ -2567,7 +3200,8 @@ class PortalSDK(BaseSDK):
 
         :param enabled: Whether new sessions can be minted. Omit to leave unchanged.
 
-            Disabling does not end sessions that are already live.
+            Disabling also revokes the portal's live sessions. Re-enabling does not
+            restore them.
 
         :param logo_url: Absolute `https://` URL of the portal logo. Omit to leave unchanged, or set
             null to remove the logo.
@@ -2722,7 +3356,8 @@ class PortalSDK(BaseSDK):
         Two changes affect your end users immediately:
         - Re-pointing at a different resource revokes the portal's live sessions,
         because a session carries the scope it was minted with.
-        - Disabling stops new sessions but leaves live ones running until they expire.
+        - Disabling stops new sessions and revokes the live ones. Re-enabling does
+        not restore them.
 
         **Required Permissions**
 
@@ -2766,7 +3401,8 @@ class PortalSDK(BaseSDK):
 
         :param enabled: Whether new sessions can be minted. Omit to leave unchanged.
 
-            Disabling does not end sessions that are already live.
+            Disabling also revokes the portal's live sessions. Re-enabling does not
+            restore them.
 
         :param logo_url: Absolute `https://` URL of the portal logo. Omit to leave unchanged, or set
             null to remove the logo.
