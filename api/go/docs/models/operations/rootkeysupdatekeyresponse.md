@@ -1,0 +1,9 @@
+# RootKeysUpdateKeyResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2RootKeysUpdateKeyResponseBody`                                                                         | [*components.V2RootKeysUpdateKeyResponseBody](../../models/components/v2rootkeysupdatekeyresponsebody.md) | :heavy_minus_sign:                                                                                        | Root key updated.                                                                                         |

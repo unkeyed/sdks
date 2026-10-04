@@ -9,7 +9,7 @@ import (
 // RatelimitIdentifier - How requests are grouped for rate limiting. Exactly one of `remoteIp`,
 // `header`, `authenticatedSubject`, `path` or `principalField` must be set.
 type RatelimitIdentifier struct {
-	// Rate limit by the client's IP address.
+	// Rate limit by the remote IP.
 	RemoteIP *RemoteIPKey `json:"remoteIp,omitzero"`
 	// Rate limit by the value of a request header.
 	Header *HeaderKey `json:"header,omitzero"`

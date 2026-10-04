@@ -18,6 +18,7 @@ type V2KeysRerollKeyRequestBody struct {
 	// This parameter controls the overlap period for key rotation:
 	// - Set to `0` to revoke the original key immediately
 	// - Positive values keep the original key active for the specified duration
+	// - Set to `null` to keep the original key active; it keeps its current expiration, if any
 	// - Allows graceful migration by giving users time to update their credentials
 	//
 	// Common overlap periods:
@@ -27,7 +28,7 @@ type V2KeysRerollKeyRequestBody struct {
 	// - 7 days grace period: 604800000
 	// - 30 days grace period: 2592000000
 	//
-	Expiration int64 `json:"expiration"`
+	Expiration *int64 `json:"expiration"`
 }
 
 func (v *V2KeysRerollKeyRequestBody) GetKeyID() string {
@@ -37,9 +38,9 @@ func (v *V2KeysRerollKeyRequestBody) GetKeyID() string {
 	return v.KeyID
 }
 
-func (v *V2KeysRerollKeyRequestBody) GetExpiration() int64 {
+func (v *V2KeysRerollKeyRequestBody) GetExpiration() *int64 {
 	if v == nil {
-		return 0
+		return nil
 	}
 	return v.Expiration
 }

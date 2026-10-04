@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.938.0
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.943.0
 
 import (
 	"context"
@@ -158,6 +158,7 @@ type Unkey struct {
 	Projects *Projects
 	// Rate limiting operations
 	Ratelimit *Ratelimit
+	RootKeys  *RootKeys
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -234,11 +235,11 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "3.0.2",
+		SDKVersion: "3.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 3.0.2 2.938.0 2.0.0 github.com/unkeyed/sdks/api/go/v3",
-			SDKVersion:        "3.0.2",
-			GenVersion:        "2.938.0",
+			UserAgent:         "speakeasy-sdk/go 3.1.0 2.943.0 2.0.0 github.com/unkeyed/sdks/api/go/v3",
+			SDKVersion:        "3.1.0",
+			GenVersion:        "2.943.0",
 			OpenAPIDocVersion: "2.0.0",
 			ServerList:        ServerList,
 		},
@@ -282,6 +283,7 @@ func New(opts ...SDKOption) *Unkey {
 	sdk.Portal = newPortal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Projects = newProjects(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ratelimit = newRatelimit(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.RootKeys = newRootKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }
