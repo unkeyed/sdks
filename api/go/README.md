@@ -356,7 +356,9 @@ func main() {
 * [GetPortal](docs/sdks/portal/README.md#getportal) - Get portal
 * [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 * [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
+* [ListSessions](docs/sdks/portal/README.md#listsessions) - List portal sessions
 * [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+* [RevokeSession](docs/sdks/portal/README.md#revokesession) - Revoke portal sessions
 * [UpdatePortal](docs/sdks/portal/README.md#updateportal) - Update portal
 
 ### [Projects](docs/sdks/projects/README.md)
@@ -375,6 +377,14 @@ func main() {
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 * [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
+
+### [RootKeys](docs/sdks/rootkeys/README.md)
+
+* [CreateKey](docs/sdks/rootkeys/README.md#createkey) - Create root key
+* [DeleteKey](docs/sdks/rootkeys/README.md#deletekey) - Delete root key
+* [ListKeys](docs/sdks/rootkeys/README.md#listkeys) - List root keys
+* [RerollKey](docs/sdks/rootkeys/README.md#rerollkey) - Reroll root key
+* [UpdateKey](docs/sdks/rootkeys/README.md#updatekey) - Update root key
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

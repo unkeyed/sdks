@@ -1,0 +1,9 @@
+# RootKeysListKeysResponse
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                      | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `V2RootKeysListKeysResponseBody`                                                                        | [*components.V2RootKeysListKeysResponseBody](../../models/components/v2rootkeyslistkeysresponsebody.md) | :heavy_minus_sign:                                                                                      | A page of readable root keys.                                                                           |
