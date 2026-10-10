@@ -4,7 +4,7 @@ from .basesdk import BaseSDK
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 from unkey.py import errors, models, utils
 from unkey.py._hooks import HookContext
-from unkey.py.types import OptionalNullable, UNSET
+from unkey.py.types import Nullable, OptionalNullable, UNSET
 from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 
 
@@ -2573,7 +2573,7 @@ class Keys(BaseSDK):
         self,
         *,
         key_id: str,
-        expiration: int,
+        expiration: Nullable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2631,6 +2631,7 @@ class Keys(BaseSDK):
             This parameter controls the overlap period for key rotation:
             - Set to `0` to revoke the original key immediately
             - Positive values keep the original key active for the specified duration
+            - Set to `null` to keep the original key active; it keeps its current expiration, if any
             - Allows graceful migration by giving users time to update their credentials
 
             Common overlap periods:
@@ -2753,7 +2754,7 @@ class Keys(BaseSDK):
         self,
         *,
         key_id: str,
-        expiration: int,
+        expiration: Nullable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2811,6 +2812,7 @@ class Keys(BaseSDK):
             This parameter controls the overlap period for key rotation:
             - Set to `0` to revoke the original key immediately
             - Positive values keep the original key active for the specified duration
+            - Set to `null` to keep the original key active; it keeps its current expiration, if any
             - Allows graceful migration by giving users time to update their credentials
 
             Common overlap periods:

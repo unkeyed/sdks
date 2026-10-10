@@ -312,6 +312,7 @@ with Unkey() as unkey:
 
 * [~~create_deployment~~](docs/sdks/deployments/README.md#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](docs/sdks/deployments/README.md#get_deployment) - Get deployment
+* [list_build_logs](docs/sdks/deployments/README.md#list_build_logs) - List build logs
 * [list_deployments](docs/sdks/deployments/README.md#list_deployments) - List deployments
 * [promote_deployment](docs/sdks/deployments/README.md#promote_deployment) - Promote deployment
 * [rollback_deployment](docs/sdks/deployments/README.md#rollback_deployment) - Rollback deployment
@@ -388,6 +389,8 @@ with Unkey() as unkey:
 * [list_permissions](docs/sdks/permissions/README.md#list_permissions) - List permissions
 * [list_roles](docs/sdks/permissions/README.md#list_roles) - List roles
 * [set_role_permissions](docs/sdks/permissions/README.md#set_role_permissions) - Set role permissions
+* [update_permission](docs/sdks/permissions/README.md#update_permission) - Update permission
+* [update_role](docs/sdks/permissions/README.md#update_role) - Update role
 
 ### [Portal](docs/sdks/portalsdk/README.md)
 
@@ -398,7 +401,9 @@ with Unkey() as unkey:
 * [get_portal](docs/sdks/portalsdk/README.md#get_portal) - Get portal
 * [get_verifications](docs/sdks/portalsdk/README.md#get_verifications) - Get portal verifications
 * [list_keys](docs/sdks/portalsdk/README.md#list_keys) - List portal keys
+* [list_sessions](docs/sdks/portalsdk/README.md#list_sessions) - List portal sessions
 * [reroll_key](docs/sdks/portalsdk/README.md#reroll_key) - Reroll portal key
+* [revoke_session](docs/sdks/portalsdk/README.md#revoke_session) - Revoke portal sessions
 * [update_portal](docs/sdks/portalsdk/README.md#update_portal) - Update portal
 
 ### [Projects](docs/sdks/projects/README.md)
@@ -417,6 +422,19 @@ with Unkey() as unkey:
 * [list_overrides](docs/sdks/ratelimit/README.md#list_overrides) - List ratelimit overrides
 * [multi_limit](docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 * [set_override](docs/sdks/ratelimit/README.md#set_override) - Set ratelimit override
+
+### [RootKeys](docs/sdks/rootkeys/README.md)
+
+* [create_key](docs/sdks/rootkeys/README.md#create_key) - Create root key
+* [delete_key](docs/sdks/rootkeys/README.md#delete_key) - Delete root key
+* [list_keys](docs/sdks/rootkeys/README.md#list_keys) - List root keys
+* [reroll_key](docs/sdks/rootkeys/README.md#reroll_key) - Reroll root key
+* [update_key](docs/sdks/rootkeys/README.md#update_key) - Update root key
+
+### [Workspace](docs/sdks/workspace/README.md)
+
+* [get_limits](docs/sdks/workspace/README.md#get_limits) - Get workspace limits
+* [get_usage](docs/sdks/workspace/README.md#get_usage) - Get workspace usage
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -539,8 +557,8 @@ with Unkey(
 * [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py): The base class for HTTP error responses.
   * [`BadRequestErrorResponse`](./src/unkey/py/errors/badrequesterrorresponse.py): Error response for invalid requests that cannot be processed due to client-side errors. This typically occurs when request parameters are missing, malformed, or fail validation rules. The response includes detailed information about the specific errors in the request, including the location of each error and suggestions for fixing it. When receiving this error, check the 'errors' array in the response for specific validation issues that need to be addressed before retrying. Status code `400`.
   * [`UnauthorizedErrorResponse`](./src/unkey/py/errors/unauthorizederrorresponse.py): Error response when authentication has failed or credentials are missing. This occurs when: - No authentication token is provided in the request - The provided token is invalid, expired, or malformed - The token format doesn't match expected patterns  To resolve this error, ensure you're including a valid root key in the Authorization header. Status code `401`.
-  * [`TooManyRequestsErrorResponse`](./src/unkey/py/errors/toomanyrequestserrorresponse.py): Error response when the client has sent too many requests in a given time period. This occurs when you've exceeded a rate limit or quota for the resource you're accessing.  The rate limit resets automatically after the time window expires. To avoid this error: - Implement exponential backoff when retrying requests - Cache results where appropriate to reduce request frequency - Check the error detail message for specific quota information - Contact support if you need a higher quota for your use case. Status code `429`.
   * [`InternalServerErrorResponse`](./src/unkey/py/errors/internalservererrorresponse.py): Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.  When you encounter this error: - The request ID in the response can help Unkey support investigate the issue - The error is likely temporary and retrying may succeed - If the error persists, contact Unkey support with the request ID. Status code `500`.
+  * [`TooManyRequestsErrorResponse`](./src/unkey/py/errors/toomanyrequestserrorresponse.py): Error response when the client has sent too many requests in a given time period. This occurs when you've exceeded a rate limit or quota for the resource you're accessing.  The rate limit resets automatically after the time window expires. To avoid this error: - Implement exponential backoff when retrying requests - Cache results where appropriate to reduce request frequency - Check the error detail message for specific quota information - Contact support if you need a higher quota for your use case. Status code `429`. *
   * [`ForbiddenErrorResponse`](./src/unkey/py/errors/forbiddenerrorresponse.py): Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when: - The root key doesn't have the required permissions for this endpoint - The operation requires elevated privileges that the current key lacks - Access to the requested resource is restricted based on workspace settings  To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator. Status code `403`. *
   * [`NotFoundErrorResponse`](./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. *
 
@@ -555,11 +573,11 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](./src/unkey/py/errors/unkeyerror.py)**:
-* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 87 methods.*
-* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 10 of 87 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 87 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 87 methods.*
-* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 87 methods.*
+* [`ConflictErrorResponse`](./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 13 of 99 methods.*
+* [`PreconditionFailedErrorResponse`](./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 99 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 99 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 99 methods.*
+* [`GoneErrorResponse`](./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 99 methods.*
 * [`ResponseValidationError`](./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

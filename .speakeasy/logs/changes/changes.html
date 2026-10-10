@@ -98,89 +98,67 @@
 <body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.apps.create_app()</code>: <code>request</code> <strong>Changed</strong> (Breaking ⚠️)
+<li><code>unkey.deployments.list_build_logs()</code>: <strong>Added</strong></li>
+<li><code>unkey.permissions.update_permission()</code>: <strong>Added</strong></li>
+<li><code>unkey.permissions.update_role()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.list_sessions()</code>: <strong>Added</strong></li>
+<li><code>unkey.portal.revoke_session()</code>: <strong>Added</strong></li>
+<li><code>unkey.root_keys.create_key()</code>: <strong>Added</strong></li>
+<li><code>unkey.root_keys.delete_key()</code>: <strong>Added</strong></li>
+<li><code>unkey.root_keys.list_keys()</code>: <strong>Added</strong></li>
+<li><code>unkey.root_keys.reroll_key()</code>: <strong>Added</strong></li>
+<li><code>unkey.root_keys.update_key()</code>: <strong>Added</strong></li>
+<li><code>unkey.workspace.get_limits()</code>: <strong>Added</strong></li>
+<li><code>unkey.workspace.get_usage()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.get_deployment()</code>: <code>response.data</code> <strong>Changed</strong>
 
 <ul>
-<li><code>git</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>name</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>project</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>request</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>slug</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>docker.resolved_image</code> <strong>Added</strong></li>
+<li><code>finished_at</code> <strong>Added</strong></li>
+<li><code>git.author</code> <strong>Added</strong></li>
+<li><code>git.commit_message</code> <strong>Added</strong></li>
+<li><code>git.commit_timestamp</code> <strong>Added</strong></li>
+<li><code>git.fork_repository</code> <strong>Added</strong></li>
+<li><code>git.pr_number</code> <strong>Added</strong></li>
+<li><code>trigger</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>unkey.portal.get_verifications()</code>:
-
-<ul>
-<li><code>response</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>bucket_millis</code> <strong>Added</strong></li>
-<li><code>data</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>keys</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>error.status[422]</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.portal.create_session()</code>: <code>request</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>preview</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>scopes[].enum(keys:create)</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-</ul></li>
-<li><code>unkey.permissions.set_role_permissions()</code>: <code>request</code> <strong>Changed</strong> (Breaking ⚠️)
-
-<ul>
-<li><code>permissions</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>request</code> <strong>Added</strong> (Breaking ⚠️)</li>
-<li><code>role_id</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-</ul></li>
-<li><code>unkey.apps.update_app()</code>:
-
-<ul>
-<li><code>request.oci</code> <strong>Added</strong></li>
-<li><code>response.data</code> <strong>Changed</strong>
-
-<ul>
-<li><code>oci</code> <strong>Added</strong></li>
-<li><code>source_type</code> <strong>Added</strong></li>
-</ul></li>
-</ul></li>
-<li><code>unkey.portal.update_portal()</code>: <strong>Added</strong></li>
-<li><code>unkey.apps.get_app()</code>: <code>response.data</code> <strong>Changed</strong>
-
-<ul>
-<li><code>oci</code> <strong>Added</strong></li>
-<li><code>source_type</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.apps.list_apps()</code>: <code>response.data[]</code> <strong>Changed</strong>
-
-<ul>
-<li><code>oci</code> <strong>Added</strong></li>
-<li><code>source_type</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.deployments.create_deployment_v3()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.create_deployment()</code>: <strong>Deprecated</strong></li>
-<li><code>unkey.domains.get_domain()</code>:  <code>response.data.domain_connect</code> <strong>Added</strong></li>
-<li><code>unkey.domains.list_domains()</code>:
+<li><code>unkey.deployments.list_deployments()</code>:
 
 <ul>
 <li><code>request</code> <strong>Changed</strong>
 
 <ul>
-<li><code>app</code> <strong>Changed</strong></li>
-<li><code>environment</code> <strong>Changed</strong></li>
-<li><code>project</code> <strong>Changed</strong></li>
+<li><code>branch</code> <strong>Added</strong></li>
+<li><code>end_time</code> <strong>Added</strong></li>
+<li><code>start_time</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>response.data[].domain_connect</code> <strong>Added</strong></li>
-<li><code>error.status[503]</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.keys.verify_key()</code>:
+<li><code>response.data[]</code> <strong>Changed</strong>
 
 <ul>
-<li><code>request.keyspaces</code> <strong>Added</strong></li>
-<li><code>response.data.keyspace_id</code> <strong>Added</strong></li>
+<li><code>docker.resolved_image</code> <strong>Added</strong></li>
+<li><code>finished_at</code> <strong>Added</strong></li>
+<li><code>git.author</code> <strong>Added</strong></li>
+<li><code>git.commit_message</code> <strong>Added</strong></li>
+<li><code>git.commit_timestamp</code> <strong>Added</strong></li>
+<li><code>git.fork_repository</code> <strong>Added</strong></li>
+<li><code>git.pr_number</code> <strong>Added</strong></li>
+<li><code>trigger</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>unkey.portal.get_portal()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.delete_portal()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.create_portal()</code>: <strong>Added</strong></li>
+</ul></li>
+<li><code>unkey.gateway.list_policies()</code>:  <code>response.data[].match[].remote_ip</code> <strong>Added</strong></li>
+<li><code>unkey.gateway.set_policies()</code>:
+
+<ul>
+<li><code>request.policies[].match[].remote_ip</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>unkey.gateway.update_policy()</code>:
+
+<ul>
+<li><code>request.match[].remote_ip</code> <strong>Added</strong></li>
+</ul></li>
+<li><code>unkey.keys.reroll_key()</code>:  <code>request.expiration</code> <strong>Changed</strong></li>
+<li><code>unkey.portal.create_session()</code>:  <code>error.status[409]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.reroll_key()</code>:  <code>request.expiration</code> <strong>Changed</strong></li>
 </ul>
 </body>
 </html>

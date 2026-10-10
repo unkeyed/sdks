@@ -7,6 +7,7 @@ from .deploymenterror import DeploymentError, DeploymentErrorTypedDict
 from .deploymentgit import DeploymentGit, DeploymentGitTypedDict
 from .deploymentruntime import DeploymentRuntime, DeploymentRuntimeTypedDict
 from .deploymentstatus import DeploymentStatus
+from .deploymenttrigger import DeploymentTrigger, DeploymentTriggerTypedDict
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -38,6 +39,7 @@ class DeploymentTypedDict(TypedDict):
     r"""Slug of the app this deployment belongs to."""
     project: str
     r"""Slug of the project this deployment belongs to."""
+    trigger: DeploymentTriggerTypedDict
     available_actions: List[DeploymentAction]
     r"""Lifecycle operations you are allowed to call on this deployment right now.
     Empty when none apply (e.g. while building or in a terminal state).
@@ -56,6 +58,11 @@ class DeploymentTypedDict(TypedDict):
     git: NotRequired[DeploymentGitTypedDict]
     docker: NotRequired[DeploymentDockerTypedDict]
     error: NotRequired[DeploymentErrorTypedDict]
+    finished_at: NotRequired[int]
+    r"""Unix timestamp in milliseconds when the deployment finished, successfully
+    or not. Omitted while it is in progress.
+
+    """
     domains: NotRequired[List[str]]
     r"""Public hostnames this deployment is reachable at.
 
@@ -97,6 +104,8 @@ class Deployment(BaseModel):
     project: str
     r"""Slug of the project this deployment belongs to."""
 
+    trigger: DeploymentTrigger
+
     available_actions: Annotated[
         List[DeploymentAction], pydantic.Field(alias="availableActions")
     ]
@@ -124,6 +133,12 @@ class Deployment(BaseModel):
 
     error: Optional[DeploymentError] = None
 
+    finished_at: Annotated[Optional[int], pydantic.Field(alias="finishedAt")] = None
+    r"""Unix timestamp in milliseconds when the deployment finished, successfully
+    or not. Omitted while it is in progress.
+
+    """
+
     domains: Optional[List[str]] = None
     r"""Public hostnames this deployment is reachable at.
 
@@ -137,7 +152,9 @@ class Deployment(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["git", "docker", "error", "domains", "updatedAt"])
+        optional_fields = set(
+            ["git", "docker", "error", "finishedAt", "domains", "updatedAt"]
+        )
         serialized = handler(self)
         m = {}
 

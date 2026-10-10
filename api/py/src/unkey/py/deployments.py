@@ -339,9 +339,9 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.read_deployment` (to read deployments in any environment)
-        - `environment.<environment_id>.read_deployment` (to read deployments in a specific environment)
+        Your root key must have this permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#read`
+        (use `*` for any level)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -477,9 +477,9 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.read_deployment` (to read deployments in any environment)
-        - `environment.<environment_id>.read_deployment` (to read deployments in a specific environment)
+        Your root key must have this permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#read`
+        (use `*` for any level)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -597,6 +597,354 @@ class Deployments(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def list_build_logs(
+        self,
+        *,
+        deployment_id: str,
+        step_id: Optional[str] = None,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = 100,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsListBuildLogsResponseBody:
+        r"""List build logs
+
+        Retrieve the build output of a deployment as a list of log entries, in the
+        order the build printed them. A log entry is one chunk of build output,
+        and can contain several lines or part of a line.
+
+        Poll this endpoint to follow a running build:
+
+        - Send the `pagination.cursor` of the last response as `cursor`. The
+        response contains only the entries after it.
+        - When `hasMore` is true, request again now.
+        - When `hasMore` is false, you have all entries so far. Wait,
+        then request again with the same cursor.
+        - The cursor is absent only when the request had no cursor and the build
+        has no entries yet.
+        - A response can contain fewer than `limit` entries and still have
+        `hasMore: true` when the entries are large.
+
+        New entries become visible up to a few seconds after the build prints
+        them. To know that a build is done, check the deployment status with
+        `getDeployment`. After the status is no longer `building`, request until
+        you get an empty response at least 5 seconds later.
+
+        When a build attempt is retried, an entry from the earlier attempt can
+        arrive after the cursor has moved past it, and a poll does not return it.
+        A request without a cursor returns it. A deployment from a prebuilt image
+        has no build and returns no entries. Build logs are kept for 3 months.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>/buildLogs#read`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param step_id: Return only the log entries of this build step. Use the `stepId` of an
+            entry from a previous response. An unknown step returns no entries.
+            Omit this field to return the entries of every step.
+
+        :param cursor: Pagination cursor from a previous response to fetch the entries after
+            it. Omit it to start at the first entry of the build.
+
+        :param limit: Maximum number of log entries to return. A response can contain fewer
+            entries and still have `hasMore: true` when the entries are large.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsListBuildLogsRequestBody(
+            deployment_id=deployment_id,
+            step_id=step_id,
+            cursor=cursor,
+            limit=limit,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/deployments.listBuildLogs",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsListBuildLogsRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.listBuildLogs",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsListBuildLogsResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_build_logs_async(
+        self,
+        *,
+        deployment_id: str,
+        step_id: Optional[str] = None,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = 100,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsListBuildLogsResponseBody:
+        r"""List build logs
+
+        Retrieve the build output of a deployment as a list of log entries, in the
+        order the build printed them. A log entry is one chunk of build output,
+        and can contain several lines or part of a line.
+
+        Poll this endpoint to follow a running build:
+
+        - Send the `pagination.cursor` of the last response as `cursor`. The
+        response contains only the entries after it.
+        - When `hasMore` is true, request again now.
+        - When `hasMore` is false, you have all entries so far. Wait,
+        then request again with the same cursor.
+        - The cursor is absent only when the request had no cursor and the build
+        has no entries yet.
+        - A response can contain fewer than `limit` entries and still have
+        `hasMore: true` when the entries are large.
+
+        New entries become visible up to a few seconds after the build prints
+        them. To know that a build is done, check the deployment status with
+        `getDeployment`. After the status is no longer `building`, request until
+        you get an empty response at least 5 seconds later.
+
+        When a build attempt is retried, an entry from the earlier attempt can
+        arrive after the cursor has moved past it, and a poll does not return it.
+        A request without a cursor returns it. A deployment from a prebuilt image
+        has no build and returns no entries. Build logs are kept for 3 months.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>/buildLogs#read`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param step_id: Return only the log entries of this build step. Use the `stepId` of an
+            entry from a previous response. An unknown step returns no entries.
+            Omit this field to return the entries of every step.
+
+        :param cursor: Pagination cursor from a previous response to fetch the entries after
+            it. Omit it to start at the first entry of the build.
+
+        :param limit: Maximum number of log entries to return. A response can contain fewer
+            entries and still have `hasMore: true` when the entries are large.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsListBuildLogsRequestBody(
+            deployment_id=deployment_id,
+            step_id=step_id,
+            cursor=cursor,
+            limit=limit,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/deployments.listBuildLogs",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsListBuildLogsRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.listBuildLogs",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsListBuildLogsResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def list_deployments(
         self,
         *,
@@ -604,6 +952,9 @@ class Deployments(BaseSDK):
         app: Optional[str] = None,
         environment: Optional[str] = None,
         status: Optional[Iterable[models.DeploymentStatus]] = None,
+        branch: Optional[Iterable[str]] = None,
+        start_time: Optional[int] = None,
+        end_time: Optional[int] = None,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -615,17 +966,22 @@ class Deployments(BaseSDK):
 
         Retrieve a paginated list of deployments within a workspace, newest first.
 
-        Filter by project, app, environment, and lifecycle status. All filters are
-        optional; with none set, every deployment in the workspace is returned.
-        Filters nest: `app` requires `project`, and `environment` requires both
-        `project` and `app`. Results are paginated; when `hasMore` is true, pass the
-        returned `cursor` to fetch the next page.
+        Filter by project, app, environment, lifecycle status, git branch, and
+        creation time. All filters are optional; with none set, every deployment in
+        the workspace is returned. Filters nest: `app` requires `project`, and
+        `environment` and `branch` require both `project` and `app`. Results are
+        paginated; when `hasMore` is true, pass the returned `cursor` to fetch the
+        next page.
 
         **Required Permissions**
 
-        Your root key must have the `environment.*.read_deployment` permission.
-        Listing spans environments, so a grant on a single environment is not
-        sufficient.
+        Your root key must have this permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#read`
+        (use `*` for every level you do not filter by)
+
+        The permission must cover every deployment the filters select: a grant on
+        one environment is not sufficient for a request that spans more than that
+        environment.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -641,6 +997,17 @@ class Deployments(BaseSDK):
 
         :param status: Restrict results to deployments in any of the given lifecycle statuses.
             Omit to return deployments in every status.
+
+        :param branch: Restrict results to deployments built from any of the given git branches.
+            Requires `project` and `app` to also be set. Omit or pass an empty list to
+            return deployments from every branch.
+
+        :param start_time: Return only deployments created at or after this unix timestamp in
+            milliseconds (inclusive).
+
+        :param end_time: Return only deployments created before this unix timestamp in
+            milliseconds (exclusive). Must be later than `startTime` when both are
+            set.
 
         :param limit: Maximum number of deployments to return per request.
             Balance between response size and number of pagination calls needed.
@@ -668,6 +1035,9 @@ class Deployments(BaseSDK):
             app=app,
             environment=environment,
             status=utils.unmarshal(status, Optional[List[models.DeploymentStatus]]),
+            branch=utils.unmarshal(branch, Optional[List[str]]),
+            start_time=start_time,
+            end_time=end_time,
             limit=limit,
             cursor=cursor,
         )
@@ -740,6 +1110,9 @@ class Deployments(BaseSDK):
                 app=app,
                 environment=environment,
                 status=status,
+                branch=branch,
+                start_time=start_time,
+                end_time=end_time,
                 limit=limit,
                 cursor=next_cursor,
                 retries=retries,
@@ -802,6 +1175,9 @@ class Deployments(BaseSDK):
         app: Optional[str] = None,
         environment: Optional[str] = None,
         status: Optional[Iterable[models.DeploymentStatus]] = None,
+        branch: Optional[Iterable[str]] = None,
+        start_time: Optional[int] = None,
+        end_time: Optional[int] = None,
         limit: Optional[int] = 100,
         cursor: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -813,17 +1189,22 @@ class Deployments(BaseSDK):
 
         Retrieve a paginated list of deployments within a workspace, newest first.
 
-        Filter by project, app, environment, and lifecycle status. All filters are
-        optional; with none set, every deployment in the workspace is returned.
-        Filters nest: `app` requires `project`, and `environment` requires both
-        `project` and `app`. Results are paginated; when `hasMore` is true, pass the
-        returned `cursor` to fetch the next page.
+        Filter by project, app, environment, lifecycle status, git branch, and
+        creation time. All filters are optional; with none set, every deployment in
+        the workspace is returned. Filters nest: `app` requires `project`, and
+        `environment` and `branch` require both `project` and `app`. Results are
+        paginated; when `hasMore` is true, pass the returned `cursor` to fetch the
+        next page.
 
         **Required Permissions**
 
-        Your root key must have the `environment.*.read_deployment` permission.
-        Listing spans environments, so a grant on a single environment is not
-        sufficient.
+        Your root key must have this permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#read`
+        (use `*` for every level you do not filter by)
+
+        The permission must cover every deployment the filters select: a grant on
+        one environment is not sufficient for a request that spans more than that
+        environment.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -839,6 +1220,17 @@ class Deployments(BaseSDK):
 
         :param status: Restrict results to deployments in any of the given lifecycle statuses.
             Omit to return deployments in every status.
+
+        :param branch: Restrict results to deployments built from any of the given git branches.
+            Requires `project` and `app` to also be set. Omit or pass an empty list to
+            return deployments from every branch.
+
+        :param start_time: Return only deployments created at or after this unix timestamp in
+            milliseconds (inclusive).
+
+        :param end_time: Return only deployments created before this unix timestamp in
+            milliseconds (exclusive). Must be later than `startTime` when both are
+            set.
 
         :param limit: Maximum number of deployments to return per request.
             Balance between response size and number of pagination calls needed.
@@ -866,6 +1258,9 @@ class Deployments(BaseSDK):
             app=app,
             environment=environment,
             status=utils.unmarshal(status, Optional[List[models.DeploymentStatus]]),
+            branch=utils.unmarshal(branch, Optional[List[str]]),
+            start_time=start_time,
+            end_time=end_time,
             limit=limit,
             cursor=cursor,
         )
@@ -938,6 +1333,9 @@ class Deployments(BaseSDK):
                 app=app,
                 environment=environment,
                 status=status,
+                branch=branch,
+                start_time=start_time,
+                end_time=end_time,
                 limit=limit,
                 cursor=next_cursor,
                 retries=retries,
