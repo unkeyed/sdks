@@ -1,0 +1,9 @@
+# WorkspaceGetUsageResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2WorkspaceGetUsageResponseBody`                                                                         | [*components.V2WorkspaceGetUsageResponseBody](../../models/components/v2workspacegetusageresponsebody.md) | :heavy_minus_sign:                                                                                        | The workspace usage for the requested month.<br/>                                                         |

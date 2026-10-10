@@ -243,7 +243,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -264,7 +264,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -285,7 +285,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -306,7 +306,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.PreconditionFailedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -327,7 +327,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.UnprocessableEntityErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -348,7 +348,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -369,7 +369,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -390,7 +390,7 @@ func (s *Analytics) GetGatewayRequests(ctx context.Context, request components.V
 
 			var out apierrors.ServiceUnavailableErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -634,7 +634,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -655,7 +655,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -676,7 +676,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -697,7 +697,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.PreconditionFailedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -718,7 +718,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.UnprocessableEntityErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -739,7 +739,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -760,7 +760,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -781,7 +781,7 @@ func (s *Analytics) GetRatelimits(ctx context.Context, request components.V2Anal
 
 			var out apierrors.ServiceUnavailableErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1027,7 +1027,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1048,7 +1048,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1069,7 +1069,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1090,7 +1090,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.PreconditionFailedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1111,7 +1111,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.UnprocessableEntityErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1132,7 +1132,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1153,7 +1153,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1174,7 +1174,7 @@ func (s *Analytics) GetRuntimeLogs(ctx context.Context, request components.V2Ana
 
 			var out apierrors.ServiceUnavailableErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1419,7 +1419,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1440,7 +1440,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1461,7 +1461,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1482,7 +1482,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.UnprocessableEntityErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1503,7 +1503,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1524,7 +1524,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1545,7 +1545,7 @@ func (s *Analytics) GetVerifications(ctx context.Context, request components.V2A
 
 			var out apierrors.ServiceUnavailableErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

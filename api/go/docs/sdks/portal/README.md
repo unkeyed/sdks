@@ -13,7 +13,9 @@ Customer Portal session management
 * [GetPortal](#getportal) - Get portal
 * [GetVerifications](#getverifications) - Get portal verifications
 * [ListKeys](#listkeys) - List portal keys
+* [ListSessions](#listsessions) - List portal sessions
 * [RerollKey](#rerollkey) - Reroll portal key
+* [RevokeSession](#revokesession) - Revoke portal sessions
 * [UpdatePortal](#updateportal) - Update portal
 
 ## CreatePortal
@@ -193,6 +195,7 @@ func main() {
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
@@ -578,6 +581,87 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## ListSessions
+
+List the end users holding a revocable session on a portal, with each
+end user's sessions.
+
+Unreleased and subject to change without notice.
+
+A session is revocable until it expires or is revoked. That includes
+sessions whose portal URL was created but not opened yet. Pass an end
+user's `externalId` to `portal.revokeSession` to end their sessions.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.create_portal_session` (for any portal in the workspace)
+- `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+with `#read` or `#write`. Reading the portal itself is not enough.
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.listSessions" method="post" path="/v2/portal.listSessions" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.ListSessions(ctx, components.V2PortalListSessionsRequestBody{
+        Portal: "proj_1234abcd",
+        Cursor: unkey.Pointer("user_123"),
+        Search: unkey.Pointer("user_"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalListSessionsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalListSessionsRequestBody](../../models/components/v2portallistsessionsrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalListSessionsResponse](../../models/operations/portallistsessionsresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## RerollKey
 
 Reroll an API key owned by the authenticated portal session's end user,
@@ -610,7 +694,7 @@ func main() {
 
     res, err := s.Portal.RerollKey(ctx, components.V2KeysRerollKeyRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Expiration: 86400000,
+        Expiration: unkey.Pointer[int64](86400000),
     }, operations.PortalRerollKeySecurity{
         PortalSession: os.Getenv("UNKEY_PORTAL_SESSION"),
     })
@@ -648,6 +732,91 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## RevokeSession
+
+Revoke every live session an end user holds on a portal.
+
+Unreleased and subject to change without notice.
+
+Sessions that were created but not yet opened are revoked too, so their
+portal URLs stop working. Revocation is not instantaneous: session lookups
+are cached briefly, so a request already in flight may still succeed.
+
+Revoking ends existing sessions only. To keep the end user out, also stop
+calling `portal.createSession` for them.
+
+Calling this again for the same end user is safe and revokes nothing.
+
+**Required Permissions**
+
+Your root key must have one of:
+- `portal.*.create_portal_session` (for any portal in the workspace)
+- `portal.<portal_id>.create_portal_session` (for a specific portal)
+
+It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
+which dashboard roles carry. Unlike `portal.createSession`, a dashboard
+session can call this, not just a root key.
+
+Without the permission this returns **404**, not 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.revokeSession" method="post" path="/v2/portal.revokeSession" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.RevokeSession(ctx, components.V2PortalRevokeSessionRequestBody{
+        Portal: "proj_1234abcd",
+        ExternalID: "user_123",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalRevokeSessionResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [components.V2PortalRevokeSessionRequestBody](../../models/components/v2portalrevokesessionrequestbody.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.PortalRevokeSessionResponse](../../models/operations/portalrevokesessionresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## UpdatePortal
 
 Change a portal's slug, display name, the resource it serves, its enabled
@@ -661,7 +830,8 @@ branding, sending null clears it. Send at most one of `keyspaceId` or `appId`.
 Two changes affect your end users immediately:
 - Re-pointing at a different resource revokes the portal's live sessions,
   because a session carries the scope it was minted with.
-- Disabling stops new sessions but leaves live ones running until they expire.
+- Disabling stops new sessions and revokes the live ones. Re-enabling does
+  not restore them.
 
 **Required Permissions**
 

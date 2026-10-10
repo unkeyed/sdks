@@ -270,6 +270,7 @@ func main() {
 
 * [~~CreateDeployment~~](docs/sdks/deployments/README.md#createdeployment) - Create deployment :warning: **Deprecated**
 * [GetDeployment](docs/sdks/deployments/README.md#getdeployment) - Get deployment
+* [ListBuildLogs](docs/sdks/deployments/README.md#listbuildlogs) - List build logs
 * [ListDeployments](docs/sdks/deployments/README.md#listdeployments) - List deployments
 * [PromoteDeployment](docs/sdks/deployments/README.md#promotedeployment) - Promote deployment
 * [RollbackDeployment](docs/sdks/deployments/README.md#rollbackdeployment) - Rollback deployment
@@ -346,6 +347,8 @@ func main() {
 * [ListPermissions](docs/sdks/permissions/README.md#listpermissions) - List permissions
 * [ListRoles](docs/sdks/permissions/README.md#listroles) - List roles
 * [SetRolePermissions](docs/sdks/permissions/README.md#setrolepermissions) - Set role permissions
+* [UpdatePermission](docs/sdks/permissions/README.md#updatepermission) - Update permission
+* [UpdateRole](docs/sdks/permissions/README.md#updaterole) - Update role
 
 ### [Portal](docs/sdks/portal/README.md)
 
@@ -356,7 +359,9 @@ func main() {
 * [GetPortal](docs/sdks/portal/README.md#getportal) - Get portal
 * [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
 * [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
+* [ListSessions](docs/sdks/portal/README.md#listsessions) - List portal sessions
 * [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
+* [RevokeSession](docs/sdks/portal/README.md#revokesession) - Revoke portal sessions
 * [UpdatePortal](docs/sdks/portal/README.md#updateportal) - Update portal
 
 ### [Projects](docs/sdks/projects/README.md)
@@ -375,6 +380,19 @@ func main() {
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 * [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
+
+### [RootKeys](docs/sdks/rootkeys/README.md)
+
+* [CreateKey](docs/sdks/rootkeys/README.md#createkey) - Create root key
+* [DeleteKey](docs/sdks/rootkeys/README.md#deletekey) - Delete root key
+* [ListKeys](docs/sdks/rootkeys/README.md#listkeys) - List root keys
+* [RerollKey](docs/sdks/rootkeys/README.md#rerollkey) - Reroll root key
+* [UpdateKey](docs/sdks/rootkeys/README.md#updatekey) - Update root key
+
+### [Workspace](docs/sdks/workspace/README.md)
+
+* [GetLimits](docs/sdks/workspace/README.md#getlimits) - Get workspace limits
+* [GetUsage](docs/sdks/workspace/README.md#getusage) - Get workspace usage
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

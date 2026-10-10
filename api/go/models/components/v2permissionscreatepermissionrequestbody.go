@@ -4,7 +4,6 @@ package components
 
 type V2PermissionsCreatePermissionRequestBody struct {
 	// Creates a permission with this human-readable name that describes its purpose.
-	// Names must be unique within your workspace to prevent conflicts during assignment.
 	// Use clear, semantic names that developers can easily understand when building authorization logic.
 	// Consider using hierarchical naming conventions like 'resource.action' for better organization.
 	//

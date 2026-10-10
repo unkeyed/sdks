@@ -43,7 +43,8 @@ type V2PortalUpdatePortalRequestBody struct {
 	AppID *string `json:"appId,omitzero"`
 	// Whether new sessions can be minted. Omit to leave unchanged.
 	//
-	// Disabling does not end sessions that are already live.
+	// Disabling also revokes the portal's live sessions. Re-enabling does not
+	// restore them.
 	//
 	Enabled *bool `json:"enabled,omitzero"`
 	// Absolute `https://` URL of the portal logo. Omit to leave unchanged, or set

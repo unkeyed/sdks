@@ -1,0 +1,9 @@
+# WorkspaceGetLimitsResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2WorkspaceGetLimitsResponseBody`                                                                          | [*components.V2WorkspaceGetLimitsResponseBody](../../models/components/v2workspacegetlimitsresponsebody.md) | :heavy_minus_sign:                                                                                          | The workspace limits and the current values against them.<br/>                                              |

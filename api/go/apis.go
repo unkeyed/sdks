@@ -251,7 +251,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -272,7 +272,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -293,7 +293,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -314,7 +314,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -335,7 +335,7 @@ func (s *Apis) CreateAPI(ctx context.Context, request components.V2ApisCreateAPI
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -589,7 +589,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -610,7 +610,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -631,7 +631,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -652,7 +652,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.NotFoundErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -673,7 +673,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.PreconditionFailedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -694,7 +694,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -715,7 +715,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request components.V2ApisDeleteAPI
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -965,7 +965,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -986,7 +986,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1007,7 +1007,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1028,7 +1028,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.NotFoundErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1049,7 +1049,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1070,7 +1070,7 @@ func (s *Apis) GetAPI(ctx context.Context, request components.V2ApisGetAPIReques
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1371,7 +1371,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.BadRequestErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1392,7 +1392,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.UnauthorizedErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1413,7 +1413,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1434,7 +1434,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.NotFoundErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1455,7 +1455,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.TooManyRequestsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1476,7 +1476,7 @@ func (s *Apis) ListKeys(ctx context.Context, request components.V2ApisListKeysRe
 
 			var out apierrors.InternalServerErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

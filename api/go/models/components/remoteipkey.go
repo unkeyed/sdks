@@ -2,6 +2,6 @@
 
 package components
 
-// RemoteIPKey - Rate limit by the client's IP address.
+// RemoteIPKey - Rate limit by the remote IP.
 type RemoteIPKey struct {
 }

@@ -15,6 +15,8 @@ Permission and role management operations
 * [ListPermissions](#listpermissions) - List permissions
 * [ListRoles](#listroles) - List roles
 * [SetRolePermissions](#setrolepermissions) - Set role permissions
+* [UpdatePermission](#updatepermission) - Update permission
+* [UpdateRole](#updaterole) - Update role
 
 ## CreatePermission
 
@@ -22,7 +24,7 @@ Create a new permission to define specific actions or capabilities in your RBAC 
 
 Use hierarchical naming patterns like `documents.read`, `admin.users.delete`, or `billing.invoices.create` for clear organization.
 
-**Important:** Permission names must be unique within the workspace. Once created, permissions are immediately available for assignment.
+**Important:** Permission slugs must be unique within the workspace. Names do not need to be unique. Once created, permissions are immediately available for assignment.
 
 **Required Permissions**
 
@@ -708,5 +710,714 @@ func main() {
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## UpdatePermission
+
+Update the name, slug, or description of a permission, identified by its ID or slug.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored permission without a write.
+
+**Important**: Keys and roles reference the permission by ID, so they keep the permission after a slug change. Key verification can return the old slug for a short time while caches refresh. A slug that another permission in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#write`
+
+
+### Example Usage: changeSlug
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="changeSlug" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "documents-read",
+        Slug: unkey.Pointer("documents.read"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="clearDescription" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Description: optionalnullable.From[string](nil),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: invalidSlug
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="invalidSlug" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="keyDisabled" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="missingKey" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: permissionNotFound
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="permissionNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="rename" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: slugTaken
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="slugTaken" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="go" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="updated" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdatePermission(ctx, components.V2PermissionsUpdatePermissionRequestBody{
+        Permission: "perm_1234567890abcdef",
+        Name: unkey.Pointer("Read documents"),
+        Slug: unkey.Pointer("documents.read"),
+        Description: optionalnullable.From(unkey.Pointer("Allows reading document resources")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdatePermissionResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `request`                                                                                                                  | [components.V2PermissionsUpdatePermissionRequestBody](../../models/components/v2permissionsupdatepermissionrequestbody.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+
+### Response
+
+**[*operations.PermissionsUpdatePermissionResponse](../../models/operations/permissionsupdatepermissionresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## UpdateRole
+
+Update the name or description of a role, identified by its ID or name.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored role without a write.
+
+This endpoint does not change the role's permissions or keys. Use `permissions.setRolePermissions`, `keys.addRoles`, and `keys.removeRoles` for those.
+
+**Important**: Keys keep the role after a rename. Requests that name the role, such as `keys.addRoles`, must use the new name. Key verification can return the old name for a short time while caches refresh. A name that another role in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
+
+
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="clearDescription" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Description: optionalnullable.From[string](nil),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: describeByName
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="describeByName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "support.readonly",
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="emptyName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="keyDisabled" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="missingKey" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="nameTaken" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="rename" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: roleNotFound
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="roleNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="go" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="updated" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Permissions.UpdateRole(ctx, components.V2PermissionsUpdateRoleRequestBody{
+        Role: "role_1234567890abcdef",
+        Name: unkey.Pointer("support.readonly"),
+        Description: optionalnullable.From(unkey.Pointer("Read-only access for customer support")),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PermissionsUpdateRoleResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `request`                                                                                                      | [components.V2PermissionsUpdateRoleRequestBody](../../models/components/v2permissionsupdaterolerequestbody.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.PermissionsUpdateRoleResponse](../../models/operations/permissionsupdateroleresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

@@ -25,6 +25,20 @@ type V2DeploymentsListDeploymentsRequestBody struct {
 	// Omit to return deployments in every status.
 	//
 	Status []DeploymentStatus `json:"status,omitzero"`
+	// Restrict results to deployments built from any of the given git branches.
+	// Requires `project` and `app` to also be set. Omit or pass an empty list to
+	// return deployments from every branch.
+	//
+	Branch []string `json:"branch,omitzero"`
+	// Return only deployments created at or after this unix timestamp in
+	// milliseconds (inclusive).
+	//
+	StartTime *int64 `json:"startTime,omitzero"`
+	// Return only deployments created before this unix timestamp in
+	// milliseconds (exclusive). Must be later than `startTime` when both are
+	// set.
+	//
+	EndTime *int64 `json:"endTime,omitzero"`
 	// Maximum number of deployments to return per request.
 	// Balance between response size and number of pagination calls needed.
 	//
@@ -72,6 +86,27 @@ func (v *V2DeploymentsListDeploymentsRequestBody) GetStatus() []DeploymentStatus
 		return nil
 	}
 	return v.Status
+}
+
+func (v *V2DeploymentsListDeploymentsRequestBody) GetBranch() []string {
+	if v == nil {
+		return nil
+	}
+	return v.Branch
+}
+
+func (v *V2DeploymentsListDeploymentsRequestBody) GetStartTime() *int64 {
+	if v == nil {
+		return nil
+	}
+	return v.StartTime
+}
+
+func (v *V2DeploymentsListDeploymentsRequestBody) GetEndTime() *int64 {
+	if v == nil {
+		return nil
+	}
+	return v.EndTime
 }
 
 func (v *V2DeploymentsListDeploymentsRequestBody) GetLimit() *int64 {
