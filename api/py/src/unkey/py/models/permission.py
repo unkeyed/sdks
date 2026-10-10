@@ -18,7 +18,6 @@ class PermissionTypedDict(TypedDict):
     r"""The human-readable name for this permission that describes its purpose.
     Should be descriptive enough for developers to understand what access it grants.
     Use clear, semantic names that reflect the resources or actions being permitted.
-    Names must be unique within your workspace to avoid confusion and conflicts.
 
     """
     slug: str
@@ -44,7 +43,6 @@ class Permission(BaseModel):
     r"""The human-readable name for this permission that describes its purpose.
     Should be descriptive enough for developers to understand what access it grants.
     Use clear, semantic names that reflect the resources or actions being permitted.
-    Names must be unique within your workspace to avoid confusion and conflicts.
 
     """
 

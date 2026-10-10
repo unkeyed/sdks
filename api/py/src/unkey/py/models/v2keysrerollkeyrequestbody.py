@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 import pydantic
+from pydantic import model_serializer
 from typing_extensions import Annotated, TypedDict
-from unkey.py.types import BaseModel
+from unkey.py.types import BaseModel, Nullable, UNSET_SENTINEL
 
 
 class V2KeysRerollKeyRequestBodyTypedDict(TypedDict):
@@ -18,12 +19,13 @@ class V2KeysRerollKeyRequestBodyTypedDict(TypedDict):
     - API key listing endpoints
 
     """
-    expiration: int
+    expiration: Nullable[int]
     r"""Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
 
     This parameter controls the overlap period for key rotation:
     - Set to `0` to revoke the original key immediately
     - Positive values keep the original key active for the specified duration
+    - Set to `null` to keep the original key active; it keeps its current expiration, if any
     - Allows graceful migration by giving users time to update their credentials
 
     Common overlap periods:
@@ -49,12 +51,13 @@ class V2KeysRerollKeyRequestBody(BaseModel):
 
     """
 
-    expiration: int
+    expiration: Nullable[int]
     r"""Duration in milliseconds until the ORIGINAL key is revoked, starting from now.
 
     This parameter controls the overlap period for key rotation:
     - Set to `0` to revoke the original key immediately
     - Positive values keep the original key active for the specified duration
+    - Set to `null` to keep the original key active; it keeps its current expiration, if any
     - Allows graceful migration by giving users time to update their credentials
 
     Common overlap periods:
@@ -65,6 +68,20 @@ class V2KeysRerollKeyRequestBody(BaseModel):
     - 30 days grace period: 2592000000
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
 
 
 try:

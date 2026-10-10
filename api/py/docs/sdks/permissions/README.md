@@ -15,6 +15,8 @@ Permission and role management operations
 * [list_permissions](#list_permissions) - List permissions
 * [list_roles](#list_roles) - List roles
 * [set_role_permissions](#set_role_permissions) - Set role permissions
+* [update_permission](#update_permission) - Update permission
+* [update_role](#update_role) - Update role
 
 ## create_permission
 
@@ -22,7 +24,7 @@ Create a new permission to define specific actions or capabilities in your RBAC 
 
 Use hierarchical naming patterns like `documents.read`, `admin.users.delete`, or `billing.invoices.create` for clear organization.
 
-**Important:** Permission names must be unique within the workspace. Once created, permissions are immediately available for assignment.
+**Important:** Permission slugs must be unique within the workspace. Names do not need to be unique. Once created, permissions are immediately available for assignment.
 
 **Required Permissions**
 
@@ -52,7 +54,7 @@ with Unkey(
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Creates a permission with this human-readable name that describes its purpose.<br/>Names must be unique within your workspace to prevent conflicts during assignment.<br/>Use clear, semantic names that developers can easily understand when building authorization logic.<br/>Consider using hierarchical naming conventions like 'resource.action' for better organization.<br/><br/>Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'<br/>                                                          | users.read                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `name`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Creates a permission with this human-readable name that describes its purpose.<br/>Use clear, semantic names that developers can easily understand when building authorization logic.<br/>Consider using hierarchical naming conventions like 'resource.action' for better organization.<br/><br/>Examples: 'users.read', 'billing.write', 'analytics.view', 'admin.manage'<br/>                                                                                                                                                 | users.read                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `slug`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Creates a URL-safe identifier for this permission that can be used in APIs and integrations.<br/>Must start with a letter and contain only letters, numbers, periods, underscores, and hyphens.<br/>Slugs are often used in REST endpoints, configuration files, and external integrations.<br/>Should closely match the name but in a format suitable for technical usage.<br/>Must be unique within your workspace to ensure reliable permission lookups.<br/><br/>Keep slugs concise but descriptive for better developer experience.<br/> | users-read                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `description`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Provides detailed documentation of what this permission grants access to.<br/>Include information about affected resources, allowed actions, and any important limitations.<br/>This internal documentation helps team members understand permission scope and security implications.<br/>Not visible to end users - designed for development teams and security audits.<br/><br/>Consider documenting:<br/>- What resources can be accessed<br/>- What operations are permitted<br/>- Any conditions or limitations<br/>- Related permissions that might be needed<br/> | Grants read-only access to user profile information, account settings, and subscription status.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `retries`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -529,5 +531,396 @@ with Unkey(
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## update_permission
+
+Update the name, slug, or description of a permission, identified by its ID or slug.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored permission without a write.
+
+**Important**: Keys and roles reference the permission by ID, so they keep the permission after a slug change. Key verification can return the old slug for a short time while caches refresh. A slug that another permission in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#write`
+
+
+### Example Usage: changeSlug
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="changeSlug" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="documents-read", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="clearDescription" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description=None)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: invalidSlug
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="invalidSlug" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="keyDisabled" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="missingKey" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: permissionNotFound
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="permissionNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="rename" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: slugTaken
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="slugTaken" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="python" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="updated" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_permission(permission="perm_1234567890abcdef", name="Read documents", slug="documents.read", description="Allows reading document resources")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                               | Type                                                                                                                                                                                                    | Required                                                                                                                                                                                                | Description                                                                                                                                                                                             | Example                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `permission`                                                                                                                                                                                            | *str*                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                      | The permission to update. Pass the permission ID (`perm_...`) or its current slug.<br/>                                                                                                                 | perm_1234567890abcdef                                                                                                                                                                                   |
+| `name`                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                      | New human-readable name for the permission.<br/>Omit this field to keep the current name.<br/>                                                                                                          | Read documents                                                                                                                                                                                          |
+| `slug`                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                      | New slug for the permission. Keys and roles that have this permission get the new slug in verification responses.<br/>The slug must be unique in your workspace.<br/>Omit this field to keep the current slug.<br/> | documents.read                                                                                                                                                                                          |
+| `description`                                                                                                                                                                                           | *OptionalNullable[str]*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                      | New description for the permission.<br/>Omit this field to keep the current description. Send null or an empty string to remove it.<br/>                                                                | Allows reading document resources                                                                                                                                                                       |
+| `retries`                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                     |                                                                                                                                                                                                         |
+
+### Response
+
+**[models.V2PermissionsUpdatePermissionResponseBody](../../models/v2permissionsupdatepermissionresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## update_role
+
+Update the name or description of a role, identified by its ID or name.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored role without a write.
+
+This endpoint does not change the role's permissions or keys. Use `permissions.setRolePermissions`, `keys.addRoles`, and `keys.removeRoles` for those.
+
+**Important**: Keys keep the role after a rename. Requests that name the role, such as `keys.addRoles`, must use the new name. Key verification can return the old name for a short time while caches refresh. A name that another role in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
+
+
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="clearDescription" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description=None)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: describeByName
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="describeByName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="support.readonly", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="emptyName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="keyDisabled" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="missingKey" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="nameTaken" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="rename" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: roleNotFound
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="roleNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="python" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="updated" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.permissions.update_role(role="role_1234567890abcdef", name="support.readonly", description="Read-only access for customer support")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                     | *str*                                                                                                                      | :heavy_check_mark:                                                                                                         | The role to update. Pass the role ID (`role_...`) or its current name.<br/>                                                | role_1234567890abcdef                                                                                                      |
+| `name`                                                                                                                     | *Optional[str]*                                                                                                            | :heavy_minus_sign:                                                                                                         | New name for the role. The name must be unique in your workspace.<br/>Omit this field to keep the current name.<br/>       | support.readonly                                                                                                           |
+| `description`                                                                                                              | *OptionalNullable[str]*                                                                                                    | :heavy_minus_sign:                                                                                                         | New description for the role.<br/>Omit this field to keep the current description. Send null or an empty string to remove it.<br/> | Read-only access for customer support                                                                                      |
+| `retries`                                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                           | :heavy_minus_sign:                                                                                                         | Configuration to override the default retry behavior of the client.                                                        |                                                                                                                            |
+
+### Response
+
+**[models.V2PermissionsUpdateRoleResponseBody](../../models/v2permissionsupdateroleresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

@@ -29,7 +29,7 @@ class Permissions(BaseSDK):
 
         Use hierarchical naming patterns like `documents.read`, `admin.users.delete`, or `billing.invoices.create` for clear organization.
 
-        **Important:** Permission names must be unique within the workspace. Once created, permissions are immediately available for assignment.
+        **Important:** Permission slugs must be unique within the workspace. Names do not need to be unique. Once created, permissions are immediately available for assignment.
 
         **Required Permissions**
 
@@ -40,7 +40,6 @@ class Permissions(BaseSDK):
         If set, this operation will use `root_key` from the global security.
 
         :param name: Creates a permission with this human-readable name that describes its purpose.
-            Names must be unique within your workspace to prevent conflicts during assignment.
             Use clear, semantic names that developers can easily understand when building authorization logic.
             Consider using hierarchical naming conventions like 'resource.action' for better organization.
 
@@ -199,7 +198,7 @@ class Permissions(BaseSDK):
 
         Use hierarchical naming patterns like `documents.read`, `admin.users.delete`, or `billing.invoices.create` for clear organization.
 
-        **Important:** Permission names must be unique within the workspace. Once created, permissions are immediately available for assignment.
+        **Important:** Permission slugs must be unique within the workspace. Names do not need to be unique. Once created, permissions are immediately available for assignment.
 
         **Required Permissions**
 
@@ -210,7 +209,6 @@ class Permissions(BaseSDK):
         If set, this operation will use `root_key` from the global security.
 
         :param name: Creates a permission with this human-readable name that describes its purpose.
-            Names must be unique within your workspace to prevent conflicts during assignment.
             Use clear, semantic names that developers can easily understand when building authorization logic.
             Consider using hierarchical naming conventions like 'resource.action' for better organization.
 
@@ -2774,6 +2772,642 @@ class Permissions(BaseSDK):
             )
             raise errors.NotFoundErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def update_permission(
+        self,
+        *,
+        permission: str,
+        name: Optional[str] = None,
+        slug: Optional[str] = None,
+        description: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsUpdatePermissionResponseBody:
+        r"""Update permission
+
+        Update the name, slug, or description of a permission, identified by its ID or slug.
+
+        Omitted fields keep their current values. A request with no fields to update returns the stored permission without a write.
+
+        **Important**: Keys and roles reference the permission by ID, so they keep the permission after a slug change. Key verification can return the old slug for a short time while caches refresh. A slug that another permission in your workspace already uses returns 409.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param permission: The permission to update. Pass the permission ID (`perm_...`) or its current slug.
+
+        :param name: New human-readable name for the permission.
+            Omit this field to keep the current name.
+
+        :param slug: New slug for the permission. Keys and roles that have this permission get the new slug in verification responses.
+            The slug must be unique in your workspace.
+            Omit this field to keep the current slug.
+
+        :param description: New description for the permission.
+            Omit this field to keep the current description. Send null or an empty string to remove it.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsUpdatePermissionRequestBody(
+            permission=permission,
+            name=name,
+            slug=slug,
+            description=description,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/permissions.updatePermission",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2PermissionsUpdatePermissionRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.updatePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsUpdatePermissionResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def update_permission_async(
+        self,
+        *,
+        permission: str,
+        name: Optional[str] = None,
+        slug: Optional[str] = None,
+        description: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsUpdatePermissionResponseBody:
+        r"""Update permission
+
+        Update the name, slug, or description of a permission, identified by its ID or slug.
+
+        Omitted fields keep their current values. A request with no fields to update returns the stored permission without a write.
+
+        **Important**: Keys and roles reference the permission by ID, so they keep the permission after a slug change. Key verification can return the old slug for a short time while caches refresh. A slug that another permission in your workspace already uses returns 409.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param permission: The permission to update. Pass the permission ID (`perm_...`) or its current slug.
+
+        :param name: New human-readable name for the permission.
+            Omit this field to keep the current name.
+
+        :param slug: New slug for the permission. Keys and roles that have this permission get the new slug in verification responses.
+            The slug must be unique in your workspace.
+            Omit this field to keep the current slug.
+
+        :param description: New description for the permission.
+            Omit this field to keep the current description. Send null or an empty string to remove it.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsUpdatePermissionRequestBody(
+            permission=permission,
+            name=name,
+            slug=slug,
+            description=description,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/permissions.updatePermission",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2PermissionsUpdatePermissionRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.updatePermission",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsUpdatePermissionResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def update_role(
+        self,
+        *,
+        role: str,
+        name: Optional[str] = None,
+        description: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsUpdateRoleResponseBody:
+        r"""Update role
+
+        Update the name or description of a role, identified by its ID or name.
+
+        Omitted fields keep their current values. A request with no fields to update returns the stored role without a write.
+
+        This endpoint does not change the role's permissions or keys. Use `permissions.setRolePermissions`, `keys.addRoles`, and `keys.removeRoles` for those.
+
+        **Important**: Keys keep the role after a rename. Requests that name the role, such as `keys.addRoles`, must use the new name. Key verification can return the old name for a short time while caches refresh. A name that another role in your workspace already uses returns 409.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param role: The role to update. Pass the role ID (`role_...`) or its current name.
+
+        :param name: New name for the role. The name must be unique in your workspace.
+            Omit this field to keep the current name.
+
+        :param description: New description for the role.
+            Omit this field to keep the current description. Send null or an empty string to remove it.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsUpdateRoleRequestBody(
+            role=role,
+            name=name,
+            description=description,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/permissions.updateRole",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PermissionsUpdateRoleRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.updateRole",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsUpdateRoleResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def update_role_async(
+        self,
+        *,
+        role: str,
+        name: Optional[str] = None,
+        description: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2PermissionsUpdateRoleResponseBody:
+        r"""Update role
+
+        Update the name or description of a role, identified by its ID or name.
+
+        Omitted fields keep their current values. A request with no fields to update returns the stored role without a write.
+
+        This endpoint does not change the role's permissions or keys. Use `permissions.setRolePermissions`, `keys.addRoles`, and `keys.removeRoles` for those.
+
+        **Important**: Keys keep the role after a rename. Requests that name the role, such as `keys.addRoles`, must use the new name. Key verification can return the old name for a short time while caches refresh. A name that another role in your workspace already uses returns 409.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param role: The role to update. Pass the role ID (`role_...`) or its current name.
+
+        :param name: New name for the role. The name must be unique in your workspace.
+            Omit this field to keep the current name.
+
+        :param description: New description for the role.
+            Omit this field to keep the current description. Send null or an empty string to remove it.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PermissionsUpdateRoleRequestBody(
+            role=role,
+            name=name,
+            description=description,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/permissions.updateRole",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PermissionsUpdateRoleRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="permissions.updateRole",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["permissions"],
+                extensions={"x-unkey-idempotency": "idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V2PermissionsUpdateRoleResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictErrorResponseData, http_res
+            )
+            raise errors.ConflictErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
             )

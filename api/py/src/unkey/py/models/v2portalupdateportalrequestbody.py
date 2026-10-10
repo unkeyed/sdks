@@ -51,7 +51,8 @@ class V2PortalUpdatePortalRequestBodyTypedDict(TypedDict):
     enabled: NotRequired[bool]
     r"""Whether new sessions can be minted. Omit to leave unchanged.
 
-    Disabling does not end sessions that are already live.
+    Disabling also revokes the portal's live sessions. Re-enabling does not
+    restore them.
 
     """
     logo_url: NotRequired[Nullable[str]]
@@ -114,7 +115,8 @@ class V2PortalUpdatePortalRequestBody(BaseModel):
     enabled: Optional[bool] = None
     r"""Whether new sessions can be minted. Omit to leave unchanged.
 
-    Disabling does not end sessions that are already live.
+    Disabling also revokes the portal's live sessions. Re-enabling does not
+    restore them.
 
     """
 
