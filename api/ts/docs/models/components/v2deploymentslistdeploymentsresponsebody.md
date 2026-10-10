@@ -20,9 +20,26 @@ let value: V2DeploymentsListDeploymentsResponseBody = {
       git: {
         commitSha: "9f2c1a7d3b",
         branch: "main",
+        commitMessage: "fix: retry on 429",
+        commitTimestamp: 1704067100000,
+        author: {
+          handle: "octocat",
+          avatarUrl: "https://avatars.githubusercontent.com/u/583231",
+        },
+        prNumber: 412,
+        forkRepository: "octocat/payments-api",
       },
       docker: {
         image: "ghcr.io/acme/api:v1.2.3",
+        resolvedImage:
+          "ghcr.io/acme/api@sha256:3f1d9c0b7e2a4c8f5b6d1e0a9c8b7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a",
+      },
+      trigger: {
+        via: "github",
+        actor: {
+          type: "github",
+          id: "octocat",
+        },
       },
       availableActions: [
         "stop",
@@ -37,6 +54,7 @@ let value: V2DeploymentsListDeploymentsResponseBody = {
         message:
           "No schedulable regions configured. Please configure at least one schedulable region before deploying.",
       },
+      finishedAt: 1704067260000,
       domains: [
         "kebap-app.unkey.app",
       ],
