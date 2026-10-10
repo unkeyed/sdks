@@ -5,6 +5,10 @@ package components
 type DeploymentDocker struct {
 	// The OCI image reference requested for this deployment.
 	Image string `json:"image"`
+	// The image reference pinned to its sha256 digest. Omitted until Unkey
+	// resolves the image.
+	//
+	ResolvedImage *string `json:"resolvedImage,omitzero"`
 }
 
 func (d *DeploymentDocker) GetImage() string {
@@ -12,4 +16,11 @@ func (d *DeploymentDocker) GetImage() string {
 		return ""
 	}
 	return d.Image
+}
+
+func (d *DeploymentDocker) GetResolvedImage() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ResolvedImage
 }

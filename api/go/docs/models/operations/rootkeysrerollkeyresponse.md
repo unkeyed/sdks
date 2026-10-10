@@ -1,0 +1,9 @@
+# RootKeysRerollKeyResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2RootKeysRerollKeyResponseBody`                                                                         | [*components.V2RootKeysRerollKeyResponseBody](../../models/components/v2rootkeysrerollkeyresponsebody.md) | :heavy_minus_sign:                                                                                        | Root key rerolled. Save the secret now; it cannot be retrieved later.                                     |

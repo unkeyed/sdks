@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// Type - Record type to create. `ALIAS` is not a real DNS record type: it means an apex-compatible
+// DNSRecordType - Record type to create. `ALIAS` is not a real DNS record type: it means an apex-compatible
 // alias, which providers expose as ALIAS, ANAME, or a flattened CNAME. Apex domains cannot
 // hold a plain CNAME, so they receive `ALIAS` where a subdomain receives `CNAME`.
-type Type string
+type DNSRecordType string
 
 const (
-	TypeCname Type = "CNAME"
-	TypeAlias Type = "ALIAS"
-	TypeTxt   Type = "TXT"
+	DNSRecordTypeCname DNSRecordType = "CNAME"
+	DNSRecordTypeAlias DNSRecordType = "ALIAS"
+	DNSRecordTypeTxt   DNSRecordType = "TXT"
 )
 
-func (e Type) ToPointer() *Type {
+func (e DNSRecordType) ToPointer() *DNSRecordType {
 	return &e
 }
-func (e *Type) UnmarshalJSON(data []byte) error {
+func (e *DNSRecordType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -32,10 +32,10 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	case "ALIAS":
 		fallthrough
 	case "TXT":
-		*e = Type(v)
+		*e = DNSRecordType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
+		return fmt.Errorf("invalid value for DNSRecordType: %v", v)
 	}
 }
 
@@ -44,7 +44,7 @@ type DNSRecord struct {
 	// alias, which providers expose as ALIAS, ANAME, or a flattened CNAME. Apex domains cannot
 	// hold a plain CNAME, so they receive `ALIAS` where a subdomain receives `CNAME`.
 	//
-	Type Type `json:"type"`
+	Type DNSRecordType `json:"type"`
 	// Fully qualified name of the record, ready to use as-is.
 	//
 	// Some providers want a name relative to the zone instead. Drop the zone and its trailing dot:
@@ -80,9 +80,9 @@ type DNSRecord struct {
 	Note *string `json:"note,omitzero"`
 }
 
-func (d *DNSRecord) GetType() Type {
+func (d *DNSRecord) GetType() DNSRecordType {
 	if d == nil {
-		return Type("")
+		return DNSRecordType("")
 	}
 	return d.Type
 }
