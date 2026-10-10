@@ -8,6 +8,7 @@ Deployment operations
 
 * [~~createDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [getDeployment](#getdeployment) - Get deployment
+* [listBuildLogs](#listbuildlogs) - List build logs
 * [listDeployments](#listdeployments) - List deployments
 * [promoteDeployment](#promotedeployment) - Promote deployment
 * [rollbackDeployment](#rollbackdeployment) - Rollback deployment
@@ -142,9 +143,9 @@ runtime configuration of an existing deployment.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_deployment` (to read deployments in any environment)
-- `environment.<environment_id>.read_deployment` (to read deployments in a specific environment)
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#read`
+  (use `*` for any level)
 
 
 ### Example Usage: deployment
@@ -319,23 +320,623 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## listBuildLogs
+
+Retrieve the build output of a deployment as a list of log entries, in the
+order the build printed them. A log entry is one chunk of build output,
+and can contain several lines or part of a line.
+
+Poll this endpoint to follow a running build:
+
+- Send the `pagination.cursor` of the last response as `cursor`. The
+  response contains only the entries after it.
+- When `hasMore` is true, request again now.
+- When `hasMore` is false, you have all entries so far. Wait,
+  then request again with the same cursor.
+- The cursor is absent only when the request had no cursor and the build
+  has no entries yet.
+- A response can contain fewer than `limit` entries and still have
+  `hasMore: true` when the entries are large.
+
+New entries become visible up to a few seconds after the build prints
+them. To know that a build is done, check the deployment status with
+`getDeployment`. After the status is no longer `building`, request until
+you get an empty response at least 5 seconds later.
+
+When a build attempt is retried, an entry from the earlier attempt can
+arrive after the cursor has moved past it, and a poll does not return it.
+A request without a cursor returns it. A deployment from a prebuilt image
+has no build and returns no entries. Build logs are kept for 3 months.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>/buildLogs#read`
+
+
+### Example Usage: caughtUp
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="caughtUp" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: deploymentNotFound
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="deploymentNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: entries
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="entries" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: firstPage
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="firstPage" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "d_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "d_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidCursor
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidCursor" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidRootKey
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidRootKey" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: logsUnavailable
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="logsUnavailable" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "proj_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: nextPage
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="nextPage" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "d_1234abcd",
+    cursor: "1704067201000001",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "d_1234abcd",
+    cursor: "1704067201000001",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: oneStep
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="oneStep" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listBuildLogs({
+    deploymentId: "d_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListBuildLogs } from "@unkey/api/funcs/deploymentsListBuildLogs.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListBuildLogs(unkey, {
+    deploymentId: "d_1234abcd",
+    stepId: "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsListBuildLogs failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2DeploymentsListBuildLogsRequestBody](../../models/components/v2deploymentslistbuildlogsrequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2DeploymentsListBuildLogsResponseBody](../../models/components/v2deploymentslistbuildlogsresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
 ## listDeployments
 
 Retrieve a paginated list of deployments within a workspace, newest first.
 
-Filter by project, app, environment, and lifecycle status. All filters are
-optional; with none set, every deployment in the workspace is returned.
-Filters nest: `app` requires `project`, and `environment` requires both
-`project` and `app`. Results are paginated; when `hasMore` is true, pass the
-returned `cursor` to fetch the next page.
+Filter by project, app, environment, lifecycle status, git branch, and
+creation time. All filters are optional; with none set, every deployment in
+the workspace is returned. Filters nest: `app` requires `project`, and
+`environment` and `branch` require both `project` and `app`. Results are
+paginated; when `hasMore` is true, pass the returned `cursor` to fetch the
+next page.
 
 **Required Permissions**
 
-Your root key must have the `environment.*.read_deployment` permission.
-Listing spans environments, so a grant on a single environment is not
-sufficient.
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#read`
+  (use `*` for every level you do not filter by)
+
+The permission must cover every deployment the filters select: a grant on
+one environment is not sufficient for a request that spans more than that
+environment.
 
 
+### Example Usage: byBranchAndTime
+
+<!-- UsageSnippet language="typescript" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byBranchAndTime" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.listDeployments({
+    project: "payments-service",
+    app: "payments-api",
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsListDeployments } from "@unkey/api/funcs/deploymentsListDeployments.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsListDeployments(unkey, {
+    project: "payments-service",
+    app: "payments-api",
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("deploymentsListDeployments failed:", res.error);
+  }
+}
+
+run();
+```
 ### Example Usage: byEnvironment
 
 <!-- UsageSnippet language="typescript" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byEnvironment" -->
@@ -412,6 +1013,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
 
   for await (const page of result) {
@@ -445,6 +1052,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -477,6 +1090,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
 
   for await (const page of result) {
@@ -510,6 +1129,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -542,6 +1167,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
 
   for await (const page of result) {
@@ -575,6 +1206,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -607,6 +1244,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
 
   for await (const page of result) {
@@ -640,6 +1283,12 @@ async function run() {
       "ready",
       "failed",
     ],
+    branch: [
+      "main",
+      "feature/checkout",
+    ],
+    startTime: 1704067200000,
+    endTime: 1704672000000,
   });
   if (res.ok) {
     const { value: result } = res;
