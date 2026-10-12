@@ -18,6 +18,8 @@ import { Permissions } from "./permissions.js";
 import { Portal } from "./portal.js";
 import { Projects } from "./projects.js";
 import { Ratelimit } from "./ratelimit.js";
+import { RootKeys } from "./rootkeys.js";
+import { Workspace } from "./workspace.js";
 
 export class Unkey extends ClientSDK {
   private _analytics?: Analytics;
@@ -93,5 +95,15 @@ export class Unkey extends ClientSDK {
   private _ratelimit?: Ratelimit;
   get ratelimit(): Ratelimit {
     return (this._ratelimit ??= new Ratelimit(this._options));
+  }
+
+  private _rootKeys?: RootKeys;
+  get rootKeys(): RootKeys {
+    return (this._rootKeys ??= new RootKeys(this._options));
+  }
+
+  private _workspace?: Workspace;
+  get workspace(): Workspace {
+    return (this._workspace ??= new Workspace(this._options));
   }
 }

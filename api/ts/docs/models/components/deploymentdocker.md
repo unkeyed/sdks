@@ -7,11 +7,14 @@ import { DeploymentDocker } from "@unkey/api/models/components";
 
 let value: DeploymentDocker = {
   image: "ghcr.io/acme/api:v1.2.3",
+  resolvedImage:
+    "ghcr.io/acme/api@sha256:3f1d9c0b7e2a4c8f5b6d1e0a9c8b7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a",
 };
 ```
 
 ## Fields
 
-| Field                                                  | Type                                                   | Required                                               | Description                                            | Example                                                |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `image`                                                | *string*                                               | :heavy_check_mark:                                     | The OCI image reference requested for this deployment. | ghcr.io/acme/api:v1.2.3                                |
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `image`                                                                                   | *string*                                                                                  | :heavy_check_mark:                                                                        | The OCI image reference requested for this deployment.                                    | ghcr.io/acme/api:v1.2.3                                                                   |
+| `resolvedImage`                                                                           | *string*                                                                                  | :heavy_minus_sign:                                                                        | The image reference pinned to its sha256 digest. Omitted until Unkey<br/>resolves the image.<br/> | ghcr.io/acme/api@sha256:3f1d9c0b7e2a4c8f5b6d1e0a9c8b7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a  |

@@ -15,6 +15,8 @@ Permission and role management operations
 * [listPermissions](#listpermissions) - List permissions
 * [listRoles](#listroles) - List roles
 * [setRolePermissions](#setrolepermissions) - Set role permissions
+* [updatePermission](#updatepermission) - Update permission
+* [updateRole](#updaterole) - Update role
 
 ## createPermission
 
@@ -22,7 +24,7 @@ Create a new permission to define specific actions or capabilities in your RBAC 
 
 Use hierarchical naming patterns like `documents.read`, `admin.users.delete`, or `billing.invoices.create` for clear organization.
 
-**Important:** Permission names must be unique within the workspace. Once created, permissions are immediately available for assignment.
+**Important:** Permission slugs must be unique within the workspace. Names do not need to be unique. Once created, permissions are immediately available for assignment.
 
 **Required Permissions**
 
@@ -883,5 +885,1043 @@ run();
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## updatePermission
+
+Update the name, slug, or description of a permission, identified by its ID or slug.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored permission without a write.
+
+**Important**: Keys and roles reference the permission by ID, so they keep the permission after a slug change. Key verification can return the old slug for a short time while caches refresh. A slug that another permission in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#write`
+
+
+### Example Usage: changeSlug
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="changeSlug" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "documents-read",
+    slug: "documents.read",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "documents-read",
+    slug: "documents.read",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="clearDescription" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    description: null,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    description: null,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidSlug
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="invalidSlug" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="keyDisabled" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="missingKey" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: permissionNotFound
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="permissionNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="rename" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: slugTaken
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="slugTaken" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updatePermission" method="post" path="/v2/permissions.updatePermission" example="updated" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updatePermission({
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdatePermission } from "@unkey/api/funcs/permissionsUpdatePermission.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdatePermission(unkey, {
+    permission: "perm_1234567890abcdef",
+    name: "Read documents",
+    slug: "documents.read",
+    description: "Allows reading document resources",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdatePermission failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PermissionsUpdatePermissionRequestBody](../../models/components/v2permissionsupdatepermissionrequestbody.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2PermissionsUpdatePermissionResponseBody](../../models/components/v2permissionsupdatepermissionresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## updateRole
+
+Update the name or description of a role, identified by its ID or name.
+
+Omitted fields keep their current values. A request with no fields to update returns the stored role without a write.
+
+This endpoint does not change the role's permissions or keys. Use `permissions.setRolePermissions`, `keys.addRoles`, and `keys.removeRoles` for those.
+
+**Important**: Keys keep the role after a rename. Requests that name the role, such as `keys.addRoles`, must use the new name. Key verification can return the old name for a short time while caches refresh. A name that another role in your workspace already uses returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
+
+
+### Example Usage: clearDescription
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="clearDescription" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    description: null,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    description: null,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: describeByName
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="describeByName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="emptyName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: keyDisabled
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="keyDisabled" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingKey
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="missingKey" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="nameTaken" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="rename" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: roleNotFound
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="roleNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: updated
+
+<!-- UsageSnippet language="typescript" operationID="permissions.updateRole" method="post" path="/v2/permissions.updateRole" example="updated" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.permissions.updateRole({
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { permissionsUpdateRole } from "@unkey/api/funcs/permissionsUpdateRole.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await permissionsUpdateRole(unkey, {
+    role: "role_1234567890abcdef",
+    name: "support.readonly",
+    description: "Read-only access for customer support",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("permissionsUpdateRole failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PermissionsUpdateRoleRequestBody](../../models/components/v2permissionsupdaterolerequestbody.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2PermissionsUpdateRoleResponseBody](../../models/components/v2permissionsupdateroleresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
