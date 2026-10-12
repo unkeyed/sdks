@@ -1,44 +1,46 @@
-## Python SDK Changes:
-* `unkey.deployments.list_build_logs()`: **Added**
-* `unkey.permissions.update_permission()`: **Added**
-* `unkey.permissions.update_role()`: **Added**
-* `unkey.portal.list_sessions()`: **Added**
-* `unkey.portal.revoke_session()`: **Added**
-* `unkey.root_keys.create_key()`: **Added**
-* `unkey.root_keys.delete_key()`: **Added**
-* `unkey.root_keys.list_keys()`: **Added**
-* `unkey.root_keys.reroll_key()`: **Added**
-* `unkey.root_keys.update_key()`: **Added**
-* `unkey.workspace.get_limits()`: **Added**
-* `unkey.workspace.get_usage()`: **Added**
-* `unkey.deployments.get_deployment()`: `response.data` **Changed**
-    - `docker.resolved_image` **Added**
-    - `finished_at` **Added**
+## Typescript SDK Changes:
+* `unkey.deployments.listBuildLogs()`: **Added**
+* `unkey.permissions.updatePermission()`: **Added**
+* `unkey.permissions.updateRole()`: **Added**
+* `unkey.portal.listSessions()`: **Added**
+* `unkey.portal.revokeSession()`: **Added**
+* `unkey.rootKeys.createKey()`: **Added**
+* `unkey.rootKeys.deleteKey()`: **Added**
+* `unkey.rootKeys.listKeys()`: **Added**
+* `unkey.rootKeys.rerollKey()`: **Added**
+* `unkey.rootKeys.updateKey()`: **Added**
+* `unkey.workspace.getLimits()`: **Added**
+* `unkey.workspace.getUsage()`: **Added**
+* `unkey.deployments.getDeployment()`: `response.data` **Changed**
+    - `docker.resolvedImage` **Added**
+    - `finishedAt` **Added**
     - `git.author` **Added**
-    - `git.commit_message` **Added**
-    - `git.commit_timestamp` **Added**
-    - `git.fork_repository` **Added**
-    - `git.pr_number` **Added**
+    - `git.commitMessage` **Added**
+    - `git.commitTimestamp` **Added**
+    - `git.forkRepository` **Added**
+    - `git.prNumber` **Added**
     - `trigger` **Added**
-* `unkey.deployments.list_deployments()`: 
+* `unkey.deployments.listDeployments()`: 
   * `request` **Changed**
     - `branch` **Added**
-    - `end_time` **Added**
-    - `start_time` **Added**
+    - `endTime` **Added**
+    - `startTime` **Added**
   * `response.data[]` **Changed**
-    - `docker.resolved_image` **Added**
-    - `finished_at` **Added**
+    - `docker.resolvedImage` **Added**
+    - `finishedAt` **Added**
     - `git.author` **Added**
-    - `git.commit_message` **Added**
-    - `git.commit_timestamp` **Added**
-    - `git.fork_repository` **Added**
-    - `git.pr_number` **Added**
+    - `git.commitMessage` **Added**
+    - `git.commitTimestamp` **Added**
+    - `git.forkRepository` **Added**
+    - `git.prNumber` **Added**
     - `trigger` **Added**
-* `unkey.gateway.list_policies()`:  `response.data[].match[].remote_ip` **Added**
-* `unkey.gateway.set_policies()`: 
-  *  `request.policies[].match[].remote_ip` **Added**
-* `unkey.gateway.update_policy()`: 
-  *  `request.match[].remote_ip` **Added**
-* `unkey.keys.reroll_key()`:  `request.expiration` **Changed**
-* `unkey.portal.create_session()`:  `error.status[409]` **Added**
-* `unkey.portal.reroll_key()`:  `request.expiration` **Changed**
+* `unkey.gateway.listPolicies()`:  `response.data[].match[].remoteIp` **Added**
+* `unkey.gateway.setPolicies()`: 
+  *  `request.policies[].match[].remoteIp` **Added**
+* `unkey.gateway.updatePolicy()`: 
+  *  `request.match[].remoteIp` **Added**
+* `unkey.keys.rerollKey()`: 
+  *  `request.expiration` **Changed**
+* `unkey.portal.createSession()`:  `error.status[409]` **Added**
+* `unkey.portal.rerollKey()`: 
+  *  `request.expiration` **Changed**

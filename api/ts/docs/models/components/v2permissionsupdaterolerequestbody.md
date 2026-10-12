@@ -1,0 +1,21 @@
+# V2PermissionsUpdateRoleRequestBody
+
+## Example Usage
+
+```typescript
+import { V2PermissionsUpdateRoleRequestBody } from "@unkey/api/models/components";
+
+let value: V2PermissionsUpdateRoleRequestBody = {
+  role: "role_1234567890abcdef",
+  name: "support.readonly",
+  description: "Read-only access for customer support",
+};
+```
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                     | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The role to update. Pass the role ID (`role_...`) or its current name.<br/>                                                | role_1234567890abcdef                                                                                                      |
+| `name`                                                                                                                     | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | New name for the role. The name must be unique in your workspace.<br/>Omit this field to keep the current name.<br/>       | support.readonly                                                                                                           |
+| `description`                                                                                                              | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | New description for the role.<br/>Omit this field to keep the current description. Send null or an empty string to remove it.<br/> | Read-only access for customer support                                                                                      |

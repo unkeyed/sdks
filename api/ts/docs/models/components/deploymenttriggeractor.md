@@ -1,0 +1,19 @@
+# DeploymentTriggerActor
+
+## Example Usage
+
+```typescript
+import { DeploymentTriggerActor } from "@unkey/api/models/components";
+
+let value: DeploymentTriggerActor = {
+  type: "github",
+  id: "octocat",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                 | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           | Example                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                | [components.DeploymentTriggerActorType](../../models/components/deploymenttriggeractortype.md)                                                                                        | :heavy_check_mark:                                                                                                                                                                    | `user` is a dashboard user, `root_key` a root key, `github` the GitHub<br/>user who pushed or opened the pull request, `system` Unkey itself.<br/>`unknown` when the actor isn't recognized.<br/> | github                                                                                                                                                                                |
+| `id`                                                                                                                                                                                  | *string*                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                    | The actor's identifier: a user id, a root key id, a GitHub login, or<br/>`unkey-ops` for Unkey itself.<br/>                                                                           | octocat                                                                                                                                                                               |
