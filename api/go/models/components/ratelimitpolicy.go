@@ -11,7 +11,7 @@ import (
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type Identifier struct {
-	// Rate limit by the client's IP address.
+	// Rate limit by the remote IP.
 	RemoteIP *RemoteIPKey `json:"remoteIp,omitzero"`
 	// Rate limit by the value of a request header.
 	Header *HeaderKey `json:"header,omitzero"`

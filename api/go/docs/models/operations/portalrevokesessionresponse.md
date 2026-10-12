@@ -1,0 +1,9 @@
+# PortalRevokeSessionResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2PortalRevokeSessionResponseBody`                                                                           | [*components.V2PortalRevokeSessionResponseBody](../../models/components/v2portalrevokesessionresponsebody.md) | :heavy_minus_sign:                                                                                            | The end user's live sessions on the portal are revoked.<br/>                                                  |

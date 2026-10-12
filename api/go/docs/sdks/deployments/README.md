@@ -8,6 +8,7 @@ Deployment operations
 
 * [~~CreateDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [GetDeployment](#getdeployment) - Get deployment
+* [ListBuildLogs](#listbuildlogs) - List build logs
 * [ListDeployments](#listdeployments) - List deployments
 * [PromoteDeployment](#promotedeployment) - Promote deployment
 * [RollbackDeployment](#rollbackdeployment) - Rollback deployment
@@ -113,9 +114,9 @@ runtime configuration of an existing deployment.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_deployment` (to read deployments in any environment)
-- `environment.<environment_id>.read_deployment` (to read deployments in a specific environment)
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#read`
+  (use `*` for any level)
 
 
 ### Example Usage: deployment
@@ -238,23 +239,439 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## ListBuildLogs
+
+Retrieve the build output of a deployment as a list of log entries, in the
+order the build printed them. A log entry is one chunk of build output,
+and can contain several lines or part of a line.
+
+Poll this endpoint to follow a running build:
+
+- Send the `pagination.cursor` of the last response as `cursor`. The
+  response contains only the entries after it.
+- When `hasMore` is true, request again now.
+- When `hasMore` is false, you have all entries so far. Wait,
+  then request again with the same cursor.
+- The cursor is absent only when the request had no cursor and the build
+  has no entries yet.
+- A response can contain fewer than `limit` entries and still have
+  `hasMore: true` when the entries are large.
+
+New entries become visible up to a few seconds after the build prints
+them. To know that a build is done, check the deployment status with
+`getDeployment`. After the status is no longer `building`, request until
+you get an empty response at least 5 seconds later.
+
+When a build attempt is retried, an entry from the earlier attempt can
+arrive after the cursor has moved past it, and a poll does not return it.
+A request without a cursor returns it. A deployment from a prebuilt image
+has no build and returns no entries. Build logs are kept for 3 months.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>/buildLogs#read`
+
+
+### Example Usage: caughtUp
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="caughtUp" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: deploymentNotFound
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="deploymentNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: entries
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="entries" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: firstPage
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="firstPage" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "d_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: invalidCursor
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidCursor" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: invalidRootKey
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidRootKey" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: logsUnavailable
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="logsUnavailable" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "proj_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: nextPage
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="nextPage" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "d_1234abcd",
+        Cursor: unkey.Pointer("1704067201000001"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: oneStep
+
+<!-- UsageSnippet language="go" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="oneStep" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListBuildLogs(ctx, components.V2DeploymentsListBuildLogsRequestBody{
+        DeploymentID: "d_1234abcd",
+        StepID: unkey.Pointer("sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListBuildLogsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [components.V2DeploymentsListBuildLogsRequestBody](../../models/components/v2deploymentslistbuildlogsrequestbody.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.DeploymentsListBuildLogsResponse](../../models/operations/deploymentslistbuildlogsresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## ListDeployments
 
 Retrieve a paginated list of deployments within a workspace, newest first.
 
-Filter by project, app, environment, and lifecycle status. All filters are
-optional; with none set, every deployment in the workspace is returned.
-Filters nest: `app` requires `project`, and `environment` requires both
-`project` and `app`. Results are paginated; when `hasMore` is true, pass the
-returned `cursor` to fetch the next page.
+Filter by project, app, environment, lifecycle status, git branch, and
+creation time. All filters are optional; with none set, every deployment in
+the workspace is returned. Filters nest: `app` requires `project`, and
+`environment` and `branch` require both `project` and `app`. Results are
+paginated; when `hasMore` is true, pass the returned `cursor` to fetch the
+next page.
 
 **Required Permissions**
 
-Your root key must have the `environment.*.read_deployment` permission.
-Listing spans environments, so a grant on a single environment is not
-sufficient.
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#read`
+  (use `*` for every level you do not filter by)
+
+The permission must cover every deployment the filters select: a grant on
+one environment is not sufficient for a request that spans more than that
+environment.
 
 
+### Example Usage: byBranchAndTime
+
+<!-- UsageSnippet language="go" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byBranchAndTime" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.ListDeployments(ctx, components.V2DeploymentsListDeploymentsRequestBody{
+        Project: unkey.Pointer("payments-service"),
+        App: unkey.Pointer("payments-api"),
+        Branch: []string{
+            "main",
+            "feature/checkout",
+        },
+        StartTime: unkey.Pointer[int64](1704067200000),
+        EndTime: unkey.Pointer[int64](1704672000000),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsListDeploymentsResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
 ### Example Usage: byEnvironment
 
 <!-- UsageSnippet language="go" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byEnvironment" -->
@@ -330,6 +747,12 @@ func main() {
             components.DeploymentStatusReady,
             components.DeploymentStatusFailed,
         },
+        Branch: []string{
+            "main",
+            "feature/checkout",
+        },
+        StartTime: unkey.Pointer[int64](1704067200000),
+        EndTime: unkey.Pointer[int64](1704672000000),
     })
     if err != nil {
         log.Fatal(err)
@@ -380,6 +803,12 @@ func main() {
             components.DeploymentStatusReady,
             components.DeploymentStatusFailed,
         },
+        Branch: []string{
+            "main",
+            "feature/checkout",
+        },
+        StartTime: unkey.Pointer[int64](1704067200000),
+        EndTime: unkey.Pointer[int64](1704672000000),
     })
     if err != nil {
         log.Fatal(err)
@@ -430,6 +859,12 @@ func main() {
             components.DeploymentStatusReady,
             components.DeploymentStatusFailed,
         },
+        Branch: []string{
+            "main",
+            "feature/checkout",
+        },
+        StartTime: unkey.Pointer[int64](1704067200000),
+        EndTime: unkey.Pointer[int64](1704672000000),
     })
     if err != nil {
         log.Fatal(err)
@@ -480,6 +915,12 @@ func main() {
             components.DeploymentStatusReady,
             components.DeploymentStatusFailed,
         },
+        Branch: []string{
+            "main",
+            "feature/checkout",
+        },
+        StartTime: unkey.Pointer[int64](1704067200000),
+        EndTime: unkey.Pointer[int64](1704672000000),
     })
     if err != nil {
         log.Fatal(err)

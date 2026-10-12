@@ -1,0 +1,9 @@
+# PortalListSessionsResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalListSessionsResponseBody`                                                                          | [*components.V2PortalListSessionsResponseBody](../../models/components/v2portallistsessionsresponsebody.md) | :heavy_minus_sign:                                                                                          | One page of end users with revocable sessions.<br/>                                                         |

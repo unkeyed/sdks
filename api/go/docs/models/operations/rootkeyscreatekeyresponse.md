@@ -1,0 +1,9 @@
+# RootKeysCreateKeyResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2RootKeysCreateKeyResponseBody`                                                                         | [*components.V2RootKeysCreateKeyResponseBody](../../models/components/v2rootkeyscreatekeyresponsebody.md) | :heavy_minus_sign:                                                                                        | Root key created. Save the secret now; it cannot be retrieved later.                                      |

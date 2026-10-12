@@ -1,0 +1,14 @@
+# RemoteIPMatch
+
+Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
+or `notIn` must be set. Entries are rejected if they have host bits set (such
+as `10.1.2.3/8`), are IPv4-mapped IPv6 addresses, or carry a zone. Single
+addresses are returned as full-length prefixes, such as `203.0.113.7/32`.
+
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `In`                                                                                                                                                 | []`string`                                                                                                                                           | :heavy_minus_sign:                                                                                                                                   | Matches when the remote IP is in at least one of these ranges. Entries<br/>are CIDRs such as `203.0.113.0/24` or single addresses such as<br/>`203.0.113.7`. |
+| `NotIn`                                                                                                                                              | []`string`                                                                                                                                           | :heavy_minus_sign:                                                                                                                                   | Matches when the remote IP is in none of these ranges. Entries are CIDRs<br/>such as `198.51.100.0/24` or single addresses such as `198.51.100.7`.   |

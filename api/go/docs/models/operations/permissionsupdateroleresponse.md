@@ -1,0 +1,9 @@
+# PermissionsUpdateRoleResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `V2PermissionsUpdateRoleResponseBody`                                                                             | [*components.V2PermissionsUpdateRoleResponseBody](../../models/components/v2permissionsupdateroleresponsebody.md) | :heavy_minus_sign:                                                                                                | Role updated successfully                                                                                         |

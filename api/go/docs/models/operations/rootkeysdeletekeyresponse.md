@@ -1,0 +1,9 @@
+# RootKeysDeleteKeyResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2RootKeysDeleteKeyResponseBody`                                                                         | [*components.V2RootKeysDeleteKeyResponseBody](../../models/components/v2rootkeysdeletekeyresponsebody.md) | :heavy_minus_sign:                                                                                        | Root key deleted.                                                                                         |

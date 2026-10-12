@@ -7,7 +7,7 @@ import (
 )
 
 // MatchExpr - A single request match expression. Exactly one of `path`, `method`,
-// `header` or `queryParam` must be set.
+// `header`, `queryParam` or `remoteIp` must be set.
 type MatchExpr struct {
 	// Matches on the request path.
 	Path *PathMatch `json:"path,omitzero"`
@@ -19,6 +19,11 @@ type MatchExpr struct {
 	// Matches a named request field (header or query parameter). Exactly one of
 	// `present` or `value` must be set.
 	QueryParam *FieldMatch `json:"queryParam,omitzero"`
+	// Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
+	// or `notIn` must be set. Entries are rejected if they have host bits set (such
+	// as `10.1.2.3/8`), are IPv4-mapped IPv6 addresses, or carry a zone. Single
+	// addresses are returned as full-length prefixes, such as `203.0.113.7/32`.
+	RemoteIP *RemoteIPMatch `json:"remoteIp,omitzero"`
 }
 
 func (m MatchExpr) MarshalJSON() ([]byte, error) {
@@ -58,4 +63,11 @@ func (m *MatchExpr) GetQueryParam() *FieldMatch {
 		return nil
 	}
 	return m.QueryParam
+}
+
+func (m *MatchExpr) GetRemoteIP() *RemoteIPMatch {
+	if m == nil {
+		return nil
+	}
+	return m.RemoteIP
 }

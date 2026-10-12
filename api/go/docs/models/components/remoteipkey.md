@@ -1,6 +1,6 @@
 # RemoteIPKey
 
-Rate limit by the client's IP address.
+Rate limit by the remote IP.
 
 
 ## Fields

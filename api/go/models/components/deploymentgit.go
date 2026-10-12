@@ -2,11 +2,37 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+)
+
 type DeploymentGit struct {
 	// The git commit SHA this deployment was built from.
 	CommitSha string `json:"commitSha"`
 	// The git branch this deployment was built from. Omitted when unknown.
 	Branch *string `json:"branch,omitzero"`
+	// The commit message. Omitted when unknown.
+	CommitMessage *string `json:"commitMessage,omitzero"`
+	// Unix timestamp in milliseconds when the commit was authored. Omitted when unknown.
+	CommitTimestamp *int64               `json:"commitTimestamp,omitzero"`
+	Author          *DeploymentGitAuthor `json:"author,omitzero"`
+	// The pull request number this deployment was built for. Omitted when the commit is not part of a pull request.
+	PrNumber *int64 `json:"prNumber,omitzero"`
+	// The `owner/repo` name of the fork this deployment was built from. Omitted
+	// when it was built from the app's connected repository.
+	//
+	ForkRepository *string `json:"forkRepository,omitzero"`
+}
+
+func (d DeploymentGit) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DeploymentGit) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DeploymentGit) GetCommitSha() string {
@@ -21,4 +47,39 @@ func (d *DeploymentGit) GetBranch() *string {
 		return nil
 	}
 	return d.Branch
+}
+
+func (d *DeploymentGit) GetCommitMessage() *string {
+	if d == nil {
+		return nil
+	}
+	return d.CommitMessage
+}
+
+func (d *DeploymentGit) GetCommitTimestamp() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.CommitTimestamp
+}
+
+func (d *DeploymentGit) GetAuthor() *DeploymentGitAuthor {
+	if d == nil {
+		return nil
+	}
+	return d.Author
+}
+
+func (d *DeploymentGit) GetPrNumber() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.PrNumber
+}
+
+func (d *DeploymentGit) GetForkRepository() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ForkRepository
 }
