@@ -8,7 +8,7 @@ from typing_extensions import NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
-class Type(str, Enum):
+class DNSRecordType(str, Enum):
     r"""Record type to create. `ALIAS` is not a real DNS record type: it means an apex-compatible
     alias, which providers expose as ALIAS, ANAME, or a flattened CNAME. Apex domains cannot
     hold a plain CNAME, so they receive `ALIAS` where a subdomain receives `CNAME`.
@@ -21,7 +21,7 @@ class Type(str, Enum):
 
 
 class DNSRecordTypedDict(TypedDict):
-    type: Type
+    type: DNSRecordType
     r"""Record type to create. `ALIAS` is not a real DNS record type: it means an apex-compatible
     alias, which providers expose as ALIAS, ANAME, or a flattened CNAME. Apex domains cannot
     hold a plain CNAME, so they receive `ALIAS` where a subdomain receives `CNAME`.
@@ -68,7 +68,7 @@ class DNSRecordTypedDict(TypedDict):
 
 
 class DNSRecord(BaseModel):
-    type: Type
+    type: DNSRecordType
     r"""Record type to create. `ALIAS` is not a real DNS record type: it means an apex-compatible
     alias, which providers expose as ALIAS, ANAME, or a flattened CNAME. Apex domains cannot
     hold a plain CNAME, so they receive `ALIAS` where a subdomain receives `CNAME`.

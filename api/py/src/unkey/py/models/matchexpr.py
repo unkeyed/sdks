@@ -4,6 +4,7 @@ from __future__ import annotations
 from .fieldmatch import FieldMatch, FieldMatchTypedDict
 from .methodmatch import MethodMatch, MethodMatchTypedDict
 from .pathmatch import PathMatch, PathMatchTypedDict
+from .remoteipmatch import RemoteIPMatch, RemoteIPMatchTypedDict
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -13,7 +14,7 @@ from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 class MatchExprTypedDict(TypedDict):
     r"""A single request match expression. Exactly one of `path`, `method`,
-    `header` or `queryParam` must be set.
+    `header`, `queryParam` or `remoteIp` must be set.
     """
 
     path: NotRequired[PathMatchTypedDict]
@@ -28,11 +29,17 @@ class MatchExprTypedDict(TypedDict):
     r"""Matches a named request field (header or query parameter). Exactly one of
     `present` or `value` must be set.
     """
+    remote_ip: NotRequired[RemoteIPMatchTypedDict]
+    r"""Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
+    or `notIn` must be set. Entries are rejected if they have host bits set (such
+    as `10.1.2.3/8`), are IPv4-mapped IPv6 addresses, or carry a zone. Single
+    addresses are returned as full-length prefixes, such as `203.0.113.7/32`.
+    """
 
 
 class MatchExpr(BaseModel):
     r"""A single request match expression. Exactly one of `path`, `method`,
-    `header` or `queryParam` must be set.
+    `header`, `queryParam` or `remoteIp` must be set.
     """
 
     path: Optional[PathMatch] = None
@@ -53,9 +60,18 @@ class MatchExpr(BaseModel):
     `present` or `value` must be set.
     """
 
+    remote_ip: Annotated[Optional[RemoteIPMatch], pydantic.Field(alias="remoteIp")] = (
+        None
+    )
+    r"""Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
+    or `notIn` must be set. Entries are rejected if they have host bits set (such
+    as `10.1.2.3/8`), are IPv4-mapped IPv6 addresses, or carry a zone. Single
+    addresses are returned as full-length prefixes, such as `203.0.113.7/32`.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["path", "method", "header", "queryParam"])
+        optional_fields = set(["path", "method", "header", "queryParam", "remoteIp"])
         serialized = handler(self)
         m = {}
 

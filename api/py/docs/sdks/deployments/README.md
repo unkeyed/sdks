@@ -8,6 +8,7 @@ Deployment operations
 
 * [~~create_deployment~~](#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](#get_deployment) - Get deployment
+* [list_build_logs](#list_build_logs) - List build logs
 * [list_deployments](#list_deployments) - List deployments
 * [promote_deployment](#promote_deployment) - Promote deployment
 * [rollback_deployment](#rollback_deployment) - Rollback deployment
@@ -97,9 +98,9 @@ runtime configuration of an existing deployment.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.read_deployment` (to read deployments in any environment)
-- `environment.<environment_id>.read_deployment` (to read deployments in a specific environment)
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#read`
+  (use `*` for any level)
 
 
 ### Example Usage: deployment
@@ -176,23 +177,266 @@ with Unkey(
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## list_build_logs
+
+Retrieve the build output of a deployment as a list of log entries, in the
+order the build printed them. A log entry is one chunk of build output,
+and can contain several lines or part of a line.
+
+Poll this endpoint to follow a running build:
+
+- Send the `pagination.cursor` of the last response as `cursor`. The
+  response contains only the entries after it.
+- When `hasMore` is true, request again now.
+- When `hasMore` is false, you have all entries so far. Wait,
+  then request again with the same cursor.
+- The cursor is absent only when the request had no cursor and the build
+  has no entries yet.
+- A response can contain fewer than `limit` entries and still have
+  `hasMore: true` when the entries are large.
+
+New entries become visible up to a few seconds after the build prints
+them. To know that a build is done, check the deployment status with
+`getDeployment`. After the status is no longer `building`, request until
+you get an empty response at least 5 seconds later.
+
+When a build attempt is retried, an entry from the earlier attempt can
+arrive after the cursor has moved past it, and a poll does not return it.
+A request without a cursor returns it. A deployment from a prebuilt image
+has no build and returns no entries. Build logs are kept for 3 months.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>/buildLogs#read`
+
+
+### Example Usage: caughtUp
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="caughtUp" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: deploymentNotFound
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="deploymentNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: entries
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="entries" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: firstPage
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="firstPage" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: invalidCursor
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidCursor" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: invalidRootKey
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="invalidRootKey" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: logsUnavailable
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="logsUnavailable" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: nextPage
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="nextPage" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: oneStep
+
+<!-- UsageSnippet language="python" operationID="deployments.listBuildLogs" method="post" path="/v2/deployments.listBuildLogs" example="oneStep" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                        | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      | Example                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `deployment_id`                                                                                                                                                                                  | *str*                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                               | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                                 | proj_1234abcd                                                                                                                                                                                    |
+| `step_id`                                                                                                                                                                                        | *Optional[str]*                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                               | Return only the log entries of this build step. Use the `stepId` of an<br/>entry from a previous response. An unknown step returns no entries.<br/>Omit this field to return the entries of every step.<br/> | sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f                                                                                                                          |
+| `cursor`                                                                                                                                                                                         | *Optional[str]*                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                               | Pagination cursor from a previous response to fetch the entries after<br/>it. Omit it to start at the first entry of the build.<br/>                                                             | 1704067201000001                                                                                                                                                                                 |
+| `limit`                                                                                                                                                                                          | *Optional[int]*                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                               | Maximum number of log entries to return. A response can contain fewer<br/>entries and still have `hasMore: true` when the entries are large.<br/>                                                |                                                                                                                                                                                                  |
+| `retries`                                                                                                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                               | Configuration to override the default retry behavior of the client.                                                                                                                              |                                                                                                                                                                                                  |
+
+### Response
+
+**[models.V2DeploymentsListBuildLogsResponseBody](../../models/v2deploymentslistbuildlogsresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
 ## list_deployments
 
 Retrieve a paginated list of deployments within a workspace, newest first.
 
-Filter by project, app, environment, and lifecycle status. All filters are
-optional; with none set, every deployment in the workspace is returned.
-Filters nest: `app` requires `project`, and `environment` requires both
-`project` and `app`. Results are paginated; when `hasMore` is true, pass the
-returned `cursor` to fetch the next page.
+Filter by project, app, environment, lifecycle status, git branch, and
+creation time. All filters are optional; with none set, every deployment in
+the workspace is returned. Filters nest: `app` requires `project`, and
+`environment` and `branch` require both `project` and `app`. Results are
+paginated; when `hasMore` is true, pass the returned `cursor` to fetch the
+next page.
 
 **Required Permissions**
 
-Your root key must have the `environment.*.read_deployment` permission.
-Listing spans environments, so a grant on a single environment is not
-sufficient.
+Your root key must have this permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#read`
+  (use `*` for every level you do not filter by)
+
+The permission must cover every deployment the filters select: a grant on
+one environment is not sufficient for a request that spans more than that
+environment.
 
 
+### Example Usage: byBranchAndTime
+
+<!-- UsageSnippet language="python" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byBranchAndTime" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.list_deployments(project="payments-service", app="payments-api", environment="proj_1234abcd", status=[
+        models.DeploymentStatus.READY,
+        models.DeploymentStatus.FAILED,
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
 ### Example Usage: byEnvironment
 
 <!-- UsageSnippet language="python" operationID="deployments.listDeployments" method="post" path="/v2/deployments.listDeployments" example="byEnvironment" -->
@@ -207,7 +451,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="payments-service", app="payments-api", environment="production", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -229,7 +476,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -251,7 +501,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -273,7 +526,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -295,7 +551,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -317,7 +576,10 @@ with Unkey(
     res = unkey.deployments.list_deployments(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", status=[
         models.DeploymentStatus.READY,
         models.DeploymentStatus.FAILED,
-    ], limit=100)
+    ], branch=[
+        "main",
+        "feature/checkout",
+    ], start_time=1704067200000, end_time=1704672000000, limit=100)
 
     while res is not None:
         # Handle items
@@ -328,15 +590,18 @@ with Unkey(
 
 ### Parameters
 
-| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `project`                                                                                                                  | *Optional[str]*                                                                                                            | :heavy_minus_sign:                                                                                                         | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                              |
-| `app`                                                                                                                      | *Optional[str]*                                                                                                            | :heavy_minus_sign:                                                                                                         | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                              |
-| `environment`                                                                                                              | *Optional[str]*                                                                                                            | :heavy_minus_sign:                                                                                                         | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                              |
-| `status`                                                                                                                   | List[[models.DeploymentStatus](../../models/deploymentstatus.md)]                                                          | :heavy_minus_sign:                                                                                                         | Restrict results to deployments in any of the given lifecycle statuses.<br/>Omit to return deployments in every status.<br/> | [<br/>"ready",<br/>"failed"<br/>]                                                                                          |
-| `limit`                                                                                                                    | *Optional[int]*                                                                                                            | :heavy_minus_sign:                                                                                                         | Maximum number of deployments to return per request.<br/>Balance between response size and number of pagination calls needed.<br/> |                                                                                                                            |
-| `cursor`                                                                                                                   | *Optional[str]*                                                                                                            | :heavy_minus_sign:                                                                                                         | Pagination cursor from a previous response to fetch the next page.<br/>Use when `hasMore: true` in the previous response.<br/> |                                                                                                                            |
-| `retries`                                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                           | :heavy_minus_sign:                                                                                                         | Configuration to override the default retry behavior of the client.                                                        |                                                                                                                            |
+| Parameter                                                                                                                                                                                   | Type                                                                                                                                                                                        | Required                                                                                                                                                                                    | Description                                                                                                                                                                                 | Example                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project`                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                            | proj_1234abcd                                                                                                                                                                               |
+| `app`                                                                                                                                                                                       | *Optional[str]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                            | proj_1234abcd                                                                                                                                                                               |
+| `environment`                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                            | proj_1234abcd                                                                                                                                                                               |
+| `status`                                                                                                                                                                                    | List[[models.DeploymentStatus](../../models/deploymentstatus.md)]                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                          | Restrict results to deployments in any of the given lifecycle statuses.<br/>Omit to return deployments in every status.<br/>                                                                | [<br/>"ready",<br/>"failed"<br/>]                                                                                                                                                           |
+| `branch`                                                                                                                                                                                    | List[*str*]                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                          | Restrict results to deployments built from any of the given git branches.<br/>Requires `project` and `app` to also be set. Omit or pass an empty list to<br/>return deployments from every branch.<br/> | [<br/>"main",<br/>"feature/checkout"<br/>]                                                                                                                                                  |
+| `start_time`                                                                                                                                                                                | *Optional[int]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Return only deployments created at or after this unix timestamp in<br/>milliseconds (inclusive).<br/>                                                                                       | 1704067200000                                                                                                                                                                               |
+| `end_time`                                                                                                                                                                                  | *Optional[int]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Return only deployments created before this unix timestamp in<br/>milliseconds (exclusive). Must be later than `startTime` when both are<br/>set.<br/>                                      | 1704672000000                                                                                                                                                                               |
+| `limit`                                                                                                                                                                                     | *Optional[int]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Maximum number of deployments to return per request.<br/>Balance between response size and number of pagination calls needed.<br/>                                                          |                                                                                                                                                                                             |
+| `cursor`                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                          | Pagination cursor from a previous response to fetch the next page.<br/>Use when `hasMore: true` in the previous response.<br/>                                                              |                                                                                                                                                                                             |
+| `retries`                                                                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                                                                         |                                                                                                                                                                                             |
 
 ### Response
 

@@ -6,8 +6,8 @@ from unkey.py.types import BaseModel
 
 
 class RemoteIPKeyTypedDict(TypedDict):
-    r"""Rate limit by the client's IP address."""
+    r"""Rate limit by the remote IP."""
 
 
 class RemoteIPKey(BaseModel):
-    r"""Rate limit by the client's IP address."""
+    r"""Rate limit by the remote IP."""
