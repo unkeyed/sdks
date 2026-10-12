@@ -796,7 +796,7 @@ func main() {
 
     res, err := s.Keys.RerollKey(ctx, components.V2KeysRerollKeyRequestBody{
         KeyID: "key_2cGKbMxRyIzhCxo1Idjz8q",
-        Expiration: 86400000,
+        Expiration: unkey.Pointer[int64](86400000),
     })
     if err != nil {
         log.Fatal(err)

@@ -29,6 +29,7 @@ type Deployment struct {
 	Project string            `json:"project"`
 	Git     *DeploymentGit    `json:"git,omitzero"`
 	Docker  *DeploymentDocker `json:"docker,omitzero"`
+	Trigger DeploymentTrigger `json:"trigger"`
 	// Lifecycle operations you are allowed to call on this deployment right now.
 	// Empty when none apply (e.g. while building or in a terminal state).
 	//
@@ -38,6 +39,10 @@ type Deployment struct {
 	//
 	Regions []string         `json:"regions"`
 	Error   *DeploymentError `json:"error,omitzero"`
+	// Unix timestamp in milliseconds when the deployment finished, successfully
+	// or not. Omitted while it is in progress.
+	//
+	FinishedAt *int64 `json:"finishedAt,omitzero"`
 	// Public hostnames this deployment is reachable at.
 	//
 	Domains []string          `json:"domains,omitzero"`
@@ -118,6 +123,13 @@ func (d *Deployment) GetDocker() *DeploymentDocker {
 	return d.Docker
 }
 
+func (d *Deployment) GetTrigger() DeploymentTrigger {
+	if d == nil {
+		return DeploymentTrigger{}
+	}
+	return d.Trigger
+}
+
 func (d *Deployment) GetAvailableActions() []DeploymentAction {
 	if d == nil {
 		return []DeploymentAction{}
@@ -137,6 +149,13 @@ func (d *Deployment) GetError() *DeploymentError {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *Deployment) GetFinishedAt() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.FinishedAt
 }
 
 func (d *Deployment) GetDomains() []string {
