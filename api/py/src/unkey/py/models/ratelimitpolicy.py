@@ -26,7 +26,7 @@ class IdentifierTypedDict(TypedDict):
     """
 
     remote_ip: NotRequired[RemoteIPKeyTypedDict]
-    r"""Rate limit by the client's IP address."""
+    r"""Rate limit by the remote IP."""
     header: NotRequired[HeaderKeyTypedDict]
     r"""Rate limit by the value of a request header."""
     authenticated_subject: NotRequired[AuthenticatedSubjectKeyTypedDict]
@@ -46,7 +46,7 @@ class Identifier(BaseModel):
     """
 
     remote_ip: Annotated[Optional[RemoteIPKey], pydantic.Field(alias="remoteIp")] = None
-    r"""Rate limit by the client's IP address."""
+    r"""Rate limit by the remote IP."""
 
     header: Optional[HeaderKey] = None
     r"""Rate limit by the value of a request header."""

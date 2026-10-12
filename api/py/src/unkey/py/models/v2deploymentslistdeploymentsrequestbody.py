@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .deploymentstatus import DeploymentStatus
+import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
 
 
@@ -32,6 +33,23 @@ class V2DeploymentsListDeploymentsRequestBodyTypedDict(TypedDict):
     status: NotRequired[List[DeploymentStatus]]
     r"""Restrict results to deployments in any of the given lifecycle statuses.
     Omit to return deployments in every status.
+
+    """
+    branch: NotRequired[List[str]]
+    r"""Restrict results to deployments built from any of the given git branches.
+    Requires `project` and `app` to also be set. Omit or pass an empty list to
+    return deployments from every branch.
+
+    """
+    start_time: NotRequired[int]
+    r"""Return only deployments created at or after this unix timestamp in
+    milliseconds (inclusive).
+
+    """
+    end_time: NotRequired[int]
+    r"""Return only deployments created before this unix timestamp in
+    milliseconds (exclusive). Must be later than `startTime` when both are
+    set.
 
     """
     limit: NotRequired[int]
@@ -76,6 +94,26 @@ class V2DeploymentsListDeploymentsRequestBody(BaseModel):
 
     """
 
+    branch: Optional[List[str]] = None
+    r"""Restrict results to deployments built from any of the given git branches.
+    Requires `project` and `app` to also be set. Omit or pass an empty list to
+    return deployments from every branch.
+
+    """
+
+    start_time: Annotated[Optional[int], pydantic.Field(alias="startTime")] = None
+    r"""Return only deployments created at or after this unix timestamp in
+    milliseconds (inclusive).
+
+    """
+
+    end_time: Annotated[Optional[int], pydantic.Field(alias="endTime")] = None
+    r"""Return only deployments created before this unix timestamp in
+    milliseconds (exclusive). Must be later than `startTime` when both are
+    set.
+
+    """
+
     limit: Optional[int] = 100
     r"""Maximum number of deployments to return per request.
     Balance between response size and number of pagination calls needed.
@@ -91,7 +129,17 @@ class V2DeploymentsListDeploymentsRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["project", "app", "environment", "status", "limit", "cursor"]
+            [
+                "project",
+                "app",
+                "environment",
+                "status",
+                "branch",
+                "startTime",
+                "endTime",
+                "limit",
+                "cursor",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -105,3 +153,9 @@ class V2DeploymentsListDeploymentsRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    V2DeploymentsListDeploymentsRequestBody.model_rebuild()
+except NameError:
+    pass

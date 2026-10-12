@@ -1,0 +1,9 @@
+# V2PortalListSessionsResponseData
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `external_id`                                                                        | *str*                                                                                | :heavy_check_mark:                                                                   | The end user's identifier, as passed to `portal.createSession`.                      | user_123                                                                             |
+| `sessions`                                                                           | List[[models.V2PortalListSessionsSession](../models/v2portallistsessionssession.md)] | :heavy_check_mark:                                                                   | The end user's revocable sessions, newest first.                                     |                                                                                      |
