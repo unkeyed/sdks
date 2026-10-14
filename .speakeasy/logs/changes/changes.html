@@ -98,75 +98,12 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.deployments.listBuildLogs()</code>: <strong>Added</strong></li>
-<li><code>unkey.permissions.updatePermission()</code>: <strong>Added</strong></li>
-<li><code>unkey.permissions.updateRole()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.listSessions()</code>: <strong>Added</strong></li>
-<li><code>unkey.portal.revokeSession()</code>: <strong>Added</strong></li>
-<li><code>unkey.rootKeys.createKey()</code>: <strong>Added</strong></li>
-<li><code>unkey.rootKeys.deleteKey()</code>: <strong>Added</strong></li>
-<li><code>unkey.rootKeys.listKeys()</code>: <strong>Added</strong></li>
-<li><code>unkey.rootKeys.rerollKey()</code>: <strong>Added</strong></li>
-<li><code>unkey.rootKeys.updateKey()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.getLimits()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.getUsage()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.getDeployment()</code>: <code>response.data</code> <strong>Changed</strong>
-
-<ul>
-<li><code>docker.resolvedImage</code> <strong>Added</strong></li>
-<li><code>finishedAt</code> <strong>Added</strong></li>
-<li><code>git.author</code> <strong>Added</strong></li>
-<li><code>git.commitMessage</code> <strong>Added</strong></li>
-<li><code>git.commitTimestamp</code> <strong>Added</strong></li>
-<li><code>git.forkRepository</code> <strong>Added</strong></li>
-<li><code>git.prNumber</code> <strong>Added</strong></li>
-<li><code>trigger</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.deployments.listDeployments()</code>:
-
-<ul>
-<li><code>request</code> <strong>Changed</strong>
-
-<ul>
-<li><code>branch</code> <strong>Added</strong></li>
-<li><code>endTime</code> <strong>Added</strong></li>
-<li><code>startTime</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>response.data[]</code> <strong>Changed</strong>
-
-<ul>
-<li><code>docker.resolvedImage</code> <strong>Added</strong></li>
-<li><code>finishedAt</code> <strong>Added</strong></li>
-<li><code>git.author</code> <strong>Added</strong></li>
-<li><code>git.commitMessage</code> <strong>Added</strong></li>
-<li><code>git.commitTimestamp</code> <strong>Added</strong></li>
-<li><code>git.forkRepository</code> <strong>Added</strong></li>
-<li><code>git.prNumber</code> <strong>Added</strong></li>
-<li><code>trigger</code> <strong>Added</strong></li>
-</ul></li>
-</ul></li>
-<li><code>unkey.gateway.listPolicies()</code>:  <code>response.data[].match[].remoteIp</code> <strong>Added</strong></li>
-<li><code>unkey.gateway.setPolicies()</code>:
-
-<ul>
-<li><code>request.policies[].match[].remoteIp</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.gateway.updatePolicy()</code>:
-
-<ul>
-<li><code>request.match[].remoteIp</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.keys.rerollKey()</code>:
-
-<ul>
-<li><code>request.expiration</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>unkey.portal.createSession()</code>:  <code>error.status[409]</code> <strong>Added</strong></li>
-<li><code>unkey.portal.rerollKey()</code>:
-
-<ul>
-<li><code>request.expiration</code> <strong>Changed</strong></li>
-</ul></li>
+<li><code>unkey.ratelimit.createNamespace()</code>: <strong>Added</strong></li>
+<li><code>unkey.ratelimit.deleteNamespace()</code>: <strong>Added</strong></li>
+<li><code>unkey.ratelimit.listNamespaces()</code>: <strong>Added</strong></li>
+<li><code>unkey.ratelimit.updateNamespace()</code>: <strong>Added</strong></li>
+<li><code>unkey.workspace.getFlags()</code>: <strong>Added</strong></li>
+<li><code>unkey.workspace.updateFlag()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>

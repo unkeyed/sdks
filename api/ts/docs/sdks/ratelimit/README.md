@@ -6,12 +6,585 @@ Rate limiting operations
 
 ### Available Operations
 
+* [createNamespace](#createnamespace) - Create ratelimit namespace
+* [deleteNamespace](#deletenamespace) - Delete ratelimit namespace
 * [deleteOverride](#deleteoverride) - Delete ratelimit override
 * [getOverride](#getoverride) - Get ratelimit override
 * [limit](#limit) - Apply rate limiting
+* [listNamespaces](#listnamespaces) - List ratelimit namespaces
 * [listOverrides](#listoverrides) - List ratelimit overrides
 * [multiLimit](#multilimit) - Apply multiple rate limit checks
 * [setOverride](#setoverride) - Set ratelimit override
+* [updateNamespace](#updatenamespace) - Update ratelimit namespace
+
+## createNamespace
+
+Create a rate limit namespace before you rate limit against it.
+
+`ratelimit.limit` also creates a namespace the first time you use its name, when your root key can create namespaces. Use this endpoint when you want the namespace to exist up front, for example to set overrides before the first request.
+
+**Important**: Names are unique within your workspace, deleted namespaces included. A name that is in use or was deleted returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write`
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="basic" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.createNamespace({
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitCreateNamespace } from "@unkey/api/funcs/ratelimitCreateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitCreateNamespace(unkey, {
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitCreateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="emptyName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.createNamespace({
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitCreateNamespace } from "@unkey/api/funcs/ratelimitCreateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitCreateNamespace(unkey, {
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitCreateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="missingPermission" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.createNamespace({
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitCreateNamespace } from "@unkey/api/funcs/ratelimitCreateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitCreateNamespace(unkey, {
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitCreateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="nameTaken" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.createNamespace({
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitCreateNamespace } from "@unkey/api/funcs/ratelimitCreateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitCreateNamespace(unkey, {
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitCreateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="success" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.createNamespace({
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitCreateNamespace } from "@unkey/api/funcs/ratelimitCreateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitCreateNamespace(unkey, {
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitCreateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitCreateNamespaceRequestBody](../../models/components/v2ratelimitcreatenamespacerequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2RatelimitCreateNamespaceResponseBody](../../models/components/v2ratelimitcreatenamespaceresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## deleteNamespace
+
+Delete a rate limit namespace and all of its overrides, identified by the namespace ID or name.
+
+**Important**: A deleted name cannot be reused. `ratelimit.limit` and `ratelimit.multiLimit` return 410 for it instead of creating a new namespace, so a deleted namespace does not turn into unlimited traffic. Other API nodes can take up to a minute to see the deletion.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#delete` (to delete any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#delete` (to delete a specific namespace)
+
+
+### Example Usage: byId
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byId" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteNamespace({
+    namespace: "rlns_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteNamespace } from "@unkey/api/funcs/ratelimitDeleteNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: byName
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteNamespace({
+    namespace: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteNamespace } from "@unkey/api/funcs/ratelimitDeleteNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteNamespace(unkey, {
+    namespace: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: deleted
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="deleted" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteNamespace({
+    namespace: "rlns_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteNamespace } from "@unkey/api/funcs/ratelimitDeleteNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: emptyNamespace
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="emptyNamespace" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteNamespace({
+    namespace: "rlns_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteNamespace } from "@unkey/api/funcs/ratelimitDeleteNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="namespaceNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.deleteNamespace({
+    namespace: "rlns_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitDeleteNamespace } from "@unkey/api/funcs/ratelimitDeleteNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitDeleteNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitDeleteNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitDeleteNamespaceRequestBody](../../models/components/v2ratelimitdeletenamespacerequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2RatelimitDeleteNamespaceResponseBody](../../models/components/v2ratelimitdeletenamespaceresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## deleteOverride
 
@@ -876,6 +1449,422 @@ run();
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.GoneErrorResponse            | 410                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## listNamespaces
+
+Retrieve a paginated list of the rate limit namespaces in your workspace.
+
+Use this to find the namespaces your services rate limit against, for example to build an admin view or to look up a namespace ID. Results are ordered newest first and returned in pages. When `hasMore` is true, pass the returned `cursor` to fetch the next page.
+
+Deleted namespaces are not returned. The list contains only the namespaces your root key can read.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#read` (to read any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#read` (to read a specific namespace)
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="basic" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({});
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {});
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: empty
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="empty" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidLimit
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="invalidLimit" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: morePages
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="morePages" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: namespaceList
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="namespaceList" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    cursor: "rlns_1234abcd",
+    search: "api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: paginated
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="paginated" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    limit: 20,
+    cursor: "rlns_1234abcd",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    limit: 20,
+    cursor: "rlns_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: search
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="search" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.listNamespaces({
+    search: "api",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitListNamespaces } from "@unkey/api/funcs/ratelimitListNamespaces.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitListNamespaces(unkey, {
+    search: "api",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("ratelimitListNamespaces failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitListNamespacesRequestBody](../../models/components/v2ratelimitlistnamespacesrequestbody.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.RatelimitListNamespacesResponse](../../models/operations/ratelimitlistnamespacesresponse.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
@@ -1749,5 +2738,353 @@ run();
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## updateNamespace
+
+Rename a rate limit namespace, identified by its ID or current name.
+
+Renaming to the current name returns the namespace without a write.
+
+**Important**: Overrides stay with the namespace. Requests that pass the namespace by name, such as `ratelimit.limit`, must use the new name. A `ratelimit.limit` call with the old name can create a new, empty namespace with that name. A name that is in use or was deleted returns 409. Other API nodes can take up to a minute to see the new name.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write` (to rename any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#write` (to rename a specific namespace)
+
+
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="emptyName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="nameTaken" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="namespaceNotFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: renameById
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameById" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: renameByName
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameByName" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "email.sends",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "email.sends",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: renamed
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renamed" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.updateNamespace({
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitUpdateNamespace } from "@unkey/api/funcs/ratelimitUpdateNamespace.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitUpdateNamespace(unkey, {
+    namespace: "rlns_1234abcd",
+    name: "email.outbound",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitUpdateNamespace failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2RatelimitUpdateNamespaceRequestBody](../../models/components/v2ratelimitupdatenamespacerequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2RatelimitUpdateNamespaceResponseBody](../../models/components/v2ratelimitupdatenamespaceresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
