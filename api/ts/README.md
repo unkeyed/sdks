@@ -372,12 +372,16 @@ run();
 
 ### [Ratelimit](docs/sdks/ratelimit/README.md)
 
+* [createNamespace](docs/sdks/ratelimit/README.md#createnamespace) - Create ratelimit namespace
+* [deleteNamespace](docs/sdks/ratelimit/README.md#deletenamespace) - Delete ratelimit namespace
 * [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 * [getOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 * [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [listNamespaces](docs/sdks/ratelimit/README.md#listnamespaces) - List ratelimit namespaces
 * [listOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 * [multiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [setOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
+* [updateNamespace](docs/sdks/ratelimit/README.md#updatenamespace) - Update ratelimit namespace
 
 ### [RootKeys](docs/sdks/rootkeys/README.md)
 
@@ -389,8 +393,10 @@ run();
 
 ### [Workspace](docs/sdks/workspace/README.md)
 
+* [getFlags](docs/sdks/workspace/README.md#getflags) - Get workspace flags
 * [getLimits](docs/sdks/workspace/README.md#getlimits) - Get workspace limits
 * [getUsage](docs/sdks/workspace/README.md#getusage) - Get workspace usage
+* [updateFlag](docs/sdks/workspace/README.md#updateflag) - Update a workspace flag
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -493,19 +499,25 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`projectsGetProject`](docs/sdks/projects/README.md#getproject) - Get project
 - [`projectsListProjects`](docs/sdks/projects/README.md#listprojects) - List projects
 - [`projectsUpdateProject`](docs/sdks/projects/README.md#updateproject) - Update project
+- [`ratelimitCreateNamespace`](docs/sdks/ratelimit/README.md#createnamespace) - Create ratelimit namespace
+- [`ratelimitDeleteNamespace`](docs/sdks/ratelimit/README.md#deletenamespace) - Delete ratelimit namespace
 - [`ratelimitDeleteOverride`](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 - [`ratelimitGetOverride`](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
 - [`ratelimitLimit`](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+- [`ratelimitListNamespaces`](docs/sdks/ratelimit/README.md#listnamespaces) - List ratelimit namespaces
 - [`ratelimitListOverrides`](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
 - [`ratelimitMultiLimit`](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 - [`ratelimitSetOverride`](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
+- [`ratelimitUpdateNamespace`](docs/sdks/ratelimit/README.md#updatenamespace) - Update ratelimit namespace
 - [`rootKeysCreateKey`](docs/sdks/rootkeys/README.md#createkey) - Create root key
 - [`rootKeysDeleteKey`](docs/sdks/rootkeys/README.md#deletekey) - Delete root key
 - [`rootKeysListKeys`](docs/sdks/rootkeys/README.md#listkeys) - List root keys
 - [`rootKeysRerollKey`](docs/sdks/rootkeys/README.md#rerollkey) - Reroll root key
 - [`rootKeysUpdateKey`](docs/sdks/rootkeys/README.md#updatekey) - Update root key
+- [`workspaceGetFlags`](docs/sdks/workspace/README.md#getflags) - Get workspace flags
 - [`workspaceGetLimits`](docs/sdks/workspace/README.md#getlimits) - Get workspace limits
 - [`workspaceGetUsage`](docs/sdks/workspace/README.md#getusage) - Get workspace usage
+- [`workspaceUpdateFlag`](docs/sdks/workspace/README.md#updateflag) - Update a workspace flag
 - ~~[`deploymentsCreateDeployment`](docs/sdks/deployments/README.md#createdeployment)~~ - Create deployment :warning: **Deprecated**
 - ~~[`internalCreateDeployment`](docs/sdks/internal/README.md#createdeployment)~~ - Create deployment :warning: **Deprecated**
 - ~~[`internalGetDeployment`](docs/sdks/internal/README.md#getdeployment)~~ - Get deployment :warning: **Deprecated**
@@ -678,9 +690,8 @@ run();
   * [`InternalServerErrorResponse`](./src/models/errors/internalservererrorresponse.ts): Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.  When you encounter this error: - The request ID in the response can help Unkey support investigate the issue - The error is likely temporary and retrying may succeed - If the error persists, contact Unkey support with the request ID. Status code `500`.
   * [`TooManyRequestsErrorResponse`](./src/models/errors/toomanyrequestserrorresponse.ts): Error response when the client has sent too many requests in a given time period. This occurs when you've exceeded a rate limit or quota for the resource you're accessing.  The rate limit resets automatically after the time window expires. To avoid this error: - Implement exponential backoff when retrying requests - Cache results where appropriate to reduce request frequency - Check the error detail message for specific quota information - Contact support if you need a higher quota for your use case. Status code `429`. *
   * [`ForbiddenErrorResponse`](./src/models/errors/forbiddenerrorresponse.ts): Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when: - The root key doesn't have the required permissions for this endpoint - The operation requires elevated privileges that the current key lacks - Access to the requested resource is restricted based on workspace settings  To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator. Status code `403`. *
-  * [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. *
 
-<details><summary>Less common errors (11)</summary>
+<details><summary>Less common errors (12)</summary>
 
 <br />
 
@@ -693,11 +704,12 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 13 of 99 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 99 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 99 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 99 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 99 methods.*
+* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 83 of 105 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 105 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 105 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 105 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 105 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 105 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
