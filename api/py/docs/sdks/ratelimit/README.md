@@ -6,12 +6,261 @@ Rate limiting operations
 
 ### Available Operations
 
+* [create_namespace](#create_namespace) - Create ratelimit namespace
+* [delete_namespace](#delete_namespace) - Delete ratelimit namespace
 * [delete_override](#delete_override) - Delete ratelimit override
 * [get_override](#get_override) - Get ratelimit override
 * [limit](#limit) - Apply rate limiting
+* [list_namespaces](#list_namespaces) - List ratelimit namespaces
 * [list_overrides](#list_overrides) - List ratelimit overrides
 * [multi_limit](#multi_limit) - Apply multiple rate limit checks
 * [set_override](#set_override) - Set ratelimit override
+* [update_namespace](#update_namespace) - Update ratelimit namespace
+
+## create_namespace
+
+Create a rate limit namespace before you rate limit against it.
+
+`ratelimit.limit` also creates a namespace the first time you use its name, when your root key can create namespaces. Use this endpoint when you want the namespace to exist up front, for example to set overrides before the first request.
+
+**Important**: Names are unique within your workspace, deleted namespaces included. A name that is in use or was deleted returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write`
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="python" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="basic" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.create_namespace(name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="python" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="emptyName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.create_namespace(name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="python" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="missingPermission" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.create_namespace(name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="python" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="nameTaken" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.create_namespace(name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="python" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="success" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.create_namespace(name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                   | Type                                                                                                                                                        | Required                                                                                                                                                    | Description                                                                                                                                                 | Example                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                                      | *str*                                                                                                                                                       | :heavy_check_mark:                                                                                                                                          | The name of the namespace, unique within your workspace. Names are case-sensitive.<br/>Pass it as `namespace` to `ratelimit.limit` and the override endpoints.<br/> | email.outbound                                                                                                                                              |
+| `retries`                                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                            | :heavy_minus_sign:                                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                                         |                                                                                                                                                             |
+
+### Response
+
+**[models.V2RatelimitCreateNamespaceResponseBody](../../models/v2ratelimitcreatenamespaceresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## delete_namespace
+
+Delete a rate limit namespace and all of its overrides, identified by the namespace ID or name.
+
+**Important**: A deleted name cannot be reused. `ratelimit.limit` and `ratelimit.multiLimit` return 410 for it instead of creating a new namespace, so a deleted namespace does not turn into unlimited traffic. Other API nodes can take up to a minute to see the deletion.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#delete` (to delete any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#delete` (to delete a specific namespace)
+
+
+### Example Usage: byId
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byId" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_namespace(namespace="rlns_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: byName
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_namespace(namespace="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: deleted
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="deleted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_namespace(namespace="rlns_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: emptyNamespace
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="emptyNamespace" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_namespace(namespace="rlns_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="namespaceNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.delete_namespace(namespace="rlns_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `namespace`                                                               | *str*                                                                     | :heavy_check_mark:                                                        | The namespace to delete. Pass the namespace ID (`rlns_...`) or its name.<br/> | rlns_1234abcd                                                             |
+| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |                                                                           |
+
+### Response
+
+**[models.V2RatelimitDeleteNamespaceResponseBody](../../models/v2ratelimitdeletenamespaceresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## delete_override
 
@@ -364,6 +613,178 @@ with Unkey(
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.GoneErrorResponse            | 410                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## list_namespaces
+
+Retrieve a paginated list of the rate limit namespaces in your workspace.
+
+Use this to find the namespaces your services rate limit against, for example to build an admin view or to look up a namespace ID. Results are ordered newest first and returned in pages. When `hasMore` is true, pass the returned `cursor` to fetch the next page.
+
+Deleted namespaces are not returned. The list contains only the namespaces your root key can read.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#read` (to read any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#read` (to read a specific namespace)
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="basic" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: empty
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="empty" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: invalidLimit
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="invalidLimit" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: morePages
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="morePages" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: namespaceList
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="namespaceList" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: paginated
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="paginated" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=20, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: search
+
+<!-- UsageSnippet language="python" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="search" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.list_namespaces(limit=100, cursor="rlns_1234abcd", search="api")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                    | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  | Example                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`                                                                                                                                                                      | *Optional[int]*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                           | Maximum number of namespaces to return per request.<br/>Omit this field to receive up to 100 namespaces.<br/>                                                                |                                                                                                                                                                              |
+| `cursor`                                                                                                                                                                     | *Optional[str]*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                           | Pagination cursor from a previous response to fetch the next page.<br/>Use when `hasMore: true` in the previous response. Omit this field to start from the first page.<br/> | rlns_1234abcd                                                                                                                                                                |
+| `search`                                                                                                                                                                     | *Optional[str]*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                           | Free-form text to filter namespaces. Returns namespaces whose ID or name contains the search string. Matching is case-insensitive.<br/>Omit this field to list every namespace.<br/> | api                                                                                                                                                                          |
+| `retries`                                                                                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                           | Configuration to override the default retry behavior of the client.                                                                                                          |                                                                                                                                                                              |
+
+### Response
+
+**[models.RatelimitListNamespacesResponse](../../models/ratelimitlistnamespacesresponse.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
@@ -758,5 +1179,148 @@ with Unkey(
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## update_namespace
+
+Rename a rate limit namespace, identified by its ID or current name.
+
+Renaming to the current name returns the namespace without a write.
+
+**Important**: Overrides stay with the namespace. Requests that pass the namespace by name, such as `ratelimit.limit`, must use the new name. A `ratelimit.limit` call with the old name can create a new, empty namespace with that name. A name that is in use or was deleted returns 409. Other API nodes can take up to a minute to see the new name.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write` (to rename any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#write` (to rename a specific namespace)
+
+
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="emptyName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="rlns_1234abcd", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="nameTaken" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="rlns_1234abcd", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="namespaceNotFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="rlns_1234abcd", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: renameById
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameById" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="rlns_1234abcd", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: renameByName
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameByName" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="email.sends", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: renamed
+
+<!-- UsageSnippet language="python" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renamed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.update_namespace(namespace="rlns_1234abcd", name="email.outbound")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `namespace`                                                                             | *str*                                                                                   | :heavy_check_mark:                                                                      | The namespace to rename. Pass the namespace ID (`rlns_...`) or its current name.<br/>   | rlns_1234abcd                                                                           |
+| `name`                                                                                  | *str*                                                                                   | :heavy_check_mark:                                                                      | The new name of the namespace, unique within your workspace. Names are case-sensitive.<br/> | email.outbound                                                                          |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |                                                                                         |
+
+### Response
+
+**[models.V2RatelimitUpdateNamespaceResponseBody](../../models/v2ratelimitupdatenamespaceresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
