@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: b6a6dbea64bdd2b708c60edfa29f72c9
+  docChecksum: 72acd75648f52b69bafc88ba5b8e9fa3
   docVersion: 2.0.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 3.1.0
-  configChecksum: 949b7a7584e754075441c01cc405f18f
+  releaseVersion: 3.1.1
+  configChecksum: 5979b9adc3793d77780a971454651a3b
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks
 persistentEdits:
-  generation_id: 67fc07c6-ae1f-4dc7-95e7-612dbfd115ba
-  pristine_commit_hash: 8dd11490159530c6da3188656614fbd6374497b5
-  pristine_tree_hash: b3a857a63e5c2faaed1f70eb1e64d2302849b907
+  generation_id: eba1fb23-484e-4b79-8165-d9af74b206b4
+  pristine_commit_hash: d19546c51ff10af3d211680f9262b80b9ef9c26e
+  pristine_tree_hash: 0563091b99f324f17e21c1877beb2cb3ccab6e00
 features:
   go:
     additionalDependencies: 0.1.0
@@ -297,8 +297,8 @@ trackedFiles:
     pristine_git_object: 6f10b8fbe4c4b95fc975c9e95a06e1515c65b63b
   docs/models/components/fieldmatch.md:
     id: 7f2c32e0134d
-    last_write_checksum: sha1:bc0cc3971dd4df6d38f83f9ee701ecb88f195593
-    pristine_git_object: 0fb963d6d026de2468edfdabde0449aeae0fae69
+    last_write_checksum: sha1:3a4e5176e9e4779a11ae02676d5223995004b7fe
+    pristine_git_object: 1d79655878aa440ac9c4185b022d7ba5e042811e
   docs/models/components/firewallpolicy.md:
     id: cac9b2956e1f
     last_write_checksum: sha1:c4b34cad3cc668a55d07f8512806435881fd3540
@@ -439,6 +439,10 @@ trackedFiles:
     id: 27182552d638
     last_write_checksum: sha1:71fb3561ad99035c5f968cb517588cfe0cd8231a
     pristine_git_object: 66e93faaad1817ea1da427cfab3deb5bed7ad350
+  docs/models/components/ratelimitnamespace.md:
+    id: 945db43ccecb
+    last_write_checksum: sha1:8eeddaf749d5aca66c83805fda7320d34f50edf4
+    pristine_git_object: 9445b2ff8fdcf9c66e53bb2a4e00da38d02aaf5a
   docs/models/components/ratelimitoverride.md:
     id: a5d79f2a2458
     last_write_checksum: sha1:983acecc78f2a7f44dc056532861767f5ed4b4ff
@@ -565,8 +569,8 @@ trackedFiles:
     pristine_git_object: a4a57b321e1dca0d793fb928494a54324b7bb825
   docs/models/components/v2apislistkeysrequestbody.md:
     id: 673e82698fb4
-    last_write_checksum: sha1:c95dea137ffaa2ece59d87d1d07d028ea99c0623
-    pristine_git_object: 1e5f3345bb92f7195362060d3de1280b93a765fc
+    last_write_checksum: sha1:de842c1fd3dff235dd3b090b178f0baf46ee9da5
+    pristine_git_object: 220b1b0eeb0aaa604436b989d81a0c332f6127d5
   docs/models/components/v2apislistkeysresponsebody.md:
     id: a31f7ed47554
     last_write_checksum: sha1:82d8d3c46b214705fa22fb7de8b923250656d166
@@ -1339,6 +1343,22 @@ trackedFiles:
     id: 85ba19c6f76e
     last_write_checksum: sha1:5af9f955190904d58ac6526b592f3c989a9c95a6
     pristine_git_object: dd4f6e36e5f7e46927664cdc8934499e0603258b
+  docs/models/components/v2ratelimitcreatenamespacerequestbody.md:
+    id: 0a768b48a9ad
+    last_write_checksum: sha1:1b04e99fc79b8515bdd94724b3e2227fdc6508da
+    pristine_git_object: ecdc6def38ccd16f034ebab526b80bf51207a80c
+  docs/models/components/v2ratelimitcreatenamespaceresponsebody.md:
+    id: 1658ccd355de
+    last_write_checksum: sha1:afbb3d2669fcb2ae6f1f8cbb8528f9085434e8eb
+    pristine_git_object: b7d2333add548b19d8ef9b80622c0f7138542498
+  docs/models/components/v2ratelimitdeletenamespacerequestbody.md:
+    id: 6e44ee25afc8
+    last_write_checksum: sha1:fac617bde7d73f45a01ddddf18f29658411cc095
+    pristine_git_object: 414c22b7160768b9862098ab5796f20432b33225
+  docs/models/components/v2ratelimitdeletenamespaceresponsebody.md:
+    id: 3438194aeee1
+    last_write_checksum: sha1:c6deb1ca1cf450e15be644354c344111b06f948f
+    pristine_git_object: 25fe05229b96b442b3407e8072ea2c0248b31d01
   docs/models/components/v2ratelimitdeleteoverriderequestbody.md:
     id: 27743a6adcdd
     last_write_checksum: sha1:9ca287bdf2a08c1d7a1e562254435a2322a20653
@@ -1371,6 +1391,14 @@ trackedFiles:
     id: b9f3101479f1
     last_write_checksum: sha1:e3a7eea916ae3371c70b8457a1184c4226c64ddb
     pristine_git_object: f72fc011638014ecb4b00c5035c02cbcc3ef41b3
+  docs/models/components/v2ratelimitlistnamespacesrequestbody.md:
+    id: 66d72b9a7fac
+    last_write_checksum: sha1:57837c0789103a8be0374dd19156a7850bc2c2ce
+    pristine_git_object: 13cf9d2bcba9be72e9e88ebfacb7bd4795da5543
+  docs/models/components/v2ratelimitlistnamespacesresponsebody.md:
+    id: 1902e0793e0b
+    last_write_checksum: sha1:b84babb508625ee2eb026bb603bab9d63e5ddf49
+    pristine_git_object: fffb4a79e0f848f4484e00a89c6706592542220e
   docs/models/components/v2ratelimitlistoverridesrequestbody.md:
     id: dfe45edc5e9b
     last_write_checksum: sha1:f04560b9abda274659656448c08a35f7032f4ce8
@@ -1403,6 +1431,14 @@ trackedFiles:
     id: 75942f64d168
     last_write_checksum: sha1:2910bc6d09536b3a687a8b5dd15ccc1fcc4fe235
     pristine_git_object: ca7cd87f7186e344998c34f9fda4782b45546bd0
+  docs/models/components/v2ratelimitupdatenamespacerequestbody.md:
+    id: 57aea26e3236
+    last_write_checksum: sha1:fd35ef6fe6fd1fd21c8a525cc7fb34e53d7238d2
+    pristine_git_object: b1149a78219d50e4e5ea67c9c7d115c7566ef7c5
+  docs/models/components/v2ratelimitupdatenamespaceresponsebody.md:
+    id: 63c8149521c2
+    last_write_checksum: sha1:ac218697468a7c7a278e344cc90b93c0aa560abf
+    pristine_git_object: 53bcc7a6cac1e38e5fe628060e4561e17cf92d6e
   docs/models/components/v2rootkeyscreatekeyrequestbody.md:
     id: abb02c5e2080
     last_write_checksum: sha1:e1a524ba492009064bf302f2c1a6df6bf225e226
@@ -1455,6 +1491,14 @@ trackedFiles:
     id: 0158288c6cfa
     last_write_checksum: sha1:8d0ba02f2c33c591b7da8a38cf717e75b62622c1
     pristine_git_object: e09c7f3bef005fea0e73bf28a1a1de4d8ccd4739
+  docs/models/components/v2workspacegetflagsflag.md:
+    id: b5f3313cf521
+    last_write_checksum: sha1:b2d5ce87cb2c8fc9ac2bd62ad305479065239341
+    pristine_git_object: 99efde09fec26e41d2ef501c1aec3c054e5f8c1c
+  docs/models/components/v2workspacegetflagsresponsebody.md:
+    id: cab5627d73db
+    last_write_checksum: sha1:c89e1baba2c8fd6fbc91fa542e49907ea8c3a3b5
+    pristine_git_object: 74a9839a082371c8e9fa956484230216f52fc1b7
   docs/models/components/v2workspacegetlimitslimit.md:
     id: 8527cffdd625
     last_write_checksum: sha1:7dd5cbe9969de86be91ebe97f49afd7761777b3c
@@ -1523,6 +1567,14 @@ trackedFiles:
     id: c0d0e7d821cd
     last_write_checksum: sha1:585aaa9fb80f7220dbd1bcf8f49a2d6be27a2861
     pristine_git_object: 7604cc9c341da00131f3e6cbbe0bfb91d72435e4
+  docs/models/components/v2workspaceupdateflagrequestbody.md:
+    id: 2dcf08fb6f65
+    last_write_checksum: sha1:9d8594f381fa0211ad1e4ab0e5be457b5ab232a9
+    pristine_git_object: d7430d01251b7071f0d92f976f740ddca76b44be
+  docs/models/components/v2workspaceupdateflagresponsebody.md:
+    id: 7b0d2fb4f096
+    last_write_checksum: sha1:9239c56bd73fc7f76bd2d07e5ebba4db7176b84c
+    pristine_git_object: bbf2ff8e36f6fd6ae14126cff87de4af8c15571f
   docs/models/components/v3deploymentscreatedeploymentrequestbody.md:
     id: ad519ee8b022
     last_write_checksum: sha1:755c0867eb1c40023a399df5d17c3388da5dd528
@@ -1705,8 +1757,8 @@ trackedFiles:
     pristine_git_object: bcf6447f34679ea6c9d2a49d87dbfb5bc5329086
   docs/models/operations/identitiescreateidentityresponse.md:
     id: 9d43ee0e4e08
-    last_write_checksum: sha1:0a755000064836e54c17a59dff952b9bf8f97094
-    pristine_git_object: 02f585e40b98610f893c3b34e93901b04d1c23cc
+    last_write_checksum: sha1:c8625936111c2155334b56d4977f821db6f21cdf
+    pristine_git_object: 41f48087ce0a1c3c61ab7ccdbe5efb02701d11f7
   docs/models/operations/identitiesdeleteidentityresponse.md:
     id: a60b74bea89f
     last_write_checksum: sha1:c8ece9576350a68046e1612edac4bc04e86915a6
@@ -1907,6 +1959,14 @@ trackedFiles:
     id: 461f77abddc9
     last_write_checksum: sha1:53bf412b397967e2e3dc97425831083a0e77b872
     pristine_git_object: 5d02a9a8c13cfbfc9ddeb4313a350bf6f14d51ec
+  docs/models/operations/ratelimitcreatenamespaceresponse.md:
+    id: 00ad1439914c
+    last_write_checksum: sha1:682b70334adcbbc9c792ae8d2d9fbcc7288fa85c
+    pristine_git_object: 19ed5dda00788725288242fa3b807c9eab692e33
+  docs/models/operations/ratelimitdeletenamespaceresponse.md:
+    id: a4970dc99a18
+    last_write_checksum: sha1:633011dddbdb9f9d68c4f45326dd5ca196cba1c5
+    pristine_git_object: 2e8900e916df9e616f409fe8392b582118f3fa4e
   docs/models/operations/ratelimitdeleteoverrideresponse.md:
     id: b18479169175
     last_write_checksum: sha1:bbbb10ba10393a4e4c55e21d68b1acd2fbb0f55b
@@ -1919,6 +1979,10 @@ trackedFiles:
     id: 9010a115b7f1
     last_write_checksum: sha1:52424e853f7558df121a084a613c7120d948e452
     pristine_git_object: 4e4a8fd0d3babaf1ba033770bef79889962f2837
+  docs/models/operations/ratelimitlistnamespacesresponse.md:
+    id: df3e33af1202
+    last_write_checksum: sha1:116fa4a10bb77921bfb7b8381a9ae02a55933173
+    pristine_git_object: 77de212f089d29e1bb7a0fdbf877116e949c655c
   docs/models/operations/ratelimitlistoverridesresponse.md:
     id: c7c93b7c1a5e
     last_write_checksum: sha1:ea6ca73a4f7f35dd3fd9f706cf3414871b50da79
@@ -1931,6 +1995,10 @@ trackedFiles:
     id: 846657862ba6
     last_write_checksum: sha1:d550eec630378f255140eb9dbc7c139be0fe9d04
     pristine_git_object: 4b1d23ab115550f3b1512abe23abe754bb8561c0
+  docs/models/operations/ratelimitupdatenamespaceresponse.md:
+    id: 2365ba42ffce
+    last_write_checksum: sha1:080881cd7a7711fa0cdecd3b253750b65864501b
+    pristine_git_object: d288d8de29745db6a5be4a640cd46906976e7720
   docs/models/operations/rootkeyscreatekeyresponse.md:
     id: 34c8cf1b1b38
     last_write_checksum: sha1:b5baff63b529d3f9d6a68220a2bda828c691e66b
@@ -1951,6 +2019,10 @@ trackedFiles:
     id: 6571c572fe30
     last_write_checksum: sha1:e839335f8c6766e2fdc5ef64b6f88d7a08766fc7
     pristine_git_object: 6b3ee1b93dc862849fc54224a87e66f9c755d50b
+  docs/models/operations/workspacegetflagsresponse.md:
+    id: e6c4ea744fa7
+    last_write_checksum: sha1:70cbfc2ebf0fb6ffa646d41d75827e9e270c9ed2
+    pristine_git_object: 097d077275ea3a8577b3969f9576ffcc301bb501
   docs/models/operations/workspacegetlimitsresponse.md:
     id: 4dc6247a778f
     last_write_checksum: sha1:8c70b2c11eb1bf96bf76a07d8403d13b8af4011b
@@ -1959,6 +2031,10 @@ trackedFiles:
     id: 4b142726e317
     last_write_checksum: sha1:4954cc8f85dd0a4d4bd949b2ed6b15146362f034
     pristine_git_object: 4ba9a4903c38bf0ec9123599efe4fa5124ec8f79
+  docs/models/operations/workspaceupdateflagresponse.md:
+    id: 4468abca01cb
+    last_write_checksum: sha1:b3e531bf6f7a13f42ac1335e849eb599fa0a9314
+    pristine_git_object: e95dd86810dc6a0dfc448bd2fbc87f2ed3c4c680
   docs/sdks/analytics/README.md:
     id: 4c84abb05030
     last_write_checksum: sha1:23fe56f2f1c46f3e653210546c0e38a4c9def7a7
@@ -2017,16 +2093,16 @@ trackedFiles:
     pristine_git_object: 988d9f0570eedfd131e6f7d1f5c8a9f3f28a9137
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
-    last_write_checksum: sha1:65f51530efc635a2fa6ea86a246a29c2312df92d
-    pristine_git_object: 27834742b2f695b76b838c4d870ea47dbbba172e
+    last_write_checksum: sha1:17eb1728b64efd41f9ab98cf21ed42ee379201ba
+    pristine_git_object: 67460bcda1eb500761de343f3c81bdfeb26c3f95
   docs/sdks/rootkeys/README.md:
     id: 6c7959344b5a
     last_write_checksum: sha1:7b8b95608fb9d774f8cd4dc5191acec680fa456d
     pristine_git_object: 94bedbe18754bc11cb0a4af9e2c499119f68a905
   docs/sdks/workspace/README.md:
     id: 654279fffdff
-    last_write_checksum: sha1:053772941d9c5d7cadbb9c05186bbeb7a558a76c
-    pristine_git_object: b672f728bb3fb5c5e7989ceaee18753c001919d5
+    last_write_checksum: sha1:e1991c393cc1dcf57f2d6fff4486a67ad40590da
+    pristine_git_object: 5ef24b853e2079ef865c627a6367f5b3e5eccf7e
   domains.go:
     id: 52c02d6e35cc
     last_write_checksum: sha1:f63de1cf1f923ba2eb2273e0b459a029d84e65e2
@@ -2337,8 +2413,8 @@ trackedFiles:
     pristine_git_object: 2bfc1f2be4ceed19374eba87878320c06e45e37c
   models/components/fieldmatch.go:
     id: dc9f7751d4f0
-    last_write_checksum: sha1:f4e6b72ae7874c14f976d913feacd7fa35c9721a
-    pristine_git_object: 7a3074401661a60bb6bd52797247b824f42dce20
+    last_write_checksum: sha1:4309051b294ec76fbf617ece02443388e63dfeb1
+    pristine_git_object: 253cc34ee8d03c83269856e7902cf4e69a217001
   models/components/firewallpolicy.go:
     id: a6f23e86316a
     last_write_checksum: sha1:1ff76b2370d832b9581062a434a9788da5eba0da
@@ -2459,6 +2535,10 @@ trackedFiles:
     id: a95cfd9874c9
     last_write_checksum: sha1:b14af7c72b4d381d92504b462776aff5b3f15240
     pristine_git_object: 3e8b35d5e17a2abff78e167215a744d65a8d9afd
+  models/components/ratelimitnamespace.go:
+    id: 38ff978790f0
+    last_write_checksum: sha1:9133ce5e1505d3db5a339d739744718b8165c891
+    pristine_git_object: 50853c85a6a76516b3fa22fa45525822880630d5
   models/components/ratelimitoverride.go:
     id: 4ee089c4811e
     last_write_checksum: sha1:c65234f34e46501b339d9c111186396ec5bd6a7e
@@ -2573,8 +2653,8 @@ trackedFiles:
     pristine_git_object: 6c37d2d362b6d866c4b3625e8abc04de656c135c
   models/components/v2apislistkeysrequestbody.go:
     id: d5b8f1211c1e
-    last_write_checksum: sha1:2d6296b51a0d4a29ad9c5caefb4c65c03a538e5b
-    pristine_git_object: 970849e3d32a2ec33e79fb8fc4c0c28c4a840f89
+    last_write_checksum: sha1:634e0b0aaeb2f065899955c1780e09932e882968
+    pristine_git_object: f7f3c9212519dd7c36eb0a91edac850db7fc1422
   models/components/v2apislistkeysresponsebody.go:
     id: 76b8044cb3dd
     last_write_checksum: sha1:75b1e483fe2cd4a4ba0195b7b8f9112ce1eecb86
@@ -3291,6 +3371,22 @@ trackedFiles:
     id: ae618153b5e6
     last_write_checksum: sha1:4ae4432428f370c466f29c775cd50f87dfa2f7ff
     pristine_git_object: 5fdb766e92ad8d6e121b85cbe215e72d4b5dea58
+  models/components/v2ratelimitcreatenamespacerequestbody.go:
+    id: 2965db56cf73
+    last_write_checksum: sha1:05e6bc711b9e5e0025636c51a27f6f099d049b6f
+    pristine_git_object: b65ac9a7358e8e9b5aa9284d8555c725f435465b
+  models/components/v2ratelimitcreatenamespaceresponsebody.go:
+    id: 50506faba3a0
+    last_write_checksum: sha1:186f09487beb68df2baa39a973a6e9a70c9d6e73
+    pristine_git_object: 1ade93d97ba8bb9911f5b147602564bddf613e72
+  models/components/v2ratelimitdeletenamespacerequestbody.go:
+    id: f8b29449be0d
+    last_write_checksum: sha1:6c29d0d75e80fae98c4a1abfb9bf21e3f68159dd
+    pristine_git_object: 89c79a9f7622a804f5a446032f2a0fb12e6b350c
+  models/components/v2ratelimitdeletenamespaceresponsebody.go:
+    id: 9548961b4b26
+    last_write_checksum: sha1:a03bb495af0351991e164377b2d39f2b0893d61e
+    pristine_git_object: 6c828a31e9ae7c98c21cc9f0594d009649bd5aa4
   models/components/v2ratelimitdeleteoverriderequestbody.go:
     id: e95523e95c48
     last_write_checksum: sha1:ca870736f49ddf80fa1d3a2a8832612408d581a4
@@ -3323,6 +3419,14 @@ trackedFiles:
     id: b99a1f116e4c
     last_write_checksum: sha1:29b990985d04c8c58f8930bd16d9b6cacfba0ecf
     pristine_git_object: 1d30da4a77b9869500b7db50d2d6d4c70d469354
+  models/components/v2ratelimitlistnamespacesrequestbody.go:
+    id: e220f576ed2b
+    last_write_checksum: sha1:78d704a030c28f7e8c483633a0a9b180884abeb7
+    pristine_git_object: 83535d57c037d78235333524d98aec2d747ffc12
+  models/components/v2ratelimitlistnamespacesresponsebody.go:
+    id: 2a746659697c
+    last_write_checksum: sha1:399a8e041d36f705b31dbf6aebf294def9a60ea5
+    pristine_git_object: 8fa04fa4aae38ba5cd0ff9c58c3a84edae308e2a
   models/components/v2ratelimitlistoverridesrequestbody.go:
     id: da51f3196e5a
     last_write_checksum: sha1:e553acbf5966381b7340eabf3882a958aaa4512c
@@ -3355,6 +3459,14 @@ trackedFiles:
     id: 767536c08aeb
     last_write_checksum: sha1:e06e60ffb62075f1da5dfde54172e945512cfb94
     pristine_git_object: 352626a4732ce619a38953f5be1b7c92c9c72c0f
+  models/components/v2ratelimitupdatenamespacerequestbody.go:
+    id: 22b6ab218df2
+    last_write_checksum: sha1:0fa6bb3e06a452a0175efd5730eea4bc89065c83
+    pristine_git_object: 2b73aef141b3ed047fea052ab806cbea5bf16dba
+  models/components/v2ratelimitupdatenamespaceresponsebody.go:
+    id: 27a60d62bd15
+    last_write_checksum: sha1:83b22f493cc11bb5e2a1df73f812626333c128bd
+    pristine_git_object: 1c6becf1dc4c3fe243c3fa5c96b395d73df811a4
   models/components/v2rootkeyscreatekeyrequestbody.go:
     id: 78b08762c477
     last_write_checksum: sha1:2de62d936bce25a02a1c859947280a928b3af671
@@ -3407,6 +3519,14 @@ trackedFiles:
     id: 4d836c22ebb8
     last_write_checksum: sha1:9181bb5410d304bbc1e462d3ef43fb387fca4271
     pristine_git_object: 2715ed33383a17d186e2ae7395103cf28c851981
+  models/components/v2workspacegetflagsflag.go:
+    id: f4694308f6b3
+    last_write_checksum: sha1:90aea4c1997245d4066cec2f2b5d97954fb59021
+    pristine_git_object: 4d212ecc61ffa6c997cbdec7f3b3278f368324f1
+  models/components/v2workspacegetflagsresponsebody.go:
+    id: 1ee2befc3418
+    last_write_checksum: sha1:9abc0dc7fe00541501ff7c68451f26ba7c5b1553
+    pristine_git_object: fe95fc99766361829c90366b4c2868187866a654
   models/components/v2workspacegetlimitslimit.go:
     id: 63d64e96c329
     last_write_checksum: sha1:e9f083679290535f5128400b53e60046eb060fcc
@@ -3475,6 +3595,14 @@ trackedFiles:
     id: 47af5a95f302
     last_write_checksum: sha1:147b6db5a6f20da77c891683f08401aa86732011
     pristine_git_object: 5c09c106ea4be788cc5ebd59dc2b9af55a769d0a
+  models/components/v2workspaceupdateflagrequestbody.go:
+    id: 1a65f91a98c3
+    last_write_checksum: sha1:d4b1c307b8c10e019486dbfd130be417c296bed3
+    pristine_git_object: abc1d4979b6fbd868c33c2acc39893f56fe8030e
+  models/components/v2workspaceupdateflagresponsebody.go:
+    id: 1f6e7c66c8ce
+    last_write_checksum: sha1:cc282d9ec2169f06c22ad9b805028b7bf06e1f34
+    pristine_git_object: ac67b6248d182ce37f80a6d20a12c987ea3f4efb
   models/components/v3deploymentscreatedeploymentrequestbody.go:
     id: 274fd5c6df14
     last_write_checksum: sha1:4d5a0d6a644856afa32bc7884a1be6522f35e430
@@ -3653,8 +3781,8 @@ trackedFiles:
     pristine_git_object: dcbed09b47311edb46b70f18bcca5e06defca3cd
   models/operations/identitiescreateidentity.go:
     id: 911cf3779a59
-    last_write_checksum: sha1:8238f824e37e720521c8c5bb5e6ecbf0bb53538c
-    pristine_git_object: 80eda89f6b6035ec42952e8724a1347a15bb2020
+    last_write_checksum: sha1:80bb2d980f7f63598437b052299b713dca549cef
+    pristine_git_object: 1a96a9062082223c9d430f69f68c73fab3c60500
   models/operations/identitiesdeleteidentity.go:
     id: cca549c55d4d
     last_write_checksum: sha1:d730b2a846c1649fb9b4649fc1232fedbca79bf5
@@ -3843,6 +3971,14 @@ trackedFiles:
     id: 9d7d3fabb7d5
     last_write_checksum: sha1:4ee23e20561dd5c73436323079099e46798513d5
     pristine_git_object: 9ee507cd42c69abc4dc03f020e8538a7da042569
+  models/operations/ratelimitcreatenamespace.go:
+    id: 7627e9c0e937
+    last_write_checksum: sha1:2bbc4057f83fb01453a184601b83b521ef977678
+    pristine_git_object: 7c8f446e8fe60f9749b757cf7e642c1685426f05
+  models/operations/ratelimitdeletenamespace.go:
+    id: 1b02000056bb
+    last_write_checksum: sha1:1f614cd509523eedad3dfb95cb4c014b6cdfc555
+    pristine_git_object: d9e84687cb0086fadd308fa120607978a68052a0
   models/operations/ratelimitdeleteoverride.go:
     id: 8f2ecbb8c9ca
     last_write_checksum: sha1:8db462f3244c8bcedea6b11b8e07b132352fd576
@@ -3855,6 +3991,10 @@ trackedFiles:
     id: d585bfba34e0
     last_write_checksum: sha1:33fa7a67d837a17c0026618f21b9d5501ed0e899
     pristine_git_object: 6644802322d6b050a344bb0e65b63caa9ca9d589
+  models/operations/ratelimitlistnamespaces.go:
+    id: 02023fb3955e
+    last_write_checksum: sha1:91ac82fdf78c3285726ea376d645fdc22f6a688a
+    pristine_git_object: 9da326dae750da11c5460b96da508b7ce5da6531
   models/operations/ratelimitlistoverrides.go:
     id: 5aef1c624ee7
     last_write_checksum: sha1:ebac2953d6f1aa6723eb39e20a2e2f4ba64a6e02
@@ -3867,6 +4007,10 @@ trackedFiles:
     id: 9eb49ec4586b
     last_write_checksum: sha1:0f33e2b9f28d50fd8ae1ebaf0f8b8e4df3a765bb
     pristine_git_object: f6fe3ada9286c2b24cb9bcb53bc6d71f79618189
+  models/operations/ratelimitupdatenamespace.go:
+    id: a8ec47088a40
+    last_write_checksum: sha1:2b052f605f5f471e17b56a63412eacd435b948ab
+    pristine_git_object: 88148760cc91852e627259b0235ca0e7330f81b3
   models/operations/rootkeyscreatekey.go:
     id: 35fdd84a009d
     last_write_checksum: sha1:b2dbdb16b617c28d7dd3a1af89c6691f1903c493
@@ -3887,6 +4031,10 @@ trackedFiles:
     id: 487774ca1760
     last_write_checksum: sha1:0961df32fcfd3edcf23bdc0a78763ef176cdd61d
     pristine_git_object: 73a0105737084f90d5ded2e9598d3dc833d5e06c
+  models/operations/workspacegetflags.go:
+    id: b805ec74e267
+    last_write_checksum: sha1:f5d56094e360fd47227d965c3a684b273fdb3207
+    pristine_git_object: 9025b5ee6982f69caf9dcc1518f7857d19243cdb
   models/operations/workspacegetlimits.go:
     id: efbf8af839b9
     last_write_checksum: sha1:9ce15691e0959261476e02cf4883d1d40147da18
@@ -3895,6 +4043,10 @@ trackedFiles:
     id: a7469026da42
     last_write_checksum: sha1:1e291d74ec310548b6c67c0be0608e9b8f1c1e38
     pristine_git_object: e7da24695ea4ac73a323aba40744afbbc9ff62ad
+  models/operations/workspaceupdateflag.go:
+    id: 50e8a9cb078e
+    last_write_checksum: sha1:4810777f20db1646ae5194fecece0fe54576b33b
+    pristine_git_object: 3722e3422f546cf8d43fa707b0dfc27ca6e9fa99
   optionalnullable/optionalnullable.go:
     id: ce60f259ead3
     last_write_checksum: sha1:b828c94c45116e632925027e4e2c211e971e04e2
@@ -3917,8 +4069,8 @@ trackedFiles:
     pristine_git_object: e338b29c6efadede7d74da9ae23d00365a9ae403
   ratelimit.go:
     id: 480e0ac1bd3e
-    last_write_checksum: sha1:6a948a99f7e0d938582f10ff44faa9451e6bdf27
-    pristine_git_object: 4f4c875cc2bd379aea9bae5dbb51bbfe41b8a23c
+    last_write_checksum: sha1:062eb094db87106eba30c815ce5b5c289b8b133c
+    pristine_git_object: 9b5f2b6dcbb7f592584b70e622403bcb1fce6c04
   retry/config.go:
     id: 82d673cb0389
     last_write_checksum: sha1:102d1953fbd7e9f312c4442c71ccca2eaaeaa27d
@@ -3945,12 +4097,12 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:500a5f4c81bbbd26989cb75f7be789646aca4437
-    pristine_git_object: 3446dd9b51605f419f765bff9db1f55a24fb1c1c
+    last_write_checksum: sha1:b11d7e4984d752bc0005e3251c4978d9dc30a4c6
+    pristine_git_object: 93c07f3f418a9497a87594d5381120b8da3d025c
   workspace.go:
     id: e884b92e3a6b
-    last_write_checksum: sha1:27ed66546a5017eb8b9f92d36c17462a47fe6415
-    pristine_git_object: 532dc2af01bf27f93dd57b7c507479fb8a166f00
+    last_write_checksum: sha1:ac47aa7067378ca1c06435cffa904c62e0e59241
+    pristine_git_object: 1404478f4a3be606aa627a32c24723568d7f818a
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -8584,9 +8736,267 @@ examples:
       responses:
         "500":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Failed to read the workspace's usage.", "status": 500, "title": "Internal Server Error", "type": "https://unkey.com/docs/errors/unkey/application/service_unavailable"}}
+  ratelimit.createNamespace:
+    basic:
+      requestBody:
+        application/json: {"name": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "rlns_1234abcd", "name": "api.requests", "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    success:
+      requestBody:
+        application/json: {"name": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "rlns_1234abcd", "name": "email.outbound", "createdAt": 1704067200000}}
+    emptyName:
+      requestBody:
+        application/json: {"name": "email.outbound"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "POST request body for '/v2/ratelimit.createNamespace' failed to validate schema", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": [{"location": "/properties/name/minLength", "message": "minLength: got 0, want 1"}]}}
+    missingPermission:
+      requestBody:
+        application/json: {"name": "email.outbound"}
+      responses:
+        "403":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Missing permission: 'unkey:v1:ws_1234abcd:projects/proj_1234abcd/ratelimits/namespaces/*#write'", "status": 403, "title": "Insufficient Permissions", "type": "https://unkey.com/docs/errors/unkey/authorization/insufficient_permissions"}}
+    nameTaken:
+      requestBody:
+        application/json: {"name": "email.outbound"}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A namespace named 'email.outbound' already exists or was deleted in this workspace. Choose a different name.", "status": 409, "title": "Conflicting Resource", "type": "https://unkey.com/docs/errors/unkey/data/ratelimit_namespace_already_exists"}}
+  ratelimit.deleteNamespace:
+    byId:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    byName:
+      requestBody:
+        application/json: {"namespace": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    deleted:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    emptyNamespace:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "POST request body for '/v2/ratelimit.deleteNamespace' failed to validate schema", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": [{"location": "/properties/namespace/minLength", "message": "minLength: got 0, want 1"}]}}
+    namespaceNotFound:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested namespace does not exist.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/data/ratelimit_namespace_not_found"}}
+  ratelimit.listNamespaces:
+    basic:
+      requestBody:
+        application/json: {"limit": 100}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    paginated:
+      requestBody:
+        application/json: {"limit": 20, "cursor": "rlns_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    search:
+      requestBody:
+        application/json: {"limit": 100, "search": "api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": [], "pagination": {"cursor": "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==", "hasMore": true}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": [{"location": "body.permissions[0].name", "message": "Must be at least 3 characters long", "fix": "Ensure the name uses only alphanumeric characters, underscores, and hyphens"}]}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    empty:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "rlns_1234abcd", "search": "api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_9876zyxw"}, "data": [], "pagination": {"hasMore": false}}
+    morePages:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "rlns_1234abcd", "search": "api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_5678efgh"}, "data": [{"id": "rlns_5678efgh", "name": "email.sends", "createdAt": 1704240000000}], "pagination": {"cursor": "rlns_1234abcd", "hasMore": true}}
+    namespaceList:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "rlns_1234abcd", "search": "api"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "rlns_5678efgh", "name": "email.sends", "createdAt": 1704240000000}, {"id": "rlns_1234abcd", "name": "api.requests", "createdAt": 1704067200000, "updatedAt": 1704153600000}], "pagination": {"hasMore": false}}
+    invalidLimit:
+      requestBody:
+        application/json: {"limit": 100, "cursor": "rlns_1234abcd", "search": "api"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "One or more fields failed validation", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": [{"location": "body.limit", "message": "must be less than or equal to 100", "fix": "Use a limit between 1 and 100"}]}}
+  ratelimit.updateNamespace:
+    renameById:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd", "name": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "rlns_1234abcd", "name": "api.requests", "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    renameByName:
+      requestBody:
+        application/json: {"namespace": "email.sends", "name": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"id": "rlns_1234abcd", "name": "api.requests", "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+    renamed:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd", "name": "email.outbound"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "rlns_1234abcd", "name": "email.outbound", "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+    emptyName:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd", "name": "email.outbound"}
+      responses:
+        "400":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "POST request body for '/v2/ratelimit.updateNamespace' failed to validate schema", "status": 400, "title": "Bad Request", "type": "https://unkey.com/docs/errors/unkey/application/invalid_input", "errors": [{"location": "/properties/name/minLength", "message": "minLength: got 0, want 1"}]}}
+    namespaceNotFound:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd", "name": "email.outbound"}
+      responses:
+        "404":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "The requested namespace does not exist.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/data/ratelimit_namespace_not_found"}}
+    nameTaken:
+      requestBody:
+        application/json: {"namespace": "rlns_1234abcd", "name": "email.outbound"}
+      responses:
+        "409":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "A namespace named 'email.outbound' already exists or was deleted in this workspace. Choose a different name.", "status": 409, "title": "Conflicting Resource", "type": "https://unkey.com/docs/errors/unkey/data/ratelimit_namespace_already_exists"}}
+  workspace.getFlags:
+    empty:
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+    flags:
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"projects_nav": {"enabled": true, "description": "Preview project navigation.", "allowOptIn": true, "allowOptOut": false}}}
+  workspace.updateFlag:
+    speakeasy-default-workspace-update-flag:
+      requestBody:
+        application/json: {"slug": "<value>", "enabled": true}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Unkey.Deployments.ListBuildLogs()`: **Added**\n* `Unkey.Permissions.UpdatePermission()`: **Added**\n* `Unkey.Permissions.UpdateRole()`: **Added**\n* `Unkey.Portal.ListSessions()`: **Added**\n* `Unkey.Portal.RevokeSession()`: **Added**\n* `Unkey.RootKeys.CreateKey()`: **Added**\n* `Unkey.RootKeys.DeleteKey()`: **Added**\n* `Unkey.RootKeys.ListKeys()`: **Added**\n* `Unkey.RootKeys.RerollKey()`: **Added**\n* `Unkey.RootKeys.UpdateKey()`: **Added**\n* `Unkey.Workspace.GetLimits()`: **Added**\n* `Unkey.Workspace.GetUsage()`: **Added**\n* `Unkey.Deployments.GetDeployment()`:  `response.Data` **Changed**\n* `Unkey.Deployments.ListDeployments()`: \n  *  `request.Request` **Changed**\n  *  `response.Data[]` **Changed**\n* `Unkey.Gateway.ListPolicies()`:  `response.Data[].Match[].RemoteIp` **Added**\n* `Unkey.Gateway.SetPolicies()`: \n  *  `request.Request.Policies[].Match[].RemoteIp` **Added**\n* `Unkey.Gateway.UpdatePolicy()`: \n  *  `request.Request.Match[].RemoteIp` **Added**\n* `Unkey.Keys.RerollKey()`: \n  *  `request.Request.Expiration` **Changed**\n* `Unkey.Portal.CreateSession()`:  `error.status[409]` **Added**\n* `Unkey.Portal.RerollKey()`: \n  *  `request.Request.Expiration` **Changed**\n"
+releaseNotes: "## Go SDK Changes:\n* `Unkey.Ratelimit.CreateNamespace()`: **Added**\n* `Unkey.Ratelimit.DeleteNamespace()`: **Added**\n* `Unkey.Ratelimit.ListNamespaces()`: **Added**\n* `Unkey.Ratelimit.UpdateNamespace()`: **Added**\n* `Unkey.Workspace.GetFlags()`: **Added**\n* `Unkey.Workspace.UpdateFlag()`: **Added**\n* `Unkey.Gateway.ListPolicies()`:  `response.Data[].Match[].Header.Present` **Changed**\n* `Unkey.Gateway.SetPolicies()`: \n  *  `request.Request.Policies[].Match[].Header.Present` **Changed**\n* `Unkey.Gateway.UpdatePolicy()`: \n  *  `request.Request.Match[].Header.Present` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go

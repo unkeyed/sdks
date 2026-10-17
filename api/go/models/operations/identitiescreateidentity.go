@@ -8,7 +8,8 @@ import (
 )
 
 type IdentitiesCreateIdentityResponse struct {
-	HTTPMeta                               components.HTTPMetadata `json:"-"`
+	HTTPMeta components.HTTPMetadata `json:"-"`
+	// Identity created successfully.
 	V2IdentitiesCreateIdentityResponseBody *components.V2IdentitiesCreateIdentityResponseBody
 }
 
