@@ -4,16 +4,14 @@ package components
 
 import (
 	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v3/types"
 )
 
 // FieldMatch - Matches a named request field (header or query parameter). Exactly one of
 // `present` or `value` must be set.
 type FieldMatch struct {
 	Name string `json:"name"`
-	// Matches when the field is present, regardless of value.
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	present *bool `const:"true" json:"present,omitzero"`
+	// Matches when the field is present if true, or absent if false, regardless of value.
+	Present *bool `json:"present,omitzero"`
 	// String matcher. Exactly one of `exact`, `prefix` or `regex` must be set.
 	Value *StringMatch `json:"value,omitzero"`
 }
@@ -37,7 +35,10 @@ func (f *FieldMatch) GetName() string {
 }
 
 func (f *FieldMatch) GetPresent() *bool {
-	return types.Pointer(true)
+	if f == nil {
+		return nil
+	}
+	return f.Present
 }
 
 func (f *FieldMatch) GetValue() *StringMatch {

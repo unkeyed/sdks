@@ -6,12 +6,413 @@ Rate limiting operations
 
 ### Available Operations
 
+* [CreateNamespace](#createnamespace) - Create ratelimit namespace
+* [DeleteNamespace](#deletenamespace) - Delete ratelimit namespace
 * [DeleteOverride](#deleteoverride) - Delete ratelimit override
 * [GetOverride](#getoverride) - Get ratelimit override
 * [Limit](#limit) - Apply rate limiting
+* [ListNamespaces](#listnamespaces) - List ratelimit namespaces
 * [ListOverrides](#listoverrides) - List ratelimit overrides
 * [MultiLimit](#multilimit) - Apply multiple rate limit checks
 * [SetOverride](#setoverride) - Set ratelimit override
+* [UpdateNamespace](#updatenamespace) - Update ratelimit namespace
+
+## CreateNamespace
+
+Create a rate limit namespace before you rate limit against it.
+
+`ratelimit.limit` also creates a namespace the first time you use its name, when your root key can create namespaces. Use this endpoint when you want the namespace to exist up front, for example to set overrides before the first request.
+
+**Important**: Names are unique within your workspace, deleted namespaces included. A name that is in use or was deleted returns 409.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write`
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="go" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="basic" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.CreateNamespace(ctx, components.V2RatelimitCreateNamespaceRequestBody{
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitCreateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="go" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="emptyName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.CreateNamespace(ctx, components.V2RatelimitCreateNamespaceRequestBody{
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitCreateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingPermission
+
+<!-- UsageSnippet language="go" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="missingPermission" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.CreateNamespace(ctx, components.V2RatelimitCreateNamespaceRequestBody{
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitCreateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="go" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="nameTaken" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.CreateNamespace(ctx, components.V2RatelimitCreateNamespaceRequestBody{
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitCreateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: success
+
+<!-- UsageSnippet language="go" operationID="ratelimit.createNamespace" method="post" path="/v2/ratelimit.createNamespace" example="success" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.CreateNamespace(ctx, components.V2RatelimitCreateNamespaceRequestBody{
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitCreateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [components.V2RatelimitCreateNamespaceRequestBody](../../models/components/v2ratelimitcreatenamespacerequestbody.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.RatelimitCreateNamespaceResponse](../../models/operations/ratelimitcreatenamespaceresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## DeleteNamespace
+
+Delete a rate limit namespace and all of its overrides, identified by the namespace ID or name.
+
+**Important**: A deleted name cannot be reused. `ratelimit.limit` and `ratelimit.multiLimit` return 410 for it instead of creating a new namespace, so a deleted namespace does not turn into unlimited traffic. Other API nodes can take up to a minute to see the deletion.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#delete` (to delete any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#delete` (to delete a specific namespace)
+
+
+### Example Usage: byId
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byId" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteNamespace(ctx, components.V2RatelimitDeleteNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: byName
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="byName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteNamespace(ctx, components.V2RatelimitDeleteNamespaceRequestBody{
+        Namespace: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: deleted
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="deleted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteNamespace(ctx, components.V2RatelimitDeleteNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: emptyNamespace
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="emptyNamespace" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteNamespace(ctx, components.V2RatelimitDeleteNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="go" operationID="ratelimit.deleteNamespace" method="post" path="/v2/ratelimit.deleteNamespace" example="namespaceNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.DeleteNamespace(ctx, components.V2RatelimitDeleteNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitDeleteNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [components.V2RatelimitDeleteNamespaceRequestBody](../../models/components/v2ratelimitdeletenamespacerequestbody.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.RatelimitDeleteNamespaceResponse](../../models/operations/ratelimitdeletenamespaceresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## DeleteOverride
 
@@ -603,6 +1004,355 @@ func main() {
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.GoneErrorResponse            | 410                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## ListNamespaces
+
+Retrieve a paginated list of the rate limit namespaces in your workspace.
+
+Use this to find the namespaces your services rate limit against, for example to build an admin view or to look up a namespace ID. Results are ordered newest first and returned in pages. When `hasMore` is true, pass the returned `cursor` to fetch the next page.
+
+Deleted namespaces are not returned. The list contains only the namespaces your root key can read.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#read` (to read any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#read` (to read a specific namespace)
+
+
+### Example Usage: basic
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="basic" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: empty
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="empty" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Cursor: unkey.Pointer("rlns_1234abcd"),
+        Search: unkey.Pointer("api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: invalidLimit
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="invalidLimit" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Cursor: unkey.Pointer("rlns_1234abcd"),
+        Search: unkey.Pointer("api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: morePages
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="morePages" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Cursor: unkey.Pointer("rlns_1234abcd"),
+        Search: unkey.Pointer("api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: namespaceList
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="namespaceList" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Cursor: unkey.Pointer("rlns_1234abcd"),
+        Search: unkey.Pointer("api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: paginated
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="paginated" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Limit: unkey.Pointer[int64](20),
+        Cursor: unkey.Pointer("rlns_1234abcd"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+### Example Usage: search
+
+<!-- UsageSnippet language="go" operationID="ratelimit.listNamespaces" method="post" path="/v2/ratelimit.listNamespaces" example="search" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.ListNamespaces(ctx, components.V2RatelimitListNamespacesRequestBody{
+        Search: unkey.Pointer("api"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitListNamespacesResponseBody != nil {
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
+| `request`                                                                                                          | [components.V2RatelimitListNamespacesRequestBody](../../models/components/v2ratelimitlistnamespacesrequestbody.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
+
+### Response
+
+**[*operations.RatelimitListNamespacesResponse](../../models/operations/ratelimitlistnamespacesresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
@@ -1222,5 +1972,244 @@ func main() {
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## UpdateNamespace
+
+Rename a rate limit namespace, identified by its ID or current name.
+
+Renaming to the current name returns the namespace without a write.
+
+**Important**: Overrides stay with the namespace. Requests that pass the namespace by name, such as `ratelimit.limit`, must use the new name. A `ratelimit.limit` call with the old name can create a new, empty namespace with that name. A name that is in use or was deleted returns 409. Other API nodes can take up to a minute to see the new name.
+
+**Required Permissions**
+
+Your root key must have one of the following permissions:
+- `unkey:v1:<workspace_id>:projects/*/ratelimits/namespaces/*#write` (to rename any namespace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#write` (to rename a specific namespace)
+
+
+### Example Usage: emptyName
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="emptyName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: nameTaken
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="nameTaken" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: namespaceNotFound
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="namespaceNotFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: renameById
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameById" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: renameByName
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renameByName" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "email.sends",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: renamed
+
+<!-- UsageSnippet language="go" operationID="ratelimit.updateNamespace" method="post" path="/v2/ratelimit.updateNamespace" example="renamed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.UpdateNamespace(ctx, components.V2RatelimitUpdateNamespaceRequestBody{
+        Namespace: "rlns_1234abcd",
+        Name: "email.outbound",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2RatelimitUpdateNamespaceResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [components.V2RatelimitUpdateNamespaceRequestBody](../../models/components/v2ratelimitupdatenamespacerequestbody.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.RatelimitUpdateNamespaceResponse](../../models/operations/ratelimitupdatenamespaceresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

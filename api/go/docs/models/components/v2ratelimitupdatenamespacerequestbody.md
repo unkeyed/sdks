@@ -1,0 +1,9 @@
+# V2RatelimitUpdateNamespaceRequestBody
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Namespace`                                                                             | `string`                                                                                | :heavy_check_mark:                                                                      | The namespace to rename. Pass the namespace ID (`rlns_...`) or its current name.<br/>   | rlns_1234abcd                                                                           |
+| `Name`                                                                                  | `string`                                                                                | :heavy_check_mark:                                                                      | The new name of the namespace, unique within your workspace. Names are case-sensitive.<br/> | email.outbound                                                                          |
