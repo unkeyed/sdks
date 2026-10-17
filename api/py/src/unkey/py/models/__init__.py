@@ -156,11 +156,16 @@ if TYPE_CHECKING:
         QueryParamKeyLocation,
         QueryParamKeyLocationTypedDict,
     )
+    from .ratelimit_listnamespacesop import (
+        RatelimitListNamespacesResponse,
+        RatelimitListNamespacesResponseTypedDict,
+    )
     from .ratelimit_listoverridesop import (
         RatelimitListOverridesResponse,
         RatelimitListOverridesResponseTypedDict,
     )
     from .ratelimitidentifier import RatelimitIdentifier, RatelimitIdentifierTypedDict
+    from .ratelimitnamespace import RatelimitNamespace, RatelimitNamespaceTypedDict
     from .ratelimitoverride import RatelimitOverride, RatelimitOverrideTypedDict
     from .ratelimitpolicy import (
         Identifier,
@@ -999,6 +1004,22 @@ if TYPE_CHECKING:
         V2ProjectsUpdateProjectResponseBody,
         V2ProjectsUpdateProjectResponseBodyTypedDict,
     )
+    from .v2ratelimitcreatenamespacerequestbody import (
+        V2RatelimitCreateNamespaceRequestBody,
+        V2RatelimitCreateNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitcreatenamespaceresponsebody import (
+        V2RatelimitCreateNamespaceResponseBody,
+        V2RatelimitCreateNamespaceResponseBodyTypedDict,
+    )
+    from .v2ratelimitdeletenamespacerequestbody import (
+        V2RatelimitDeleteNamespaceRequestBody,
+        V2RatelimitDeleteNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitdeletenamespaceresponsebody import (
+        V2RatelimitDeleteNamespaceResponseBody,
+        V2RatelimitDeleteNamespaceResponseBodyTypedDict,
+    )
     from .v2ratelimitdeleteoverriderequestbody import (
         V2RatelimitDeleteOverrideRequestBody,
         V2RatelimitDeleteOverrideRequestBodyTypedDict,
@@ -1031,6 +1052,14 @@ if TYPE_CHECKING:
         V2RatelimitLimitResponseData,
         V2RatelimitLimitResponseDataTypedDict,
     )
+    from .v2ratelimitlistnamespacesrequestbody import (
+        V2RatelimitListNamespacesRequestBody,
+        V2RatelimitListNamespacesRequestBodyTypedDict,
+    )
+    from .v2ratelimitlistnamespacesresponsebody import (
+        V2RatelimitListNamespacesResponseBody,
+        V2RatelimitListNamespacesResponseBodyTypedDict,
+    )
     from .v2ratelimitlistoverridesrequestbody import (
         V2RatelimitListOverridesRequestBody,
         V2RatelimitListOverridesRequestBodyTypedDict,
@@ -1062,6 +1091,14 @@ if TYPE_CHECKING:
     from .v2ratelimitsetoverrideresponsedata import (
         V2RatelimitSetOverrideResponseData,
         V2RatelimitSetOverrideResponseDataTypedDict,
+    )
+    from .v2ratelimitupdatenamespacerequestbody import (
+        V2RatelimitUpdateNamespaceRequestBody,
+        V2RatelimitUpdateNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitupdatenamespaceresponsebody import (
+        V2RatelimitUpdateNamespaceResponseBody,
+        V2RatelimitUpdateNamespaceResponseBodyTypedDict,
     )
     from .v2rootkeyscreatekeyrequestbody import (
         V2RootKeysCreateKeyRequestBody,
@@ -1114,6 +1151,14 @@ if TYPE_CHECKING:
     from .v2rootkeysupdatekeyresponsebody import (
         V2RootKeysUpdateKeyResponseBody,
         V2RootKeysUpdateKeyResponseBodyTypedDict,
+    )
+    from .v2workspacegetflagsflag import (
+        V2WorkspaceGetFlagsFlag,
+        V2WorkspaceGetFlagsFlagTypedDict,
+    )
+    from .v2workspacegetflagsresponsebody import (
+        V2WorkspaceGetFlagsResponseBody,
+        V2WorkspaceGetFlagsResponseBodyTypedDict,
     )
     from .v2workspacegetlimitslimit import (
         V2WorkspaceGetLimitsLimit,
@@ -1182,6 +1227,14 @@ if TYPE_CHECKING:
     from .v2workspacegetusagetotals import (
         V2WorkspaceGetUsageTotals,
         V2WorkspaceGetUsageTotalsTypedDict,
+    )
+    from .v2workspaceupdateflagrequestbody import (
+        V2WorkspaceUpdateFlagRequestBody,
+        V2WorkspaceUpdateFlagRequestBodyTypedDict,
+    )
+    from .v2workspaceupdateflagresponsebody import (
+        V2WorkspaceUpdateFlagResponseBody,
+        V2WorkspaceUpdateFlagResponseBodyTypedDict,
     )
     from .v3deploymentscreatedeploymentrequestbody import (
         V3DeploymentsCreateDeploymentRequestBody,
@@ -1374,8 +1427,12 @@ __all__ = [
     "QueryParamKeyLocationTypedDict",
     "RatelimitIdentifier",
     "RatelimitIdentifierTypedDict",
+    "RatelimitListNamespacesResponse",
+    "RatelimitListNamespacesResponseTypedDict",
     "RatelimitListOverridesResponse",
     "RatelimitListOverridesResponseTypedDict",
+    "RatelimitNamespace",
+    "RatelimitNamespaceTypedDict",
     "RatelimitOverride",
     "RatelimitOverrideTypedDict",
     "RatelimitPolicy",
@@ -1823,6 +1880,14 @@ __all__ = [
     "V2ProjectsUpdateProjectRequestBodyTypedDict",
     "V2ProjectsUpdateProjectResponseBody",
     "V2ProjectsUpdateProjectResponseBodyTypedDict",
+    "V2RatelimitCreateNamespaceRequestBody",
+    "V2RatelimitCreateNamespaceRequestBodyTypedDict",
+    "V2RatelimitCreateNamespaceResponseBody",
+    "V2RatelimitCreateNamespaceResponseBodyTypedDict",
+    "V2RatelimitDeleteNamespaceRequestBody",
+    "V2RatelimitDeleteNamespaceRequestBodyTypedDict",
+    "V2RatelimitDeleteNamespaceResponseBody",
+    "V2RatelimitDeleteNamespaceResponseBodyTypedDict",
     "V2RatelimitDeleteOverrideRequestBody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict",
     "V2RatelimitDeleteOverrideResponseBody",
@@ -1839,6 +1904,10 @@ __all__ = [
     "V2RatelimitLimitResponseBodyTypedDict",
     "V2RatelimitLimitResponseData",
     "V2RatelimitLimitResponseDataTypedDict",
+    "V2RatelimitListNamespacesRequestBody",
+    "V2RatelimitListNamespacesRequestBodyTypedDict",
+    "V2RatelimitListNamespacesResponseBody",
+    "V2RatelimitListNamespacesResponseBodyTypedDict",
     "V2RatelimitListOverridesRequestBody",
     "V2RatelimitListOverridesRequestBodyTypedDict",
     "V2RatelimitListOverridesResponseBody",
@@ -1855,6 +1924,10 @@ __all__ = [
     "V2RatelimitSetOverrideResponseBodyTypedDict",
     "V2RatelimitSetOverrideResponseData",
     "V2RatelimitSetOverrideResponseDataTypedDict",
+    "V2RatelimitUpdateNamespaceRequestBody",
+    "V2RatelimitUpdateNamespaceRequestBodyTypedDict",
+    "V2RatelimitUpdateNamespaceResponseBody",
+    "V2RatelimitUpdateNamespaceResponseBodyTypedDict",
     "V2RootKeysCreateKeyRequestBody",
     "V2RootKeysCreateKeyRequestBodyTypedDict",
     "V2RootKeysCreateKeyResponseBody",
@@ -1881,6 +1954,10 @@ __all__ = [
     "V2RootKeysUpdateKeyRequestBodyTypedDict",
     "V2RootKeysUpdateKeyResponseBody",
     "V2RootKeysUpdateKeyResponseBodyTypedDict",
+    "V2WorkspaceGetFlagsFlag",
+    "V2WorkspaceGetFlagsFlagTypedDict",
+    "V2WorkspaceGetFlagsResponseBody",
+    "V2WorkspaceGetFlagsResponseBodyTypedDict",
     "V2WorkspaceGetLimitsLimit",
     "V2WorkspaceGetLimitsLimitTypedDict",
     "V2WorkspaceGetLimitsResponseBody",
@@ -1915,6 +1992,10 @@ __all__ = [
     "V2WorkspaceGetUsageResponseDataTypedDict",
     "V2WorkspaceGetUsageTotals",
     "V2WorkspaceGetUsageTotalsTypedDict",
+    "V2WorkspaceUpdateFlagRequestBody",
+    "V2WorkspaceUpdateFlagRequestBodyTypedDict",
+    "V2WorkspaceUpdateFlagResponseBody",
+    "V2WorkspaceUpdateFlagResponseBodyTypedDict",
     "V3DeploymentsCreateDeploymentRequestBody",
     "V3DeploymentsCreateDeploymentRequestBodyTypedDict",
     "V3DeploymentsCreateDeploymentResponseBody",
@@ -2097,10 +2178,14 @@ _dynamic_imports: dict[str, str] = {
     "ProjectsListProjectsResponseTypedDict": ".projects_listprojectsop",
     "QueryParamKeyLocation": ".queryparamkeylocation",
     "QueryParamKeyLocationTypedDict": ".queryparamkeylocation",
+    "RatelimitListNamespacesResponse": ".ratelimit_listnamespacesop",
+    "RatelimitListNamespacesResponseTypedDict": ".ratelimit_listnamespacesop",
     "RatelimitListOverridesResponse": ".ratelimit_listoverridesop",
     "RatelimitListOverridesResponseTypedDict": ".ratelimit_listoverridesop",
     "RatelimitIdentifier": ".ratelimitidentifier",
     "RatelimitIdentifierTypedDict": ".ratelimitidentifier",
+    "RatelimitNamespace": ".ratelimitnamespace",
+    "RatelimitNamespaceTypedDict": ".ratelimitnamespace",
     "RatelimitOverride": ".ratelimitoverride",
     "RatelimitOverrideTypedDict": ".ratelimitoverride",
     "Identifier": ".ratelimitpolicy",
@@ -2551,6 +2636,14 @@ _dynamic_imports: dict[str, str] = {
     "V2ProjectsUpdateProjectRequestBodyTypedDict": ".v2projectsupdateprojectrequestbody",
     "V2ProjectsUpdateProjectResponseBody": ".v2projectsupdateprojectresponsebody",
     "V2ProjectsUpdateProjectResponseBodyTypedDict": ".v2projectsupdateprojectresponsebody",
+    "V2RatelimitCreateNamespaceRequestBody": ".v2ratelimitcreatenamespacerequestbody",
+    "V2RatelimitCreateNamespaceRequestBodyTypedDict": ".v2ratelimitcreatenamespacerequestbody",
+    "V2RatelimitCreateNamespaceResponseBody": ".v2ratelimitcreatenamespaceresponsebody",
+    "V2RatelimitCreateNamespaceResponseBodyTypedDict": ".v2ratelimitcreatenamespaceresponsebody",
+    "V2RatelimitDeleteNamespaceRequestBody": ".v2ratelimitdeletenamespacerequestbody",
+    "V2RatelimitDeleteNamespaceRequestBodyTypedDict": ".v2ratelimitdeletenamespacerequestbody",
+    "V2RatelimitDeleteNamespaceResponseBody": ".v2ratelimitdeletenamespaceresponsebody",
+    "V2RatelimitDeleteNamespaceResponseBodyTypedDict": ".v2ratelimitdeletenamespaceresponsebody",
     "V2RatelimitDeleteOverrideRequestBody": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideResponseBody": ".v2ratelimitdeleteoverrideresponsebody",
@@ -2567,6 +2660,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitLimitResponseBodyTypedDict": ".v2ratelimitlimitresponsebody",
     "V2RatelimitLimitResponseData": ".v2ratelimitlimitresponsedata",
     "V2RatelimitLimitResponseDataTypedDict": ".v2ratelimitlimitresponsedata",
+    "V2RatelimitListNamespacesRequestBody": ".v2ratelimitlistnamespacesrequestbody",
+    "V2RatelimitListNamespacesRequestBodyTypedDict": ".v2ratelimitlistnamespacesrequestbody",
+    "V2RatelimitListNamespacesResponseBody": ".v2ratelimitlistnamespacesresponsebody",
+    "V2RatelimitListNamespacesResponseBodyTypedDict": ".v2ratelimitlistnamespacesresponsebody",
     "V2RatelimitListOverridesRequestBody": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesRequestBodyTypedDict": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesResponseBody": ".v2ratelimitlistoverridesresponsebody",
@@ -2583,6 +2680,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitSetOverrideResponseBodyTypedDict": ".v2ratelimitsetoverrideresponsebody",
     "V2RatelimitSetOverrideResponseData": ".v2ratelimitsetoverrideresponsedata",
     "V2RatelimitSetOverrideResponseDataTypedDict": ".v2ratelimitsetoverrideresponsedata",
+    "V2RatelimitUpdateNamespaceRequestBody": ".v2ratelimitupdatenamespacerequestbody",
+    "V2RatelimitUpdateNamespaceRequestBodyTypedDict": ".v2ratelimitupdatenamespacerequestbody",
+    "V2RatelimitUpdateNamespaceResponseBody": ".v2ratelimitupdatenamespaceresponsebody",
+    "V2RatelimitUpdateNamespaceResponseBodyTypedDict": ".v2ratelimitupdatenamespaceresponsebody",
     "V2RootKeysCreateKeyRequestBody": ".v2rootkeyscreatekeyrequestbody",
     "V2RootKeysCreateKeyRequestBodyTypedDict": ".v2rootkeyscreatekeyrequestbody",
     "V2RootKeysCreateKeyResponseBody": ".v2rootkeyscreatekeyresponsebody",
@@ -2609,6 +2710,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RootKeysUpdateKeyRequestBodyTypedDict": ".v2rootkeysupdatekeyrequestbody",
     "V2RootKeysUpdateKeyResponseBody": ".v2rootkeysupdatekeyresponsebody",
     "V2RootKeysUpdateKeyResponseBodyTypedDict": ".v2rootkeysupdatekeyresponsebody",
+    "V2WorkspaceGetFlagsFlag": ".v2workspacegetflagsflag",
+    "V2WorkspaceGetFlagsFlagTypedDict": ".v2workspacegetflagsflag",
+    "V2WorkspaceGetFlagsResponseBody": ".v2workspacegetflagsresponsebody",
+    "V2WorkspaceGetFlagsResponseBodyTypedDict": ".v2workspacegetflagsresponsebody",
     "V2WorkspaceGetLimitsLimit": ".v2workspacegetlimitslimit",
     "V2WorkspaceGetLimitsLimitTypedDict": ".v2workspacegetlimitslimit",
     "V2WorkspaceGetLimitsResponseBody": ".v2workspacegetlimitsresponsebody",
@@ -2643,6 +2748,10 @@ _dynamic_imports: dict[str, str] = {
     "V2WorkspaceGetUsageResponseDataTypedDict": ".v2workspacegetusageresponsedata",
     "V2WorkspaceGetUsageTotals": ".v2workspacegetusagetotals",
     "V2WorkspaceGetUsageTotalsTypedDict": ".v2workspacegetusagetotals",
+    "V2WorkspaceUpdateFlagRequestBody": ".v2workspaceupdateflagrequestbody",
+    "V2WorkspaceUpdateFlagRequestBodyTypedDict": ".v2workspaceupdateflagrequestbody",
+    "V2WorkspaceUpdateFlagResponseBody": ".v2workspaceupdateflagresponsebody",
+    "V2WorkspaceUpdateFlagResponseBodyTypedDict": ".v2workspaceupdateflagresponsebody",
     "V3DeploymentsCreateDeploymentRequestBody": ".v3deploymentscreatedeploymentrequestbody",
     "V3DeploymentsCreateDeploymentRequestBodyTypedDict": ".v3deploymentscreatedeploymentrequestbody",
     "V3DeploymentsCreateDeploymentResponseBody": ".v3deploymentscreatedeploymentresponsebody",

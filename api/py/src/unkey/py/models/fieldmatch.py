@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 from .stringmatch import StringMatch, StringMatchTypedDict
-import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
-from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
-from unkey.py.utils import validate_const
 
 
 class FieldMatchTypedDict(TypedDict):
@@ -17,8 +14,8 @@ class FieldMatchTypedDict(TypedDict):
     """
 
     name: str
-    present: Literal[True]
-    r"""Matches when the field is present, regardless of value."""
+    present: NotRequired[bool]
+    r"""Matches when the field is present if true, or absent if false, regardless of value."""
     value: NotRequired[StringMatchTypedDict]
     r"""String matcher. Exactly one of `exact`, `prefix` or `regex` must be set."""
 
@@ -30,11 +27,8 @@ class FieldMatch(BaseModel):
 
     name: str
 
-    PRESENT: Annotated[
-        Annotated[Optional[Literal[True]], AfterValidator(validate_const(True))],
-        pydantic.Field(alias="present"),
-    ] = True
-    r"""Matches when the field is present, regardless of value."""
+    present: Optional[bool] = None
+    r"""Matches when the field is present if true, or absent if false, regardless of value."""
 
     value: Optional[StringMatch] = None
     r"""String matcher. Exactly one of `exact`, `prefix` or `regex` must be set."""
@@ -54,9 +48,3 @@ class FieldMatch(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    FieldMatch.model_rebuild()
-except NameError:
-    pass

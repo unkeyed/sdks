@@ -895,12 +895,9 @@ class Apis(BaseSDK):
             - Exposes sensitive key material in the response
             - Should only be used in secure administrative contexts
             - Never enable this in user-facing applications
-        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
-            - You've just created a key and need to display it immediately
-            - You need absolute certainty about the current key state
-            - You're debugging cache consistency issues
-
-            This parameter comes with a performance cost and should be used sparingly.
+        :param revalidate_keys_cache: When true, reads keys and their identities from the primary database to avoid replica lag.
+            When false or omitted, reads from a replica, which may not reflect recent changes.
+            Primary reads can have higher latency, depending on your region.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1096,12 +1093,9 @@ class Apis(BaseSDK):
             - Exposes sensitive key material in the response
             - Should only be used in secure administrative contexts
             - Never enable this in user-facing applications
-        :param revalidate_keys_cache: EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
-            - You've just created a key and need to display it immediately
-            - You need absolute certainty about the current key state
-            - You're debugging cache consistency issues
-
-            This parameter comes with a performance cost and should be used sparingly.
+        :param revalidate_keys_cache: When true, reads keys and their identities from the primary database to avoid replica lag.
+            When false or omitted, reads from a replica, which may not reflect recent changes.
+            Primary reads can have higher latency, depending on your region.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
