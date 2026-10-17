@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 71e95a8c2f188fd24e73d28f058b4870
+  docChecksum: 72acd75648f52b69bafc88ba5b8e9fa3
   docVersion: 2.0.0
   speakeasyVersion: 1.802.0
   generationVersion: 2.948.4
-  releaseVersion: 2.5.4
-  configChecksum: 070f8a45cdcaa1ee694c0cbca9a47570
+  releaseVersion: 2.5.5
+  configChecksum: dcb0745c973235ca6e39024eaef75f6f
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: fe307aba-2b1a-478f-bc9d-5b16080c5b22
-  pristine_commit_hash: 9ee1e5d7e871315879afebec7c91e008751c2163
-  pristine_tree_hash: 3718c1cfe083bf7410f3c2ed0a85125d9e8c7026
+  generation_id: 3547f52e-a522-41c9-82ae-3cd05fcba702
+  pristine_commit_hash: 2758199384347ce2b081bed0df20bc0494f791eb
+  pristine_tree_hash: 5d488f3abf23889ac72c2c74d0d9418fe4714a98
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -254,8 +254,8 @@ trackedFiles:
     pristine_git_object: a01fa5745eb1094595311a73487617df2e160ead
   docs/models/components/fieldmatch.md:
     id: 7f2c32e0134d
-    last_write_checksum: sha1:cb78a1b3d45882f33231fe4e85773592c7e4b24e
-    pristine_git_object: 2e033461334df2aad92fc58bfd3c794486db0ab4
+    last_write_checksum: sha1:8652cd46cd575106b530c76c3617d31648e14b21
+    pristine_git_object: 147d71230d7a3cdbe27963685aa5f71a059e2085
   docs/models/components/firewallpolicy.md:
     id: cac9b2956e1f
     last_write_checksum: sha1:c02062a89584b2a571888ff7cf11ecd3ef8d7123
@@ -1750,12 +1750,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:b157fc0033af055577882cc6acd14a00b5ee82b4
-    pristine_git_object: 5f564dcf501ad4b7c0af0bc721bd55e4d1a20752
+    last_write_checksum: sha1:0535616824889aff972d3b12e426fd17503d985f
+    pristine_git_object: 9918c8683aa13d3db22f8c32aa56ac735f9bafdd
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:4169f68928873f0b4571f898fdc8fedf54d2e1ed
-    pristine_git_object: 584db8bd2cfc43724ae5e4981d8782d0812962c8
+    last_write_checksum: sha1:ff19697d9363269bdd5365b4f8abcf0368cfaba1
+    pristine_git_object: 1c40961d0f07cfa8d94c03a31af2cdf3b8503cab
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -2202,8 +2202,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:281415781c1576c4f563037f9a317a224974ab16
-    pristine_git_object: fcd77b1d0b291f398f850a17b4b9d8fd24dbc0d5
+    last_write_checksum: sha1:1ced4b5efda85f175ba08f5c7b28822373c24493
+    pristine_git_object: 19287f041df3b3a1ea7817a6702d0eac10f9e378
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2418,8 +2418,8 @@ trackedFiles:
     pristine_git_object: bb0f2387d3998d37584322444cb14527128e61d6
   src/models/components/fieldmatch.ts:
     id: f98d06551e9a
-    last_write_checksum: sha1:5c63c07e7cd14abe65f3b4e75668d3f1fa9b8412
-    pristine_git_object: 6fc0eabc506b95eb94472eeb9977661f1f3dc215
+    last_write_checksum: sha1:8216c106e6f056072350998aa010722612de6118
+    pristine_git_object: 941e83f567c8559ae2c35875b1c5653b5ef7cdb9
   src/models/components/firewallpolicy.ts:
     id: 6b09e62585ce
     last_write_checksum: sha1:03c457cde8af5b0bd6159b279a9b3b4dad841dd4
@@ -8739,14 +8739,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `unkey.ratelimit.createNamespace()`: **Added**
-  * `unkey.ratelimit.deleteNamespace()`: **Added**
-  * `unkey.ratelimit.listNamespaces()`: **Added**
-  * `unkey.ratelimit.updateNamespace()`: **Added**
-  * `unkey.workspace.getFlags()`: **Added**
-  * `unkey.workspace.updateFlag()`: **Added**
+releaseNotes: "## Typescript SDK Changes:\n* `unkey.gateway.listPolicies()`:  `response.data[].match[].header.present` **Changed**\n* `unkey.gateway.setPolicies()`: \n  *  `request.policies[].match[].header.present` **Changed**\n* `unkey.gateway.updatePolicy()`: \n  *  `request.match[].header.present` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
