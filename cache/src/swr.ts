@@ -1,6 +1,6 @@
 import { Err, Ok, type Result } from "@unkey/error";
 import type { Context } from "./context";
-import { CacheError } from "./errors";
+import type { CacheError } from "./errors";
 import type { Store } from "./stores";
 
 /**
@@ -121,19 +121,10 @@ export class SwrCache<TNamespace extends string, TValue> {
         return Ok(value);
       }
     }
-    try {
-      const value = await this.deduplicateLoadFromOrigin(namespace, key, loadFromOrigin);
-      this.ctx.waitUntil(this.set(namespace, key, value));
-      return Ok(value);
-    } catch (err) {
-      return Err(
-        new CacheError({
-          tier: "cache",
-          key,
-          message: (err as Error).message,
-        }),
-      );
-    }
+    // Loader errors are not cache errors, so let them reach the caller as is
+    const value = await this.deduplicateLoadFromOrigin(namespace, key, loadFromOrigin);
+    this.ctx.waitUntil(this.set(namespace, key, value));
+    return Ok(value);
   }
 
   /**

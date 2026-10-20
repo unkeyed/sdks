@@ -104,3 +104,10 @@ describe("with fresh=0", () => {
     expect(revalidated).toBe(100);
   });
 });
+
+test("a throwing loader surfaces its own error, not a CacheError", async () => {
+  class LoaderError extends Error {}
+  await expect(
+    cache.swr(namespace, "unknown", () => Promise.reject(new LoaderError("not found"))),
+  ).rejects.toBeInstanceOf(LoaderError);
+});
