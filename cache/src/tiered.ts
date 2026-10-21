@@ -54,9 +54,10 @@ export class TieredStore<TNamespace extends string, TValue> implements Store<TNa
         // Fill all lower caches
         this.ctx.waitUntil(
           Promise.all(
-            this.tiers.filter((_, j) => j < i).map((t) => () => t.set(namespace, key, val)),
+            this.tiers.filter((_, j) => j < i).map((t) => t.set(namespace, key, val)),
           ).catch((err) => {
-            return Err(
+            // backfill is best effort and must never fail the read
+            console.error(
               new CacheError({
                 tier: this.name,
                 key,
