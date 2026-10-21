@@ -115,7 +115,7 @@ export class CloudflareStore<TNamespace extends string, TValue = unknown>
     await Promise.all(cacheKeys.map((key) => caches.default.delete(key)));
 
     return await fetch(
-      `https://api.cloudflare.com/client/v4zones/${this.config.zoneId}/purge_cache`,
+      `https://api.cloudflare.com/client/v4/zones/${this.config.zoneId}/purge_cache`,
       {
         method: "POST",
         headers: {
