@@ -98,12 +98,23 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.ratelimit.createNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.deleteNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.listNamespaces()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.updateNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.getFlags()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.updateFlag()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.authorizeDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.cancelDeployment()</code>: <strong>Added</strong></li>
+<li><code>unkey.logs.getApiRequestMetrics()</code>: <strong>Added</strong></li>
+<li><code>unkey.logs.listApiRequests()</code>: <strong>Added</strong></li>
+<li><code>unkey.deployments.getDeployment()</code>:  <code>response.data.issues</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.listDeployments()</code>:  <code>response.data[].issues</code> <strong>Added</strong></li>
+<li><code>unkey.gateway.listPolicies()</code>:  <code>response.data[].match[].header.present</code> <strong>Changed</strong></li>
+<li><code>unkey.gateway.setPolicies()</code>:
+
+<ul>
+<li><code>request.policies[].match[].header.present</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>unkey.gateway.updatePolicy()</code>:
+
+<ul>
+<li><code>request.match[].header.present</code> <strong>Changed</strong></li>
+</ul></li>
 </ul>
 </body>
 </html>

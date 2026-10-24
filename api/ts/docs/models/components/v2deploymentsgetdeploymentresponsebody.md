@@ -53,6 +53,7 @@ let value: V2DeploymentsGetDeploymentResponseBody = {
       message:
         "No schedulable regions configured. Please configure at least one schedulable region before deploying.",
     },
+    issues: [],
     finishedAt: 1704067260000,
     domains: [
       "kebap-app.unkey.app",
