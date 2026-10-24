@@ -4,6 +4,7 @@ package components
 
 import (
 	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v3/types"
 )
 
 // FieldMatch - Matches a named request field (header or query parameter). Exactly one of
@@ -17,6 +18,7 @@ type FieldMatch struct {
 }
 
 func (f FieldMatch) MarshalJSON() ([]byte, error) {
+	f.Present = f.GetPresent()
 	return utils.MarshalJSON(f, "", false)
 }
 
@@ -37,6 +39,9 @@ func (f *FieldMatch) GetName() string {
 func (f *FieldMatch) GetPresent() *bool {
 	if f == nil {
 		return nil
+	}
+	if f.Present == nil && f.Value == nil {
+		return types.Pointer(true)
 	}
 	return f.Present
 }
