@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .stringmatch import StringMatch, StringMatchTypedDict
-from pydantic import AliasChoices, Field, model_serializer, model_validator
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 from unkey.py.types import BaseModel, UNSET_SENTINEL
@@ -27,27 +27,11 @@ class FieldMatch(BaseModel):
 
     name: str
 
-    present: Optional[bool] = Field(
-        default=True, validation_alias=AliasChoices("present", "PRESENT")
-    )
+    present: Optional[bool] = None
     r"""Matches when the field is present if true, or absent if false, regardless of value."""
 
     value: Optional[StringMatch] = None
     r"""String matcher. Exactly one of `exact`, `prefix` or `regex` must be set."""
-
-    @model_validator(mode="after")
-    def omit_default_presence_for_value_match(self) -> FieldMatch:
-        if self.value is not None and "present" not in self.model_fields_set:
-            self.present = None
-        return self
-
-    @property
-    def PRESENT(self) -> Optional[bool]:
-        return self.present
-
-    @PRESENT.setter
-    def PRESENT(self, value: Optional[bool]) -> None:
-        self.present = value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
