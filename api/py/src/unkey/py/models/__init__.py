@@ -5,6 +5,11 @@ from typing import Any, TYPE_CHECKING
 from unkey.py.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
+    from .apirequestlog import APIRequestLog, APIRequestLogTypedDict
+    from .apirequestmetricspoint import (
+        APIRequestMetricsPoint,
+        APIRequestMetricsPointTypedDict,
+    )
     from .apis_listkeysop import ApisListKeysResponse, ApisListKeysResponseTypedDict
     from .app import App, AppTypedDict, SourceType
     from .appgit import AppGit, AppGitTypedDict
@@ -29,8 +34,12 @@ if TYPE_CHECKING:
     from .deploymentdocker import DeploymentDocker, DeploymentDockerTypedDict
     from .deploymenterror import DeploymentError, DeploymentErrorTypedDict
     from .deploymenterrorcode import DeploymentErrorCode
+    from .deploymentexitreason import DeploymentExitReason
     from .deploymentgit import DeploymentGit, DeploymentGitTypedDict
     from .deploymentgitauthor import DeploymentGitAuthor, DeploymentGitAuthorTypedDict
+    from .deploymentissue import DeploymentIssue, DeploymentIssueTypedDict
+    from .deploymentissuemeta import DeploymentIssueMeta, DeploymentIssueMetaTypedDict
+    from .deploymentissuetype import DeploymentIssueType
     from .deploymentruntime import DeploymentRuntime, DeploymentRuntimeTypedDict
     from .deployments_listdeploymentsop import (
         DeploymentsListDeploymentsResponse,
@@ -76,15 +85,18 @@ if TYPE_CHECKING:
         Kind,
     )
     from .environmentvariablekind import EnvironmentVariableKind
+    from .exactfilter import ExactFilter, ExactFilterTypedDict
     from .fieldmatch import FieldMatch, FieldMatchTypedDict
     from .firewallpolicy import Action, FirewallPolicy, FirewallPolicyTypedDict
     from .headerkey import HeaderKey, HeaderKeyTypedDict
     from .headerkeylocation import HeaderKeyLocation, HeaderKeyLocationTypedDict
+    from .httpmethod import HTTPMethod
     from .identities_listidentitiesop import (
         IdentitiesListIdentitiesResponse,
         IdentitiesListIdentitiesResponseTypedDict,
     )
     from .identity import Identity, IdentityTypedDict
+    from .intfilter import IntFilter, IntFilterTypedDict
     from .keyauthpolicy import KeyauthPolicy, KeyauthPolicyTypedDict
     from .keycreditsdata import KeyCreditsData, KeyCreditsDataTypedDict
     from .keycreditsrefill import (
@@ -104,8 +116,13 @@ if TYPE_CHECKING:
         KeysVerifyKeyRatelimitTypedDict,
     )
     from .loggingpolicy import LoggingPolicy, LoggingPolicyTypedDict
+    from .logs_listapirequestsop import (
+        LogsListAPIRequestsResponse,
+        LogsListAPIRequestsResponseTypedDict,
+    )
     from .matchexpr import MatchExpr, MatchExprTypedDict
     from .meta import Meta, MetaTypedDict
+    from .methodfilter import MethodFilter, MethodFilterTypedDict
     from .methodmatch import MethodMatch, MethodMatchMethod, MethodMatchTypedDict
     from .openapipolicy import OpenapiPolicy, OpenapiPolicyTypedDict
     from .pagination import Pagination, PaginationTypedDict
@@ -156,11 +173,16 @@ if TYPE_CHECKING:
         QueryParamKeyLocation,
         QueryParamKeyLocationTypedDict,
     )
+    from .ratelimit_listnamespacesop import (
+        RatelimitListNamespacesResponse,
+        RatelimitListNamespacesResponseTypedDict,
+    )
     from .ratelimit_listoverridesop import (
         RatelimitListOverridesResponse,
         RatelimitListOverridesResponseTypedDict,
     )
     from .ratelimitidentifier import RatelimitIdentifier, RatelimitIdentifierTypedDict
+    from .ratelimitnamespace import RatelimitNamespace, RatelimitNamespaceTypedDict
     from .ratelimitoverride import RatelimitOverride, RatelimitOverrideTypedDict
     from .ratelimitpolicy import (
         Identifier,
@@ -180,6 +202,8 @@ if TYPE_CHECKING:
     )
     from .security import Security, SecurityTypedDict
     from .stringmatch import StringMatch, StringMatchTypedDict
+    from .textfilter import TextFilter, TextFilterTypedDict
+    from .timefilter import TimeFilter, TimeFilterTypedDict
     from .updatekeycreditsdata import (
         UpdateKeyCreditsData,
         UpdateKeyCreditsDataTypedDict,
@@ -339,6 +363,22 @@ if TYPE_CHECKING:
         V2DeployGetDeploymentResponseDataTypedDict,
     )
     from .v2deploygitcommit import V2DeployGitCommit, V2DeployGitCommitTypedDict
+    from .v2deploymentsauthorizedeploymentrequestbody import (
+        V2DeploymentsAuthorizeDeploymentRequestBody,
+        V2DeploymentsAuthorizeDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentsauthorizedeploymentresponsebody import (
+        V2DeploymentsAuthorizeDeploymentResponseBody,
+        V2DeploymentsAuthorizeDeploymentResponseBodyTypedDict,
+    )
+    from .v2deploymentscanceldeploymentrequestbody import (
+        V2DeploymentsCancelDeploymentRequestBody,
+        V2DeploymentsCancelDeploymentRequestBodyTypedDict,
+    )
+    from .v2deploymentscanceldeploymentresponsebody import (
+        V2DeploymentsCancelDeploymentResponseBody,
+        V2DeploymentsCancelDeploymentResponseBodyTypedDict,
+    )
     from .v2deploymentscreatedeploymentrequestbody_union import (
         V2DeploymentsCreateDeploymentRequestBody1,
         V2DeploymentsCreateDeploymentRequestBody1TypedDict,
@@ -727,6 +767,30 @@ if TYPE_CHECKING:
         V2KeysWhoamiResponseBody,
         V2KeysWhoamiResponseBodyTypedDict,
     )
+    from .v2logsgetapirequestmetricsfilters import (
+        V2LogsGetAPIRequestMetricsFilters,
+        V2LogsGetAPIRequestMetricsFiltersTypedDict,
+    )
+    from .v2logsgetapirequestmetricsrequestbody import (
+        V2LogsGetAPIRequestMetricsRequestBody,
+        V2LogsGetAPIRequestMetricsRequestBodyTypedDict,
+    )
+    from .v2logsgetapirequestmetricsresponsebody import (
+        V2LogsGetAPIRequestMetricsResponseBody,
+        V2LogsGetAPIRequestMetricsResponseBodyTypedDict,
+    )
+    from .v2logslistapirequestsfilters import (
+        V2LogsListAPIRequestsFilters,
+        V2LogsListAPIRequestsFiltersTypedDict,
+    )
+    from .v2logslistapirequestsrequestbody import (
+        V2LogsListAPIRequestsRequestBody,
+        V2LogsListAPIRequestsRequestBodyTypedDict,
+    )
+    from .v2logslistapirequestsresponsebody import (
+        V2LogsListAPIRequestsResponseBody,
+        V2LogsListAPIRequestsResponseBodyTypedDict,
+    )
     from .v2permissionscreatepermissionrequestbody import (
         V2PermissionsCreatePermissionRequestBody,
         V2PermissionsCreatePermissionRequestBodyTypedDict,
@@ -999,6 +1063,22 @@ if TYPE_CHECKING:
         V2ProjectsUpdateProjectResponseBody,
         V2ProjectsUpdateProjectResponseBodyTypedDict,
     )
+    from .v2ratelimitcreatenamespacerequestbody import (
+        V2RatelimitCreateNamespaceRequestBody,
+        V2RatelimitCreateNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitcreatenamespaceresponsebody import (
+        V2RatelimitCreateNamespaceResponseBody,
+        V2RatelimitCreateNamespaceResponseBodyTypedDict,
+    )
+    from .v2ratelimitdeletenamespacerequestbody import (
+        V2RatelimitDeleteNamespaceRequestBody,
+        V2RatelimitDeleteNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitdeletenamespaceresponsebody import (
+        V2RatelimitDeleteNamespaceResponseBody,
+        V2RatelimitDeleteNamespaceResponseBodyTypedDict,
+    )
     from .v2ratelimitdeleteoverriderequestbody import (
         V2RatelimitDeleteOverrideRequestBody,
         V2RatelimitDeleteOverrideRequestBodyTypedDict,
@@ -1031,6 +1111,14 @@ if TYPE_CHECKING:
         V2RatelimitLimitResponseData,
         V2RatelimitLimitResponseDataTypedDict,
     )
+    from .v2ratelimitlistnamespacesrequestbody import (
+        V2RatelimitListNamespacesRequestBody,
+        V2RatelimitListNamespacesRequestBodyTypedDict,
+    )
+    from .v2ratelimitlistnamespacesresponsebody import (
+        V2RatelimitListNamespacesResponseBody,
+        V2RatelimitListNamespacesResponseBodyTypedDict,
+    )
     from .v2ratelimitlistoverridesrequestbody import (
         V2RatelimitListOverridesRequestBody,
         V2RatelimitListOverridesRequestBodyTypedDict,
@@ -1062,6 +1150,14 @@ if TYPE_CHECKING:
     from .v2ratelimitsetoverrideresponsedata import (
         V2RatelimitSetOverrideResponseData,
         V2RatelimitSetOverrideResponseDataTypedDict,
+    )
+    from .v2ratelimitupdatenamespacerequestbody import (
+        V2RatelimitUpdateNamespaceRequestBody,
+        V2RatelimitUpdateNamespaceRequestBodyTypedDict,
+    )
+    from .v2ratelimitupdatenamespaceresponsebody import (
+        V2RatelimitUpdateNamespaceResponseBody,
+        V2RatelimitUpdateNamespaceResponseBodyTypedDict,
     )
     from .v2rootkeyscreatekeyrequestbody import (
         V2RootKeysCreateKeyRequestBody,
@@ -1114,6 +1210,14 @@ if TYPE_CHECKING:
     from .v2rootkeysupdatekeyresponsebody import (
         V2RootKeysUpdateKeyResponseBody,
         V2RootKeysUpdateKeyResponseBodyTypedDict,
+    )
+    from .v2workspacegetflagsflag import (
+        V2WorkspaceGetFlagsFlag,
+        V2WorkspaceGetFlagsFlagTypedDict,
+    )
+    from .v2workspacegetflagsresponsebody import (
+        V2WorkspaceGetFlagsResponseBody,
+        V2WorkspaceGetFlagsResponseBodyTypedDict,
     )
     from .v2workspacegetlimitslimit import (
         V2WorkspaceGetLimitsLimit,
@@ -1183,6 +1287,14 @@ if TYPE_CHECKING:
         V2WorkspaceGetUsageTotals,
         V2WorkspaceGetUsageTotalsTypedDict,
     )
+    from .v2workspaceupdateflagrequestbody import (
+        V2WorkspaceUpdateFlagRequestBody,
+        V2WorkspaceUpdateFlagRequestBodyTypedDict,
+    )
+    from .v2workspaceupdateflagresponsebody import (
+        V2WorkspaceUpdateFlagResponseBody,
+        V2WorkspaceUpdateFlagResponseBodyTypedDict,
+    )
     from .v3deploymentscreatedeploymentrequestbody import (
         V3DeploymentsCreateDeploymentRequestBody,
         V3DeploymentsCreateDeploymentRequestBodyTypedDict,
@@ -1202,6 +1314,10 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "APIRequestLog",
+    "APIRequestLogTypedDict",
+    "APIRequestMetricsPoint",
+    "APIRequestMetricsPointTypedDict",
     "Action",
     "ApisListKeysResponse",
     "ApisListKeysResponseTypedDict",
@@ -1239,10 +1355,16 @@ __all__ = [
     "DeploymentError",
     "DeploymentErrorCode",
     "DeploymentErrorTypedDict",
+    "DeploymentExitReason",
     "DeploymentGit",
     "DeploymentGitAuthor",
     "DeploymentGitAuthorTypedDict",
     "DeploymentGitTypedDict",
+    "DeploymentIssue",
+    "DeploymentIssueMeta",
+    "DeploymentIssueMetaTypedDict",
+    "DeploymentIssueType",
+    "DeploymentIssueTypedDict",
     "DeploymentRuntime",
     "DeploymentRuntimeTypedDict",
     "DeploymentSourceDeployment",
@@ -1288,10 +1410,13 @@ __all__ = [
     "EnvironmentVariableInputTypedDict",
     "EnvironmentVariableKind",
     "EnvironmentVariableTypedDict",
+    "ExactFilter",
+    "ExactFilterTypedDict",
     "FieldMatch",
     "FieldMatchTypedDict",
     "FirewallPolicy",
     "FirewallPolicyTypedDict",
+    "HTTPMethod",
     "HeaderKey",
     "HeaderKeyLocation",
     "HeaderKeyLocationTypedDict",
@@ -1302,6 +1427,8 @@ __all__ = [
     "IdentitiesListIdentitiesResponseTypedDict",
     "Identity",
     "IdentityTypedDict",
+    "IntFilter",
+    "IntFilterTypedDict",
     "KeyCreditsData",
     "KeyCreditsDataTypedDict",
     "KeyCreditsRefill",
@@ -1322,10 +1449,14 @@ __all__ = [
     "Kind",
     "LoggingPolicy",
     "LoggingPolicyTypedDict",
+    "LogsListAPIRequestsResponse",
+    "LogsListAPIRequestsResponseTypedDict",
     "MatchExpr",
     "MatchExprTypedDict",
     "Meta",
     "MetaTypedDict",
+    "MethodFilter",
+    "MethodFilterTypedDict",
     "MethodMatch",
     "MethodMatchMethod",
     "MethodMatchTypedDict",
@@ -1374,8 +1505,12 @@ __all__ = [
     "QueryParamKeyLocationTypedDict",
     "RatelimitIdentifier",
     "RatelimitIdentifierTypedDict",
+    "RatelimitListNamespacesResponse",
+    "RatelimitListNamespacesResponseTypedDict",
     "RatelimitListOverridesResponse",
     "RatelimitListOverridesResponseTypedDict",
+    "RatelimitNamespace",
+    "RatelimitNamespaceTypedDict",
     "RatelimitOverride",
     "RatelimitOverrideTypedDict",
     "RatelimitPolicy",
@@ -1400,6 +1535,10 @@ __all__ = [
     "SourceType",
     "StringMatch",
     "StringMatchTypedDict",
+    "TextFilter",
+    "TextFilterTypedDict",
+    "TimeFilter",
+    "TimeFilterTypedDict",
     "UpdateKeyCreditsData",
     "UpdateKeyCreditsDataTypedDict",
     "UpdateKeyCreditsRefill",
@@ -1484,6 +1623,14 @@ __all__ = [
     "V2DeployGetDeploymentResponseDataTypedDict",
     "V2DeployGitCommit",
     "V2DeployGitCommitTypedDict",
+    "V2DeploymentsAuthorizeDeploymentRequestBody",
+    "V2DeploymentsAuthorizeDeploymentRequestBodyTypedDict",
+    "V2DeploymentsAuthorizeDeploymentResponseBody",
+    "V2DeploymentsAuthorizeDeploymentResponseBodyTypedDict",
+    "V2DeploymentsCancelDeploymentRequestBody",
+    "V2DeploymentsCancelDeploymentRequestBodyTypedDict",
+    "V2DeploymentsCancelDeploymentResponseBody",
+    "V2DeploymentsCancelDeploymentResponseBodyTypedDict",
     "V2DeploymentsCreateDeploymentRequestBody1",
     "V2DeploymentsCreateDeploymentRequestBody1TypedDict",
     "V2DeploymentsCreateDeploymentRequestBody2",
@@ -1680,6 +1827,18 @@ __all__ = [
     "V2KeysWhoamiRequestBodyTypedDict",
     "V2KeysWhoamiResponseBody",
     "V2KeysWhoamiResponseBodyTypedDict",
+    "V2LogsGetAPIRequestMetricsFilters",
+    "V2LogsGetAPIRequestMetricsFiltersTypedDict",
+    "V2LogsGetAPIRequestMetricsRequestBody",
+    "V2LogsGetAPIRequestMetricsRequestBodyTypedDict",
+    "V2LogsGetAPIRequestMetricsResponseBody",
+    "V2LogsGetAPIRequestMetricsResponseBodyTypedDict",
+    "V2LogsListAPIRequestsFilters",
+    "V2LogsListAPIRequestsFiltersTypedDict",
+    "V2LogsListAPIRequestsRequestBody",
+    "V2LogsListAPIRequestsRequestBodyTypedDict",
+    "V2LogsListAPIRequestsResponseBody",
+    "V2LogsListAPIRequestsResponseBodyTypedDict",
     "V2PermissionsCreatePermissionRequestBody",
     "V2PermissionsCreatePermissionRequestBodyTypedDict",
     "V2PermissionsCreatePermissionResponseBody",
@@ -1823,6 +1982,14 @@ __all__ = [
     "V2ProjectsUpdateProjectRequestBodyTypedDict",
     "V2ProjectsUpdateProjectResponseBody",
     "V2ProjectsUpdateProjectResponseBodyTypedDict",
+    "V2RatelimitCreateNamespaceRequestBody",
+    "V2RatelimitCreateNamespaceRequestBodyTypedDict",
+    "V2RatelimitCreateNamespaceResponseBody",
+    "V2RatelimitCreateNamespaceResponseBodyTypedDict",
+    "V2RatelimitDeleteNamespaceRequestBody",
+    "V2RatelimitDeleteNamespaceRequestBodyTypedDict",
+    "V2RatelimitDeleteNamespaceResponseBody",
+    "V2RatelimitDeleteNamespaceResponseBodyTypedDict",
     "V2RatelimitDeleteOverrideRequestBody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict",
     "V2RatelimitDeleteOverrideResponseBody",
@@ -1839,6 +2006,10 @@ __all__ = [
     "V2RatelimitLimitResponseBodyTypedDict",
     "V2RatelimitLimitResponseData",
     "V2RatelimitLimitResponseDataTypedDict",
+    "V2RatelimitListNamespacesRequestBody",
+    "V2RatelimitListNamespacesRequestBodyTypedDict",
+    "V2RatelimitListNamespacesResponseBody",
+    "V2RatelimitListNamespacesResponseBodyTypedDict",
     "V2RatelimitListOverridesRequestBody",
     "V2RatelimitListOverridesRequestBodyTypedDict",
     "V2RatelimitListOverridesResponseBody",
@@ -1855,6 +2026,10 @@ __all__ = [
     "V2RatelimitSetOverrideResponseBodyTypedDict",
     "V2RatelimitSetOverrideResponseData",
     "V2RatelimitSetOverrideResponseDataTypedDict",
+    "V2RatelimitUpdateNamespaceRequestBody",
+    "V2RatelimitUpdateNamespaceRequestBodyTypedDict",
+    "V2RatelimitUpdateNamespaceResponseBody",
+    "V2RatelimitUpdateNamespaceResponseBodyTypedDict",
     "V2RootKeysCreateKeyRequestBody",
     "V2RootKeysCreateKeyRequestBodyTypedDict",
     "V2RootKeysCreateKeyResponseBody",
@@ -1881,6 +2056,10 @@ __all__ = [
     "V2RootKeysUpdateKeyRequestBodyTypedDict",
     "V2RootKeysUpdateKeyResponseBody",
     "V2RootKeysUpdateKeyResponseBodyTypedDict",
+    "V2WorkspaceGetFlagsFlag",
+    "V2WorkspaceGetFlagsFlagTypedDict",
+    "V2WorkspaceGetFlagsResponseBody",
+    "V2WorkspaceGetFlagsResponseBodyTypedDict",
     "V2WorkspaceGetLimitsLimit",
     "V2WorkspaceGetLimitsLimitTypedDict",
     "V2WorkspaceGetLimitsResponseBody",
@@ -1915,6 +2094,10 @@ __all__ = [
     "V2WorkspaceGetUsageResponseDataTypedDict",
     "V2WorkspaceGetUsageTotals",
     "V2WorkspaceGetUsageTotalsTypedDict",
+    "V2WorkspaceUpdateFlagRequestBody",
+    "V2WorkspaceUpdateFlagRequestBodyTypedDict",
+    "V2WorkspaceUpdateFlagResponseBody",
+    "V2WorkspaceUpdateFlagResponseBodyTypedDict",
     "V3DeploymentsCreateDeploymentRequestBody",
     "V3DeploymentsCreateDeploymentRequestBodyTypedDict",
     "V3DeploymentsCreateDeploymentResponseBody",
@@ -1929,6 +2112,10 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "APIRequestLog": ".apirequestlog",
+    "APIRequestLogTypedDict": ".apirequestlog",
+    "APIRequestMetricsPoint": ".apirequestmetricspoint",
+    "APIRequestMetricsPointTypedDict": ".apirequestmetricspoint",
     "ApisListKeysResponse": ".apis_listkeysop",
     "ApisListKeysResponseTypedDict": ".apis_listkeysop",
     "App": ".app",
@@ -1963,10 +2150,16 @@ _dynamic_imports: dict[str, str] = {
     "DeploymentError": ".deploymenterror",
     "DeploymentErrorTypedDict": ".deploymenterror",
     "DeploymentErrorCode": ".deploymenterrorcode",
+    "DeploymentExitReason": ".deploymentexitreason",
     "DeploymentGit": ".deploymentgit",
     "DeploymentGitTypedDict": ".deploymentgit",
     "DeploymentGitAuthor": ".deploymentgitauthor",
     "DeploymentGitAuthorTypedDict": ".deploymentgitauthor",
+    "DeploymentIssue": ".deploymentissue",
+    "DeploymentIssueTypedDict": ".deploymentissue",
+    "DeploymentIssueMeta": ".deploymentissuemeta",
+    "DeploymentIssueMetaTypedDict": ".deploymentissuemeta",
+    "DeploymentIssueType": ".deploymentissuetype",
     "DeploymentRuntime": ".deploymentruntime",
     "DeploymentRuntimeTypedDict": ".deploymentruntime",
     "DeploymentsListDeploymentsResponse": ".deployments_listdeploymentsop",
@@ -2016,6 +2209,8 @@ _dynamic_imports: dict[str, str] = {
     "EnvironmentVariableInputTypedDict": ".environmentvariableinput",
     "Kind": ".environmentvariableinput",
     "EnvironmentVariableKind": ".environmentvariablekind",
+    "ExactFilter": ".exactfilter",
+    "ExactFilterTypedDict": ".exactfilter",
     "FieldMatch": ".fieldmatch",
     "FieldMatchTypedDict": ".fieldmatch",
     "Action": ".firewallpolicy",
@@ -2025,10 +2220,13 @@ _dynamic_imports: dict[str, str] = {
     "HeaderKeyTypedDict": ".headerkey",
     "HeaderKeyLocation": ".headerkeylocation",
     "HeaderKeyLocationTypedDict": ".headerkeylocation",
+    "HTTPMethod": ".httpmethod",
     "IdentitiesListIdentitiesResponse": ".identities_listidentitiesop",
     "IdentitiesListIdentitiesResponseTypedDict": ".identities_listidentitiesop",
     "Identity": ".identity",
     "IdentityTypedDict": ".identity",
+    "IntFilter": ".intfilter",
+    "IntFilterTypedDict": ".intfilter",
     "KeyauthPolicy": ".keyauthpolicy",
     "KeyauthPolicyTypedDict": ".keyauthpolicy",
     "KeyCreditsData": ".keycreditsdata",
@@ -2048,10 +2246,14 @@ _dynamic_imports: dict[str, str] = {
     "KeysVerifyKeyRatelimitTypedDict": ".keysverifykeyratelimit",
     "LoggingPolicy": ".loggingpolicy",
     "LoggingPolicyTypedDict": ".loggingpolicy",
+    "LogsListAPIRequestsResponse": ".logs_listapirequestsop",
+    "LogsListAPIRequestsResponseTypedDict": ".logs_listapirequestsop",
     "MatchExpr": ".matchexpr",
     "MatchExprTypedDict": ".matchexpr",
     "Meta": ".meta",
     "MetaTypedDict": ".meta",
+    "MethodFilter": ".methodfilter",
+    "MethodFilterTypedDict": ".methodfilter",
     "MethodMatch": ".methodmatch",
     "MethodMatchMethod": ".methodmatch",
     "MethodMatchTypedDict": ".methodmatch",
@@ -2097,10 +2299,14 @@ _dynamic_imports: dict[str, str] = {
     "ProjectsListProjectsResponseTypedDict": ".projects_listprojectsop",
     "QueryParamKeyLocation": ".queryparamkeylocation",
     "QueryParamKeyLocationTypedDict": ".queryparamkeylocation",
+    "RatelimitListNamespacesResponse": ".ratelimit_listnamespacesop",
+    "RatelimitListNamespacesResponseTypedDict": ".ratelimit_listnamespacesop",
     "RatelimitListOverridesResponse": ".ratelimit_listoverridesop",
     "RatelimitListOverridesResponseTypedDict": ".ratelimit_listoverridesop",
     "RatelimitIdentifier": ".ratelimitidentifier",
     "RatelimitIdentifierTypedDict": ".ratelimitidentifier",
+    "RatelimitNamespace": ".ratelimitnamespace",
+    "RatelimitNamespaceTypedDict": ".ratelimitnamespace",
     "RatelimitOverride": ".ratelimitoverride",
     "RatelimitOverrideTypedDict": ".ratelimitoverride",
     "Identifier": ".ratelimitpolicy",
@@ -2125,6 +2331,10 @@ _dynamic_imports: dict[str, str] = {
     "SecurityTypedDict": ".security",
     "StringMatch": ".stringmatch",
     "StringMatchTypedDict": ".stringmatch",
+    "TextFilter": ".textfilter",
+    "TextFilterTypedDict": ".textfilter",
+    "TimeFilter": ".timefilter",
+    "TimeFilterTypedDict": ".timefilter",
     "UpdateKeyCreditsData": ".updatekeycreditsdata",
     "UpdateKeyCreditsDataTypedDict": ".updatekeycreditsdata",
     "UpdateKeyCreditsRefill": ".updatekeycreditsrefill",
@@ -2209,6 +2419,14 @@ _dynamic_imports: dict[str, str] = {
     "V2DeployGetDeploymentResponseDataTypedDict": ".v2deploygetdeploymentresponsedata",
     "V2DeployGitCommit": ".v2deploygitcommit",
     "V2DeployGitCommitTypedDict": ".v2deploygitcommit",
+    "V2DeploymentsAuthorizeDeploymentRequestBody": ".v2deploymentsauthorizedeploymentrequestbody",
+    "V2DeploymentsAuthorizeDeploymentRequestBodyTypedDict": ".v2deploymentsauthorizedeploymentrequestbody",
+    "V2DeploymentsAuthorizeDeploymentResponseBody": ".v2deploymentsauthorizedeploymentresponsebody",
+    "V2DeploymentsAuthorizeDeploymentResponseBodyTypedDict": ".v2deploymentsauthorizedeploymentresponsebody",
+    "V2DeploymentsCancelDeploymentRequestBody": ".v2deploymentscanceldeploymentrequestbody",
+    "V2DeploymentsCancelDeploymentRequestBodyTypedDict": ".v2deploymentscanceldeploymentrequestbody",
+    "V2DeploymentsCancelDeploymentResponseBody": ".v2deploymentscanceldeploymentresponsebody",
+    "V2DeploymentsCancelDeploymentResponseBodyTypedDict": ".v2deploymentscanceldeploymentresponsebody",
     "V2DeploymentsCreateDeploymentRequestBody1": ".v2deploymentscreatedeploymentrequestbody_union",
     "V2DeploymentsCreateDeploymentRequestBody1TypedDict": ".v2deploymentscreatedeploymentrequestbody_union",
     "V2DeploymentsCreateDeploymentRequestBody2": ".v2deploymentscreatedeploymentrequestbody_union",
@@ -2407,6 +2625,18 @@ _dynamic_imports: dict[str, str] = {
     "V2KeysWhoamiRequestBodyTypedDict": ".v2keyswhoamirequestbody",
     "V2KeysWhoamiResponseBody": ".v2keyswhoamiresponsebody",
     "V2KeysWhoamiResponseBodyTypedDict": ".v2keyswhoamiresponsebody",
+    "V2LogsGetAPIRequestMetricsFilters": ".v2logsgetapirequestmetricsfilters",
+    "V2LogsGetAPIRequestMetricsFiltersTypedDict": ".v2logsgetapirequestmetricsfilters",
+    "V2LogsGetAPIRequestMetricsRequestBody": ".v2logsgetapirequestmetricsrequestbody",
+    "V2LogsGetAPIRequestMetricsRequestBodyTypedDict": ".v2logsgetapirequestmetricsrequestbody",
+    "V2LogsGetAPIRequestMetricsResponseBody": ".v2logsgetapirequestmetricsresponsebody",
+    "V2LogsGetAPIRequestMetricsResponseBodyTypedDict": ".v2logsgetapirequestmetricsresponsebody",
+    "V2LogsListAPIRequestsFilters": ".v2logslistapirequestsfilters",
+    "V2LogsListAPIRequestsFiltersTypedDict": ".v2logslistapirequestsfilters",
+    "V2LogsListAPIRequestsRequestBody": ".v2logslistapirequestsrequestbody",
+    "V2LogsListAPIRequestsRequestBodyTypedDict": ".v2logslistapirequestsrequestbody",
+    "V2LogsListAPIRequestsResponseBody": ".v2logslistapirequestsresponsebody",
+    "V2LogsListAPIRequestsResponseBodyTypedDict": ".v2logslistapirequestsresponsebody",
     "V2PermissionsCreatePermissionRequestBody": ".v2permissionscreatepermissionrequestbody",
     "V2PermissionsCreatePermissionRequestBodyTypedDict": ".v2permissionscreatepermissionrequestbody",
     "V2PermissionsCreatePermissionResponseBody": ".v2permissionscreatepermissionresponsebody",
@@ -2551,6 +2781,14 @@ _dynamic_imports: dict[str, str] = {
     "V2ProjectsUpdateProjectRequestBodyTypedDict": ".v2projectsupdateprojectrequestbody",
     "V2ProjectsUpdateProjectResponseBody": ".v2projectsupdateprojectresponsebody",
     "V2ProjectsUpdateProjectResponseBodyTypedDict": ".v2projectsupdateprojectresponsebody",
+    "V2RatelimitCreateNamespaceRequestBody": ".v2ratelimitcreatenamespacerequestbody",
+    "V2RatelimitCreateNamespaceRequestBodyTypedDict": ".v2ratelimitcreatenamespacerequestbody",
+    "V2RatelimitCreateNamespaceResponseBody": ".v2ratelimitcreatenamespaceresponsebody",
+    "V2RatelimitCreateNamespaceResponseBodyTypedDict": ".v2ratelimitcreatenamespaceresponsebody",
+    "V2RatelimitDeleteNamespaceRequestBody": ".v2ratelimitdeletenamespacerequestbody",
+    "V2RatelimitDeleteNamespaceRequestBodyTypedDict": ".v2ratelimitdeletenamespacerequestbody",
+    "V2RatelimitDeleteNamespaceResponseBody": ".v2ratelimitdeletenamespaceresponsebody",
+    "V2RatelimitDeleteNamespaceResponseBodyTypedDict": ".v2ratelimitdeletenamespaceresponsebody",
     "V2RatelimitDeleteOverrideRequestBody": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideRequestBodyTypedDict": ".v2ratelimitdeleteoverriderequestbody",
     "V2RatelimitDeleteOverrideResponseBody": ".v2ratelimitdeleteoverrideresponsebody",
@@ -2567,6 +2805,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitLimitResponseBodyTypedDict": ".v2ratelimitlimitresponsebody",
     "V2RatelimitLimitResponseData": ".v2ratelimitlimitresponsedata",
     "V2RatelimitLimitResponseDataTypedDict": ".v2ratelimitlimitresponsedata",
+    "V2RatelimitListNamespacesRequestBody": ".v2ratelimitlistnamespacesrequestbody",
+    "V2RatelimitListNamespacesRequestBodyTypedDict": ".v2ratelimitlistnamespacesrequestbody",
+    "V2RatelimitListNamespacesResponseBody": ".v2ratelimitlistnamespacesresponsebody",
+    "V2RatelimitListNamespacesResponseBodyTypedDict": ".v2ratelimitlistnamespacesresponsebody",
     "V2RatelimitListOverridesRequestBody": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesRequestBodyTypedDict": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesResponseBody": ".v2ratelimitlistoverridesresponsebody",
@@ -2583,6 +2825,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitSetOverrideResponseBodyTypedDict": ".v2ratelimitsetoverrideresponsebody",
     "V2RatelimitSetOverrideResponseData": ".v2ratelimitsetoverrideresponsedata",
     "V2RatelimitSetOverrideResponseDataTypedDict": ".v2ratelimitsetoverrideresponsedata",
+    "V2RatelimitUpdateNamespaceRequestBody": ".v2ratelimitupdatenamespacerequestbody",
+    "V2RatelimitUpdateNamespaceRequestBodyTypedDict": ".v2ratelimitupdatenamespacerequestbody",
+    "V2RatelimitUpdateNamespaceResponseBody": ".v2ratelimitupdatenamespaceresponsebody",
+    "V2RatelimitUpdateNamespaceResponseBodyTypedDict": ".v2ratelimitupdatenamespaceresponsebody",
     "V2RootKeysCreateKeyRequestBody": ".v2rootkeyscreatekeyrequestbody",
     "V2RootKeysCreateKeyRequestBodyTypedDict": ".v2rootkeyscreatekeyrequestbody",
     "V2RootKeysCreateKeyResponseBody": ".v2rootkeyscreatekeyresponsebody",
@@ -2609,6 +2855,10 @@ _dynamic_imports: dict[str, str] = {
     "V2RootKeysUpdateKeyRequestBodyTypedDict": ".v2rootkeysupdatekeyrequestbody",
     "V2RootKeysUpdateKeyResponseBody": ".v2rootkeysupdatekeyresponsebody",
     "V2RootKeysUpdateKeyResponseBodyTypedDict": ".v2rootkeysupdatekeyresponsebody",
+    "V2WorkspaceGetFlagsFlag": ".v2workspacegetflagsflag",
+    "V2WorkspaceGetFlagsFlagTypedDict": ".v2workspacegetflagsflag",
+    "V2WorkspaceGetFlagsResponseBody": ".v2workspacegetflagsresponsebody",
+    "V2WorkspaceGetFlagsResponseBodyTypedDict": ".v2workspacegetflagsresponsebody",
     "V2WorkspaceGetLimitsLimit": ".v2workspacegetlimitslimit",
     "V2WorkspaceGetLimitsLimitTypedDict": ".v2workspacegetlimitslimit",
     "V2WorkspaceGetLimitsResponseBody": ".v2workspacegetlimitsresponsebody",
@@ -2643,6 +2893,10 @@ _dynamic_imports: dict[str, str] = {
     "V2WorkspaceGetUsageResponseDataTypedDict": ".v2workspacegetusageresponsedata",
     "V2WorkspaceGetUsageTotals": ".v2workspacegetusagetotals",
     "V2WorkspaceGetUsageTotalsTypedDict": ".v2workspacegetusagetotals",
+    "V2WorkspaceUpdateFlagRequestBody": ".v2workspaceupdateflagrequestbody",
+    "V2WorkspaceUpdateFlagRequestBodyTypedDict": ".v2workspaceupdateflagrequestbody",
+    "V2WorkspaceUpdateFlagResponseBody": ".v2workspaceupdateflagresponsebody",
+    "V2WorkspaceUpdateFlagResponseBodyTypedDict": ".v2workspaceupdateflagresponsebody",
     "V3DeploymentsCreateDeploymentRequestBody": ".v3deploymentscreatedeploymentrequestbody",
     "V3DeploymentsCreateDeploymentRequestBodyTypedDict": ".v3deploymentscreatedeploymentrequestbody",
     "V3DeploymentsCreateDeploymentResponseBody": ".v3deploymentscreatedeploymentresponsebody",

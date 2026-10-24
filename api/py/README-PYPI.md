@@ -310,6 +310,8 @@ with Unkey() as unkey:
 
 ### [Deployments](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md)
 
+* [authorize_deployment](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md#authorize_deployment) - Authorize deployment
+* [cancel_deployment](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md#cancel_deployment) - Cancel deployment
 * [~~create_deployment~~](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md#get_deployment) - Get deployment
 * [list_build_logs](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/deployments/README.md#list_build_logs) - List build logs
@@ -378,6 +380,11 @@ with Unkey() as unkey:
 * [verify_key](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/keys/README.md#verify_key) - Verify API key
 * [whoami](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/keys/README.md#whoami) - Get API key by hash
 
+### [Logs](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/logs/README.md)
+
+* [get_api_request_metrics](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/logs/README.md#get_api_request_metrics) - Get API request metrics
+* [list_api_requests](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/logs/README.md#list_api_requests) - List API requests
+
 ### [Permissions](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/permissions/README.md)
 
 * [create_permission](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/permissions/README.md#create_permission) - Create permission
@@ -416,12 +423,16 @@ with Unkey() as unkey:
 
 ### [Ratelimit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md)
 
+* [create_namespace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#create_namespace) - Create ratelimit namespace
+* [delete_namespace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#delete_namespace) - Delete ratelimit namespace
 * [delete_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#delete_override) - Delete ratelimit override
 * [get_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#get_override) - Get ratelimit override
 * [limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [list_namespaces](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#list_namespaces) - List ratelimit namespaces
 * [list_overrides](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#list_overrides) - List ratelimit overrides
 * [multi_limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 * [set_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#set_override) - Set ratelimit override
+* [update_namespace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#update_namespace) - Update ratelimit namespace
 
 ### [RootKeys](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/rootkeys/README.md)
 
@@ -433,8 +444,10 @@ with Unkey() as unkey:
 
 ### [Workspace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/workspace/README.md)
 
+* [get_flags](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/workspace/README.md#get_flags) - Get workspace flags
 * [get_limits](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/workspace/README.md#get_limits) - Get workspace limits
 * [get_usage](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/workspace/README.md#get_usage) - Get workspace usage
+* [update_flag](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/workspace/README.md#update_flag) - Update a workspace flag
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -560,9 +573,8 @@ with Unkey(
   * [`InternalServerErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/internalservererrorresponse.py): Error response when an unexpected error occurs on the server. This indicates a problem with Unkey's systems rather than your request.  When you encounter this error: - The request ID in the response can help Unkey support investigate the issue - The error is likely temporary and retrying may succeed - If the error persists, contact Unkey support with the request ID. Status code `500`.
   * [`TooManyRequestsErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/toomanyrequestserrorresponse.py): Error response when the client has sent too many requests in a given time period. This occurs when you've exceeded a rate limit or quota for the resource you're accessing.  The rate limit resets automatically after the time window expires. To avoid this error: - Implement exponential backoff when retrying requests - Cache results where appropriate to reduce request frequency - Check the error detail message for specific quota information - Contact support if you need a higher quota for your use case. Status code `429`. *
   * [`ForbiddenErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/forbiddenerrorresponse.py): Error response when the provided credentials are valid but lack sufficient permissions for the requested operation. This occurs when: - The root key doesn't have the required permissions for this endpoint - The operation requires elevated privileges that the current key lacks - Access to the requested resource is restricted based on workspace settings  To resolve this error, ensure your root key has the necessary permissions or contact your workspace administrator. Status code `403`. *
-  * [`NotFoundErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. *
 
-<details><summary>Less common errors (10)</summary>
+<details><summary>Less common errors (11)</summary>
 
 <br />
 
@@ -573,11 +585,12 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/unkeyerror.py)**:
-* [`ConflictErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 13 of 99 methods.*
-* [`PreconditionFailedErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 99 methods.*
-* [`UnprocessableEntityErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 99 methods.*
-* [`ServiceUnavailableErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 99 methods.*
-* [`GoneErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 99 methods.*
+* [`NotFoundErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 85 of 109 methods.*
+* [`ConflictErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 109 methods.*
+* [`PreconditionFailedErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 109 methods.*
+* [`UnprocessableEntityErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 109 methods.*
+* [`ServiceUnavailableErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/serviceunavailableerrorresponse.py): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 109 methods.*
+* [`GoneErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/goneerrorresponse.py): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 109 methods.*
 * [`ResponseValidationError`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

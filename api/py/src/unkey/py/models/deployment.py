@@ -5,6 +5,7 @@ from .deploymentaction import DeploymentAction
 from .deploymentdocker import DeploymentDocker, DeploymentDockerTypedDict
 from .deploymenterror import DeploymentError, DeploymentErrorTypedDict
 from .deploymentgit import DeploymentGit, DeploymentGitTypedDict
+from .deploymentissue import DeploymentIssue, DeploymentIssueTypedDict
 from .deploymentruntime import DeploymentRuntime, DeploymentRuntimeTypedDict
 from .deploymentstatus import DeploymentStatus
 from .deploymenttrigger import DeploymentTrigger, DeploymentTriggerTypedDict
@@ -48,6 +49,11 @@ class DeploymentTypedDict(TypedDict):
     regions: List[str]
     r"""Regions this deployment is configured to run in. Empty while the deployment
     has no scheduled regions yet.
+
+    """
+    issues: List[DeploymentIssueTypedDict]
+    r"""Problems with the running app right now, at most one per type. An issue
+    is removed when it is resolved. Empty when nothing is wrong.
 
     """
     runtime: DeploymentRuntimeTypedDict
@@ -117,6 +123,12 @@ class Deployment(BaseModel):
     regions: List[str]
     r"""Regions this deployment is configured to run in. Empty while the deployment
     has no scheduled regions yet.
+
+    """
+
+    issues: List[DeploymentIssue]
+    r"""Problems with the running app right now, at most one per type. An issue
+    is removed when it is resolved. Empty when nothing is wrong.
 
     """
 
