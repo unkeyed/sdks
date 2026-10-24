@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - typescript</title>
+    <title>SDK Changelog - go</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,15 +95,32 @@
         }
     </style>
 </head>
-<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
+<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.ratelimit.createNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.deleteNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.listNamespaces()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.updateNamespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.getFlags()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.updateFlag()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.AuthorizeDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.CancelDeployment()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Logs.GetApiRequestMetrics()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Logs.ListApiRequests()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Ratelimit.CreateNamespace()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Ratelimit.DeleteNamespace()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Ratelimit.ListNamespaces()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Ratelimit.UpdateNamespace()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Workspace.GetFlags()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Workspace.UpdateFlag()</code>: <strong>Added</strong></li>
+<li><code>Unkey.Deployments.GetDeployment()</code>:  <code>response.Data.Issues</code> <strong>Added</strong></li>
+<li><code>Unkey.Deployments.ListDeployments()</code>:  <code>response.Data[].Issues</code> <strong>Added</strong></li>
+<li><code>Unkey.Gateway.ListPolicies()</code>:  <code>response.Data[].Match[].Header.Present</code> <strong>Changed</strong></li>
+<li><code>Unkey.Gateway.SetPolicies()</code>:
+
+<ul>
+<li><code>request.Request.Policies[].Match[].Header.Present</code> <strong>Changed</strong></li>
+</ul></li>
+<li><code>Unkey.Gateway.UpdatePolicy()</code>:
+
+<ul>
+<li><code>request.Request.Match[].Header.Present</code> <strong>Changed</strong></li>
+</ul></li>
 </ul>
 </body>
 </html>

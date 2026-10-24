@@ -1,0 +1,9 @@
+# LogsListAPIRequestsResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2LogsListAPIRequestsResponseBody`                                                                           | [*components.V2LogsListAPIRequestsResponseBody](../../models/components/v2logslistapirequestsresponsebody.md) | :heavy_minus_sign:                                                                                            | A page of requests, newest first. When `hasMore` is true, send `pagination.cursor` to get the next page.      |

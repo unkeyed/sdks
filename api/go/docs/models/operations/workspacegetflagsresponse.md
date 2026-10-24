@@ -1,0 +1,9 @@
+# WorkspaceGetFlagsResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2WorkspaceGetFlagsResponseBody`                                                                         | [*components.V2WorkspaceGetFlagsResponseBody](../../models/components/v2workspacegetflagsresponsebody.md) | :heavy_minus_sign:                                                                                        | Workspace flags keyed by slug, or an empty object when no flags are available.                            |
