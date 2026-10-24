@@ -6,6 +6,8 @@ Deployment operations
 
 ### Available Operations
 
+* [AuthorizeDeployment](#authorizedeployment) - Authorize deployment
+* [CancelDeployment](#canceldeployment) - Cancel deployment
 * [~~CreateDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [GetDeployment](#getdeployment) - Get deployment
 * [ListBuildLogs](#listbuildlogs) - List build logs
@@ -15,6 +17,412 @@ Deployment operations
 * [StartDeployment](#startdeployment) - Start deployment
 * [StopDeployment](#stopdeployment) - Stop deployment
 * [CreateDeploymentV3](#createdeploymentv3) - Create deployment
+
+## AuthorizeDeployment
+
+Authorize a deployment that is awaiting approval. Deployments from forked
+pull requests run code from outside your repository, so they wait for a
+project member to approve them before they build.
+
+The deployment must have the status `awaiting_approval`. Authorization is
+asynchronous: this endpoint only enqueues it and returns immediately. The
+deployment then moves to `pending` and starts its build. Poll
+`getDeployment` to follow its status. If the build cannot start, the
+deployment returns to `awaiting_approval`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="go" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="accepted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.AuthorizeDeployment(ctx, components.V2DeploymentsAuthorizeDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsAuthorizeDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: authorize
+
+<!-- UsageSnippet language="go" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="authorize" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.AuthorizeDeployment(ctx, components.V2DeploymentsAuthorizeDeploymentRequestBody{
+        DeploymentID: "d_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsAuthorizeDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="go" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="missingDeploymentId" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.AuthorizeDeployment(ctx, components.V2DeploymentsAuthorizeDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsAuthorizeDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: notAwaitingApproval
+
+<!-- UsageSnippet language="go" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notAwaitingApproval" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.AuthorizeDeployment(ctx, components.V2DeploymentsAuthorizeDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsAuthorizeDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="go" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.AuthorizeDeployment(ctx, components.V2DeploymentsAuthorizeDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsAuthorizeDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                            | :heavy_check_mark:                                                                                                               | The context to use for the request.                                                                                              |
+| `request`                                                                                                                        | [components.V2DeploymentsAuthorizeDeploymentRequestBody](../../models/components/v2deploymentsauthorizedeploymentrequestbody.md) | :heavy_check_mark:                                                                                                               | The request object to use for the request.                                                                                       |
+| `opts`                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                         | :heavy_minus_sign:                                                                                                               | The options for this request.                                                                                                    |
+
+### Response
+
+**[*operations.DeploymentsAuthorizeDeploymentResponse](../../models/operations/deploymentsauthorizedeploymentresponse.md), error**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
+| apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
+| apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
+| apierrors.TooManyRequestsErrorResponse    | 429                                       | application/json                          |
+| apierrors.InternalServerErrorResponse     | 500                                       | application/json                          |
+| apierrors.APIError                        | 4XX, 5XX                                  | \*/\*                                     |
+
+## CancelDeployment
+
+Cancel a deployment that has not finished yet: queued, waiting for
+approval, building, or deploying. Cancelling aborts its run and marks it
+`cancelled`.
+
+Only in-progress deployments can be cancelled. To take a `ready` preview
+deployment offline, use `stopDeployment` instead.
+
+Cancellation is asynchronous: this endpoint only enqueues it and returns
+immediately. Poll `getDeployment` until the status reaches `cancelled`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="go" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="accepted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CancelDeployment(ctx, components.V2DeploymentsCancelDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsCancelDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: cancel
+
+<!-- UsageSnippet language="go" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="cancel" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CancelDeployment(ctx, components.V2DeploymentsCancelDeploymentRequestBody{
+        DeploymentID: "d_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsCancelDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="go" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="missingDeploymentId" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CancelDeployment(ctx, components.V2DeploymentsCancelDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsCancelDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="go" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notFound" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CancelDeployment(ctx, components.V2DeploymentsCancelDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsCancelDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: notInProgress
+
+<!-- UsageSnippet language="go" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notInProgress" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Deployments.CancelDeployment(ctx, components.V2DeploymentsCancelDeploymentRequestBody{
+        DeploymentID: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2DeploymentsCancelDeploymentResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `request`                                                                                                                  | [components.V2DeploymentsCancelDeploymentRequestBody](../../models/components/v2deploymentscanceldeploymentrequestbody.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+
+### Response
+
+**[*operations.DeploymentsCancelDeploymentResponse](../../models/operations/deploymentscanceldeploymentresponse.md), error**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
+| apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
+| apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
+| apierrors.TooManyRequestsErrorResponse    | 429                                       | application/json                          |
+| apierrors.InternalServerErrorResponse     | 500                                       | application/json                          |
+| apierrors.APIError                        | 4XX, 5XX                                  | \*/\*                                     |
 
 ## ~~CreateDeployment~~
 

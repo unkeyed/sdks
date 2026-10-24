@@ -6,8 +6,107 @@ Workspace limits and usage operations
 
 ### Available Operations
 
+* [GetFlags](#getflags) - Get workspace flags
 * [GetLimits](#getlimits) - Get workspace limits
 * [GetUsage](#getusage) - Get workspace usage
+* [UpdateFlag](#updateflag) - Update a workspace flag
+
+## GetFlags
+
+Get feature flags for the workspace associated with your credentials.
+
+Each flag is keyed by its slug and includes its current value, description,
+and whether it can be enabled or disabled. A workspace-specific value takes
+precedence over the flag's default. If no flags are available, `data` is an
+empty object.
+
+This endpoint takes no request body.
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:flags#read`
+
+
+### Example Usage: empty
+
+<!-- UsageSnippet language="go" operationID="workspace.getFlags" method="post" path="/v2/workspace.getFlags" example="empty" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Workspace.GetFlags(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2WorkspaceGetFlagsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: flags
+
+<!-- UsageSnippet language="go" operationID="workspace.getFlags" method="post" path="/v2/workspace.getFlags" example="flags" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Workspace.GetFlags(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2WorkspaceGetFlagsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.WorkspaceGetFlagsResponse](../../models/operations/workspacegetflagsresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## GetLimits
 
@@ -530,6 +629,75 @@ func main() {
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## UpdateFlag
+
+Enable or disable a flag for your workspace. Use `workspace.getFlags` to
+find flag slugs and check whether they can be enabled or disabled.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:flags#write`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="workspace.updateFlag" method="post" path="/v2/workspace.updateFlag" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Workspace.UpdateFlag(ctx, components.V2WorkspaceUpdateFlagRequestBody{
+        Slug: "<value>",
+        Enabled: true,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2WorkspaceUpdateFlagResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [components.V2WorkspaceUpdateFlagRequestBody](../../models/components/v2workspaceupdateflagrequestbody.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.WorkspaceUpdateFlagResponse](../../models/operations/workspaceupdateflagresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

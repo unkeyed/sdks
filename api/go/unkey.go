@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 2.0.0 and generator version 2.948.4
+// Generated from OpenAPI doc version 2.0.0 and generator version 2.950.13
 
 import (
 	"context"
@@ -151,6 +151,8 @@ type Unkey struct {
 	Identities *Identities
 	// API key management operations
 	Keys *Keys
+	// Log listing operations
+	Logs *Logs
 	// Permission and role management operations
 	Permissions *Permissions
 	// Customer Portal session management
@@ -237,11 +239,11 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Unkey {
 	sdk := &Unkey{
-		SDKVersion: "3.1.0",
+		SDKVersion: "3.1.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 3.1.0 2.948.4 2.0.0 github.com/unkeyed/sdks/api/go/v3",
-			SDKVersion:        "3.1.0",
-			GenVersion:        "2.948.4",
+			UserAgent:         "speakeasy-sdk/go 3.1.1 2.950.13 2.0.0 github.com/unkeyed/sdks/api/go/v3",
+			SDKVersion:        "3.1.1",
+			GenVersion:        "2.950.13",
 			OpenAPIDocVersion: "2.0.0",
 			ServerList:        ServerList,
 		},
@@ -281,6 +283,7 @@ func New(opts ...SDKOption) *Unkey {
 	sdk.Github = newGithub(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Identities = newIdentities(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Keys = newKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Logs = newLogs(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Permissions = newPermissions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Portal = newPortal(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Projects = newProjects(sdk, sdk.sdkConfiguration, sdk.hooks)

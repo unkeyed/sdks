@@ -39,6 +39,10 @@ type Deployment struct {
 	//
 	Regions []string         `json:"regions"`
 	Error   *DeploymentError `json:"error,omitzero"`
+	// Problems with the running app right now, at most one per type. An issue
+	// is removed when it is resolved. Empty when nothing is wrong.
+	//
+	Issues []DeploymentIssue `json:"issues"`
 	// Unix timestamp in milliseconds when the deployment finished, successfully
 	// or not. Omitted while it is in progress.
 	//
@@ -149,6 +153,13 @@ func (d *Deployment) GetError() *DeploymentError {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *Deployment) GetIssues() []DeploymentIssue {
+	if d == nil {
+		return []DeploymentIssue{}
+	}
+	return d.Issues
 }
 
 func (d *Deployment) GetFinishedAt() *int64 {

@@ -1,0 +1,9 @@
+# WorkspaceUpdateFlagResponse
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                            | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `V2WorkspaceUpdateFlagResponseBody`                                                                           | [*components.V2WorkspaceUpdateFlagResponseBody](../../models/components/v2workspaceupdateflagresponsebody.md) | :heavy_minus_sign:                                                                                            | Flag updated successfully. The data object is empty.                                                          |
