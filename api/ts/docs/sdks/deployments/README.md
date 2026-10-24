@@ -6,6 +6,8 @@ Deployment operations
 
 ### Available Operations
 
+* [authorizeDeployment](#authorizedeployment) - Authorize deployment
+* [cancelDeployment](#canceldeployment) - Cancel deployment
 * [~~createDeployment~~](#createdeployment) - Create deployment :warning: **Deprecated**
 * [getDeployment](#getdeployment) - Get deployment
 * [listBuildLogs](#listbuildlogs) - List build logs
@@ -15,6 +17,584 @@ Deployment operations
 * [startDeployment](#startdeployment) - Start deployment
 * [stopDeployment](#stopdeployment) - Stop deployment
 * [createDeploymentV3](#createdeploymentv3) - Create deployment
+
+## authorizeDeployment
+
+Authorize a deployment that is awaiting approval. Deployments from forked
+pull requests run code from outside your repository, so they wait for a
+project member to approve them before they build.
+
+The deployment must have the status `awaiting_approval`. Authorization is
+asynchronous: this endpoint only enqueues it and returns immediately. The
+deployment then moves to `pending` and starts its build. Poll
+`getDeployment` to follow its status. If the build cannot start, the
+deployment returns to `awaiting_approval`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="typescript" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="accepted" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.authorizeDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsAuthorizeDeployment } from "@unkey/api/funcs/deploymentsAuthorizeDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsAuthorizeDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsAuthorizeDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: authorize
+
+<!-- UsageSnippet language="typescript" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="authorize" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.authorizeDeployment({
+    deploymentId: "d_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsAuthorizeDeployment } from "@unkey/api/funcs/deploymentsAuthorizeDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsAuthorizeDeployment(unkey, {
+    deploymentId: "d_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsAuthorizeDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="typescript" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="missingDeploymentId" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.authorizeDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsAuthorizeDeployment } from "@unkey/api/funcs/deploymentsAuthorizeDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsAuthorizeDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsAuthorizeDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: notAwaitingApproval
+
+<!-- UsageSnippet language="typescript" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notAwaitingApproval" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.authorizeDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsAuthorizeDeployment } from "@unkey/api/funcs/deploymentsAuthorizeDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsAuthorizeDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsAuthorizeDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="typescript" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.authorizeDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsAuthorizeDeployment } from "@unkey/api/funcs/deploymentsAuthorizeDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsAuthorizeDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsAuthorizeDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2DeploymentsAuthorizeDeploymentRequestBody](../../models/components/v2deploymentsauthorizedeploymentrequestbody.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2DeploymentsAuthorizeDeploymentResponseBody](../../models/components/v2deploymentsauthorizedeploymentresponsebody.md)\>**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## cancelDeployment
+
+Cancel a deployment that has not finished yet: queued, waiting for
+approval, building, or deploying. Cancelling aborts its run and marks it
+`cancelled`.
+
+Only in-progress deployments can be cancelled. To take a `ready` preview
+deployment offline, use `stopDeployment` instead.
+
+Cancellation is asynchronous: this endpoint only enqueues it and returns
+immediately. Poll `getDeployment` until the status reaches `cancelled`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="typescript" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="accepted" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.cancelDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCancelDeployment } from "@unkey/api/funcs/deploymentsCancelDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCancelDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCancelDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: cancel
+
+<!-- UsageSnippet language="typescript" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="cancel" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.cancelDeployment({
+    deploymentId: "d_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCancelDeployment } from "@unkey/api/funcs/deploymentsCancelDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCancelDeployment(unkey, {
+    deploymentId: "d_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCancelDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="typescript" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="missingDeploymentId" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.cancelDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCancelDeployment } from "@unkey/api/funcs/deploymentsCancelDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCancelDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCancelDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="typescript" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notFound" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.cancelDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCancelDeployment } from "@unkey/api/funcs/deploymentsCancelDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCancelDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCancelDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: notInProgress
+
+<!-- UsageSnippet language="typescript" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notInProgress" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.deployments.cancelDeployment({
+    deploymentId: "proj_1234abcd",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { deploymentsCancelDeployment } from "@unkey/api/funcs/deploymentsCancelDeployment.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await deploymentsCancelDeployment(unkey, {
+    deploymentId: "proj_1234abcd",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCancelDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2DeploymentsCancelDeploymentRequestBody](../../models/components/v2deploymentscanceldeploymentrequestbody.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2DeploymentsCancelDeploymentResponseBody](../../models/components/v2deploymentscanceldeploymentresponsebody.md)\>**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## ~~createDeployment~~
 

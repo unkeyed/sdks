@@ -54,6 +54,19 @@ let value: V2DeploymentsListDeploymentsResponseBody = {
         message:
           "No schedulable regions configured. Please configure at least one schedulable region before deploying.",
       },
+      issues: [
+        {
+          type: "crash_loop",
+          time: 1704067260000,
+          message:
+            "Your app used more memory than its limit and keeps stopping, so Unkey waits longer before each restart. Check its memory usage, or raise the limit.",
+          meta: {
+            reason: "out_of_memory",
+            exitCode: 137,
+            restartCount: 12,
+          },
+        },
+      ],
       finishedAt: 1704067260000,
       domains: [
         "kebap-app.unkey.app",

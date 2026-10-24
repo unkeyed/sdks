@@ -1,0 +1,32 @@
+# TextFilter
+
+Filters a text field. Every operator is exact and case-sensitive. `%` and `_` match only themselves.
+The positive operators (`is`, `contains`, `startsWith`, `endsWith`) are combined with OR.
+The negated operators (`isNot`, `notContains`) are combined with AND.
+
+
+## Example Usage
+
+```typescript
+import { TextFilter } from "@unkey/api/models/components";
+
+let value: TextFilter = {
+  notContains: [
+    "verifyKey",
+  ],
+  startsWith: [
+    "/v2/keys.",
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                  | Type                                                                                                                                                                                   | Required                                                                                                                                                                               | Description                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `is`                                                                                                                                                                                   | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
+| `isNot`                                                                                                                                                                                | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
+| `contains`                                                                                                                                                                             | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
+| `notContains`                                                                                                                                                                          | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
+| `startsWith`                                                                                                                                                                           | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
+| `endsWith`                                                                                                                                                                             | *string*[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                     | The values of one filter operator. A row matches a positive operator when it matches any value in the list.<br/>A row matches a negated operator only when it matches none of the values.<br/> |
