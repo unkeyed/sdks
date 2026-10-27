@@ -26,6 +26,7 @@ if TYPE_CHECKING:
     from unkey.py.identities import Identities
     from unkey.py.internal import Internal
     from unkey.py.keys import Keys
+    from unkey.py.logs import Logs
     from unkey.py.permissions import Permissions
     from unkey.py.portal_sdk import PortalSDK
     from unkey.py.projects import Projects
@@ -134,6 +135,8 @@ class Unkey(BaseSDK):
     r"""Identity management operations"""
     keys: "Keys"
     r"""API key management operations"""
+    logs: "Logs"
+    r"""Log listing operations"""
     permissions: "Permissions"
     r"""Permission and role management operations"""
     portal: "PortalSDK"
@@ -156,6 +159,7 @@ class Unkey(BaseSDK):
         "github": ("unkey.py.github", "Github"),
         "identities": ("unkey.py.identities", "Identities"),
         "keys": ("unkey.py.keys", "Keys"),
+        "logs": ("unkey.py.logs", "Logs"),
         "permissions": ("unkey.py.permissions", "Permissions"),
         "portal": ("unkey.py.portal_sdk", "PortalSDK"),
         "projects": ("unkey.py.projects", "Projects"),

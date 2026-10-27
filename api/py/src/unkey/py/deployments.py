@@ -13,6 +13,594 @@ from unkey.py.utils.unmarshal_json_response import unmarshal_json_response
 class Deployments(BaseSDK):
     r"""Deployment operations"""
 
+    def authorize_deployment(
+        self,
+        *,
+        deployment_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsAuthorizeDeploymentResponseBody:
+        r"""Authorize deployment
+
+        Authorize a deployment that is awaiting approval. Deployments from forked
+        pull requests run code from outside your repository, so they wait for a
+        project member to approve them before they build.
+
+        The deployment must have the status `awaiting_approval`. Authorization is
+        asynchronous: this endpoint only enqueues it and returns immediately. The
+        deployment then moves to `pending` and starts its build. Poll
+        `getDeployment` to follow its status. If the build cannot start, the
+        deployment returns to `awaiting_approval`.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsAuthorizeDeploymentRequestBody(
+            deployment_id=deployment_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/deployments.authorizeDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsAuthorizeDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.authorizeDeployment",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsAuthorizeDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def authorize_deployment_async(
+        self,
+        *,
+        deployment_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsAuthorizeDeploymentResponseBody:
+        r"""Authorize deployment
+
+        Authorize a deployment that is awaiting approval. Deployments from forked
+        pull requests run code from outside your repository, so they wait for a
+        project member to approve them before they build.
+
+        The deployment must have the status `awaiting_approval`. Authorization is
+        asynchronous: this endpoint only enqueues it and returns immediately. The
+        deployment then moves to `pending` and starts its build. Poll
+        `getDeployment` to follow its status. If the build cannot start, the
+        deployment returns to `awaiting_approval`.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsAuthorizeDeploymentRequestBody(
+            deployment_id=deployment_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/deployments.authorizeDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsAuthorizeDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.authorizeDeployment",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsAuthorizeDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def cancel_deployment(
+        self,
+        *,
+        deployment_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsCancelDeploymentResponseBody:
+        r"""Cancel deployment
+
+        Cancel a deployment that has not finished yet: queued, waiting for
+        approval, building, or deploying. Cancelling aborts its run and marks it
+        `cancelled`.
+
+        Only in-progress deployments can be cancelled. To take a `ready` preview
+        deployment offline, use `stopDeployment` instead.
+
+        Cancellation is asynchronous: this endpoint only enqueues it and returns
+        immediately. Poll `getDeployment` until the status reaches `cancelled`.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsCancelDeploymentRequestBody(
+            deployment_id=deployment_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/deployments.cancelDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsCancelDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.cancelDeployment",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsCancelDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def cancel_deployment_async(
+        self,
+        *,
+        deployment_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2DeploymentsCancelDeploymentResponseBody:
+        r"""Cancel deployment
+
+        Cancel a deployment that has not finished yet: queued, waiting for
+        approval, building, or deploying. Cancelling aborts its run and marks it
+        `cancelled`.
+
+        Only in-progress deployments can be cancelled. To take a `ready` preview
+        deployment offline, use `stopDeployment` instead.
+
+        Cancellation is asynchronous: this endpoint only enqueues it and returns
+        immediately. Poll `getDeployment` until the status reaches `cancelled`.
+
+        **Required Permissions**
+
+        Your root key must have the following permission:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param deployment_id: Identifies a resource by either its unique ID or its slug.
+            Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2DeploymentsCancelDeploymentRequestBody(
+            deployment_id=deployment_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/deployments.cancelDeployment",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                False,
+                "json",
+                models.V2DeploymentsCancelDeploymentRequestBody,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deployments.cancelDeployment",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["deployments"],
+                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(
+                models.V2DeploymentsCancelDeploymentResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     @deprecated(
         "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
     )
@@ -608,7 +1196,7 @@ class Deployments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2DeploymentsListBuildLogsResponseBody:
+    ) -> Optional[models.DeploymentsListBuildLogsResponse]:
         r"""List build logs
 
         Retrieve the build output of a deployment as a list of log entries, in the
@@ -732,10 +1320,35 @@ class Deployments(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[models.DeploymentsListBuildLogsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$.pagination.cursor").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list_build_logs(
+                deployment_id=deployment_id,
+                step_id=step_id,
+                cursor=next_cursor,
+                limit=limit,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2DeploymentsListBuildLogsResponseBody, http_res
+            return models.DeploymentsListBuildLogsResponse(
+                result=unmarshal_json_response(
+                    models.V2DeploymentsListBuildLogsResponseBody, http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -782,7 +1395,7 @@ class Deployments(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2DeploymentsListBuildLogsResponseBody:
+    ) -> Optional[models.DeploymentsListBuildLogsResponse]:
         r"""List build logs
 
         Retrieve the build output of a deployment as a list of log entries, in the
@@ -906,10 +1519,35 @@ class Deployments(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[models.DeploymentsListBuildLogsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$.pagination.cursor").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list_build_logs(
+                deployment_id=deployment_id,
+                step_id=step_id,
+                cursor=next_cursor,
+                limit=limit,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2DeploymentsListBuildLogsResponseBody, http_res
+            return models.DeploymentsListBuildLogsResponse(
+                result=unmarshal_json_response(
+                    models.V2DeploymentsListBuildLogsResponseBody, http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(

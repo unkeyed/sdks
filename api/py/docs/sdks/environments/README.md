@@ -169,8 +169,10 @@ with Unkey(
 
     res = unkey.environments.list_environment_variables(project="payments", app="payments-api", environment="production", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -187,7 +189,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2EnvironmentsListEnvironmentVariablesResponseBody](../../models/v2environmentslistenvironmentvariablesresponsebody.md)**
+**[models.EnvironmentsListEnvironmentVariablesResponse](../../models/environmentslistenvironmentvariablesresponse.md)**
 
 ### Errors
 

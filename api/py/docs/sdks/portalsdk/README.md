@@ -496,8 +496,10 @@ with Unkey(
 
     res = unkey.portal.list_sessions(portal="proj_1234abcd", limit=100, cursor="user_123", search="user_")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -513,7 +515,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2PortalListSessionsResponseBody](../../models/v2portallistsessionsresponsebody.md)**
+**[models.PortalListSessionsResponse](../../models/portallistsessionsresponse.md)**
 
 ### Errors
 
