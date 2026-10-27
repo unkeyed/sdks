@@ -13,6 +13,8 @@ type DomainsListDomainsResponse struct {
 	// mismatched filtered resources return an empty list.
 	//
 	V2DomainsListDomainsResponseBody *components.V2DomainsListDomainsResponseBody
+
+	Next func() (*DomainsListDomainsResponse, error)
 }
 
 func (d DomainsListDomainsResponse) MarshalJSON() ([]byte, error) {

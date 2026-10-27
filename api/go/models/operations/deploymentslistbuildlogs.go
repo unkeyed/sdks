@@ -12,6 +12,8 @@ type DeploymentsListBuildLogsResponse struct {
 	// Successfully retrieved the build log entries.
 	//
 	V2DeploymentsListBuildLogsResponseBody *components.V2DeploymentsListBuildLogsResponseBody
+
+	Next func() (*DeploymentsListBuildLogsResponse, error)
 }
 
 func (d DeploymentsListBuildLogsResponse) MarshalJSON() ([]byte, error) {

@@ -634,7 +634,19 @@ func main() {
         log.Fatal(err)
     }
     if res.V2PortalListSessionsResponseBody != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
