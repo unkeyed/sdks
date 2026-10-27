@@ -12,6 +12,8 @@ type PortalListSessionsResponse struct {
 	// One page of end users with revocable sessions.
 	//
 	V2PortalListSessionsResponseBody *components.V2PortalListSessionsResponseBody
+
+	Next func() (*PortalListSessionsResponse, error)
 }
 
 func (p PortalListSessionsResponse) MarshalJSON() ([]byte, error) {

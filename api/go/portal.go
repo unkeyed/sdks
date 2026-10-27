@@ -2644,6 +2644,7 @@ func (s *Portal) ListSessions(ctx context.Context, request components.V2PortalLi
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -2771,6 +2772,50 @@ func (s *Portal) ListSessions(ctx context.Context, request components.V2PortalLi
 			Request:  req,
 			Response: httpRes,
 		},
+	}
+	res.Next = func() (*operations.PortalListSessionsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.pagination.cursor")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+		request.Cursor = &nCVal
+
+		return s.ListSessions(
+			paginationCtx,
+			request,
+			opts...,
+		)
 	}
 
 	switch {

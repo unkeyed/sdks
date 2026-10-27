@@ -12,6 +12,8 @@ type EnvironmentsListEnvironmentVariablesResponse struct {
 	// Successfully retrieved a page of environment variables.
 	//
 	V2EnvironmentsListEnvironmentVariablesResponseBody *components.V2EnvironmentsListEnvironmentVariablesResponseBody
+
+	Next func() (*EnvironmentsListEnvironmentVariablesResponse, error)
 }
 
 func (e EnvironmentsListEnvironmentVariablesResponse) MarshalJSON() ([]byte, error) {

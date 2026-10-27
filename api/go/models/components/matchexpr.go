@@ -13,11 +13,11 @@ type MatchExpr struct {
 	Path *PathMatch `json:"path,omitzero"`
 	// Matches when the request method is one of the listed methods.
 	Method *MethodMatch `json:"method,omitzero"`
-	// Matches a named request field (header or query parameter). Exactly one of
-	// `present` or `value` must be set.
+	// Matches a named request field (header or query parameter). Set `present` or
+	// `value`, not both. If neither is supplied, the field must be present.
 	Header *FieldMatch `json:"header,omitzero"`
-	// Matches a named request field (header or query parameter). Exactly one of
-	// `present` or `value` must be set.
+	// Matches a named request field (header or query parameter). Set `present` or
+	// `value`, not both. If neither is supplied, the field must be present.
 	QueryParam *FieldMatch `json:"queryParam,omitzero"`
 	// Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
 	// or `notIn` must be set. Entries are rejected if they have host bits set (such
