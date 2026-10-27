@@ -32,10 +32,10 @@ targets:
     api-ts:
         source: api
         sourceNamespace: api
-        sourceRevisionDigest: sha256:b6ea66f61eb6682e79ff1c8b53c31faafd604ef3f381abae174b6b278ca3f7d4
-        sourceBlobDigest: sha256:e81807b3eaaa46883b93175a887bbe36c5f9dfd95d74bd00c31928cf504c079c
+        sourceRevisionDigest: sha256:1d708ab4e2c732b1e0b91b5103b95557ffbcdb920302b87b42936f232e28946f
+        sourceBlobDigest: sha256:2c1064e54302b90d8c2b6beee5a1a594483ae7f837368ccee32089bd7f71d990
         codeSamplesNamespace: api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:f17985100a412d950262b1416bafbae583a389a655ff261871a034c3801dfe15
+        codeSamplesRevisionDigest: sha256:c3f04e608a488ba4bc15ad13ac393996859faa79eaf772d585cb4e13610a63a5
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

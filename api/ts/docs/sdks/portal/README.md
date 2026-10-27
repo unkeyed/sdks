@@ -750,7 +750,9 @@ async function run() {
     search: "user_",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -778,7 +780,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("portalListSessions failed:", res.error);
   }
@@ -798,7 +802,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2PortalListSessionsResponseBody](../../models/components/v2portallistsessionsresponsebody.md)\>**
+**Promise\<[operations.PortalListSessionsResponse](../../models/operations/portallistsessionsresponse.md)\>**
 
 ### Errors
 
