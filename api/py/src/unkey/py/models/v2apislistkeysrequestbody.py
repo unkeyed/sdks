@@ -38,12 +38,9 @@ class V2ApisListKeysRequestBodyTypedDict(TypedDict):
     - Never enable this in user-facing applications
     """
     revalidate_keys_cache: NotRequired[bool]
-    r"""EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
-    - You've just created a key and need to display it immediately
-    - You need absolute certainty about the current key state
-    - You're debugging cache consistency issues
-
-    This parameter comes with a performance cost and should be used sparingly.
+    r"""When true, reads keys and their identities from the primary database to avoid replica lag.
+    When false or omitted, reads from a replica, which may not reflect recent changes.
+    Primary reads can have higher latency, depending on your region.
     """
 
 
@@ -84,12 +81,9 @@ class V2ApisListKeysRequestBody(BaseModel):
     revalidate_keys_cache: Annotated[
         Optional[bool], pydantic.Field(alias="revalidateKeysCache")
     ] = False
-    r"""EXPERIMENTAL: Skip the cache and fetch the keys directly from the database. This ensures you see the most recent state, including keys created moments ago. Use this when:
-    - You've just created a key and need to display it immediately
-    - You need absolute certainty about the current key state
-    - You're debugging cache consistency issues
-
-    This parameter comes with a performance cost and should be used sparingly.
+    r"""When true, reads keys and their identities from the primary database to avoid replica lag.
+    When false or omitted, reads from a replica, which may not reflect recent changes.
+    Primary reads can have higher latency, depending on your region.
     """
 
     @model_serializer(mode="wrap")

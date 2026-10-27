@@ -112,7 +112,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -268,7 +268,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -460,7 +460,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -655,7 +655,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -810,7 +810,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -952,7 +952,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1341,7 +1341,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1480,7 +1480,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2203,7 +2203,7 @@ class PortalSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2PortalListSessionsResponseBody:
+    ) -> Optional[models.PortalListSessionsResponse]:
         r"""List portal sessions
 
         List the end users holding a revocable session on a portal, with each
@@ -2302,17 +2302,42 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[models.PortalListSessionsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$.pagination.cursor").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list_sessions(
+                portal=portal,
+                limit=limit,
+                cursor=next_cursor,
+                search=search,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2PortalListSessionsResponseBody, http_res
+            return models.PortalListSessionsResponse(
+                result=unmarshal_json_response(
+                    models.V2PortalListSessionsResponseBody, http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -2359,7 +2384,7 @@ class PortalSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2PortalListSessionsResponseBody:
+    ) -> Optional[models.PortalListSessionsResponse]:
         r"""List portal sessions
 
         List the end users holding a revocable session on a portal, with each
@@ -2458,17 +2483,42 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[models.PortalListSessionsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$.pagination.cursor").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list_sessions(
+                portal=portal,
+                limit=limit,
+                cursor=next_cursor,
+                search=search,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2PortalListSessionsResponseBody, http_res
+            return models.PortalListSessionsResponse(
+                result=unmarshal_json_response(
+                    models.V2PortalListSessionsResponseBody, http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
@@ -2926,7 +2976,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3080,7 +3130,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3276,7 +3326,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3477,7 +3527,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

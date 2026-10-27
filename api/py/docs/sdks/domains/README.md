@@ -790,8 +790,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="payments-api", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byAppAndEnvironment
@@ -807,8 +809,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="payments-api", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byEnvironment
@@ -824,8 +828,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byIds
@@ -841,8 +847,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="env_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byProject
@@ -858,8 +866,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byProjectAndApp
@@ -875,8 +885,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="payments-api", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: byProjectAndEnvironment
@@ -892,8 +904,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="proj_1234abcd", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: bySlugs
@@ -909,8 +923,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="payments-api", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: domainList
@@ -926,8 +942,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: empty
@@ -943,8 +961,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: environmentNotFound
@@ -960,8 +980,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: internalError
@@ -977,8 +999,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: invalidRootKey
@@ -994,8 +1018,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: keyDisabled
@@ -1011,8 +1037,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: paginated
@@ -1028,8 +1056,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="payments-api", environment="production", limit=20, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: rateLimited
@@ -1045,8 +1075,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: scanBudgetExhausted
@@ -1062,8 +1094,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: search
@@ -1079,8 +1113,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="payments", app="payments-api", environment="production", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: searchTooLong
@@ -1096,8 +1132,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: workspaceWide
@@ -1113,8 +1151,10 @@ with Unkey(
 
     res = unkey.domains.list_domains(project="proj_1234abcd", app="proj_1234abcd", environment="proj_1234abcd", limit=100, cursor="dom_1234abcd", search="acme.com")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -1132,7 +1172,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2DomainsListDomainsResponseBody](../../models/v2domainslistdomainsresponsebody.md)**
+**[models.DomainsListDomainsResponse](../../models/domainslistdomainsresponse.md)**
 
 ### Errors
 

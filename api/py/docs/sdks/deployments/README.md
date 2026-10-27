@@ -6,6 +6,8 @@ Deployment operations
 
 ### Available Operations
 
+* [authorize_deployment](#authorize_deployment) - Authorize deployment
+* [cancel_deployment](#cancel_deployment) - Cancel deployment
 * [~~create_deployment~~](#create_deployment) - Create deployment :warning: **Deprecated**
 * [get_deployment](#get_deployment) - Get deployment
 * [list_build_logs](#list_build_logs) - List build logs
@@ -15,6 +17,260 @@ Deployment operations
 * [start_deployment](#start_deployment) - Start deployment
 * [stop_deployment](#stop_deployment) - Stop deployment
 * [create_deployment_v3](#create_deployment_v3) - Create deployment
+
+## authorize_deployment
+
+Authorize a deployment that is awaiting approval. Deployments from forked
+pull requests run code from outside your repository, so they wait for a
+project member to approve them before they build.
+
+The deployment must have the status `awaiting_approval`. Authorization is
+asynchronous: this endpoint only enqueues it and returns immediately. The
+deployment then moves to `pending` and starts its build. Poll
+`getDeployment` to follow its status. If the build cannot start, the
+deployment returns to `awaiting_approval`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="python" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="accepted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.authorize_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: authorize
+
+<!-- UsageSnippet language="python" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="authorize" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.authorize_deployment(deployment_id="d_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="python" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="missingDeploymentId" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.authorize_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: notAwaitingApproval
+
+<!-- UsageSnippet language="python" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notAwaitingApproval" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.authorize_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="python" operationID="deployments.authorizeDeployment" method="post" path="/v2/deployments.authorizeDeployment" example="notFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.authorize_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `deployment_id`                                                                                                          | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2DeploymentsAuthorizeDeploymentResponseBody](../../models/v2deploymentsauthorizedeploymentresponsebody.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## cancel_deployment
+
+Cancel a deployment that has not finished yet: queued, waiting for
+approval, building, or deploying. Cancelling aborts its run and marks it
+`cancelled`.
+
+Only in-progress deployments can be cancelled. To take a `ready` preview
+deployment offline, use `stopDeployment` instead.
+
+Cancellation is asynchronous: this endpoint only enqueues it and returns
+immediately. Poll `getDeployment` until the status reaches `cancelled`.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
+
+
+### Example Usage: accepted
+
+<!-- UsageSnippet language="python" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="accepted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.cancel_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: cancel
+
+<!-- UsageSnippet language="python" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="cancel" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.cancel_deployment(deployment_id="d_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missingDeploymentId
+
+<!-- UsageSnippet language="python" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="missingDeploymentId" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.cancel_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: notFound
+
+<!-- UsageSnippet language="python" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notFound" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.cancel_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: notInProgress
+
+<!-- UsageSnippet language="python" operationID="deployments.cancelDeployment" method="post" path="/v2/deployments.cancelDeployment" example="notInProgress" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.deployments.cancel_deployment(deployment_id="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `deployment_id`                                                                                                          | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2DeploymentsCancelDeploymentResponseBody](../../models/v2deploymentscanceldeploymentresponsebody.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.NotFoundErrorResponse           | 404                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## ~~create_deployment~~
 
@@ -224,8 +480,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: deploymentNotFound
@@ -241,8 +499,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: entries
@@ -258,8 +518,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: firstPage
@@ -275,8 +537,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: invalidCursor
@@ -292,8 +556,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: invalidRootKey
@@ -309,8 +575,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: logsUnavailable
@@ -326,8 +594,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="proj_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: nextPage
@@ -343,8 +613,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 ### Example Usage: oneStep
@@ -360,8 +632,10 @@ with Unkey(
 
     res = unkey.deployments.list_build_logs(deployment_id="d_1234abcd", step_id="sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", cursor="1704067201000001", limit=100)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -377,7 +651,7 @@ with Unkey(
 
 ### Response
 
-**[models.V2DeploymentsListBuildLogsResponseBody](../../models/v2deploymentslistbuildlogsresponsebody.md)**
+**[models.DeploymentsListBuildLogsResponse](../../models/deploymentslistbuildlogsresponse.md)**
 
 ### Errors
 

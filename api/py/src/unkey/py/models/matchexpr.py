@@ -22,12 +22,12 @@ class MatchExprTypedDict(TypedDict):
     method: NotRequired[MethodMatchTypedDict]
     r"""Matches when the request method is one of the listed methods."""
     header: NotRequired[FieldMatchTypedDict]
-    r"""Matches a named request field (header or query parameter). Exactly one of
-    `present` or `value` must be set.
+    r"""Matches a named request field (header or query parameter). Set `present` or
+    `value`, not both. If neither is supplied, the field must be present.
     """
     query_param: NotRequired[FieldMatchTypedDict]
-    r"""Matches a named request field (header or query parameter). Exactly one of
-    `present` or `value` must be set.
+    r"""Matches a named request field (header or query parameter). Set `present` or
+    `value`, not both. If neither is supplied, the field must be present.
     """
     remote_ip: NotRequired[RemoteIPMatchTypedDict]
     r"""Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`
@@ -49,15 +49,15 @@ class MatchExpr(BaseModel):
     r"""Matches when the request method is one of the listed methods."""
 
     header: Optional[FieldMatch] = None
-    r"""Matches a named request field (header or query parameter). Exactly one of
-    `present` or `value` must be set.
+    r"""Matches a named request field (header or query parameter). Set `present` or
+    `value`, not both. If neither is supplied, the field must be present.
     """
 
     query_param: Annotated[Optional[FieldMatch], pydantic.Field(alias="queryParam")] = (
         None
     )
-    r"""Matches a named request field (header or query parameter). Exactly one of
-    `present` or `value` must be set.
+    r"""Matches a named request field (header or query parameter). Set `present` or
+    `value`, not both. If neither is supplied, the field must be present.
     """
 
     remote_ip: Annotated[Optional[RemoteIPMatch], pydantic.Field(alias="remoteIp")] = (

@@ -6,8 +6,82 @@ Workspace limits and usage operations
 
 ### Available Operations
 
+* [get_flags](#get_flags) - Get workspace flags
 * [get_limits](#get_limits) - Get workspace limits
 * [get_usage](#get_usage) - Get workspace usage
+* [update_flag](#update_flag) - Update a workspace flag
+
+## get_flags
+
+Get feature flags for the workspace associated with your credentials.
+
+Each flag is keyed by its slug and includes its current value, description,
+and whether it can be enabled or disabled. A workspace-specific value takes
+precedence over the flag's default. If no flags are available, `data` is an
+empty object.
+
+This endpoint takes no request body.
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:flags#read`
+
+
+### Example Usage: empty
+
+<!-- UsageSnippet language="python" operationID="workspace.getFlags" method="post" path="/v2/workspace.getFlags" example="empty" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.workspace.get_flags()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: flags
+
+<!-- UsageSnippet language="python" operationID="workspace.getFlags" method="post" path="/v2/workspace.getFlags" example="flags" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.workspace.get_flags()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.V2WorkspaceGetFlagsResponseBody](../../models/v2workspacegetflagsresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## get_limits
 
@@ -344,6 +418,59 @@ with Unkey(
 | errors.BadRequestErrorResponse      | 400                                 | application/json                    |
 | errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
 | errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## update_flag
+
+Enable or disable a flag for your workspace. Use `workspace.getFlags` to
+find flag slugs and check whether they can be enabled or disabled.
+
+**Required Permissions**
+
+Your root key must have the following permission:
+- `unkey:v1:<workspace_id>:flags#write`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="workspace.updateFlag" method="post" path="/v2/workspace.updateFlag" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.workspace.update_flag(slug="<value>", enabled=True)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `slug`                                                                                   | *str*                                                                                    | :heavy_check_mark:                                                                       | Lowercase snake_case slug of the flag to update, as returned by `workspace.getFlags`.    |
+| `enabled`                                                                                | *bool*                                                                                   | :heavy_check_mark:                                                                       | Set to true to enable the flag or false to disable it, regardless of the flag's default. |
+| `retries`                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                         | :heavy_minus_sign:                                                                       | Configuration to override the default retry behavior of the client.                      |
+
+### Response
+
+**[models.V2WorkspaceUpdateFlagResponseBody](../../models/v2workspaceupdateflagresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
