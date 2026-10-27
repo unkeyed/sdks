@@ -1999,7 +1999,9 @@ async function run() {
     app: "payments-api",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2025,7 +2027,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2049,7 +2053,9 @@ async function run() {
     environment: "production",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2076,7 +2082,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2099,7 +2107,9 @@ async function run() {
     environment: "production",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2125,7 +2135,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2148,7 +2160,9 @@ async function run() {
     environment: "env_1234abcd",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2174,7 +2188,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2197,7 +2213,9 @@ async function run() {
     project: "payments",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2223,7 +2241,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2247,7 +2267,9 @@ async function run() {
     app: "payments-api",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2274,7 +2296,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2298,7 +2322,9 @@ async function run() {
     environment: "production",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2325,7 +2351,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2350,7 +2378,9 @@ async function run() {
     environment: "production",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2378,7 +2408,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2405,7 +2437,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2435,7 +2469,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2462,7 +2498,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2492,7 +2530,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2519,7 +2559,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2549,7 +2591,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2576,7 +2620,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2606,7 +2652,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2633,7 +2681,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2663,7 +2713,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2690,7 +2742,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2720,7 +2774,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2747,7 +2803,9 @@ async function run() {
     cursor: "dom_1234abcd",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2777,7 +2835,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2804,7 +2864,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2834,7 +2896,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2861,7 +2925,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2891,7 +2957,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2917,7 +2985,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -2946,7 +3016,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -2973,7 +3045,9 @@ async function run() {
     search: "acme.com",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -3003,7 +3077,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -3024,7 +3100,9 @@ const unkey = new Unkey({
 async function run() {
   const result = await unkey.domains.listDomains({});
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -3048,7 +3126,9 @@ async function run() {
   const res = await domainsListDomains(unkey, {});
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("domainsListDomains failed:", res.error);
   }
@@ -3068,7 +3148,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2DomainsListDomainsResponseBody](../../models/components/v2domainslistdomainsresponsebody.md)\>**
+**Promise\<[operations.DomainsListDomainsResponse](../../models/operations/domainslistdomainsresponse.md)\>**
 
 ### Errors
 

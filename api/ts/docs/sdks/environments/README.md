@@ -353,7 +353,9 @@ async function run() {
     environment: "production",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -381,7 +383,9 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("environmentsListEnvironmentVariables failed:", res.error);
   }
@@ -401,7 +405,7 @@ run();
 
 ### Response
 
-**Promise\<[components.V2EnvironmentsListEnvironmentVariablesResponseBody](../../models/components/v2environmentslistenvironmentvariablesresponsebody.md)\>**
+**Promise\<[operations.EnvironmentsListEnvironmentVariablesResponse](../../models/operations/environmentslistenvironmentvariablesresponse.md)\>**
 
 ### Errors
 

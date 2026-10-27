@@ -266,6 +266,8 @@ run();
 
 ### [Deployments](docs/sdks/deployments/README.md)
 
+* [authorizeDeployment](docs/sdks/deployments/README.md#authorizedeployment) - Authorize deployment
+* [cancelDeployment](docs/sdks/deployments/README.md#canceldeployment) - Cancel deployment
 * [~~createDeployment~~](docs/sdks/deployments/README.md#createdeployment) - Create deployment :warning: **Deprecated**
 * [getDeployment](docs/sdks/deployments/README.md#getdeployment) - Get deployment
 * [listBuildLogs](docs/sdks/deployments/README.md#listbuildlogs) - List build logs
@@ -333,6 +335,11 @@ run();
 * [updateKey](docs/sdks/keys/README.md#updatekey) - Update key settings
 * [verifyKey](docs/sdks/keys/README.md#verifykey) - Verify API key
 * [whoami](docs/sdks/keys/README.md#whoami) - Get API key by hash
+
+### [Logs](docs/sdks/logs/README.md)
+
+* [getApiRequestMetrics](docs/sdks/logs/README.md#getapirequestmetrics) - Get API request metrics
+* [listApiRequests](docs/sdks/logs/README.md#listapirequests) - List API requests
 
 ### [Permissions](docs/sdks/permissions/README.md)
 
@@ -429,6 +436,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appsGetApp`](docs/sdks/apps/README.md#getapp) - Get app
 - [`appsListApps`](docs/sdks/apps/README.md#listapps) - List apps
 - [`appsUpdateApp`](docs/sdks/apps/README.md#updateapp) - Update app
+- [`deploymentsAuthorizeDeployment`](docs/sdks/deployments/README.md#authorizedeployment) - Authorize deployment
+- [`deploymentsCancelDeployment`](docs/sdks/deployments/README.md#canceldeployment) - Cancel deployment
 - [`deploymentsCreateDeploymentV3`](docs/sdks/deployments/README.md#createdeploymentv3) - Create deployment
 - [`deploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get deployment
 - [`deploymentsListBuildLogs`](docs/sdks/deployments/README.md#listbuildlogs) - List build logs
@@ -472,6 +481,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`keysUpdateKey`](docs/sdks/keys/README.md#updatekey) - Update key settings
 - [`keysVerifyKey`](docs/sdks/keys/README.md#verifykey) - Verify API key
 - [`keysWhoami`](docs/sdks/keys/README.md#whoami) - Get API key by hash
+- [`logsGetApiRequestMetrics`](docs/sdks/logs/README.md#getapirequestmetrics) - Get API request metrics
+- [`logsListApiRequests`](docs/sdks/logs/README.md#listapirequests) - List API requests
 - [`permissionsCreatePermission`](docs/sdks/permissions/README.md#createpermission) - Create permission
 - [`permissionsCreateRole`](docs/sdks/permissions/README.md#createrole) - Create role
 - [`permissionsDeletePermission`](docs/sdks/permissions/README.md#deletepermission) - Delete permission
@@ -704,12 +715,12 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 83 of 105 methods.*
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 105 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 13 of 105 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 5 of 105 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 5 of 105 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 105 methods.*
+* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 85 of 109 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 109 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 109 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 109 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 109 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 109 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
