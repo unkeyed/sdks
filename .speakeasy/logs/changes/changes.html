@@ -98,29 +98,19 @@
 <body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.deployments.authorize_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.cancel_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.logs.get_api_request_metrics()</code>: <strong>Added</strong></li>
-<li><code>unkey.logs.list_api_requests()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.create_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.delete_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.list_namespaces()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.update_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.get_flags()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.update_flag()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.get_deployment()</code>:  <code>response.data.issues</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.list_deployments()</code>:  <code>response.data[].issues</code> <strong>Added</strong></li>
-<li><code>unkey.gateway.list_policies()</code>:  <code>response.data[].match[].header.present</code> <strong>Changed</strong></li>
-<li><code>unkey.gateway.set_policies()</code>:
-
-<ul>
-<li><code>request.policies[].match[].header.present</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>unkey.gateway.update_policy()</code>:
-
-<ul>
-<li><code>request.match[].header.present</code> <strong>Changed</strong></li>
-</ul></li>
+<li><code>unkey.logs.get_api_request_metrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.list_api_requests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.deployments.stop_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.promote_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.rollback_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.start_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.authorize_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.list_build_logs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.cancel_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.delete_role()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.delete_portal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.revoke_session()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.update_portal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>
