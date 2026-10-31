@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - python</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,32 +95,22 @@
         }
     </style>
 </head>
-<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.deployments.authorize_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.cancel_deployment()</code>: <strong>Added</strong></li>
-<li><code>unkey.logs.get_api_request_metrics()</code>: <strong>Added</strong></li>
-<li><code>unkey.logs.list_api_requests()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.create_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.delete_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.list_namespaces()</code>: <strong>Added</strong></li>
-<li><code>unkey.ratelimit.update_namespace()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.get_flags()</code>: <strong>Added</strong></li>
-<li><code>unkey.workspace.update_flag()</code>: <strong>Added</strong></li>
-<li><code>unkey.deployments.get_deployment()</code>:  <code>response.data.issues</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.list_deployments()</code>:  <code>response.data[].issues</code> <strong>Added</strong></li>
-<li><code>unkey.gateway.list_policies()</code>:  <code>response.data[].match[].header.present</code> <strong>Changed</strong></li>
-<li><code>unkey.gateway.set_policies()</code>:
-
-<ul>
-<li><code>request.policies[].match[].header.present</code> <strong>Changed</strong></li>
-</ul></li>
-<li><code>unkey.gateway.update_policy()</code>:
-
-<ul>
-<li><code>request.match[].header.present</code> <strong>Changed</strong></li>
-</ul></li>
+<li><code>unkey.logs.getApiRequestMetrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.listApiRequests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.deployments.stopDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.promoteDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.rollbackDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.startDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.authorizeDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.listBuildLogs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.cancelDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.deleteRole()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.deletePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.revokeSession()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.updatePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

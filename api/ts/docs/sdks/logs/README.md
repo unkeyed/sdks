@@ -651,7 +651,6 @@ run();
 | errors.UnauthorizedErrorResponse        | 401                                     | application/json                        |
 | errors.ForbiddenErrorResponse           | 403                                     | application/json                        |
 | errors.UnprocessableEntityErrorResponse | 422                                     | application/json                        |
-| errors.TooManyRequestsErrorResponse     | 429                                     | application/json                        |
 | errors.InternalServerErrorResponse      | 500                                     | application/json                        |
 | errors.ServiceUnavailableErrorResponse  | 503                                     | application/json                        |
 | errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |
@@ -1396,7 +1395,6 @@ run();
 | errors.UnauthorizedErrorResponse        | 401                                     | application/json                        |
 | errors.ForbiddenErrorResponse           | 403                                     | application/json                        |
 | errors.UnprocessableEntityErrorResponse | 422                                     | application/json                        |
-| errors.TooManyRequestsErrorResponse     | 429                                     | application/json                        |
 | errors.InternalServerErrorResponse      | 500                                     | application/json                        |
 | errors.ServiceUnavailableErrorResponse  | 503                                     | application/json                        |
 | errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |
