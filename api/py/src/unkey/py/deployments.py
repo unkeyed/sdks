@@ -131,6 +131,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -278,6 +283,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -425,6 +435,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -572,6 +587,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -1001,7 +1021,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1139,7 +1159,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1313,7 +1333,10 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1360,6 +1383,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -1512,7 +1540,10 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1559,6 +1590,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -1725,7 +1761,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1948,7 +1984,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2057,9 +2093,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.promote_deployment` (to promote deployments in any environment)
-        - `environment.<environment_id>.promote_deployment` (to promote deployments in a specific environment)
+        Your root key must have write permission on the environment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2153,6 +2188,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2210,9 +2250,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.promote_deployment` (to promote deployments in any environment)
-        - `environment.<environment_id>.promote_deployment` (to promote deployments in a specific environment)
+        Your root key must have write permission on the environment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2306,6 +2345,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2363,9 +2407,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.rollback_deployment` (to roll back deployments in any environment)
-        - `environment.<environment_id>.rollback_deployment` (to roll back deployments in a specific environment)
+        Your root key must have write permission on the environment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2459,6 +2502,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2516,9 +2564,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.rollback_deployment` (to roll back deployments in any environment)
-        - `environment.<environment_id>.rollback_deployment` (to roll back deployments in a specific environment)
+        Your root key must have write permission on the environment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2612,6 +2659,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2665,9 +2717,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.start_deployment` (to start deployments in any environment)
-        - `environment.<environment_id>.start_deployment` (to start deployments in a specific environment)
+        Your root key must have write permission on the deployment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2761,6 +2812,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2814,9 +2870,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.start_deployment` (to start deployments in any environment)
-        - `environment.<environment_id>.start_deployment` (to start deployments in a specific environment)
+        Your root key must have write permission on the deployment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2910,6 +2965,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -2950,11 +3010,12 @@ class Deployments(BaseSDK):
     ) -> models.V2DeploymentsStopDeploymentResponseBody:
         r"""Stop deployment
 
-        Stop a running preview deployment. Stopped deployments keep their
-        configuration and can be resumed later with `startDeployment`.
+        Stop a running deployment that is not the app's live production deployment.
+        Stopped deployments keep their configuration. Preview deployments can be
+        resumed later with `startDeployment`.
 
-        The deployment must be ready and running, and must belong to a
-        non-production environment; production deployments cannot be stopped.
+        The deployment must be ready and running. Previous production deployments
+        can be stopped, but stopping one removes instant rollback to it.
         A deployment that is already draining from a previous stop is rejected
         with a precondition error.
 
@@ -2963,9 +3024,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.stop_deployment` (to stop deployments in any environment)
-        - `environment.<environment_id>.stop_deployment` (to stop deployments in a specific environment)
+        Your root key must have write permission on the deployment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3059,6 +3119,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -3099,11 +3164,12 @@ class Deployments(BaseSDK):
     ) -> models.V2DeploymentsStopDeploymentResponseBody:
         r"""Stop deployment
 
-        Stop a running preview deployment. Stopped deployments keep their
-        configuration and can be resumed later with `startDeployment`.
+        Stop a running deployment that is not the app's live production deployment.
+        Stopped deployments keep their configuration. Preview deployments can be
+        resumed later with `startDeployment`.
 
-        The deployment must be ready and running, and must belong to a
-        non-production environment; production deployments cannot be stopped.
+        The deployment must be ready and running. Previous production deployments
+        can be stopped, but stopping one removes instant rollback to it.
         A deployment that is already draining from a previous stop is rejected
         with a precondition error.
 
@@ -3112,9 +3178,8 @@ class Deployments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.stop_deployment` (to stop deployments in any environment)
-        - `environment.<environment_id>.stop_deployment` (to stop deployments in a specific environment)
+        Your root key must have write permission on the deployment:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3208,6 +3273,11 @@ class Deployments(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res

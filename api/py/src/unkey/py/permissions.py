@@ -1108,6 +1108,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
@@ -1251,6 +1256,11 @@ class Permissions(BaseSDK):
                 errors.ForbiddenErrorResponseData, http_res
             )
             raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
@@ -1357,7 +1367,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1495,7 +1505,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1633,7 +1643,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1771,7 +1781,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1921,7 +1931,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2090,7 +2100,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2257,7 +2267,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2429,7 +2439,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

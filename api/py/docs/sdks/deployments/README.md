@@ -139,6 +139,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
@@ -266,6 +267,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/json                       |
@@ -659,6 +661,7 @@ with Unkey(
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | errors.BadRequestErrorResponse      | 400                                 | application/json                    |
 | errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
@@ -912,9 +915,8 @@ the result.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.promote_deployment` (to promote deployments in any environment)
-- `environment.<environment_id>.promote_deployment` (to promote deployments in a specific environment)
+Your root key must have write permission on the environment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
 ### Example Usage: accepted
@@ -969,6 +971,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
@@ -994,9 +997,8 @@ the result.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.rollback_deployment` (to roll back deployments in any environment)
-- `environment.<environment_id>.rollback_deployment` (to roll back deployments in a specific environment)
+Your root key must have write permission on the environment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1051,6 +1053,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
@@ -1072,9 +1075,8 @@ immediately. Poll `getDeployment` until the status reaches `ready`.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.start_deployment` (to start deployments in any environment)
-- `environment.<environment_id>.start_deployment` (to start deployments in a specific environment)
+Your root key must have write permission on the deployment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1129,6 +1131,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
@@ -1137,11 +1140,12 @@ with Unkey(
 
 ## stop_deployment
 
-Stop a running preview deployment. Stopped deployments keep their
-configuration and can be resumed later with `startDeployment`.
+Stop a running deployment that is not the app's live production deployment.
+Stopped deployments keep their configuration. Preview deployments can be
+resumed later with `startDeployment`.
 
-The deployment must be ready and running, and must belong to a
-non-production environment; production deployments cannot be stopped.
+The deployment must be ready and running. Previous production deployments
+can be stopped, but stopping one removes instant rollback to it.
 A deployment that is already draining from a previous stop is rejected
 with a precondition error.
 
@@ -1150,9 +1154,8 @@ immediately. Poll `getDeployment` until the status reaches `stopped`.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.stop_deployment` (to stop deployments in any environment)
-- `environment.<environment_id>.stop_deployment` (to stop deployments in a specific environment)
+Your root key must have write permission on the deployment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1207,6 +1210,7 @@ with Unkey(
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | errors.BadRequestErrorResponse         | 400                                    | application/json                       |
 | errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
 | errors.NotFoundErrorResponse           | 404                                    | application/json                       |
 | errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
 | errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |

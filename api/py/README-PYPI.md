@@ -585,7 +585,7 @@ with Unkey(
 
 
 **Inherit from [`UnkeyError`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/unkeyerror.py)**:
-* [`NotFoundErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 85 of 109 methods.*
+* [`NotFoundErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/notfounderrorresponse.py): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 86 of 109 methods.*
 * [`ConflictErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/conflicterrorresponse.py): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 109 methods.*
 * [`PreconditionFailedErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/preconditionfailederrorresponse.py): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 109 methods.*
 * [`UnprocessableEntityErrorResponse`](https://github.com/unkeyed/sdks/blob/master/api/py/./src/unkey/py/errors/unprocessableentityerrorresponse.py): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 109 methods.*
@@ -731,6 +731,7 @@ def main():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
         # Rest of application here...
+        pass
 
 
 # Or when using async:
@@ -740,6 +741,7 @@ async def amain():
         root_key="<YOUR_BEARER_TOKEN_HERE>",
     ) as unkey:
         # Rest of application here...
+        pass
 ```
 <!-- End Resource Management [resource-management] -->
 
