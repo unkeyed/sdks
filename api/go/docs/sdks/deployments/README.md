@@ -215,6 +215,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/json                          |
@@ -418,6 +419,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/json                          |
@@ -1110,6 +1112,7 @@ func main() {
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
@@ -1544,9 +1547,8 @@ the result.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.promote_deployment` (to promote deployments in any environment)
-- `environment.<environment_id>.promote_deployment` (to promote deployments in a specific environment)
+Your root key must have write permission on the environment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1632,6 +1634,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |
@@ -1657,9 +1660,8 @@ the result.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.rollback_deployment` (to roll back deployments in any environment)
-- `environment.<environment_id>.rollback_deployment` (to roll back deployments in a specific environment)
+Your root key must have write permission on the environment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1745,6 +1747,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |
@@ -1766,9 +1769,8 @@ immediately. Poll `getDeployment` until the status reaches `ready`.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.start_deployment` (to start deployments in any environment)
-- `environment.<environment_id>.start_deployment` (to start deployments in a specific environment)
+Your root key must have write permission on the deployment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1854,6 +1856,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |
@@ -1862,11 +1865,12 @@ func main() {
 
 ## StopDeployment
 
-Stop a running preview deployment. Stopped deployments keep their
-configuration and can be resumed later with `startDeployment`.
+Stop a running deployment that is not the app's live production deployment.
+Stopped deployments keep their configuration. Preview deployments can be
+resumed later with `startDeployment`.
 
-The deployment must be ready and running, and must belong to a
-non-production environment; production deployments cannot be stopped.
+The deployment must be ready and running. Previous production deployments
+can be stopped, but stopping one removes instant rollback to it.
 A deployment that is already draining from a previous stop is rejected
 with a precondition error.
 
@@ -1875,9 +1879,8 @@ immediately. Poll `getDeployment` until the status reaches `stopped`.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.stop_deployment` (to stop deployments in any environment)
-- `environment.<environment_id>.stop_deployment` (to stop deployments in a specific environment)
+Your root key must have write permission on the deployment:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
 
 
 ### Example Usage: accepted
@@ -1963,6 +1966,7 @@ func main() {
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | apierrors.BadRequestErrorResponse         | 400                                       | application/json                          |
 | apierrors.UnauthorizedErrorResponse       | 401                                       | application/json                          |
+| apierrors.ForbiddenErrorResponse          | 403                                       | application/json                          |
 | apierrors.NotFoundErrorResponse           | 404                                       | application/json                          |
 | apierrors.PreconditionFailedErrorResponse | 412                                       | application/json                          |
 | apierrors.TooManyRequestsErrorResponse    | 429                                       | application/problem+json                  |

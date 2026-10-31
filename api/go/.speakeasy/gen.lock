@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 1e71104d-54d7-4d66-ad20-a43a13855261
 management:
-  docChecksum: 65b553db6eb71819b74061a44c856a82
+  docChecksum: aedbcea382aca96983332df230f808c4
   docVersion: 2.0.0
-  speakeasyVersion: 1.803.2
-  generationVersion: 2.950.13
-  releaseVersion: 3.1.1
-  configChecksum: eeaf9ef8c25bc80998baf5c78cc77543
+  speakeasyVersion: 1.805.0
+  generationVersion: 2.954.8
+  releaseVersion: 3.1.2
+  configChecksum: 8d7cc3a81bc06889925c1c3ef0eaf1a9
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/go
   installationURL: https://github.com/unkeyed/sdks
 persistentEdits:
-  generation_id: c7496be2-d559-43bc-ae8a-c6d00efcd2cc
-  pristine_commit_hash: f19ae62adb83a1ac6370b1bb4bb786451d494bec
-  pristine_tree_hash: 983767314c379b7ef8a0dcb04022809beaffa773
+  generation_id: f0c9b33e-8a29-4c32-b6aa-4e844a35facc
+  pristine_commit_hash: 7216550ab30d6c0eae3e5592030f3207d6f52421
+  pristine_tree_hash: a2a0aa2df114ba875cbf409c04a1b1b12bfd6b40
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.14
-    core: 3.16.3
+    constsAndDefaults: 0.1.15
+    core: 3.16.4
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     envVarSecurityUsage: 0.3.2
@@ -61,8 +61,8 @@ trackedFiles:
     pristine_git_object: a0b450569054fd095feaa45f9cb4ba51b452a036
   deployments.go:
     id: ff4c90b3f50f
-    last_write_checksum: sha1:fcc72d8efb7f1e3cb3e0463c30a765ae057e3780
-    pristine_git_object: fd59c99c45d477520dddd5322274c17c76b8aed6
+    last_write_checksum: sha1:cff73dad36ae41c7d2414d0aae4772daf74b19fe
+    pristine_git_object: 368f2b6f99d7854c497c58f4288daf6884054ace
   docs/models/apierrors/badrequesterrorresponse.md:
     id: 63d1eac23098
     last_write_checksum: sha1:9cf805c81e8d8f33fc4e3b5e34e9df8f4e1810cb
@@ -2153,8 +2153,8 @@ trackedFiles:
     pristine_git_object: af78c23e1e8c563c02368791603d2065023d5f5b
   docs/sdks/deployments/README.md:
     id: e7c5559ab768
-    last_write_checksum: sha1:de5dddf5cd7d1923fdde3e3bbeed901f703392b6
-    pristine_git_object: ba84aca46c83994b2b563e05ef35b15a9a0e1e30
+    last_write_checksum: sha1:85f497e26d14c0d8975883907a0ab57d96f8cd76
+    pristine_git_object: 0d3a8b5f4afaadec914b96094a65f465a1c989e4
   docs/sdks/domains/README.md:
     id: 06e9beb4063b
     last_write_checksum: sha1:e4d5b954fa2de1c7907d73260681ad9cc3dff973
@@ -2185,16 +2185,16 @@ trackedFiles:
     pristine_git_object: 7c1188a46cc3c631496cdd71e37a19b3418150c2
   docs/sdks/logs/README.md:
     id: 5adacd63da21
-    last_write_checksum: sha1:fe5f67051893ff55a4ca2ebada41cfedd6e73d8a
-    pristine_git_object: 422bb0db2a1c8de9509920d1de5f6b1f7986f677
+    last_write_checksum: sha1:7564ed33c22ac1523e1ac1457df7280bded941b9
+    pristine_git_object: 20c3a955b3b0df8c66d2229b07c16e9598079be2
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
-    last_write_checksum: sha1:ea1eeb799312cae17bf3e5362ebb5e8cdae2da06
-    pristine_git_object: 0854bd76b52dce2438e85a0fa51b35c06d0c801e
+    last_write_checksum: sha1:1bf5297d897656a21d2f14fe863df42012465c77
+    pristine_git_object: d6657544b3f986cbc62f2f12dbc6ca6d51763411
   docs/sdks/portal/README.md:
     id: 130ac1af4c35
-    last_write_checksum: sha1:73accfc9a88422aae7ad629450b5646f8e103a0a
-    pristine_git_object: a5351d777ccfa2813891053d183415ebcf5b965e
+    last_write_checksum: sha1:49ebf5199656ab41bce452d9d50e670d64121760
+    pristine_git_object: 1d99c891dd3453efaa856cb736d6cd06f2090525
   docs/sdks/projects/README.md:
     id: 1c5f71754e17
     last_write_checksum: sha1:31f1553cbde690e03c4be42953d61ec16457ee4a
@@ -2305,8 +2305,8 @@ trackedFiles:
     pristine_git_object: 17250ee8623f8835cf02ad76413f67020f485682
   logs.go:
     id: 9c836cec1fdd
-    last_write_checksum: sha1:5b324190572c6eea9a085cdc5e89af3071c8b451
-    pristine_git_object: ea8a69287a56395c31b787e40939bb01202c890c
+    last_write_checksum: sha1:4476943f2e37e7648f948379cbe824b89d8db98e
+    pristine_git_object: 9d0e6e686404876fb2116703041b93397116309d
   models/apierrors/apierror.go:
     id: 4cecf27a5a54
     last_write_checksum: sha1:e699d3325ea82ea2b0d29656396210f0513c3391
@@ -4273,12 +4273,12 @@ trackedFiles:
     pristine_git_object: 786206153d8252101a56c2ab1b661466bb8b5b7c
   permissions.go:
     id: 24d6fe5c456e
-    last_write_checksum: sha1:04483c9bac37ffaae6735896cfaffb1ce2fe5f9c
-    pristine_git_object: 6e49314730049ba6f807548b79b953e2b4add92c
+    last_write_checksum: sha1:92da172e799d9358104770fe9f64bbdd65d622a2
+    pristine_git_object: 9d86f9c9f05208a18308b45016e9ad90d2737d20
   portal.go:
     id: d4a27eb9bfa7
-    last_write_checksum: sha1:4392d5a01c992118220850295727e5ab310f9163
-    pristine_git_object: c186f7ed61b04b7710c8277e41178ab1b268bb85
+    last_write_checksum: sha1:7dc78472badfcf548e0b861d00ed8aab9841c593
+    pristine_git_object: da47b4f0f2a2fceb3038c14d34392e714b807cd9
   projects.go:
     id: 18025b258b56
     last_write_checksum: sha1:97c5281aba4b4a4016112277133cf783a47bbdb9
@@ -4313,8 +4313,8 @@ trackedFiles:
     pristine_git_object: 35c439d2661e08fcb6a854096fd7b9a8561b3938
   unkey.go:
     id: e17c3d20e92b
-    last_write_checksum: sha1:9889e3f5441a97662270863f6c80dd91a3078e04
-    pristine_git_object: 4525cc800bea8a00a0022321870ff481ef381be9
+    last_write_checksum: sha1:fb58ee8cc63591b176a7fa308aa1c67bca42741a
+    pristine_git_object: 38ada6b54d8e07803c2efef5a1118946ea69d426
   workspace.go:
     id: e884b92e3a6b
     last_write_checksum: sha1:ac47aa7067378ca1c06435cffa904c62e0e59241
@@ -6118,6 +6118,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "429":
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   permissions.getPermission:
     speakeasy-default-permissions-get-permission:
       requestBody:
@@ -6706,6 +6708,8 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
         application/json: {"deploymentId": "proj_1234abcd"}
@@ -6730,6 +6734,8 @@ examples:
         "429":
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
@@ -6756,6 +6762,8 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
         application/json: {"deploymentId": "proj_1234abcd"}
@@ -6780,6 +6788,8 @@ examples:
         "429":
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
@@ -8424,6 +8434,8 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   portal.getPortal:
     speakeasy-default-portal-get-portal:
       requestBody:
@@ -8460,6 +8472,8 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   deployments.listBuildLogs:
     firstPage:
       requestBody:
@@ -8477,6 +8491,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     nextPage:
       requestBody:
         application/json: {"deploymentId": "d_1234abcd", "cursor": "1704067201000001", "limit": 100}
@@ -8493,6 +8509,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     oneStep:
       requestBody:
         application/json: {"deploymentId": "d_1234abcd", "stepId": "sha256:3f9c2b7e1d4a6f8c0b5e9d2a7c4f1e8b3d6a9c2f5e8b1d4a7c0f3e6b9d2a5c8f", "limit": 100}
@@ -8508,6 +8526,8 @@ examples:
         "429":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     caughtUp:
       requestBody:
@@ -8773,6 +8793,8 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
   rootKeys.createKey:
     speakeasy-default-root-keys-create-key:
       requestBody:
@@ -8971,6 +8993,8 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
         application/json: {"deploymentId": "proj_1234abcd"}
@@ -9013,6 +9037,8 @@ examples:
         "429":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
         "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     accepted:
       requestBody:
@@ -9372,7 +9398,21 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Unkey.Deployments.AuthorizeDeployment()`: **Added**\n* `Unkey.Deployments.CancelDeployment()`: **Added**\n* `Unkey.Logs.GetApiRequestMetrics()`: **Added**\n* `Unkey.Logs.ListApiRequests()`: **Added**\n* `Unkey.Ratelimit.CreateNamespace()`: **Added**\n* `Unkey.Ratelimit.DeleteNamespace()`: **Added**\n* `Unkey.Ratelimit.ListNamespaces()`: **Added**\n* `Unkey.Ratelimit.UpdateNamespace()`: **Added**\n* `Unkey.Workspace.GetFlags()`: **Added**\n* `Unkey.Workspace.UpdateFlag()`: **Added**\n* `Unkey.Deployments.GetDeployment()`:  `response.Data.Issues` **Added**\n* `Unkey.Deployments.ListDeployments()`:  `response.Data[].Issues` **Added**\n* `Unkey.Gateway.ListPolicies()`:  `response.Data[].Match[].Header.Present` **Changed**\n* `Unkey.Gateway.SetPolicies()`: \n  *  `request.Request.Policies[].Match[].Header.Present` **Changed**\n* `Unkey.Gateway.UpdatePolicy()`: \n  *  `request.Request.Match[].Header.Present` **Changed**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Unkey.Logs.GetApiRequestMetrics()`:  `error.status[429]` **Removed** (Breaking ⚠️)
+  * `Unkey.Logs.ListApiRequests()`:  `error.status[429]` **Removed** (Breaking ⚠️)
+  * `Unkey.Deployments.StopDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.PromoteDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.RollbackDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.StartDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.AuthorizeDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.ListBuildLogs()`:  `error.status[403]` **Added**
+  * `Unkey.Deployments.CancelDeployment()`:  `error.status[403]` **Added**
+  * `Unkey.Permissions.DeleteRole()`:  `error.status[404]` **Added**
+  * `Unkey.Portal.DeletePortal()`:  `error.status[403]` **Added**
+  * `Unkey.Portal.RevokeSession()`:  `error.status[403]` **Added**
+  * `Unkey.Portal.UpdatePortal()`:  `error.status[403]` **Added**
 generatedFiles:
   - .gitattributes
   - /models/apierrors/badrequesterrorresponse.go
