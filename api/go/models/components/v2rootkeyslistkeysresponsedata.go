@@ -3,6 +3,8 @@
 package components
 
 type V2RootKeysListKeysResponseData struct {
+	// Allowed IPv4 or IPv6 addresses and CIDR ranges. An empty list allows any IP address.
+	IPAllowlist []string `json:"ipAllowlist"`
 	// Stable root key identifier.
 	KeyID string `json:"keyId"`
 	// User-supplied name, or null when absent.
@@ -21,6 +23,13 @@ type V2RootKeysListKeysResponseData struct {
 	Expires *int64 `json:"expires"`
 	// All permissions assigned to the root key.
 	Permissions []string `json:"permissions"`
+}
+
+func (v *V2RootKeysListKeysResponseData) GetIPAllowlist() []string {
+	if v == nil {
+		return []string{}
+	}
+	return v.IPAllowlist
 }
 
 func (v *V2RootKeysListKeysResponseData) GetKeyID() string {

@@ -8,6 +8,8 @@ import (
 )
 
 type V2RootKeysUpdateKeyRequestBody struct {
+	// Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list.
+	IPAllowlist []string `json:"ipAllowlist,omitzero"`
 	// Root key identifier returned by rootKeys.createKey or rootKeys.listKeys.
 	KeyID string `json:"keyId"`
 	// New root key name. Set null to remove the name. Omit to keep the current name.
@@ -29,6 +31,13 @@ func (v *V2RootKeysUpdateKeyRequestBody) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2RootKeysUpdateKeyRequestBody) GetIPAllowlist() []string {
+	if v == nil {
+		return nil
+	}
+	return v.IPAllowlist
 }
 
 func (v *V2RootKeysUpdateKeyRequestBody) GetKeyID() string {

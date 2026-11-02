@@ -3,16 +3,37 @@
 package components
 
 import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
 )
 
 type V2RootKeysCreateKeyRequestBody struct {
+	// IPv4 or IPv6 addresses and CIDR ranges allowed to use this root key. Omit to inherit the calling root key's allowlist. A caller without an IP restriction creates an unrestricted key when this field is omitted. An explicit list must stay within the caller's allowed networks; a restricted caller cannot send an empty list.
+	IPAllowlist []string `json:"ipAllowlist,omitzero"`
 	// Optional name for the root key.
 	Name *string `json:"name,omitzero"`
 	// Permissions to grant to the root key. Each permission must be within the caller's existing permissions.
 	Permissions []string `json:"permissions"`
 	// Expiration as Unix milliseconds, strictly in the future. Expiring root-key callers must provide a child expiry no later than their own. JWT admins and nonexpiring root-key callers may omit it or set null for no expiration.
 	Expires optionalnullable.OptionalNullable[int64] `json:"expires,omitzero"`
+}
+
+func (v V2RootKeysCreateKeyRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2RootKeysCreateKeyRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2RootKeysCreateKeyRequestBody) GetIPAllowlist() []string {
+	if v == nil {
+		return nil
+	}
+	return v.IPAllowlist
 }
 
 func (v *V2RootKeysCreateKeyRequestBody) GetName() *string {

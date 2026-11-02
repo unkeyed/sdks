@@ -392,7 +392,6 @@ func main() {
 | apierrors.UnauthorizedErrorResponse        | 401                                        | application/json                           |
 | apierrors.ForbiddenErrorResponse           | 403                                        | application/json                           |
 | apierrors.UnprocessableEntityErrorResponse | 422                                        | application/json                           |
-| apierrors.TooManyRequestsErrorResponse     | 429                                        | application/json                           |
 | apierrors.InternalServerErrorResponse      | 500                                        | application/json                           |
 | apierrors.ServiceUnavailableErrorResponse  | 503                                        | application/json                           |
 | apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |
@@ -890,7 +889,6 @@ func main() {
 | apierrors.UnauthorizedErrorResponse        | 401                                        | application/json                           |
 | apierrors.ForbiddenErrorResponse           | 403                                        | application/json                           |
 | apierrors.UnprocessableEntityErrorResponse | 422                                        | application/json                           |
-| apierrors.TooManyRequestsErrorResponse     | 429                                        | application/json                           |
 | apierrors.InternalServerErrorResponse      | 500                                        | application/json                           |
 | apierrors.ServiceUnavailableErrorResponse  | 503                                        | application/json                           |
 | apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |

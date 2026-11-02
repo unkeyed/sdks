@@ -336,6 +336,7 @@ func main() {
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
