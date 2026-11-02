@@ -443,8 +443,10 @@ func (s *Portal) CreatePortal(ctx context.Context, request components.V2PortalCr
 // returns 403 for the whole request rather than minting a reduced session, so a
 // missing grant is visible instead of surfacing later as a broken portal.
 //
-// Missing the portal permission itself returns **404**, not 403: a caller who
-// cannot mint for a portal is not told whether it exists.
+// Missing the portal permission itself returns **404** when your root key
+// cannot read the portal or its sessions, so a caller who cannot see a portal
+// is not told whether it exists. A root key that can read the portal but lacks
+// the permission gets **403**.
 //
 // Your root key must also be associated with a workspace that has an enabled portal.
 //
@@ -833,7 +835,8 @@ func (s *Portal) CreateSession(ctx context.Context, request components.V2PortalC
 // - `portal.*.delete_portal` (to delete any portal in the workspace)
 // - `portal.<portal_id>.delete_portal` (to delete a specific portal)
 //
-// Without the permission this returns **404**, not 403.
+// A root key that cannot read the portal gets **404**. One that can read it
+// but lacks the permission gets **403**.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Portal) DeletePortal(ctx context.Context, request components.V2PortalDeletePortalRequestBody, opts ...operations.Option) (*operations.PortalDeletePortalResponse, error) {
@@ -1059,6 +1062,27 @@ func (s *Portal) DeletePortal(ctx context.Context, request components.V2PortalDe
 			}
 
 			var out apierrors.UnauthorizedErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 403:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
@@ -3343,7 +3367,8 @@ func (s *Portal) RerollKey(ctx context.Context, request components.V2KeysRerollK
 // which dashboard roles carry. Unlike `portal.createSession`, a dashboard
 // session can call this, not just a root key.
 //
-// Without the permission this returns **404**, not 403.
+// A root key that cannot read the portal's sessions gets **404**. One that can
+// read them but lacks the permission gets **403**.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Portal) RevokeSession(ctx context.Context, request components.V2PortalRevokeSessionRequestBody, opts ...operations.Option) (*operations.PortalRevokeSessionResponse, error) {
@@ -3581,6 +3606,27 @@ func (s *Portal) RevokeSession(ctx context.Context, request components.V2PortalR
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 403:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ForbiddenErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -3689,7 +3735,8 @@ func (s *Portal) RevokeSession(ctx context.Context, request components.V2PortalR
 // - `portal.*.update_portal` (to update any portal in the workspace)
 // - `portal.<portal_id>.update_portal` (to update a specific portal)
 //
-// Without the permission this returns **404**, not 403.
+// A root key that cannot read the portal gets **404**. One that can read it
+// but lacks the permission gets **403**.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Portal) UpdatePortal(ctx context.Context, request components.V2PortalUpdatePortalRequestBody, opts ...operations.Option) (*operations.PortalUpdatePortalResponse, error) {
@@ -3915,6 +3962,27 @@ func (s *Portal) UpdatePortal(ctx context.Context, request components.V2PortalUp
 			}
 
 			var out apierrors.UnauthorizedErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 403:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ForbiddenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
