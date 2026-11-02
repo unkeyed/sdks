@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - go</title>
+    <title>SDK Changelog - typescript</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,32 +95,33 @@
         }
     </style>
 </head>
-<body><h2 id="go-sdk-changes">Go SDK Changes:</h2>
+<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>Unkey.Logs.GetApiRequestMetrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Logs.ListApiRequests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>Unkey.Deployments.RollbackDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Permissions.DeleteRole()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.AuthorizeDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.StartDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.StopDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.ListBuildLogs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.CancelDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Deployments.PromoteDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Portal.DeletePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Portal.RevokeSession()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.Portal.UpdatePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>Unkey.RootKeys.CreateKey()</code>:
+<li><code>unkey.keys.verifyKey()</code>:  <code>error.status[403]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.listApiRequests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.getApiRequestMetrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.deployments.rollbackDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.deleteRole()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.startDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.stopDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.promoteDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.listBuildLogs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.cancelDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.authorizeDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.deletePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.revokeSession()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.updatePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.rootKeys.createKey()</code>:
 
 <ul>
-<li><code>request.Request.IpAllowlist</code> <strong>Added</strong></li>
+<li><code>request.ipAllowlist</code> <strong>Added</strong></li>
 </ul></li>
-<li><code>Unkey.RootKeys.ListKeys()</code>:  <code>response.Data[].IpAllowlist</code> <strong>Added</strong></li>
-<li><code>Unkey.RootKeys.UpdateKey()</code>:
+<li><code>unkey.rootKeys.listKeys()</code>:  <code>response.data[].ipAllowlist</code> <strong>Added</strong></li>
+<li><code>unkey.rootKeys.updateKey()</code>:
 
 <ul>
-<li><code>request.Request.IpAllowlist</code> <strong>Added</strong></li>
+<li><code>request.ipAllowlist</code> <strong>Added</strong></li>
 </ul></li>
 </ul>
 </body>

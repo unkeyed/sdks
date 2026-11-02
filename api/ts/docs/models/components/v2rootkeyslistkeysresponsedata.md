@@ -6,14 +6,17 @@
 import { V2RootKeysListKeysResponseData } from "@unkey/api/models/components";
 
 let value: V2RootKeysListKeysResponseData = {
+  ipAllowlist: [
+    "<value 1>",
+  ],
   keyId: "<id>",
-  name: "<value>",
+  name: null,
   start: "<value>",
   end: "<value>",
-  enabled: true,
-  createdAt: 666196,
-  lastUsedAt: 555115,
-  expires: 504549,
+  enabled: false,
+  createdAt: 555115,
+  lastUsedAt: 166393,
+  expires: 741523,
   permissions: [
     "<value 1>",
     "<value 2>",
@@ -25,6 +28,7 @@ let value: V2RootKeysListKeysResponseData = {
 
 | Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `ipAllowlist`                                                                           | *string*[]                                                                              | :heavy_check_mark:                                                                      | Allowed IPv4 or IPv6 addresses and CIDR ranges. An empty list allows any IP address.    |
 | `keyId`                                                                                 | *string*                                                                                | :heavy_check_mark:                                                                      | Stable root key identifier.                                                             |
 | `name`                                                                                  | *string*                                                                                | :heavy_check_mark:                                                                      | User-supplied name, or null when absent.                                                |
 | `start`                                                                                 | *string*                                                                                | :heavy_check_mark:                                                                      | Stored display fragment, including the prefix when present.                             |
