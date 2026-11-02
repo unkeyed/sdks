@@ -1,19 +1,20 @@
-## Go SDK Changes:
-* `Unkey.Logs.GetApiRequestMetrics()`:  `error.status[429]` **Removed** (Breaking ⚠️)
-* `Unkey.Logs.ListApiRequests()`:  `error.status[429]` **Removed** (Breaking ⚠️)
-* `Unkey.Deployments.RollbackDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Permissions.DeleteRole()`:  `error.status[404]` **Added**
-* `Unkey.Deployments.AuthorizeDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Deployments.StartDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Deployments.StopDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Deployments.ListBuildLogs()`:  `error.status[403]` **Added**
-* `Unkey.Deployments.CancelDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Deployments.PromoteDeployment()`:  `error.status[403]` **Added**
-* `Unkey.Portal.DeletePortal()`:  `error.status[403]` **Added**
-* `Unkey.Portal.RevokeSession()`:  `error.status[403]` **Added**
-* `Unkey.Portal.UpdatePortal()`:  `error.status[403]` **Added**
-* `Unkey.RootKeys.CreateKey()`: 
-  *  `request.Request.IpAllowlist` **Added**
-* `Unkey.RootKeys.ListKeys()`:  `response.Data[].IpAllowlist` **Added**
-* `Unkey.RootKeys.UpdateKey()`: 
-  *  `request.Request.IpAllowlist` **Added**
+## Typescript SDK Changes:
+* `unkey.keys.verifyKey()`:  `error.status[403]` **Removed** (Breaking ⚠️)
+* `unkey.logs.listApiRequests()`:  `error.status[429]` **Removed** (Breaking ⚠️)
+* `unkey.logs.getApiRequestMetrics()`:  `error.status[429]` **Removed** (Breaking ⚠️)
+* `unkey.deployments.rollbackDeployment()`:  `error.status[403]` **Added**
+* `unkey.permissions.deleteRole()`:  `error.status[404]` **Added**
+* `unkey.deployments.startDeployment()`:  `error.status[403]` **Added**
+* `unkey.deployments.stopDeployment()`:  `error.status[403]` **Added**
+* `unkey.deployments.promoteDeployment()`:  `error.status[403]` **Added**
+* `unkey.deployments.listBuildLogs()`:  `error.status[403]` **Added**
+* `unkey.deployments.cancelDeployment()`:  `error.status[403]` **Added**
+* `unkey.deployments.authorizeDeployment()`:  `error.status[403]` **Added**
+* `unkey.portal.deletePortal()`:  `error.status[403]` **Added**
+* `unkey.portal.revokeSession()`:  `error.status[403]` **Added**
+* `unkey.portal.updatePortal()`:  `error.status[403]` **Added**
+* `unkey.rootKeys.createKey()`: 
+  *  `request.ipAllowlist` **Added**
+* `unkey.rootKeys.listKeys()`:  `response.data[].ipAllowlist` **Added**
+* `unkey.rootKeys.updateKey()`: 
+  *  `request.ipAllowlist` **Added**

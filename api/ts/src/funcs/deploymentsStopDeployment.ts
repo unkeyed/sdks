@@ -30,11 +30,12 @@ import { Result } from "../types/fp.js";
  * Stop deployment
  *
  * @remarks
- * Stop a running preview deployment. Stopped deployments keep their
- * configuration and can be resumed later with `startDeployment`.
+ * Stop a running deployment that is not the app's live production deployment.
+ * Stopped deployments keep their configuration. Preview deployments can be
+ * resumed later with `startDeployment`.
  *
- * The deployment must be ready and running, and must belong to a
- * non-production environment; production deployments cannot be stopped.
+ * The deployment must be ready and running. Previous production deployments
+ * can be stopped, but stopping one removes instant rollback to it.
  * A deployment that is already draining from a previous stop is rejected
  * with a precondition error.
  *
@@ -43,9 +44,8 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `environment.*.stop_deployment` (to stop deployments in any environment)
- * - `environment.<environment_id>.stop_deployment` (to stop deployments in a specific environment)
+ * Your root key must have write permission on the deployment:
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/<deployment_id>#write`
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */
@@ -58,6 +58,7 @@ export function deploymentsStopDeployment(
     components.V2DeploymentsStopDeploymentResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.PreconditionFailedErrorResponse
     | errors.TooManyRequestsErrorResponse
@@ -89,6 +90,7 @@ async function $do(
       components.V2DeploymentsStopDeploymentResponseBody,
       | errors.BadRequestErrorResponse
       | errors.UnauthorizedErrorResponse
+      | errors.ForbiddenErrorResponse
       | errors.NotFoundErrorResponse
       | errors.PreconditionFailedErrorResponse
       | errors.TooManyRequestsErrorResponse
@@ -190,6 +192,7 @@ async function $do(
     components.V2DeploymentsStopDeploymentResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
+    | errors.ForbiddenErrorResponse
     | errors.NotFoundErrorResponse
     | errors.PreconditionFailedErrorResponse
     | errors.TooManyRequestsErrorResponse
@@ -209,6 +212,7 @@ async function $do(
     ),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
+    M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),
     M.jsonErr(404, errors.NotFoundErrorResponse$inboundSchema),
     M.jsonErr(412, errors.PreconditionFailedErrorResponse$inboundSchema),
     M.jsonErr(429, errors.TooManyRequestsErrorResponse$inboundSchema, {

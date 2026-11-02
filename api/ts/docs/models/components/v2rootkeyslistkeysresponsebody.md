@@ -11,14 +11,15 @@ let value: V2RootKeysListKeysResponseBody = {
   },
   data: [
     {
+      ipAllowlist: [],
       keyId: "<id>",
-      name: "<value>",
+      name: null,
       start: "<value>",
       end: "<value>",
-      enabled: true,
-      createdAt: 707859,
-      lastUsedAt: 56381,
-      expires: 708853,
+      enabled: false,
+      createdAt: 56381,
+      lastUsedAt: 906303,
+      expires: 669889,
       permissions: [
         "<value 1>",
         "<value 2>",
