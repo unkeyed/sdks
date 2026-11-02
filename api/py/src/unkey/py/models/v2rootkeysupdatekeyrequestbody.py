@@ -5,12 +5,22 @@ import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-from unkey.py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from unkey.py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 
 
 class V2RootKeysUpdateKeyRequestBodyTypedDict(TypedDict):
     key_id: str
     r"""Root key identifier returned by rootKeys.createKey or rootKeys.listKeys."""
+    ip_allowlist: NotRequired[List[str]]
+    r"""Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list."""
     name: NotRequired[Nullable[str]]
     r"""New root key name. Set null to remove the name. Omit to keep the current name."""
     enabled: NotRequired[bool]
@@ -26,6 +36,11 @@ class V2RootKeysUpdateKeyRequestBody(BaseModel):
     key_id: Annotated[str, pydantic.Field(alias="keyId")]
     r"""Root key identifier returned by rootKeys.createKey or rootKeys.listKeys."""
 
+    ip_allowlist: Annotated[
+        Optional[List[str]], pydantic.Field(alias="ipAllowlist")
+    ] = None
+    r"""Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list."""
+
     name: OptionalNullable[str] = UNSET
     r"""New root key name. Set null to remove the name. Omit to keep the current name."""
 
@@ -39,14 +54,20 @@ class V2RootKeysUpdateKeyRequestBody(BaseModel):
     """
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["name", "enabled", "permissions"])
+        optional_fields = set(["ipAllowlist", "name", "enabled", "permissions"])
         nullable_fields = set(["name"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

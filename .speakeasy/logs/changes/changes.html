@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>SDK Changelog - typescript</title>
+    <title>SDK Changelog - python</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -95,34 +95,26 @@
         }
     </style>
 </head>
-<body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
+<body><h2 id="python-sdk-changes">Python SDK Changes:</h2>
 
 <ul>
-<li><code>unkey.keys.verifyKey()</code>:  <code>error.status[403]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>unkey.logs.listApiRequests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>unkey.logs.getApiRequestMetrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
-<li><code>unkey.deployments.rollbackDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.permissions.deleteRole()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.startDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.stopDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.promoteDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.listBuildLogs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.cancelDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.deployments.authorizeDeployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.portal.deletePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.portal.revokeSession()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.portal.updatePortal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
-<li><code>unkey.rootKeys.createKey()</code>:
-
-<ul>
-<li><code>request.ipAllowlist</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>unkey.rootKeys.listKeys()</code>:  <code>response.data[].ipAllowlist</code> <strong>Added</strong></li>
-<li><code>unkey.rootKeys.updateKey()</code>:
-
-<ul>
-<li><code>request.ipAllowlist</code> <strong>Added</strong></li>
-</ul></li>
+<li><code>unkey.keys.verify_key()</code>:  <code>error.status[403]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.list_api_requests()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.logs.get_api_request_metrics()</code>:  <code>error.status[429]</code> <strong>Removed</strong> (Breaking ⚠️)</li>
+<li><code>unkey.deployments.rollback_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.permissions.delete_role()</code>:  <code>error.status[404]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.start_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.stop_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.promote_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.list_build_logs()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.cancel_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.deployments.authorize_deployment()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.delete_portal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.revoke_session()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.portal.update_portal()</code>:  <code>error.status[403]</code> <strong>Added</strong></li>
+<li><code>unkey.root_keys.create_key()</code>:  <code>request.ip_allowlist</code> <strong>Added</strong></li>
+<li><code>unkey.root_keys.list_keys()</code>:  <code>response.data[].ip_allowlist</code> <strong>Added</strong></li>
+<li><code>unkey.root_keys.update_key()</code>:  <code>request.ip_allowlist</code> <strong>Added</strong></li>
 </ul>
 </body>
 </html>

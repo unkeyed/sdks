@@ -363,8 +363,10 @@ class PortalSDK(BaseSDK):
         returns 403 for the whole request rather than minting a reduced session, so a
         missing grant is visible instead of surfacing later as a broken portal.
 
-        Missing the portal permission itself returns **404**, not 403: a caller who
-        cannot mint for a portal is not told whether it exists.
+        Missing the portal permission itself returns **404** when your root key
+        cannot read the portal or its sessions, so a caller who cannot see a portal
+        is not told whether it exists. A root key that can read the portal but lacks
+        the permission gets **403**.
 
         Your root key must also be associated with a workspace that has an enabled portal.
 
@@ -558,8 +560,10 @@ class PortalSDK(BaseSDK):
         returns 403 for the whole request rather than minting a reduced session, so a
         missing grant is visible instead of surfacing later as a broken portal.
 
-        Missing the portal permission itself returns **404**, not 403: a caller who
-        cannot mint for a portal is not told whether it exists.
+        Missing the portal permission itself returns **404** when your root key
+        cannot read the portal or its sessions, so a caller who cannot see a portal
+        is not told whether it exists. A root key that can read the portal but lacks
+        the permission gets **403**.
 
         Your root key must also be associated with a workspace that has an enabled portal.
 
@@ -742,7 +746,8 @@ class PortalSDK(BaseSDK):
         - `portal.*.delete_portal` (to delete any portal in the workspace)
         - `portal.<portal_id>.delete_portal` (to delete a specific portal)
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal gets **404**. One that can read it
+        but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -832,6 +837,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -884,7 +894,8 @@ class PortalSDK(BaseSDK):
         - `portal.*.delete_portal` (to delete any portal in the workspace)
         - `portal.<portal_id>.delete_portal` (to delete a specific portal)
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal gets **404**. One that can read it
+        but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -974,6 +985,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -1341,7 +1357,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1480,7 +1496,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1636,7 +1652,10 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1802,7 +1821,10 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1950,7 +1972,10 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2117,7 +2142,10 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-workspace-rate-limit-exempt": True,
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2302,7 +2330,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2483,7 +2511,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2903,7 +2931,8 @@ class PortalSDK(BaseSDK):
         which dashboard roles carry. Unlike `portal.createSession`, a dashboard
         session can call this, not just a root key.
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal's sessions gets **404**. One that can
+        read them but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2998,6 +3027,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -3057,7 +3091,8 @@ class PortalSDK(BaseSDK):
         which dashboard roles carry. Unlike `portal.createSession`, a dashboard
         session can call this, not just a root key.
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal's sessions gets **404**. One that can
+        read them but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3152,6 +3187,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -3214,7 +3254,8 @@ class PortalSDK(BaseSDK):
         - `portal.*.update_portal` (to update any portal in the workspace)
         - `portal.<portal_id>.update_portal` (to update a specific portal)
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal gets **404**. One that can read it
+        but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3348,6 +3389,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -3415,7 +3461,8 @@ class PortalSDK(BaseSDK):
         - `portal.*.update_portal` (to update any portal in the workspace)
         - `portal.<portal_id>.update_portal` (to update a specific portal)
 
-        Without the permission this returns **404**, not 403.
+        A root key that cannot read the portal gets **404**. One that can read it
+        but lacks the permission gets **403**.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3549,6 +3596,11 @@ class PortalSDK(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
