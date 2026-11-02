@@ -14,6 +14,7 @@ class RootKeys(BaseSDK):
         self,
         *,
         permissions: Iterable[str],
+        ip_allowlist: Optional[Iterable[str]] = None,
         name: Optional[str] = None,
         expires: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -29,6 +30,7 @@ class RootKeys(BaseSDK):
 
 
         :param permissions: Permissions to grant to the root key. Each permission must be within the caller's existing permissions.
+        :param ip_allowlist: IPv4 or IPv6 addresses and CIDR ranges allowed to use this root key. Omit to inherit the calling root key's allowlist. A caller without an IP restriction creates an unrestricted key when this field is omitted. An explicit list must stay within the caller's allowed networks; a restricted caller cannot send an empty list.
         :param name: Optional name for the root key.
         :param expires: Expiration as Unix milliseconds, strictly in the future. Expiring root-key callers must provide a child expiry no later than their own. JWT admins and nonexpiring root-key callers may omit it or set null for no expiration.
         :param retries: Override the default retry configuration for this method
@@ -47,6 +49,7 @@ class RootKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2RootKeysCreateKeyRequestBody(
+            ip_allowlist=utils.unmarshal(ip_allowlist, Optional[List[str]]),
             name=name,
             permissions=utils.unmarshal(permissions, List[str]),
             expires=expires,
@@ -137,6 +140,7 @@ class RootKeys(BaseSDK):
         self,
         *,
         permissions: Iterable[str],
+        ip_allowlist: Optional[Iterable[str]] = None,
         name: Optional[str] = None,
         expires: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -152,6 +156,7 @@ class RootKeys(BaseSDK):
 
 
         :param permissions: Permissions to grant to the root key. Each permission must be within the caller's existing permissions.
+        :param ip_allowlist: IPv4 or IPv6 addresses and CIDR ranges allowed to use this root key. Omit to inherit the calling root key's allowlist. A caller without an IP restriction creates an unrestricted key when this field is omitted. An explicit list must stay within the caller's allowed networks; a restricted caller cannot send an empty list.
         :param name: Optional name for the root key.
         :param expires: Expiration as Unix milliseconds, strictly in the future. Expiring root-key callers must provide a child expiry no later than their own. JWT admins and nonexpiring root-key callers may omit it or set null for no expiration.
         :param retries: Override the default retry configuration for this method
@@ -170,6 +175,7 @@ class RootKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2RootKeysCreateKeyRequestBody(
+            ip_allowlist=utils.unmarshal(ip_allowlist, Optional[List[str]]),
             name=name,
             permissions=utils.unmarshal(permissions, List[str]),
             expires=expires,
@@ -605,7 +611,7 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -756,7 +762,7 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1106,6 +1112,7 @@ class RootKeys(BaseSDK):
         self,
         *,
         key_id: str,
+        ip_allowlist: Optional[Iterable[str]] = None,
         name: OptionalNullable[str] = UNSET,
         enabled: Optional[bool] = None,
         permissions: Optional[Iterable[str]] = None,
@@ -1128,6 +1135,7 @@ class RootKeys(BaseSDK):
         If set, this operation will use `root_key` from the global security.
 
         :param key_id: Root key identifier returned by rootKeys.createKey or rootKeys.listKeys.
+        :param ip_allowlist: Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list.
         :param name: New root key name. Set null to remove the name. Omit to keep the current name.
         :param enabled: Whether the root key can authenticate. Omit to keep the current state.
         :param permissions: Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
@@ -1149,6 +1157,7 @@ class RootKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2RootKeysUpdateKeyRequestBody(
+            ip_allowlist=utils.unmarshal(ip_allowlist, Optional[List[str]]),
             key_id=key_id,
             name=name,
             enabled=enabled,
@@ -1251,6 +1260,7 @@ class RootKeys(BaseSDK):
         self,
         *,
         key_id: str,
+        ip_allowlist: Optional[Iterable[str]] = None,
         name: OptionalNullable[str] = UNSET,
         enabled: Optional[bool] = None,
         permissions: Optional[Iterable[str]] = None,
@@ -1273,6 +1283,7 @@ class RootKeys(BaseSDK):
         If set, this operation will use `root_key` from the global security.
 
         :param key_id: Root key identifier returned by rootKeys.createKey or rootKeys.listKeys.
+        :param ip_allowlist: Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list.
         :param name: New root key name. Set null to remove the name. Omit to keep the current name.
         :param enabled: Whether the root key can authenticate. Omit to keep the current state.
         :param permissions: Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
@@ -1294,6 +1305,7 @@ class RootKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.V2RootKeysUpdateKeyRequestBody(
+            ip_allowlist=utils.unmarshal(ip_allowlist, Optional[List[str]]),
             key_id=key_id,
             name=name,
             enabled=enabled,

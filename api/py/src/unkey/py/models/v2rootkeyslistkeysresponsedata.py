@@ -5,10 +5,18 @@ import pydantic
 from pydantic import model_serializer
 from typing import List
 from typing_extensions import Annotated, TypedDict
-from unkey.py.types import BaseModel, Nullable, UNSET_SENTINEL
+from unkey.py.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 
 
 class V2RootKeysListKeysResponseDataTypedDict(TypedDict):
+    ip_allowlist: List[str]
+    r"""Allowed IPv4 or IPv6 addresses and CIDR ranges. An empty list allows any IP address."""
     key_id: str
     r"""Stable root key identifier."""
     name: Nullable[str]
@@ -30,6 +38,9 @@ class V2RootKeysListKeysResponseDataTypedDict(TypedDict):
 
 
 class V2RootKeysListKeysResponseData(BaseModel):
+    ip_allowlist: Annotated[List[str], pydantic.Field(alias="ipAllowlist")]
+    r"""Allowed IPv4 or IPv6 addresses and CIDR ranges. An empty list allows any IP address."""
+
     key_id: Annotated[str, pydantic.Field(alias="keyId")]
     r"""Stable root key identifier."""
 
@@ -58,12 +69,18 @@ class V2RootKeysListKeysResponseData(BaseModel):
     r"""All permissions assigned to the root key."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

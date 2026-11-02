@@ -643,7 +643,7 @@ class Keys(BaseSDK):
 
         Use this endpoint when users sign up, upgrade subscription tiers, or need additional keys. Keys are cryptographically secure and unique to the specified API namespace.
 
-        **Important**: The key is returned only once. Store it immediately and provide it to your user, as it cannot be retrieved later.
+        **Important**: Store the returned key securely. Unless you create a recoverable key, the plaintext cannot be retrieved later. Recoverable keys require key encryption and permission to decrypt them.
 
         **Common use cases:**
         - Generate keys for new user registrations
@@ -875,7 +875,7 @@ class Keys(BaseSDK):
 
         Use this endpoint when users sign up, upgrade subscription tiers, or need additional keys. Keys are cryptographically secure and unique to the specified API namespace.
 
-        **Important**: The key is returned only once. Store it immediately and provide it to your user, as it cannot be retrieved later.
+        **Important**: Store the returned key securely. Unless you create a recoverable key, the plaintext cannot be retrieved later. Recoverable keys require key encryption and permission to decrypt them.
 
         **Common use cases:**
         - Generate keys for new user registrations
@@ -1480,7 +1480,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1636,7 +1636,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4301,7 +4301,7 @@ class Keys(BaseSDK):
         - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
         - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
 
-        **Note**: If your credential has no verify permissions at all, you will receive a `403 Forbidden` error. If your credential has verify permissions for a different API or keyspace than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
+        **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
 
 
         :param key: The API key to verify, exactly as provided by your user.
@@ -4423,11 +4423,6 @@ class Keys(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -4496,7 +4491,7 @@ class Keys(BaseSDK):
         - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
         - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
 
-        **Note**: If your credential has no verify permissions at all, you will receive a `403 Forbidden` error. If your credential has verify permissions for a different API or keyspace than the key you're verifying, you will receive a `200` response with `code: NOT_FOUND` to avoid leaking key existence.
+        **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
 
 
         :param key: The API key to verify, exactly as provided by your user.
@@ -4618,11 +4613,6 @@ class Keys(BaseSDK):
                 errors.UnauthorizedErrorResponseData, http_res
             )
             raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundErrorResponseData, http_res
@@ -4735,7 +4725,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4872,7 +4862,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions=None,
+                extensions={"x-unkey-workspace-rate-limit-exempt": True},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
