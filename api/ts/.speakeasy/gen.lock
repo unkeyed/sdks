@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 6d0e614b95a027093166b103d8f3f3e9
+  docChecksum: 3a94c433109767b07468961a54cdade7
   docVersion: 2.0.0
-  speakeasyVersion: 1.805.0
-  generationVersion: 2.954.8
-  releaseVersion: 2.5.6
-  configChecksum: d93176db645dad018b06a29e45d5036e
+  speakeasyVersion: 1.806.0
+  generationVersion: 2.956.1
+  releaseVersion: 2.5.7
+  configChecksum: 3589d586f093813829812497983b41a7
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: 6e502d3e-e33c-46b1-b5c0-67ae6f1b74dd
-  pristine_commit_hash: dbc56e0ed87c569dcefc446e04db45af82c78c02
-  pristine_tree_hash: be12d10b08b979e2ce232b809f440cc473eebbc5
+  generation_id: d1b7b5f7-133e-41f5-ab57-76a6b9c9a0ae
+  pristine_commit_hash: 64cc99e818ff9d5eba9d175b576253ebab3d0b0b
+  pristine_tree_hash: 1b842298a79e4577ac3c0722562cf708ca7cb411
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1550,8 +1550,8 @@ trackedFiles:
     pristine_git_object: 9b31c19cf33d0e226e83d70557e11b7414bbd39e
   docs/models/components/v2workspacegetlimitsresponsedata.md:
     id: d7dc47b31480
-    last_write_checksum: sha1:aa2688c2be66d45274af30d612012740ccffb884
-    pristine_git_object: 840adff9af966e74d04355102c19208f5333c2ff
+    last_write_checksum: sha1:d487bfd5a8dc0be226b426fd4ec3f35288a275bd
+    pristine_git_object: 2c7d7d9d40624fc200da9b73709808802fed729e
   docs/models/components/v2workspacegetusageapi.md:
     id: 8d4dbcb20b4c
     last_write_checksum: sha1:8172198b635ee8bcf350fc8a3dbbeca5015e6b90
@@ -1822,8 +1822,8 @@ trackedFiles:
     pristine_git_object: e7e278f203b2870f69345765aa3278342a8492e0
   docs/sdks/portal/README.md:
     id: 130ac1af4c35
-    last_write_checksum: sha1:d593857ed93a50e30cb15a187dec9caf0268e39e
-    pristine_git_object: c56933ec9fd45506542307cf6ef311ded83c6861
+    last_write_checksum: sha1:529350238e67cbf800ae45a3a6afdb12aa9c37c2
+    pristine_git_object: d9f4351f6503f6f0ad21684e591611a91cd75502
   docs/sdks/projects/README.md:
     id: 1c5f71754e17
     last_write_checksum: sha1:05d8c0835f18ed0acdf8a9678ffa9298b1b9c4d5
@@ -1862,12 +1862,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:0bcc5b676e558f2f277c29e08089d081c5932168
-    pristine_git_object: 3849d13e160b61b06fdf14ba2e52962239fcc4fe
+    last_write_checksum: sha1:789a04e0a26dc9afff4fc4f75955cec56b560749
+    pristine_git_object: f9fb1a237b50ae1a32b0bd8eb989d0333b827436
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b04659a2dc234286f466e6e2c762b325a16d4cbc
-    pristine_git_object: 576b8da923bc5c12d7aaa7eed7745a7280d4b9d5
+    last_write_checksum: sha1:9d75df8fd5d9c4ffa98116a4ce2a251a316765be
+    pristine_git_object: 2a8ece8e0a91abeb0bd1c47538a15c65faf709a8
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -2178,8 +2178,8 @@ trackedFiles:
     pristine_git_object: 4113291c6b476a8855d4da6a716e028026db27e0
   src/funcs/portalDeletePortal.ts:
     id: b8d9786f6f9a
-    last_write_checksum: sha1:a078602704033357c9c38c39f10f6fbe4a3dab71
-    pristine_git_object: bf7dcc803f29e61e1bf2b2db55f6ba56099feb72
+    last_write_checksum: sha1:9dd3f68b49a13860b0dae34d6f24018974fc1a1d
+    pristine_git_object: 4437d4b6c95bc1c304dedfeb3b2d24b8c80de485
   src/funcs/portalExchangeCode.ts:
     id: 05ccebb3fa38
     last_write_checksum: sha1:2888a9176c43762d8ad45941c4533586522ab780
@@ -2330,8 +2330,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ccb0de014b47b9684747fa63a41880dbaba1557c
-    pristine_git_object: 473543eeaa0609495b2667f061a2ad15b7c2f5e5
+    last_write_checksum: sha1:5ee0113bef9890bc71734e2bb263bc48c0d6233e
+    pristine_git_object: 2f77d6e27565b1592e4f977f9cf64722407c5cd3
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -3758,8 +3758,8 @@ trackedFiles:
     pristine_git_object: b85075d99fb90ca799cc219da67ef6717d9e7f22
   src/models/components/v2workspacegetlimitsresponsedata.ts:
     id: 5d6936e7c601
-    last_write_checksum: sha1:5a795a9c54bc53e046620f437c2f3a76ec60a711
-    pristine_git_object: eb96b7eb213b17cda370df6504e3fd1594b3f65b
+    last_write_checksum: sha1:4db51a11389b32e394096be128ca1b4111a95f99
+    pristine_git_object: 9d1c3f1e416a0803e64327546b088d3e044731a1
   src/models/components/v2workspacegetusageapi.ts:
     id: 234649420fa4
     last_write_checksum: sha1:c146941096676a4b195f2ca601f3453a7f855dfe
@@ -4054,8 +4054,8 @@ trackedFiles:
     pristine_git_object: 22532f12fa459646240b923cffb83a076fd22cf9
   src/sdk/portal.ts:
     id: d907b3858eda
-    last_write_checksum: sha1:292a81048b0cb0bfc025a186dee55031039575ec
-    pristine_git_object: ba4593283789d3c9fd5a24a90f8a1fa588b37c05
+    last_write_checksum: sha1:56aa750511f0cca0bfdb0f22f7c00b41cb28145e
+    pristine_git_object: b6bcba93ff1dff72a6252fd6867edc96b27b7918
   src/sdk/projects.ts:
     id: 28088373a118
     last_write_checksum: sha1:fa98769c399008baadb6a183ea8f658a5f5828dd
@@ -9165,7 +9165,6 @@ examples:
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "This workspace has exceeded its API rate limit of 1000/1m0s. Please try again later.", "status": 429, "title": "Too Many Requests", "type": "https://unkey.com/docs/errors/user/too_many_requests/workspace_rate_limited"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `unkey.keys.verifyKey()`:  `error.status[403]` **Removed** (Breaking ⚠️)\n* `unkey.logs.listApiRequests()`:  `error.status[429]` **Removed** (Breaking ⚠️)\n* `unkey.logs.getApiRequestMetrics()`:  `error.status[429]` **Removed** (Breaking ⚠️)\n* `unkey.deployments.rollbackDeployment()`:  `error.status[403]` **Added**\n* `unkey.permissions.deleteRole()`:  `error.status[404]` **Added**\n* `unkey.deployments.startDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.stopDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.promoteDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.listBuildLogs()`:  `error.status[403]` **Added**\n* `unkey.deployments.cancelDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.authorizeDeployment()`:  `error.status[403]` **Added**\n* `unkey.portal.deletePortal()`:  `error.status[403]` **Added**\n* `unkey.portal.revokeSession()`:  `error.status[403]` **Added**\n* `unkey.portal.updatePortal()`:  `error.status[403]` **Added**\n* `unkey.rootKeys.createKey()`: \n  *  `request.ipAllowlist` **Added**\n* `unkey.rootKeys.listKeys()`:  `response.data[].ipAllowlist` **Added**\n* `unkey.rootKeys.updateKey()`: \n  *  `request.ipAllowlist` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
