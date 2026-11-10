@@ -42,12 +42,12 @@ workflow:
     sources:
         api:
             inputs:
-                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
+                - location: https://api.unkey.com/openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api
         api-python:
             inputs:
-                - location: https://raw.githubusercontent.com/unkeyed/unkey/refs/heads/main/svc/api/openapi/openapi-generated.yaml
+                - location: https://api.unkey.com/openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-python
     targets:
