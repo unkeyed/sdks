@@ -41,11 +41,14 @@ import { Result } from "../types/fp.js";
  * The app or keyspace it served is untouched, and its slug becomes free for a
  * new portal.
  *
+ * Its custom domains are deleted with it: they stop serving and their DNS
+ * records can be removed. Their certificates are not revoked.
+ *
  * **Required Permissions**
  *
- * Your root key must have one of:
- * - `portal.*.delete_portal` (to delete any portal in the workspace)
- * - `portal.<portal_id>.delete_portal` (to delete a specific portal)
+ * Your root key must have `delete` permission on
+ * `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+ * A broader grant, such as `unkey:v1:<workspace_id>:**#delete`, also permits deletion.
  *
  * A root key that cannot read the portal gets **404**. One that can read it
  * but lacks the permission gets **403**.

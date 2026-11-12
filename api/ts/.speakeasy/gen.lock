@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 6d0e614b95a027093166b103d8f3f3e9
+  docChecksum: 536f2b7501bb84c04d30f65814089acf
   docVersion: 2.0.0
-  speakeasyVersion: 1.805.0
-  generationVersion: 2.954.8
-  releaseVersion: 2.5.6
-  configChecksum: d93176db645dad018b06a29e45d5036e
+  speakeasyVersion: 1.808.1
+  generationVersion: 2.960.8
+  releaseVersion: 2.5.7
+  configChecksum: 3589d586f093813829812497983b41a7
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: 6e502d3e-e33c-46b1-b5c0-67ae6f1b74dd
-  pristine_commit_hash: dbc56e0ed87c569dcefc446e04db45af82c78c02
-  pristine_tree_hash: be12d10b08b979e2ce232b809f440cc473eebbc5
+  generation_id: b42ab34d-1f06-408f-ab5e-c498458e0df9
+  pristine_commit_hash: da6aba575e89ebc429c4809ccbb26c8ef5765b21
+  pristine_tree_hash: 5479890f93525e034f4d559bde56cae4b3679fa9
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.8
+    core: 3.31.11
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
@@ -214,16 +214,16 @@ trackedFiles:
     pristine_git_object: 9f915acac42be8bcfe4effa6773a165617798552
   docs/models/components/domain.md:
     id: d5ba88d19c49
-    last_write_checksum: sha1:d5e0186bf99aafd32016d9374bc2ce063fc35919
-    pristine_git_object: 4e98b45ef1459a55872cd5fa0fec7564153b252a
+    last_write_checksum: sha1:719ec8e7d995999a7450178f6542b6c211d94a9c
+    pristine_git_object: 03dbb5ad7e2490ae258689c6be7c6e23727b8e86
   docs/models/components/domainconnect.md:
     id: 746b41f3895b
     last_write_checksum: sha1:2fcf667d25ee854c199a66ee92336e349919be34
     pristine_git_object: e3bee732243074b73705498ad130dfcf9e8c29dd
   docs/models/components/domainstatus.md:
     id: 10990ae643a2
-    last_write_checksum: sha1:9b28f5cee44506bc3f2a8a29b35510ee2a24de76
-    pristine_git_object: 9e4d7102d83dc51247c881dd39a401f76d0cd021
+    last_write_checksum: sha1:926bad609ca9ee956a3d98f42548f69c1839a55f
+    pristine_git_object: 8eb3d1d4bdc728b869c19a2b49846f29f1e83558
   docs/models/components/emptyresponse.md:
     id: 058494548c6c
     last_write_checksum: sha1:8e0bc6584f33b7c4b6aeb7e77c5f4596441fa696
@@ -410,12 +410,16 @@ trackedFiles:
     pristine_git_object: ed950dbd2d7219e5ddeb4e17aa58c1673ee96e5f
   docs/models/components/portal.md:
     id: b84bb0aebdb0
-    last_write_checksum: sha1:73c55d5f0cd4a937e73f5de2fd3446504621fd3d
-    pristine_git_object: ebf8e25a524ddc3de4b2d53e3f2233a61bf94edf
+    last_write_checksum: sha1:bb2741e27ffd83f140351ec17baaf50068241df0
+    pristine_git_object: 3ca491ded2ba2a64b7048969aaa7d2a39c2a81e4
   docs/models/components/portalbranding.md:
     id: 4f884194a064
     last_write_checksum: sha1:938b4b2e84958b83844b3d7ea6b517ea1d1783ac
     pristine_git_object: 7c6c5943eb67392a900837a0e55190b84ed8eeab
+  docs/models/components/portaldomain.md:
+    id: 1f4a234d27cb
+    last_write_checksum: sha1:9432c2fd07ae9021c0065bab1cb172d62cf29b7b
+    pristine_git_object: 1d59c94a993f3f6752dc925eb50d7c25024bdad5
   docs/models/components/principalfieldkey.md:
     id: 70497d360631
     last_write_checksum: sha1:772533e42a3d49111bdf4f68ef13e218cd0a3eb5
@@ -1204,6 +1208,18 @@ trackedFiles:
     id: 9586b80d4d67
     last_write_checksum: sha1:ffa01d91105f48f9dbe38e601ebbae5aaf33a051
     pristine_git_object: 50c0015e9fe3a97b2a4ec05cf518780218b8beae
+  docs/models/components/v2portalcreatedomainrequestbody.md:
+    id: 2fbe191c83ed
+    last_write_checksum: sha1:7aad60d1b3696bf999e1ddaab2e8c4ffb98322a0
+    pristine_git_object: f5b66a69309833f2d9e7789e5f959effecdb6607
+  docs/models/components/v2portalcreatedomainresponsebody.md:
+    id: 999c7e2b4bd1
+    last_write_checksum: sha1:2b9d0315625e4e5cee9f8100c0b62cf5863e56bf
+    pristine_git_object: 033adf36b625413711f250174f5baa3af759b1fa
+  docs/models/components/v2portalcreatedomainresponsedata.md:
+    id: c60d3633e0c1
+    last_write_checksum: sha1:8e755e0af904eb3de85f3b1d9bce0323105b4605
+    pristine_git_object: 65a9749837d67c5160cb91414a1a7ba21de76765
   docs/models/components/v2portalcreateportalrequestbody1.md:
     id: 765935eb717c
     last_write_checksum: sha1:5bd1016dbd9e629ac4c5ebcad9df76e15ebc0ab9
@@ -1236,6 +1252,14 @@ trackedFiles:
     id: 5bb90afbeb15
     last_write_checksum: sha1:630b64a302bc26552506823f262645ec7916a146
     pristine_git_object: 68b10033b9aaf5b1e812aa16ecd50ce3bb94936b
+  docs/models/components/v2portaldeletedomainrequestbody.md:
+    id: 4aa7c172a7de
+    last_write_checksum: sha1:6970063b4600fed71edb2975dbb5792966afb756
+    pristine_git_object: 4336d09bdd3ca13946049303b0774f9ff53486e5
+  docs/models/components/v2portaldeletedomainresponsebody.md:
+    id: 39ffa5f4631e
+    last_write_checksum: sha1:ef6e159b57b0d41d20307a80f03b5843c0b5e522
+    pristine_git_object: 164e86cb12749431c6bda3b9627977cfe2d21698
   docs/models/components/v2portaldeleteportalrequestbody.md:
     id: c83a37134f26
     last_write_checksum: sha1:3a1ac8be5dedb621a341531fa97c1602c577e48b
@@ -1256,6 +1280,14 @@ trackedFiles:
     id: bf9d6e3302ad
     last_write_checksum: sha1:3f5ef054a223e372bd501117a22b35510ff0eb64
     pristine_git_object: da647c235f3883a845e44f2258a72d974a93a395
+  docs/models/components/v2portalgetdomainrequestbody.md:
+    id: fdb882736f1e
+    last_write_checksum: sha1:7c0d5db97bb340fa0c4d0d42a9087ba61397d784
+    pristine_git_object: 264995f4cc250895c60ba23bbfe8486b1354a8c1
+  docs/models/components/v2portalgetdomainresponsebody.md:
+    id: 6305ea91cd9c
+    last_write_checksum: sha1:bb6659fd992f5155c86266bae4964b5c1d470029
+    pristine_git_object: b6e701ce624418d675c9442b5c9450090df874bd
   docs/models/components/v2portalgetportalrequestbody1.md:
     id: 3812af37254c
     last_write_checksum: sha1:f859468e33408bd41df934df9fd71f862f108f12
@@ -1274,8 +1306,8 @@ trackedFiles:
     pristine_git_object: 1ba55bddbe41a1f565d3fd5900f66a2c0a152e59
   docs/models/components/v2portalgetportalresponsebody.md:
     id: d90fb951e833
-    last_write_checksum: sha1:e45d5120a49fdb9968b587f3cd0fed065ff34d33
-    pristine_git_object: 7bb93781895e252be13d8520adc8bf6946864c2f
+    last_write_checksum: sha1:6d469d4c4d173d4e66a1f2a6b1f64f90fb02fe6b
+    pristine_git_object: bb490e2e6b97ad68652d0ce12b709c77933dd062
   docs/models/components/v2portalgetverificationsdatapoint.md:
     id: 8694d793d16b
     last_write_checksum: sha1:d0bf7f5b0d531da7db432d9419d4d52687f04b91
@@ -1292,6 +1324,14 @@ trackedFiles:
     id: dd3e8f44afe6
     last_write_checksum: sha1:75a3697f42d505d078dd03f3a804f4ae65892848
     pristine_git_object: e32d55bc078fbebfc7da7c5a3e5e92f2c2c17009
+  docs/models/components/v2portallistdomainsrequestbody.md:
+    id: 3448c1760bf2
+    last_write_checksum: sha1:4da54d65213749c9b87e1c66e81cee477453ba7b
+    pristine_git_object: 0b907304fc3e7a0594f37af3baac964603add8e6
+  docs/models/components/v2portallistdomainsresponsebody.md:
+    id: 1d02d145e036
+    last_write_checksum: sha1:430f63cdfbe624dd24100f8497600bbb9df41fbb
+    pristine_git_object: 5ce3807e746bcc8f591bcdc703c0d83c7eea652e
   docs/models/components/v2portallistkeysrequestbody.md:
     id: "458525114349"
     last_write_checksum: sha1:97d765cfaa9af0b9af98a8202a2124053513bffb
@@ -1338,8 +1378,16 @@ trackedFiles:
     pristine_git_object: 92f24431204be1c0f4c7aac8bc6147fc8b233c23
   docs/models/components/v2portalupdateportalresponsebody.md:
     id: 61e6dddbb3ae
-    last_write_checksum: sha1:7467c6234f565d6944244fdb12010d786f68fb10
-    pristine_git_object: 5a7434c2bbaec39023d5bc449667cc946920e635
+    last_write_checksum: sha1:3360a9d6a6040d4f680b6aa22b785edc65b35f07
+    pristine_git_object: a13480f94ec7d887f0923d8c940962e88b2fbe03
+  docs/models/components/v2portalverifydomainrequestbody.md:
+    id: 69a556836fea
+    last_write_checksum: sha1:22b475d712471373328c16ed00f7b81212649d89
+    pristine_git_object: 519a1f550ebd9aa685733eb0d4a448d296297b39
+  docs/models/components/v2portalverifydomainresponsebody.md:
+    id: 725f700eca6f
+    last_write_checksum: sha1:5061c93e977b1e298ea14d59560df9049c19171d
+    pristine_git_object: c0dc666c391af79444603c7396dbcf36145f01d2
   docs/models/components/v2projectscreateprojectrequestbody.md:
     id: c8f749c821fb
     last_write_checksum: sha1:2bb4903fd5411b347fe9f59dac96f4e99bfaedde
@@ -1550,8 +1598,8 @@ trackedFiles:
     pristine_git_object: 9b31c19cf33d0e226e83d70557e11b7414bbd39e
   docs/models/components/v2workspacegetlimitsresponsedata.md:
     id: d7dc47b31480
-    last_write_checksum: sha1:aa2688c2be66d45274af30d612012740ccffb884
-    pristine_git_object: 840adff9af966e74d04355102c19208f5333c2ff
+    last_write_checksum: sha1:d487bfd5a8dc0be226b426fd4ec3f35288a275bd
+    pristine_git_object: 2c7d7d9d40624fc200da9b73709808802fed729e
   docs/models/components/v2workspacegetusageapi.md:
     id: 8d4dbcb20b4c
     last_write_checksum: sha1:8172198b635ee8bcf350fc8a3dbbeca5015e6b90
@@ -1822,8 +1870,8 @@ trackedFiles:
     pristine_git_object: e7e278f203b2870f69345765aa3278342a8492e0
   docs/sdks/portal/README.md:
     id: 130ac1af4c35
-    last_write_checksum: sha1:d593857ed93a50e30cb15a187dec9caf0268e39e
-    pristine_git_object: c56933ec9fd45506542307cf6ef311ded83c6861
+    last_write_checksum: sha1:c6aa07d9f4ceab7b2972697dc6da52df2cc37c3a
+    pristine_git_object: 8348ed8ac9eb9db32272ce30ec7b69ddd92ab3a5
   docs/sdks/projects/README.md:
     id: 1c5f71754e17
     last_write_checksum: sha1:05d8c0835f18ed0acdf8a9678ffa9298b1b9c4d5
@@ -1862,12 +1910,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:0bcc5b676e558f2f277c29e08089d081c5932168
-    pristine_git_object: 3849d13e160b61b06fdf14ba2e52962239fcc4fe
+    last_write_checksum: sha1:789a04e0a26dc9afff4fc4f75955cec56b560749
+    pristine_git_object: f9fb1a237b50ae1a32b0bd8eb989d0333b827436
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b04659a2dc234286f466e6e2c762b325a16d4cbc
-    pristine_git_object: 576b8da923bc5c12d7aaa7eed7745a7280d4b9d5
+    last_write_checksum: sha1:fcd87e41befe0cae43a9dfa21554c383910de2cb
+    pristine_git_object: 57052ff94b7a25a0de0bd424749395ef9364c150
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -2168,6 +2216,10 @@ trackedFiles:
     id: d61e0a77b580
     last_write_checksum: sha1:9f5ed7dcab42467872d6793ff6c5c5b898fc99c4
     pristine_git_object: fc5d551580a8c4e78e5992e013146816cae522ac
+  src/funcs/portalCreateDomain.ts:
+    id: 4870c5f539e6
+    last_write_checksum: sha1:cf39c5148e7393606f1efa0586896213b49cdc2f
+    pristine_git_object: 04bc3f969087fb4e943aec47ce9df5d0fa064356
   src/funcs/portalCreatePortal.ts:
     id: 8c44348e5b49
     last_write_checksum: sha1:bfac3486fc173c18a9921b0366745a3440353df3
@@ -2176,14 +2228,22 @@ trackedFiles:
     id: cada8e3bed72
     last_write_checksum: sha1:d864b099c0fff667052833ef59654365c102da86
     pristine_git_object: 4113291c6b476a8855d4da6a716e028026db27e0
+  src/funcs/portalDeleteDomain.ts:
+    id: e671f17f85b8
+    last_write_checksum: sha1:0b9a926c8cb5cceab4aea7eab6a86af345c8c49e
+    pristine_git_object: 0e2a62ed858185df3b5666f270eff8b4b66e13e0
   src/funcs/portalDeletePortal.ts:
     id: b8d9786f6f9a
-    last_write_checksum: sha1:a078602704033357c9c38c39f10f6fbe4a3dab71
-    pristine_git_object: bf7dcc803f29e61e1bf2b2db55f6ba56099feb72
+    last_write_checksum: sha1:e7deca334761cfe619b9209d520469ea24f18489
+    pristine_git_object: b0ae98723ff5d4ed6c3ae99c52e85988f67493f6
   src/funcs/portalExchangeCode.ts:
     id: 05ccebb3fa38
     last_write_checksum: sha1:2888a9176c43762d8ad45941c4533586522ab780
     pristine_git_object: 44ed93ec1732005f92800262cd910233e81aab2d
+  src/funcs/portalGetDomain.ts:
+    id: e481a788645a
+    last_write_checksum: sha1:f9dd0fb7aecd0f3ae7931204511ff72258b0f3f6
+    pristine_git_object: 16beb71bc75b1c9b197e0802054adaca90a9db14
   src/funcs/portalGetPortal.ts:
     id: ad7841f06168
     last_write_checksum: sha1:4ab774fc6e81619f45035a8e5361d0ba5efff87d
@@ -2192,6 +2252,10 @@ trackedFiles:
     id: 92c5119185db
     last_write_checksum: sha1:3b8bae461b6503eacc8d9a35095e785c170c293a
     pristine_git_object: 12f8e54cc1ded200a58916346ffb805392a0916a
+  src/funcs/portalListDomains.ts:
+    id: 8bd627dadb59
+    last_write_checksum: sha1:a967589099cb1b881eb450998e391d21ec746ad7
+    pristine_git_object: 46ef439aa0880fb1a177c6cb0d6dd1279e592c62
   src/funcs/portalListKeys.ts:
     id: 5a0ea580d4db
     last_write_checksum: sha1:4d08d128e81a5ab717d4cd3c4920cd25ea680327
@@ -2212,6 +2276,10 @@ trackedFiles:
     id: 525069c32d7d
     last_write_checksum: sha1:e77c8ad6cc26b697066ee0e9d695d89b29f92786
     pristine_git_object: a060b2def4b157f81d805e5f7d70543c18a6453e
+  src/funcs/portalVerifyDomain.ts:
+    id: a18fda0f0a8a
+    last_write_checksum: sha1:87ac8134ed18cfdb0f220e61f6156296d46d1942
+    pristine_git_object: 96591936191fdb12feff11e6ebc065e1480828c9
   src/funcs/projectsCreateProject.ts:
     id: 6c0124cd7f03
     last_write_checksum: sha1:1b2c7f5c0e5ef3f5630d3af5e29fdcb08b65588c
@@ -2330,16 +2398,16 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ccb0de014b47b9684747fa63a41880dbaba1557c
-    pristine_git_object: 473543eeaa0609495b2667f061a2ad15b7c2f5e5
+    last_write_checksum: sha1:801193af569804f3e3fa476a9613485dfbca2611
+    pristine_git_object: 35e09418214cf0ebcace4e01c9f7a7f632e9adb3
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
     pristine_git_object: d6e751fe6a9a39af519df802d05c999f6783bae8
   src/lib/env.ts:
     id: c52972a3b198
-    last_write_checksum: sha1:701f09e9109e8e3729a4e4f1d8ae24bcad7f1bfe
-    pristine_git_object: c275a60c16d3b52df7b9b21c4127566aec80fa53
+    last_write_checksum: sha1:16f752cfdde3625dfb69e6828dd34beda22aafc4
+    pristine_git_object: 9f99ed6ce6977b620c401f75c502bbf7dd5fdfc6
   src/lib/files.ts:
     id: e5efa54fcb95
     last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
@@ -2514,12 +2582,16 @@ trackedFiles:
     pristine_git_object: ab60bd57343246c821b629ee3f23301869da9842
   src/models/components/domain.ts:
     id: 8cada08f884e
-    last_write_checksum: sha1:ad53a46b3d77a421c70ace1a121839d4fa4ff8b7
-    pristine_git_object: 981ef450432ba16402d3d473b1c5c2f9b4cfcaa9
+    last_write_checksum: sha1:5fd802e3c11d3e5cb4fe1f69411289eb2216397b
+    pristine_git_object: 36f67695f40d0c0cb239d823023ddd68f1c16946
   src/models/components/domainconnect.ts:
     id: 9afe60f41e0d
     last_write_checksum: sha1:dd156d961c14673fe730faadcfcdef1c7efab0cf
     pristine_git_object: d3a8874ba6a5d0e3dec826eb851ae2ed549d456b
+  src/models/components/domainstatus.ts:
+    id: 6434d93b394d
+    last_write_checksum: sha1:d32c06c8f1c168d98ad7a0ec1fd00a608533ad89
+    pristine_git_object: 961dc71ba663e803d7fc6b94d3d644bd5cd5aabc
   src/models/components/emptyresponse.ts:
     id: 32d9b51aae32
     last_write_checksum: sha1:c90c94b09405a5ac315e70ffcf1f34928b2e9b7d
@@ -2598,8 +2670,8 @@ trackedFiles:
     pristine_git_object: 13d57aabbb139bd955ff6a36b355e40e34cf6a0c
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:77384732a1ccea11b1a05dcdb3d4eefeedc55803
-    pristine_git_object: c40b8013973275c93eb88a79595fb7cc35091206
+    last_write_checksum: sha1:f829a860c16c4e018791426adeecd273ff15ac24
+    pristine_git_object: 3a3d97db8e65df6a9ab4ddf31c390280650a369d
   src/models/components/intfilter.ts:
     id: 1711450beed8
     last_write_checksum: sha1:ca712009b6ea1fb944b1d750a035d5f9de0590d3
@@ -2692,6 +2764,10 @@ trackedFiles:
     id: 573b38ac1920
     last_write_checksum: sha1:c7406087b412d30c9f33bfdd95782359fe2261a6
     pristine_git_object: 0f981d31c811fc8ebc1a807ce15d2dc468ecb04f
+  src/models/components/portaldomain.ts:
+    id: a7096563f7bb
+    last_write_checksum: sha1:eed5c22a6d3d3a6767b3dc99833d8d32d3bb2cbf
+    pristine_git_object: d9a7f395c6235e895080ab63c96e3312944600e3
   src/models/components/principalfieldkey.ts:
     id: 45cdfdccd9dc
     last_write_checksum: sha1:91351713ef27ddb6f3f33f57094a6b6398f1b074
@@ -3436,6 +3512,18 @@ trackedFiles:
     id: adf7cfca04e8
     last_write_checksum: sha1:ceb9a3b2055757782fccbf9c1b5a230012aa9f58
     pristine_git_object: a54922361577f0e64e59dfd37851dba5a0f566ba
+  src/models/components/v2portalcreatedomainrequestbody.ts:
+    id: dcd887030145
+    last_write_checksum: sha1:8b1b28151d557ad3e9c710169a99b45fecd4fdee
+    pristine_git_object: 0768f584b10768cd612ad40abdda842996965d26
+  src/models/components/v2portalcreatedomainresponsebody.ts:
+    id: ef8329a045ea
+    last_write_checksum: sha1:2e241818eddc5836c4476c74dc2725e566c6b8e3
+    pristine_git_object: 56ee009df92e234cc0156fb64b84bff37186d43e
+  src/models/components/v2portalcreatedomainresponsedata.ts:
+    id: 92c3cb142f39
+    last_write_checksum: sha1:211bb5f1368addf3fd970da495a92825c67beede
+    pristine_git_object: b4ec4abbaf5d03b27abfbde8b896f560c003df58
   src/models/components/v2portalcreateportalrequestbodyunion.ts:
     id: f2a6f694a66d
     last_write_checksum: sha1:7083e45e055691f386e16e9b4f6e6b626afdd840
@@ -3460,6 +3548,14 @@ trackedFiles:
     id: 64ce4600c105
     last_write_checksum: sha1:8490e9d65121e9a193801379f4f4126c17811323
     pristine_git_object: db715095e9580112d40b07f655a89169dd422595
+  src/models/components/v2portaldeletedomainrequestbody.ts:
+    id: 644bbea1b648
+    last_write_checksum: sha1:c260a3a4c5d6fad9b22af1b3c44f0a093f29dbf5
+    pristine_git_object: 1c0d98e31d76cf7de3656c2925751a714badeedd
+  src/models/components/v2portaldeletedomainresponsebody.ts:
+    id: 82355aaa6587
+    last_write_checksum: sha1:d462d0aaedb8de8028f2248e3160177267431034
+    pristine_git_object: 472db6d2b27836aae2a94d67bbbe653727a52084
   src/models/components/v2portaldeleteportalrequestbody.ts:
     id: d3becb1ae684
     last_write_checksum: sha1:3774472babfbccdfa9176d63903ddab61e4ee919
@@ -3480,6 +3576,14 @@ trackedFiles:
     id: a080688faa5a
     last_write_checksum: sha1:9de1de7bbe46c8291d3ef3f9f6165c1684a1b5c4
     pristine_git_object: 0127b82287d903dbf14a0c4985d209d2462743e3
+  src/models/components/v2portalgetdomainrequestbody.ts:
+    id: c335de110036
+    last_write_checksum: sha1:592aa0006a67733f5aa91b00930275504fd5ac06
+    pristine_git_object: f52773d848dad6b7bd38fdd42324f22ac4ed2d54
+  src/models/components/v2portalgetdomainresponsebody.ts:
+    id: a6308146304c
+    last_write_checksum: sha1:0fd2405abedd2955ef593422be30babd5c07c772
+    pristine_git_object: f198a02fff8b2f34263e509715562d86eea7bdc8
   src/models/components/v2portalgetportalrequestbodyunion.ts:
     id: 6d230015c17c
     last_write_checksum: sha1:54bbe36012d50dc72e1a9e76d7633dc727548fce
@@ -3504,6 +3608,14 @@ trackedFiles:
     id: 0b045fdcdb1a
     last_write_checksum: sha1:f09eb26d367bbf974c1d9cd43ea3ff5e15ae2ef0
     pristine_git_object: d3bee4064bdb7cde92a05c3605d40a991d8b2b6b
+  src/models/components/v2portallistdomainsrequestbody.ts:
+    id: 27d9fe670cf5
+    last_write_checksum: sha1:5296e3d8d3aef34a217c1dd5554414d9799cddf6
+    pristine_git_object: 9a98fdb56fcc5e5d3680aeb5204ea38272e4b0b3
+  src/models/components/v2portallistdomainsresponsebody.ts:
+    id: b0346e2e65ee
+    last_write_checksum: sha1:94e2c6f72525ea97a09f2d7d701791c6a06e63c8
+    pristine_git_object: 32736c1d5adfad0b56df42346025778671f7a170
   src/models/components/v2portallistkeysrequestbody.ts:
     id: ab2f81990249
     last_write_checksum: sha1:6cbb99ba38bf51395ef3b391520afa310bc80397
@@ -3548,6 +3660,14 @@ trackedFiles:
     id: eb18e391f3c3
     last_write_checksum: sha1:8cacf4687e4b630fe555119b196696fd07006022
     pristine_git_object: 8448d127428c6b90369330af570eada1a916fae0
+  src/models/components/v2portalverifydomainrequestbody.ts:
+    id: c3ee9151ee07
+    last_write_checksum: sha1:605b71068769aa9d888f89917d0fc9255df24506
+    pristine_git_object: ddbf8607ab117fb3559460ae39f6a6063d341d7c
+  src/models/components/v2portalverifydomainresponsebody.ts:
+    id: 442b898990b4
+    last_write_checksum: sha1:45dd96739f09c9d948ecddc3f65fd13ea0cd43c1
+    pristine_git_object: 5b36caffac7057f8a59dc56df6fa1cbb2c4be2cd
   src/models/components/v2projectscreateprojectrequestbody.ts:
     id: de5e1fdd3d5d
     last_write_checksum: sha1:3a26c290a9bbe744412027af6200cd2642877d15
@@ -3758,8 +3878,8 @@ trackedFiles:
     pristine_git_object: b85075d99fb90ca799cc219da67ef6717d9e7f22
   src/models/components/v2workspacegetlimitsresponsedata.ts:
     id: 5d6936e7c601
-    last_write_checksum: sha1:5a795a9c54bc53e046620f437c2f3a76ec60a711
-    pristine_git_object: eb96b7eb213b17cda370df6504e3fd1594b3f65b
+    last_write_checksum: sha1:4db51a11389b32e394096be128ca1b4111a95f99
+    pristine_git_object: 9d1c3f1e416a0803e64327546b088d3e044731a1
   src/models/components/v2workspacegetusageapi.ts:
     id: 234649420fa4
     last_write_checksum: sha1:c146941096676a4b195f2ca601f3453a7f855dfe
@@ -4054,8 +4174,8 @@ trackedFiles:
     pristine_git_object: 22532f12fa459646240b923cffb83a076fd22cf9
   src/sdk/portal.ts:
     id: d907b3858eda
-    last_write_checksum: sha1:292a81048b0cb0bfc025a186dee55031039575ec
-    pristine_git_object: ba4593283789d3c9fd5a24a90f8a1fa588b37c05
+    last_write_checksum: sha1:0a18f72e4312d1c428daea22d84221b0342db0e5
+    pristine_git_object: 063c848bd31633091ba7d90ba8b09637615c8337
   src/sdk/projects.ts:
     id: 28088373a118
     last_write_checksum: sha1:fa98769c399008baadb6a183ea8f658a5f5828dd
@@ -9163,9 +9283,76 @@ examples:
       responses:
         "429":
           application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "This workspace has exceeded its API rate limit of 1000/1m0s. Please try again later.", "status": 429, "title": "Too Many Requests", "type": "https://unkey.com/docs/errors/user/too_many_requests/workspace_rate_limited"}}
+  portal.createDomain:
+    speakeasy-default-portal-create-domain:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd", "domain": "portal.acme.com"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"domainId": "pdom_1234abcd", "dnsRecords": [{"type": "CNAME", "name": "api.acme.com", "value": "a1b2c3d4e5f6g7h8.cname.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}], "domainConnect": {"provider": "Cloudflare", "url": "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api"}}}
+        "400":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
+        "401":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "403":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "404":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "409":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "429":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+        "500":
+          application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
+  portal.deleteDomain:
+    accepted:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd", "domainId": "pdom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
+  portal.getDomain:
+    failed:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd", "domainId": "pdom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "pdom_1234abcd", "portalId": "prt_1234abcd", "domain": "portal.acme.com", "status": "failed", "verificationError": "domain verification timed out after 24 hours", "dnsRecords": [{"type": "CNAME", "name": "portal.acme.com", "value": "a1b2c3d4e5f6g7h8.portal.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.portal.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704153600000}}
+    verified:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd", "domainId": "pdom_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {"id": "pdom_1234abcd", "portalId": "prt_1234abcd", "domain": "portal.acme.com", "status": "verified", "dnsRecords": [{"type": "CNAME", "name": "portal.acme.com", "value": "a1b2c3d4e5f6g7h8.portal.unkey.com", "ttl": 60, "verified": true, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.portal.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}}
+  portal.listDomains:
+    empty:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": []}
+    twoDomains:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd"}
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": [{"id": "pdom_1234abcd", "portalId": "prt_1234abcd", "domain": "portal.acme.com", "status": "verified", "dnsRecords": [{"type": "CNAME", "name": "portal.acme.com", "value": "a1b2c3d4e5f6g7h8.portal.unkey.com", "ttl": 60, "verified": true, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.portal.acme.com", "value": "unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704067200000, "updatedAt": 1704067260000}, {"id": "pdom_5678efgh", "portalId": "prt_1234abcd", "domain": "help.acme.com", "status": "verifying", "dnsRecords": [{"type": "CNAME", "name": "help.acme.com", "value": "h8g7f6e5d4c3b2a1.portal.unkey.com", "ttl": 60, "verified": false, "note": "Create as DNS-only if your provider offers the choice."}, {"type": "TXT", "name": "_unkey.help.acme.com", "value": "unkey-domain-verify=9LhJ4bY6wR2nT5vP7mK1xQ8Z", "ttl": 60, "verified": false, "note": "Proves ownership. Create it alongside the routing record."}], "createdAt": 1704070800000, "updatedAt": 1704070860000}]}
+  portal.verifyDomain:
+    accepted:
+      requestBody:
+        application/json: {"portal": "proj_1234abcd", "domainId": "pdom_1234abcd"}
+      responses:
+        "202":
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "data": {}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `unkey.keys.verifyKey()`:  `error.status[403]` **Removed** (Breaking ⚠️)\n* `unkey.logs.listApiRequests()`:  `error.status[429]` **Removed** (Breaking ⚠️)\n* `unkey.logs.getApiRequestMetrics()`:  `error.status[429]` **Removed** (Breaking ⚠️)\n* `unkey.deployments.rollbackDeployment()`:  `error.status[403]` **Added**\n* `unkey.permissions.deleteRole()`:  `error.status[404]` **Added**\n* `unkey.deployments.startDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.stopDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.promoteDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.listBuildLogs()`:  `error.status[403]` **Added**\n* `unkey.deployments.cancelDeployment()`:  `error.status[403]` **Added**\n* `unkey.deployments.authorizeDeployment()`:  `error.status[403]` **Added**\n* `unkey.portal.deletePortal()`:  `error.status[403]` **Added**\n* `unkey.portal.revokeSession()`:  `error.status[403]` **Added**\n* `unkey.portal.updatePortal()`:  `error.status[403]` **Added**\n* `unkey.rootKeys.createKey()`: \n  *  `request.ipAllowlist` **Added**\n* `unkey.rootKeys.listKeys()`:  `response.data[].ipAllowlist` **Added**\n* `unkey.rootKeys.updateKey()`: \n  *  `request.ipAllowlist` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `unkey.portal.createDomain()`: **Added**
+  * `unkey.portal.deleteDomain()`: **Added**
+  * `unkey.portal.getDomain()`: **Added**
+  * `unkey.portal.listDomains()`: **Added**
+  * `unkey.portal.verifyDomain()`: **Added**
 generatedFiles:
   - .gitattributes
   - .npmignore

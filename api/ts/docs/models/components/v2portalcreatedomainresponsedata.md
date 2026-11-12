@@ -1,0 +1,34 @@
+# V2PortalCreateDomainResponseData
+
+## Example Usage
+
+```typescript
+import { V2PortalCreateDomainResponseData } from "@unkey/api/models/components";
+
+let value: V2PortalCreateDomainResponseData = {
+  domainId: "pdom_1234abcd",
+  dnsRecords: [
+    {
+      type: "CNAME",
+      name: "api.acme.com",
+      value: "a1b2c3d4e5f6g7h8.cname.unkey.com",
+      ttl: 60,
+      verified: false,
+      note: "Create as DNS-only if your provider offers the choice.",
+    },
+  ],
+  domainConnect: {
+    provider: "Cloudflare",
+    url:
+      "https://dash.cloudflare.com/domainconnect/v2/domaintemplates/apply?domain=acme.com&host=api",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                     | Example                                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `domainId`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                                              | The portal domain ID that `portal.createDomain` returned.                                                                                                                                                                                       | pdom_1234abcd                                                                                                                                                                                                                                   |
+| `dnsRecords`                                                                                                                                                                                                                                    | [components.DnsRecord](../../models/components/dnsrecord.md)[]                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                              | Every DNS record needed to finish setting up this domain, ready to create at your provider.<br/>One record routes traffic to the portal and one proves ownership. Create all of them.<br/>                                                      |                                                                                                                                                                                                                                                 |
+| `domainConnect`                                                                                                                                                                                                                                 | [components.DomainConnect](../../models/components/domainconnect.md)                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                              | One-click setup at the domain's DNS provider. Omitted entirely when the provider does not support<br/>Domain Connect or discovery failed, so the object's presence is the signal that the shortcut is<br/>available and both of its fields are filled.<br/> |                                                                                                                                                                                                                                                 |

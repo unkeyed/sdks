@@ -3519,6 +3519,35 @@ components:
                 data:
                     "$ref": "#/components/schemas/V2PermissionsUpdateRoleResponseData"
             additionalProperties: false
+        V2PortalCreateDomainRequestBody:
+            type: object
+            required:
+                - portal
+                - domain
+            properties:
+                portal:
+                    "$ref": "#/components/schemas/ResourceIdentifier"
+                domain:
+                    type: string
+                    minLength: 4
+                    maxLength: 253
+                    description: |
+                        Fully qualified domain name to attach to the portal, without a scheme, port, or path.
+                        Must be unique across your workspace: a name already attached to a portal or to an
+                        environment cannot be attached again.
+                    example: portal.acme.com
+            additionalProperties: false
+        V2PortalCreateDomainResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    "$ref": "#/components/schemas/Meta"
+                data:
+                    "$ref": "#/components/schemas/V2PortalCreateDomainResponseData"
+            additionalProperties: false
         V2PortalCreatePortalRequestBody:
             type: object
             required:
@@ -3655,6 +3684,28 @@ components:
                 data:
                     $ref: "#/components/schemas/V2PortalCreateSessionResponseData"
             additionalProperties: false
+        V2PortalDeleteDomainRequestBody:
+            type: object
+            required:
+                - portal
+                - domainId
+            properties:
+                portal:
+                    "$ref": "#/components/schemas/ResourceIdentifier"
+                domainId:
+                    "$ref": "#/components/schemas/PortalDomainId"
+            additionalProperties: false
+        V2PortalDeleteDomainResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    "$ref": "#/components/schemas/Meta"
+                data:
+                    "$ref": "#/components/schemas/EmptyResponse"
+            additionalProperties: false
         V2PortalDeletePortalRequestBody:
             type: object
             required:
@@ -3698,6 +3749,28 @@ components:
                     $ref: "#/components/schemas/Meta"
                 data:
                     $ref: "#/components/schemas/V2PortalExchangeCodeResponseData"
+            additionalProperties: false
+        V2PortalGetDomainRequestBody:
+            type: object
+            required:
+                - portal
+                - domainId
+            properties:
+                portal:
+                    "$ref": "#/components/schemas/ResourceIdentifier"
+                domainId:
+                    "$ref": "#/components/schemas/PortalDomainId"
+            additionalProperties: false
+        V2PortalGetDomainResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    "$ref": "#/components/schemas/Meta"
+                data:
+                    "$ref": "#/components/schemas/PortalDomain"
             additionalProperties: false
         V2PortalGetPortalRequestBody:
             type: object
@@ -3790,6 +3863,31 @@ components:
                         render those totals without assuming the key is still listable.
                     items:
                         $ref: "#/components/schemas/V2PortalGetVerificationsKeySeries"
+            additionalProperties: false
+        V2PortalListDomainsRequestBody:
+            type: object
+            required:
+                - portal
+            properties:
+                portal:
+                    "$ref": "#/components/schemas/ResourceIdentifier"
+            additionalProperties: false
+        V2PortalListDomainsResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    "$ref": "#/components/schemas/Meta"
+                data:
+                    type: array
+                    maxItems: 10
+                    items:
+                        "$ref": "#/components/schemas/PortalDomain"
+                    description: |
+                        Every domain attached to the portal, verified or not, sorted by ID. Empty when the
+                        portal has no domains.
             additionalProperties: false
         V2PortalListKeysRequestBody:
             type: object
@@ -3988,6 +4086,28 @@ components:
                     "$ref": "#/components/schemas/Meta"
                 data:
                     "$ref": "#/components/schemas/Portal"
+            additionalProperties: false
+        V2PortalVerifyDomainRequestBody:
+            type: object
+            required:
+                - portal
+                - domainId
+            properties:
+                portal:
+                    "$ref": "#/components/schemas/ResourceIdentifier"
+                domainId:
+                    "$ref": "#/components/schemas/PortalDomainId"
+            additionalProperties: false
+        V2PortalVerifyDomainResponseBody:
+            type: object
+            required:
+                - meta
+                - data
+            properties:
+                meta:
+                    "$ref": "#/components/schemas/Meta"
+                data:
+                    "$ref": "#/components/schemas/EmptyResponse"
             additionalProperties: false
         V2ProjectsCreateProjectRequestBody:
             type: object
@@ -6528,25 +6648,7 @@ components:
                         deployed to this environment.
                     example: env_1234abcd
                 status:
-                    type: string
-                    enum:
-                        - pending
-                        - verifying
-                        - verified
-                        - failed
-                    x-enum-varnames:
-                        - DomainStatusPending
-                        - DomainStatusVerifying
-                        - DomainStatusVerified
-                        - DomainStatusFailed
-                    description: |
-                        The verification status of the domain.
-
-                        - `pending`: the domain is created. No DNS check has completed yet.
-                        - `verifying`: Unkey checks the DNS records approximately each minute.
-                        - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-                        - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
-                    example: verified
+                    "$ref": "#/components/schemas/DomainStatus"
                 verificationError:
                     type: string
                     maxLength: 512
@@ -6576,6 +6678,26 @@ components:
                     description: Unix timestamp in milliseconds of the last change to this domain. Omitted if it has never changed.
                     example: 1704153600000
             additionalProperties: false
+        DomainStatus:
+            type: string
+            enum:
+                - pending
+                - verifying
+                - verified
+                - failed
+            x-enum-varnames:
+                - DomainStatusPending
+                - DomainStatusVerifying
+                - DomainStatusVerified
+                - DomainStatusFailed
+            description: |
+                The verification status of the domain.
+
+                - `pending`: the domain is created. No DNS check has completed yet.
+                - `verifying`: Unkey checks the DNS records approximately each minute.
+                - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
+                - `failed`: verification stopped. `verificationError` says why, for example the records did not appear within 24 hours. Fix the cause, then retry verification.
+            example: verified
         Environment:
             type: object
             required:
@@ -8568,6 +8690,32 @@ components:
                     x-go-type-skip-optional-pointer: true
                     x-go-type-skip-optional-pointer-with-omitzero: true
             additionalProperties: false
+        V2PortalCreateDomainResponseData:
+            type: object
+            required:
+                - domainId
+                - dnsRecords
+            properties:
+                domainId:
+                    "$ref": "#/components/schemas/PortalDomainId"
+                dnsRecords:
+                    type: array
+                    minItems: 1
+                    items:
+                        "$ref": "#/components/schemas/DnsRecord"
+                    description: |
+                        Every DNS record needed to finish setting up this domain, ready to create at your provider.
+                        One record routes traffic to the portal and one proves ownership. Create all of them.
+                domainConnect:
+                    "$ref": "#/components/schemas/DomainConnect"
+            additionalProperties: false
+        PortalDomainId:
+            type: string
+            minLength: 3
+            maxLength: 255
+            pattern: "^[a-zA-Z0-9_]+$"
+            description: The portal domain ID that `portal.createDomain` returned.
+            example: pdom_1234abcd
         PortalKeyspaceId:
             type: string
             minLength: 1
@@ -8643,6 +8791,66 @@ components:
                         Unix timestamp in milliseconds when the access token expires (24 hours from creation).
                     example: 1711386400000
             additionalProperties: false
+        PortalDomain:
+            type: object
+            required:
+                - id
+                - portalId
+                - domain
+                - status
+                - dnsRecords
+                - createdAt
+            properties:
+                id:
+                    type: string
+                    minLength: 3
+                    maxLength: 255
+                    pattern: "^[a-zA-Z0-9_]+$"
+                    description: The portal domain's ID. Pass it as `domainId` to the other portal domain operations.
+                    example: pdom_1234abcd
+                portalId:
+                    type: string
+                    minLength: 3
+                    maxLength: 255
+                    pattern: "^[a-zA-Z0-9_]+$"
+                    description: The portal this domain serves.
+                    example: prt_1234abcd
+                domain:
+                    type: string
+                    minLength: 4
+                    maxLength: 253
+                    description: Fully qualified domain name attached to the portal.
+                    example: portal.acme.com
+                status:
+                    "$ref": "#/components/schemas/DomainStatus"
+                verificationError:
+                    type: string
+                    maxLength: 512
+                    description: |
+                        Why the most recent verification attempt did not succeed, in plain language.
+                        Omitted while verification is progressing normally.
+                    example: domain verification timed out after 24 hours
+                dnsRecords:
+                    type: array
+                    minItems: 1
+                    items:
+                        "$ref": "#/components/schemas/DnsRecord"
+                    description: |
+                        The DNS records this domain needs. Create each record at your DNS provider.
+                        Each record has a `verified` flag showing whether Unkey has read that record back.
+                domainConnect:
+                    "$ref": "#/components/schemas/DomainConnect"
+                createdAt:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp in milliseconds when the domain was created.
+                    example: 1704067200000
+                updatedAt:
+                    type: integer
+                    format: int64
+                    description: Unix timestamp in milliseconds of the last change to this domain. Omitted if it has never changed.
+                    example: 1704153600000
+            additionalProperties: false
         Portal:
             type: object
             required:
@@ -8662,7 +8870,7 @@ components:
                     type: string
                     description: |
                         The unique identifier of the portal, generated by Unkey.
-                    example: pc_1234abcd
+                    example: prt_1234abcd
                 slug:
                     type: string
                     minLength: 3
@@ -9392,9 +9600,10 @@ components:
                         - "$ref": "#/components/schemas/V2WorkspaceGetLimitsLimit"
                 customDomainsMax:
                     description: |
-                        Custom domains across all apps. `current` is the custom domains attached
-                        now. `limit` is `null` when the plan has no limit. Present only with a
-                        Compute plan.
+                        Custom domains across all apps. Subdomains are unlimited, so
+                        `api.acme.com`, `app.acme.com`, and `acme.com` together count as one
+                        custom domain. `current` is the custom domains counted now. `limit` is `null` when
+                        the plan has no limit. Present only with a Compute plan.
                     allOf:
                         - "$ref": "#/components/schemas/V2WorkspaceGetLimitsLimit"
             additionalProperties: false
@@ -18075,6 +18284,89 @@ paths:
                 - permissions
             x-speakeasy-name-override: UpdateRole
             x-unkey-idempotency: idempotent
+    /v2/portal.createDomain:
+        post:
+            description: |
+                Attach a custom domain to a portal and start verifying it.
+
+                The domain is created in the `pending` state and does not serve the portal until
+                verification succeeds. The response returns `dnsRecords`: create every entry exactly as
+                given. Verification runs in the background; poll `portal.getDomain` for the result.
+
+                A name already attached to one of your portals or environments returns a 409.
+
+                Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#write`.
+                Use `portals/*/domains/*#write` to attach domains to any portal in the project.
+                Without the permission this returns **404**, not 403, unless the key can read
+                the portal or its domains.
+            operationId: portal.createDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2PortalCreateDomainRequestBody'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/V2PortalCreateDomainResponseBody'
+                    description: |
+                        Domain created and verification started. The domain is `pending` until the DNS records resolve.
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: The domain is not a valid fully qualified domain name.
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: |
+                        The root key or its workspace is disabled, the key can read the portal but may not
+                        attach domains to it, or the workspace already holds as many portal domains as it may.
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: |
+                        No such portal, or your root key may not update it.
+                "409":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ConflictErrorResponse'
+                    description: |
+                        The domain is already attached to a portal or an environment in your workspace.
+                "429":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: |
+                        Internal server error, including when portal domains are not available in this environment.
+            security:
+                - bearer: []
+            summary: Create portal domain
+            tags:
+                - portal
+            x-speakeasy-name-override: createDomain
     /v2/portal.createPortal:
         post:
             description: |
@@ -18271,6 +18563,80 @@ paths:
             tags:
                 - portal
             x-speakeasy-name-override: createSession
+    /v2/portal.deleteDomain:
+        post:
+            description: |
+                Detach a custom domain from a portal. A verified domain stops serving the portal.
+
+                Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#delete`.
+                Use `portals/<portal_id>/domains/*#delete` to delete any domain on the portal.
+                Without the permission this returns **404**, not 403, unless the key can read
+                the portal or the domain.
+            operationId: portal.deleteDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2PortalDeleteDomainRequestBody'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                accepted:
+                                    summary: Domain deleted
+                                    value:
+                                        data: {}
+                                        meta:
+                                            requestId: req_1234abcd
+                            schema:
+                                $ref: '#/components/schemas/V2PortalDeleteDomainResponseBody'
+                    description: The domain was deleted.
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: |
+                        Your root key can read the portal or the domain but may not delete it. The error names the missing permission.
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: |
+                        No such portal or domain on that portal, or your root key may not read either.
+                "429":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - bearer: []
+            summary: Delete portal domain
+            tags:
+                - portal
+            x-speakeasy-name-override: deleteDomain
     /v2/portal.deletePortal:
         post:
             description: |
@@ -18285,11 +18651,14 @@ paths:
                 The app or keyspace it served is untouched, and its slug becomes free for a
                 new portal.
 
+                Its custom domains are deleted with it: they stop serving and their DNS
+                records can be removed. Their certificates are not revoked.
+
                 **Required Permissions**
 
-                Your root key must have one of:
-                - `portal.*.delete_portal` (to delete any portal in the workspace)
-                - `portal.<portal_id>.delete_portal` (to delete a specific portal)
+                Your root key must have `delete` permission on
+                `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+                A broader grant, such as `unkey:v1:<workspace_id>:**#delete`, also permits deletion.
 
                 A root key that cannot read the portal gets **404**. One that can read it
                 but lacks the permission gets **403**.
@@ -18419,6 +18788,126 @@ paths:
                 - portal
             x-excluded: true
             x-speakeasy-name-override: exchangeCode
+    /v2/portal.getDomain:
+        post:
+            description: |
+                Read one custom domain attached to a portal, with its verification status and DNS records.
+
+                Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#read`.
+                Use `portals/<portal_id>/domains/*#read` to read every domain on the portal.
+                Without the permission this returns **404**, not 403, unless the key can read
+                the portal itself.
+            operationId: portal.getDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2PortalGetDomainRequestBody'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                failed:
+                                    description: The records never appeared. Fix them, then call portal.verifyDomain.
+                                    summary: Verification stopped
+                                    value:
+                                        data:
+                                            createdAt: 1704067200000
+                                            dnsRecords:
+                                                - name: portal.acme.com
+                                                  note: Create as DNS-only if your provider offers the choice.
+                                                  ttl: 60
+                                                  type: CNAME
+                                                  value: a1b2c3d4e5f6g7h8.portal.unkey.com
+                                                  verified: false
+                                                - name: _unkey.portal.acme.com
+                                                  note: Proves ownership. Create it alongside the routing record.
+                                                  ttl: 60
+                                                  type: TXT
+                                                  value: unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL
+                                                  verified: false
+                                            domain: portal.acme.com
+                                            id: pdom_1234abcd
+                                            portalId: prt_1234abcd
+                                            status: failed
+                                            updatedAt: 1704153600000
+                                            verificationError: domain verification timed out after 24 hours
+                                        meta:
+                                            requestId: req_1234abcd
+                                verified:
+                                    summary: Domain serving the portal
+                                    value:
+                                        data:
+                                            createdAt: 1704067200000
+                                            dnsRecords:
+                                                - name: portal.acme.com
+                                                  note: Create as DNS-only if your provider offers the choice.
+                                                  ttl: 60
+                                                  type: CNAME
+                                                  value: a1b2c3d4e5f6g7h8.portal.unkey.com
+                                                  verified: true
+                                                - name: _unkey.portal.acme.com
+                                                  note: Proves ownership. Create it alongside the routing record.
+                                                  ttl: 60
+                                                  type: TXT
+                                                  value: unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL
+                                                  verified: false
+                                            domain: portal.acme.com
+                                            id: pdom_1234abcd
+                                            portalId: prt_1234abcd
+                                            status: verified
+                                            updatedAt: 1704067260000
+                                        meta:
+                                            requestId: req_1234abcd
+                            schema:
+                                $ref: '#/components/schemas/V2PortalGetDomainResponseBody'
+                    description: The portal domain.
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: |
+                        Your root key can read the portal but not its domains. The error names the missing permission.
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: |
+                        No such portal or domain on that portal, or your root key may not read either.
+                "429":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - bearer: []
+            summary: Get portal domain
+            tags:
+                - portal
+            x-speakeasy-name-override: getDomain
     /v2/portal.getPortal:
         post:
             description: |
@@ -18571,6 +19060,123 @@ paths:
             x-excluded: true
             x-speakeasy-name-override: getVerifications
             x-unkey-workspace-rate-limit-exempt: true
+    /v2/portal.listDomains:
+        post:
+            description: |
+                List the custom domains attached to a portal, with their verification status and DNS records.
+
+                Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#read`.
+                Without the permission this returns **404**, not 403, unless the key can read
+                the portal itself.
+            operationId: portal.listDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2PortalListDomainsRequestBody'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                empty:
+                                    summary: No domains attached
+                                    value:
+                                        data: []
+                                        meta:
+                                            requestId: req_1234abcd
+                                twoDomains:
+                                    summary: One verified, one still verifying
+                                    value:
+                                        data:
+                                            - createdAt: 1704067200000
+                                              dnsRecords:
+                                                - name: portal.acme.com
+                                                  note: Create as DNS-only if your provider offers the choice.
+                                                  ttl: 60
+                                                  type: CNAME
+                                                  value: a1b2c3d4e5f6g7h8.portal.unkey.com
+                                                  verified: true
+                                                - name: _unkey.portal.acme.com
+                                                  note: Proves ownership. Create it alongside the routing record.
+                                                  ttl: 60
+                                                  type: TXT
+                                                  value: unkey-domain-verify=3ZQ8xK1mP7vT5nR2wY6bJ4hL
+                                                  verified: false
+                                              domain: portal.acme.com
+                                              id: pdom_1234abcd
+                                              portalId: prt_1234abcd
+                                              status: verified
+                                              updatedAt: 1704067260000
+                                            - createdAt: 1704070800000
+                                              dnsRecords:
+                                                - name: help.acme.com
+                                                  note: Create as DNS-only if your provider offers the choice.
+                                                  ttl: 60
+                                                  type: CNAME
+                                                  value: h8g7f6e5d4c3b2a1.portal.unkey.com
+                                                  verified: false
+                                                - name: _unkey.help.acme.com
+                                                  note: Proves ownership. Create it alongside the routing record.
+                                                  ttl: 60
+                                                  type: TXT
+                                                  value: unkey-domain-verify=9LhJ4bY6wR2nT5vP7mK1xQ8Z
+                                                  verified: false
+                                              domain: help.acme.com
+                                              id: pdom_5678efgh
+                                              portalId: prt_1234abcd
+                                              status: verifying
+                                              updatedAt: 1704070860000
+                                        meta:
+                                            requestId: req_1234abcd
+                            schema:
+                                $ref: '#/components/schemas/V2PortalListDomainsResponseBody'
+                    description: The portal's domains.
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: |
+                        Your root key can read the portal but not its domains. The error names the missing permission.
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: |
+                        No such portal, or your root key may not read it or its domains.
+                "429":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - bearer: []
+            summary: List portal domains
+            tags:
+                - portal
+            x-speakeasy-name-override: listDomains
     /v2/portal.listKeys:
         post:
             description: |
@@ -18977,6 +19583,86 @@ paths:
             tags:
                 - portal
             x-speakeasy-name-override: updatePortal
+    /v2/portal.verifyDomain:
+        post:
+            description: |
+                Restart verification for a portal domain.
+
+                Call this after you correct the DNS records of a domain that shows `failed`, or to give a
+                `pending` domain a new 24-hour verification period. The endpoint returns when Unkey accepts
+                the retry. Poll `portal.getDomain` for the result.
+
+                A domain that is already `verified` returns a 202 and starts nothing.
+
+                Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#write`.
+                Use `portals/<portal_id>/domains/*#write` to manage every domain on the portal.
+                Without the permission this returns **404**, not 403, unless the key can read
+                the portal or the domain.
+            operationId: portal.verifyDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/V2PortalVerifyDomainRequestBody'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            examples:
+                                accepted:
+                                    summary: Verification restarted
+                                    value:
+                                        data: {}
+                                        meta:
+                                            requestId: req_1234abcd
+                            schema:
+                                $ref: '#/components/schemas/V2PortalVerifyDomainResponseBody'
+                    description: Verification retry accepted. The workflow runs in the background.
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadRequestErrorResponse'
+                    description: Bad request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ForbiddenErrorResponse'
+                    description: |
+                        Your root key can read the portal or the domain but may not manage it. The error names the missing permission.
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFoundErrorResponse'
+                    description: |
+                        No such portal or domain on that portal, or your root key may not read either.
+                "429":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TooManyRequestsErrorResponse'
+                    description: Too Many Requests
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InternalServerErrorResponse'
+                    description: Internal server error
+            security:
+                - bearer: []
+            summary: Verify portal domain
+            tags:
+                - portal
+            x-speakeasy-name-override: verifyDomain
     /v2/projects.createProject:
         post:
             description: |

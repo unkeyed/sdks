@@ -10,7 +10,7 @@ let value: V2PortalUpdatePortalResponseBody = {
     requestId: "req_123",
   },
   data: {
-    id: "pc_1234abcd",
+    id: "prt_1234abcd",
     slug: "acme-portal",
     displayName: "Acme",
     enabled: true,
