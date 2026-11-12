@@ -3,48 +3,8 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
-
-// DomainStatus - The verification status of the domain.
-//
-// - `pending`: the domain is created. No DNS check has completed yet.
-// - `verifying`: Unkey checks the DNS records approximately each minute.
-// - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-// - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
-type DomainStatus string
-
-const (
-	DomainStatusPending   DomainStatus = "pending"
-	DomainStatusVerifying DomainStatus = "verifying"
-	DomainStatusVerified  DomainStatus = "verified"
-	DomainStatusFailed    DomainStatus = "failed"
-)
-
-func (e DomainStatus) ToPointer() *DomainStatus {
-	return &e
-}
-func (e *DomainStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "pending":
-		fallthrough
-	case "verifying":
-		fallthrough
-	case "verified":
-		fallthrough
-	case "failed":
-		*e = DomainStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DomainStatus: %v", v)
-	}
-}
 
 type Domain struct {
 	// Identifies a resource by either its unique ID or its slug.
@@ -66,7 +26,7 @@ type Domain struct {
 	// - `pending`: the domain is created. No DNS check has completed yet.
 	// - `verifying`: Unkey checks the DNS records approximately each minute.
 	// - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-	// - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
+	// - `failed`: verification stopped. `verificationError` says why, for example the records did not appear within 24 hours. Fix the cause, then retry verification.
 	//
 	Status DomainStatus `json:"status"`
 	// Why the most recent verification attempt did not succeed, in plain language.

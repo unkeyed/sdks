@@ -52,9 +52,10 @@ type V2WorkspaceGetLimitsResponseData struct {
 	// Present only with a Compute plan.
 	//
 	AutoscalingReplicasMax *V2WorkspaceGetLimitsLimit `json:"autoscalingReplicasMax,omitzero"`
-	// Custom domains across all apps. `current` is the custom domains attached
-	// now. `limit` is `null` when the plan has no limit. Present only with a
-	// Compute plan.
+	// Custom domains across all apps. Subdomains are unlimited, so
+	// `api.acme.com`, `app.acme.com`, and `acme.com` together count as one
+	// custom domain. `current` is the custom domains counted now. `limit` is `null` when
+	// the plan has no limit. Present only with a Compute plan.
 	//
 	CustomDomainsMax *V2WorkspaceGetLimitsLimit `json:"customDomainsMax,omitzero"`
 }

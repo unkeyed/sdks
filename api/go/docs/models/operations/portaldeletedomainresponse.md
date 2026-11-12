@@ -1,0 +1,9 @@
+# PortalDeleteDomainResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalDeleteDomainResponseBody`                                                                          | [*components.V2PortalDeleteDomainResponseBody](../../models/components/v2portaldeletedomainresponsebody.md) | :heavy_minus_sign:                                                                                          | The domain was deleted.                                                                                     |
