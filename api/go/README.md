@@ -359,17 +359,22 @@ func main() {
 
 ### [Portal](docs/sdks/portal/README.md)
 
+* [CreateDomain](docs/sdks/portal/README.md#createdomain) - Create portal domain
 * [CreatePortal](docs/sdks/portal/README.md#createportal) - Create portal
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
+* [DeleteDomain](docs/sdks/portal/README.md#deletedomain) - Delete portal domain
 * [DeletePortal](docs/sdks/portal/README.md#deleteportal) - Delete portal
 * [ExchangeCode](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
+* [GetDomain](docs/sdks/portal/README.md#getdomain) - Get portal domain
 * [GetPortal](docs/sdks/portal/README.md#getportal) - Get portal
 * [GetVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+* [ListDomains](docs/sdks/portal/README.md#listdomains) - List portal domains
 * [ListKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
 * [ListSessions](docs/sdks/portal/README.md#listsessions) - List portal sessions
 * [RerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
 * [RevokeSession](docs/sdks/portal/README.md#revokesession) - Revoke portal sessions
 * [UpdatePortal](docs/sdks/portal/README.md#updateportal) - Update portal
+* [VerifyDomain](docs/sdks/portal/README.md#verifydomain) - Verify portal domain
 
 ### [Projects](docs/sdks/projects/README.md)
 

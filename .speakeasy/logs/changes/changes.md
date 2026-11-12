@@ -1,6 +1,7 @@
-## Typescript SDK Changes:
-* `unkey.portal.createDomain()`: **Added**
-* `unkey.portal.deleteDomain()`: **Added**
-* `unkey.portal.getDomain()`: **Added**
-* `unkey.portal.listDomains()`: **Added**
-* `unkey.portal.verifyDomain()`: **Added**
+## Go SDK Changes:
+* `Unkey.Keys.VerifyKey()`:  `error.status[403]` **Removed** (Breaking ⚠️)
+* `Unkey.Portal.CreateDomain()`: **Added**
+* `Unkey.Portal.DeleteDomain()`: **Added**
+* `Unkey.Portal.GetDomain()`: **Added**
+* `Unkey.Portal.ListDomains()`: **Added**
+* `Unkey.Portal.VerifyDomain()`: **Added**
