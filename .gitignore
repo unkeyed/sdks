@@ -1,0 +1,3 @@
+# Per-run Speakeasy change reports. Every generate workflow rewrites these,
+# so committing them makes parallel regen PRs conflict with each other.
+.speakeasy/logs/
