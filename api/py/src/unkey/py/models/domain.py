@@ -3,7 +3,7 @@
 from __future__ import annotations
 from .dnsrecord import DNSRecord, DNSRecordTypedDict
 from .domainconnect import DomainConnect, DomainConnectTypedDict
-from enum import Enum
+from .domainstatus import DomainStatus
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -14,22 +14,7 @@ from unkey.py.types import (
     current_exclude_none,
     serialize_with_info,
 )
-
-
-class DomainStatus(str, Enum):
-    r"""The verification status of the domain.
-
-    - `pending`: the domain is created. No DNS check has completed yet.
-    - `verifying`: Unkey checks the DNS records approximately each minute.
-    - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-    - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
-
-    """
-
-    PENDING = "pending"
-    VERIFYING = "verifying"
-    VERIFIED = "verified"
-    FAILED = "failed"
+from unkey.py.types.basemodel import current_filtered_dump
 
 
 class DomainTypedDict(TypedDict):
@@ -55,7 +40,7 @@ class DomainTypedDict(TypedDict):
     - `pending`: the domain is created. No DNS check has completed yet.
     - `verifying`: Unkey checks the DNS records approximately each minute.
     - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-    - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
+    - `failed`: verification stopped. `verificationError` says why, for example the records did not appear within 24 hours. Fix the cause, then retry verification.
 
     """
     dns_records: List[DNSRecordTypedDict]
@@ -109,7 +94,7 @@ class Domain(BaseModel):
     - `pending`: the domain is created. No DNS check has completed yet.
     - `verifying`: Unkey checks the DNS records approximately each minute.
     - `verified`: the domain is verified. Unkey has configured routing and requested a certificate.
-    - `failed`: the required DNS records did not appear within 24 hours. Fix the records, then retry verification.
+    - `failed`: verification stopped. `verificationError` says why, for example the records did not appear within 24 hours. Fix the cause, then retry verification.
 
     """
 
@@ -150,12 +135,13 @@ class Domain(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["verificationError", "domainConnect", "updatedAt"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
