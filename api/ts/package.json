@@ -1,6 +1,6 @@
 {
   "name": "@unkey/api",
-  "version": "2.5.6",
+  "version": "2.5.7",
   "author": "Speakeasy",
   "license": "MIT",
   "type": "module",
@@ -41,7 +41,7 @@
     "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
-    "zod": "^3.25.0 || ^4.0.0"
+    "zod": "^3.25.0 || ^4.6.6"
   },
   "exports": {
     ".": {

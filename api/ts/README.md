@@ -357,17 +357,22 @@ run();
 
 ### [Portal](docs/sdks/portal/README.md)
 
+* [createDomain](docs/sdks/portal/README.md#createdomain) - Create portal domain
 * [createPortal](docs/sdks/portal/README.md#createportal) - Create portal
 * [createSession](docs/sdks/portal/README.md#createsession) - Create portal session
+* [deleteDomain](docs/sdks/portal/README.md#deletedomain) - Delete portal domain
 * [deletePortal](docs/sdks/portal/README.md#deleteportal) - Delete portal
 * [exchangeCode](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
+* [getDomain](docs/sdks/portal/README.md#getdomain) - Get portal domain
 * [getPortal](docs/sdks/portal/README.md#getportal) - Get portal
 * [getVerifications](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+* [listDomains](docs/sdks/portal/README.md#listdomains) - List portal domains
 * [listKeys](docs/sdks/portal/README.md#listkeys) - List portal keys
 * [listSessions](docs/sdks/portal/README.md#listsessions) - List portal sessions
 * [rerollKey](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
 * [revokeSession](docs/sdks/portal/README.md#revokesession) - Revoke portal sessions
 * [updatePortal](docs/sdks/portal/README.md#updateportal) - Update portal
+* [verifyDomain](docs/sdks/portal/README.md#verifydomain) - Verify portal domain
 
 ### [Projects](docs/sdks/projects/README.md)
 
@@ -494,17 +499,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`permissionsSetRolePermissions`](docs/sdks/permissions/README.md#setrolepermissions) - Set role permissions
 - [`permissionsUpdatePermission`](docs/sdks/permissions/README.md#updatepermission) - Update permission
 - [`permissionsUpdateRole`](docs/sdks/permissions/README.md#updaterole) - Update role
+- [`portalCreateDomain`](docs/sdks/portal/README.md#createdomain) - Create portal domain
 - [`portalCreatePortal`](docs/sdks/portal/README.md#createportal) - Create portal
 - [`portalCreateSession`](docs/sdks/portal/README.md#createsession) - Create portal session
+- [`portalDeleteDomain`](docs/sdks/portal/README.md#deletedomain) - Delete portal domain
 - [`portalDeletePortal`](docs/sdks/portal/README.md#deleteportal) - Delete portal
 - [`portalExchangeCode`](docs/sdks/portal/README.md#exchangecode) - Exchange portal code
+- [`portalGetDomain`](docs/sdks/portal/README.md#getdomain) - Get portal domain
 - [`portalGetPortal`](docs/sdks/portal/README.md#getportal) - Get portal
 - [`portalGetVerifications`](docs/sdks/portal/README.md#getverifications) - Get portal verifications
+- [`portalListDomains`](docs/sdks/portal/README.md#listdomains) - List portal domains
 - [`portalListKeys`](docs/sdks/portal/README.md#listkeys) - List portal keys
 - [`portalListSessions`](docs/sdks/portal/README.md#listsessions) - List portal sessions
 - [`portalRerollKey`](docs/sdks/portal/README.md#rerollkey) - Reroll portal key
 - [`portalRevokeSession`](docs/sdks/portal/README.md#revokesession) - Revoke portal sessions
 - [`portalUpdatePortal`](docs/sdks/portal/README.md#updateportal) - Update portal
+- [`portalVerifyDomain`](docs/sdks/portal/README.md#verifydomain) - Verify portal domain
 - [`projectsCreateProject`](docs/sdks/projects/README.md#createproject) - Create project
 - [`projectsDeleteProject`](docs/sdks/projects/README.md#deleteproject) - Delete project
 - [`projectsGetProject`](docs/sdks/projects/README.md#getproject) - Get project
@@ -715,12 +725,12 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 86 of 109 methods.*
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 15 of 109 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 109 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 109 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 109 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 109 methods.*
+* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 91 of 114 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 16 of 114 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 114 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 114 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 114 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 114 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -825,7 +835,7 @@ import { Unkey } from "@unkey/api";
 const sdk = new Unkey({ debugLogger: console });
 ```
 
-You can also enable a default debug logger by setting an environment variable `UNKEY_DEBUG` to true.
+You can also enable a default debug logger by setting an environment variable `UNKEY_DEBUG` to `true`, `1`, `yes` or `on` (case-insensitive). Any other value leaves it off.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
