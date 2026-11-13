@@ -9,7 +9,7 @@ import (
 
 type KeysCreateKeyResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successfully created a new API key. The response includes both the keyId (for reference in your system) and the full key string. IMPORTANT: This is the only time the complete key is available - it cannot be retrieved later. You must securely provide this key to your end user immediately.
+	// Successfully created a new API key. The response includes both the keyId (for reference in your system) and the full key string. Store the key securely. The plaintext cannot be retrieved later unless the key was created as recoverable. Retrieving a recoverable key requires permission to decrypt it.
 	V2KeysCreateKeyResponseBody *components.V2KeysCreateKeyResponseBody
 }
 

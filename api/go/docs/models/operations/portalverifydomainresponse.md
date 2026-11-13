@@ -1,0 +1,9 @@
+# PortalVerifyDomainResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalVerifyDomainResponseBody`                                                                          | [*components.V2PortalVerifyDomainResponseBody](../../models/components/v2portalverifydomainresponsebody.md) | :heavy_minus_sign:                                                                                          | Verification retry accepted. The workflow runs in the background.                                           |

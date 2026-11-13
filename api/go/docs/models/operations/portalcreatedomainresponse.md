@@ -1,0 +1,9 @@
+# PortalCreateDomainResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `V2PortalCreateDomainResponseBody`                                                                          | [*components.V2PortalCreateDomainResponseBody](../../models/components/v2portalcreatedomainresponsebody.md) | :heavy_minus_sign:                                                                                          | Domain created and verification started. The domain is `pending` until the DNS records resolve.<br/>        |
