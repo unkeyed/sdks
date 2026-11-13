@@ -6,17 +6,81 @@ Customer Portal session management
 
 ### Available Operations
 
+* [create_domain](#create_domain) - Create portal domain
 * [create_portal](#create_portal) - Create portal
 * [create_session](#create_session) - Create portal session
+* [delete_domain](#delete_domain) - Delete portal domain
 * [delete_portal](#delete_portal) - Delete portal
 * [exchange_code](#exchange_code) - Exchange portal code
+* [get_domain](#get_domain) - Get portal domain
 * [get_portal](#get_portal) - Get portal
 * [get_verifications](#get_verifications) - Get portal verifications
+* [list_domains](#list_domains) - List portal domains
 * [list_keys](#list_keys) - List portal keys
 * [list_sessions](#list_sessions) - List portal sessions
 * [reroll_key](#reroll_key) - Reroll portal key
 * [revoke_session](#revoke_session) - Revoke portal sessions
 * [update_portal](#update_portal) - Update portal
+* [verify_domain](#verify_domain) - Verify portal domain
+
+## create_domain
+
+Attach a custom domain to a portal and start verifying it.
+
+The domain is created in the `pending` state and does not serve the portal until
+verification succeeds. The response returns `dnsRecords`: create every entry exactly as
+given. Verification runs in the background; poll `portal.getDomain` for the result.
+
+A name already attached to one of your portals or environments returns a 409.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#write`.
+Use `portals/*/domains/*#write` to attach domains to any portal in the project.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or its domains.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="portal.createDomain" method="post" path="/v2/portal.createDomain" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.create_domain(portal="proj_1234abcd", domain="portal.acme.com")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                       | Type                                                                                                                                                                                                            | Required                                                                                                                                                                                                        | Description                                                                                                                                                                                                     | Example                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `portal`                                                                                                                                                                                                        | *str*                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                              | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/>                                                                                | proj_1234abcd                                                                                                                                                                                                   |
+| `domain`                                                                                                                                                                                                        | *str*                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                              | Fully qualified domain name to attach to the portal, without a scheme, port, or path.<br/>Must be unique across your workspace: a name already attached to a portal or to an<br/>environment cannot be attached again.<br/> | portal.acme.com                                                                                                                                                                                                 |
+| `retries`                                                                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                                                                             |                                                                                                                                                                                                                 |
+
+### Response
+
+**[models.V2PortalCreateDomainResponseBody](../../models/v2portalcreatedomainresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.ConflictErrorResponse        | 409                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## create_portal
 
@@ -171,6 +235,58 @@ with Unkey(
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## delete_domain
+
+Detach a custom domain from a portal. A verified domain stops serving the portal.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#delete`.
+Use `portals/<portal_id>/domains/*#delete` to delete any domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or the domain.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="portal.deleteDomain" method="post" path="/v2/portal.deleteDomain" example="accepted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.delete_domain(portal="proj_1234abcd", domain_id="pdom_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `portal`                                                                                                                 | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `domain_id`                                                                                                              | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | The portal domain ID that `portal.createDomain` returned.                                                                | pdom_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2PortalDeleteDomainResponseBody](../../models/v2portaldeletedomainresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
 ## delete_portal
 
 Delete a portal and revoke the sessions it minted.
@@ -184,11 +300,14 @@ request already in flight may still succeed.
 The app or keyspace it served is untouched, and its slug becomes free for a
 new portal.
 
+Its custom domains are deleted with it: they stop serving and their DNS
+records can be removed. Their certificates are not revoked.
+
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.delete_portal` (to delete any portal in the workspace)
-- `portal.<portal_id>.delete_portal` (to delete a specific portal)
+Your root key must have `delete` permission on
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+A broader grant, such as `unkey:v1:<workspace_id>:**#delete`, also permits deletion.
 
 A root key that cannot read the portal gets **404**. One that can read it
 but lacks the permission gets **403**.
@@ -280,6 +399,75 @@ with Unkey() as unkey:
 | errors.BadRequestErrorResponse      | 400                                 | application/json                    |
 | errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## get_domain
+
+Read one custom domain attached to a portal, with its verification status and DNS records.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#read`.
+Use `portals/<portal_id>/domains/*#read` to read every domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal itself.
+
+
+### Example Usage: failed
+
+<!-- UsageSnippet language="python" operationID="portal.getDomain" method="post" path="/v2/portal.getDomain" example="failed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.get_domain(portal="proj_1234abcd", domain_id="pdom_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: verified
+
+<!-- UsageSnippet language="python" operationID="portal.getDomain" method="post" path="/v2/portal.getDomain" example="verified" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.get_domain(portal="proj_1234abcd", domain_id="pdom_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `portal`                                                                                                                 | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `domain_id`                                                                                                              | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | The portal domain ID that `portal.createDomain` returned.                                                                | pdom_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2PortalGetDomainResponseBody](../../models/v2portalgetdomainresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
@@ -406,6 +594,73 @@ with Unkey() as unkey:
 | errors.TooManyRequestsErrorResponse     | 429                                     | application/problem+json                |
 | errors.InternalServerErrorResponse      | 500                                     | application/json                        |
 | errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |
+
+## list_domains
+
+List the custom domains attached to a portal, with their verification status and DNS records.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#read`.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal itself.
+
+
+### Example Usage: empty
+
+<!-- UsageSnippet language="python" operationID="portal.listDomains" method="post" path="/v2/portal.listDomains" example="empty" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.list_domains(portal="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: twoDomains
+
+<!-- UsageSnippet language="python" operationID="portal.listDomains" method="post" path="/v2/portal.listDomains" example="twoDomains" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.list_domains(portal="proj_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `portal`                                                                                                                 | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2PortalListDomainsResponseBody](../../models/v2portallistdomainsresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## list_keys
 
@@ -728,5 +983,63 @@ with Unkey(
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.ConflictErrorResponse        | 409                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## verify_domain
+
+Restart verification for a portal domain.
+
+Call this after you correct the DNS records of a domain that shows `failed`, or to give a
+`pending` domain a new 24-hour verification period. The endpoint returns when Unkey accepts
+the retry. Poll `portal.getDomain` for the result.
+
+A domain that is already `verified` returns a 202 and starts nothing.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#write`.
+Use `portals/<portal_id>/domains/*#write` to manage every domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or the domain.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="portal.verifyDomain" method="post" path="/v2/portal.verifyDomain" example="accepted" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.portal.verify_domain(portal="proj_1234abcd", domain_id="pdom_1234abcd")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `portal`                                                                                                                 | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Identifies a resource by either its unique ID or its slug.<br/>Accepts a prefixed ID (such as 'proj_' or 'app_') or a slug.<br/> | proj_1234abcd                                                                                                            |
+| `domain_id`                                                                                                              | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | The portal domain ID that `portal.createDomain` returned.                                                                | pdom_1234abcd                                                                                                            |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
+
+### Response
+
+**[models.V2PortalVerifyDomainResponseBody](../../models/v2portalverifydomainresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

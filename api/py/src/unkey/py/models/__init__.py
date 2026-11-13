@@ -67,12 +67,13 @@ if TYPE_CHECKING:
         DeploymentTriggerActorTypedDict,
     )
     from .dnsrecord import DNSRecord, DNSRecordType, DNSRecordTypedDict
-    from .domain import Domain, DomainStatus, DomainTypedDict
+    from .domain import Domain, DomainTypedDict
     from .domainconnect import DomainConnect, DomainConnectTypedDict
     from .domains_listdomainsop import (
         DomainsListDomainsResponse,
         DomainsListDomainsResponseTypedDict,
     )
+    from .domainstatus import DomainStatus
     from .emptyresponse import EmptyResponse, EmptyResponseTypedDict
     from .environment import Environment, EnvironmentTypedDict
     from .environmentbuild import EnvironmentBuild, EnvironmentBuildTypedDict
@@ -179,6 +180,7 @@ if TYPE_CHECKING:
         PortalRerollKeySecurityTypedDict,
     )
     from .portalbranding import PortalBranding, PortalBrandingTypedDict
+    from .portaldomain import PortalDomain, PortalDomainTypedDict
     from .principalfieldkey import PrincipalFieldKey, PrincipalFieldKeyTypedDict
     from .project import Project, ProjectTypedDict
     from .projects_listprojectsop import (
@@ -911,6 +913,18 @@ if TYPE_CHECKING:
         V2PermissionsUpdateRoleResponseData,
         V2PermissionsUpdateRoleResponseDataTypedDict,
     )
+    from .v2portalcreatedomainrequestbody import (
+        V2PortalCreateDomainRequestBody,
+        V2PortalCreateDomainRequestBodyTypedDict,
+    )
+    from .v2portalcreatedomainresponsebody import (
+        V2PortalCreateDomainResponseBody,
+        V2PortalCreateDomainResponseBodyTypedDict,
+    )
+    from .v2portalcreatedomainresponsedata import (
+        V2PortalCreateDomainResponseData,
+        V2PortalCreateDomainResponseDataTypedDict,
+    )
     from .v2portalcreateportalrequestbody_union import (
         V2PortalCreatePortalRequestBody1,
         V2PortalCreatePortalRequestBody1TypedDict,
@@ -940,6 +954,14 @@ if TYPE_CHECKING:
         V2PortalCreateSessionResponseData,
         V2PortalCreateSessionResponseDataTypedDict,
     )
+    from .v2portaldeletedomainrequestbody import (
+        V2PortalDeleteDomainRequestBody,
+        V2PortalDeleteDomainRequestBodyTypedDict,
+    )
+    from .v2portaldeletedomainresponsebody import (
+        V2PortalDeleteDomainResponseBody,
+        V2PortalDeleteDomainResponseBodyTypedDict,
+    )
     from .v2portaldeleteportalrequestbody import (
         V2PortalDeletePortalRequestBody,
         V2PortalDeletePortalRequestBodyTypedDict,
@@ -959,6 +981,14 @@ if TYPE_CHECKING:
     from .v2portalexchangecoderesponsedata import (
         V2PortalExchangeCodeResponseData,
         V2PortalExchangeCodeResponseDataTypedDict,
+    )
+    from .v2portalgetdomainrequestbody import (
+        V2PortalGetDomainRequestBody,
+        V2PortalGetDomainRequestBodyTypedDict,
+    )
+    from .v2portalgetdomainresponsebody import (
+        V2PortalGetDomainResponseBody,
+        V2PortalGetDomainResponseBodyTypedDict,
     )
     from .v2portalgetportalrequestbody_union import (
         V2PortalGetPortalRequestBody1,
@@ -989,6 +1019,14 @@ if TYPE_CHECKING:
     from .v2portalgetverificationsresponsebody import (
         V2PortalGetVerificationsResponseBody,
         V2PortalGetVerificationsResponseBodyTypedDict,
+    )
+    from .v2portallistdomainsrequestbody import (
+        V2PortalListDomainsRequestBody,
+        V2PortalListDomainsRequestBodyTypedDict,
+    )
+    from .v2portallistdomainsresponsebody import (
+        V2PortalListDomainsResponseBody,
+        V2PortalListDomainsResponseBodyTypedDict,
     )
     from .v2portallistkeysrequestbody import (
         V2PortalListKeysRequestBody,
@@ -1034,6 +1072,14 @@ if TYPE_CHECKING:
     from .v2portalupdateportalresponsebody import (
         V2PortalUpdatePortalResponseBody,
         V2PortalUpdatePortalResponseBodyTypedDict,
+    )
+    from .v2portalverifydomainrequestbody import (
+        V2PortalVerifyDomainRequestBody,
+        V2PortalVerifyDomainRequestBodyTypedDict,
+    )
+    from .v2portalverifydomainresponsebody import (
+        V2PortalVerifyDomainResponseBody,
+        V2PortalVerifyDomainResponseBodyTypedDict,
     )
     from .v2projectscreateprojectrequestbody import (
         V2ProjectsCreateProjectRequestBody,
@@ -1506,6 +1552,8 @@ __all__ = [
     "PortalBrandingTypedDict",
     "PortalCreateSessionResponse",
     "PortalCreateSessionResponseTypedDict",
+    "PortalDomain",
+    "PortalDomainTypedDict",
     "PortalExchangeCodeResponse",
     "PortalExchangeCodeResponseTypedDict",
     "PortalGetVerificationsSecurity",
@@ -1917,6 +1965,12 @@ __all__ = [
     "V2PermissionsUpdateRoleResponseBodyTypedDict",
     "V2PermissionsUpdateRoleResponseData",
     "V2PermissionsUpdateRoleResponseDataTypedDict",
+    "V2PortalCreateDomainRequestBody",
+    "V2PortalCreateDomainRequestBodyTypedDict",
+    "V2PortalCreateDomainResponseBody",
+    "V2PortalCreateDomainResponseBodyTypedDict",
+    "V2PortalCreateDomainResponseData",
+    "V2PortalCreateDomainResponseDataTypedDict",
     "V2PortalCreatePortalRequestBody1",
     "V2PortalCreatePortalRequestBody1TypedDict",
     "V2PortalCreatePortalRequestBody2",
@@ -1933,6 +1987,10 @@ __all__ = [
     "V2PortalCreateSessionResponseBodyTypedDict",
     "V2PortalCreateSessionResponseData",
     "V2PortalCreateSessionResponseDataTypedDict",
+    "V2PortalDeleteDomainRequestBody",
+    "V2PortalDeleteDomainRequestBodyTypedDict",
+    "V2PortalDeleteDomainResponseBody",
+    "V2PortalDeleteDomainResponseBodyTypedDict",
     "V2PortalDeletePortalRequestBody",
     "V2PortalDeletePortalRequestBodyTypedDict",
     "V2PortalDeletePortalResponseBody",
@@ -1943,6 +2001,10 @@ __all__ = [
     "V2PortalExchangeCodeResponseBodyTypedDict",
     "V2PortalExchangeCodeResponseData",
     "V2PortalExchangeCodeResponseDataTypedDict",
+    "V2PortalGetDomainRequestBody",
+    "V2PortalGetDomainRequestBodyTypedDict",
+    "V2PortalGetDomainResponseBody",
+    "V2PortalGetDomainResponseBodyTypedDict",
     "V2PortalGetPortalRequestBody1",
     "V2PortalGetPortalRequestBody1TypedDict",
     "V2PortalGetPortalRequestBody2",
@@ -1961,6 +2023,10 @@ __all__ = [
     "V2PortalGetVerificationsRequestBodyTypedDict",
     "V2PortalGetVerificationsResponseBody",
     "V2PortalGetVerificationsResponseBodyTypedDict",
+    "V2PortalListDomainsRequestBody",
+    "V2PortalListDomainsRequestBodyTypedDict",
+    "V2PortalListDomainsResponseBody",
+    "V2PortalListDomainsResponseBodyTypedDict",
     "V2PortalListKeysRequestBody",
     "V2PortalListKeysRequestBodyTypedDict",
     "V2PortalListKeysResponseBody",
@@ -1984,6 +2050,10 @@ __all__ = [
     "V2PortalUpdatePortalRequestBodyTypedDict",
     "V2PortalUpdatePortalResponseBody",
     "V2PortalUpdatePortalResponseBodyTypedDict",
+    "V2PortalVerifyDomainRequestBody",
+    "V2PortalVerifyDomainRequestBodyTypedDict",
+    "V2PortalVerifyDomainResponseBody",
+    "V2PortalVerifyDomainResponseBodyTypedDict",
     "V2ProjectsCreateProjectRequestBody",
     "V2ProjectsCreateProjectRequestBodyTypedDict",
     "V2ProjectsCreateProjectResponseBody",
@@ -2209,12 +2279,12 @@ _dynamic_imports: dict[str, str] = {
     "DNSRecordType": ".dnsrecord",
     "DNSRecordTypedDict": ".dnsrecord",
     "Domain": ".domain",
-    "DomainStatus": ".domain",
     "DomainTypedDict": ".domain",
     "DomainConnect": ".domainconnect",
     "DomainConnectTypedDict": ".domainconnect",
     "DomainsListDomainsResponse": ".domains_listdomainsop",
     "DomainsListDomainsResponseTypedDict": ".domains_listdomainsop",
+    "DomainStatus": ".domainstatus",
     "EmptyResponse": ".emptyresponse",
     "EmptyResponseTypedDict": ".emptyresponse",
     "Environment": ".environment",
@@ -2323,6 +2393,8 @@ _dynamic_imports: dict[str, str] = {
     "PortalRerollKeySecurityTypedDict": ".portal_rerollkeyop",
     "PortalBranding": ".portalbranding",
     "PortalBrandingTypedDict": ".portalbranding",
+    "PortalDomain": ".portaldomain",
+    "PortalDomainTypedDict": ".portaldomain",
     "PrincipalFieldKey": ".principalfieldkey",
     "PrincipalFieldKeyTypedDict": ".principalfieldkey",
     "Project": ".project",
@@ -2723,6 +2795,12 @@ _dynamic_imports: dict[str, str] = {
     "V2PermissionsUpdateRoleResponseBodyTypedDict": ".v2permissionsupdateroleresponsebody",
     "V2PermissionsUpdateRoleResponseData": ".v2permissionsupdateroleresponsedata",
     "V2PermissionsUpdateRoleResponseDataTypedDict": ".v2permissionsupdateroleresponsedata",
+    "V2PortalCreateDomainRequestBody": ".v2portalcreatedomainrequestbody",
+    "V2PortalCreateDomainRequestBodyTypedDict": ".v2portalcreatedomainrequestbody",
+    "V2PortalCreateDomainResponseBody": ".v2portalcreatedomainresponsebody",
+    "V2PortalCreateDomainResponseBodyTypedDict": ".v2portalcreatedomainresponsebody",
+    "V2PortalCreateDomainResponseData": ".v2portalcreatedomainresponsedata",
+    "V2PortalCreateDomainResponseDataTypedDict": ".v2portalcreatedomainresponsedata",
     "V2PortalCreatePortalRequestBody1": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody1TypedDict": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody2": ".v2portalcreateportalrequestbody_union",
@@ -2740,6 +2818,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalCreateSessionResponseBodyTypedDict": ".v2portalcreatesessionresponsebody",
     "V2PortalCreateSessionResponseData": ".v2portalcreatesessionresponsedata",
     "V2PortalCreateSessionResponseDataTypedDict": ".v2portalcreatesessionresponsedata",
+    "V2PortalDeleteDomainRequestBody": ".v2portaldeletedomainrequestbody",
+    "V2PortalDeleteDomainRequestBodyTypedDict": ".v2portaldeletedomainrequestbody",
+    "V2PortalDeleteDomainResponseBody": ".v2portaldeletedomainresponsebody",
+    "V2PortalDeleteDomainResponseBodyTypedDict": ".v2portaldeletedomainresponsebody",
     "V2PortalDeletePortalRequestBody": ".v2portaldeleteportalrequestbody",
     "V2PortalDeletePortalRequestBodyTypedDict": ".v2portaldeleteportalrequestbody",
     "V2PortalDeletePortalResponseBody": ".v2portaldeleteportalresponsebody",
@@ -2750,6 +2832,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalExchangeCodeResponseBodyTypedDict": ".v2portalexchangecoderesponsebody",
     "V2PortalExchangeCodeResponseData": ".v2portalexchangecoderesponsedata",
     "V2PortalExchangeCodeResponseDataTypedDict": ".v2portalexchangecoderesponsedata",
+    "V2PortalGetDomainRequestBody": ".v2portalgetdomainrequestbody",
+    "V2PortalGetDomainRequestBodyTypedDict": ".v2portalgetdomainrequestbody",
+    "V2PortalGetDomainResponseBody": ".v2portalgetdomainresponsebody",
+    "V2PortalGetDomainResponseBodyTypedDict": ".v2portalgetdomainresponsebody",
     "V2PortalGetPortalRequestBody1": ".v2portalgetportalrequestbody_union",
     "V2PortalGetPortalRequestBody1TypedDict": ".v2portalgetportalrequestbody_union",
     "V2PortalGetPortalRequestBody2": ".v2portalgetportalrequestbody_union",
@@ -2768,6 +2854,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalGetVerificationsRequestBodyTypedDict": ".v2portalgetverificationsrequestbody",
     "V2PortalGetVerificationsResponseBody": ".v2portalgetverificationsresponsebody",
     "V2PortalGetVerificationsResponseBodyTypedDict": ".v2portalgetverificationsresponsebody",
+    "V2PortalListDomainsRequestBody": ".v2portallistdomainsrequestbody",
+    "V2PortalListDomainsRequestBodyTypedDict": ".v2portallistdomainsrequestbody",
+    "V2PortalListDomainsResponseBody": ".v2portallistdomainsresponsebody",
+    "V2PortalListDomainsResponseBodyTypedDict": ".v2portallistdomainsresponsebody",
     "V2PortalListKeysRequestBody": ".v2portallistkeysrequestbody",
     "V2PortalListKeysRequestBodyTypedDict": ".v2portallistkeysrequestbody",
     "V2PortalListKeysResponseBody": ".v2portallistkeysresponsebody",
@@ -2791,6 +2881,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalUpdatePortalRequestBodyTypedDict": ".v2portalupdateportalrequestbody",
     "V2PortalUpdatePortalResponseBody": ".v2portalupdateportalresponsebody",
     "V2PortalUpdatePortalResponseBodyTypedDict": ".v2portalupdateportalresponsebody",
+    "V2PortalVerifyDomainRequestBody": ".v2portalverifydomainrequestbody",
+    "V2PortalVerifyDomainRequestBodyTypedDict": ".v2portalverifydomainrequestbody",
+    "V2PortalVerifyDomainResponseBody": ".v2portalverifydomainresponsebody",
+    "V2PortalVerifyDomainResponseBodyTypedDict": ".v2portalverifydomainresponsebody",
     "V2ProjectsCreateProjectRequestBody": ".v2projectscreateprojectrequestbody",
     "V2ProjectsCreateProjectRequestBodyTypedDict": ".v2projectscreateprojectrequestbody",
     "V2ProjectsCreateProjectResponseBody": ".v2projectscreateprojectresponsebody",
