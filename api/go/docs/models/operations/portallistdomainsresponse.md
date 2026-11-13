@@ -1,0 +1,9 @@
+# PortalListDomainsResponse
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `V2PortalListDomainsResponseBody`                                                                         | [*components.V2PortalListDomainsResponseBody](../../models/components/v2portallistdomainsresponsebody.md) | :heavy_minus_sign:                                                                                        | The portal's domains.                                                                                     |

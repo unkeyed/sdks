@@ -6,17 +6,97 @@ Customer Portal session management
 
 ### Available Operations
 
+* [CreateDomain](#createdomain) - Create portal domain
 * [CreatePortal](#createportal) - Create portal
 * [CreateSession](#createsession) - Create portal session
+* [DeleteDomain](#deletedomain) - Delete portal domain
 * [DeletePortal](#deleteportal) - Delete portal
 * [ExchangeCode](#exchangecode) - Exchange portal code
+* [GetDomain](#getdomain) - Get portal domain
 * [GetPortal](#getportal) - Get portal
 * [GetVerifications](#getverifications) - Get portal verifications
+* [ListDomains](#listdomains) - List portal domains
 * [ListKeys](#listkeys) - List portal keys
 * [ListSessions](#listsessions) - List portal sessions
 * [RerollKey](#rerollkey) - Reroll portal key
 * [RevokeSession](#revokesession) - Revoke portal sessions
 * [UpdatePortal](#updateportal) - Update portal
+* [VerifyDomain](#verifydomain) - Verify portal domain
+
+## CreateDomain
+
+Attach a custom domain to a portal and start verifying it.
+
+The domain is created in the `pending` state and does not serve the portal until
+verification succeeds. The response returns `dnsRecords`: create every entry exactly as
+given. Verification runs in the background; poll `portal.getDomain` for the result.
+
+A name already attached to one of your portals or environments returns a 409.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#write`.
+Use `portals/*/domains/*#write` to attach domains to any portal in the project.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or its domains.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.createDomain" method="post" path="/v2/portal.createDomain" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.CreateDomain(ctx, components.V2PortalCreateDomainRequestBody{
+        Portal: "proj_1234abcd",
+        Domain: "portal.acme.com",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalCreateDomainResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalCreateDomainRequestBody](../../models/components/v2portalcreatedomainrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalCreateDomainResponse](../../models/operations/portalcreatedomainresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## CreatePortal
 
@@ -202,6 +282,74 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## DeleteDomain
+
+Detach a custom domain from a portal. A verified domain stops serving the portal.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#delete`.
+Use `portals/<portal_id>/domains/*#delete` to delete any domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or the domain.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.deleteDomain" method="post" path="/v2/portal.deleteDomain" example="accepted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.DeleteDomain(ctx, components.V2PortalDeleteDomainRequestBody{
+        Portal: "proj_1234abcd",
+        DomainID: "pdom_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalDeleteDomainResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalDeleteDomainRequestBody](../../models/components/v2portaldeletedomainrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalDeleteDomainResponse](../../models/operations/portaldeletedomainresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## DeletePortal
 
 Delete a portal and revoke the sessions it minted.
@@ -215,11 +363,14 @@ request already in flight may still succeed.
 The app or keyspace it served is untouched, and its slug becomes free for a
 new portal.
 
+Its custom domains are deleted with it: they stop serving and their DNS
+records can be removed. Their certificates are not revoked.
+
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.delete_portal` (to delete any portal in the workspace)
-- `portal.<portal_id>.delete_portal` (to delete a specific portal)
+Your root key must have `delete` permission on
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+A broader grant, such as `unkey:v1:<workspace_id>:**#delete`, also permits deletion.
 
 A root key that cannot read the portal gets **404**. One that can read it
 but lacks the permission gets **403**.
@@ -342,6 +493,107 @@ func main() {
 | apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
 | apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## GetDomain
+
+Read one custom domain attached to a portal, with its verification status and DNS records.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#read`.
+Use `portals/<portal_id>/domains/*#read` to read every domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal itself.
+
+
+### Example Usage: failed
+
+<!-- UsageSnippet language="go" operationID="portal.getDomain" method="post" path="/v2/portal.getDomain" example="failed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.GetDomain(ctx, components.V2PortalGetDomainRequestBody{
+        Portal: "proj_1234abcd",
+        DomainID: "pdom_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalGetDomainResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: verified
+
+<!-- UsageSnippet language="go" operationID="portal.getDomain" method="post" path="/v2/portal.getDomain" example="verified" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.GetDomain(ctx, components.V2PortalGetDomainRequestBody{
+        Portal: "proj_1234abcd",
+        DomainID: "pdom_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalGetDomainResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [components.V2PortalGetDomainRequestBody](../../models/components/v2portalgetdomainrequestbody.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.PortalGetDomainResponse](../../models/operations/portalgetdomainresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
@@ -501,6 +753,104 @@ func main() {
 | apierrors.TooManyRequestsErrorResponse     | 429                                        | application/problem+json                   |
 | apierrors.InternalServerErrorResponse      | 500                                        | application/json                           |
 | apierrors.APIError                         | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListDomains
+
+List the custom domains attached to a portal, with their verification status and DNS records.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/*#read`.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal itself.
+
+
+### Example Usage: empty
+
+<!-- UsageSnippet language="go" operationID="portal.listDomains" method="post" path="/v2/portal.listDomains" example="empty" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.ListDomains(ctx, components.V2PortalListDomainsRequestBody{
+        Portal: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: twoDomains
+
+<!-- UsageSnippet language="go" operationID="portal.listDomains" method="post" path="/v2/portal.listDomains" example="twoDomains" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.ListDomains(ctx, components.V2PortalListDomainsRequestBody{
+        Portal: "proj_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalListDomainsResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `request`                                                                                              | [components.V2PortalListDomainsRequestBody](../../models/components/v2portallistdomainsrequestbody.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.PortalListDomainsResponse](../../models/operations/portallistdomainsresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## ListKeys
 
@@ -924,5 +1274,79 @@ func main() {
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## VerifyDomain
+
+Restart verification for a portal domain.
+
+Call this after you correct the DNS records of a domain that shows `failed`, or to give a
+`pending` domain a new 24-hour verification period. The endpoint returns when Unkey accepts
+the retry. Poll `portal.getDomain` for the result.
+
+A domain that is already `verified` returns a 202 and starts nothing.
+
+Requires `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/domains/<domain_id>#write`.
+Use `portals/<portal_id>/domains/*#write` to manage every domain on the portal.
+Without the permission this returns **404**, not 403, unless the key can read
+the portal or the domain.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="portal.verifyDomain" method="post" path="/v2/portal.verifyDomain" example="accepted" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Portal.VerifyDomain(ctx, components.V2PortalVerifyDomainRequestBody{
+        Portal: "proj_1234abcd",
+        DomainID: "pdom_1234abcd",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2PortalVerifyDomainResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [components.V2PortalVerifyDomainRequestBody](../../models/components/v2portalverifydomainrequestbody.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.PortalVerifyDomainResponse](../../models/operations/portalverifydomainresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
