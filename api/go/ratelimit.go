@@ -753,7 +753,7 @@ func (s *Ratelimit) DeleteNamespace(ctx context.Context, request components.V2Ra
 //
 // **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
 //
-// **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+// **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/<override_id>#delete`, or a wildcard URN permission that includes this override and action. Without read access to the override, insufficient permissions return 404. With read access but no delete permission, the response is 403.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) DeleteOverride(ctx context.Context, request components.V2RatelimitDeleteOverrideRequestBody, opts ...operations.Option) (*operations.RatelimitDeleteOverrideResponse, error) {
@@ -2973,7 +2973,7 @@ func (s *Ratelimit) MultiLimit(ctx context.Context, request []components.V2Ratel
 //
 // **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
 //
-// **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+// **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/*#write` to create overrides. To update an override, you can replace `*` with its override ID.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Ratelimit) SetOverride(ctx context.Context, request components.V2RatelimitSetOverrideRequestBody, opts ...operations.Option) (*operations.RatelimitSetOverrideResponse, error) {
