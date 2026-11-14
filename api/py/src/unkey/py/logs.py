@@ -110,10 +110,7 @@ class Logs(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["logs"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -145,6 +142,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -262,10 +264,7 @@ class Logs(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["logs"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -297,6 +296,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -420,10 +424,7 @@ class Logs(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["logs"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -479,6 +480,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -602,10 +608,7 @@ class Logs(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["logs"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -661,6 +664,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res

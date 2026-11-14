@@ -647,7 +647,7 @@ class Deployments(BaseSDK):
 
         Returns immediately with a `deploymentId`. The build and rollout run asynchronously — poll `deployments.getDeployment` to watch status until it is ready.
 
-        **Authentication**: requires a root key with permission to create deployments.
+        **Authentication**: requires a root key with `write` permission on `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*` for the target environment.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -801,7 +801,7 @@ class Deployments(BaseSDK):
 
         Returns immediately with a `deploymentId`. The build and rollout run asynchronously — poll `deployments.getDeployment` to watch status until it is ready.
 
-        **Authentication**: requires a root key with permission to create deployments.
+        **Authentication**: requires a root key with `write` permission on `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*` for the target environment.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1021,7 +1021,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1159,7 +1159,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1333,10 +1333,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1540,10 +1537,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1761,7 +1755,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1984,7 +1978,7 @@ class Deployments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deployments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3343,7 +3337,7 @@ class Deployments(BaseSDK):
 
         Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
 
-        **Authentication**: requires a root key with permission to create deployments.
+        **Authentication**: requires a root key with `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#write`. Wildcards can replace resource IDs to grant access across a wider scope.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -3523,7 +3517,7 @@ class Deployments(BaseSDK):
 
         Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
 
-        **Authentication**: requires a root key with permission to create deployments.
+        **Authentication**: requires a root key with `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#write`. Wildcards can replace resource IDs to grant access across a wider scope.
 
 
         If set, this operation will use `root_key` from the global security.

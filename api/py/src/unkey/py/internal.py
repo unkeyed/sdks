@@ -37,7 +37,10 @@ class Internal(BaseSDK):
 
         Creates a new deployment for a project using either a pre-built Docker image or build context.
 
-        **Authentication**: Requires a valid root key with appropriate permissions.
+        **Authentication**: Requires a valid root key with `#write` permission on
+        `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*`.
+        The workspace must match the root key's authorized workspace. The project,
+        app, and environment must match the resources resolved from the request.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -199,7 +202,10 @@ class Internal(BaseSDK):
 
         Creates a new deployment for a project using either a pre-built Docker image or build context.
 
-        **Authentication**: Requires a valid root key with appropriate permissions.
+        **Authentication**: Requires a valid root key with `#write` permission on
+        `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*`.
+        The workspace must match the root key's authorized workspace. The project,
+        app, and environment must match the resources resolved from the request.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -419,7 +425,7 @@ class Internal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deploy"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -555,7 +561,7 @@ class Internal(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["deploy"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

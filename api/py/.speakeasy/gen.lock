@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: 8a9e26c7-28d4-48cc-ad07-e968ac5cd901
 management:
-  docChecksum: 536f2b7501bb84c04d30f65814089acf
+  docChecksum: 6d31abdc74010578b3214ae778281264
   docVersion: 2.0.0
-  speakeasyVersion: 1.808.1
-  generationVersion: 2.960.8
-  releaseVersion: 3.2.5
-  configChecksum: f7c96a48a832b127a3aae12957dcbaef
+  speakeasyVersion: 1.809.0
+  generationVersion: 2.961.1
+  releaseVersion: 3.2.6
+  configChecksum: 92742c7a2f8ecf6f4d5286a7f52d3328
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/py
   installationURL: https://github.com/unkeyed/sdks.git#subdirectory=api/py
   published: true
 persistentEdits:
-  generation_id: 9b720b8f-70df-49ea-a459-fef6daa0c91c
-  pristine_commit_hash: b9279cb483b7a1d4eb7ea10195d1bef429284d34
-  pristine_tree_hash: ea7c9cd3c3ff7c69def8d80a69a95e2f1d786759
+  generation_id: 10fbd4b3-7e23-48d6-9983-aa5fa50f3313
+  pristine_commit_hash: 82cd4040f038e7f209e770c6817fe052026955eb
+  pristine_tree_hash: 803e7e691e12174c7525c4f760706a5bfa11a478
 features:
   python:
     additionalDependencies: 1.1.0
     configurableModuleName: 0.2.0
     constsAndDefaults: 1.0.8
-    core: 6.1.14
+    core: 6.1.15
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.1
@@ -1057,8 +1057,8 @@ trackedFiles:
     pristine_git_object: 7c5c76ef6f23697bbe28f7cd017f9eeefbf6fc29
   docs/models/v2keysaddpermissionsrequestbody.md:
     id: 319dae252910
-    last_write_checksum: sha1:38d8d1b375cf5d2a7ea32697409a60dfd294e604
-    pristine_git_object: d8cf576ffcf52ef40b070e8e7555cc051be3de1f
+    last_write_checksum: sha1:cd0b44e22854937655f6ee7c6e0724efc119d47d
+    pristine_git_object: d321031eeecfbefc166787952d76f77339b10679
   docs/models/v2keysaddpermissionsresponsebody.md:
     id: e79597dd0903
     last_write_checksum: sha1:c7210379f844efbc9865900f321ff5dd7cae0be7
@@ -1149,8 +1149,8 @@ trackedFiles:
     pristine_git_object: fc83217ff594498c7a7e5b1e4b8cad6800272748
   docs/models/v2keyssetpermissionsrequestbody.md:
     id: 17bf3ad349a5
-    last_write_checksum: sha1:9becb83fd4c7e39d8145f5a387e66e025b0edc16
-    pristine_git_object: 6546aa35499ca04426fb0076292820c4cd2efc78
+    last_write_checksum: sha1:ccc9a3777f60a190b6b0e4c14573703b2cca4761
+    pristine_git_object: fcf5125ed9f51d8f94fc20735489084022489864
   docs/models/v2keyssetpermissionsresponsebody.md:
     id: 0514631e2c60
     last_write_checksum: sha1:c1d5926cd6488ef9b0e0fe8c53d0349e25c9b356
@@ -1237,8 +1237,8 @@ trackedFiles:
     pristine_git_object: 1f5bf72dcef0c61c2941e5642b847d747ba628c3
   docs/models/v2permissionscreaterolerequestbody.md:
     id: 6c3875980b38
-    last_write_checksum: sha1:58a2a25534a9859e7ea8ebbacc2061bbaf4e3b62
-    pristine_git_object: 2f6b3e5c440b0f9704935e2268c81a66515d5f17
+    last_write_checksum: sha1:22c304951c710eb24e5d0bead415ed8831176850
+    pristine_git_object: dd309f2de622ec6da091b7ec840a1f99e1622e4e
   docs/models/v2permissionscreateroleresponsebody.md:
     id: a0b7b43c3374
     last_write_checksum: sha1:ec29bf181d900064e260f1f6854ec7c3ee933ce6
@@ -1821,60 +1821,60 @@ trackedFiles:
     pristine_git_object: 55a96b7a6f1c082c737c5a1f6a42d3da39fa04da
   docs/sdks/apps/README.md:
     id: 9c9c1a6527a3
-    last_write_checksum: sha1:08159735c976b79c78c446f1feab34cedd4ce569
-    pristine_git_object: ab4120c89be10e18e2c9781b4b0371e10f5bfebc
+    last_write_checksum: sha1:8c7eaf9cbd4fb4f98f44142d0902ec6c189b3283
+    pristine_git_object: 8a5e874c0ada250b9f675bd7b0e75f9a37f4febb
   docs/sdks/deployments/README.md:
     id: e7c5559ab768
-    last_write_checksum: sha1:e706136be6bee9735c201cf99de2c791065d1cf4
-    pristine_git_object: 3897e6200c8170374010617073b5f8bdf4507ed4
+    last_write_checksum: sha1:f911aeb19bbb47701a04e5cf70ea6763c67c8d96
+    pristine_git_object: 3a1e47c9b95695c2fd509d562732af4819480c2f
   docs/sdks/domains/README.md:
     id: 06e9beb4063b
-    last_write_checksum: sha1:3c603e370f5e510ebd23e0ab9c5949dc9663d456
-    pristine_git_object: 38fe8ceac6ab2d25a133fd41d703798fb05acf56
+    last_write_checksum: sha1:7d613b7f2080a52ff2cc6feac9e921fae5adad7f
+    pristine_git_object: 98c7f53f26d6c8744440b53545037a53deba6c1b
   docs/sdks/environments/README.md:
     id: d15fc95481b6
-    last_write_checksum: sha1:f0e3605ad3067b5277f5247a24f3f6944ce1f3d3
-    pristine_git_object: ac2dd7af484df9490f1179e941addfd7e2cc1198
+    last_write_checksum: sha1:cf6006dd70b9d79251b6d4fc4781fcfd119d92e1
+    pristine_git_object: 073b663bcac85a67256cab547b862a0c6d0ae507
   docs/sdks/gateway/README.md:
     id: 61f4d543d34b
-    last_write_checksum: sha1:83c18e7ed5838b12c6ba4c87196cd1f6c7981fa2
-    pristine_git_object: 73ba1de4024132f40594be0a4a248005436dfcc7
+    last_write_checksum: sha1:5f7d01a6e9247686253e5a62eada937539910288
+    pristine_git_object: 43331c525b6b94408f86ebc9ac37bfc8850e69ec
   docs/sdks/github/README.md:
     id: 52292810cfa2
-    last_write_checksum: sha1:ffa5ec6b81b8e548e3b229ff12ea5ea362ef09fb
-    pristine_git_object: 88a1e120097ba033ab752e8074f6e9c611d6bf4f
+    last_write_checksum: sha1:7312564e0d6bcd6e0f147b81c8284d215127854c
+    pristine_git_object: 1fb377820106a4fc9060cbe4b1ef8cbffdde9d32
   docs/sdks/identities/README.md:
     id: 751b50358a28
-    last_write_checksum: sha1:65e382c0592d4d94aa700c0bbcfbccf3f56e7d74
-    pristine_git_object: 07a46ed54cfa2d6b92bae3383e63728b47f49af0
+    last_write_checksum: sha1:6e27b3a33d92f08488c2cf290a52fcd1db0f441e
+    pristine_git_object: 675103ac9ed0d879d15e0871b4fa621963586a6b
   docs/sdks/internal/README.md:
     id: 11cb26f5abcb
-    last_write_checksum: sha1:cb4ccae2aa43a00bbf46b4ba86a4bbda2e146891
-    pristine_git_object: 8e85d5b4c2c3ac884405348711c7178e6f21d380
+    last_write_checksum: sha1:9d76afdf22a81e3d20db45483671d3a993bd1e09
+    pristine_git_object: ed8fa4b535dba3e9ee571421422640bcdbe89abe
   docs/sdks/keys/README.md:
     id: 9a567cd0daf2
-    last_write_checksum: sha1:4e5aa7571f668383363d058a1315a31a0f988eed
-    pristine_git_object: 6bfb86c5d95b655245dfd0065e479c53b73b83ba
+    last_write_checksum: sha1:535f5617769258608a0e738c0e749e5c62f07307
+    pristine_git_object: 7b636dbe160f848ee3db04373643a7d60e7380e6
   docs/sdks/logs/README.md:
     id: 5adacd63da21
-    last_write_checksum: sha1:099778f16a1a2c3e58bbd6f8d1fd3b7cf068d22c
-    pristine_git_object: fc44bc6f35341a77d51d5e5595c86a973b1a77ac
+    last_write_checksum: sha1:07d6e4323a5346462729e00b7e64a515c533aa1c
+    pristine_git_object: 2fcb19a3a1c106d1482404726de0d42f1db26cd4
   docs/sdks/permissions/README.md:
     id: 2e4061ce50d4
-    last_write_checksum: sha1:f594ef4387b9261b791701f39a88a72cff827250
-    pristine_git_object: 76f83fd5877c98cfbae12492e65b1b5acf56ccdc
+    last_write_checksum: sha1:099b3628367cbb10c94c14aa046db1e924a49201
+    pristine_git_object: 0aa21fb14c190696cf4db435e5c3832970c53a61
   docs/sdks/portalsdk/README.md:
     id: a852e401ee14
-    last_write_checksum: sha1:b333c499142ae35b384d711dc6e29fd909c93b53
-    pristine_git_object: d9a93a73e21a4dbb98e75f249573e0a4057c9e54
+    last_write_checksum: sha1:98c5282a9bea5d51e55a1aa4a0e18ab4bf3472a4
+    pristine_git_object: 68dadcfeb45de705582589bd2e22b6a34c2aa066
   docs/sdks/projects/README.md:
     id: 1c5f71754e17
-    last_write_checksum: sha1:a8d05e934c7a07564fb5feba5552cb6cc5c818a9
-    pristine_git_object: 9e1cc6c0a69aaceab570fa1ae749432ca2ec8855
+    last_write_checksum: sha1:4fb663b5a7e15771156eef9dec401cbe7e1960fa
+    pristine_git_object: c8022b9f9e5ffe832c10ff529e5b18ae0a8fc121
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
-    last_write_checksum: sha1:b75fb7c669e3595a7f8e73dcbdc47fd0055ee1b6
-    pristine_git_object: 8d1126bb91dbec4af18e04b4cb619d89bf135e16
+    last_write_checksum: sha1:af4104fd7f28787b246e89ab4c889570a165db03
+    pristine_git_object: e6a5aa1ba24119913163df8725a9d6fdace7b70e
   docs/sdks/rootkeys/README.md:
     id: 6c7959344b5a
     last_write_checksum: sha1:c17729160c15046d602105e7468e2be3d6eedd57
@@ -1897,8 +1897,8 @@ trackedFiles:
     pristine_git_object: 684dd8effbc5c533624ee606dbf6c79dbbb5c1f7
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f40b2b790f6e75c84b83095dc9f1d0da2eda63ff
-    pristine_git_object: a618b5a3f82b656e753e07d661fe3d689598e84c
+    last_write_checksum: sha1:47ce02a23c5773bd68377d87258eba667921fb24
+    pristine_git_object: c9833db927445b195e06b3b92f47f8124e9bd698
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:623648abfc037d1a6a3a146251169d77b83801ae
@@ -1925,36 +1925,36 @@ trackedFiles:
     pristine_git_object: e3bace255cef14ba5daa2e931aa3c0974a372218
   src/unkey/py/_version.py:
     id: dd5769ea5724
-    last_write_checksum: sha1:2f6d5364163b096d5c6ea3dfafe8bb5b7a4070b3
-    pristine_git_object: e42fc0eab0c624451a2498eb083df9c8bac77139
+    last_write_checksum: sha1:064b725b41e8fa52adf9af1ea71c43ce51e91933
+    pristine_git_object: 65d0f03ac7f2bf5ecf8654d4024326e93f7a3ae5
   src/unkey/py/analytics.py:
     id: 8a9a23d68313
-    last_write_checksum: sha1:45262309249f691ddfb3e45454c94b2857c63420
-    pristine_git_object: 01ac7b9321f1addce7490b62abfcbd2dfd250226
+    last_write_checksum: sha1:64a1592364a7045479f8c556fd9b1ad995d24e6f
+    pristine_git_object: 66efc6297f4772517c6a1a18042a0cb47649462d
   src/unkey/py/apis.py:
     id: fe64a9c06fa5
-    last_write_checksum: sha1:707672627498a7e97e25fdd66b8a8f900729bcd4
-    pristine_git_object: a6cdc853cad50a0fed57d53566e6c933c80a7e6c
+    last_write_checksum: sha1:6a8df2bf28c6ef098097266e2e4a7881ecdebad2
+    pristine_git_object: b7d578a6499379f1aebd1f90010a31fde2eb934c
   src/unkey/py/apps.py:
     id: 7c8e40493ad7
-    last_write_checksum: sha1:f3c485f60e7ca819ea940bece2ab160a4db2e920
-    pristine_git_object: 6998bd989560784c8262945e97ccce9a7c554d62
+    last_write_checksum: sha1:dcebd4d2e19a16b5c9411ef20ea4998d2f5cf7c3
+    pristine_git_object: 26dc07fdd4564e7ba28df6a674d2adad8475b7c0
   src/unkey/py/basesdk.py:
     id: 2abc2fe2b4e1
     last_write_checksum: sha1:92bef75edf78724e08e361ef36c0187057c180f7
     pristine_git_object: d0a3f865545305f28e8ab43ea14172d4f960a21b
   src/unkey/py/deployments.py:
     id: 131f48143066
-    last_write_checksum: sha1:64715f9b835e6caa4203c85e3fd41e090df856d2
-    pristine_git_object: 080a5f1bea94bb96e8cbd421471800150d95c518
+    last_write_checksum: sha1:da08ec36fe39d9439c0c46acb857255105775eed
+    pristine_git_object: 8c19bfe32de8c0195ea8deb1c81a988ff9328965
   src/unkey/py/domains.py:
     id: b7d9eb8c67ab
-    last_write_checksum: sha1:b7aed789822a42cb07ac8f2f97cc72ba897b8ac7
-    pristine_git_object: dde1756d67b05f39d990b5177fed84f5eba67e95
+    last_write_checksum: sha1:01a3cdb4f3e0e3354137924f9de41ddb6b369a24
+    pristine_git_object: 421c03b902409188bea0c685831dc7cd364c6bc3
   src/unkey/py/environments.py:
     id: aa9b10441ddd
-    last_write_checksum: sha1:e032bdb78bba732e72064c48dfa4c41437bf7298
-    pristine_git_object: 47350a00fa7d0f0206b28b14836e2d44fbcaef81
+    last_write_checksum: sha1:3162476279dddf2eb2542792023659df2370a2f0
+    pristine_git_object: 490562622cc7efa4801a47b8da40679711c62273
   src/unkey/py/errors/__init__.py:
     id: 66fa56f36052
     last_write_checksum: sha1:7baf8340bad306d00e8812b2e2d4a821f0d70dd9
@@ -2021,32 +2021,32 @@ trackedFiles:
     pristine_git_object: b1af3af289e65337b08df0eb337ba4edb1684b3b
   src/unkey/py/gateway.py:
     id: 661f130d9093
-    last_write_checksum: sha1:09d7493b812f8e90a9a93db1412da0e61e7dc944
-    pristine_git_object: a252c285a6050c04ee9876620175067a2db80828
+    last_write_checksum: sha1:7341ab2da01546ead4f98965412a16674705ef8a
+    pristine_git_object: a7ccd1def9fde54aa8c20b1fc4905c7f9b083a9a
   src/unkey/py/github.py:
     id: 2c3592b1fde5
-    last_write_checksum: sha1:84ed353572d8c508066fc177a06afca1b0a9765e
-    pristine_git_object: d37e08d6df131f0eb9ae260b0bba1d7b6f4798b7
+    last_write_checksum: sha1:7c3cf12e4fb19ab9574912d787e7efd6d2c3233e
+    pristine_git_object: d586224da79203810a76ff4dcc3b34750c4f2bb2
   src/unkey/py/httpclient.py:
     id: 6a3c9f40d08b
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/unkey/py/identities.py:
     id: 8cd19eced4af
-    last_write_checksum: sha1:2bf9a357091533b5ac915d4ab374a33c9631f15b
-    pristine_git_object: e2b7987b1464ed38d281d5ebbf7d48d0e5dea67b
+    last_write_checksum: sha1:d6394a2e1cc0f65053319798295fff559779ddca
+    pristine_git_object: 9ad033811773b2a9e789e42379fd8b67b3620b47
   src/unkey/py/internal.py:
     id: 1137858e3f91
-    last_write_checksum: sha1:eb9c2b8ce4130671db2bed5b69f808496256a969
-    pristine_git_object: dfaedf8a9fc5d946d3bcc51b18eb271d0f7d805a
+    last_write_checksum: sha1:435bb02263c416630054cd2d889d223fca68e00a
+    pristine_git_object: 0e5957ffa44b7258ee50b7b236f156dedaec239e
   src/unkey/py/keys.py:
     id: 16399d9cff4f
-    last_write_checksum: sha1:1a60faf62af70c2afcc2b8d41c54833cbd798bdb
-    pristine_git_object: 440ba95f36eb347a2561bc032953af9d48c5dee1
+    last_write_checksum: sha1:421d0eb089cde5b42e695b973a03b99cb26ecf55
+    pristine_git_object: aebfb1d92dead4385771f231b92292df416651b3
   src/unkey/py/logs.py:
     id: 9bd7eb88aa9c
-    last_write_checksum: sha1:7442a436cdfd99f67d25d8ea215ed9182542ae09
-    pristine_git_object: be6485225e2a21d0945e94731bd945da2be7fe92
+    last_write_checksum: sha1:2d439ed88fe326f0e6ef77dbf28239422ef991da
+    pristine_git_object: a8ac4ecd457e291a365b0f37f5dc8a33310f22a6
   src/unkey/py/models/__init__.py:
     id: ed00b9cad2ec
     last_write_checksum: sha1:601e0954e10c07885a738b653eb17ab37dd0b555
@@ -2925,8 +2925,8 @@ trackedFiles:
     pristine_git_object: a3745e52aec5a6118c54c56acdf097a225b7b71b
   src/unkey/py/models/v2keysaddpermissionsrequestbody.py:
     id: 8517cecf90f0
-    last_write_checksum: sha1:02cbe8c7df7758b3c008e7632f86f369ae5b90be
-    pristine_git_object: 95ab1c53efac9c43137c0e1b61b19522952a9fd6
+    last_write_checksum: sha1:3dab33b1ef26e433b6b401a3355599b084294008
+    pristine_git_object: 737cdfc65e757a80ccb9718b0f0f6fc409d0fbd8
   src/unkey/py/models/v2keysaddpermissionsresponsebody.py:
     id: 0aff53d9ecf0
     last_write_checksum: sha1:74f64eedfb5d6edcd30d80b0828ad73b0df1a87d
@@ -3017,8 +3017,8 @@ trackedFiles:
     pristine_git_object: e4d1755b17ef3625dcb7a102f00513e8eabc86fa
   src/unkey/py/models/v2keyssetpermissionsrequestbody.py:
     id: 04a3ec3c1823
-    last_write_checksum: sha1:f4169eb1854b9328e642a89272087a5c1baa5656
-    pristine_git_object: e4a7cff1d5e3815851bd76c42275413e1e83e0a5
+    last_write_checksum: sha1:c18860dbc0656f218c99f32d4562325209bbf2a1
+    pristine_git_object: fb4540c99090e045d265e21d2aaf080c55d8163f
   src/unkey/py/models/v2keyssetpermissionsresponsebody.py:
     id: 3eeb4dfb4065
     last_write_checksum: sha1:4e565e68253542facacab65be1dcf47da10b4cae
@@ -3105,8 +3105,8 @@ trackedFiles:
     pristine_git_object: 7ffc939bfd7a30e1424f35a1314cc87a7c63c75c
   src/unkey/py/models/v2permissionscreaterolerequestbody.py:
     id: 167b9ccf98f5
-    last_write_checksum: sha1:271637b5864fb39436c749555fbe2d40ec289a05
-    pristine_git_object: 122a0bb7b7bb35362a099b617ba7d70015e63886
+    last_write_checksum: sha1:e6c8463f02256cb177d8ef1aeec4d2e1764055ac
+    pristine_git_object: 1322af9e6a80f06327bcc7c8786ce47b99e75ace
   src/unkey/py/models/v2permissionscreateroleresponsebody.py:
     id: 718e361b5a6b
     last_write_checksum: sha1:7dc11442318ef8b359164c755f67260195deea54
@@ -3645,28 +3645,28 @@ trackedFiles:
     pristine_git_object: 8b65ac6eee33b929aca0b0dc51690a5248208393
   src/unkey/py/permissions.py:
     id: d4f3a7f81197
-    last_write_checksum: sha1:cf62a75a20165348f8644b412c9dd91f39637c4a
-    pristine_git_object: 99f6409e85bc8224d29f37e92a7431d0e7e922cd
+    last_write_checksum: sha1:024f547209284d3d96524ef77b298146ae65ffb2
+    pristine_git_object: c8a7622bd48a250268f560b8032b323b0effc488
   src/unkey/py/portal_sdk.py:
     id: 1c182099e502
-    last_write_checksum: sha1:3cbc56e24f5e059ba6d3b25a9b5765d0ff4b1a25
-    pristine_git_object: b3540d320adc77178ce758e9fbfe369cee7f76f5
+    last_write_checksum: sha1:ba83ed414a99cfc363ef54ff792dfad06e14583c
+    pristine_git_object: 1c193d5fbe5c26101fd308b04f1ce0ec9904ee9c
   src/unkey/py/projects.py:
     id: 328bff1fa3e5
-    last_write_checksum: sha1:be890f1ba27c380c819c9e9f58f3743abe6bb521
-    pristine_git_object: 73379e2c871b15021aaac54b9bb83c26cbf2292b
+    last_write_checksum: sha1:d69bb0b00a3461499a4e4e0fb806474204dfe90e
+    pristine_git_object: a46a25777f0bfe8b266a1e29d1c06d45a471e0e3
   src/unkey/py/py.typed:
     id: 9310f1c2f81a
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/unkey/py/ratelimit.py:
     id: 67e95f778961
-    last_write_checksum: sha1:e41b13d5583a122f29366d3d3ec0caaef4aaef05
-    pristine_git_object: d4ac1968f56630774e603c66ea8fc0fcfcfdd563
+    last_write_checksum: sha1:eccc56bcf6975fea4633bc9ed203b562020d8a6b
+    pristine_git_object: 1a4772396ada11790df29b56bdfae303db443886
   src/unkey/py/rootkeys.py:
     id: e1cf82242130
-    last_write_checksum: sha1:97f3dc3c42611414ab5657dd0a2d1ae9ba208c2d
-    pristine_git_object: 8a6329fadec06a5334ba24980f74cec5615f6f10
+    last_write_checksum: sha1:fcc713f80feee651cb91155e178bbe2fecf9bae2
+    pristine_git_object: efe22bf25d1fa89b245e86b7f05c29784ba40f18
   src/unkey/py/sdk.py:
     id: 62460043018c
     last_write_checksum: sha1:2d15064ffebc61ac0828716d3b4d873a24afb265
@@ -3681,8 +3681,8 @@ trackedFiles:
     pristine_git_object: 3a43a78ab719ec504ec95c050c984c843407d366
   src/unkey/py/types/base64fileinput.py:
     id: 9ec452d0b5d1
-    last_write_checksum: sha1:1522687ae3398374c35710cad993a6e82b5ab99d
-    pristine_git_object: 862566fe2b1db830276b390e136e65090e5963d2
+    last_write_checksum: sha1:94a99b9b1b7ab6d3fd8fb2e52385a50b4a2ff333
+    pristine_git_object: de42346d429a62ce8d39b04be6ee568c9d37e619
   src/unkey/py/types/basemodel.py:
     id: 5b992f01dec3
     last_write_checksum: sha1:99c644208e340c4974b94bbe6d52019c80fedb97
@@ -3761,8 +3761,8 @@ trackedFiles:
     pristine_git_object: 094755b73f7f9382d8df997602080c82a55896fd
   src/unkey/py/workspace.py:
     id: 9f2d3caa085f
-    last_write_checksum: sha1:2c4917a14d9abaa05b06401bb82121db9563da38
-    pristine_git_object: f07e5b769b23834780fbdc31c46eaf88fb9a064d
+    last_write_checksum: sha1:ef119de6f88fef215b66f4081cd4bc309cd2d3a8
+    pristine_git_object: 8402311dcce7e4ace30ff1348d2f771dd9749628
 examples:
   chproxyMetrics:
     speakeasy-default-chproxy-metrics:
@@ -3931,7 +3931,7 @@ examples:
         application/json: {"externalId": "user_123", "ratelimits": [{"name": "api", "limit": 249033, "duration": 650402, "autoApply": false}]}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'identity.*.create_identity' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Missing permission: 'unkey:v1:ws_123:projects/proj_123/identities/*#write'. Log in again with that permission, or grant it.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     identityExists:
       requestBody:
         application/json: {"externalId": "user_123", "ratelimits": [{"name": "api", "limit": 249033, "duration": 650402, "autoApply": false}]}
@@ -4502,13 +4502,13 @@ examples:
         application/json: {"namespace": "<value>", "identifier": "<value>"}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'ratelimit.*.delete_override' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Missing permission: 'unkey:v1:ws_123:projects/{proj}/ratelimits/namespaces/{rlns}/overrides/{rlor}#delete'. Log in again with that permission, or grant it.", "status": 403, "title": "Forbidden", "type": "https://unkey.com/docs/errors/unkey/authorization/insufficient_permissions"}}
     overrideNotFound:
       requestBody:
         application/json: {"namespace": "<value>", "identifier": "<value>"}
       responses:
         "404":
-          application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "No override found for the specified identifier in this namespace.", "status": 404, "title": "Not Found", "type": "not_found"}}
+          application/json: {"meta": {"requestId": "req_2wXyZaAbCdEfGhIjKlMnOp"}, "error": {"detail": "Resource does not exist.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/data/ratelimit_override_not_found"}}
     speakeasy-default-ratelimit-delete-override:
       requestBody:
         application/json: {"namespace": "<value>", "identifier": "<value>"}
@@ -4776,7 +4776,7 @@ examples:
         application/json: {"namespace": "<value>", "duration": 956831, "identifier": "<value>", "limit": 816580}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'ratelimit.*.set_override' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'unkey:v1:ws_example:projects/proj_example/ratelimits/namespaces/rl_ns_example/overrides/rlor_example#write' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     namespaceNotFound:
       requestBody:
         application/json: {"namespace": "<value>", "duration": 956831, "identifier": "<value>", "limit": 816580}
@@ -5113,7 +5113,7 @@ examples:
         application/json: {"identity": "user_123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Your root key requires the 'identity.*.update_identity' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_0uVwX4yZaAbCdEfGhIjKl"}, "error": {"detail": "Missing permission: 'unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write'. Log in again with that permission, or grant it.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     identityNotFound:
       requestBody:
         application/json: {"identity": "user_123", "meta": {"name": "Alice Smith", "email": "alice@example.com", "plan": "premium"}, "ratelimits": [{"name": "requests", "limit": 1000, "duration": 3600000, "autoApply": true}]}
@@ -5957,7 +5957,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "oci": {"image": "ghcr.io/acme/api:v1.2.3"}, "deleteProtection": true}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'update_app' permission on the target app to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Missing permission: 'unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#write'. Log in again with that permission, or grant it.", "status": 403, "title": "Insufficient Permissions", "type": "https://unkey.com/docs/errors/unkey/authorization/insufficient_permissions"}}
     appNotFound:
       requestBody:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "name": "Payments API", "slug": "proj_1234abcd", "git": {"repository": "unkeyed/unkey", "defaultBranch": "main"}, "oci": {"image": "ghcr.io/acme/api:v1.2.3"}, "deleteProtection": true}
@@ -6500,7 +6500,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "dockerfile": "./Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "autoDeploy": true, "port": 8080, "vCpus": 1, "memoryMib": 512, "storageMib": 1024, "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml", "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'environment.*.update_environment' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Missing permission: 'unkey:v1:<workspace_id>:projects/{proj}/apps/{app}/environments/{env}#write'. Log in again with that permission, or grant it.", "status": 403, "title": "Insufficient Permissions", "type": "https://unkey.com/docs/errors/unkey/authorization/insufficient_permissions"}}
     environmentNotFound:
       requestBody:
         application/json: {"project": "proj_1234abcd", "app": "proj_1234abcd", "environment": "proj_1234abcd", "dockerfile": "./Dockerfile", "rootDirectory": ".", "buildCommand": "pnpm --filter api build", "autoDeploy": true, "port": 8080, "vCpus": 1, "memoryMib": 512, "storageMib": 1024, "healthcheck": {"method": "GET", "path": "/healthz", "intervalSeconds": 10, "timeoutSeconds": 2, "failureThreshold": 3, "initialDelaySeconds": 5}, "shutdownSignal": "SIGTERM", "upstreamProtocol": "http1", "openapiSpecPath": "/openapi.yaml", "regions": [{"name": "us-east-1", "replicas": {"min": 1, "max": 3}}]}
@@ -7011,7 +7011,7 @@ examples:
         application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
       responses:
         "403":
-          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Your root key requires the 'project.*.update_project' permission to perform this operation", "status": 403, "title": "Forbidden", "type": "forbidden"}}
+          application/json: {"meta": {"requestId": "req_1234abcd"}, "error": {"detail": "Missing permission: 'unkey:v1:ws_1234abcd:projects/proj_1234abcd#write'. Log in again with that permission, or grant it.", "status": 403, "title": "Forbidden", "type": "forbidden"}}
     projectNotFound:
       requestBody:
         application/json: {"project": "proj_1234abcd", "slug": "proj_1234abcd", "name": "Payments Service", "deleteProtection": true}
@@ -8871,11 +8871,8 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes:
-  * `unkey.portal.create_domain()`: **Added**
-  * `unkey.portal.delete_domain()`: **Added**
-  * `unkey.portal.get_domain()`: **Added**
-  * `unkey.portal.list_domains()`: **Added**
-  * `unkey.portal.verify_domain()`: **Added**
+  * `unkey.logs.get_api_request_metrics()`:  `error.status[429]` **Added**
+  * `unkey.logs.list_api_requests()`:  `error.status[429]` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

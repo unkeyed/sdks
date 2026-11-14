@@ -598,7 +598,7 @@ class Ratelimit(BaseSDK):
 
         **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
 
-        **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+        **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/<override_id>#delete`, or a wildcard URN permission that includes this override and action. Without read access to the override, insufficient permissions return 404. With read access but no delete permission, the response is 403.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -746,7 +746,7 @@ class Ratelimit(BaseSDK):
 
         **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
 
-        **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+        **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/<override_id>#delete`, or a wildcard URN permission that includes this override and action. Without read access to the override, insufficient permissions return 404. With read access but no delete permission, the response is 403.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -969,7 +969,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1113,7 +1113,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1611,10 +1611,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1782,10 +1779,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={
-                    "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
-                },
+                extensions={"x-unkey-idempotency": "idempotent"},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1949,7 +1943,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2123,7 +2117,7 @@ class Ratelimit(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["ratelimit"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2510,7 +2504,7 @@ class Ratelimit(BaseSDK):
 
         **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
 
-        **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+        **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/*#write` to create overrides. To update an override, you can replace `*` with its override ID.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2678,7 +2672,7 @@ class Ratelimit(BaseSDK):
 
         **Important:** Overrides take effect immediately and completely replace the default limit for matching identifiers. Use wildcard patterns (e.g., `premium_*`) to match multiple identifiers.
 
-        **Permissions:** Requires `ratelimit.*.set_override` or `ratelimit.<namespace_id>.set_override`
+        **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/*#write` to create overrides. To update an override, you can replace `*` with its override ID.
 
 
         If set, this operation will use `root_key` from the global security.

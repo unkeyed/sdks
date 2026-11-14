@@ -285,7 +285,7 @@ Provide exactly one source:
 
 Returns immediately with a `deploymentId`. The build and rollout run asynchronously — poll `deployments.getDeployment` to watch status until it is ready.
 
-**Authentication**: requires a root key with permission to create deployments.
+**Authentication**: requires a root key with `write` permission on `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*` for the target environment.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -1230,7 +1230,7 @@ Optionally provide one source override:
 
 Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
 
-**Authentication**: requires a root key with permission to create deployments.
+**Authentication**: requires a root key with `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#write`. Wildcards can replace resource IDs to grant access across a wider scope.
 
 
 ### Example Usage

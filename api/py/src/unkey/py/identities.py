@@ -35,7 +35,7 @@ class Identities(BaseSDK):
         Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
         **Important**
-        Requires `identity.*.create_identity` permission
+        Requires `unkey:v1:<workspaceId>:projects/<projectId>/identities/*#write` for the workspace's default project.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -210,7 +210,7 @@ class Identities(BaseSDK):
         Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
         **Important**
-        Requires `identity.*.create_identity` permission
+        Requires `unkey:v1:<workspaceId>:projects/<projectId>/identities/*#write` for the workspace's default project.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -722,7 +722,7 @@ class Identities(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["identities"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -855,7 +855,7 @@ class Identities(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["identities"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -998,7 +998,7 @@ class Identities(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["identities"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1160,7 +1160,7 @@ class Identities(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["identities"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1253,7 +1253,7 @@ class Identities(BaseSDK):
         Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
         > **Important**
-        > Requires `identity.*.update_identity` permission
+        > Requires `unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write` permission for the identity
         > Rate limit changes propagate within 30 seconds
 
 
@@ -1412,7 +1412,7 @@ class Identities(BaseSDK):
         Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
         > **Important**
-        > Requires `identity.*.update_identity` permission
+        > Requires `unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write` permission for the identity
         > Rate limit changes propagate within 30 seconds
 
 

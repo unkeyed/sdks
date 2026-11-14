@@ -675,7 +675,7 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -813,7 +813,7 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -958,7 +958,7 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1122,7 +1122,7 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1213,8 +1213,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.update_project` (to update any project)
-        - `project.<project_id>.update_project` (to update a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1371,8 +1371,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.update_project` (to update any project)
-        - `project.<project_id>.update_project` (to update a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
