@@ -38,9 +38,10 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `api.*.update_key` (to update keys in any API)
- * - `api.<api_id>.update_key` (to update keys in a specific API)
+ * Your root key must have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>`.
+ *
+ * To create missing permission slugs, it must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*`.
+ * Adding existing permissions does not require this additional grant.
  *
  * **Side Effects**
  *

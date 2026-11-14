@@ -125,9 +125,12 @@ atomic: if any policy is invalid, nothing is written.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.set_policies` (for any environment)
-- `environment.<environment_id>.set_policies` (for a specific environment)
+Your root key must have both permissions on the target environment's gateway policies:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/gateway/policies/*#write`
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/gateway/policies/*#delete`
+
+Replace the placeholders with resource IDs. Wildcard grants can cover multiple
+resources, but access remains limited to the root key's workspace.
 
 
 ### Example Usage: matchers
@@ -414,9 +417,9 @@ list, so fetch current ids via `gateway.listPolicies` first.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.update_policy` (for any environment)
-- `environment.<environment_id>.update_policy` (for a specific environment)
+Your root key must have `write` permission on the policy:
+`unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/gateway/policies/<policy_id>#write`.
+Use `*` in place of a resource ID to grant access to all resources at that level.
 
 
 ### Example Usage: clearMatch

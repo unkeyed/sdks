@@ -19,7 +19,7 @@ Create an identity to group multiple API keys under a single entity. Identities 
 Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 
 **Important**
-Requires `identity.*.create_identity` permission
+Requires `unkey:v1:<workspaceId>:projects/<projectId>/identities/*#write` for the workspace's default project.
 
 
 ### Example Usage: basic
@@ -1193,7 +1193,7 @@ Update an identity's metadata and rate limits. Only specified fields are modifie
 Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 
 > **Important**
-> Requires `identity.*.update_identity` permission
+> Requires `unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write` permission for the identity
 > Rate limit changes propagate within 30 seconds
 
 

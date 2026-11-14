@@ -38,9 +38,13 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `api.*.update_key` (to update keys in any API)
- * - `api.<api_id>.update_key` (to update keys in a specific API)
+ * Your root key must have `write` on the target key:
+ * - `unkey:v1:{workspace_id}:projects/{project_id}/keyspaces/{keyspace_id}/keys/{key_id}#write`
+ *
+ * When any requested permission slug does not exist in the key's project, your root key must also have:
+ * - `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`
+ *
+ * Use the keyspace ID, not the API ID. You can use wildcard resource IDs to grant access to multiple resources.
  *
  * **Side Effects**
  *

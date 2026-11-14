@@ -38,9 +38,7 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `api.*.update_key` (to update keys in any API)
- * - `api.<api_id>.update_key` (to update keys in a specific API)
+ * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. Wildcard grants that include the target key also authorize this operation.
  *
  * **Side Effects**
  *

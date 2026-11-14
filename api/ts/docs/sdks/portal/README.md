@@ -132,8 +132,18 @@ independently of the resource the portal serves.
 
 **Required Permissions**
 
-Your root key must have `portal.*.create_portal`. A grant scoped to a specific
-portal id does not authorize creation, because the id does not exist yet.
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/*#write`
+for the project that owns the app or keyspace. A grant scoped to a specific
+portal ID does not authorize creation, because the ID does not exist yet.
+
+You must also have read permission on the resource the portal serves:
+
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read` for a keyspace.
+
+Broader grants that cover these resources and actions also authorize the request.
+A missing permission returns **403**. An app or keyspace outside your workspace
+returns **404**, the same as a resource that does not exist.
 
 
 ### Example Usage
@@ -235,19 +245,22 @@ redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 
 Authorization runs in two stages, and both must pass.
 
-First, your root key must have one of the following permissions:
-- `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+First, your root key must have
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`.
+Write permission on the portal itself does not grant permission to mint sessions.
 
 Second, a session can never carry a capability your root key does not itself
 hold. Each requested scope additionally requires the equivalent permission on
 every keyspace the portal resolves to:
-- `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
-- `keys:reroll` requires `api.<api_id>.create_key`, plus
-  `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
-- `analytics:read` requires `api.<api_id>.read_analytics`
+- `keys:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#read`
+  and `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`.
+- `keys:reroll` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+  including when the keyspace stores encrypted keys.
+- `analytics:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/logs#read`.
 
-The `*` form of each is also accepted. Requesting a scope you do not hold
+Broader URN grants that cover these resources and actions are also accepted.
+A grant on one concrete key cannot satisfy the `keys/*` requirement.
+Requesting a scope you do not hold
 returns 403 for the whole request rather than minting a reduced session, so a
 missing grant is visible instead of surfacing later as a broken portal.
 
@@ -1187,11 +1200,7 @@ user's `externalId` to `portal.revokeSession` to end their sessions.
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.create_portal_session` (for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
 with `#read` or `#write`. Reading the portal itself is not enough.
 
 Without the permission this returns **404**, not 403.
@@ -1384,11 +1393,7 @@ Calling this again for the same end user is safe and revokes nothing.
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.create_portal_session` (for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
 which dashboard roles carry. Unlike `portal.createSession`, a dashboard
 session can call this, not just a root key.
 
@@ -1491,9 +1496,15 @@ Two changes affect your end users immediately:
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.update_portal` (to update any portal in the workspace)
-- `portal.<portal_id>.update_portal` (to update a specific portal)
+Your root key must have `write` permission on
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+A broader grant, such as `unkey:v1:<workspace_id>:**#write`, also permits updates.
+
+To change the mapped resource, your root key must also have `read` permission
+on the target:
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`
+  for a keyspace.
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
 
 A root key that cannot read the portal gets **404**. One that can read it
 but lacks the permission gets **403**.

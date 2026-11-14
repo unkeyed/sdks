@@ -36,8 +36,7 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have the following permission:
- * - `rbac.*.delete_role`
+ * Your root key must have `unkey:v1:{workspaceId}:projects/{projectId}/rbac/roles/{roleId}#delete` for the role. A wildcard grant that covers the role also authorizes deletion.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */
