@@ -23,7 +23,7 @@ export class Identities extends ClientSDK {
    * Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
    *
    * **Important**
-   * Requires `identity.*.create_identity` permission
+   * Requires `unkey:v1:<workspaceId>:projects/<projectId>/identities/*#write` for the workspace's default project.
    */
   async createIdentity(
     request: components.V2IdentitiesCreateIdentityRequestBody,
@@ -118,7 +118,7 @@ export class Identities extends ClientSDK {
    * Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
    *
    * > **Important**
-   * > Requires `identity.*.update_identity` permission
+   * > Requires `unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write` permission for the identity
    * > Rate limit changes propagate within 30 seconds
    */
   async updateIdentity(

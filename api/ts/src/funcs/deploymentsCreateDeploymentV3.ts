@@ -41,7 +41,7 @@ import { Result } from "../types/fp.js";
  *
  * Returns immediately with a `deploymentId`. The build and rollout run asynchronously. Poll `deployments.getDeployment` to watch status until it is ready.
  *
- * **Authentication**: requires a root key with permission to create deployments.
+ * **Authentication**: requires a root key with `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*#write`. Wildcards can replace resource IDs to grant access across a wider scope.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

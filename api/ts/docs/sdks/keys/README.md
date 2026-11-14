@@ -32,9 +32,10 @@ Use this for privilege upgrades, enabling new features, or plan changes that gra
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
+Your root key must have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>`.
+
+To create missing permission slugs, it must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*`.
+Adding existing permissions does not require this additional grant.
 
 **Side Effects**
 
@@ -241,11 +242,11 @@ Use this endpoint when users sign up, upgrade subscription tiers, or need additi
 
 **Required Permissions**
 
-Your credential needs one of:
-- `api.*.create_key` (create keys in any API)
-- `api.<api_id>.create_key` (create keys in specific API)
-- `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
+Your credential needs `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace. Use the keyspace's project ID, not the API's project ID if they differ. A grant with wildcard project or keyspace segments can cover multiple keyspaces in the authorized workspace.
+
+Recoverable keys use the same write permission. They also require the keyspace to support key encryption.
+
+Without write permission, this endpoint returns 404 to hide whether the API exists. If your credential can read the keyspace, it returns 403 and names the missing write permission instead.
 
 
 ### Example Usage
@@ -428,11 +429,10 @@ Use this for user-requested key revocation, account deletion workflows, or clean
 **Required Permissions**
 
 Your credential must have one of the following permissions:
-- `api.*.delete_key` (to delete keys in any API)
-- `api.<api_id>.delete_key` (to delete keys in a specific API)
-- `unkey:v1:<workspace_id>:keyspaces/*/keys/*#delete_key` (to delete keys in any keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
+- `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#delete` (to delete keys in any project)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#delete` (to delete keys in a specific project)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#delete` (to delete keys in a specific keyspace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#delete` (to delete a specific key)
 
 
 ### Example Usage
@@ -614,9 +614,7 @@ run();
 Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
 
 **Required Permissions**
-Your root key must have one of the following permissions for basic key information:
-- `api.*.create_key` (to migrate keys to any API)
-- `api.<api_id>.create_key` (to migrate keys to a specific API)
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace in its project and workspace.
 
 
 ### Example Usage
@@ -804,9 +802,7 @@ Use this for privilege downgrades, removing temporary access, or plan changes th
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. Wildcard grants that include the target key also authorize this operation.
 
 **Side Effects**
 
@@ -900,9 +896,8 @@ Use this for privilege downgrades, removing temporary access, or subscription ch
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
+Your root key must have the following permission for the target key:
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`
 
 **Side Effects**
 
@@ -1017,11 +1012,9 @@ Common use cases include:
 
 **Required Permissions**
 
- Your credential must have:
- - `api.*.create_key` or `api.<api_id>.create_key`
- - `unkey:v1:<workspace_id>:keyspaces/*#create_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key`
- - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
- - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#encrypt_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#encrypt_key` (only when the original key is recoverable)
+Your credential must grant `write` on the original key:
+`unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`.
+A matching wildcard grant also satisfies this requirement. The same permission applies to recoverable keys.
 
 
 ### Example Usage
@@ -1111,9 +1104,13 @@ Use this to synchronize with external systems, reset permissions to a known stat
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
+Your root key must have `write` on the target key:
+- `unkey:v1:{workspace_id}:projects/{project_id}/keyspaces/{keyspace_id}/keys/{key_id}#write`
+
+When any requested permission slug does not exist in the key's project, your root key must also have:
+- `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`
+
+Use the keyspace ID, not the API ID. You can use wildcard resource IDs to grant access to multiple resources.
 
 **Side Effects**
 
@@ -1215,9 +1212,7 @@ Use this to synchronize with external systems, reset roles to a known state, or 
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. A wildcard grant that covers the target key also authorizes this operation.
 
 **Side Effects**
 
@@ -1412,12 +1407,7 @@ Use this for user upgrades/downgrades, role modifications, or administrative cha
 
 **Required Permissions**
 
-Your credential must have one of the following permissions:
-- `api.*.update_key` (to update keys in any API)
-- `api.<api_id>.update_key` (to update keys in a specific API)
-- `unkey:v1:<workspace_id>:keyspaces/*/keys/*#update_key` (to update keys in any keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
+Your credential must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the key being updated, or a broader permission that covers it.
 
 **Side Effects**
 
@@ -1615,11 +1605,12 @@ Use this endpoint on every incoming request to your protected resources. It chec
 **Required Permissions**
 
 Your credential needs one of:
-- `api.*.verify_key` (verify keys in any API)
-- `api.<api_id>.verify_key` (verify keys in specific API)
-- `unkey:v1:<workspace_id>:keyspaces/*/keys/*#verify_key` (verify keys in any keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
-- `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
+- `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#verify` (verify keys in any project in your workspace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#verify` (verify keys in a specific project)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#verify` (verify keys in a specific keyspace)
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#verify` (verify a specific key)
+
+Use the keyspace's project ID and keyspace ID, not its API ID. The workspace must match your credential's authorized workspace.
 
 **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
 

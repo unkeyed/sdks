@@ -117,9 +117,11 @@ export class Environments extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
-   * - `environment.*.remove_environment_variables` (for any environment)
-   * - `environment.<environment_id>.remove_environment_variables` (for a specific environment)
+   * Your root key must have `delete` permission on the environment's variable collection:
+   * `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
+   *
+   * Replace the placeholders with resource IDs, not names or slugs. A broader
+   * permission that covers this collection also grants access.
    */
   async removeEnvironmentVariables(
     request: components.V2EnvironmentsRemoveEnvironmentVariablesRequestBody,
@@ -156,9 +158,11 @@ export class Environments extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
-   * - `environment.*.set_environment_variables` (for any environment)
-   * - `environment.<environment_id>.set_environment_variables` (for a specific environment)
+   * Your root key must have `write` on the environment's variable collection:
+   * `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#write`.
+   *
+   * When `prune` is true, it must also have `delete` on the same collection:
+   * `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
    */
   async setEnvironmentVariables(
     request: components.V2EnvironmentsSetEnvironmentVariablesRequestBody,
@@ -184,9 +188,9 @@ export class Environments extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have one of the following permissions:
-   * - `environment.*.update_environment` (to update any environment)
-   * - `environment.<environment_id>.update_environment` (to update a specific environment)
+   * Your root key must have `#write` permission on the environment, for example:
+   * - `unkey:v1:<workspace_id>:projects/* /apps/* /environments/*#write` (any environment in your workspace)
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write` (a specific environment)
    */
   async updateSettings(
     request: components.V2EnvironmentsUpdateSettingsRequestBody,

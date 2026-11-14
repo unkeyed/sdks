@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
  *
  * **Important:** Deletion is immediate and permanent. The override cannot be recovered and must be recreated if needed again.
  *
- * **Permissions:** Requires `ratelimit.*.delete_override` or `ratelimit.<namespace_id>.delete_override`
+ * **Permissions:** Requires `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>/overrides/<override_id>#delete`, or a wildcard URN permission that includes this override and action. Without read access to the override, insufficient permissions return 404. With read access but no delete permission, the response is 403.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

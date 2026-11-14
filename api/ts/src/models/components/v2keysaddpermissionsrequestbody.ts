@@ -20,7 +20,7 @@ export type V2KeysAddPermissionsRequestBody = {
    *
    * Adding permissions never removes existing permissions or role-based permissions.
    *
-   * Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+   * To create missing permission slugs, your root key must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*` in the key's project. Without this grant, the operation fails with a 403 error if your root key can read the key, or a 404 error otherwise.
    */
   permissions: Array<string>;
 };
