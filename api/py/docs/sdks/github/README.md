@@ -22,7 +22,9 @@ repositories to individual apps with the `git` field on `apps.createApp` and
 **Required Permissions**
 
 Your root key must have the following permission:
-- `workspace.*.install_github`
+- `unkey:v1:<workspace_id>:github/apps/*#write`
+
+Replace `<workspace_id>` with the authenticated workspace ID.
 
 
 ### Example Usage

@@ -503,8 +503,8 @@ The project name, slug, and delete protection setting can be changed. Omitted fi
 **Required Permissions**
 
 Your root key must have one of the following permissions:
-- `project.*.update_project` (to update any project)
-- `project.<project_id>.update_project` (to update a specific project)
+- `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+- `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
 
 
 ### Example Usage: changeSlug

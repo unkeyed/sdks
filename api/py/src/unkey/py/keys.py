@@ -31,9 +31,10 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>`.
+
+        To create missing permission slugs, it must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*`.
+        Adding existing permissions does not require this additional grant.
 
         **Side Effects**
 
@@ -48,7 +49,7 @@ class Keys(BaseSDK):
 
             Adding permissions never removes existing permissions or role-based permissions.
 
-            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+            To create missing permission slugs, your root key must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*` in the key's project. Without this grant, the operation fails with a 403 error if your root key can read the key, or a 404 error otherwise.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -181,9 +182,10 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>`.
+
+        To create missing permission slugs, it must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*`.
+        Adding existing permissions does not require this additional grant.
 
         **Side Effects**
 
@@ -198,7 +200,7 @@ class Keys(BaseSDK):
 
             Adding permissions never removes existing permissions or role-based permissions.
 
-            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+            To create missing permission slugs, your root key must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*` in the key's project. Without this grant, the operation fails with a 403 error if your root key can read the key, or a 404 error otherwise.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -652,11 +654,11 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential needs one of:
-        - `api.*.create_key` (create keys in any API)
-        - `api.<api_id>.create_key` (create keys in specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
+        Your credential needs `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace. Use the keyspace's project ID, not the API's project ID if they differ. A grant with wildcard project or keyspace segments can cover multiple keyspaces in the authorized workspace.
+
+        Recoverable keys use the same write permission. They also require the keyspace to support key encryption.
+
+        Without write permission, this endpoint returns 404 to hide whether the API exists. If your credential can read the keyspace, it returns 403 and names the missing write permission instead.
 
 
         :param api_id: The API namespace this key belongs to.
@@ -884,11 +886,11 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential needs one of:
-        - `api.*.create_key` (create keys in any API)
-        - `api.<api_id>.create_key` (create keys in specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
+        Your credential needs `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace. Use the keyspace's project ID, not the API's project ID if they differ. A grant with wildcard project or keyspace segments can cover multiple keyspaces in the authorized workspace.
+
+        Recoverable keys use the same write permission. They also require the keyspace to support key encryption.
+
+        Without write permission, this endpoint returns 404 to hide whether the API exists. If your credential can read the keyspace, it returns 403 and names the missing write permission instead.
 
 
         :param api_id: The API namespace this key belongs to.
@@ -1094,11 +1096,10 @@ class Keys(BaseSDK):
         **Required Permissions**
 
         Your credential must have one of the following permissions:
-        - `api.*.delete_key` (to delete keys in any API)
-        - `api.<api_id>.delete_key` (to delete keys in a specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#delete_key` (to delete keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
+        - `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#delete` (to delete keys in any project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#delete` (to delete keys in a specific project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#delete` (to delete keys in a specific keyspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#delete` (to delete a specific key)
 
 
         :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
@@ -1244,11 +1245,10 @@ class Keys(BaseSDK):
         **Required Permissions**
 
         Your credential must have one of the following permissions:
-        - `api.*.delete_key` (to delete keys in any API)
-        - `api.<api_id>.delete_key` (to delete keys in a specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#delete_key` (to delete keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#delete_key` (to delete keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#delete_key` (to delete a specific key)
+        - `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#delete` (to delete keys in any project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#delete` (to delete keys in a specific project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#delete` (to delete keys in a specific keyspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#delete` (to delete a specific key)
 
 
         :param key_id: Specifies which key to delete using the database identifier returned from `createKey`.
@@ -1480,7 +1480,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1636,7 +1636,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1704,9 +1704,7 @@ class Keys(BaseSDK):
         Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
 
         **Required Permissions**
-        Your root key must have one of the following permissions for basic key information:
-        - `api.*.create_key` (to migrate keys to any API)
-        - `api.<api_id>.create_key` (to migrate keys to a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace in its project and workspace.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1846,9 +1844,7 @@ class Keys(BaseSDK):
         Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
 
         **Required Permissions**
-        Your root key must have one of the following permissions for basic key information:
-        - `api.*.create_key` (to migrate keys to any API)
-        - `api.<api_id>.create_key` (to migrate keys to a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace in its project and workspace.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1989,9 +1985,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. Wildcard grants that include the target key also authorize this operation.
 
         **Side Effects**
 
@@ -2138,9 +2132,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. Wildcard grants that include the target key also authorize this operation.
 
         **Side Effects**
 
@@ -2287,9 +2279,8 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have the following permission for the target key:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`
 
         **Side Effects**
 
@@ -2438,9 +2429,8 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have the following permission for the target key:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`
 
         **Side Effects**
 
@@ -2610,11 +2600,9 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential must have:
-        - `api.*.create_key` or `api.<api_id>.create_key`
-        - `unkey:v1:<workspace_id>:keyspaces/*#create_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key`
-        - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#encrypt_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#encrypt_key` (only when the original key is recoverable)
+        Your credential must grant `write` on the original key:
+        `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`.
+        A matching wildcard grant also satisfies this requirement. The same permission applies to recoverable keys.
 
 
         :param key_id: The database identifier of the key to reroll.
@@ -2791,11 +2779,9 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential must have:
-        - `api.*.create_key` or `api.<api_id>.create_key`
-        - `unkey:v1:<workspace_id>:keyspaces/*#create_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key`
-        - `api.*.encrypt_key` or `api.<api_id>.encrypt_key` (only when the original key is recoverable)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#encrypt_key` or `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#encrypt_key` (only when the original key is recoverable)
+        Your credential must grant `write` on the original key:
+        `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write`.
+        A matching wildcard grant also satisfies this requirement. The same permission applies to recoverable keys.
 
 
         :param key_id: The database identifier of the key to reroll.
@@ -2951,9 +2937,13 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `write` on the target key:
+        - `unkey:v1:{workspace_id}:projects/{project_id}/keyspaces/{keyspace_id}/keys/{key_id}#write`
+
+        When any requested permission slug does not exist in the key's project, your root key must also have:
+        - `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`
+
+        Use the keyspace ID, not the API ID. You can use wildcard resource IDs to grant access to multiple resources.
 
         **Side Effects**
 
@@ -2972,7 +2962,7 @@ class Keys(BaseSDK):
             - This only affects direct permissions - permissions granted through roles are not affected
             - All existing direct permissions not included in this list will be removed
 
-            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+            To create missing permission slugs in the key's project, your root key must also have `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`. Without this grant, the operation returns HTTP 403. Setting existing permissions does not require this additional grant.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3104,9 +3094,13 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `write` on the target key:
+        - `unkey:v1:{workspace_id}:projects/{project_id}/keyspaces/{keyspace_id}/keys/{key_id}#write`
+
+        When any requested permission slug does not exist in the key's project, your root key must also have:
+        - `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`
+
+        Use the keyspace ID, not the API ID. You can use wildcard resource IDs to grant access to multiple resources.
 
         **Side Effects**
 
@@ -3125,7 +3119,7 @@ class Keys(BaseSDK):
             - This only affects direct permissions - permissions granted through roles are not affected
             - All existing direct permissions not included in this list will be removed
 
-            Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+            To create missing permission slugs in the key's project, your root key must also have `unkey:v1:{workspace_id}:projects/{project_id}/rbac/permissions/*#write`. Without this grant, the operation returns HTTP 403. Setting existing permissions does not require this additional grant.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3257,9 +3251,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. A wildcard grant that covers the target key also authorizes this operation.
 
         **Side Effects**
 
@@ -3407,9 +3399,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the target key. A wildcard grant that covers the target key also authorizes this operation.
 
         **Side Effects**
 
@@ -3880,12 +3870,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#update_key` (to update keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
+        Your credential must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the key being updated, or a broader permission that covers it.
 
         **Side Effects**
 
@@ -4086,12 +4071,7 @@ class Keys(BaseSDK):
 
         **Required Permissions**
 
-        Your credential must have one of the following permissions:
-        - `api.*.update_key` (to update keys in any API)
-        - `api.<api_id>.update_key` (to update keys in a specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#update_key` (to update keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#update_key` (to update keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#update_key` (to update a specific key)
+        Your credential must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#write` for the key being updated, or a broader permission that covers it.
 
         **Side Effects**
 
@@ -4295,11 +4275,12 @@ class Keys(BaseSDK):
         **Required Permissions**
 
         Your credential needs one of:
-        - `api.*.verify_key` (verify keys in any API)
-        - `api.<api_id>.verify_key` (verify keys in specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#verify_key` (verify keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
+        - `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#verify` (verify keys in any project in your workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#verify` (verify keys in a specific project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#verify` (verify keys in a specific keyspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#verify` (verify a specific key)
+
+        Use the keyspace's project ID and keyspace ID, not its API ID. The workspace must match your credential's authorized workspace.
 
         **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
 
@@ -4485,11 +4466,12 @@ class Keys(BaseSDK):
         **Required Permissions**
 
         Your credential needs one of:
-        - `api.*.verify_key` (verify keys in any API)
-        - `api.<api_id>.verify_key` (verify keys in specific API)
-        - `unkey:v1:<workspace_id>:keyspaces/*/keys/*#verify_key` (verify keys in any keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
-        - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
+        - `unkey:v1:<workspace_id>:projects/*/keyspaces/*/keys/*#verify` (verify keys in any project in your workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/*/keys/*#verify` (verify keys in a specific project)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#verify` (verify keys in a specific keyspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#verify` (verify a specific key)
+
+        Use the keyspace's project ID and keyspace ID, not its API ID. The workspace must match your credential's authorized workspace.
 
         **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
 
@@ -4725,7 +4707,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4862,7 +4844,7 @@ class Keys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["keys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
