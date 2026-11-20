@@ -11,11 +11,24 @@ class V2PortalExchangeCodeRequestBodyTypedDict(TypedDict):
     Must be valid, unexpired, and not previously redeemed.
 
     """
+    host: str
+    r"""The domain the end user is visiting, such as `developers.example.com`.
+    The code only works on Unkey's portal domain or on one of this portal's
+    verified custom domains.
+
+    """
 
 
 class V2PortalExchangeCodeRequestBody(BaseModel):
     code: str
     r"""The exchange code carried by the portal URL from `portal.createSession`.
     Must be valid, unexpired, and not previously redeemed.
+
+    """
+
+    host: str
+    r"""The domain the end user is visiting, such as `developers.example.com`.
+    The code only works on Unkey's portal domain or on one of this portal's
+    verified custom domains.
 
     """

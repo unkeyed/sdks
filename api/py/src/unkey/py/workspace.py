@@ -91,7 +91,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]},
                 },
             ),
             request=req,
@@ -218,7 +218,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]},
                 },
             ),
             request=req,
@@ -349,7 +349,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -480,7 +480,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -631,7 +631,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -782,7 +782,7 @@ class Workspace(BaseSDK):
                 tags=["workspace"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -915,7 +915,15 @@ class Workspace(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["workspace"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1052,7 +1060,15 @@ class Workspace(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["workspace"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

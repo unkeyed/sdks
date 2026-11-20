@@ -33,7 +33,9 @@ class Github(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `workspace.*.install_github`
+        - `unkey:v1:<workspace_id>:github/apps/*#write`
+
+        Replace `<workspace_id>` with the authenticated workspace ID.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -90,7 +92,15 @@ class Github(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["github"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -158,7 +168,9 @@ class Github(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `workspace.*.install_github`
+        - `unkey:v1:<workspace_id>:github/apps/*#write`
+
+        Replace `<workspace_id>` with the authenticated workspace ID.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -215,7 +227,15 @@ class Github(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["github"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

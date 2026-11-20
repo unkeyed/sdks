@@ -108,7 +108,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -260,7 +267,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -316,6 +330,340 @@ class PortalSDK(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def create_key(
+        self,
+        *,
+        security: Union[
+            models.PortalCreateKeySecurity, models.PortalCreateKeySecurityTypedDict
+        ],
+        name: Optional[str] = None,
+        ratelimits: Optional[
+            Union[
+                Iterable[models.V2PortalCreateKeyRatelimit],
+                Iterable[models.V2PortalCreateKeyRatelimitTypedDict],
+            ]
+        ] = None,
+        expires_in: Optional[int] = None,
+        permissions: Optional[Iterable[str]] = None,
+        roles: Optional[Iterable[str]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysCreateKeyResponseBody:
+        r"""Create portal key
+
+        Create an API key for the authenticated portal session's end user, within
+        the key-creation policy the session was created with.
+
+        The key is owned by the session's external identity and lives in the
+        session's keyspace, so the request has no `externalId` or `apiId` field.
+        Rate limits, expiry, permissions, and roles must stay within the policy;
+        a value outside it is refused rather than adjusted.
+
+
+        :param security:
+        :param name: A label for the key, shown to the end user and in the dashboard.
+        :param ratelimits: Tightens rate limits the policy defines. Each entry must name a policy
+            rate limit and may only lower its limit or lengthen its duration. Policy
+            rate limits left out are applied at the policy's values.
+
+        :param expires_in: How long the key lives, in milliseconds from creation. At least one hour,
+            and at most the policy's maximum lifetime. Omitted, the key lives for the
+            policy's maximum lifetime, or never expires when the policy sets none.
+
+        :param permissions: Optional permission slugs the policy allows. Permissions the policy
+            requires are always attached.
+
+        :param roles: Optional role names the policy allows. Roles the policy requires are
+            always attached.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalCreateKeyRequestBody(
+            name=name,
+            ratelimits=utils.get_pydantic_model(
+                ratelimits, Optional[List[models.V2PortalCreateKeyRatelimit]]
+            ),
+            expires_in=expires_in,
+            permissions=utils.unmarshal(permissions, Optional[List[str]]),
+            roles=utils.unmarshal(roles, Optional[List[str]]),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/portal.createKey",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.PortalCreateKeySecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalCreateKeyRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.createKey",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["portal"],
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.V2KeysCreateKeyResponseBody, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def create_key_async(
+        self,
+        *,
+        security: Union[
+            models.PortalCreateKeySecurity, models.PortalCreateKeySecurityTypedDict
+        ],
+        name: Optional[str] = None,
+        ratelimits: Optional[
+            Union[
+                Iterable[models.V2PortalCreateKeyRatelimit],
+                Iterable[models.V2PortalCreateKeyRatelimitTypedDict],
+            ]
+        ] = None,
+        expires_in: Optional[int] = None,
+        permissions: Optional[Iterable[str]] = None,
+        roles: Optional[Iterable[str]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V2KeysCreateKeyResponseBody:
+        r"""Create portal key
+
+        Create an API key for the authenticated portal session's end user, within
+        the key-creation policy the session was created with.
+
+        The key is owned by the session's external identity and lives in the
+        session's keyspace, so the request has no `externalId` or `apiId` field.
+        Rate limits, expiry, permissions, and roles must stay within the policy;
+        a value outside it is refused rather than adjusted.
+
+
+        :param security:
+        :param name: A label for the key, shown to the end user and in the dashboard.
+        :param ratelimits: Tightens rate limits the policy defines. Each entry must name a policy
+            rate limit and may only lower its limit or lengthen its duration. Policy
+            rate limits left out are applied at the policy's values.
+
+        :param expires_in: How long the key lives, in milliseconds from creation. At least one hour,
+            and at most the policy's maximum lifetime. Omitted, the key lives for the
+            policy's maximum lifetime, or never expires when the policy sets none.
+
+        :param permissions: Optional permission slugs the policy allows. Permissions the policy
+            requires are always attached.
+
+        :param roles: Optional role names the policy allows. Roles the policy requires are
+            always attached.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V2PortalCreateKeyRequestBody(
+            name=name,
+            ratelimits=utils.get_pydantic_model(
+                ratelimits, Optional[List[models.V2PortalCreateKeyRatelimit]]
+            ),
+            expires_in=expires_in,
+            permissions=utils.unmarshal(permissions, Optional[List[str]]),
+            roles=utils.unmarshal(roles, Optional[List[str]]),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/portal.createKey",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(security, models.PortalCreateKeySecurity),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V2PortalCreateKeyRequestBody
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="portal.createKey",
+                oauth2_scopes=None,
+                security_source=security,
+                tags=["portal"],
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.V2KeysCreateKeyResponseBody, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "412", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PreconditionFailedErrorResponseData, http_res
+            )
+            raise errors.PreconditionFailedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def create_portal(
         self,
         *,
@@ -343,8 +691,18 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have `portal.*.create_portal`. A grant scoped to a specific
-        portal id does not authorize creation, because the id does not exist yet.
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/*#write`
+        for the project that owns the app or keyspace. A grant scoped to a specific
+        portal ID does not authorize creation, because the ID does not exist yet.
+
+        You must also have read permission on the resource the portal serves:
+
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read` for a keyspace.
+
+        Broader grants that cover these resources and actions also authorize the request.
+        A missing permission returns **403**. An app or keyspace outside your workspace
+        returns **404**, the same as a resource that does not exist.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -416,7 +774,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -499,8 +864,18 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have `portal.*.create_portal`. A grant scoped to a specific
-        portal id does not authorize creation, because the id does not exist yet.
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/*#write`
+        for the project that owns the app or keyspace. A grant scoped to a specific
+        portal ID does not authorize creation, because the ID does not exist yet.
+
+        You must also have read permission on the resource the portal serves:
+
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read` for a keyspace.
+
+        Broader grants that cover these resources and actions also authorize the request.
+        A missing permission returns **403**. An app or keyspace outside your workspace
+        returns **404**, the same as a resource that does not exist.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -572,7 +947,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -634,7 +1016,14 @@ class PortalSDK(BaseSDK):
         portal: str,
         external_id: str,
         scopes: Iterable[models.Scope],
+        key_creation: Optional[
+            Union[
+                models.V2PortalCreateSessionKeyCreation,
+                models.V2PortalCreateSessionKeyCreationTypedDict,
+            ]
+        ] = None,
         return_url: Optional[str] = None,
+        hostname: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -651,19 +1040,24 @@ class PortalSDK(BaseSDK):
 
         Authorization runs in two stages, and both must pass.
 
-        First, your root key must have one of the following permissions:
-        - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+        First, your root key must have
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`.
+        Write permission on the portal itself does not grant permission to mint sessions.
 
         Second, a session can never carry a capability your root key does not itself
         hold. Each requested scope additionally requires the equivalent permission on
         every keyspace the portal resolves to:
-        - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
-        - `keys:reroll` requires `api.<api_id>.create_key`, plus
-        `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
-        - `analytics:read` requires `api.<api_id>.read_analytics`
+        - `keys:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#read`
+        and `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`.
+        - `keys:reroll` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+        including when the keyspace stores encrypted keys.
+        - `keys:create` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+        the same permission creating a key with `keys.createKey` requires.
+        - `analytics:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/logs#read`.
 
-        The `*` form of each is also accepted. Requesting a scope you do not hold
+        Broader URN grants that cover these resources and actions are also accepted.
+        A grant on one concrete key cannot satisfy the `keys/*` requirement.
+        Requesting a scope you do not hold
         returns 403 for the whole request rather than minting a reduced session, so a
         missing grant is visible instead of surfacing later as a broken portal.
 
@@ -689,12 +1083,30 @@ class PortalSDK(BaseSDK):
             configured on the portal. An end user can never see another identity's
             keys.
 
-            Rerolling and usage analytics are both reached from the keys page, so
-            `keys:reroll` and `analytics:read` each require `keys:read` in the same
-            session; requesting either without it is rejected.
+            Rerolling, key creation, and usage analytics are all reached from the
+            keys page, so `keys:reroll`, `keys:create`, and `analytics:read` each
+            require `keys:read` in the same session; requesting any of them without it
+            is rejected.
+
+            `keys:create` lets the end user create keys for themselves, bounded by the
+            `keyCreation` policy, which it requires. It is not available on a portal
+            mapped to an app. Created keys never carry credits, so do not grant it if
+            you bill on credits. Created keys are ordinary keys in your keyspace: they
+            keep working after the session ends, until they expire or you revoke them.
 
             Each scope requires the equivalent permission on your own root key. See
             Required Permissions on this operation.
+
+        :param key_creation: What the end user may create through the portal. Required with the
+            `keys:create` scope and rejected without it. The policy is fixed for the
+            session's lifetime.
+
+            Created keys never carry credits, so do not grant `keys:create` if you bill
+            on credits.
+
+            Created keys are recoverable when the keyspace stores encrypted keys, and
+            not recoverable otherwise. This differs from `keys.createKey`, where
+            recoverability is opt-in per key.
 
         :param return_url: Absolute URL the end user is sent back to when they leave the portal, or
             when their session expires mid-visit. Set per session rather than per
@@ -702,6 +1114,12 @@ class PortalSDK(BaseSDK):
             to the page they came from.
 
             When omitted, the portal shows no return link.
+
+        :param hostname: A verified custom domain of this portal to build the session URL on, so
+            end users stay on your domain. The domain must be verified on this
+            portal; any other value is rejected.
+
+            When omitted, the URL uses Unkey's portal host.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -722,7 +1140,11 @@ class PortalSDK(BaseSDK):
             portal=portal,
             external_id=external_id,
             scopes=utils.unmarshal(scopes, List[models.Scope]),
+            key_creation=utils.get_pydantic_model(
+                key_creation, Optional[models.V2PortalCreateSessionKeyCreation]
+            ),
             return_url=return_url,
+            hostname=hostname,
         )
 
         req = self._build_request(
@@ -766,7 +1188,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -831,7 +1260,14 @@ class PortalSDK(BaseSDK):
         portal: str,
         external_id: str,
         scopes: Iterable[models.Scope],
+        key_creation: Optional[
+            Union[
+                models.V2PortalCreateSessionKeyCreation,
+                models.V2PortalCreateSessionKeyCreationTypedDict,
+            ]
+        ] = None,
         return_url: Optional[str] = None,
+        hostname: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -848,19 +1284,24 @@ class PortalSDK(BaseSDK):
 
         Authorization runs in two stages, and both must pass.
 
-        First, your root key must have one of the following permissions:
-        - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+        First, your root key must have
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`.
+        Write permission on the portal itself does not grant permission to mint sessions.
 
         Second, a session can never carry a capability your root key does not itself
         hold. Each requested scope additionally requires the equivalent permission on
         every keyspace the portal resolves to:
-        - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
-        - `keys:reroll` requires `api.<api_id>.create_key`, plus
-        `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
-        - `analytics:read` requires `api.<api_id>.read_analytics`
+        - `keys:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#read`
+        and `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`.
+        - `keys:reroll` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+        including when the keyspace stores encrypted keys.
+        - `keys:create` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+        the same permission creating a key with `keys.createKey` requires.
+        - `analytics:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/logs#read`.
 
-        The `*` form of each is also accepted. Requesting a scope you do not hold
+        Broader URN grants that cover these resources and actions are also accepted.
+        A grant on one concrete key cannot satisfy the `keys/*` requirement.
+        Requesting a scope you do not hold
         returns 403 for the whole request rather than minting a reduced session, so a
         missing grant is visible instead of surfacing later as a broken portal.
 
@@ -886,12 +1327,30 @@ class PortalSDK(BaseSDK):
             configured on the portal. An end user can never see another identity's
             keys.
 
-            Rerolling and usage analytics are both reached from the keys page, so
-            `keys:reroll` and `analytics:read` each require `keys:read` in the same
-            session; requesting either without it is rejected.
+            Rerolling, key creation, and usage analytics are all reached from the
+            keys page, so `keys:reroll`, `keys:create`, and `analytics:read` each
+            require `keys:read` in the same session; requesting any of them without it
+            is rejected.
+
+            `keys:create` lets the end user create keys for themselves, bounded by the
+            `keyCreation` policy, which it requires. It is not available on a portal
+            mapped to an app. Created keys never carry credits, so do not grant it if
+            you bill on credits. Created keys are ordinary keys in your keyspace: they
+            keep working after the session ends, until they expire or you revoke them.
 
             Each scope requires the equivalent permission on your own root key. See
             Required Permissions on this operation.
+
+        :param key_creation: What the end user may create through the portal. Required with the
+            `keys:create` scope and rejected without it. The policy is fixed for the
+            session's lifetime.
+
+            Created keys never carry credits, so do not grant `keys:create` if you bill
+            on credits.
+
+            Created keys are recoverable when the keyspace stores encrypted keys, and
+            not recoverable otherwise. This differs from `keys.createKey`, where
+            recoverability is opt-in per key.
 
         :param return_url: Absolute URL the end user is sent back to when they leave the portal, or
             when their session expires mid-visit. Set per session rather than per
@@ -899,6 +1358,12 @@ class PortalSDK(BaseSDK):
             to the page they came from.
 
             When omitted, the portal shows no return link.
+
+        :param hostname: A verified custom domain of this portal to build the session URL on, so
+            end users stay on your domain. The domain must be verified on this
+            portal; any other value is rejected.
+
+            When omitted, the URL uses Unkey's portal host.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -919,7 +1384,11 @@ class PortalSDK(BaseSDK):
             portal=portal,
             external_id=external_id,
             scopes=utils.unmarshal(scopes, List[models.Scope]),
+            key_creation=utils.get_pydantic_model(
+                key_creation, Optional[models.V2PortalCreateSessionKeyCreation]
+            ),
             return_url=return_url,
+            hostname=hostname,
         )
 
         req = self._build_request_async(
@@ -963,7 +1432,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1109,7 +1585,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1247,7 +1730,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1398,7 +1888,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1549,7 +2046,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1604,6 +2108,7 @@ class PortalSDK(BaseSDK):
         self,
         *,
         code: str,
+        host: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1623,6 +2128,10 @@ class PortalSDK(BaseSDK):
         :param code: The exchange code carried by the portal URL from `portal.createSession`.
             Must be valid, unexpired, and not previously redeemed.
 
+        :param host: The domain the end user is visiting, such as `developers.example.com`.
+            The code only works on Unkey's portal domain or on one of this portal's
+            verified custom domains.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1640,6 +2149,7 @@ class PortalSDK(BaseSDK):
 
         request = models.V2PortalExchangeCodeRequestBody(
             code=code,
+            host=host,
         )
 
         req = self._build_request(
@@ -1681,7 +2191,12 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=None,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Exchanges a one-time portal code for a browser session cookie."
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1729,6 +2244,7 @@ class PortalSDK(BaseSDK):
         self,
         *,
         code: str,
+        host: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1748,6 +2264,10 @@ class PortalSDK(BaseSDK):
         :param code: The exchange code carried by the portal URL from `portal.createSession`.
             Must be valid, unexpired, and not previously redeemed.
 
+        :param host: The domain the end user is visiting, such as `developers.example.com`.
+            The code only works on Unkey's portal domain or on one of this portal's
+            verified custom domains.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1765,6 +2285,7 @@ class PortalSDK(BaseSDK):
 
         request = models.V2PortalExchangeCodeRequestBody(
             code=code,
+            host=host,
         )
 
         req = self._build_request_async(
@@ -1806,7 +2327,12 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=None,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Exchanges a one-time portal code for a browser session cookie."
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1937,7 +2463,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2075,7 +2601,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2219,7 +2745,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2358,7 +2884,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2516,7 +3042,9 @@ class PortalSDK(BaseSDK):
                 tags=["portal"],
                 extensions={
                     "x-excluded": True,
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
                 },
             ),
             request=req,
@@ -2685,7 +3213,9 @@ class PortalSDK(BaseSDK):
                 tags=["portal"],
                 extensions={
                     "x-excluded": True,
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
                 },
             ),
             request=req,
@@ -2825,7 +3355,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2959,7 +3489,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3104,7 +3634,9 @@ class PortalSDK(BaseSDK):
                 tags=["portal"],
                 extensions={
                     "x-excluded": True,
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
                 },
             ),
             request=req,
@@ -3274,7 +3806,9 @@ class PortalSDK(BaseSDK):
                 tags=["portal"],
                 extensions={
                     "x-excluded": True,
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
                 },
             ),
             request=req,
@@ -3375,11 +3909,7 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.create_portal_session` (for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
         with `#read` or `#write`. Reading the portal itself is not enough.
 
         Without the permission this returns **404**, not 403.
@@ -3460,7 +3990,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3556,11 +4086,7 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.create_portal_session` (for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
         with `#read` or `#write`. Reading the portal itself is not enough.
 
         Without the permission this returns **404**, not 403.
@@ -3641,7 +4167,7 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3820,7 +4346,12 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3977,7 +4508,12 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=security,
                 tags=["portal"],
-                extensions={"x-excluded": True},
+                extensions={
+                    "x-excluded": True,
+                    "x-unkey-mcp": {
+                        "exclude": "Authenticated by the portal session cookie, which an MCP client cannot hold."
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4053,13 +4589,11 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.create_portal_session` (for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
-        which dashboard roles carry. Unlike `portal.createSession`, a dashboard
-        session can call this, not just a root key.
+        Your root key must have
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`
+        or a broader grant that includes it. Dashboard roles can grant this permission.
+        Unlike `portal.createSession`, a dashboard session with this permission can
+        also call this endpoint.
 
         A root key that cannot read the portal's sessions gets **404**. One that can
         read them but lacks the permission gets **403**.
@@ -4135,7 +4669,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4213,13 +4754,11 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.create_portal_session` (for any portal in the workspace)
-        - `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-        It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
-        which dashboard roles carry. Unlike `portal.createSession`, a dashboard
-        session can call this, not just a root key.
+        Your root key must have
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`
+        or a broader grant that includes it. Dashboard roles can grant this permission.
+        Unlike `portal.createSession`, a dashboard session with this permission can
+        also call this endpoint.
 
         A root key that cannot read the portal's sessions gets **404**. One that can
         read them but lacks the permission gets **403**.
@@ -4295,7 +4834,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4380,9 +4926,15 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.update_portal` (to update any portal in the workspace)
-        - `portal.<portal_id>.update_portal` (to update a specific portal)
+        Your root key must have `write` permission on
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+        A broader grant, such as `unkey:v1:<workspace_id>:**#write`, also permits updates.
+
+        To change the mapped resource, your root key must also have `read` permission
+        on the target:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`
+        for a keyspace.
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
 
         A root key that cannot read the portal gets **404**. One that can read it
         but lacks the permission gets **403**.
@@ -4497,7 +5049,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4587,9 +5146,15 @@ class PortalSDK(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of:
-        - `portal.*.update_portal` (to update any portal in the workspace)
-        - `portal.<portal_id>.update_portal` (to update a specific portal)
+        Your root key must have `write` permission on
+        `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+        A broader grant, such as `unkey:v1:<workspace_id>:**#write`, also permits updates.
+
+        To change the mapped resource, your root key must also have `read` permission
+        on the target:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`
+        for a keyspace.
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
 
         A root key that cannot read the portal gets **404**. One that can read it
         but lacks the permission gets **403**.
@@ -4704,7 +5269,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4853,7 +5425,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4997,7 +5576,14 @@ class PortalSDK(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["portal"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

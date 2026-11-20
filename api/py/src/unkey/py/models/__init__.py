@@ -153,6 +153,10 @@ if TYPE_CHECKING:
     from .policy import Policy, PolicyTypedDict
     from .policyresponse import PolicyResponse, PolicyResponseTypedDict
     from .portal import Portal, PortalTypedDict
+    from .portal_createkeyop import (
+        PortalCreateKeySecurity,
+        PortalCreateKeySecurityTypedDict,
+    )
     from .portal_createsessionop import (
         PortalCreateSessionResponse,
         PortalCreateSessionResponseTypedDict,
@@ -925,6 +929,14 @@ if TYPE_CHECKING:
         V2PortalCreateDomainResponseData,
         V2PortalCreateDomainResponseDataTypedDict,
     )
+    from .v2portalcreatekeyratelimit import (
+        V2PortalCreateKeyRatelimit,
+        V2PortalCreateKeyRatelimitTypedDict,
+    )
+    from .v2portalcreatekeyrequestbody import (
+        V2PortalCreateKeyRequestBody,
+        V2PortalCreateKeyRequestBodyTypedDict,
+    )
     from .v2portalcreateportalrequestbody_union import (
         V2PortalCreatePortalRequestBody1,
         V2PortalCreatePortalRequestBody1TypedDict,
@@ -940,6 +952,22 @@ if TYPE_CHECKING:
     from .v2portalcreateportalresponsedata import (
         V2PortalCreatePortalResponseData,
         V2PortalCreatePortalResponseDataTypedDict,
+    )
+    from .v2portalcreatesessionkeycreation import (
+        V2PortalCreateSessionKeyCreation,
+        V2PortalCreateSessionKeyCreationTypedDict,
+    )
+    from .v2portalcreatesessionkeycreationpermissions import (
+        V2PortalCreateSessionKeyCreationPermissions,
+        V2PortalCreateSessionKeyCreationPermissionsTypedDict,
+    )
+    from .v2portalcreatesessionkeycreationratelimit import (
+        V2PortalCreateSessionKeyCreationRatelimit,
+        V2PortalCreateSessionKeyCreationRatelimitTypedDict,
+    )
+    from .v2portalcreatesessionkeycreationroles import (
+        V2PortalCreateSessionKeyCreationRoles,
+        V2PortalCreateSessionKeyCreationRolesTypedDict,
     )
     from .v2portalcreatesessionrequestbody import (
         Scope,
@@ -1027,6 +1055,18 @@ if TYPE_CHECKING:
     from .v2portallistdomainsresponsebody import (
         V2PortalListDomainsResponseBody,
         V2PortalListDomainsResponseBodyTypedDict,
+    )
+    from .v2portallistkeyskeycreation import (
+        V2PortalListKeysKeyCreation,
+        V2PortalListKeysKeyCreationTypedDict,
+    )
+    from .v2portallistkeyskeycreationallowance import (
+        V2PortalListKeysKeyCreationAllowance,
+        V2PortalListKeysKeyCreationAllowanceTypedDict,
+    )
+    from .v2portallistkeyskeycreationratelimit import (
+        V2PortalListKeysKeyCreationRatelimit,
+        V2PortalListKeysKeyCreationRatelimitTypedDict,
     )
     from .v2portallistkeysrequestbody import (
         V2PortalListKeysRequestBody,
@@ -1550,6 +1590,8 @@ __all__ = [
     "Portal",
     "PortalBranding",
     "PortalBrandingTypedDict",
+    "PortalCreateKeySecurity",
+    "PortalCreateKeySecurityTypedDict",
     "PortalCreateSessionResponse",
     "PortalCreateSessionResponseTypedDict",
     "PortalDomain",
@@ -1971,6 +2013,10 @@ __all__ = [
     "V2PortalCreateDomainResponseBodyTypedDict",
     "V2PortalCreateDomainResponseData",
     "V2PortalCreateDomainResponseDataTypedDict",
+    "V2PortalCreateKeyRatelimit",
+    "V2PortalCreateKeyRatelimitTypedDict",
+    "V2PortalCreateKeyRequestBody",
+    "V2PortalCreateKeyRequestBodyTypedDict",
     "V2PortalCreatePortalRequestBody1",
     "V2PortalCreatePortalRequestBody1TypedDict",
     "V2PortalCreatePortalRequestBody2",
@@ -1981,6 +2027,14 @@ __all__ = [
     "V2PortalCreatePortalResponseBodyTypedDict",
     "V2PortalCreatePortalResponseData",
     "V2PortalCreatePortalResponseDataTypedDict",
+    "V2PortalCreateSessionKeyCreation",
+    "V2PortalCreateSessionKeyCreationPermissions",
+    "V2PortalCreateSessionKeyCreationPermissionsTypedDict",
+    "V2PortalCreateSessionKeyCreationRatelimit",
+    "V2PortalCreateSessionKeyCreationRatelimitTypedDict",
+    "V2PortalCreateSessionKeyCreationRoles",
+    "V2PortalCreateSessionKeyCreationRolesTypedDict",
+    "V2PortalCreateSessionKeyCreationTypedDict",
     "V2PortalCreateSessionRequestBody",
     "V2PortalCreateSessionRequestBodyTypedDict",
     "V2PortalCreateSessionResponseBody",
@@ -2027,6 +2081,12 @@ __all__ = [
     "V2PortalListDomainsRequestBodyTypedDict",
     "V2PortalListDomainsResponseBody",
     "V2PortalListDomainsResponseBodyTypedDict",
+    "V2PortalListKeysKeyCreation",
+    "V2PortalListKeysKeyCreationAllowance",
+    "V2PortalListKeysKeyCreationAllowanceTypedDict",
+    "V2PortalListKeysKeyCreationRatelimit",
+    "V2PortalListKeysKeyCreationRatelimitTypedDict",
+    "V2PortalListKeysKeyCreationTypedDict",
     "V2PortalListKeysRequestBody",
     "V2PortalListKeysRequestBodyTypedDict",
     "V2PortalListKeysResponseBody",
@@ -2377,6 +2437,8 @@ _dynamic_imports: dict[str, str] = {
     "PolicyResponseTypedDict": ".policyresponse",
     "Portal": ".portal",
     "PortalTypedDict": ".portal",
+    "PortalCreateKeySecurity": ".portal_createkeyop",
+    "PortalCreateKeySecurityTypedDict": ".portal_createkeyop",
     "PortalCreateSessionResponse": ".portal_createsessionop",
     "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
     "PortalExchangeCodeResponse": ".portal_exchangecodeop",
@@ -2801,6 +2863,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalCreateDomainResponseBodyTypedDict": ".v2portalcreatedomainresponsebody",
     "V2PortalCreateDomainResponseData": ".v2portalcreatedomainresponsedata",
     "V2PortalCreateDomainResponseDataTypedDict": ".v2portalcreatedomainresponsedata",
+    "V2PortalCreateKeyRatelimit": ".v2portalcreatekeyratelimit",
+    "V2PortalCreateKeyRatelimitTypedDict": ".v2portalcreatekeyratelimit",
+    "V2PortalCreateKeyRequestBody": ".v2portalcreatekeyrequestbody",
+    "V2PortalCreateKeyRequestBodyTypedDict": ".v2portalcreatekeyrequestbody",
     "V2PortalCreatePortalRequestBody1": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody1TypedDict": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody2": ".v2portalcreateportalrequestbody_union",
@@ -2811,6 +2877,14 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalCreatePortalResponseBodyTypedDict": ".v2portalcreateportalresponsebody",
     "V2PortalCreatePortalResponseData": ".v2portalcreateportalresponsedata",
     "V2PortalCreatePortalResponseDataTypedDict": ".v2portalcreateportalresponsedata",
+    "V2PortalCreateSessionKeyCreation": ".v2portalcreatesessionkeycreation",
+    "V2PortalCreateSessionKeyCreationTypedDict": ".v2portalcreatesessionkeycreation",
+    "V2PortalCreateSessionKeyCreationPermissions": ".v2portalcreatesessionkeycreationpermissions",
+    "V2PortalCreateSessionKeyCreationPermissionsTypedDict": ".v2portalcreatesessionkeycreationpermissions",
+    "V2PortalCreateSessionKeyCreationRatelimit": ".v2portalcreatesessionkeycreationratelimit",
+    "V2PortalCreateSessionKeyCreationRatelimitTypedDict": ".v2portalcreatesessionkeycreationratelimit",
+    "V2PortalCreateSessionKeyCreationRoles": ".v2portalcreatesessionkeycreationroles",
+    "V2PortalCreateSessionKeyCreationRolesTypedDict": ".v2portalcreatesessionkeycreationroles",
     "Scope": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBody": ".v2portalcreatesessionrequestbody",
     "V2PortalCreateSessionRequestBodyTypedDict": ".v2portalcreatesessionrequestbody",
@@ -2858,6 +2932,12 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalListDomainsRequestBodyTypedDict": ".v2portallistdomainsrequestbody",
     "V2PortalListDomainsResponseBody": ".v2portallistdomainsresponsebody",
     "V2PortalListDomainsResponseBodyTypedDict": ".v2portallistdomainsresponsebody",
+    "V2PortalListKeysKeyCreation": ".v2portallistkeyskeycreation",
+    "V2PortalListKeysKeyCreationTypedDict": ".v2portallistkeyskeycreation",
+    "V2PortalListKeysKeyCreationAllowance": ".v2portallistkeyskeycreationallowance",
+    "V2PortalListKeysKeyCreationAllowanceTypedDict": ".v2portallistkeyskeycreationallowance",
+    "V2PortalListKeysKeyCreationRatelimit": ".v2portallistkeyskeycreationratelimit",
+    "V2PortalListKeysKeyCreationRatelimitTypedDict": ".v2portallistkeyskeycreationratelimit",
     "V2PortalListKeysRequestBody": ".v2portallistkeysrequestbody",
     "V2PortalListKeysRequestBodyTypedDict": ".v2portallistkeysrequestbody",
     "V2PortalListKeysResponseBody": ".v2portallistkeysresponsebody",
