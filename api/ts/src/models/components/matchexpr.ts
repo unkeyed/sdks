@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -76,13 +76,15 @@ export const MatchExpr$inboundSchema: z.ZodType<
   MatchExpr,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: PathMatch$inboundSchema.optional(),
-  method: MethodMatch$inboundSchema.optional(),
-  header: FieldMatch$inboundSchema.optional(),
-  queryParam: FieldMatch$inboundSchema.optional(),
-  remoteIp: RemoteIpMatch$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: PathMatch$inboundSchema.optional(),
+    method: MethodMatch$inboundSchema.optional(),
+    header: FieldMatch$inboundSchema.optional(),
+    queryParam: FieldMatch$inboundSchema.optional(),
+    remoteIp: RemoteIpMatch$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type MatchExpr$Outbound = {
   path?: PathMatch$Outbound | undefined;
@@ -97,13 +99,15 @@ export const MatchExpr$outboundSchema: z.ZodType<
   MatchExpr$Outbound,
   z.ZodTypeDef,
   MatchExpr
-> = z.object({
-  path: PathMatch$outboundSchema.optional(),
-  method: MethodMatch$outboundSchema.optional(),
-  header: FieldMatch$outboundSchema.optional(),
-  queryParam: FieldMatch$outboundSchema.optional(),
-  remoteIp: RemoteIpMatch$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: PathMatch$outboundSchema.optional(),
+    method: MethodMatch$outboundSchema.optional(),
+    header: FieldMatch$outboundSchema.optional(),
+    queryParam: FieldMatch$outboundSchema.optional(),
+    remoteIp: RemoteIpMatch$outboundSchema.optional(),
+  })
+);
 
 export function matchExprToJSON(matchExpr: MatchExpr): string {
   return JSON.stringify(MatchExpr$outboundSchema.parse(matchExpr));

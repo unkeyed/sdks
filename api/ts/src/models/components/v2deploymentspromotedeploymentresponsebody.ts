@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
@@ -23,10 +23,12 @@ export type V2DeploymentsPromoteDeploymentResponseBody = {
 /** @internal */
 export const V2DeploymentsPromoteDeploymentResponseBody$inboundSchema:
   z.ZodType<V2DeploymentsPromoteDeploymentResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      meta: Meta$inboundSchema,
-      data: EmptyResponse$inboundSchema,
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        meta: Meta$inboundSchema,
+        data: EmptyResponse$inboundSchema,
+      })
+    );
 
 export function v2DeploymentsPromoteDeploymentResponseBodyFromJSON(
   jsonString: string,

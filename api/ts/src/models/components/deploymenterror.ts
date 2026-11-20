@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,11 +39,13 @@ export const DeploymentError$inboundSchema: z.ZodType<
   DeploymentError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: DeploymentErrorCode$inboundSchema,
-  step: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: DeploymentErrorCode$inboundSchema,
+    step: z.string(),
+    message: z.string(),
+  })
+);
 
 export function deploymentErrorFromJSON(
   jsonString: string,

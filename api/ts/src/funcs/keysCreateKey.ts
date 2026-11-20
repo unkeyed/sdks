@@ -43,11 +43,11 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your credential needs one of:
- * - `api.*.create_key` (create keys in any API)
- * - `api.<api_id>.create_key` (create keys in specific API)
- * - `unkey:v1:<workspace_id>:keyspaces/*#create_key` (create keys in any keyspace)
- * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>#create_key` (create keys in a specific keyspace)
+ * Your credential needs `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace. Use the keyspace's project ID, not the API's project ID if they differ. A grant with wildcard project or keyspace segments can cover multiple keyspaces in the authorized workspace.
+ *
+ * Recoverable keys use the same write permission. They also require the keyspace to support key encryption.
+ *
+ * Without write permission, this endpoint returns 404 to hide whether the API exists. If your credential can read the keyspace, it returns 403 and names the missing write permission instead.
  */
 export function keysCreateKey(
   client: UnkeyCore,

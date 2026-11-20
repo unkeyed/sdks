@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2RootKeysUpdateKeyRequestBody = {
   /**
@@ -44,13 +45,15 @@ export const V2RootKeysUpdateKeyRequestBody$outboundSchema: z.ZodType<
   V2RootKeysUpdateKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2RootKeysUpdateKeyRequestBody
-> = z.object({
-  ipAllowlist: z.array(z.string()).optional(),
-  keyId: z.string(),
-  name: z.nullable(z.string()).optional(),
-  enabled: z.boolean().optional(),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipAllowlist: z.array(z.string()).optional(),
+    keyId: z.string(),
+    name: z.nullable(z.string()).optional(),
+    enabled: z.boolean().optional(),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 
 export function v2RootKeysUpdateKeyRequestBodyToJSON(
   v2RootKeysUpdateKeyRequestBody: V2RootKeysUpdateKeyRequestBody,

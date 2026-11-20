@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -109,23 +109,26 @@ export const V2WorkspaceGetLimitsResponseData$inboundSchema: z.ZodType<
   V2WorkspaceGetLimitsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  apiBillableOperationsCountMaxPerMonth:
-    V2WorkspaceGetLimitsLimit$inboundSchema,
-  apiRequestsCountMaxPerMinute: V2WorkspaceGetLimitsLimit$inboundSchema,
-  logsRetentionDaysMax: V2WorkspaceGetLimitsLimit$inboundSchema,
-  logsAuditRetentionDaysMax: V2WorkspaceGetLimitsLimit$inboundSchema,
-  logdrainsMax: V2WorkspaceGetLimitsLimit$inboundSchema,
-  cpuCoresMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  cpuCoresMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  memoryMibMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  memoryMibMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  storageMibMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  storageMibMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  buildsConcurrentMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  autoscalingReplicasMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-  customDomainsMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiBillableOperationsCountMaxPerMonth:
+      V2WorkspaceGetLimitsLimit$inboundSchema,
+    apiRequestsCountMaxPerMinute: V2WorkspaceGetLimitsLimit$inboundSchema,
+    logsRetentionDaysMax: V2WorkspaceGetLimitsLimit$inboundSchema,
+    logsAuditRetentionDaysMax: V2WorkspaceGetLimitsLimit$inboundSchema,
+    logdrainsMax: V2WorkspaceGetLimitsLimit$inboundSchema,
+    cpuCoresMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    cpuCoresMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    memoryMibMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    memoryMibMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    storageMibMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    storageMibMaxPerInstance: V2WorkspaceGetLimitsLimit$inboundSchema
+      .optional(),
+    buildsConcurrentMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    autoscalingReplicasMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+    customDomainsMax: V2WorkspaceGetLimitsLimit$inboundSchema.optional(),
+  })
+);
 
 export function v2WorkspaceGetLimitsResponseDataFromJSON(
   jsonString: string,

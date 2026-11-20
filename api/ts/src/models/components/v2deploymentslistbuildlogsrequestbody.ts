@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Retrieve the build log entries of a deployment. Get the deployment id from
@@ -55,12 +56,14 @@ export const V2DeploymentsListBuildLogsRequestBody$outboundSchema: z.ZodType<
   V2DeploymentsListBuildLogsRequestBody$Outbound,
   z.ZodTypeDef,
   V2DeploymentsListBuildLogsRequestBody
-> = z.object({
-  deploymentId: z.string(),
-  stepId: z.string().optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(100),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deploymentId: z.string(),
+    stepId: z.string().optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(100),
+  })
+);
 
 export function v2DeploymentsListBuildLogsRequestBodyToJSON(
   v2DeploymentsListBuildLogsRequestBody: V2DeploymentsListBuildLogsRequestBody,

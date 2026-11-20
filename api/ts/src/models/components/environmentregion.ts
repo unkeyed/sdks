@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const EnvironmentRegion$inboundSchema: z.ZodType<
   EnvironmentRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  replicas: Replicas$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    replicas: Replicas$inboundSchema,
+  })
+);
 /** @internal */
 export type EnvironmentRegion$Outbound = {
   name: string;
@@ -47,10 +49,12 @@ export const EnvironmentRegion$outboundSchema: z.ZodType<
   EnvironmentRegion$Outbound,
   z.ZodTypeDef,
   EnvironmentRegion
-> = z.object({
-  name: z.string(),
-  replicas: Replicas$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    replicas: Replicas$outboundSchema,
+  })
+);
 
 export function environmentRegionToJSON(
   environmentRegion: EnvironmentRegion,

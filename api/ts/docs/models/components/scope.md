@@ -11,5 +11,5 @@ let value: Scope = "keys:read";
 ## Values
 
 ```typescript
-"keys:read" | "keys:reroll" | "analytics:read"
+"keys:read" | "keys:reroll" | "keys:create" | "analytics:read"
 ```

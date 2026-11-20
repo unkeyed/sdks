@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RatelimitRequest = {
   /**
@@ -66,12 +67,14 @@ export const RatelimitRequest$outboundSchema: z.ZodType<
   RatelimitRequest$Outbound,
   z.ZodTypeDef,
   RatelimitRequest
-> = z.object({
-  name: z.string(),
-  limit: z.number().int(),
-  duration: z.number().int(),
-  autoApply: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    limit: z.number().int(),
+    duration: z.number().int(),
+    autoApply: z.boolean().default(false),
+  })
+);
 
 export function ratelimitRequestToJSON(
   ratelimitRequest: RatelimitRequest,

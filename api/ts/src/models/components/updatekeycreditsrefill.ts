@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -47,7 +48,9 @@ export const UpdateKeyCreditsRefillInterval$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UpdateKeyCreditsRefillInterval
-> = openEnums.outboundSchema(UpdateKeyCreditsRefillInterval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UpdateKeyCreditsRefillInterval)
+);
 
 /** @internal */
 export type UpdateKeyCreditsRefill$Outbound = {
@@ -61,11 +64,13 @@ export const UpdateKeyCreditsRefill$outboundSchema: z.ZodType<
   UpdateKeyCreditsRefill$Outbound,
   z.ZodTypeDef,
   UpdateKeyCreditsRefill
-> = z.object({
-  interval: UpdateKeyCreditsRefillInterval$outboundSchema,
-  amount: z.number().int(),
-  refillDay: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    interval: UpdateKeyCreditsRefillInterval$outboundSchema,
+    amount: z.number().int(),
+    refillDay: z.number().int().optional(),
+  })
+);
 
 export function updateKeyCreditsRefillToJSON(
   updateKeyCreditsRefill: UpdateKeyCreditsRefill,

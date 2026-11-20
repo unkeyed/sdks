@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,13 +18,15 @@ export const RootKeysListKeysResponse$inboundSchema: z.ZodType<
   RootKeysListKeysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: components.V2RootKeysListKeysResponseBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: components.V2RootKeysListKeysResponseBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 
 export function rootKeysListKeysResponseFromJSON(
   jsonString: string,

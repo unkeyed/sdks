@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Configure Git as the app source. Provide `repository` to connect it during
@@ -39,10 +40,12 @@ export const AppGitCreateInput$outboundSchema: z.ZodType<
   AppGitCreateInput$Outbound,
   z.ZodTypeDef,
   AppGitCreateInput
-> = z.object({
-  repository: z.string().optional(),
-  defaultBranch: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository: z.string().optional(),
+    defaultBranch: z.string().optional(),
+  })
+);
 
 export function appGitCreateInputToJSON(
   appGitCreateInput: AppGitCreateInput,

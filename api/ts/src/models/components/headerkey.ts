@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const HeaderKey$inboundSchema: z.ZodType<
   HeaderKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 /** @internal */
 export type HeaderKey$Outbound = {
   name: string;
@@ -32,9 +34,11 @@ export const HeaderKey$outboundSchema: z.ZodType<
   HeaderKey$Outbound,
   z.ZodTypeDef,
   HeaderKey
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function headerKeyToJSON(headerKey: HeaderKey): string {
   return JSON.stringify(HeaderKey$outboundSchema.parse(headerKey));

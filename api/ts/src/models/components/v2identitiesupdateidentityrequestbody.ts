@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   RatelimitRequest,
   RatelimitRequest$Outbound,
@@ -46,11 +47,13 @@ export const V2IdentitiesUpdateIdentityRequestBody$outboundSchema: z.ZodType<
   V2IdentitiesUpdateIdentityRequestBody$Outbound,
   z.ZodTypeDef,
   V2IdentitiesUpdateIdentityRequestBody
-> = z.object({
-  identity: z.string(),
-  meta: z.record(z.any()).optional(),
-  ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: z.string(),
+    meta: z.record(z.any()).optional(),
+    ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
+  })
+);
 
 export function v2IdentitiesUpdateIdentityRequestBodyToJSON(
   v2IdentitiesUpdateIdentityRequestBody: V2IdentitiesUpdateIdentityRequestBody,

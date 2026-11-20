@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Meta, Meta$inboundSchema } from "./meta.js";
@@ -25,10 +25,12 @@ export const V2KeysVerifyKeyResponseBody$inboundSchema: z.ZodType<
   V2KeysVerifyKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: Meta$inboundSchema,
-  data: V2KeysVerifyKeyResponseData$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: Meta$inboundSchema,
+    data: V2KeysVerifyKeyResponseData$inboundSchema,
+  })
+);
 
 export function v2KeysVerifyKeyResponseBodyFromJSON(
   jsonString: string,

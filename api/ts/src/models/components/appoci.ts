@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,10 +18,12 @@ export type AppOCI = {
 };
 
 /** @internal */
-export const AppOCI$inboundSchema: z.ZodType<AppOCI, z.ZodTypeDef, unknown> = z
-  .object({
-    image: z.string(),
-  });
+export const AppOCI$inboundSchema: z.ZodType<AppOCI, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      image: z.string(),
+    })
+  );
 /** @internal */
 export type AppOCI$Outbound = {
   image: string;
@@ -32,9 +34,11 @@ export const AppOCI$outboundSchema: z.ZodType<
   AppOCI$Outbound,
   z.ZodTypeDef,
   AppOCI
-> = z.object({
-  image: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image: z.string(),
+  })
+);
 
 export function appOCIToJSON(appOCI: AppOCI): string {
   return JSON.stringify(AppOCI$outboundSchema.parse(appOCI));

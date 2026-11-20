@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2AnalyticsGetVerificationsRequestBody = {
   /**
@@ -25,9 +26,11 @@ export const V2AnalyticsGetVerificationsRequestBody$outboundSchema: z.ZodType<
   V2AnalyticsGetVerificationsRequestBody$Outbound,
   z.ZodTypeDef,
   V2AnalyticsGetVerificationsRequestBody
-> = z.object({
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+  })
+);
 
 export function v2AnalyticsGetVerificationsRequestBodyToJSON(
   v2AnalyticsGetVerificationsRequestBody:

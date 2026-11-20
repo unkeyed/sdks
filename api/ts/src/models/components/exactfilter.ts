@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filters a field that matches only as a whole value, such as a host or a request ID.
@@ -40,10 +41,12 @@ export const ExactFilter$outboundSchema: z.ZodType<
   ExactFilter$Outbound,
   z.ZodTypeDef,
   ExactFilter
-> = z.object({
-  is: z.array(z.string()).optional(),
-  isNot: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    is: z.array(z.string()).optional(),
+    isNot: z.array(z.string()).optional(),
+  })
+);
 
 export function exactFilterToJSON(exactFilter: ExactFilter): string {
   return JSON.stringify(ExactFilter$outboundSchema.parse(exactFilter));

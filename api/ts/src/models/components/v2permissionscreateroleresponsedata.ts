@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,9 +24,11 @@ export const V2PermissionsCreateRoleResponseData$inboundSchema: z.ZodType<
   V2PermissionsCreateRoleResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  roleId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roleId: z.string(),
+  })
+);
 
 export function v2PermissionsCreateRoleResponseDataFromJSON(
   jsonString: string,

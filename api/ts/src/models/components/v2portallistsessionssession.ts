@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,20 +60,24 @@ export type V2PortalListSessionsSession = {
 /** @internal */
 export const V2PortalListSessionsSessionStatus$inboundSchema: z.ZodNativeEnum<
   typeof V2PortalListSessionsSessionStatus
-> = z.nativeEnum(V2PortalListSessionsSessionStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(V2PortalListSessionsSessionStatus)
+);
 
 /** @internal */
 export const V2PortalListSessionsSession$inboundSchema: z.ZodType<
   V2PortalListSessionsSession,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  status: V2PortalListSessionsSessionStatus$inboundSchema,
-  createdAt: z.number().int(),
-  expiresAt: z.number().int(),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: V2PortalListSessionsSessionStatus$inboundSchema,
+    createdAt: z.number().int(),
+    expiresAt: z.number().int(),
+    scopes: z.array(z.string()),
+  })
+);
 
 export function v2PortalListSessionsSessionFromJSON(
   jsonString: string,

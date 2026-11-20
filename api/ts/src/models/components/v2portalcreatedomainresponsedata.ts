@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DnsRecord, DnsRecord$inboundSchema } from "./dnsrecord.js";
@@ -36,11 +36,13 @@ export const V2PortalCreateDomainResponseData$inboundSchema: z.ZodType<
   V2PortalCreateDomainResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  domainId: z.string(),
-  dnsRecords: z.array(DnsRecord$inboundSchema),
-  domainConnect: DomainConnect$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domainId: z.string(),
+    dnsRecords: z.array(DnsRecord$inboundSchema),
+    domainConnect: DomainConnect$inboundSchema.optional(),
+  })
+);
 
 export function v2PortalCreateDomainResponseDataFromJSON(
   jsonString: string,

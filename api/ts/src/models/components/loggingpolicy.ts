@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,13 +55,15 @@ export const LoggingPolicy$inboundSchema: z.ZodType<
   LoggingPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requestHeaders: z.boolean().default(false),
-  responseHeaders: z.boolean().default(false),
-  requestBody: z.boolean().default(false),
-  responseBody: z.boolean().default(false),
-  query: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestHeaders: z.boolean().default(false),
+    responseHeaders: z.boolean().default(false),
+    requestBody: z.boolean().default(false),
+    responseBody: z.boolean().default(false),
+    query: z.boolean().default(false),
+  })
+);
 /** @internal */
 export type LoggingPolicy$Outbound = {
   requestHeaders: boolean;
@@ -76,13 +78,15 @@ export const LoggingPolicy$outboundSchema: z.ZodType<
   LoggingPolicy$Outbound,
   z.ZodTypeDef,
   LoggingPolicy
-> = z.object({
-  requestHeaders: z.boolean().default(false),
-  responseHeaders: z.boolean().default(false),
-  requestBody: z.boolean().default(false),
-  responseBody: z.boolean().default(false),
-  query: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestHeaders: z.boolean().default(false),
+    responseHeaders: z.boolean().default(false),
+    requestBody: z.boolean().default(false),
+    responseBody: z.boolean().default(false),
+    query: z.boolean().default(false),
+  })
+);
 
 export function loggingPolicyToJSON(loggingPolicy: LoggingPolicy): string {
   return JSON.stringify(LoggingPolicy$outboundSchema.parse(loggingPolicy));

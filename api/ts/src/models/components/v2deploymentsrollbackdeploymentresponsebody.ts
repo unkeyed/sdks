@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EmptyResponse, EmptyResponse$inboundSchema } from "./emptyresponse.js";
@@ -26,10 +26,12 @@ export const V2DeploymentsRollbackDeploymentResponseBody$inboundSchema:
     V2DeploymentsRollbackDeploymentResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    meta: Meta$inboundSchema,
-    data: EmptyResponse$inboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      meta: Meta$inboundSchema,
+      data: EmptyResponse$inboundSchema,
+    })
+  );
 
 export function v2DeploymentsRollbackDeploymentResponseBodyFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -56,9 +57,8 @@ export type EnvironmentVariableInput = {
 };
 
 /** @internal */
-export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
+export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Kind));
 
 /** @internal */
 export type EnvironmentVariableInput$Outbound = {
@@ -73,12 +73,14 @@ export const EnvironmentVariableInput$outboundSchema: z.ZodType<
   EnvironmentVariableInput$Outbound,
   z.ZodTypeDef,
   EnvironmentVariableInput
-> = z.object({
-  key: z.string(),
-  value: z.string(),
-  kind: Kind$outboundSchema.default("writeonly"),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.string(),
+    kind: Kind$outboundSchema.default("writeonly"),
+    description: z.string().optional(),
+  })
+);
 
 export function environmentVariableInputToJSON(
   environmentVariableInput: EnvironmentVariableInput,

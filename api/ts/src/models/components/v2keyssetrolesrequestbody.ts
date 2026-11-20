@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2KeysSetRolesRequestBody = {
   /**
@@ -38,10 +39,12 @@ export const V2KeysSetRolesRequestBody$outboundSchema: z.ZodType<
   V2KeysSetRolesRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysSetRolesRequestBody
-> = z.object({
-  keyId: z.string(),
-  roles: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    roles: z.array(z.string()),
+  })
+);
 
 export function v2KeysSetRolesRequestBodyToJSON(
   v2KeysSetRolesRequestBody: V2KeysSetRolesRequestBody,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ExactFilter,
   ExactFilter$Outbound,
@@ -84,13 +85,15 @@ export const V2LogsListApiRequestsFilters$outboundSchema: z.ZodType<
   V2LogsListApiRequestsFilters$Outbound,
   z.ZodTypeDef,
   V2LogsListApiRequestsFilters
-> = z.object({
-  time: TimeFilter$outboundSchema.optional(),
-  path: TextFilter$outboundSchema.optional(),
-  method: MethodFilter$outboundSchema.optional(),
-  requestId: ExactFilter$outboundSchema.optional(),
-  status: IntFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    time: TimeFilter$outboundSchema.optional(),
+    path: TextFilter$outboundSchema.optional(),
+    method: MethodFilter$outboundSchema.optional(),
+    requestId: ExactFilter$outboundSchema.optional(),
+    status: IntFilter$outboundSchema.optional(),
+  })
+);
 
 export function v2LogsListApiRequestsFiltersToJSON(
   v2LogsListApiRequestsFilters: V2LogsListApiRequestsFilters,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -90,17 +90,19 @@ export const PolicyResponse$inboundSchema: z.ZodType<
   PolicyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  enabled: z.boolean(),
-  match: z.array(MatchExpr$inboundSchema).optional(),
-  keyauth: KeyauthPolicy$inboundSchema.optional(),
-  ratelimit: RatelimitPolicy$inboundSchema.optional(),
-  firewall: FirewallPolicy$inboundSchema.optional(),
-  openapi: OpenapiPolicy$inboundSchema.optional(),
-  logging: LoggingPolicy$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    enabled: z.boolean(),
+    match: z.array(MatchExpr$inboundSchema).optional(),
+    keyauth: KeyauthPolicy$inboundSchema.optional(),
+    ratelimit: RatelimitPolicy$inboundSchema.optional(),
+    firewall: FirewallPolicy$inboundSchema.optional(),
+    openapi: OpenapiPolicy$inboundSchema.optional(),
+    logging: LoggingPolicy$inboundSchema.optional(),
+  })
+);
 
 export function policyResponseFromJSON(
   jsonString: string,

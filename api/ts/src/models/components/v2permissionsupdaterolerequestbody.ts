@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PermissionsUpdateRoleRequestBody = {
   /**
@@ -39,11 +40,13 @@ export const V2PermissionsUpdateRoleRequestBody$outboundSchema: z.ZodType<
   V2PermissionsUpdateRoleRequestBody$Outbound,
   z.ZodTypeDef,
   V2PermissionsUpdateRoleRequestBody
-> = z.object({
-  role: z.string(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function v2PermissionsUpdateRoleRequestBodyToJSON(
   v2PermissionsUpdateRoleRequestBody: V2PermissionsUpdateRoleRequestBody,

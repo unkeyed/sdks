@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filters by the time of the event, in Unix milliseconds. Every bound is combined with AND.
@@ -42,12 +43,14 @@ export const TimeFilter$outboundSchema: z.ZodType<
   TimeFilter$Outbound,
   z.ZodTypeDef,
   TimeFilter
-> = z.object({
-  gt: z.number().int().optional(),
-  gte: z.number().int().optional(),
-  lt: z.number().int().optional(),
-  lte: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number().int().optional(),
+    gte: z.number().int().optional(),
+    lt: z.number().int().optional(),
+    lte: z.number().int().optional(),
+  })
+);
 
 export function timeFilterToJSON(timeFilter: TimeFilter): string {
   return JSON.stringify(TimeFilter$outboundSchema.parse(timeFilter));

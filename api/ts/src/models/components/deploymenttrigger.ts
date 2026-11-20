@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,17 +52,20 @@ export type DeploymentTrigger = {
 };
 
 /** @internal */
-export const Via$inboundSchema: z.ZodNativeEnum<typeof Via> = z.nativeEnum(Via);
+export const Via$inboundSchema: z.ZodNativeEnum<typeof Via> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Via));
 
 /** @internal */
 export const DeploymentTrigger$inboundSchema: z.ZodType<
   DeploymentTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  via: Via$inboundSchema,
-  actor: DeploymentTriggerActor$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    via: Via$inboundSchema,
+    actor: DeploymentTriggerActor$inboundSchema.optional(),
+  })
+);
 
 export function deploymentTriggerFromJSON(
   jsonString: string,

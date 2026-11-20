@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   V2DeployGitCommit,
   V2DeployGitCommit$Outbound,
@@ -61,15 +62,17 @@ export const V2DeployCreateDeploymentRequestBody$outboundSchema: z.ZodType<
   V2DeployCreateDeploymentRequestBody$Outbound,
   z.ZodTypeDef,
   V2DeployCreateDeploymentRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  keyspaceId: z.string().optional(),
-  branch: z.string(),
-  environmentSlug: z.string(),
-  dockerImage: z.string(),
-  gitCommit: V2DeployGitCommit$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    keyspaceId: z.string().optional(),
+    branch: z.string(),
+    environmentSlug: z.string(),
+    dockerImage: z.string(),
+    gitCommit: V2DeployGitCommit$outboundSchema.optional(),
+  })
+);
 
 export function v2DeployCreateDeploymentRequestBodyToJSON(
   v2DeployCreateDeploymentRequestBody: V2DeployCreateDeploymentRequestBody,

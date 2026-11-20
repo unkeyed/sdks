@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Roll live traffic back to a previous deployment.
@@ -28,9 +29,11 @@ export const V2DeploymentsRollbackDeploymentRequestBody$outboundSchema:
     V2DeploymentsRollbackDeploymentRequestBody$Outbound,
     z.ZodTypeDef,
     V2DeploymentsRollbackDeploymentRequestBody
-  > = z.object({
-    deploymentId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deploymentId: z.string(),
+    })
+  );
 
 export function v2DeploymentsRollbackDeploymentRequestBodyToJSON(
   v2DeploymentsRollbackDeploymentRequestBody:

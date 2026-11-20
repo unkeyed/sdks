@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PortalRerollKeySecurity = {
   portalSession: string;
@@ -18,9 +19,11 @@ export const PortalRerollKeySecurity$outboundSchema: z.ZodType<
   PortalRerollKeySecurity$Outbound,
   z.ZodTypeDef,
   PortalRerollKeySecurity
-> = z.object({
-  portalSession: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portalSession: z.string(),
+  })
+);
 
 export function portalRerollKeySecurityToJSON(
   portalRerollKeySecurity: PortalRerollKeySecurity,

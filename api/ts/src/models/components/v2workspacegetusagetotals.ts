@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,11 +50,13 @@ export const V2WorkspaceGetUsageTotals$inboundSchema: z.ZodType<
   V2WorkspaceGetUsageTotals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  api: V2WorkspaceGetUsageApi$inboundSchema,
-  compute: V2WorkspaceGetUsageCompute$inboundSchema,
-  gateway: V2WorkspaceGetUsageGateway$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    api: V2WorkspaceGetUsageApi$inboundSchema,
+    compute: V2WorkspaceGetUsageCompute$inboundSchema,
+    gateway: V2WorkspaceGetUsageGateway$inboundSchema,
+  })
+);
 
 export function v2WorkspaceGetUsageTotalsFromJSON(
   jsonString: string,

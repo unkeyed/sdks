@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,13 +42,15 @@ export const BadRequestErrorDetails$inboundSchema: z.ZodType<
   BadRequestErrorDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  detail: z.string(),
-  status: z.number().int(),
-  title: z.string(),
-  type: z.string(),
-  errors: z.array(ValidationError$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    detail: z.string(),
+    status: z.number().int(),
+    title: z.string(),
+    type: z.string(),
+    errors: z.array(ValidationError$inboundSchema),
+  })
+);
 
 export function badRequestErrorDetailsFromJSON(
   jsonString: string,

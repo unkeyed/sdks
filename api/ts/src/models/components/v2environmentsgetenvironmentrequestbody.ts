@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2EnvironmentsGetEnvironmentRequestBody = {
   /**
@@ -40,11 +41,13 @@ export const V2EnvironmentsGetEnvironmentRequestBody$outboundSchema: z.ZodType<
   V2EnvironmentsGetEnvironmentRequestBody$Outbound,
   z.ZodTypeDef,
   V2EnvironmentsGetEnvironmentRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+  })
+);
 
 export function v2EnvironmentsGetEnvironmentRequestBodyToJSON(
   v2EnvironmentsGetEnvironmentRequestBody:

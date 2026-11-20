@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deletes an existing rate limit override. This permanently removes a custom rate limit rule, reverting affected identifiers back to the default rate limits for the namespace.
@@ -49,10 +50,12 @@ export const V2RatelimitDeleteOverrideRequestBody$outboundSchema: z.ZodType<
   V2RatelimitDeleteOverrideRequestBody$Outbound,
   z.ZodTypeDef,
   V2RatelimitDeleteOverrideRequestBody
-> = z.object({
-  namespace: z.string(),
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace: z.string(),
+    identifier: z.string(),
+  })
+);
 
 export function v2RatelimitDeleteOverrideRequestBodyToJSON(
   v2RatelimitDeleteOverrideRequestBody: V2RatelimitDeleteOverrideRequestBody,

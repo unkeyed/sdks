@@ -37,6 +37,7 @@ import { Result } from "../types/fp.js";
  * `permissions` replaces the complete permission set. Each permission must be a supported URN
  * in the authenticated workspace and within the caller's permissions.
  * An expiring root key can only update root keys that expire no later than itself.
+ * Changes to `enabled`, `permissions`, and `ipAllowlist` can take up to 30 seconds to take effect.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   DeploymentStatus,
   DeploymentStatus$outboundSchema,
@@ -100,17 +101,19 @@ export const V2DeploymentsListDeploymentsRequestBody$outboundSchema: z.ZodType<
   V2DeploymentsListDeploymentsRequestBody$Outbound,
   z.ZodTypeDef,
   V2DeploymentsListDeploymentsRequestBody
-> = z.object({
-  project: z.string().optional(),
-  app: z.string().optional(),
-  environment: z.string().optional(),
-  status: z.array(DeploymentStatus$outboundSchema).optional(),
-  branch: z.array(z.string()).optional(),
-  startTime: z.number().int().optional(),
-  endTime: z.number().int().optional(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string().optional(),
+    app: z.string().optional(),
+    environment: z.string().optional(),
+    status: z.array(DeploymentStatus$outboundSchema).optional(),
+    branch: z.array(z.string()).optional(),
+    startTime: z.number().int().optional(),
+    endTime: z.number().int().optional(),
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+  })
+);
 
 export function v2DeploymentsListDeploymentsRequestBodyToJSON(
   v2DeploymentsListDeploymentsRequestBody:

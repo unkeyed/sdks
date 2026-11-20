@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2KeysAddPermissionsRequestBody = {
   /**
@@ -20,7 +21,7 @@ export type V2KeysAddPermissionsRequestBody = {
    *
    * Adding permissions never removes existing permissions or role-based permissions.
    *
-   * Any permissions that do not exist will be auto created if the root key has permissions, otherwise this operation will fail with a 403 error.
+   * To create missing permission slugs, your root key must also have `write` on `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*` in the key's project. Without this grant, the operation fails with a 403 error if your root key can read the key, or a 404 error otherwise.
    */
   permissions: Array<string>;
 };
@@ -36,10 +37,12 @@ export const V2KeysAddPermissionsRequestBody$outboundSchema: z.ZodType<
   V2KeysAddPermissionsRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysAddPermissionsRequestBody
-> = z.object({
-  keyId: z.string(),
-  permissions: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    permissions: z.array(z.string()),
+  })
+);
 
 export function v2KeysAddPermissionsRequestBodyToJSON(
   v2KeysAddPermissionsRequestBody: V2KeysAddPermissionsRequestBody,

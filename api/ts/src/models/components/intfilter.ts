@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filters an integer field. `is` keeps rows that equal one of its values.
@@ -58,14 +59,16 @@ export const IntFilter$outboundSchema: z.ZodType<
   IntFilter$Outbound,
   z.ZodTypeDef,
   IntFilter
-> = z.object({
-  is: z.array(z.number().int()).optional(),
-  isNot: z.array(z.number().int()).optional(),
-  gt: z.number().int().optional(),
-  gte: z.number().int().optional(),
-  lt: z.number().int().optional(),
-  lte: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    is: z.array(z.number().int()).optional(),
+    isNot: z.array(z.number().int()).optional(),
+    gt: z.number().int().optional(),
+    gte: z.number().int().optional(),
+    lt: z.number().int().optional(),
+    lte: z.number().int().optional(),
+  })
+);
 
 export function intFilterToJSON(intFilter: IntFilter): string {
   return JSON.stringify(IntFilter$outboundSchema.parse(intFilter));

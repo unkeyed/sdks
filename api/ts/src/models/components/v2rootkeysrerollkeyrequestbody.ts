@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2RootKeysRerollKeyRequestBody = {
   /**
@@ -10,7 +11,7 @@ export type V2RootKeysRerollKeyRequestBody = {
    */
   keyId: string;
   /**
-   * Milliseconds until the original root key expires. Use 0 to revoke it immediately.
+   * Milliseconds until the original root key expires. Use 0 to revoke it. Revocation can take up to 30 seconds to take effect.
    *
    * @remarks
    * Use null to keep the original key's current expiration. This value never extends
@@ -30,10 +31,12 @@ export const V2RootKeysRerollKeyRequestBody$outboundSchema: z.ZodType<
   V2RootKeysRerollKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2RootKeysRerollKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-  expiration: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    expiration: z.nullable(z.number().int()),
+  })
+);
 
 export function v2RootKeysRerollKeyRequestBodyToJSON(
   v2RootKeysRerollKeyRequestBody: V2RootKeysRerollKeyRequestBody,

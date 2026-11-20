@@ -151,6 +151,26 @@ yarn add @unkey/api
 ## Requirements
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+
+### Lazy operation loading in Node.js
+
+The `/node` entry point and its lazy SDK classes are generated for every SDK. No `gen.yaml` flag is needed; Node.js applications opt in to loading operation functions on first use by changing their import:
+
+```typescript
+import { Unkey } from "@unkey/api/node";
+
+const sdk = new Unkey();
+```
+
+The `/node` entry point keeps the same method signatures, pagination behaviour, and response helpers. Operation modules load through dynamic imports when a method is called. Models and error classes are shared with the standard entry points, rather than bundled into separate copies.
+
+The standard package entry point and SDK subpaths retain their static imports. Keep using those entry points in browser bundles, including IIFE and UMD builds, to avoid dynamic-import chunks. Custom root exports may still load additional modules.
+
+The Node SDK classes live in `src/sdk/*.lazy.ts`. Custom code regions in the standard SDK classes are not copied to these classes; apply any required customisations to their separate regions. Accept-header enums have the same values, but their enum objects are specific to each entry point.
+
+Generated model schemas are constructed synchronously and cached on first use with either entry point. Importing a model does not construct its schema; parsing or inspecting a schema does. This does not require changing the configured Zod version.
+
+`Object.freeze`, `Object.seal`, and `Object.preventExtensions` construct the schema and apply to the cached Zod object. Zod's own restrictions on frozen schemas still apply, including methods that install properties on first access.
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -220,12 +240,24 @@ import { Unkey } from "@unkey/api";
 const unkey = new Unkey();
 
 async function run() {
-  const result = await unkey.portal.getVerifications({
+  const result = await unkey.portal.createKey({
     portalSession: process.env["UNKEY_PORTAL_SESSION"] ?? "",
   }, {
-    startTime: 1704067200000,
-    endTime: 1704672000000,
-    keyId: "key_1234abcd",
+    name: "Production server",
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 50,
+        duration: 60000,
+      },
+    ],
+    expiresIn: 2592000000,
+    permissions: [
+      "documents.write",
+    ],
+    roles: [
+      "editor",
+    ],
   });
 
   console.log(result);
@@ -358,6 +390,7 @@ run();
 ### [Portal](docs/sdks/portal/README.md)
 
 * [createDomain](docs/sdks/portal/README.md#createdomain) - Create portal domain
+* [createKey](docs/sdks/portal/README.md#createkey) - Create portal key
 * [createPortal](docs/sdks/portal/README.md#createportal) - Create portal
 * [createSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [deleteDomain](docs/sdks/portal/README.md#deletedomain) - Delete portal domain
@@ -500,6 +533,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`permissionsUpdatePermission`](docs/sdks/permissions/README.md#updatepermission) - Update permission
 - [`permissionsUpdateRole`](docs/sdks/permissions/README.md#updaterole) - Update role
 - [`portalCreateDomain`](docs/sdks/portal/README.md#createdomain) - Create portal domain
+- [`portalCreateKey`](docs/sdks/portal/README.md#createkey) - Create portal key
 - [`portalCreatePortal`](docs/sdks/portal/README.md#createportal) - Create portal
 - [`portalCreateSession`](docs/sdks/portal/README.md#createsession) - Create portal session
 - [`portalDeleteDomain`](docs/sdks/portal/README.md#deletedomain) - Delete portal domain
@@ -725,12 +759,12 @@ run();
 
 
 **Inherit from [`UnkeyError`](./src/models/errors/unkeyerror.ts)**:
-* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 91 of 114 methods.*
-* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 16 of 114 methods.*
-* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 15 of 114 methods.*
-* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 114 methods.*
-* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 114 methods.*
-* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 114 methods.*
+* [`NotFoundErrorResponse`](./src/models/errors/notfounderrorresponse.ts): Error response when the requested resource cannot be found. This occurs when: - The specified resource ID doesn't exist in your workspace - The resource has been deleted or moved - The resource exists but is not accessible with current permissions  To resolve this error, verify the resource ID is correct and that you have access to it. Status code `404`. Applicable to 91 of 115 methods.*
+* [`ConflictErrorResponse`](./src/models/errors/conflicterrorresponse.ts): Error response when the request conflicts with the current state of the resource. This occurs when: - Attempting to create a resource that already exists - Modifying a resource that has been changed by another operation - Violating unique constraints or business rules  To resolve this error, check the current state of the resource and adjust your request accordingly. Status code `409`. Applicable to 16 of 115 methods.*
+* [`PreconditionFailedErrorResponse`](./src/models/errors/preconditionfailederrorresponse.ts): Error response when one or more conditions specified in the request headers are not met. This typically occurs when: - Using conditional requests with If-Match or If-None-Match headers - The resource version doesn't match the expected value - Optimistic concurrency control detects a conflict  To resolve this error, fetch the latest version of the resource and retry with updated conditions. Status code `412`. Applicable to 16 of 115 methods.*
+* [`UnprocessableEntityErrorResponse`](./src/models/errors/unprocessableentityerrorresponse.ts): Error response when the request is syntactically valid but cannot be processed due to semantic constraints or resource limitations. This occurs when: - A query exceeds execution time limits - A query uses more memory than allowed - A query scans too many rows - A query result exceeds size limits  The request syntax is correct, but the operation cannot be completed due to business rules or resource constraints. Review the error details for specific limitations and adjust your request accordingly. Status code `422`. Applicable to 7 of 115 methods.*
+* [`ServiceUnavailableErrorResponse`](./src/models/errors/serviceunavailableerrorresponse.ts): Error response when a required service is temporarily unavailable. This indicates that the service exists but cannot be reached or is not responding.  When you encounter this error: - The service is likely experiencing temporary issues - Retrying the request after a short delay may succeed - If the error persists, the service may be undergoing maintenance - Contact Unkey support if the issue continues. Status code `503`. Applicable to 7 of 115 methods.*
+* [`GoneErrorResponse`](./src/models/errors/goneerrorresponse.ts): Error response when the requested resource has been soft-deleted and is no longer available. This occurs when: - The resource has been marked as deleted but still exists in the database - The resource is intentionally unavailable but could potentially be restored - The resource cannot be restored through the API or dashboard  To resolve this error, contact support if you need the resource restored. Status code `410`. Applicable to 2 of 115 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

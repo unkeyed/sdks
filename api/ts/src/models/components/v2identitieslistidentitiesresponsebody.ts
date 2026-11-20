@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
@@ -30,11 +30,13 @@ export const V2IdentitiesListIdentitiesResponseBody$inboundSchema: z.ZodType<
   V2IdentitiesListIdentitiesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: Meta$inboundSchema,
-  data: z.array(Identity$inboundSchema),
-  pagination: Pagination$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: Meta$inboundSchema,
+    data: z.array(Identity$inboundSchema),
+    pagination: Pagination$inboundSchema,
+  })
+);
 
 export function v2IdentitiesListIdentitiesResponseBodyFromJSON(
   jsonString: string,

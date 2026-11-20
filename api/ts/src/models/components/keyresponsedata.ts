@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
@@ -72,23 +72,25 @@ export const KeyResponseData$inboundSchema: z.ZodType<
   KeyResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string(),
-  start: z.string(),
-  enabled: z.boolean(),
-  name: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int().optional(),
-  lastUsedAt: z.number().int().optional(),
-  expires: z.number().int().optional(),
-  permissions: z.array(z.string()).optional(),
-  roles: z.array(z.string()).optional(),
-  credits: KeyCreditsData$inboundSchema.optional(),
-  identity: Identity$inboundSchema.optional(),
-  plaintext: z.string().optional(),
-  ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    start: z.string(),
+    enabled: z.boolean(),
+    name: z.string().optional(),
+    meta: z.record(z.any()).optional(),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int().optional(),
+    lastUsedAt: z.number().int().optional(),
+    expires: z.number().int().optional(),
+    permissions: z.array(z.string()).optional(),
+    roles: z.array(z.string()).optional(),
+    credits: KeyCreditsData$inboundSchema.optional(),
+    identity: Identity$inboundSchema.optional(),
+    plaintext: z.string().optional(),
+    ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
+  })
+);
 
 export function keyResponseDataFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 import { UnkeyError } from "./unkeyerror.js";
 
@@ -73,17 +74,19 @@ export const ServiceUnavailableErrorResponse$inboundSchema: z.ZodType<
   ServiceUnavailableErrorResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: components.Meta$inboundSchema,
-  error: components.BaseError$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ServiceUnavailableErrorResponse(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: components.Meta$inboundSchema,
+    error: components.BaseError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ServiceUnavailableErrorResponse(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

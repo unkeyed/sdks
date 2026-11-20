@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Re-run an existing deployment.
@@ -27,9 +28,11 @@ export const DeploymentSourceDeployment$outboundSchema: z.ZodType<
   DeploymentSourceDeployment$Outbound,
   z.ZodTypeDef,
   DeploymentSourceDeployment
-> = z.object({
-  deploymentId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deploymentId: z.string(),
+  })
+);
 
 export function deploymentSourceDeploymentToJSON(
   deploymentSourceDeployment: DeploymentSourceDeployment,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,11 +39,13 @@ export const FieldMatch$inboundSchema: z.ZodType<
   FieldMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  present: z.boolean().optional(),
-  value: StringMatch$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    present: z.boolean().optional(),
+    value: StringMatch$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type FieldMatch$Outbound = {
   name: string;
@@ -56,11 +58,13 @@ export const FieldMatch$outboundSchema: z.ZodType<
   FieldMatch$Outbound,
   z.ZodTypeDef,
   FieldMatch
-> = z.object({
-  name: z.string(),
-  present: z.boolean().optional(),
-  value: StringMatch$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    present: z.boolean().optional(),
+    value: StringMatch$outboundSchema.optional(),
+  })
+);
 
 export function fieldMatchToJSON(fieldMatch: FieldMatch): string {
   return JSON.stringify(FieldMatch$outboundSchema.parse(fieldMatch));

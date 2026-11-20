@@ -33,9 +33,7 @@ import { Result } from "../types/fp.js";
  * Returns HTTP 200 even on partial success; hashes that could not be migrated are listed under `data.failed`.
  *
  * **Required Permissions**
- * Your root key must have one of the following permissions for basic key information:
- * - `api.*.create_key` (to migrate keys to any API)
- * - `api.<api_id>.create_key` (to migrate keys to a specific API)
+ * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write` for the target keyspace in its project and workspace.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

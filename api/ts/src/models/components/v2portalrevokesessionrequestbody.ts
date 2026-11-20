@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalRevokeSessionRequestBody = {
   /**
@@ -33,10 +34,12 @@ export const V2PortalRevokeSessionRequestBody$outboundSchema: z.ZodType<
   V2PortalRevokeSessionRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalRevokeSessionRequestBody
-> = z.object({
-  portal: z.string(),
-  externalId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    externalId: z.string(),
+  })
+);
 
 export function v2PortalRevokeSessionRequestBodyToJSON(
   v2PortalRevokeSessionRequestBody: V2PortalRevokeSessionRequestBody,

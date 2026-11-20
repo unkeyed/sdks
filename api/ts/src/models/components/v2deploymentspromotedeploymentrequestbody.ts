@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Promote a ready deployment to become the current deployment for its environment.
@@ -28,9 +29,11 @@ export const V2DeploymentsPromoteDeploymentRequestBody$outboundSchema:
     V2DeploymentsPromoteDeploymentRequestBody$Outbound,
     z.ZodTypeDef,
     V2DeploymentsPromoteDeploymentRequestBody
-  > = z.object({
-    deploymentId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deploymentId: z.string(),
+    })
+  );
 
 export function v2DeploymentsPromoteDeploymentRequestBodyToJSON(
   v2DeploymentsPromoteDeploymentRequestBody:

@@ -43,8 +43,18 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have `portal.*.create_portal`. A grant scoped to a specific
- * portal id does not authorize creation, because the id does not exist yet.
+ * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/*#write`
+ * for the project that owns the app or keyspace. A grant scoped to a specific
+ * portal ID does not authorize creation, because the ID does not exist yet.
+ *
+ * You must also have read permission on the resource the portal serves:
+ *
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read` for a keyspace.
+ *
+ * Broader grants that cover these resources and actions also authorize the request.
+ * A missing permission returns **403**. An app or keyspace outside your workspace
+ * returns **404**, the same as a resource that does not exist.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

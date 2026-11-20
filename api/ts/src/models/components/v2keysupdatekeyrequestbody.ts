@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   RatelimitRequest,
   RatelimitRequest$Outbound,
@@ -105,18 +106,20 @@ export const V2KeysUpdateKeyRequestBody$outboundSchema: z.ZodType<
   V2KeysUpdateKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysUpdateKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-  name: z.nullable(z.string()).optional(),
-  externalId: z.nullable(z.string()).optional(),
-  meta: z.nullable(z.record(z.any())).optional(),
-  expires: z.nullable(z.number().int()).optional(),
-  credits: z.nullable(UpdateKeyCreditsData$outboundSchema).optional(),
-  ratelimits: z.nullable(z.array(RatelimitRequest$outboundSchema)).optional(),
-  enabled: z.boolean().optional(),
-  roles: z.array(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    name: z.nullable(z.string()).optional(),
+    externalId: z.nullable(z.string()).optional(),
+    meta: z.nullable(z.record(z.any())).optional(),
+    expires: z.nullable(z.number().int()).optional(),
+    credits: z.nullable(UpdateKeyCreditsData$outboundSchema).optional(),
+    ratelimits: z.nullable(z.array(RatelimitRequest$outboundSchema)).optional(),
+    enabled: z.boolean().optional(),
+    roles: z.array(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 
 export function v2KeysUpdateKeyRequestBodyToJSON(
   v2KeysUpdateKeyRequestBody: V2KeysUpdateKeyRequestBody,

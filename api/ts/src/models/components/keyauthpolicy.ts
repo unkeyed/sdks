@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -64,13 +64,15 @@ export const KeyauthPolicy$inboundSchema: z.ZodType<
   KeyauthPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyspaces: z.array(z.string()),
-  locations: z.array(KeyLocation$inboundSchema).optional(),
-  permissionQuery: z.string().optional(),
-  ratelimits: z.array(KeyRatelimit$inboundSchema).optional(),
-  credits: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyspaces: z.array(z.string()),
+    locations: z.array(KeyLocation$inboundSchema).optional(),
+    permissionQuery: z.string().optional(),
+    ratelimits: z.array(KeyRatelimit$inboundSchema).optional(),
+    credits: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type KeyauthPolicy$Outbound = {
   keyspaces: Array<string>;
@@ -85,13 +87,15 @@ export const KeyauthPolicy$outboundSchema: z.ZodType<
   KeyauthPolicy$Outbound,
   z.ZodTypeDef,
   KeyauthPolicy
-> = z.object({
-  keyspaces: z.array(z.string()),
-  locations: z.array(KeyLocation$outboundSchema).optional(),
-  permissionQuery: z.string().optional(),
-  ratelimits: z.array(KeyRatelimit$outboundSchema).optional(),
-  credits: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyspaces: z.array(z.string()),
+    locations: z.array(KeyLocation$outboundSchema).optional(),
+    permissionQuery: z.string().optional(),
+    ratelimits: z.array(KeyRatelimit$outboundSchema).optional(),
+    credits: z.number().int().optional(),
+  })
+);
 
 export function keyauthPolicyToJSON(keyauthPolicy: KeyauthPolicy): string {
   return JSON.stringify(KeyauthPolicy$outboundSchema.parse(keyauthPolicy));

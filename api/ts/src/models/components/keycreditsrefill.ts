@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,24 +50,30 @@ export const KeyCreditsRefillInterval$inboundSchema: z.ZodType<
   KeyCreditsRefillInterval,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(KeyCreditsRefillInterval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(KeyCreditsRefillInterval)
+);
 /** @internal */
 export const KeyCreditsRefillInterval$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   KeyCreditsRefillInterval
-> = openEnums.outboundSchema(KeyCreditsRefillInterval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(KeyCreditsRefillInterval)
+);
 
 /** @internal */
 export const KeyCreditsRefill$inboundSchema: z.ZodType<
   KeyCreditsRefill,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  interval: KeyCreditsRefillInterval$inboundSchema,
-  amount: z.number().int(),
-  refillDay: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    interval: KeyCreditsRefillInterval$inboundSchema,
+    amount: z.number().int(),
+    refillDay: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type KeyCreditsRefill$Outbound = {
   interval: string;
@@ -80,11 +86,13 @@ export const KeyCreditsRefill$outboundSchema: z.ZodType<
   KeyCreditsRefill$Outbound,
   z.ZodTypeDef,
   KeyCreditsRefill
-> = z.object({
-  interval: KeyCreditsRefillInterval$outboundSchema,
-  amount: z.number().int(),
-  refillDay: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    interval: KeyCreditsRefillInterval$outboundSchema,
+    amount: z.number().int(),
+    refillDay: z.number().int().optional(),
+  })
+);
 
 export function keyCreditsRefillToJSON(
   keyCreditsRefill: KeyCreditsRefill,
