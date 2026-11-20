@@ -33,7 +33,9 @@ export class Permissions extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must have the following permission:
-   * - `rbac.*.create_permission`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+   *
+   * Use your workspace ID and its default project ID. A wildcard project grant also authorizes this operation.
    */
   async createPermission(
     request: components.V2PermissionsCreatePermissionRequestBody,
@@ -57,13 +59,12 @@ export class Permissions extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must always have:
-   * - `rbac.*.create_role`
-   *
-   * When `permissions` is not empty, it must also have:
-   * - `rbac.*.add_permission_to_role`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/*#write`
    *
    * When any requested permission slug does not exist, it must also have:
-   * - `rbac.*.create_permission`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+   *
+   * Both grants must cover the authenticated workspace and its default project. Attaching existing permissions requires only role write access.
    */
   async createRole(
     request: components.V2PermissionsCreateRoleRequestBody,
@@ -87,7 +88,7 @@ export class Permissions extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must have the following permission:
-   * - `rbac.*.delete_permission`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#delete`
    */
   async deletePermission(
     request: components.V2PermissionsDeletePermissionRequestBody,
@@ -110,8 +111,7 @@ export class Permissions extends ClientSDK {
    *
    * **Required Permissions**
    *
-   * Your root key must have the following permission:
-   * - `rbac.*.delete_role`
+   * Your root key must have `unkey:v1:{workspaceId}:projects/{projectId}/rbac/roles/{roleId}#delete` for the role. A wildcard grant that covers the role also authorizes deletion.
    */
   async deleteRole(
     request: components.V2PermissionsDeleteRoleRequestBody,
@@ -230,11 +230,12 @@ export class Permissions extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must have:
-   * - `rbac.*.add_permission_to_role`
-   * - `rbac.*.remove_permission_from_role`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
    *
    * When any requested permission slug does not exist, it must also have:
-   * - `rbac.*.create_permission`
+   * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+   *
+   * Use the role's workspace, project, and role IDs in these permissions.
    */
   async setRolePermissions(
     request: components.V2PermissionsSetRolePermissionsRequestBodyUnion,

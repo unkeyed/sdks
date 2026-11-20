@@ -40,19 +40,22 @@ import { Result } from "../types/fp.js";
  *
  * Authorization runs in two stages, and both must pass.
  *
- * First, your root key must have one of the following permissions:
- * - `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
- * - `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+ * First, your root key must have
+ * `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`.
+ * Write permission on the portal itself does not grant permission to mint sessions.
  *
  * Second, a session can never carry a capability your root key does not itself
  * hold. Each requested scope additionally requires the equivalent permission on
  * every keyspace the portal resolves to:
- * - `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
- * - `keys:reroll` requires `api.<api_id>.create_key`, plus
- *   `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
- * - `analytics:read` requires `api.<api_id>.read_analytics`
+ * - `keys:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#read`
+ *   and `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`.
+ * - `keys:reroll` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+ *   including when the keyspace stores encrypted keys.
+ * - `analytics:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/logs#read`.
  *
- * The `*` form of each is also accepted. Requesting a scope you do not hold
+ * Broader URN grants that cover these resources and actions are also accepted.
+ * A grant on one concrete key cannot satisfy the `keys/*` requirement.
+ * Requesting a scope you do not hold
  * returns 403 for the whole request rather than minting a reduced session, so a
  * missing grant is visible instead of surfacing later as a broken portal.
  *

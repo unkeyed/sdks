@@ -45,9 +45,9 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `environment.*.verify_domain` (to verify domains in any environment)
- * - `environment.<environment_id>.verify_domain` (to verify domains in a specific environment)
+ * Your root key must have `write` on the domain:
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#write`
+ * - `unkey:v1:<workspace_id>:projects/* /apps/* /environments/* /domains/*#write` (all domains in your workspace)
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

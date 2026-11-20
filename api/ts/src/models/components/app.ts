@@ -70,16 +70,25 @@ export type App = {
    */
   oci?: AppOCI | undefined;
   /**
-   * The identifier of the deployment currently serving this app.
+   * Deprecated. Use `currentDeploymentId` on the environment instead; each
    *
    * @remarks
-   * Omitted if the app has no active deployment yet.
+   * environment has its own live deployment. This field is the deployment
+   * currently serving the app's production environment.
+   * Omitted if that environment has no live deployment yet.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   currentDeploymentId?: string | undefined;
   /**
-   * Whether the app is currently serving a rolled-back deployment rather than its latest one.
+   * Deprecated. Use `isRolledBack` on the environment instead; each
    *
    * @remarks
+   * environment is rolled back on its own. This field reports whether the
+   * app's production environment is serving a rolled-back deployment rather
+   * than its latest one.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   isRolledBack: boolean;
   /**

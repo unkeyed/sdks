@@ -270,6 +270,8 @@ export * from "./v2permissionsupdateroleresponsedata.js";
 export * from "./v2portalcreatedomainrequestbody.js";
 export * from "./v2portalcreatedomainresponsebody.js";
 export * from "./v2portalcreatedomainresponsedata.js";
+export * from "./v2portalcreatekeyratelimit.js";
+export * from "./v2portalcreatekeyrequestbody.js";
 export * from "./v2portalcreateportalrequestbodyunion.js";
 export * from "./v2portalcreateportalresponsebody.js";
 export * from "./v2portalcreateportalresponsedata.js";

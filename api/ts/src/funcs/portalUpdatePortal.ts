@@ -46,9 +46,15 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of:
- * - `portal.*.update_portal` (to update any portal in the workspace)
- * - `portal.<portal_id>.update_portal` (to update a specific portal)
+ * Your root key must have `write` permission on
+ * `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+ * A broader grant, such as `unkey:v1:<workspace_id>:**#write`, also permits updates.
+ *
+ * To change the mapped resource, your root key must also have `read` permission
+ * on the target:
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`
+ *   for a keyspace.
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
  *
  * A root key that cannot read the portal gets **404**. One that can read it
  * but lacks the permission gets **403**.

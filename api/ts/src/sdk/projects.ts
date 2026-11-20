@@ -53,8 +53,8 @@ export class Projects extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must have one of the following permissions:
-   * - `project.*.delete_project` (to delete any project)
-   * - `project.<project_id>.delete_project` (to delete a specific project)
+   * - `unkey:v1:<workspace_id>:projects/*#delete` (to delete any project in the workspace)
+   * - `unkey:v1:<workspace_id>:projects/<project_id>#delete` (to delete a specific project)
    */
   async deleteProject(
     request: components.V2ProjectsDeleteProjectRequestBody,
@@ -129,8 +129,8 @@ export class Projects extends ClientSDK {
    * **Required Permissions**
    *
    * Your root key must have one of the following permissions:
-   * - `project.*.update_project` (to update any project)
-   * - `project.<project_id>.update_project` (to update a specific project)
+   * - `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+   * - `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
    */
   async updateProject(
     request: components.V2ProjectsUpdateProjectRequestBody,

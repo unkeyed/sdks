@@ -55,6 +55,16 @@ export type V2PortalCreateSessionRequestBody = {
    * When omitted, the portal shows no return link.
    */
   returnUrl?: string | undefined;
+  /**
+   * A verified custom domain of this portal to build the session URL on, so
+   *
+   * @remarks
+   * end users stay on your domain. The domain must be verified on this
+   * portal; any other value is rejected.
+   *
+   * When omitted, the URL uses Unkey's portal host.
+   */
+  hostname?: string | undefined;
 };
 
 /** @internal */
@@ -68,6 +78,7 @@ export type V2PortalCreateSessionRequestBody$Outbound = {
   externalId: string;
   scopes: Array<string>;
   returnUrl?: string | undefined;
+  hostname?: string | undefined;
 };
 
 /** @internal */
@@ -80,6 +91,7 @@ export const V2PortalCreateSessionRequestBody$outboundSchema: z.ZodType<
   externalId: z.string(),
   scopes: z.array(Scope$outboundSchema),
   returnUrl: z.string().optional(),
+  hostname: z.string().optional(),
 });
 
 export function v2PortalCreateSessionRequestBodyToJSON(

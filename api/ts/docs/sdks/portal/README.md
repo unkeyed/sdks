@@ -7,6 +7,7 @@ Customer Portal session management
 ### Available Operations
 
 * [createDomain](#createdomain) - Create portal domain
+* [createKey](#createkey) - Create portal key
 * [createPortal](#createportal) - Create portal
 * [createSession](#createsession) - Create portal session
 * [deleteDomain](#deletedomain) - Delete portal domain
@@ -117,6 +118,121 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
+## createKey
+
+Create an API key for the authenticated portal session's end user, within
+the key-creation policy the session was created with.
+
+The key is owned by the session's external identity and lives in the
+session's keyspace, so the request has no `externalId` or `apiId` field.
+Rate limits, expiry, permissions, and roles must stay within the policy;
+a value outside it is refused rather than adjusted.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="portal.createKey" method="post" path="/v2/portal.createKey" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey();
+
+async function run() {
+  const result = await unkey.portal.createKey({
+    portalSession: process.env["UNKEY_PORTAL_SESSION"] ?? "",
+  }, {
+    name: "Production server",
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 50,
+        duration: 60000,
+      },
+    ],
+    expiresIn: 2592000000,
+    permissions: [
+      "documents.write",
+    ],
+    roles: [
+      "editor",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { portalCreateKey } from "@unkey/api/funcs/portalCreateKey.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore();
+
+async function run() {
+  const res = await portalCreateKey(unkey, {
+    portalSession: process.env["UNKEY_PORTAL_SESSION"] ?? "",
+  }, {
+    name: "Production server",
+    ratelimits: [
+      {
+        name: "requests",
+        limit: 50,
+        duration: 60000,
+      },
+    ],
+    expiresIn: 2592000000,
+    permissions: [
+      "documents.write",
+    ],
+    roles: [
+      "editor",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("portalCreateKey failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V2PortalCreateKeyRequestBody](../../models/components/v2portalcreatekeyrequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [operations.PortalCreateKeySecurity](../../models/operations/portalcreatekeysecurity.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V2KeysCreateKeyResponseBody](../../models/components/v2keyscreatekeyresponsebody.md)\>**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestErrorResponse         | 400                                    | application/json                       |
+| errors.UnauthorizedErrorResponse       | 401                                    | application/json                       |
+| errors.ForbiddenErrorResponse          | 403                                    | application/json                       |
+| errors.PreconditionFailedErrorResponse | 412                                    | application/json                       |
+| errors.TooManyRequestsErrorResponse    | 429                                    | application/problem+json               |
+| errors.InternalServerErrorResponse     | 500                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
 ## createPortal
 
 Create a portal for one app or keyspace in your workspace.
@@ -132,8 +248,18 @@ independently of the resource the portal serves.
 
 **Required Permissions**
 
-Your root key must have `portal.*.create_portal`. A grant scoped to a specific
-portal id does not authorize creation, because the id does not exist yet.
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/*#write`
+for the project that owns the app or keyspace. A grant scoped to a specific
+portal ID does not authorize creation, because the ID does not exist yet.
+
+You must also have read permission on the resource the portal serves:
+
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read` for a keyspace.
+
+Broader grants that cover these resources and actions also authorize the request.
+A missing permission returns **403**. An app or keyspace outside your workspace
+returns **404**, the same as a resource that does not exist.
 
 
 ### Example Usage
@@ -235,19 +361,22 @@ redeems exactly once for a 24-hour access token via `portal.exchangeCode`.
 
 Authorization runs in two stages, and both must pass.
 
-First, your root key must have one of the following permissions:
-- `portal.*.create_portal_session` (to mint sessions for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (to mint sessions for a specific portal)
+First, your root key must have
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`.
+Write permission on the portal itself does not grant permission to mint sessions.
 
 Second, a session can never carry a capability your root key does not itself
 hold. Each requested scope additionally requires the equivalent permission on
 every keyspace the portal resolves to:
-- `keys:read` requires `api.<api_id>.read_key` **and** `api.<api_id>.read_api`
-- `keys:reroll` requires `api.<api_id>.create_key`, plus
-  `api.<api_id>.encrypt_key` when the keyspace stores encrypted keys
-- `analytics:read` requires `api.<api_id>.read_analytics`
+- `keys:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#read`
+  and `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`.
+- `keys:reroll` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#write`,
+  including when the keyspace stores encrypted keys.
+- `analytics:read` requires `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/logs#read`.
 
-The `*` form of each is also accepted. Requesting a scope you do not hold
+Broader URN grants that cover these resources and actions are also accepted.
+A grant on one concrete key cannot satisfy the `keys/*` requirement.
+Requesting a scope you do not hold
 returns 403 for the whole request rather than minting a reduced session, so a
 missing grant is visible instead of surfacing later as a broken portal.
 
@@ -279,6 +408,7 @@ async function run() {
       "analytics:read",
     ],
     returnUrl: "https://app.example.com/settings/api-keys",
+    hostname: "developers.example.com",
   });
 
   console.log(result);
@@ -311,6 +441,7 @@ async function run() {
       "analytics:read",
     ],
     returnUrl: "https://app.example.com/settings/api-keys",
+    hostname: "developers.example.com",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -559,6 +690,7 @@ const unkey = new Unkey();
 async function run() {
   const result = await unkey.portal.exchangeCode({
     code: "pst_abc123def456",
+    host: "developers.example.com",
   });
 
   console.log(result);
@@ -582,6 +714,7 @@ const unkey = new UnkeyCore();
 async function run() {
   const res = await portalExchangeCode(unkey, {
     code: "pst_abc123def456",
+    host: "developers.example.com",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1187,11 +1320,7 @@ user's `externalId` to `portal.revokeSession` to end their sessions.
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.create_portal_session` (for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*`
 with `#read` or `#write`. Reading the portal itself is not enough.
 
 Without the permission this returns **404**, not 403.
@@ -1384,13 +1513,11 @@ Calling this again for the same end user is safe and revokes nothing.
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.create_portal_session` (for any portal in the workspace)
-- `portal.<portal_id>.create_portal_session` (for a specific portal)
-
-It also accepts `unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`,
-which dashboard roles carry. Unlike `portal.createSession`, a dashboard
-session can call this, not just a root key.
+Your root key must have
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>/sessions/*#write`
+or a broader grant that includes it. Dashboard roles can grant this permission.
+Unlike `portal.createSession`, a dashboard session with this permission can
+also call this endpoint.
 
 A root key that cannot read the portal's sessions gets **404**. One that can
 read them but lacks the permission gets **403**.
@@ -1491,9 +1618,15 @@ Two changes affect your end users immediately:
 
 **Required Permissions**
 
-Your root key must have one of:
-- `portal.*.update_portal` (to update any portal in the workspace)
-- `portal.<portal_id>.update_portal` (to update a specific portal)
+Your root key must have `write` permission on
+`unkey:v1:<workspace_id>:projects/<project_id>/portals/<portal_id>`.
+A broader grant, such as `unkey:v1:<workspace_id>:**#write`, also permits updates.
+
+To change the mapped resource, your root key must also have `read` permission
+on the target:
+- `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>#read`
+  for a keyspace.
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#read` for an app.
 
 A root key that cannot read the portal gets **404**. One that can read it
 but lacks the permission gets **403**.
