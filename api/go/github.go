@@ -45,7 +45,9 @@ func newGithub(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hooks.H
 // **Required Permissions**
 //
 // Your root key must have the following permission:
-// - `workspace.*.install_github`
+// - `unkey:v1:<workspace_id>:github/apps/*#write`
+//
+// Replace `<workspace_id>` with the authenticated workspace ID.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Github) InstallApp(ctx context.Context, opts ...operations.Option) (*operations.GithubInstallAppResponse, error) {

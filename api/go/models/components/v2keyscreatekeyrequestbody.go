@@ -47,6 +47,8 @@ type V2KeysCreateKeyRequestBody struct {
 	//
 	Roles []string `json:"roles,omitzero"`
 	// Grants specific permissions directly to this key without requiring role membership.
+	// Each entry is a permission ID or slug. IDs are matched first, then slugs.
+	// An entry that matches no permission creates a permission with that slug.
 	// Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`.
 	// Direct permissions supplement any permissions inherited from assigned roles.
 	//

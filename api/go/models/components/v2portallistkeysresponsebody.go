@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+)
+
 type V2PortalListKeysResponseBody struct {
 	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
 	Meta Meta `json:"meta"`
@@ -9,6 +13,21 @@ type V2PortalListKeysResponseBody struct {
 	Data []KeyResponseData `json:"data"`
 	// Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
 	Pagination Pagination `json:"pagination"`
+	// What the end user may create through `portal.createKey`. Present only when
+	// the session may create keys.
+	//
+	KeyCreation *V2PortalListKeysKeyCreation `json:"keyCreation,omitzero"`
+}
+
+func (v V2PortalListKeysResponseBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2PortalListKeysResponseBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2PortalListKeysResponseBody) GetMeta() Meta {
@@ -30,6 +49,13 @@ func (v *V2PortalListKeysResponseBody) GetPagination() Pagination {
 		return Pagination{}
 	}
 	return v.Pagination
+}
+
+func (v *V2PortalListKeysResponseBody) GetKeyCreation() *V2PortalListKeysKeyCreation {
+	if v == nil {
+		return nil
+	}
+	return v.KeyCreation
 }
 
 // #region class-body-v2portallistkeysresponsebody

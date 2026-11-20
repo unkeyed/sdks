@@ -45,7 +45,9 @@ func newPermissions(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *ho
 // **Required Permissions**
 //
 // Your root key must have the following permission:
-// - `rbac.*.create_permission`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+//
+// Use your workspace ID and its default project ID. A wildcard project grant also authorizes this operation.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) CreatePermission(ctx context.Context, request components.V2PermissionsCreatePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsCreatePermissionResponse, error) {
@@ -399,13 +401,12 @@ func (s *Permissions) CreatePermission(ctx context.Context, request components.V
 // **Required Permissions**
 //
 // Your root key must always have:
-// - `rbac.*.create_role`
-//
-// When `permissions` is not empty, it must also have:
-// - `rbac.*.add_permission_to_role`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/*#write`
 //
 // When any requested permission slug does not exist, it must also have:
-// - `rbac.*.create_permission`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+//
+// Both grants must cover the authenticated workspace and its default project. Attaching existing permissions requires only role write access.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) CreateRole(ctx context.Context, request components.V2PermissionsCreateRoleRequestBody, opts ...operations.Option) (*operations.PermissionsCreateRoleResponse, error) {
@@ -759,7 +760,7 @@ func (s *Permissions) CreateRole(ctx context.Context, request components.V2Permi
 // **Required Permissions**
 //
 // Your root key must have the following permission:
-// - `rbac.*.delete_permission`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#delete`
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) DeletePermission(ctx context.Context, request components.V2PermissionsDeletePermissionRequestBody, opts ...operations.Option) (*operations.PermissionsDeletePermissionResponse, error) {
@@ -1112,8 +1113,7 @@ func (s *Permissions) DeletePermission(ctx context.Context, request components.V
 //
 // **Required Permissions**
 //
-// Your root key must have the following permission:
-// - `rbac.*.delete_role`
+// Your root key must have `unkey:v1:{workspaceId}:projects/{projectId}/rbac/roles/{roleId}#delete` for the role. A wildcard grant that covers the role also authorizes deletion.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Permissions) DeleteRole(ctx context.Context, request components.V2PermissionsDeleteRoleRequestBody, opts ...operations.Option) (*operations.PermissionsDeleteRoleResponse, error) {
@@ -2944,11 +2944,12 @@ func (s *Permissions) ListRoles(ctx context.Context, request components.V2Permis
 // **Required Permissions**
 //
 // Your root key must have:
-// - `rbac.*.add_permission_to_role`
-// - `rbac.*.remove_permission_from_role`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
 //
 // When any requested permission slug does not exist, it must also have:
-// - `rbac.*.create_permission`
+// - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+//
+// Use the role's workspace, project, and role IDs in these permissions.
 func (s *Permissions) SetRolePermissions(ctx context.Context, request components.V2PermissionsSetRolePermissionsRequestBodyUnion, opts ...operations.Option) (*operations.PermissionsSetRolePermissionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

@@ -25,7 +25,7 @@ type V2PermissionsCreateRoleRequestBody struct {
 	// - Related roles that might be used together
 	//
 	Description *string `json:"description,omitzero"`
-	// Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+	// Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write` for the authenticated workspace and its default project.
 	//
 	// Omit this field or provide an empty array to create the role without permissions.
 	//
