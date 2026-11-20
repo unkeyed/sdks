@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
 )
 
 type Scope string
@@ -12,6 +13,7 @@ type Scope string
 const (
 	ScopeKeysRead      Scope = "keys:read"
 	ScopeKeysReroll    Scope = "keys:reroll"
+	ScopeKeysCreate    Scope = "keys:create"
 	ScopeAnalyticsRead Scope = "analytics:read"
 )
 
@@ -27,6 +29,8 @@ func (e *Scope) UnmarshalJSON(data []byte) error {
 	case "keys:read":
 		fallthrough
 	case "keys:reroll":
+		fallthrough
+	case "keys:create":
 		fallthrough
 	case "analytics:read":
 		*e = Scope(v)
@@ -51,14 +55,33 @@ type V2PortalCreateSessionRequestBody struct {
 	// configured on the portal. An end user can never see another identity's
 	// keys.
 	//
-	// Rerolling and usage analytics are both reached from the keys page, so
-	// `keys:reroll` and `analytics:read` each require `keys:read` in the same
-	// session; requesting either without it is rejected.
+	// Rerolling, key creation, and usage analytics are all reached from the
+	// keys page, so `keys:reroll`, `keys:create`, and `analytics:read` each
+	// require `keys:read` in the same session; requesting any of them without it
+	// is rejected.
+	//
+	// `keys:create` lets the end user create keys for themselves, bounded by the
+	// `keyCreation` policy, which it requires. It is not available on a portal
+	// mapped to an app. Created keys never carry credits, so do not grant it if
+	// you bill on credits. Created keys are ordinary keys in your keyspace: they
+	// keep working after the session ends, until they expire or you revoke them.
 	//
 	// Each scope requires the equivalent permission on your own root key. See
 	// Required Permissions on this operation.
 	//
 	Scopes []Scope `json:"scopes"`
+	// What the end user may create through the portal. Required with the
+	// `keys:create` scope and rejected without it. The policy is fixed for the
+	// session's lifetime.
+	//
+	// Created keys never carry credits, so do not grant `keys:create` if you bill
+	// on credits.
+	//
+	// Created keys are recoverable when the keyspace stores encrypted keys, and
+	// not recoverable otherwise. This differs from `keys.createKey`, where
+	// recoverability is opt-in per key.
+	//
+	KeyCreation *V2PortalCreateSessionKeyCreation `json:"keyCreation,omitzero"`
 	// Absolute URL the end user is sent back to when they leave the portal, or
 	// when their session expires mid-visit. Set per session rather than per
 	// portal, so one portal can serve several entry points and return each user
@@ -67,6 +90,24 @@ type V2PortalCreateSessionRequestBody struct {
 	// When omitted, the portal shows no return link.
 	//
 	ReturnURL *string `json:"returnUrl,omitzero"`
+	// A verified custom domain of this portal to build the session URL on, so
+	// end users stay on your domain. The domain must be verified on this
+	// portal; any other value is rejected.
+	//
+	// When omitted, the URL uses Unkey's portal host.
+	//
+	Hostname *string `json:"hostname,omitzero"`
+}
+
+func (v V2PortalCreateSessionRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2PortalCreateSessionRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetPortal() string {
@@ -90,11 +131,25 @@ func (v *V2PortalCreateSessionRequestBody) GetScopes() []Scope {
 	return v.Scopes
 }
 
+func (v *V2PortalCreateSessionRequestBody) GetKeyCreation() *V2PortalCreateSessionKeyCreation {
+	if v == nil {
+		return nil
+	}
+	return v.KeyCreation
+}
+
 func (v *V2PortalCreateSessionRequestBody) GetReturnURL() *string {
 	if v == nil {
 		return nil
 	}
 	return v.ReturnURL
+}
+
+func (v *V2PortalCreateSessionRequestBody) GetHostname() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Hostname
 }
 
 // #region class-body-v2portalcreatesessionrequestbody
