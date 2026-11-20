@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2ApisCreateApiRequestBody = {
   /**
@@ -24,9 +25,11 @@ export const V2ApisCreateApiRequestBody$outboundSchema: z.ZodType<
   V2ApisCreateApiRequestBody$Outbound,
   z.ZodTypeDef,
   V2ApisCreateApiRequestBody
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function v2ApisCreateApiRequestBodyToJSON(
   v2ApisCreateApiRequestBody: V2ApisCreateApiRequestBody,

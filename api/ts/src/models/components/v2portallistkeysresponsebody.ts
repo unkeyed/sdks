@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +12,10 @@ import {
 } from "./keyresponsedata.js";
 import { Meta, Meta$inboundSchema } from "./meta.js";
 import { Pagination, Pagination$inboundSchema } from "./pagination.js";
+import {
+  V2PortalListKeysKeyCreation,
+  V2PortalListKeysKeyCreation$inboundSchema,
+} from "./v2portallistkeyskeycreation.js";
 
 export type V2PortalListKeysResponseBody = {
   /**
@@ -26,6 +30,13 @@ export type V2PortalListKeysResponseBody = {
    * Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination.
    */
   pagination: Pagination;
+  /**
+   * What the end user may create through `portal.createKey`. Present only when
+   *
+   * @remarks
+   * the session may create keys.
+   */
+  keyCreation?: V2PortalListKeysKeyCreation | undefined;
 };
 
 /** @internal */
@@ -33,11 +44,14 @@ export const V2PortalListKeysResponseBody$inboundSchema: z.ZodType<
   V2PortalListKeysResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: Meta$inboundSchema,
-  data: z.array(KeyResponseData$inboundSchema),
-  pagination: Pagination$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: Meta$inboundSchema,
+    data: z.array(KeyResponseData$inboundSchema),
+    pagination: Pagination$inboundSchema,
+    keyCreation: V2PortalListKeysKeyCreation$inboundSchema.optional(),
+  })
+);
 
 export function v2PortalListKeysResponseBodyFromJSON(
   jsonString: string,

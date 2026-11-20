@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * The calendar month (UTC) to read. Omit it for the current month to date. A
@@ -33,10 +34,12 @@ export const V2WorkspaceGetUsageRequestPeriod$outboundSchema: z.ZodType<
   V2WorkspaceGetUsageRequestPeriod$Outbound,
   z.ZodTypeDef,
   V2WorkspaceGetUsageRequestPeriod
-> = z.object({
-  year: z.number().int(),
-  month: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    year: z.number().int(),
+    month: z.number().int(),
+  })
+);
 
 export function v2WorkspaceGetUsageRequestPeriodToJSON(
   v2WorkspaceGetUsageRequestPeriod: V2WorkspaceGetUsageRequestPeriod,

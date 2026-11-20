@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2ProjectsListProjectsRequestBody = {
   /**
@@ -37,11 +38,13 @@ export const V2ProjectsListProjectsRequestBody$outboundSchema: z.ZodType<
   V2ProjectsListProjectsRequestBody$Outbound,
   z.ZodTypeDef,
   V2ProjectsListProjectsRequestBody
-> = z.object({
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  search: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+    search: z.string().optional(),
+  })
+);
 
 export function v2ProjectsListProjectsRequestBodyToJSON(
   v2ProjectsListProjectsRequestBody: V2ProjectsListProjectsRequestBody,

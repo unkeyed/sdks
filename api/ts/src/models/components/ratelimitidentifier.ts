@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -71,13 +71,15 @@ export const RatelimitIdentifier$inboundSchema: z.ZodType<
   RatelimitIdentifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  remoteIp: RemoteIpKey$inboundSchema.optional(),
-  header: HeaderKey$inboundSchema.optional(),
-  authenticatedSubject: AuthenticatedSubjectKey$inboundSchema.optional(),
-  path: PathKey$inboundSchema.optional(),
-  principalField: PrincipalFieldKey$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remoteIp: RemoteIpKey$inboundSchema.optional(),
+    header: HeaderKey$inboundSchema.optional(),
+    authenticatedSubject: AuthenticatedSubjectKey$inboundSchema.optional(),
+    path: PathKey$inboundSchema.optional(),
+    principalField: PrincipalFieldKey$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type RatelimitIdentifier$Outbound = {
   remoteIp?: RemoteIpKey$Outbound | undefined;
@@ -92,13 +94,15 @@ export const RatelimitIdentifier$outboundSchema: z.ZodType<
   RatelimitIdentifier$Outbound,
   z.ZodTypeDef,
   RatelimitIdentifier
-> = z.object({
-  remoteIp: RemoteIpKey$outboundSchema.optional(),
-  header: HeaderKey$outboundSchema.optional(),
-  authenticatedSubject: AuthenticatedSubjectKey$outboundSchema.optional(),
-  path: PathKey$outboundSchema.optional(),
-  principalField: PrincipalFieldKey$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remoteIp: RemoteIpKey$outboundSchema.optional(),
+    header: HeaderKey$outboundSchema.optional(),
+    authenticatedSubject: AuthenticatedSubjectKey$outboundSchema.optional(),
+    path: PathKey$outboundSchema.optional(),
+    principalField: PrincipalFieldKey$outboundSchema.optional(),
+  })
+);
 
 export function ratelimitIdentifierToJSON(
   ratelimitIdentifier: RatelimitIdentifier,

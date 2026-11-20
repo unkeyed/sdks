@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalListSessionsRequestBody = {
   /**
@@ -45,12 +46,14 @@ export const V2PortalListSessionsRequestBody$outboundSchema: z.ZodType<
   V2PortalListSessionsRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalListSessionsRequestBody
-> = z.object({
-  portal: z.string(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  search: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+    search: z.string().optional(),
+  })
+);
 
 export function v2PortalListSessionsRequestBodyToJSON(
   v2PortalListSessionsRequestBody: V2PortalListSessionsRequestBody,

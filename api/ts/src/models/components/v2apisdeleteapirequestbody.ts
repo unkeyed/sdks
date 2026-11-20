@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2ApisDeleteApiRequestBody = {
   /**
@@ -26,9 +27,11 @@ export const V2ApisDeleteApiRequestBody$outboundSchema: z.ZodType<
   V2ApisDeleteApiRequestBody$Outbound,
   z.ZodTypeDef,
   V2ApisDeleteApiRequestBody
-> = z.object({
-  apiId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiId: z.string(),
+  })
+);
 
 export function v2ApisDeleteApiRequestBodyToJSON(
   v2ApisDeleteApiRequestBody: V2ApisDeleteApiRequestBody,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,18 +55,20 @@ export const V2RootKeysListKeysResponseData$inboundSchema: z.ZodType<
   V2RootKeysListKeysResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ipAllowlist: z.array(z.string()),
-  keyId: z.string(),
-  name: z.nullable(z.string()),
-  start: z.string(),
-  end: z.string(),
-  enabled: z.boolean(),
-  createdAt: z.number().int(),
-  lastUsedAt: z.number().int(),
-  expires: z.nullable(z.number().int()),
-  permissions: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipAllowlist: z.array(z.string()),
+    keyId: z.string(),
+    name: z.nullable(z.string()),
+    start: z.string(),
+    end: z.string(),
+    enabled: z.boolean(),
+    createdAt: z.number().int(),
+    lastUsedAt: z.number().int(),
+    expires: z.nullable(z.number().int()),
+    permissions: z.array(z.string()),
+  })
+);
 
 export function v2RootKeysListKeysResponseDataFromJSON(
   jsonString: string,

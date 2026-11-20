@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2DeploymentsAuthorizeDeploymentRequestBody = {
   /**
@@ -25,9 +26,11 @@ export const V2DeploymentsAuthorizeDeploymentRequestBody$outboundSchema:
     V2DeploymentsAuthorizeDeploymentRequestBody$Outbound,
     z.ZodTypeDef,
     V2DeploymentsAuthorizeDeploymentRequestBody
-  > = z.object({
-    deploymentId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deploymentId: z.string(),
+    })
+  );
 
 export function v2DeploymentsAuthorizeDeploymentRequestBodyToJSON(
   v2DeploymentsAuthorizeDeploymentRequestBody:

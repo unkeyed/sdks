@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,11 +19,13 @@ export type AppGit = {
 };
 
 /** @internal */
-export const AppGit$inboundSchema: z.ZodType<AppGit, z.ZodTypeDef, unknown> = z
-  .object({
-    repository: z.string(),
-    defaultBranch: z.string().optional(),
-  });
+export const AppGit$inboundSchema: z.ZodType<AppGit, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      repository: z.string(),
+      defaultBranch: z.string().optional(),
+    })
+  );
 
 export function appGitFromJSON(
   jsonString: string,

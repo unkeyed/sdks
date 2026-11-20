@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { Policy, Policy$Outbound, Policy$outboundSchema } from "./policy.js";
 
 export type V2GatewaySetPoliciesRequestBody = {
@@ -52,12 +53,14 @@ export const V2GatewaySetPoliciesRequestBody$outboundSchema: z.ZodType<
   V2GatewaySetPoliciesRequestBody$Outbound,
   z.ZodTypeDef,
   V2GatewaySetPoliciesRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-  policies: z.array(Policy$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+    policies: z.array(Policy$outboundSchema),
+  })
+);
 
 export function v2GatewaySetPoliciesRequestBodyToJSON(
   v2GatewaySetPoliciesRequestBody: V2GatewaySetPoliciesRequestBody,

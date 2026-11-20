@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   FirewallPolicy,
   FirewallPolicy$Outbound,
@@ -152,20 +153,22 @@ export const V2GatewayUpdatePolicyRequestBody$outboundSchema: z.ZodType<
   V2GatewayUpdatePolicyRequestBody$Outbound,
   z.ZodTypeDef,
   V2GatewayUpdatePolicyRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-  policyId: z.string(),
-  name: z.string().optional(),
-  enabled: z.boolean().optional(),
-  match: z.nullable(z.array(MatchExpr$outboundSchema)).optional(),
-  keyauth: KeyauthPolicy$outboundSchema.optional(),
-  ratelimit: RatelimitPolicy$outboundSchema.optional(),
-  firewall: FirewallPolicy$outboundSchema.optional(),
-  openapi: OpenapiPolicy$outboundSchema.optional(),
-  logging: LoggingPolicy$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+    policyId: z.string(),
+    name: z.string().optional(),
+    enabled: z.boolean().optional(),
+    match: z.nullable(z.array(MatchExpr$outboundSchema)).optional(),
+    keyauth: KeyauthPolicy$outboundSchema.optional(),
+    ratelimit: RatelimitPolicy$outboundSchema.optional(),
+    firewall: FirewallPolicy$outboundSchema.optional(),
+    openapi: OpenapiPolicy$outboundSchema.optional(),
+    logging: LoggingPolicy$outboundSchema.optional(),
+  })
+);
 
 export function v2GatewayUpdatePolicyRequestBodyToJSON(
   v2GatewayUpdatePolicyRequestBody: V2GatewayUpdatePolicyRequestBody,

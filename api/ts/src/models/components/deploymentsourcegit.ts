@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Build from the app's connected GitHub repository.
@@ -34,11 +35,13 @@ export const DeploymentSourceGit$outboundSchema: z.ZodType<
   DeploymentSourceGit$Outbound,
   z.ZodTypeDef,
   DeploymentSourceGit
-> = z.object({
-  branch: z.string().optional(),
-  commitSha: z.string().optional(),
-  repository: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    branch: z.string().optional(),
+    commitSha: z.string().optional(),
+    repository: z.string().optional(),
+  })
+);
 
 export function deploymentSourceGitToJSON(
   deploymentSourceGit: DeploymentSourceGit,

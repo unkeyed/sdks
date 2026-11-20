@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalExchangeCodeRequestBody = {
   /**
@@ -12,11 +13,20 @@ export type V2PortalExchangeCodeRequestBody = {
    * Must be valid, unexpired, and not previously redeemed.
    */
   code: string;
+  /**
+   * The domain the end user is visiting, such as `developers.example.com`.
+   *
+   * @remarks
+   * The code only works on Unkey's portal domain or on one of this portal's
+   * verified custom domains.
+   */
+  host: string;
 };
 
 /** @internal */
 export type V2PortalExchangeCodeRequestBody$Outbound = {
   code: string;
+  host: string;
 };
 
 /** @internal */
@@ -24,9 +34,12 @@ export const V2PortalExchangeCodeRequestBody$outboundSchema: z.ZodType<
   V2PortalExchangeCodeRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalExchangeCodeRequestBody
-> = z.object({
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    host: z.string(),
+  })
+);
 
 export function v2PortalExchangeCodeRequestBodyToJSON(
   v2PortalExchangeCodeRequestBody: V2PortalExchangeCodeRequestBody,

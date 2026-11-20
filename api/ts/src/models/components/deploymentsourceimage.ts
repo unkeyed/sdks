@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deploy a prebuilt Docker image as-is.
@@ -26,9 +27,11 @@ export const DeploymentSourceImage$outboundSchema: z.ZodType<
   DeploymentSourceImage$Outbound,
   z.ZodTypeDef,
   DeploymentSourceImage
-> = z.object({
-  dockerImage: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dockerImage: z.string(),
+  })
+);
 
 export function deploymentSourceImageToJSON(
   deploymentSourceImage: DeploymentSourceImage,

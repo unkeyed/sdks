@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalCreatePortalRequestBody2 = {
   /**
@@ -144,15 +145,17 @@ export const V2PortalCreatePortalRequestBody2$outboundSchema: z.ZodType<
   V2PortalCreatePortalRequestBody2$Outbound,
   z.ZodTypeDef,
   V2PortalCreatePortalRequestBody2
-> = z.object({
-  slug: z.string(),
-  displayName: z.string(),
-  keyspaceId: z.string().optional(),
-  appId: z.string(),
-  enabled: z.boolean().default(true),
-  logoUrl: z.string().optional(),
-  primaryColor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string(),
+    displayName: z.string(),
+    keyspaceId: z.string().optional(),
+    appId: z.string(),
+    enabled: z.boolean().default(true),
+    logoUrl: z.string().optional(),
+    primaryColor: z.string().optional(),
+  })
+);
 
 export function v2PortalCreatePortalRequestBody2ToJSON(
   v2PortalCreatePortalRequestBody2: V2PortalCreatePortalRequestBody2,
@@ -180,15 +183,17 @@ export const V2PortalCreatePortalRequestBody1$outboundSchema: z.ZodType<
   V2PortalCreatePortalRequestBody1$Outbound,
   z.ZodTypeDef,
   V2PortalCreatePortalRequestBody1
-> = z.object({
-  slug: z.string(),
-  displayName: z.string(),
-  keyspaceId: z.string(),
-  appId: z.string().optional(),
-  enabled: z.boolean().default(true),
-  logoUrl: z.string().optional(),
-  primaryColor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string(),
+    displayName: z.string(),
+    keyspaceId: z.string(),
+    appId: z.string().optional(),
+    enabled: z.boolean().default(true),
+    logoUrl: z.string().optional(),
+    primaryColor: z.string().optional(),
+  })
+);
 
 export function v2PortalCreatePortalRequestBody1ToJSON(
   v2PortalCreatePortalRequestBody1: V2PortalCreatePortalRequestBody1,
@@ -210,10 +215,12 @@ export const V2PortalCreatePortalRequestBodyUnion$outboundSchema: z.ZodType<
   V2PortalCreatePortalRequestBodyUnion$Outbound,
   z.ZodTypeDef,
   V2PortalCreatePortalRequestBodyUnion
-> = z.union([
-  z.lazy(() => V2PortalCreatePortalRequestBody1$outboundSchema),
-  z.lazy(() => V2PortalCreatePortalRequestBody2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => V2PortalCreatePortalRequestBody1$outboundSchema),
+    z.lazy(() => V2PortalCreatePortalRequestBody2$outboundSchema),
+  ])
+);
 
 export function v2PortalCreatePortalRequestBodyUnionToJSON(
   v2PortalCreatePortalRequestBodyUnion: V2PortalCreatePortalRequestBodyUnion,

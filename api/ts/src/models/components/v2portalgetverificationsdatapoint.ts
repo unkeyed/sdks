@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -51,17 +51,19 @@ export const V2PortalGetVerificationsDataPoint$inboundSchema: z.ZodType<
   V2PortalGetVerificationsDataPoint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  time: z.number().int(),
-  total: z.number().int(),
-  valid: z.number().int(),
-  rateLimited: z.number().int(),
-  insufficientPermissions: z.number().int(),
-  forbidden: z.number().int(),
-  disabled: z.number().int(),
-  expired: z.number().int(),
-  usageExceeded: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    time: z.number().int(),
+    total: z.number().int(),
+    valid: z.number().int(),
+    rateLimited: z.number().int(),
+    insufficientPermissions: z.number().int(),
+    forbidden: z.number().int(),
+    disabled: z.number().int(),
+    expired: z.number().int(),
+    usageExceeded: z.number().int(),
+  })
+);
 
 export function v2PortalGetVerificationsDataPointFromJSON(
   jsonString: string,

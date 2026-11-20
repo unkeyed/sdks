@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const Replicas$inboundSchema: z.ZodType<
   Replicas,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+  })
+);
 /** @internal */
 export type Replicas$Outbound = {
   min: number;
@@ -41,10 +43,12 @@ export const Replicas$outboundSchema: z.ZodType<
   Replicas$Outbound,
   z.ZodTypeDef,
   Replicas
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+  })
+);
 
 export function replicasToJSON(replicas: Replicas): string {
   return JSON.stringify(Replicas$outboundSchema.parse(replicas));

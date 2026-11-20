@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,11 +41,13 @@ export const V2WorkspaceGetUsageByAppRow$inboundSchema: z.ZodType<
   V2WorkspaceGetUsageByAppRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: V2WorkspaceGetUsageResource$inboundSchema.optional(),
-  app: V2WorkspaceGetUsageResource$inboundSchema.optional(),
-  gateway: V2WorkspaceGetUsageGateway$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: V2WorkspaceGetUsageResource$inboundSchema.optional(),
+    app: V2WorkspaceGetUsageResource$inboundSchema.optional(),
+    gateway: V2WorkspaceGetUsageGateway$inboundSchema,
+  })
+);
 
 export function v2WorkspaceGetUsageByAppRowFromJSON(
   jsonString: string,

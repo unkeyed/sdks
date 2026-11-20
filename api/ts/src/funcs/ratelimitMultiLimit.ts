@@ -39,9 +39,9 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `ratelimit.*.limit` (to check limits in any namespace)
- * - `ratelimit.<namespace_id>.limit` (to check limits in all specific namespaces being checked)
+ * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+ *
+ * To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

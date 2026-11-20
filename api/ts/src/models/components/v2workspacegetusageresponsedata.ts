@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,11 +43,13 @@ export const V2WorkspaceGetUsageResponseData$inboundSchema: z.ZodType<
   V2WorkspaceGetUsageResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  period: V2WorkspaceGetUsagePeriod$inboundSchema,
-  totals: V2WorkspaceGetUsageTotals$inboundSchema,
-  breakdowns: V2WorkspaceGetUsageBreakdowns$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: V2WorkspaceGetUsagePeriod$inboundSchema,
+    totals: V2WorkspaceGetUsageTotals$inboundSchema,
+    breakdowns: V2WorkspaceGetUsageBreakdowns$inboundSchema,
+  })
+);
 
 export function v2WorkspaceGetUsageResponseDataFromJSON(
   jsonString: string,

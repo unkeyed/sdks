@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -53,6 +53,21 @@ export type Environment = {
    */
   kind: EnvironmentKind;
   /**
+   * The identifier of the deployment currently serving this environment.
+   *
+   * @remarks
+   * Omitted if the environment has no live deployment yet.
+   */
+  currentDeploymentId?: string | undefined;
+  /**
+   * Whether this environment is serving a rolled-back deployment rather than its latest one.
+   *
+   * @remarks
+   * New deployments do not replace a rolled-back deployment until one is promoted.
+   * Always returned.
+   */
+  isRolledBack?: boolean | undefined;
+  /**
    * Whether delete protection is enabled for this environment.
    *
    * @remarks
@@ -100,18 +115,22 @@ export const Environment$inboundSchema: z.ZodType<
   Environment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  description: z.string(),
-  kind: EnvironmentKind$inboundSchema,
-  deleteProtection: z.boolean(),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int().optional(),
-  runtime: EnvironmentRuntime$inboundSchema.optional(),
-  build: EnvironmentBuild$inboundSchema.optional(),
-  regions: z.array(EnvironmentRegion$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    kind: EnvironmentKind$inboundSchema,
+    currentDeploymentId: z.string().optional(),
+    isRolledBack: z.boolean().optional(),
+    deleteProtection: z.boolean(),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int().optional(),
+    runtime: EnvironmentRuntime$inboundSchema.optional(),
+    build: EnvironmentBuild$inboundSchema.optional(),
+    regions: z.array(EnvironmentRegion$inboundSchema).optional(),
+  })
+);
 
 export function environmentFromJSON(
   jsonString: string,

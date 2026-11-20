@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -144,28 +144,30 @@ export type V2KeysVerifyKeyResponseData = {
 
 /** @internal */
 export const Code$inboundSchema: z.ZodType<Code, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Code);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Code));
 
 /** @internal */
 export const V2KeysVerifyKeyResponseData$inboundSchema: z.ZodType<
   V2KeysVerifyKeyResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  valid: z.boolean(),
-  code: Code$inboundSchema,
-  keyId: z.string().optional(),
-  keyspaceId: z.string().optional(),
-  name: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  expires: z.number().int().optional(),
-  credits: z.number().int().optional(),
-  enabled: z.boolean().optional(),
-  permissions: z.array(z.string()).optional(),
-  roles: z.array(z.string()).optional(),
-  identity: Identity$inboundSchema.optional(),
-  ratelimits: z.array(VerifyKeyRatelimitData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    valid: z.boolean(),
+    code: Code$inboundSchema,
+    keyId: z.string().optional(),
+    keyspaceId: z.string().optional(),
+    name: z.string().optional(),
+    meta: z.record(z.any()).optional(),
+    expires: z.number().int().optional(),
+    credits: z.number().int().optional(),
+    enabled: z.boolean().optional(),
+    permissions: z.array(z.string()).optional(),
+    roles: z.array(z.string()).optional(),
+    identity: Identity$inboundSchema.optional(),
+    ratelimits: z.array(VerifyKeyRatelimitData$inboundSchema).optional(),
+  })
+);
 
 export function v2KeysVerifyKeyResponseDataFromJSON(
   jsonString: string,

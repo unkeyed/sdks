@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,9 +27,11 @@ export const PortalListKeysSecurity$outboundSchema: z.ZodType<
   PortalListKeysSecurity$Outbound,
   z.ZodTypeDef,
   PortalListKeysSecurity
-> = z.object({
-  portalSession: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portalSession: z.string(),
+  })
+);
 
 export function portalListKeysSecurityToJSON(
   portalListKeysSecurity: PortalListKeysSecurity,
@@ -44,13 +46,15 @@ export const PortalListKeysResponse$inboundSchema: z.ZodType<
   PortalListKeysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: components.V2PortalListKeysResponseBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: components.V2PortalListKeysResponseBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 
 export function portalListKeysResponseFromJSON(
   jsonString: string,

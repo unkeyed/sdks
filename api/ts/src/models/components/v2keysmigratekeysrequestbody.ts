@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   V2KeysMigrateKeyData,
   V2KeysMigrateKeyData$Outbound,
@@ -33,11 +34,13 @@ export const V2KeysMigrateKeysRequestBody$outboundSchema: z.ZodType<
   V2KeysMigrateKeysRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysMigrateKeysRequestBody
-> = z.object({
-  migrationId: z.string(),
-  apiId: z.string(),
-  keys: z.array(V2KeysMigrateKeyData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    migrationId: z.string(),
+    apiId: z.string(),
+    keys: z.array(V2KeysMigrateKeyData$outboundSchema),
+  })
+);
 
 export function v2KeysMigrateKeysRequestBodyToJSON(
   v2KeysMigrateKeysRequestBody: V2KeysMigrateKeysRequestBody,

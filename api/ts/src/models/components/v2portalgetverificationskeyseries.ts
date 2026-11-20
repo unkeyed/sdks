@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,10 +30,12 @@ export const V2PortalGetVerificationsKeySeries$inboundSchema: z.ZodType<
   V2PortalGetVerificationsKeySeries,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string(),
-  data: z.array(V2PortalGetVerificationsDataPoint$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    data: z.array(V2PortalGetVerificationsDataPoint$inboundSchema),
+  })
+);
 
 export function v2PortalGetVerificationsKeySeriesFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   V2LogsGetApiRequestMetricsFilters,
   V2LogsGetApiRequestMetricsFilters$Outbound,
@@ -28,9 +29,11 @@ export const V2LogsGetApiRequestMetricsRequestBody$outboundSchema: z.ZodType<
   V2LogsGetApiRequestMetricsRequestBody$Outbound,
   z.ZodTypeDef,
   V2LogsGetApiRequestMetricsRequestBody
-> = z.object({
-  filters: V2LogsGetApiRequestMetricsFilters$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filters: V2LogsGetApiRequestMetricsFilters$outboundSchema.optional(),
+  })
+);
 
 export function v2LogsGetApiRequestMetricsRequestBodyToJSON(
   v2LogsGetApiRequestMetricsRequestBody: V2LogsGetApiRequestMetricsRequestBody,

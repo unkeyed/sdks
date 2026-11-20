@@ -50,9 +50,11 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `environment.*.set_environment_variables` (for any environment)
- * - `environment.<environment_id>.set_environment_variables` (for a specific environment)
+ * Your root key must have `write` on the environment's variable collection:
+ * `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#write`.
+ *
+ * When `prune` is true, it must also have `delete` on the same collection:
+ * `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

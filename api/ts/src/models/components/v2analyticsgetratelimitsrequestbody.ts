@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2AnalyticsGetRatelimitsRequestBody = {
   /**
@@ -26,9 +27,11 @@ export const V2AnalyticsGetRatelimitsRequestBody$outboundSchema: z.ZodType<
   V2AnalyticsGetRatelimitsRequestBody$Outbound,
   z.ZodTypeDef,
   V2AnalyticsGetRatelimitsRequestBody
-> = z.object({
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+  })
+);
 
 export function v2AnalyticsGetRatelimitsRequestBodyToJSON(
   v2AnalyticsGetRatelimitsRequestBody: V2AnalyticsGetRatelimitsRequestBody,

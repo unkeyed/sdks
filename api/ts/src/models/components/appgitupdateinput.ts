@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AppGitUpdateInput = {
   /**
@@ -35,10 +36,12 @@ export const AppGitUpdateInput$outboundSchema: z.ZodType<
   AppGitUpdateInput$Outbound,
   z.ZodTypeDef,
   AppGitUpdateInput
-> = z.object({
-  repository: z.string().optional(),
-  defaultBranch: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository: z.string().optional(),
+    defaultBranch: z.string().optional(),
+  })
+);
 
 export function appGitUpdateInputToJSON(
   appGitUpdateInput: AppGitUpdateInput,

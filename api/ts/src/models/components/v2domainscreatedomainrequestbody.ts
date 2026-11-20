@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2DomainsCreateDomainRequestBody = {
   /**
@@ -53,12 +54,14 @@ export const V2DomainsCreateDomainRequestBody$outboundSchema: z.ZodType<
   V2DomainsCreateDomainRequestBody$Outbound,
   z.ZodTypeDef,
   V2DomainsCreateDomainRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-  domain: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+    domain: z.string(),
+  })
+);
 
 export function v2DomainsCreateDomainRequestBodyToJSON(
   v2DomainsCreateDomainRequestBody: V2DomainsCreateDomainRequestBody,

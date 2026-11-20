@@ -14,6 +14,8 @@ let value: V2EnvironmentsGetEnvironmentResponseBody = {
     slug: "production",
     description: "Production environment",
     kind: "production",
+    currentDeploymentId: "d_1234abcd",
+    isRolledBack: false,
     deleteProtection: false,
     createdAt: 1704067200000,
     updatedAt: 1704153600000,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PermissionsSetRolePermissionsRequestBody2 = {
   /**
@@ -70,11 +71,13 @@ export const V2PermissionsSetRolePermissionsRequestBody2$outboundSchema:
     V2PermissionsSetRolePermissionsRequestBody2$Outbound,
     z.ZodTypeDef,
     V2PermissionsSetRolePermissionsRequestBody2
-  > = z.object({
-    role: z.string().optional(),
-    roleId: z.string(),
-    permissions: z.array(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      role: z.string().optional(),
+      roleId: z.string(),
+      permissions: z.array(z.string()),
+    })
+  );
 
 export function v2PermissionsSetRolePermissionsRequestBody2ToJSON(
   v2PermissionsSetRolePermissionsRequestBody2:
@@ -100,11 +103,13 @@ export const V2PermissionsSetRolePermissionsRequestBody1$outboundSchema:
     V2PermissionsSetRolePermissionsRequestBody1$Outbound,
     z.ZodTypeDef,
     V2PermissionsSetRolePermissionsRequestBody1
-  > = z.object({
-    role: z.string(),
-    roleId: z.string().optional(),
-    permissions: z.array(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      role: z.string(),
+      roleId: z.string().optional(),
+      permissions: z.array(z.string()),
+    })
+  );
 
 export function v2PermissionsSetRolePermissionsRequestBody1ToJSON(
   v2PermissionsSetRolePermissionsRequestBody1:
@@ -128,10 +133,12 @@ export const V2PermissionsSetRolePermissionsRequestBodyUnion$outboundSchema:
     V2PermissionsSetRolePermissionsRequestBodyUnion$Outbound,
     z.ZodTypeDef,
     V2PermissionsSetRolePermissionsRequestBodyUnion
-  > = z.union([
-    z.lazy(() => V2PermissionsSetRolePermissionsRequestBody1$outboundSchema),
-    z.lazy(() => V2PermissionsSetRolePermissionsRequestBody2$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => V2PermissionsSetRolePermissionsRequestBody1$outboundSchema),
+      z.lazy(() => V2PermissionsSetRolePermissionsRequestBody2$outboundSchema),
+    ])
+  );
 
 export function v2PermissionsSetRolePermissionsRequestBodyUnionToJSON(
   v2PermissionsSetRolePermissionsRequestBodyUnion:

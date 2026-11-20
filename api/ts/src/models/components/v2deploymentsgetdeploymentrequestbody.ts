@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Retrieve a single deployment, including its status and runtime configuration.
@@ -27,9 +28,11 @@ export const V2DeploymentsGetDeploymentRequestBody$outboundSchema: z.ZodType<
   V2DeploymentsGetDeploymentRequestBody$Outbound,
   z.ZodTypeDef,
   V2DeploymentsGetDeploymentRequestBody
-> = z.object({
-  deploymentId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deploymentId: z.string(),
+  })
+);
 
 export function v2DeploymentsGetDeploymentRequestBodyToJSON(
   v2DeploymentsGetDeploymentRequestBody: V2DeploymentsGetDeploymentRequestBody,

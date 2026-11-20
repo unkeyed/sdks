@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -131,26 +131,28 @@ export const Deployment$inboundSchema: z.ZodType<
   Deployment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  status: DeploymentStatus$inboundSchema,
-  isCurrent: z.boolean(),
-  environment: z.string(),
-  app: z.string(),
-  project: z.string(),
-  git: DeploymentGit$inboundSchema.optional(),
-  docker: DeploymentDocker$inboundSchema.optional(),
-  trigger: DeploymentTrigger$inboundSchema,
-  availableActions: z.array(DeploymentAction$inboundSchema),
-  regions: z.array(z.string()),
-  error: DeploymentError$inboundSchema.optional(),
-  issues: z.array(DeploymentIssue$inboundSchema),
-  finishedAt: z.number().int().optional(),
-  domains: z.array(z.string()).optional(),
-  runtime: DeploymentRuntime$inboundSchema,
-  createdAt: z.number().int(),
-  updatedAt: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: DeploymentStatus$inboundSchema,
+    isCurrent: z.boolean(),
+    environment: z.string(),
+    app: z.string(),
+    project: z.string(),
+    git: DeploymentGit$inboundSchema.optional(),
+    docker: DeploymentDocker$inboundSchema.optional(),
+    trigger: DeploymentTrigger$inboundSchema,
+    availableActions: z.array(DeploymentAction$inboundSchema),
+    regions: z.array(z.string()),
+    error: DeploymentError$inboundSchema.optional(),
+    issues: z.array(DeploymentIssue$inboundSchema),
+    finishedAt: z.number().int().optional(),
+    domains: z.array(z.string()).optional(),
+    runtime: DeploymentRuntime$inboundSchema,
+    createdAt: z.number().int(),
+    updatedAt: z.number().int().optional(),
+  })
+);
 
 export function deploymentFromJSON(
   jsonString: string,

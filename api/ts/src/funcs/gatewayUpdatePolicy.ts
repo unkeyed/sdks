@@ -45,9 +45,9 @@ import { Result } from "../types/fp.js";
  *
  * **Required Permissions**
  *
- * Your root key must have one of the following permissions:
- * - `environment.*.update_policy` (for any environment)
- * - `environment.<environment_id>.update_policy` (for a specific environment)
+ * Your root key must have `write` permission on the policy:
+ * `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/gateway/policies/<policy_id>#write`.
+ * Use `*` in place of a resource ID to grant access to all resources at that level.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

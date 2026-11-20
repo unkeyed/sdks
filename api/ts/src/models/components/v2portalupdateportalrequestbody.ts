@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalUpdatePortalRequestBody = {
   /**
@@ -96,16 +97,18 @@ export const V2PortalUpdatePortalRequestBody$outboundSchema: z.ZodType<
   V2PortalUpdatePortalRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalUpdatePortalRequestBody
-> = z.object({
-  portal: z.string(),
-  slug: z.string().optional(),
-  displayName: z.string().optional(),
-  keyspaceId: z.string().optional(),
-  appId: z.string().optional(),
-  enabled: z.boolean().optional(),
-  logoUrl: z.nullable(z.string()).optional(),
-  primaryColor: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    slug: z.string().optional(),
+    displayName: z.string().optional(),
+    keyspaceId: z.string().optional(),
+    appId: z.string().optional(),
+    enabled: z.boolean().optional(),
+    logoUrl: z.nullable(z.string()).optional(),
+    primaryColor: z.nullable(z.string()).optional(),
+  })
+);
 
 export function v2PortalUpdatePortalRequestBodyToJSON(
   v2PortalUpdatePortalRequestBody: V2PortalUpdatePortalRequestBody,

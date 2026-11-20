@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   EnvironmentHealthcheck,
   EnvironmentHealthcheck$Outbound,
@@ -185,26 +186,28 @@ export const V2EnvironmentsUpdateSettingsRequestBody$outboundSchema: z.ZodType<
   V2EnvironmentsUpdateSettingsRequestBody$Outbound,
   z.ZodTypeDef,
   V2EnvironmentsUpdateSettingsRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-  dockerfile: z.nullable(z.string()).optional(),
-  rootDirectory: z.string().optional(),
-  buildCommand: z.nullable(z.string()).optional(),
-  watchPaths: z.array(z.string()).optional(),
-  autoDeploy: z.boolean().optional(),
-  port: z.number().int().optional(),
-  vCpus: z.number().optional(),
-  memoryMib: z.number().int().optional(),
-  storageMib: z.number().int().optional(),
-  command: z.array(z.string()).optional(),
-  healthcheck: z.nullable(EnvironmentHealthcheck$outboundSchema).optional(),
-  shutdownSignal: EnvironmentShutdownSignal$outboundSchema.optional(),
-  upstreamProtocol: EnvironmentUpstreamProtocol$outboundSchema.optional(),
-  openapiSpecPath: z.nullable(z.string()).optional(),
-  regions: z.array(EnvironmentRegion$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+    dockerfile: z.nullable(z.string()).optional(),
+    rootDirectory: z.string().optional(),
+    buildCommand: z.nullable(z.string()).optional(),
+    watchPaths: z.array(z.string()).optional(),
+    autoDeploy: z.boolean().optional(),
+    port: z.number().int().optional(),
+    vCpus: z.number().optional(),
+    memoryMib: z.number().int().optional(),
+    storageMib: z.number().int().optional(),
+    command: z.array(z.string()).optional(),
+    healthcheck: z.nullable(EnvironmentHealthcheck$outboundSchema).optional(),
+    shutdownSignal: EnvironmentShutdownSignal$outboundSchema.optional(),
+    upstreamProtocol: EnvironmentUpstreamProtocol$outboundSchema.optional(),
+    openapiSpecPath: z.nullable(z.string()).optional(),
+    regions: z.array(EnvironmentRegion$outboundSchema).optional(),
+  })
+);
 
 export function v2EnvironmentsUpdateSettingsRequestBodyToJSON(
   v2EnvironmentsUpdateSettingsRequestBody:

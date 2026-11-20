@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Controls credit consumption for usage-based billing and quota enforcement.
@@ -33,9 +34,11 @@ export const KeysVerifyKeyCredits$outboundSchema: z.ZodType<
   KeysVerifyKeyCredits$Outbound,
   z.ZodTypeDef,
   KeysVerifyKeyCredits
-> = z.object({
-  cost: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cost: z.number().int(),
+  })
+);
 
 export function keysVerifyKeyCreditsToJSON(
   keysVerifyKeyCredits: KeysVerifyKeyCredits,

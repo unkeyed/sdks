@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -62,19 +62,21 @@ export const ApiRequestLog$inboundSchema: z.ZodType<
   ApiRequestLog,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requestId: z.string(),
-  time: z.number().int(),
-  host: z.string(),
-  method: z.string(),
-  path: z.string(),
-  status: z.number().int(),
-  latencyMs: z.number().int(),
-  requestHeaders: z.array(z.string()),
-  requestBody: z.string(),
-  responseHeaders: z.array(z.string()),
-  responseBody: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestId: z.string(),
+    time: z.number().int(),
+    host: z.string(),
+    method: z.string(),
+    path: z.string(),
+    status: z.number().int(),
+    latencyMs: z.number().int(),
+    requestHeaders: z.array(z.string()),
+    requestBody: z.string(),
+    responseHeaders: z.array(z.string()),
+    responseBody: z.string(),
+  })
+);
 
 export function apiRequestLogFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Optional git commit information
@@ -44,13 +45,15 @@ export const V2DeployGitCommit$outboundSchema: z.ZodType<
   V2DeployGitCommit$Outbound,
   z.ZodTypeDef,
   V2DeployGitCommit
-> = z.object({
-  commitSha: z.string().optional(),
-  commitMessage: z.string().optional(),
-  authorHandle: z.string().optional(),
-  authorAvatarUrl: z.string().optional(),
-  timestamp: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitSha: z.string().optional(),
+    commitMessage: z.string().optional(),
+    authorHandle: z.string().optional(),
+    authorAvatarUrl: z.string().optional(),
+    timestamp: z.number().int().optional(),
+  })
+);
 
 export function v2DeployGitCommitToJSON(
   v2DeployGitCommit: V2DeployGitCommit,

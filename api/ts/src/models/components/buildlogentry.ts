@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,13 +54,15 @@ export const BuildLogEntry$inboundSchema: z.ZodType<
   BuildLogEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  time: z.number().int(),
-  stepId: z.string(),
-  step: z.string(),
-  output: BuildLogOutput$inboundSchema,
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    time: z.number().int(),
+    stepId: z.string(),
+    step: z.string(),
+    output: BuildLogOutput$inboundSchema,
+    message: z.string(),
+  })
+);
 
 export function buildLogEntryFromJSON(
   jsonString: string,

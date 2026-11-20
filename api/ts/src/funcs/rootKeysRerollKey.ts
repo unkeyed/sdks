@@ -36,8 +36,9 @@ import { Result } from "../types/fp.js";
  * already hold every permission of the original key. When `expiration` is not null,
  * it also requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
  *
- * `expiration` controls the original key: 0 revokes it immediately, a positive value
- * keeps it valid for that many milliseconds, and null keeps its current expiration.
+ * `expiration` controls the original key: 0 revokes it, a positive value keeps it
+ * valid for that many milliseconds, and null keeps its current expiration. Revoking
+ * the original key can take up to 30 seconds to take effect.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

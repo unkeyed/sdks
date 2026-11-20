@@ -44,11 +44,12 @@ import { Result } from "../types/fp.js";
  * **Required Permissions**
  *
  * Your credential needs one of:
- * - `api.*.verify_key` (verify keys in any API)
- * - `api.<api_id>.verify_key` (verify keys in specific API)
- * - `unkey:v1:<workspace_id>:keyspaces/* /keys/*#verify_key` (verify keys in any keyspace)
- * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/*#verify_key` (verify keys in a specific keyspace)
- * - `unkey:v1:<workspace_id>:keyspaces/<keyspace_id>/keys/<key_id>#verify_key` (verify a specific key)
+ * - `unkey:v1:<workspace_id>:projects/* /keyspaces/* /keys/*#verify` (verify keys in any project in your workspace)
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/* /keys/*#verify` (verify keys in a specific project)
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/*#verify` (verify keys in a specific keyspace)
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/keyspaces/<keyspace_id>/keys/<key_id>#verify` (verify a specific key)
+ *
+ * Use the keyspace's project ID and keyspace ID, not its API ID. The workspace must match your credential's authorized workspace.
  *
  * **Note**: If your credential lacks permission to verify this key, the response is HTTP 200 with `valid: false` and `code: NOT_FOUND`. This does not distinguish a missing key from an inaccessible key.
  */

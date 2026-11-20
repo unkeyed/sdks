@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -70,16 +70,25 @@ export type App = {
    */
   oci?: AppOCI | undefined;
   /**
-   * The identifier of the deployment currently serving this app.
+   * Deprecated. Use `currentDeploymentId` on the environment instead; each
    *
    * @remarks
-   * Omitted if the app has no active deployment yet.
+   * environment has its own live deployment. This field is the deployment
+   * currently serving the app's production environment.
+   * Omitted if that environment has no live deployment yet.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   currentDeploymentId?: string | undefined;
   /**
-   * Whether the app is currently serving a rolled-back deployment rather than its latest one.
+   * Deprecated. Use `isRolledBack` on the environment instead; each
    *
    * @remarks
+   * environment is rolled back on its own. This field reports whether the
+   * app's production environment is serving a rolled-back deployment rather
+   * than its latest one.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   isRolledBack: boolean;
   /**
@@ -105,24 +114,26 @@ export type App = {
 };
 
 /** @internal */
-export const SourceType$inboundSchema: z.ZodNativeEnum<typeof SourceType> = z
-  .nativeEnum(SourceType);
+export const SourceType$inboundSchema: z.ZodNativeEnum<typeof SourceType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SourceType));
 
 /** @internal */
-export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    slug: z.string(),
-    sourceType: SourceType$inboundSchema.optional(),
-    git: AppGit$inboundSchema.optional(),
-    oci: AppOCI$inboundSchema.optional(),
-    currentDeploymentId: z.string().optional(),
-    isRolledBack: z.boolean(),
-    deleteProtection: z.boolean(),
-    createdAt: z.number().int(),
-    updatedAt: z.number().int().optional(),
-  });
+export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      slug: z.string(),
+      sourceType: SourceType$inboundSchema.optional(),
+      git: AppGit$inboundSchema.optional(),
+      oci: AppOCI$inboundSchema.optional(),
+      currentDeploymentId: z.string().optional(),
+      isRolledBack: z.boolean(),
+      deleteProtection: z.boolean(),
+      createdAt: z.number().int(),
+      updatedAt: z.number().int().optional(),
+    })
+  );
 
 export function appFromJSON(
   jsonString: string,

@@ -12,6 +12,7 @@ export * from "./identitieslistidentities.js";
 export * from "./logslistapirequests.js";
 export * from "./permissionslistpermissions.js";
 export * from "./permissionslistroles.js";
+export * from "./portalcreatekey.js";
 export * from "./portalcreatesession.js";
 export * from "./portalexchangecode.js";
 export * from "./portalgetverifications.js";

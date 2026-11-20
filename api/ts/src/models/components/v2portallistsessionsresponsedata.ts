@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,10 +27,12 @@ export const V2PortalListSessionsResponseData$inboundSchema: z.ZodType<
   V2PortalListSessionsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  externalId: z.string(),
-  sessions: z.array(V2PortalListSessionsSession$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalId: z.string(),
+    sessions: z.array(V2PortalListSessionsSession$inboundSchema),
+  })
+);
 
 export function v2PortalListSessionsResponseDataFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   DeploymentSourceDeployment,
   DeploymentSourceDeployment$Outbound,
@@ -73,14 +74,16 @@ export const V3DeploymentsCreateDeploymentRequestBody$outboundSchema: z.ZodType<
   V3DeploymentsCreateDeploymentRequestBody$Outbound,
   z.ZodTypeDef,
   V3DeploymentsCreateDeploymentRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-  git: DeploymentSourceGit$outboundSchema.optional(),
-  oci: DeploymentSourceOCI$outboundSchema.optional(),
-  deployment: DeploymentSourceDeployment$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+    git: DeploymentSourceGit$outboundSchema.optional(),
+    oci: DeploymentSourceOCI$outboundSchema.optional(),
+    deployment: DeploymentSourceDeployment$outboundSchema.optional(),
+  })
+);
 
 export function v3DeploymentsCreateDeploymentRequestBodyToJSON(
   v3DeploymentsCreateDeploymentRequestBody:

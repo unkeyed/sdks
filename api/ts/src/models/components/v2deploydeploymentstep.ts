@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const V2DeployDeploymentStep$inboundSchema: z.ZodType<
   V2DeployDeploymentStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.string().optional(),
-  message: z.string().optional(),
-  errorMessage: z.string().optional(),
-  createdAt: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+    message: z.string().optional(),
+    errorMessage: z.string().optional(),
+    createdAt: z.number().int().optional(),
+  })
+);
 
 export function v2DeployDeploymentStepFromJSON(
   jsonString: string,

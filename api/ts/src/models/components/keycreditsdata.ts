@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const KeyCreditsData$inboundSchema: z.ZodType<
   KeyCreditsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  remaining: z.nullable(z.number().int()),
-  refill: KeyCreditsRefill$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remaining: z.nullable(z.number().int()),
+    refill: KeyCreditsRefill$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type KeyCreditsData$Outbound = {
   remaining: number | null;
@@ -47,10 +49,12 @@ export const KeyCreditsData$outboundSchema: z.ZodType<
   KeyCreditsData$Outbound,
   z.ZodTypeDef,
   KeyCreditsData
-> = z.object({
-  remaining: z.nullable(z.number().int()),
-  refill: KeyCreditsRefill$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remaining: z.nullable(z.number().int()),
+    refill: KeyCreditsRefill$outboundSchema.optional(),
+  })
+);
 
 export function keyCreditsDataToJSON(keyCreditsData: KeyCreditsData): string {
   return JSON.stringify(KeyCreditsData$outboundSchema.parse(keyCreditsData));

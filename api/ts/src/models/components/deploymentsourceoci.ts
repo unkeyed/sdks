@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deploy a prebuilt OCI image without a build.
@@ -24,9 +25,11 @@ export const DeploymentSourceOCI$outboundSchema: z.ZodType<
   DeploymentSourceOCI$Outbound,
   z.ZodTypeDef,
   DeploymentSourceOCI
-> = z.object({
-  image: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image: z.string(),
+  })
+);
 
 export function deploymentSourceOCIToJSON(
   deploymentSourceOCI: DeploymentSourceOCI,

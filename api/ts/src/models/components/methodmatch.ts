@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +29,7 @@ export type MethodMatch = {
 /** @internal */
 export const MethodMatchMethod$inboundSchema: z.ZodNativeEnum<
   typeof MethodMatchMethod
-> = z.nativeEnum(MethodMatchMethod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MethodMatchMethod));
 /** @internal */
 export const MethodMatchMethod$outboundSchema: z.ZodNativeEnum<
   typeof MethodMatchMethod
@@ -40,9 +40,11 @@ export const MethodMatch$inboundSchema: z.ZodType<
   MethodMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  methods: z.array(MethodMatchMethod$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    methods: z.array(MethodMatchMethod$inboundSchema),
+  })
+);
 /** @internal */
 export type MethodMatch$Outbound = {
   methods: Array<string>;
@@ -53,9 +55,11 @@ export const MethodMatch$outboundSchema: z.ZodType<
   MethodMatch$Outbound,
   z.ZodTypeDef,
   MethodMatch
-> = z.object({
-  methods: z.array(MethodMatchMethod$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    methods: z.array(MethodMatchMethod$outboundSchema),
+  })
+);
 
 export function methodMatchToJSON(methodMatch: MethodMatch): string {
   return JSON.stringify(MethodMatch$outboundSchema.parse(methodMatch));

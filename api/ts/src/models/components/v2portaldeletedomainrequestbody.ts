@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalDeleteDomainRequestBody = {
   /**
@@ -29,10 +30,12 @@ export const V2PortalDeleteDomainRequestBody$outboundSchema: z.ZodType<
   V2PortalDeleteDomainRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalDeleteDomainRequestBody
-> = z.object({
-  portal: z.string(),
-  domainId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    domainId: z.string(),
+  })
+);
 
 export function v2PortalDeleteDomainRequestBodyToJSON(
   v2PortalDeleteDomainRequestBody: V2PortalDeleteDomainRequestBody,

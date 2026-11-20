@@ -18,7 +18,10 @@ export class Internal extends ClientSDK {
    *
    * Creates a new deployment for a project using either a pre-built Docker image or build context.
    *
-   * **Authentication**: Requires a valid root key with appropriate permissions.
+   * **Authentication**: Requires a valid root key with `#write` permission on
+   * `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/deployments/*`.
+   * The workspace must match the root key's authorized workspace. The project,
+   * app, and environment must match the resources resolved from the request.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */

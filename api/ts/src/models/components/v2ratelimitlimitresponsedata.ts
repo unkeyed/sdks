@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -69,13 +69,15 @@ export const V2RatelimitLimitResponseData$inboundSchema: z.ZodType<
   V2RatelimitLimitResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int(),
-  remaining: z.number().int(),
-  reset: z.number().int(),
-  success: z.boolean(),
-  overrideId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int(),
+    remaining: z.number().int(),
+    reset: z.number().int(),
+    success: z.boolean(),
+    overrideId: z.string().optional(),
+  })
+);
 
 export function v2RatelimitLimitResponseDataFromJSON(
   jsonString: string,

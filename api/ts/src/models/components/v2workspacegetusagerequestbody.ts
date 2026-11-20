@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   V2WorkspaceGetUsageRequestPeriod,
   V2WorkspaceGetUsageRequestPeriod$Outbound,
@@ -30,9 +31,11 @@ export const V2WorkspaceGetUsageRequestBody$outboundSchema: z.ZodType<
   V2WorkspaceGetUsageRequestBody$Outbound,
   z.ZodTypeDef,
   V2WorkspaceGetUsageRequestBody
-> = z.object({
-  period: V2WorkspaceGetUsageRequestPeriod$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: V2WorkspaceGetUsageRequestPeriod$outboundSchema.optional(),
+  })
+);
 
 export function v2WorkspaceGetUsageRequestBodyToJSON(
   v2WorkspaceGetUsageRequestBody: V2WorkspaceGetUsageRequestBody,

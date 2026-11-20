@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,7 +68,9 @@ export type EnvironmentHealthcheck = {
 /** @internal */
 export const EnvironmentHealthcheckMethod$inboundSchema: z.ZodNativeEnum<
   typeof EnvironmentHealthcheckMethod
-> = z.nativeEnum(EnvironmentHealthcheckMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EnvironmentHealthcheckMethod)
+);
 /** @internal */
 export const EnvironmentHealthcheckMethod$outboundSchema: z.ZodNativeEnum<
   typeof EnvironmentHealthcheckMethod
@@ -79,14 +81,16 @@ export const EnvironmentHealthcheck$inboundSchema: z.ZodType<
   EnvironmentHealthcheck,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  method: EnvironmentHealthcheckMethod$inboundSchema,
-  path: z.string(),
-  intervalSeconds: z.number().int().optional(),
-  timeoutSeconds: z.number().int().optional(),
-  failureThreshold: z.number().int().optional(),
-  initialDelaySeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    method: EnvironmentHealthcheckMethod$inboundSchema,
+    path: z.string(),
+    intervalSeconds: z.number().int().optional(),
+    timeoutSeconds: z.number().int().optional(),
+    failureThreshold: z.number().int().optional(),
+    initialDelaySeconds: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type EnvironmentHealthcheck$Outbound = {
   method: string;
@@ -102,14 +106,16 @@ export const EnvironmentHealthcheck$outboundSchema: z.ZodType<
   EnvironmentHealthcheck$Outbound,
   z.ZodTypeDef,
   EnvironmentHealthcheck
-> = z.object({
-  method: EnvironmentHealthcheckMethod$outboundSchema,
-  path: z.string(),
-  intervalSeconds: z.number().int().optional(),
-  timeoutSeconds: z.number().int().optional(),
-  failureThreshold: z.number().int().optional(),
-  initialDelaySeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    method: EnvironmentHealthcheckMethod$outboundSchema,
+    path: z.string(),
+    intervalSeconds: z.number().int().optional(),
+    timeoutSeconds: z.number().int().optional(),
+    failureThreshold: z.number().int().optional(),
+    initialDelaySeconds: z.number().int().optional(),
+  })
+);
 
 export function environmentHealthcheckToJSON(
   environmentHealthcheck: EnvironmentHealthcheck,

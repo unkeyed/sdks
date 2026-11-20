@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   UpdateKeyCreditsRefill,
   UpdateKeyCreditsRefill$Outbound,
@@ -34,10 +35,12 @@ export const UpdateKeyCreditsData$outboundSchema: z.ZodType<
   UpdateKeyCreditsData$Outbound,
   z.ZodTypeDef,
   UpdateKeyCreditsData
-> = z.object({
-  remaining: z.nullable(z.number().int()).optional(),
-  refill: z.nullable(UpdateKeyCreditsRefill$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remaining: z.nullable(z.number().int()).optional(),
+    refill: z.nullable(UpdateKeyCreditsRefill$outboundSchema).optional(),
+  })
+);
 
 export function updateKeyCreditsDataToJSON(
   updateKeyCreditsData: UpdateKeyCreditsData,

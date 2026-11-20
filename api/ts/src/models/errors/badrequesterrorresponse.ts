@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 import { UnkeyError } from "./unkeyerror.js";
 
@@ -57,17 +58,19 @@ export const BadRequestErrorResponse$inboundSchema: z.ZodType<
   BadRequestErrorResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: components.Meta$inboundSchema,
-  error: components.BadRequestErrorDetails$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new BadRequestErrorResponse(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: components.Meta$inboundSchema,
+    error: components.BadRequestErrorDetails$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new BadRequestErrorResponse(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

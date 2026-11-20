@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalListDomainsRequestBody = {
   /**
@@ -24,9 +25,11 @@ export const V2PortalListDomainsRequestBody$outboundSchema: z.ZodType<
   V2PortalListDomainsRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalListDomainsRequestBody
-> = z.object({
-  portal: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+  })
+);
 
 export function v2PortalListDomainsRequestBodyToJSON(
   v2PortalListDomainsRequestBody: V2PortalListDomainsRequestBody,

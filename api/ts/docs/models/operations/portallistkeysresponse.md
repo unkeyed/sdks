@@ -69,6 +69,34 @@ let value: PortalListKeysResponse = {
       cursor: "eyJrZXkiOiJrZXlfMTIzNCIsInRzIjoxNjk5Mzc4ODAwfQ==",
       hasMore: true,
     },
+    keyCreation: {
+      maxKeys: 5,
+      liveKeyCount: 2,
+      ratelimits: [
+        {
+          name: "requests",
+          limit: 100,
+          duration: 60000,
+        },
+      ],
+      maxLifetime: 2592000000,
+      permissions: {
+        required: [
+          "documents.read",
+        ],
+        allowed: [
+          "documents.write",
+        ],
+      },
+      roles: {
+        required: [
+          "documents.read",
+        ],
+        allowed: [
+          "documents.write",
+        ],
+      },
+    },
   },
 };
 ```

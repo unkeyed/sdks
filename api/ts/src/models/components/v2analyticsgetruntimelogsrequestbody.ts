@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2AnalyticsGetRuntimeLogsRequestBody = {
   /**
@@ -27,9 +28,11 @@ export const V2AnalyticsGetRuntimeLogsRequestBody$outboundSchema: z.ZodType<
   V2AnalyticsGetRuntimeLogsRequestBody$Outbound,
   z.ZodTypeDef,
   V2AnalyticsGetRuntimeLogsRequestBody
-> = z.object({
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+  })
+);
 
 export function v2AnalyticsGetRuntimeLogsRequestBodyToJSON(
   v2AnalyticsGetRuntimeLogsRequestBody: V2AnalyticsGetRuntimeLogsRequestBody,

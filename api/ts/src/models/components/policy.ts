@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   FirewallPolicy,
   FirewallPolicy$Outbound,
@@ -114,16 +115,18 @@ export const Policy$outboundSchema: z.ZodType<
   Policy$Outbound,
   z.ZodTypeDef,
   Policy
-> = z.object({
-  name: z.string(),
-  enabled: z.boolean(),
-  match: z.array(MatchExpr$outboundSchema).optional(),
-  keyauth: KeyauthPolicy$outboundSchema.optional(),
-  ratelimit: RatelimitPolicy$outboundSchema.optional(),
-  firewall: FirewallPolicy$outboundSchema.optional(),
-  openapi: OpenapiPolicy$outboundSchema.optional(),
-  logging: LoggingPolicy$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    enabled: z.boolean(),
+    match: z.array(MatchExpr$outboundSchema).optional(),
+    keyauth: KeyauthPolicy$outboundSchema.optional(),
+    ratelimit: RatelimitPolicy$outboundSchema.optional(),
+    firewall: FirewallPolicy$outboundSchema.optional(),
+    openapi: OpenapiPolicy$outboundSchema.optional(),
+    logging: LoggingPolicy$outboundSchema.optional(),
+  })
+);
 
 export function policyToJSON(policy: Policy): string {
   return JSON.stringify(Policy$outboundSchema.parse(policy));

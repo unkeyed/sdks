@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,12 +46,14 @@ export const KeyRatelimit$inboundSchema: z.ZodType<
   KeyRatelimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  limit: z.number().int().optional(),
-  duration: z.number().int().optional(),
-  cost: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    limit: z.number().int().optional(),
+    duration: z.number().int().optional(),
+    cost: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type KeyRatelimit$Outbound = {
   name: string;
@@ -65,12 +67,14 @@ export const KeyRatelimit$outboundSchema: z.ZodType<
   KeyRatelimit$Outbound,
   z.ZodTypeDef,
   KeyRatelimit
-> = z.object({
-  name: z.string(),
-  limit: z.number().int().optional(),
-  duration: z.number().int().optional(),
-  cost: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    limit: z.number().int().optional(),
+    duration: z.number().int().optional(),
+    cost: z.number().int().optional(),
+  })
+);
 
 export function keyRatelimitToJSON(keyRatelimit: KeyRatelimit): string {
   return JSON.stringify(KeyRatelimit$outboundSchema.parse(keyRatelimit));
