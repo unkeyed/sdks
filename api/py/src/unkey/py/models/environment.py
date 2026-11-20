@@ -48,6 +48,17 @@ class EnvironmentTypedDict(TypedDict):
     r"""Unix timestamp in milliseconds when the environment was created.
 
     """
+    current_deployment_id: NotRequired[str]
+    r"""The identifier of the deployment currently serving this environment.
+    Omitted if the environment has no live deployment yet.
+
+    """
+    is_rolled_back: NotRequired[bool]
+    r"""Whether this environment is serving a rolled-back deployment rather than its latest one.
+    New deployments do not replace a rolled-back deployment until one is promoted.
+    Always returned.
+
+    """
     updated_at: NotRequired[int]
     r"""Unix timestamp in milliseconds when the environment was last updated.
     Omitted if the environment has never been updated.
@@ -106,6 +117,23 @@ class Environment(BaseModel):
 
     """
 
+    current_deployment_id: Annotated[
+        Optional[str], pydantic.Field(alias="currentDeploymentId")
+    ] = None
+    r"""The identifier of the deployment currently serving this environment.
+    Omitted if the environment has no live deployment yet.
+
+    """
+
+    is_rolled_back: Annotated[Optional[bool], pydantic.Field(alias="isRolledBack")] = (
+        None
+    )
+    r"""Whether this environment is serving a rolled-back deployment rather than its latest one.
+    New deployments do not replace a rolled-back deployment until one is promoted.
+    Always returned.
+
+    """
+
     updated_at: Annotated[Optional[int], pydantic.Field(alias="updatedAt")] = None
     r"""Unix timestamp in milliseconds when the environment was last updated.
     Omitted if the environment has never been updated.
@@ -135,7 +163,16 @@ class Environment(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["updatedAt", "runtime", "build", "regions"])
+        optional_fields = set(
+            [
+                "currentDeploymentId",
+                "isRolledBack",
+                "updatedAt",
+                "runtime",
+                "build",
+                "regions",
+            ]
+        )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

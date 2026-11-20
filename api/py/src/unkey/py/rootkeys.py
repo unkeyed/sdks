@@ -95,7 +95,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -221,7 +225,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -276,7 +284,7 @@ class RootKeys(BaseSDK):
         Deletes a root key in the authenticated workspace.
         Requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
         Use `rootKeys/*#delete` to delete any root key in the workspace.
-        Deleted keys cannot authenticate.
+        Deleted keys cannot authenticate. Deletion can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -342,7 +350,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -407,7 +419,7 @@ class RootKeys(BaseSDK):
         Deletes a root key in the authenticated workspace.
         Requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
         Use `rootKeys/*#delete` to delete any root key in the workspace.
-        Deleted keys cannot authenticate.
+        Deleted keys cannot authenticate. Deletion can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -473,7 +485,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -611,7 +627,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -762,7 +782,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -844,14 +868,15 @@ class RootKeys(BaseSDK):
         already hold every permission of the original key. When `expiration` is not null,
         it also requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
 
-        `expiration` controls the original key: 0 revokes it immediately, a positive value
-        keeps it valid for that many milliseconds, and null keeps its current expiration.
+        `expiration` controls the original key: 0 revokes it, a positive value keeps it
+        valid for that many milliseconds, and null keeps its current expiration. Revoking
+        the original key can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
 
         :param key_id: Root key identifier returned by rootKeys.createKey or rootKeys.listKeys.
-        :param expiration: Milliseconds until the original root key expires. Use 0 to revoke it immediately.
+        :param expiration: Milliseconds until the original root key expires. Use 0 to revoke it. Revocation can take up to 30 seconds to take effect.
             Use null to keep the original key's current expiration. This value never extends
             an existing expiration.
 
@@ -916,7 +941,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -985,14 +1014,15 @@ class RootKeys(BaseSDK):
         already hold every permission of the original key. When `expiration` is not null,
         it also requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
 
-        `expiration` controls the original key: 0 revokes it immediately, a positive value
-        keeps it valid for that many milliseconds, and null keeps its current expiration.
+        `expiration` controls the original key: 0 revokes it, a positive value keeps it
+        valid for that many milliseconds, and null keeps its current expiration. Revoking
+        the original key can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
 
         :param key_id: Root key identifier returned by rootKeys.createKey or rootKeys.listKeys.
-        :param expiration: Milliseconds until the original root key expires. Use 0 to revoke it immediately.
+        :param expiration: Milliseconds until the original root key expires. Use 0 to revoke it. Revocation can take up to 30 seconds to take effect.
             Use null to keep the original key's current expiration. This value never extends
             an existing expiration.
 
@@ -1057,7 +1087,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1130,6 +1164,7 @@ class RootKeys(BaseSDK):
         `permissions` replaces the complete permission set. Each permission must be a supported URN
         in the authenticated workspace and within the caller's permissions.
         An expiring root key can only update root keys that expire no later than itself.
+        Changes to `enabled`, `permissions`, and `ipAllowlist` can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1205,7 +1240,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1278,6 +1317,7 @@ class RootKeys(BaseSDK):
         `permissions` replaces the complete permission set. Each permission must be a supported URN
         in the authenticated workspace and within the caller's permissions.
         An expiring root key can only update root keys that expire no later than itself.
+        Changes to `enabled`, `permissions`, and `ipAllowlist` can take up to 30 seconds to take effect.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1353,7 +1393,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

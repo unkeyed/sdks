@@ -18,7 +18,7 @@ class V2RootKeysRerollKeyRequestBodyTypedDict(TypedDict):
     key_id: str
     r"""Root key identifier returned by rootKeys.createKey or rootKeys.listKeys."""
     expiration: Nullable[int]
-    r"""Milliseconds until the original root key expires. Use 0 to revoke it immediately.
+    r"""Milliseconds until the original root key expires. Use 0 to revoke it. Revocation can take up to 30 seconds to take effect.
     Use null to keep the original key's current expiration. This value never extends
     an existing expiration.
 
@@ -30,7 +30,7 @@ class V2RootKeysRerollKeyRequestBody(BaseModel):
     r"""Root key identifier returned by rootKeys.createKey or rootKeys.listKeys."""
 
     expiration: Nullable[int]
-    r"""Milliseconds until the original root key expires. Use 0 to revoke it immediately.
+    r"""Milliseconds until the original root key expires. Use 0 to revoke it. Revocation can take up to 30 seconds to take effect.
     Use null to keep the original key's current expiration. This value never extends
     an existing expiration.
 

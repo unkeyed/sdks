@@ -100,7 +100,14 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -232,7 +239,14 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -369,7 +383,14 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -516,7 +537,14 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -657,7 +685,7 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -793,7 +821,7 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -962,7 +990,7 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1160,7 +1188,7 @@ class Apis(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apis"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

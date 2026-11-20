@@ -112,7 +112,7 @@ class Logs(BaseSDK):
                 tags=["logs"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -145,6 +145,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -264,7 +269,7 @@ class Logs(BaseSDK):
                 tags=["logs"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -297,6 +302,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -422,7 +432,7 @@ class Logs(BaseSDK):
                 tags=["logs"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]},
                 },
             ),
             request=req,
@@ -479,6 +489,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res
@@ -604,7 +619,7 @@ class Logs(BaseSDK):
                 tags=["logs"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]},
                 },
             ),
             request=req,
@@ -661,6 +676,11 @@ class Logs(BaseSDK):
                 errors.UnprocessableEntityErrorResponseData, http_res
             )
             raise errors.UnprocessableEntityErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerErrorResponseData, http_res

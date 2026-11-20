@@ -129,7 +129,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -302,7 +310,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -379,9 +395,9 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.delete_domain` (to delete domains in any environment)
-        - `environment.<environment_id>.delete_domain` (to delete domains in a specific environment)
+        Your root key must have `delete` permission on the domain:
+        `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#delete`.
+        Use `*` in place of resource IDs to grant access to all matching domains in your workspace.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -453,7 +469,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -525,9 +549,9 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.delete_domain` (to delete domains in any environment)
-        - `environment.<environment_id>.delete_domain` (to delete domains in a specific environment)
+        Your root key must have `delete` permission on the domain:
+        `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#delete`.
+        Use `*` in place of resource IDs to grant access to all matching domains in your workspace.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -599,7 +623,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -760,7 +792,7 @@ class Domains(BaseSDK):
                 tags=["domains"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -922,7 +954,7 @@ class Domains(BaseSDK):
                 tags=["domains"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -1097,7 +1129,7 @@ class Domains(BaseSDK):
                 tags=["domains"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -1304,7 +1336,7 @@ class Domains(BaseSDK):
                 tags=["domains"],
                 extensions={
                     "x-unkey-idempotency": "idempotent",
-                    "x-unkey-workspace-rate-limit-exempt": True,
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]},
                 },
             ),
             request=req,
@@ -1414,9 +1446,9 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.verify_domain` (to verify domains in any environment)
-        - `environment.<environment_id>.verify_domain` (to verify domains in a specific environment)
+        Your root key must have `write` on the domain:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#write`
+        - `unkey:v1:<workspace_id>:projects/*/apps/*/environments/*/domains/*#write` (all domains in your workspace)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1486,7 +1518,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1568,9 +1608,9 @@ class Domains(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.verify_domain` (to verify domains in any environment)
-        - `environment.<environment_id>.verify_domain` (to verify domains in a specific environment)
+        Your root key must have `write` on the domain:
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#write`
+        - `unkey:v1:<workspace_id>:projects/*/apps/*/environments/*/domains/*#write` (all domains in your workspace)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1640,7 +1680,15 @@ class Domains(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["domains"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
