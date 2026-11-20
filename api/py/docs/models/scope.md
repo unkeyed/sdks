@@ -15,4 +15,5 @@ value = Scope.KEYS_READ
 | ---------------- | ---------------- |
 | `KEYS_READ`      | keys:read        |
 | `KEYS_REROLL`    | keys:reroll      |
+| `KEYS_CREATE`    | keys:create      |
 | `ANALYTICS_READ` | analytics:read   |

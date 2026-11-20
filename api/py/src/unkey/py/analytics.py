@@ -101,7 +101,9 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -252,7 +254,9 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -400,7 +404,7 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -548,7 +552,7 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -699,7 +703,9 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -850,7 +856,9 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -998,7 +1006,7 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1141,7 +1149,7 @@ class Analytics(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["analytics"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

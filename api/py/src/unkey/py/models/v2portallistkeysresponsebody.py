@@ -4,9 +4,21 @@ from __future__ import annotations
 from .keyresponsedata import KeyResponseData, KeyResponseDataTypedDict
 from .meta import Meta, MetaTypedDict
 from .pagination import Pagination, PaginationTypedDict
-from typing import List
-from typing_extensions import TypedDict
-from unkey.py.types import BaseModel
+from .v2portallistkeyskeycreation import (
+    V2PortalListKeysKeyCreation,
+    V2PortalListKeysKeyCreationTypedDict,
+)
+import pydantic
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
+from unkey.py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from unkey.py.types.basemodel import current_filtered_dump
 
 
 class V2PortalListKeysResponseBodyTypedDict(TypedDict):
@@ -16,6 +28,11 @@ class V2PortalListKeysResponseBodyTypedDict(TypedDict):
     r"""Array of the portal end user's API keys."""
     pagination: PaginationTypedDict
     r"""Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination."""
+    key_creation: NotRequired[V2PortalListKeysKeyCreationTypedDict]
+    r"""What the end user may create through `portal.createKey`. Present only when
+    the session may create keys.
+
+    """
 
 
 class V2PortalListKeysResponseBody(BaseModel):
@@ -27,3 +44,40 @@ class V2PortalListKeysResponseBody(BaseModel):
 
     pagination: Pagination
     r"""Pagination metadata for list endpoints. Provides information necessary to traverse through large result sets efficiently using cursor-based pagination."""
+
+    key_creation: Annotated[
+        Optional[V2PortalListKeysKeyCreation], pydantic.Field(alias="keyCreation")
+    ] = None
+    r"""What the end user may create through `portal.createKey`. Present only when
+    the session may create keys.
+
+    """
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["keyCreation"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    V2PortalListKeysResponseBody.model_rebuild()
+except NameError:
+    pass

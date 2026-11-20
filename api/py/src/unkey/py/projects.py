@@ -103,7 +103,15 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -247,7 +255,15 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -318,8 +334,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.delete_project` (to delete any project)
-        - `project.<project_id>.delete_project` (to delete a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#delete` (to delete any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#delete` (to delete a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -387,7 +403,14 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -463,8 +486,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.delete_project` (to delete any project)
-        - `project.<project_id>.delete_project` (to delete a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#delete` (to delete any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#delete` (to delete a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -532,7 +555,14 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -675,7 +705,9 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -813,7 +845,9 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -958,7 +992,9 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1122,7 +1158,9 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1213,8 +1251,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.update_project` (to update any project)
-        - `project.<project_id>.update_project` (to update a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1294,7 +1332,14 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1371,8 +1416,8 @@ class Projects(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `project.*.update_project` (to update any project)
-        - `project.<project_id>.update_project` (to update a specific project)
+        - `unkey:v1:<workspace_id>:projects/*#write` (to update any project in the workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>#write` (to update a specific project)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1452,7 +1497,14 @@ class Projects(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["projects"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

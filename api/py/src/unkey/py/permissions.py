@@ -34,7 +34,9 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Use your workspace ID and its default project ID. A wildcard project grant also authorizes this operation.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -130,7 +132,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -203,7 +212,9 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Use your workspace ID and its default project ID. A wildcard project grant also authorizes this operation.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -299,7 +310,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -370,13 +388,12 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must always have:
-        - `rbac.*.create_role`
-
-        When `permissions` is not empty, it must also have:
-        - `rbac.*.add_permission_to_role`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/*#write`
 
         When any requested permission slug does not exist, it must also have:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Both grants must cover the authenticated workspace and its default project. Attaching existing permissions requires only role write access.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -397,7 +414,7 @@ class Permissions(BaseSDK):
             - Any security considerations or limitations
             - Related roles that might be used together
 
-        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write` for the authenticated workspace and its default project.
 
             Omit this field or provide an empty array to create the role without permissions.
 
@@ -463,7 +480,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -534,13 +558,12 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must always have:
-        - `rbac.*.create_role`
-
-        When `permissions` is not empty, it must also have:
-        - `rbac.*.add_permission_to_role`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/*#write`
 
         When any requested permission slug does not exist, it must also have:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Both grants must cover the authenticated workspace and its default project. Attaching existing permissions requires only role write access.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -561,7 +584,7 @@ class Permissions(BaseSDK):
             - Any security considerations or limitations
             - Related roles that might be used together
 
-        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+        :param permissions: Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write` for the authenticated workspace and its default project.
 
             Omit this field or provide an empty array to create the role without permissions.
 
@@ -627,7 +650,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -696,7 +726,7 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `rbac.*.delete_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#delete`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -780,7 +810,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -849,7 +886,7 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have the following permission:
-        - `rbac.*.delete_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/<permission_id>#delete`
 
 
         If set, this operation will use `root_key` from the global security.
@@ -933,7 +970,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1001,8 +1045,7 @@ class Permissions(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have the following permission:
-        - `rbac.*.delete_role`
+        Your root key must have `unkey:v1:{workspaceId}:projects/{projectId}/rbac/roles/{roleId}#delete` for the role. A wildcard grant that covers the role also authorizes deletion.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1081,7 +1124,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1149,8 +1199,7 @@ class Permissions(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have the following permission:
-        - `rbac.*.delete_role`
+        Your root key must have `unkey:v1:{workspaceId}:projects/{projectId}/rbac/roles/{roleId}#delete` for the role. A wildcard grant that covers the role also authorizes deletion.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1229,7 +1278,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1367,7 +1423,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1505,7 +1561,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1643,7 +1699,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1781,7 +1837,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1931,7 +1987,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2100,7 +2156,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2267,7 +2323,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2439,7 +2495,7 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={"x-unkey-mcp": {"readOnly": True, "toolsets": ["v2"]}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2533,11 +2589,12 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have:
-        - `rbac.*.add_permission_to_role`
-        - `rbac.*.remove_permission_from_role`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
 
         When any requested permission slug does not exist, it must also have:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Use the role's workspace, project, and role IDs in these permissions.
 
 
         :param request: The request object to send.
@@ -2606,7 +2663,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2676,11 +2740,12 @@ class Permissions(BaseSDK):
         **Required Permissions**
 
         Your root key must have:
-        - `rbac.*.add_permission_to_role`
-        - `rbac.*.remove_permission_from_role`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/roles/<role_id>#write`
 
         When any requested permission slug does not exist, it must also have:
-        - `rbac.*.create_permission`
+        - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+
+        Use the role's workspace, project, and role IDs in these permissions.
 
 
         :param request: The request object to send.
@@ -2749,7 +2814,14 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2907,7 +2979,15 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3070,7 +3150,15 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3225,7 +3313,15 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3380,7 +3476,15 @@ class Permissions(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["permissions"],
-                extensions={"x-unkey-idempotency": "idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
