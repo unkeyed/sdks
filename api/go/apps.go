@@ -1557,8 +1557,11 @@ func (s *Apps) ListApps(ctx context.Context, request components.V2AppsListAppsRe
 // **Required Permissions**
 //
 // Your root key must have one of the following permissions:
-// - `app.*.update_app` (to update any app)
-// - `app.<app_id>.update_app` (to update a specific app)
+// - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#write` (to update a specific app)
+// - `unkey:v1:<workspace_id>:projects/<project_id>/apps/*#write` (to update any app in a project)
+// - `unkey:v1:<workspace_id>:projects/*/apps/*#write` (to update any app in your workspace)
+//
+// The same app write permission covers Git repository changes.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Apps) UpdateApp(ctx context.Context, request components.V2AppsUpdateAppRequestBody, opts ...operations.Option) (*operations.AppsUpdateAppResponse, error) {

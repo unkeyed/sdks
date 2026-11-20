@@ -1,0 +1,9 @@
+# PortalCreateKeyResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `V2KeysCreateKeyResponseBody`                                                                     | [*components.V2KeysCreateKeyResponseBody](../../models/components/v2keyscreatekeyresponsebody.md) | :heavy_minus_sign:                                                                                | Key created successfully. The plaintext key is returned exactly once.<br/>                        |

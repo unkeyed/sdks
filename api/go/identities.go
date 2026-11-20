@@ -41,7 +41,7 @@ func newIdentities(rootSDK *Unkey, sdkConfig config.SDKConfiguration, hooks *hoo
 // Perfect for users with multiple devices, organizations with multiple API keys, or when you need unified rate limiting across different services.
 //
 // **Important**
-// Requires `identity.*.create_identity` permission
+// Requires `unkey:v1:<workspaceId>:projects/<projectId>/identities/*#write` for the workspace's default project.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *Identities) CreateIdentity(ctx context.Context, request components.V2IdentitiesCreateIdentityRequestBody, opts ...operations.Option) (*operations.IdentitiesCreateIdentityResponse, error) {
@@ -1475,7 +1475,7 @@ func (s *Identities) ListIdentities(ctx context.Context, request components.V2Id
 // Perfect for subscription changes, plan upgrades, or updating user information. Changes take effect immediately.
 //
 // > **Important**
-// > Requires `identity.*.update_identity` permission
+// > Requires `unkey:v1:{workspaceId}:projects/{projectId}/identities/{identityId}#write` permission for the identity
 // > Rate limit changes propagate within 30 seconds
 //
 // If set, this operation will use [Security.RootKey] from the global security.

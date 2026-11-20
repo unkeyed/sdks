@@ -67,6 +67,13 @@ type V2PortalCreateSessionRequestBody struct {
 	// When omitted, the portal shows no return link.
 	//
 	ReturnURL *string `json:"returnUrl,omitzero"`
+	// A verified custom domain of this portal to build the session URL on, so
+	// end users stay on your domain. The domain must be verified on this
+	// portal; any other value is rejected.
+	//
+	// When omitted, the URL uses Unkey's portal host.
+	//
+	Hostname *string `json:"hostname,omitzero"`
 }
 
 func (v *V2PortalCreateSessionRequestBody) GetPortal() string {
@@ -95,6 +102,13 @@ func (v *V2PortalCreateSessionRequestBody) GetReturnURL() *string {
 		return nil
 	}
 	return v.ReturnURL
+}
+
+func (v *V2PortalCreateSessionRequestBody) GetHostname() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Hostname
 }
 
 // #region class-body-v2portalcreatesessionrequestbody
