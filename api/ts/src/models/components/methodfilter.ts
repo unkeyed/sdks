@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { HttpMethod, HttpMethod$outboundSchema } from "./httpmethod.js";
 
 /**
@@ -30,10 +31,12 @@ export const MethodFilter$outboundSchema: z.ZodType<
   MethodFilter$Outbound,
   z.ZodTypeDef,
   MethodFilter
-> = z.object({
-  is: z.array(HttpMethod$outboundSchema).optional(),
-  isNot: z.array(HttpMethod$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    is: z.array(HttpMethod$outboundSchema).optional(),
+    isNot: z.array(HttpMethod$outboundSchema).optional(),
+  })
+);
 
 export function methodFilterToJSON(methodFilter: MethodFilter): string {
   return JSON.stringify(MethodFilter$outboundSchema.parse(methodFilter));

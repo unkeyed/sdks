@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2AppsListAppsRequestBody = {
   /**
@@ -45,12 +46,14 @@ export const V2AppsListAppsRequestBody$outboundSchema: z.ZodType<
   V2AppsListAppsRequestBody$Outbound,
   z.ZodTypeDef,
   V2AppsListAppsRequestBody
-> = z.object({
-  project: z.string(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  search: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+    search: z.string().optional(),
+  })
+);
 
 export function v2AppsListAppsRequestBodyToJSON(
   v2AppsListAppsRequestBody: V2AppsListAppsRequestBody,

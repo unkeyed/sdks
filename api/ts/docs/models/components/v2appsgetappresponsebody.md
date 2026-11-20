@@ -21,7 +21,6 @@ let value: V2AppsGetAppResponseBody = {
     oci: {
       image: "ghcr.io/acme/api:v1.2.3",
     },
-    currentDeploymentId: "d_1234abcd",
     isRolledBack: false,
     deleteProtection: false,
     createdAt: 1704067200000,

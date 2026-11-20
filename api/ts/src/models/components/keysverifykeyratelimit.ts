@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type KeysVerifyKeyRatelimit = {
   /**
@@ -36,12 +37,14 @@ export const KeysVerifyKeyRatelimit$outboundSchema: z.ZodType<
   KeysVerifyKeyRatelimit$Outbound,
   z.ZodTypeDef,
   KeysVerifyKeyRatelimit
-> = z.object({
-  name: z.string(),
-  cost: z.number().int().default(1),
-  limit: z.number().int().optional(),
-  duration: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    cost: z.number().int().default(1),
+    limit: z.number().int().optional(),
+    duration: z.number().int().optional(),
+  })
+);
 
 export function keysVerifyKeyRatelimitToJSON(
   keysVerifyKeyRatelimit: KeysVerifyKeyRatelimit,

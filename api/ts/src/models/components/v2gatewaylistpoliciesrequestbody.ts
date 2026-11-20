@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2GatewayListPoliciesRequestBody = {
   /**
@@ -40,11 +41,13 @@ export const V2GatewayListPoliciesRequestBody$outboundSchema: z.ZodType<
   V2GatewayListPoliciesRequestBody$Outbound,
   z.ZodTypeDef,
   V2GatewayListPoliciesRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  environment: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    environment: z.string(),
+  })
+);
 
 export function v2GatewayListPoliciesRequestBodyToJSON(
   v2GatewayListPoliciesRequestBody: V2GatewayListPoliciesRequestBody,

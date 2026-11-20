@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2RatelimitListOverridesRequestBody = {
   /**
@@ -39,11 +40,13 @@ export const V2RatelimitListOverridesRequestBody$outboundSchema: z.ZodType<
   V2RatelimitListOverridesRequestBody$Outbound,
   z.ZodTypeDef,
   V2RatelimitListOverridesRequestBody
-> = z.object({
-  namespace: z.string(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace: z.string(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(10),
+  })
+);
 
 export function v2RatelimitListOverridesRequestBodyToJSON(
   v2RatelimitListOverridesRequestBody: V2RatelimitListOverridesRequestBody,

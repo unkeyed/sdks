@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   KeyCreditsData,
   KeyCreditsData$Outbound,
@@ -118,18 +119,20 @@ export const V2KeysMigrateKeyData$outboundSchema: z.ZodType<
   V2KeysMigrateKeyData$Outbound,
   z.ZodTypeDef,
   V2KeysMigrateKeyData
-> = z.object({
-  hash: z.string(),
-  name: z.string().optional(),
-  externalId: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  roles: z.array(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  expires: z.number().int().optional(),
-  enabled: z.boolean().default(true),
-  credits: KeyCreditsData$outboundSchema.optional(),
-  ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hash: z.string(),
+    name: z.string().optional(),
+    externalId: z.string().optional(),
+    meta: z.record(z.any()).optional(),
+    roles: z.array(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+    expires: z.number().int().optional(),
+    enabled: z.boolean().default(true),
+    credits: KeyCreditsData$outboundSchema.optional(),
+    ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
+  })
+);
 
 export function v2KeysMigrateKeyDataToJSON(
   v2KeysMigrateKeyData: V2KeysMigrateKeyData,

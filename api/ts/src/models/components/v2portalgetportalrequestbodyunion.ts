@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalGetPortalRequestBody3 = {
   /**
@@ -115,11 +116,13 @@ export const V2PortalGetPortalRequestBody3$outboundSchema: z.ZodType<
   V2PortalGetPortalRequestBody3$Outbound,
   z.ZodTypeDef,
   V2PortalGetPortalRequestBody3
-> = z.object({
-  portal: z.string().optional(),
-  keyspaceId: z.string().optional(),
-  appId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string().optional(),
+    keyspaceId: z.string().optional(),
+    appId: z.string(),
+  })
+);
 
 export function v2PortalGetPortalRequestBody3ToJSON(
   v2PortalGetPortalRequestBody3: V2PortalGetPortalRequestBody3,
@@ -143,11 +146,13 @@ export const V2PortalGetPortalRequestBody2$outboundSchema: z.ZodType<
   V2PortalGetPortalRequestBody2$Outbound,
   z.ZodTypeDef,
   V2PortalGetPortalRequestBody2
-> = z.object({
-  portal: z.string().optional(),
-  keyspaceId: z.string(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string().optional(),
+    keyspaceId: z.string(),
+    appId: z.string().optional(),
+  })
+);
 
 export function v2PortalGetPortalRequestBody2ToJSON(
   v2PortalGetPortalRequestBody2: V2PortalGetPortalRequestBody2,
@@ -171,11 +176,13 @@ export const V2PortalGetPortalRequestBody1$outboundSchema: z.ZodType<
   V2PortalGetPortalRequestBody1$Outbound,
   z.ZodTypeDef,
   V2PortalGetPortalRequestBody1
-> = z.object({
-  portal: z.string(),
-  keyspaceId: z.string().optional(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    keyspaceId: z.string().optional(),
+    appId: z.string().optional(),
+  })
+);
 
 export function v2PortalGetPortalRequestBody1ToJSON(
   v2PortalGetPortalRequestBody1: V2PortalGetPortalRequestBody1,
@@ -198,11 +205,13 @@ export const V2PortalGetPortalRequestBodyUnion$outboundSchema: z.ZodType<
   V2PortalGetPortalRequestBodyUnion$Outbound,
   z.ZodTypeDef,
   V2PortalGetPortalRequestBodyUnion
-> = z.union([
-  z.lazy(() => V2PortalGetPortalRequestBody1$outboundSchema),
-  z.lazy(() => V2PortalGetPortalRequestBody2$outboundSchema),
-  z.lazy(() => V2PortalGetPortalRequestBody3$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => V2PortalGetPortalRequestBody1$outboundSchema),
+    z.lazy(() => V2PortalGetPortalRequestBody2$outboundSchema),
+    z.lazy(() => V2PortalGetPortalRequestBody3$outboundSchema),
+  ])
+);
 
 export function v2PortalGetPortalRequestBodyUnionToJSON(
   v2PortalGetPortalRequestBodyUnion: V2PortalGetPortalRequestBodyUnion,

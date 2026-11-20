@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,10 +34,12 @@ export const V2RatelimitMultiLimitResponseData$inboundSchema: z.ZodType<
   V2RatelimitMultiLimitResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  passed: z.boolean(),
-  limits: z.array(V2RatelimitMultiLimitCheck$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    passed: z.boolean(),
+    limits: z.array(V2RatelimitMultiLimitCheck$inboundSchema),
+  })
+);
 
 export function v2RatelimitMultiLimitResponseDataFromJSON(
   jsonString: string,

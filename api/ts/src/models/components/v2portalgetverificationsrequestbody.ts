@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PortalGetVerificationsRequestBody = {
   /**
@@ -41,11 +42,13 @@ export const V2PortalGetVerificationsRequestBody$outboundSchema: z.ZodType<
   V2PortalGetVerificationsRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalGetVerificationsRequestBody
-> = z.object({
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  keyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    keyId: z.string().optional(),
+  })
+);
 
 export function v2PortalGetVerificationsRequestBodyToJSON(
   v2PortalGetVerificationsRequestBody: V2PortalGetVerificationsRequestBody,

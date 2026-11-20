@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Permission, Permission$inboundSchema } from "./permission.js";
@@ -48,13 +48,15 @@ export type Role = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string().optional(),
-    permissions: z.array(Permission$inboundSchema).optional(),
-  });
+export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      description: z.string().optional(),
+      permissions: z.array(Permission$inboundSchema).optional(),
+    })
+  );
 
 export function roleFromJSON(
   jsonString: string,

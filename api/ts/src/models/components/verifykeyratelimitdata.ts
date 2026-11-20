@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,16 +50,18 @@ export const VerifyKeyRatelimitData$inboundSchema: z.ZodType<
   VerifyKeyRatelimitData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  exceeded: z.boolean(),
-  id: z.string(),
-  name: z.string(),
-  limit: z.number().int(),
-  duration: z.number().int(),
-  reset: z.number().int(),
-  remaining: z.number().int(),
-  autoApply: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exceeded: z.boolean(),
+    id: z.string(),
+    name: z.string(),
+    limit: z.number().int(),
+    duration: z.number().int(),
+    reset: z.number().int(),
+    remaining: z.number().int(),
+    autoApply: z.boolean(),
+  })
+);
 
 export function verifyKeyRatelimitDataFromJSON(
   jsonString: string,

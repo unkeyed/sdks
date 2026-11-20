@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2KeysGetKeyRequestBody = {
   /**
@@ -39,10 +40,12 @@ export const V2KeysGetKeyRequestBody$outboundSchema: z.ZodType<
   V2KeysGetKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysGetKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-  decrypt: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    decrypt: z.boolean().default(false),
+  })
+);
 
 export function v2KeysGetKeyRequestBodyToJSON(
   v2KeysGetKeyRequestBody: V2KeysGetKeyRequestBody,

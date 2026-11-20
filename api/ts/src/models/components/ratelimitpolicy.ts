@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -116,13 +116,15 @@ export const Identifier$inboundSchema: z.ZodType<
   Identifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  remoteIp: RemoteIpKey$inboundSchema.optional(),
-  header: HeaderKey$inboundSchema.optional(),
-  authenticatedSubject: AuthenticatedSubjectKey$inboundSchema.optional(),
-  path: PathKey$inboundSchema.optional(),
-  principalField: PrincipalFieldKey$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remoteIp: RemoteIpKey$inboundSchema.optional(),
+    header: HeaderKey$inboundSchema.optional(),
+    authenticatedSubject: AuthenticatedSubjectKey$inboundSchema.optional(),
+    path: PathKey$inboundSchema.optional(),
+    principalField: PrincipalFieldKey$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type Identifier$Outbound = {
   remoteIp?: RemoteIpKey$Outbound | undefined;
@@ -137,13 +139,15 @@ export const Identifier$outboundSchema: z.ZodType<
   Identifier$Outbound,
   z.ZodTypeDef,
   Identifier
-> = z.object({
-  remoteIp: RemoteIpKey$outboundSchema.optional(),
-  header: HeaderKey$outboundSchema.optional(),
-  authenticatedSubject: AuthenticatedSubjectKey$outboundSchema.optional(),
-  path: PathKey$outboundSchema.optional(),
-  principalField: PrincipalFieldKey$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    remoteIp: RemoteIpKey$outboundSchema.optional(),
+    header: HeaderKey$outboundSchema.optional(),
+    authenticatedSubject: AuthenticatedSubjectKey$outboundSchema.optional(),
+    path: PathKey$outboundSchema.optional(),
+    principalField: PrincipalFieldKey$outboundSchema.optional(),
+  })
+);
 
 export function identifierToJSON(identifier: Identifier): string {
   return JSON.stringify(Identifier$outboundSchema.parse(identifier));
@@ -163,12 +167,14 @@ export const RatelimitPolicy$inboundSchema: z.ZodType<
   RatelimitPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int(),
-  windowMs: z.number().int(),
-  identifier: z.lazy(() => Identifier$inboundSchema).optional(),
-  identifiers: z.array(RatelimitIdentifier$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int(),
+    windowMs: z.number().int(),
+    identifier: z.lazy(() => Identifier$inboundSchema).optional(),
+    identifiers: z.array(RatelimitIdentifier$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type RatelimitPolicy$Outbound = {
   limit: number;
@@ -182,12 +188,14 @@ export const RatelimitPolicy$outboundSchema: z.ZodType<
   RatelimitPolicy$Outbound,
   z.ZodTypeDef,
   RatelimitPolicy
-> = z.object({
-  limit: z.number().int(),
-  windowMs: z.number().int(),
-  identifier: z.lazy(() => Identifier$outboundSchema).optional(),
-  identifiers: z.array(RatelimitIdentifier$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int(),
+    windowMs: z.number().int(),
+    identifier: z.lazy(() => Identifier$outboundSchema).optional(),
+    identifiers: z.array(RatelimitIdentifier$outboundSchema).optional(),
+  })
+);
 
 export function ratelimitPolicyToJSON(
   ratelimitPolicy: RatelimitPolicy,

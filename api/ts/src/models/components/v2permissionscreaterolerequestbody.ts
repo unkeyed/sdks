@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2PermissionsCreateRoleRequestBody = {
   /**
@@ -30,7 +31,7 @@ export type V2PermissionsCreateRoleRequestBody = {
    */
   description?: string | undefined;
   /**
-   * Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `rbac.*.create_permission`.
+   * Permission slugs to attach to the role. Existing permissions are reused. Missing permissions are created automatically when the root key has `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write` for the authenticated workspace and its default project.
    *
    * @remarks
    *
@@ -51,11 +52,13 @@ export const V2PermissionsCreateRoleRequestBody$outboundSchema: z.ZodType<
   V2PermissionsCreateRoleRequestBody$Outbound,
   z.ZodTypeDef,
   V2PermissionsCreateRoleRequestBody
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 
 export function v2PermissionsCreateRoleRequestBodyToJSON(
   v2PermissionsCreateRoleRequestBody: V2PermissionsCreateRoleRequestBody,

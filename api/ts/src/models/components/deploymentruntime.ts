@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,16 +70,18 @@ export const DeploymentRuntime$inboundSchema: z.ZodType<
   DeploymentRuntime,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vCpus: z.number(),
-  memoryMib: z.number().int(),
-  storageMib: z.number().int(),
-  port: z.number().int(),
-  command: z.array(z.string()),
-  shutdownSignal: EnvironmentShutdownSignal$inboundSchema,
-  upstreamProtocol: EnvironmentUpstreamProtocol$inboundSchema,
-  healthcheck: EnvironmentHealthcheck$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vCpus: z.number(),
+    memoryMib: z.number().int(),
+    storageMib: z.number().int(),
+    port: z.number().int(),
+    command: z.array(z.string()),
+    shutdownSignal: EnvironmentShutdownSignal$inboundSchema,
+    upstreamProtocol: EnvironmentUpstreamProtocol$inboundSchema,
+    healthcheck: EnvironmentHealthcheck$inboundSchema.optional(),
+  })
+);
 
 export function deploymentRuntimeFromJSON(
   jsonString: string,

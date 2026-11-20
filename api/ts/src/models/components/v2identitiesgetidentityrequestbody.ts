@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2IdentitiesGetIdentityRequestBody = {
   /**
@@ -21,9 +22,11 @@ export const V2IdentitiesGetIdentityRequestBody$outboundSchema: z.ZodType<
   V2IdentitiesGetIdentityRequestBody$Outbound,
   z.ZodTypeDef,
   V2IdentitiesGetIdentityRequestBody
-> = z.object({
-  identity: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: z.string(),
+  })
+);
 
 export function v2IdentitiesGetIdentityRequestBodyToJSON(
   v2IdentitiesGetIdentityRequestBody: V2IdentitiesGetIdentityRequestBody,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -52,12 +52,14 @@ export const RatelimitOverride$inboundSchema: z.ZodType<
   RatelimitOverride,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  overrideId: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    overrideId: z.string(),
+    duration: z.number().int(),
+    identifier: z.string(),
+    limit: z.number().int(),
+  })
+);
 
 export function ratelimitOverrideFromJSON(
   jsonString: string,

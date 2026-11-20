@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2KeysWhoamiRequestBody = {
   /**
@@ -25,9 +26,11 @@ export const V2KeysWhoamiRequestBody$outboundSchema: z.ZodType<
   V2KeysWhoamiRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysWhoamiRequestBody
-> = z.object({
-  key: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+  })
+);
 
 export function v2KeysWhoamiRequestBodyToJSON(
   v2KeysWhoamiRequestBody: V2KeysWhoamiRequestBody,

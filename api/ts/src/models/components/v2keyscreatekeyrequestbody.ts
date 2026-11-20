@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   KeyCreditsData,
   KeyCreditsData$Outbound,
@@ -79,6 +80,8 @@ export type V2KeysCreateKeyRequestBody = {
    * Grants specific permissions directly to this key without requiring role membership.
    *
    * @remarks
+   * Each entry is a permission ID or slug. IDs are matched first, then slugs.
+   * An entry that matches no permission creates a permission with that slug.
    * Wildcard permissions like `documents.*` grant access to all sub-permissions including `documents.read` and `documents.write`.
    * Direct permissions supplement any permissions inherited from assigned roles.
    */
@@ -150,21 +153,23 @@ export const V2KeysCreateKeyRequestBody$outboundSchema: z.ZodType<
   V2KeysCreateKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysCreateKeyRequestBody
-> = z.object({
-  apiId: z.string(),
-  prefix: z.string().optional(),
-  name: z.string().optional(),
-  byteLength: z.number().int().default(16),
-  externalId: z.string().optional(),
-  meta: z.record(z.any()).optional(),
-  roles: z.array(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  expires: z.number().int().optional(),
-  credits: KeyCreditsData$outboundSchema.optional(),
-  ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
-  enabled: z.boolean().default(true),
-  recoverable: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiId: z.string(),
+    prefix: z.string().optional(),
+    name: z.string().optional(),
+    byteLength: z.number().int().default(16),
+    externalId: z.string().optional(),
+    meta: z.record(z.any()).optional(),
+    roles: z.array(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+    expires: z.number().int().optional(),
+    credits: KeyCreditsData$outboundSchema.optional(),
+    ratelimits: z.array(RatelimitRequest$outboundSchema).optional(),
+    enabled: z.boolean().default(true),
+    recoverable: z.boolean().default(false),
+  })
+);
 
 export function v2KeysCreateKeyRequestBodyToJSON(
   v2KeysCreateKeyRequestBody: V2KeysCreateKeyRequestBody,

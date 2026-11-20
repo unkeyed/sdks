@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   DeploymentSourceDeployment,
   DeploymentSourceDeployment$Outbound,
@@ -151,14 +152,16 @@ export const V2DeploymentsCreateDeploymentRequestBody3$outboundSchema:
     V2DeploymentsCreateDeploymentRequestBody3$Outbound,
     z.ZodTypeDef,
     V2DeploymentsCreateDeploymentRequestBody3
-  > = z.object({
-    project: z.string(),
-    app: z.string(),
-    environment: z.string(),
-    git: DeploymentSourceGit$outboundSchema.optional(),
-    image: DeploymentSourceImage$outboundSchema.optional(),
-    deployment: DeploymentSourceDeployment$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      app: z.string(),
+      environment: z.string(),
+      git: DeploymentSourceGit$outboundSchema.optional(),
+      image: DeploymentSourceImage$outboundSchema.optional(),
+      deployment: DeploymentSourceDeployment$outboundSchema,
+    })
+  );
 
 export function v2DeploymentsCreateDeploymentRequestBody3ToJSON(
   v2DeploymentsCreateDeploymentRequestBody3:
@@ -187,14 +190,16 @@ export const V2DeploymentsCreateDeploymentRequestBody2$outboundSchema:
     V2DeploymentsCreateDeploymentRequestBody2$Outbound,
     z.ZodTypeDef,
     V2DeploymentsCreateDeploymentRequestBody2
-  > = z.object({
-    project: z.string(),
-    app: z.string(),
-    environment: z.string(),
-    git: DeploymentSourceGit$outboundSchema,
-    image: DeploymentSourceImage$outboundSchema.optional(),
-    deployment: DeploymentSourceDeployment$outboundSchema.optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      app: z.string(),
+      environment: z.string(),
+      git: DeploymentSourceGit$outboundSchema,
+      image: DeploymentSourceImage$outboundSchema.optional(),
+      deployment: DeploymentSourceDeployment$outboundSchema.optional(),
+    })
+  );
 
 export function v2DeploymentsCreateDeploymentRequestBody2ToJSON(
   v2DeploymentsCreateDeploymentRequestBody2:
@@ -223,14 +228,16 @@ export const V2DeploymentsCreateDeploymentRequestBody1$outboundSchema:
     V2DeploymentsCreateDeploymentRequestBody1$Outbound,
     z.ZodTypeDef,
     V2DeploymentsCreateDeploymentRequestBody1
-  > = z.object({
-    project: z.string(),
-    app: z.string(),
-    environment: z.string(),
-    git: DeploymentSourceGit$outboundSchema.optional(),
-    image: DeploymentSourceImage$outboundSchema,
-    deployment: DeploymentSourceDeployment$outboundSchema.optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      app: z.string(),
+      environment: z.string(),
+      git: DeploymentSourceGit$outboundSchema.optional(),
+      image: DeploymentSourceImage$outboundSchema,
+      deployment: DeploymentSourceDeployment$outboundSchema.optional(),
+    })
+  );
 
 export function v2DeploymentsCreateDeploymentRequestBody1ToJSON(
   v2DeploymentsCreateDeploymentRequestBody1:
@@ -255,11 +262,13 @@ export const V2DeploymentsCreateDeploymentRequestBodyUnion$outboundSchema:
     V2DeploymentsCreateDeploymentRequestBodyUnion$Outbound,
     z.ZodTypeDef,
     V2DeploymentsCreateDeploymentRequestBodyUnion
-  > = z.union([
-    z.lazy(() => V2DeploymentsCreateDeploymentRequestBody1$outboundSchema),
-    z.lazy(() => V2DeploymentsCreateDeploymentRequestBody2$outboundSchema),
-    z.lazy(() => V2DeploymentsCreateDeploymentRequestBody3$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => V2DeploymentsCreateDeploymentRequestBody1$outboundSchema),
+      z.lazy(() => V2DeploymentsCreateDeploymentRequestBody2$outboundSchema),
+      z.lazy(() => V2DeploymentsCreateDeploymentRequestBody3$outboundSchema),
+    ])
+  );
 
 export function v2DeploymentsCreateDeploymentRequestBodyUnionToJSON(
   v2DeploymentsCreateDeploymentRequestBodyUnion:

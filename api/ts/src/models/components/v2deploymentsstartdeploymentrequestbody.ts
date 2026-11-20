@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Start a stopped preview deployment so it serves traffic again.
@@ -27,9 +28,11 @@ export const V2DeploymentsStartDeploymentRequestBody$outboundSchema: z.ZodType<
   V2DeploymentsStartDeploymentRequestBody$Outbound,
   z.ZodTypeDef,
   V2DeploymentsStartDeploymentRequestBody
-> = z.object({
-  deploymentId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deploymentId: z.string(),
+  })
+);
 
 export function v2DeploymentsStartDeploymentRequestBodyToJSON(
   v2DeploymentsStartDeploymentRequestBody:

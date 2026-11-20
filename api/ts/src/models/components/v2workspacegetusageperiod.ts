@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const V2WorkspaceGetUsagePeriod$inboundSchema: z.ZodType<
   V2WorkspaceGetUsagePeriod,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start: z.number().int(),
-  end: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start: z.number().int(),
+    end: z.number().int(),
+  })
+);
 
 export function v2WorkspaceGetUsagePeriodFromJSON(
   jsonString: string,

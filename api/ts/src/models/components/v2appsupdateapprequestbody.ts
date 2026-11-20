@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AppGitUpdateInput,
   AppGitUpdateInput$Outbound,
@@ -84,15 +85,17 @@ export const V2AppsUpdateAppRequestBody$outboundSchema: z.ZodType<
   V2AppsUpdateAppRequestBody$Outbound,
   z.ZodTypeDef,
   V2AppsUpdateAppRequestBody
-> = z.object({
-  project: z.string(),
-  app: z.string(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  git: z.nullable(AppGitUpdateInput$outboundSchema).optional(),
-  oci: AppOCI$outboundSchema.optional(),
-  deleteProtection: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    app: z.string(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    git: z.nullable(AppGitUpdateInput$outboundSchema).optional(),
+    oci: AppOCI$outboundSchema.optional(),
+    deleteProtection: z.boolean().optional(),
+  })
+);
 
 export function v2AppsUpdateAppRequestBodyToJSON(
   v2AppsUpdateAppRequestBody: V2AppsUpdateAppRequestBody,

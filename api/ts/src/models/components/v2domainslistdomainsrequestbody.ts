@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filter domains within a workspace. All filters are optional and combine with AND. Each resource
@@ -68,14 +69,16 @@ export const V2DomainsListDomainsRequestBody$outboundSchema: z.ZodType<
   V2DomainsListDomainsRequestBody$Outbound,
   z.ZodTypeDef,
   V2DomainsListDomainsRequestBody
-> = z.object({
-  project: z.string().optional(),
-  app: z.string().optional(),
-  environment: z.string().optional(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  search: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string().optional(),
+    app: z.string().optional(),
+    environment: z.string().optional(),
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+    search: z.string().optional(),
+  })
+);
 
 export function v2DomainsListDomainsRequestBodyToJSON(
   v2DomainsListDomainsRequestBody: V2DomainsListDomainsRequestBody,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,10 +27,12 @@ export const V2KeysMigrateKeysResponseData$inboundSchema: z.ZodType<
   V2KeysMigrateKeysResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  migrated: z.array(V2KeysMigrateKeysMigration$inboundSchema),
-  failed: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    migrated: z.array(V2KeysMigrateKeysMigration$inboundSchema),
+    failed: z.array(z.string()),
+  })
+);
 
 export function v2KeysMigrateKeysResponseDataFromJSON(
   jsonString: string,

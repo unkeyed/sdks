@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Domain, Domain$inboundSchema } from "./domain.js";
@@ -22,10 +22,12 @@ export const V2DomainsGetDomainResponseBody$inboundSchema: z.ZodType<
   V2DomainsGetDomainResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: Meta$inboundSchema,
-  data: Domain$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: Meta$inboundSchema,
+    data: Domain$inboundSchema,
+  })
+);
 
 export function v2DomainsGetDomainResponseBodyFromJSON(
   jsonString: string,

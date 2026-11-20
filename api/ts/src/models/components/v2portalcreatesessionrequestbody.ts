@@ -3,11 +3,18 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import {
+  V2PortalCreateSessionKeyCreation,
+  V2PortalCreateSessionKeyCreation$Outbound,
+  V2PortalCreateSessionKeyCreation$outboundSchema,
+} from "./v2portalcreatesessionkeycreation.js";
 
 export const Scope = {
   KeysRead: "keys:read",
   KeysReroll: "keys:reroll",
+  KeysCreate: "keys:create",
   AnalyticsRead: "analytics:read",
 } as const;
 export type Scope = ClosedEnum<typeof Scope>;
@@ -36,14 +43,36 @@ export type V2PortalCreateSessionRequestBody = {
    * configured on the portal. An end user can never see another identity's
    * keys.
    *
-   * Rerolling and usage analytics are both reached from the keys page, so
-   * `keys:reroll` and `analytics:read` each require `keys:read` in the same
-   * session; requesting either without it is rejected.
+   * Rerolling, key creation, and usage analytics are all reached from the
+   * keys page, so `keys:reroll`, `keys:create`, and `analytics:read` each
+   * require `keys:read` in the same session; requesting any of them without it
+   * is rejected.
+   *
+   * `keys:create` lets the end user create keys for themselves, bounded by the
+   * `keyCreation` policy, which it requires. It is not available on a portal
+   * mapped to an app. Created keys never carry credits, so do not grant it if
+   * you bill on credits. Created keys are ordinary keys in your keyspace: they
+   * keep working after the session ends, until they expire or you revoke them.
    *
    * Each scope requires the equivalent permission on your own root key. See
    * Required Permissions on this operation.
    */
   scopes: Array<Scope>;
+  /**
+   * What the end user may create through the portal. Required with the
+   *
+   * @remarks
+   * `keys:create` scope and rejected without it. The policy is fixed for the
+   * session's lifetime.
+   *
+   * Created keys never carry credits, so do not grant `keys:create` if you bill
+   * on credits.
+   *
+   * Created keys are recoverable when the keyspace stores encrypted keys, and
+   * not recoverable otherwise. This differs from `keys.createKey`, where
+   * recoverability is opt-in per key.
+   */
+  keyCreation?: V2PortalCreateSessionKeyCreation | undefined;
   /**
    * Absolute URL the end user is sent back to when they leave the portal, or
    *
@@ -55,19 +84,30 @@ export type V2PortalCreateSessionRequestBody = {
    * When omitted, the portal shows no return link.
    */
   returnUrl?: string | undefined;
+  /**
+   * A verified custom domain of this portal to build the session URL on, so
+   *
+   * @remarks
+   * end users stay on your domain. The domain must be verified on this
+   * portal; any other value is rejected.
+   *
+   * When omitted, the URL uses Unkey's portal host.
+   */
+  hostname?: string | undefined;
 };
 
 /** @internal */
-export const Scope$outboundSchema: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(
-  Scope,
-);
+export const Scope$outboundSchema: z.ZodNativeEnum<typeof Scope> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Scope));
 
 /** @internal */
 export type V2PortalCreateSessionRequestBody$Outbound = {
   portal: string;
   externalId: string;
   scopes: Array<string>;
+  keyCreation?: V2PortalCreateSessionKeyCreation$Outbound | undefined;
   returnUrl?: string | undefined;
+  hostname?: string | undefined;
 };
 
 /** @internal */
@@ -75,12 +115,16 @@ export const V2PortalCreateSessionRequestBody$outboundSchema: z.ZodType<
   V2PortalCreateSessionRequestBody$Outbound,
   z.ZodTypeDef,
   V2PortalCreateSessionRequestBody
-> = z.object({
-  portal: z.string(),
-  externalId: z.string(),
-  scopes: z.array(Scope$outboundSchema),
-  returnUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    portal: z.string(),
+    externalId: z.string(),
+    scopes: z.array(Scope$outboundSchema),
+    keyCreation: V2PortalCreateSessionKeyCreation$outboundSchema.optional(),
+    returnUrl: z.string().optional(),
+    hostname: z.string().optional(),
+  })
+);
 
 export function v2PortalCreateSessionRequestBodyToJSON(
   v2PortalCreateSessionRequestBody: V2PortalCreateSessionRequestBody,

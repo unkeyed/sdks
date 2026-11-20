@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DnsRecord, DnsRecord$inboundSchema } from "./dnsrecord.js";
@@ -82,20 +82,22 @@ export type Domain = {
 };
 
 /** @internal */
-export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    domain: z.string(),
-    projectId: z.string(),
-    appId: z.string(),
-    environmentId: z.string(),
-    status: DomainStatus$inboundSchema,
-    verificationError: z.string().optional(),
-    dnsRecords: z.array(DnsRecord$inboundSchema),
-    domainConnect: DomainConnect$inboundSchema.optional(),
-    createdAt: z.number().int(),
-    updatedAt: z.number().int().optional(),
-  });
+export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      domain: z.string(),
+      projectId: z.string(),
+      appId: z.string(),
+      environmentId: z.string(),
+      status: DomainStatus$inboundSchema,
+      verificationError: z.string().optional(),
+      dnsRecords: z.array(DnsRecord$inboundSchema),
+      domainConnect: DomainConnect$inboundSchema.optional(),
+      createdAt: z.number().int(),
+      updatedAt: z.number().int().optional(),
+    })
+  );
 
 export function domainFromJSON(
   jsonString: string,

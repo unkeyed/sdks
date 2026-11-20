@@ -39,7 +39,9 @@ import { Result } from "../types/fp.js";
  * **Required Permissions**
  *
  * Your root key must have the following permission:
- * - `rbac.*.create_permission`
+ * - `unkey:v1:<workspace_id>:projects/<project_id>/rbac/permissions/*#write`
+ *
+ * Use your workspace ID and its default project ID. A wildcard project grant also authorizes this operation.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */

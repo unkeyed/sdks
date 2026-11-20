@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Gets the configuration of an existing rate limit override. Use this to retrieve details about custom rate limit rules that have been created for specific identifiers within a namespace.
@@ -47,10 +48,12 @@ export const V2RatelimitGetOverrideRequestBody$outboundSchema: z.ZodType<
   V2RatelimitGetOverrideRequestBody$Outbound,
   z.ZodTypeDef,
   V2RatelimitGetOverrideRequestBody
-> = z.object({
-  namespace: z.string(),
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace: z.string(),
+    identifier: z.string(),
+  })
+);
 
 export function v2RatelimitGetOverrideRequestBodyToJSON(
   v2RatelimitGetOverrideRequestBody: V2RatelimitGetOverrideRequestBody,

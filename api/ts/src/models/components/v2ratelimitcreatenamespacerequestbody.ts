@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2RatelimitCreateNamespaceRequestBody = {
   /**
@@ -24,9 +25,11 @@ export const V2RatelimitCreateNamespaceRequestBody$outboundSchema: z.ZodType<
   V2RatelimitCreateNamespaceRequestBody$Outbound,
   z.ZodTypeDef,
   V2RatelimitCreateNamespaceRequestBody
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function v2RatelimitCreateNamespaceRequestBodyToJSON(
   v2RatelimitCreateNamespaceRequestBody: V2RatelimitCreateNamespaceRequestBody,

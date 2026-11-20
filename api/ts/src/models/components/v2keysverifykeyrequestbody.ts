@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   KeysVerifyKeyCredits,
   KeysVerifyKeyCredits$Outbound,
@@ -90,15 +91,17 @@ export const V2KeysVerifyKeyRequestBody$outboundSchema: z.ZodType<
   V2KeysVerifyKeyRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysVerifyKeyRequestBody
-> = z.object({
-  key: z.string(),
-  tags: z.array(z.string()).optional(),
-  permissions: z.string().optional(),
-  credits: KeysVerifyKeyCredits$outboundSchema.optional(),
-  keyspaces: z.array(z.string()).optional(),
-  ratelimits: z.array(KeysVerifyKeyRatelimit$outboundSchema).optional(),
-  migrationId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    tags: z.array(z.string()).optional(),
+    permissions: z.string().optional(),
+    credits: KeysVerifyKeyCredits$outboundSchema.optional(),
+    keyspaces: z.array(z.string()).optional(),
+    ratelimits: z.array(KeysVerifyKeyRatelimit$outboundSchema).optional(),
+    migrationId: z.string().optional(),
+  })
+);
 
 export function v2KeysVerifyKeyRequestBodyToJSON(
   v2KeysVerifyKeyRequestBody: V2KeysVerifyKeyRequestBody,

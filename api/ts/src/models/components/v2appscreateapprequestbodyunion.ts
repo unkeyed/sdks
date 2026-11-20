@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AppGitCreateInput,
   AppGitCreateInput$Outbound,
@@ -98,13 +99,15 @@ export const V2AppsCreateAppRequestBody2$outboundSchema: z.ZodType<
   V2AppsCreateAppRequestBody2$Outbound,
   z.ZodTypeDef,
   V2AppsCreateAppRequestBody2
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  git: AppGitCreateInput$outboundSchema.optional(),
-  oci: AppOCI$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    git: AppGitCreateInput$outboundSchema.optional(),
+    oci: AppOCI$outboundSchema,
+  })
+);
 
 export function v2AppsCreateAppRequestBody2ToJSON(
   v2AppsCreateAppRequestBody2: V2AppsCreateAppRequestBody2,
@@ -130,13 +133,15 @@ export const V2AppsCreateAppRequestBody1$outboundSchema: z.ZodType<
   V2AppsCreateAppRequestBody1$Outbound,
   z.ZodTypeDef,
   V2AppsCreateAppRequestBody1
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  git: AppGitCreateInput$outboundSchema,
-  oci: AppOCI$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    git: AppGitCreateInput$outboundSchema,
+    oci: AppOCI$outboundSchema.optional(),
+  })
+);
 
 export function v2AppsCreateAppRequestBody1ToJSON(
   v2AppsCreateAppRequestBody1: V2AppsCreateAppRequestBody1,
@@ -158,10 +163,12 @@ export const V2AppsCreateAppRequestBodyUnion$outboundSchema: z.ZodType<
   V2AppsCreateAppRequestBodyUnion$Outbound,
   z.ZodTypeDef,
   V2AppsCreateAppRequestBodyUnion
-> = z.union([
-  z.lazy(() => V2AppsCreateAppRequestBody1$outboundSchema),
-  z.lazy(() => V2AppsCreateAppRequestBody2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => V2AppsCreateAppRequestBody1$outboundSchema),
+    z.lazy(() => V2AppsCreateAppRequestBody2$outboundSchema),
+  ])
+);
 
 export function v2AppsCreateAppRequestBodyUnionToJSON(
   v2AppsCreateAppRequestBodyUnion: V2AppsCreateAppRequestBodyUnion,

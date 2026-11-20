@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2WorkspaceUpdateFlagRequestBody = {
   /**
@@ -26,10 +27,12 @@ export const V2WorkspaceUpdateFlagRequestBody$outboundSchema: z.ZodType<
   V2WorkspaceUpdateFlagRequestBody$Outbound,
   z.ZodTypeDef,
   V2WorkspaceUpdateFlagRequestBody
-> = z.object({
-  slug: z.string(),
-  enabled: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string(),
+    enabled: z.boolean(),
+  })
+);
 
 export function v2WorkspaceUpdateFlagRequestBodyToJSON(
   v2WorkspaceUpdateFlagRequestBody: V2WorkspaceUpdateFlagRequestBody,

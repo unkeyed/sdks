@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filters a text field. Every operator is exact and case-sensitive. `%` and `_` match only themselves.
@@ -71,14 +72,16 @@ export const TextFilter$outboundSchema: z.ZodType<
   TextFilter$Outbound,
   z.ZodTypeDef,
   TextFilter
-> = z.object({
-  is: z.array(z.string()).optional(),
-  isNot: z.array(z.string()).optional(),
-  contains: z.array(z.string()).optional(),
-  notContains: z.array(z.string()).optional(),
-  startsWith: z.array(z.string()).optional(),
-  endsWith: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    is: z.array(z.string()).optional(),
+    isNot: z.array(z.string()).optional(),
+    contains: z.array(z.string()).optional(),
+    notContains: z.array(z.string()).optional(),
+    startsWith: z.array(z.string()).optional(),
+    endsWith: z.array(z.string()).optional(),
+  })
+);
 
 export function textFilterToJSON(textFilter: TextFilter): string {
   return JSON.stringify(TextFilter$outboundSchema.parse(textFilter));

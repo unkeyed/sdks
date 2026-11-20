@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Sets a new or overwrites an existing rate limit override. Overrides allow you to apply special rate limit rules to specific identifiers, providing custom limits that differ from the default.
@@ -79,12 +80,14 @@ export const V2RatelimitSetOverrideRequestBody$outboundSchema: z.ZodType<
   V2RatelimitSetOverrideRequestBody$Outbound,
   z.ZodTypeDef,
   V2RatelimitSetOverrideRequestBody
-> = z.object({
-  namespace: z.string(),
-  duration: z.number().int(),
-  identifier: z.string(),
-  limit: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace: z.string(),
+    duration: z.number().int(),
+    identifier: z.string(),
+    limit: z.number().int(),
+  })
+);
 
 export function v2RatelimitSetOverrideRequestBodyToJSON(
   v2RatelimitSetOverrideRequestBody: V2RatelimitSetOverrideRequestBody,

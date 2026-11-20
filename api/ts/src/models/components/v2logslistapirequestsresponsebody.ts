@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ApiRequestLog, ApiRequestLog$inboundSchema } from "./apirequestlog.js";
@@ -30,11 +30,13 @@ export const V2LogsListApiRequestsResponseBody$inboundSchema: z.ZodType<
   V2LogsListApiRequestsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: Meta$inboundSchema,
-  data: z.array(ApiRequestLog$inboundSchema),
-  pagination: Pagination$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: Meta$inboundSchema,
+    data: z.array(ApiRequestLog$inboundSchema),
+    pagination: Pagination$inboundSchema,
+  })
+);
 
 export function v2LogsListApiRequestsResponseBodyFromJSON(
   jsonString: string,

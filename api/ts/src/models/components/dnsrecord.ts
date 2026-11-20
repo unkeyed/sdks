@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -91,21 +91,23 @@ export type DnsRecord = {
 /** @internal */
 export const DnsRecordType$inboundSchema: z.ZodNativeEnum<
   typeof DnsRecordType
-> = z.nativeEnum(DnsRecordType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DnsRecordType));
 
 /** @internal */
 export const DnsRecord$inboundSchema: z.ZodType<
   DnsRecord,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: DnsRecordType$inboundSchema,
-  name: z.string(),
-  value: z.string(),
-  ttl: z.number().int(),
-  verified: z.boolean(),
-  note: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: DnsRecordType$inboundSchema,
+    name: z.string(),
+    value: z.string(),
+    ttl: z.number().int(),
+    verified: z.boolean(),
+    note: z.string().optional(),
+  })
+);
 
 export function dnsRecordFromJSON(
   jsonString: string,

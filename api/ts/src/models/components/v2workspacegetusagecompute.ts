@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const V2WorkspaceGetUsageCompute$inboundSchema: z.ZodType<
   V2WorkspaceGetUsageCompute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpuSeconds: z.number(),
-  memoryGiBHours: z.number(),
-  storageGiBHours: z.number(),
-  egressGiB: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpuSeconds: z.number(),
+    memoryGiBHours: z.number(),
+    storageGiBHours: z.number(),
+    egressGiB: z.number(),
+  })
+);
 
 export function v2WorkspaceGetUsageComputeFromJSON(
   jsonString: string,

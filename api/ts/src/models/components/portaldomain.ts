@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DnsRecord, DnsRecord$inboundSchema } from "./dnsrecord.js";
@@ -71,17 +71,19 @@ export const PortalDomain$inboundSchema: z.ZodType<
   PortalDomain,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  portalId: z.string(),
-  domain: z.string(),
-  status: DomainStatus$inboundSchema,
-  verificationError: z.string().optional(),
-  dnsRecords: z.array(DnsRecord$inboundSchema),
-  domainConnect: DomainConnect$inboundSchema.optional(),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    portalId: z.string(),
+    domain: z.string(),
+    status: DomainStatus$inboundSchema,
+    verificationError: z.string().optional(),
+    dnsRecords: z.array(DnsRecord$inboundSchema),
+    domainConnect: DomainConnect$inboundSchema.optional(),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int().optional(),
+  })
+);
 
 export function portalDomainFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2ApisListKeysRequestBody = {
   /**
@@ -69,14 +70,16 @@ export const V2ApisListKeysRequestBody$outboundSchema: z.ZodType<
   V2ApisListKeysRequestBody$Outbound,
   z.ZodTypeDef,
   V2ApisListKeysRequestBody
-> = z.object({
-  apiId: z.string(),
-  limit: z.number().int().default(100),
-  cursor: z.string().optional(),
-  externalId: z.string().optional(),
-  decrypt: z.boolean().default(false),
-  revalidateKeysCache: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiId: z.string(),
+    limit: z.number().int().default(100),
+    cursor: z.string().optional(),
+    externalId: z.string().optional(),
+    decrypt: z.boolean().default(false),
+    revalidateKeysCache: z.boolean().default(false),
+  })
+);
 
 export function v2ApisListKeysRequestBodyToJSON(
   v2ApisListKeysRequestBody: V2ApisListKeysRequestBody,

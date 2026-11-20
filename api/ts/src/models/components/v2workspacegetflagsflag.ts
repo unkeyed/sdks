@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const V2WorkspaceGetFlagsFlag$inboundSchema: z.ZodType<
   V2WorkspaceGetFlagsFlag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  description: z.string(),
-  allowOptIn: z.boolean(),
-  allowOptOut: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    description: z.string(),
+    allowOptIn: z.boolean(),
+    allowOptOut: z.boolean(),
+  })
+);
 
 export function v2WorkspaceGetFlagsFlagFromJSON(
   jsonString: string,

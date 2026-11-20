@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,12 +35,14 @@ export const Identity$inboundSchema: z.ZodType<
   Identity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  meta: z.record(z.any()).optional(),
-  ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    externalId: z.string(),
+    meta: z.record(z.any()).optional(),
+    ratelimits: z.array(RatelimitResponse$inboundSchema).optional(),
+  })
+);
 
 export function identityFromJSON(
   jsonString: string,

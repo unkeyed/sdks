@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   EnvironmentVariableInput,
   EnvironmentVariableInput$Outbound,
@@ -76,13 +77,15 @@ export const V2EnvironmentsSetEnvironmentVariablesRequestBody$outboundSchema:
     V2EnvironmentsSetEnvironmentVariablesRequestBody$Outbound,
     z.ZodTypeDef,
     V2EnvironmentsSetEnvironmentVariablesRequestBody
-  > = z.object({
-    project: z.string(),
-    app: z.string(),
-    environment: z.string(),
-    variables: z.array(EnvironmentVariableInput$outboundSchema),
-    prune: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      app: z.string(),
+      environment: z.string(),
+      variables: z.array(EnvironmentVariableInput$outboundSchema),
+      prune: z.boolean().default(false),
+    })
+  );
 
 export function v2EnvironmentsSetEnvironmentVariablesRequestBodyToJSON(
   v2EnvironmentsSetEnvironmentVariablesRequestBody:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,8 +30,8 @@ export type FirewallPolicy = {
 };
 
 /** @internal */
-export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> = z
-  .nativeEnum(Action);
+export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Action));
 /** @internal */
 export const Action$outboundSchema: z.ZodNativeEnum<typeof Action> =
   Action$inboundSchema;
@@ -41,9 +41,11 @@ export const FirewallPolicy$inboundSchema: z.ZodType<
   FirewallPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: Action$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: Action$inboundSchema,
+  })
+);
 /** @internal */
 export type FirewallPolicy$Outbound = {
   action: string;
@@ -54,9 +56,11 @@ export const FirewallPolicy$outboundSchema: z.ZodType<
   FirewallPolicy$Outbound,
   z.ZodTypeDef,
   FirewallPolicy
-> = z.object({
-  action: Action$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: Action$outboundSchema,
+  })
+);
 
 export function firewallPolicyToJSON(firewallPolicy: FirewallPolicy): string {
   return JSON.stringify(FirewallPolicy$outboundSchema.parse(firewallPolicy));

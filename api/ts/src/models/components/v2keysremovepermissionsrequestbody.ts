@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type V2KeysRemovePermissionsRequestBody = {
   /**
@@ -35,10 +36,12 @@ export const V2KeysRemovePermissionsRequestBody$outboundSchema: z.ZodType<
   V2KeysRemovePermissionsRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysRemovePermissionsRequestBody
-> = z.object({
-  keyId: z.string(),
-  permissions: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    permissions: z.array(z.string()),
+  })
+);
 
 export function v2KeysRemovePermissionsRequestBodyToJSON(
   v2KeysRemovePermissionsRequestBody: V2KeysRemovePermissionsRequestBody,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -51,7 +52,7 @@ export const Operation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Operation
-> = openEnums.outboundSchema(Operation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Operation));
 
 /** @internal */
 export type V2KeysUpdateCreditsRequestBody$Outbound = {
@@ -65,11 +66,13 @@ export const V2KeysUpdateCreditsRequestBody$outboundSchema: z.ZodType<
   V2KeysUpdateCreditsRequestBody$Outbound,
   z.ZodTypeDef,
   V2KeysUpdateCreditsRequestBody
-> = z.object({
-  keyId: z.string(),
-  value: z.nullable(z.number().int()).optional(),
-  operation: Operation$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    value: z.nullable(z.number().int()).optional(),
+    operation: Operation$outboundSchema,
+  })
+);
 
 export function v2KeysUpdateCreditsRequestBodyToJSON(
   v2KeysUpdateCreditsRequestBody: V2KeysUpdateCreditsRequestBody,
