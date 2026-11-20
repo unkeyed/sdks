@@ -95,7 +95,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -221,7 +225,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -342,7 +350,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -473,7 +485,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -611,7 +627,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -762,7 +782,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -916,7 +940,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1057,7 +1085,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1205,7 +1237,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1353,7 +1389,11 @@ class RootKeys(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["rootKeys"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "exclude": "Root keys are managed in the dashboard or the Unkey CLI. An MCP client can act on untrusted input, so it cannot mint or change them."
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

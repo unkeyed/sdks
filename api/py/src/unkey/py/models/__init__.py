@@ -153,6 +153,10 @@ if TYPE_CHECKING:
     from .policy import Policy, PolicyTypedDict
     from .policyresponse import PolicyResponse, PolicyResponseTypedDict
     from .portal import Portal, PortalTypedDict
+    from .portal_createkeyop import (
+        PortalCreateKeySecurity,
+        PortalCreateKeySecurityTypedDict,
+    )
     from .portal_createsessionop import (
         PortalCreateSessionResponse,
         PortalCreateSessionResponseTypedDict,
@@ -925,6 +929,14 @@ if TYPE_CHECKING:
         V2PortalCreateDomainResponseData,
         V2PortalCreateDomainResponseDataTypedDict,
     )
+    from .v2portalcreatekeyratelimit import (
+        V2PortalCreateKeyRatelimit,
+        V2PortalCreateKeyRatelimitTypedDict,
+    )
+    from .v2portalcreatekeyrequestbody import (
+        V2PortalCreateKeyRequestBody,
+        V2PortalCreateKeyRequestBodyTypedDict,
+    )
     from .v2portalcreateportalrequestbody_union import (
         V2PortalCreatePortalRequestBody1,
         V2PortalCreatePortalRequestBody1TypedDict,
@@ -1550,6 +1562,8 @@ __all__ = [
     "Portal",
     "PortalBranding",
     "PortalBrandingTypedDict",
+    "PortalCreateKeySecurity",
+    "PortalCreateKeySecurityTypedDict",
     "PortalCreateSessionResponse",
     "PortalCreateSessionResponseTypedDict",
     "PortalDomain",
@@ -1971,6 +1985,10 @@ __all__ = [
     "V2PortalCreateDomainResponseBodyTypedDict",
     "V2PortalCreateDomainResponseData",
     "V2PortalCreateDomainResponseDataTypedDict",
+    "V2PortalCreateKeyRatelimit",
+    "V2PortalCreateKeyRatelimitTypedDict",
+    "V2PortalCreateKeyRequestBody",
+    "V2PortalCreateKeyRequestBodyTypedDict",
     "V2PortalCreatePortalRequestBody1",
     "V2PortalCreatePortalRequestBody1TypedDict",
     "V2PortalCreatePortalRequestBody2",
@@ -2377,6 +2395,8 @@ _dynamic_imports: dict[str, str] = {
     "PolicyResponseTypedDict": ".policyresponse",
     "Portal": ".portal",
     "PortalTypedDict": ".portal",
+    "PortalCreateKeySecurity": ".portal_createkeyop",
+    "PortalCreateKeySecurityTypedDict": ".portal_createkeyop",
     "PortalCreateSessionResponse": ".portal_createsessionop",
     "PortalCreateSessionResponseTypedDict": ".portal_createsessionop",
     "PortalExchangeCodeResponse": ".portal_exchangecodeop",
@@ -2801,6 +2821,10 @@ _dynamic_imports: dict[str, str] = {
     "V2PortalCreateDomainResponseBodyTypedDict": ".v2portalcreatedomainresponsebody",
     "V2PortalCreateDomainResponseData": ".v2portalcreatedomainresponsedata",
     "V2PortalCreateDomainResponseDataTypedDict": ".v2portalcreatedomainresponsedata",
+    "V2PortalCreateKeyRatelimit": ".v2portalcreatekeyratelimit",
+    "V2PortalCreateKeyRatelimitTypedDict": ".v2portalcreatekeyratelimit",
+    "V2PortalCreateKeyRequestBody": ".v2portalcreatekeyrequestbody",
+    "V2PortalCreateKeyRequestBodyTypedDict": ".v2portalcreatekeyrequestbody",
     "V2PortalCreatePortalRequestBody1": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody1TypedDict": ".v2portalcreateportalrequestbody_union",
     "V2PortalCreatePortalRequestBody2": ".v2portalcreateportalrequestbody_union",

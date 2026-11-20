@@ -104,7 +104,15 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -250,7 +258,15 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-idempotency": "conditionally-idempotent"},
+                extensions={
+                    "x-unkey-idempotency": "conditionally-idempotent",
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    },
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -398,7 +414,14 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -546,7 +569,14 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -692,7 +722,9 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -833,7 +865,9 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -981,7 +1015,9 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1156,7 +1192,9 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1260,8 +1298,11 @@ class Apps(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `app.*.update_app` (to update any app)
-        - `app.<app_id>.update_app` (to update a specific app)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#write` (to update a specific app)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/*#write` (to update any app in a project)
+        - `unkey:v1:<workspace_id>:projects/*/apps/*#write` (to update any app in your workspace)
+
+        The same app write permission covers Git repository changes.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1358,7 +1399,14 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1440,8 +1488,11 @@ class Apps(BaseSDK):
         **Required Permissions**
 
         Your root key must have one of the following permissions:
-        - `app.*.update_app` (to update any app)
-        - `app.<app_id>.update_app` (to update a specific app)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>#write` (to update a specific app)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/*#write` (to update any app in a project)
+        - `unkey:v1:<workspace_id>:projects/*/apps/*#write` (to update any app in your workspace)
+
+        The same app write permission covers Git repository changes.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1538,7 +1589,14 @@ class Apps(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["apps"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

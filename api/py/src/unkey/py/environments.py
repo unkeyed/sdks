@@ -113,7 +113,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -265,7 +267,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -431,7 +435,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -625,7 +631,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -799,7 +807,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -945,7 +955,9 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions={"x-unkey-workspace-rate-limit-exempt": True},
+                extensions={
+                    "x-unkey-mcp": {"readOnly": True, "toolsets": ["v2", "compute"]}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1023,9 +1035,11 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.remove_environment_variables` (for any environment)
-        - `environment.<environment_id>.remove_environment_variables` (for a specific environment)
+        Your root key must have `delete` permission on the environment's variable collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
+
+        Replace the placeholders with resource IDs, not names or slugs. A broader
+        permission that covers this collection also grants access.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1114,7 +1128,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1192,9 +1213,11 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.remove_environment_variables` (for any environment)
-        - `environment.<environment_id>.remove_environment_variables` (for a specific environment)
+        Your root key must have `delete` permission on the environment's variable collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
+
+        Replace the placeholders with resource IDs, not names or slugs. A broader
+        permission that covers this collection also grants access.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1283,7 +1306,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1372,9 +1402,11 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.set_environment_variables` (for any environment)
-        - `environment.<environment_id>.set_environment_variables` (for a specific environment)
+        Your root key must have `write` on the environment's variable collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#write`.
+
+        When `prune` is true, it must also have `delete` on the same collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1477,7 +1509,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1566,9 +1605,11 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.set_environment_variables` (for any environment)
-        - `environment.<environment_id>.set_environment_variables` (for a specific environment)
+        Your root key must have `write` on the environment's variable collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#write`.
+
+        When `prune` is true, it must also have `delete` on the same collection:
+        `unkey:v1:{workspace_id}:projects/{project_id}/apps/{app_id}/environments/{environment_id}/variables/*#delete`.
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1671,7 +1712,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1766,9 +1814,9 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.update_environment` (to update any environment)
-        - `environment.<environment_id>.update_environment` (to update a specific environment)
+        Your root key must have `#write` permission on the environment, for example:
+        - `unkey:v1:<workspace_id>:projects/*/apps/*/environments/*#write` (any environment in your workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write` (a specific environment)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -1919,7 +1967,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2014,9 +2069,9 @@ class Environments(BaseSDK):
 
         **Required Permissions**
 
-        Your root key must have one of the following permissions:
-        - `environment.*.update_environment` (to update any environment)
-        - `environment.<environment_id>.update_environment` (to update a specific environment)
+        Your root key must have `#write` permission on the environment, for example:
+        - `unkey:v1:<workspace_id>:projects/*/apps/*/environments/*#write` (any environment in your workspace)
+        - `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>#write` (a specific environment)
 
 
         If set, this operation will use `root_key` from the global security.
@@ -2167,7 +2222,14 @@ class Environments(BaseSDK):
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
                 tags=["environments"],
-                extensions=None,
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": True,
+                        "idempotent": True,
+                        "readOnly": False,
+                        "toolsets": ["v2", "compute"],
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

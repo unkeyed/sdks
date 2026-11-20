@@ -42,7 +42,10 @@ class AppTypedDict(TypedDict):
 
     """
     is_rolled_back: bool
-    r"""Whether the app is currently serving a rolled-back deployment rather than its latest one.
+    r"""Deprecated. Use `isRolledBack` on the environment instead; each
+    environment is rolled back on its own. This field reports whether the
+    app's production environment is serving a rolled-back deployment rather
+    than its latest one.
 
     """
     delete_protection: bool
@@ -70,8 +73,10 @@ class AppTypedDict(TypedDict):
 
     """
     current_deployment_id: NotRequired[str]
-    r"""The identifier of the deployment currently serving this app.
-    Omitted if the app has no active deployment yet.
+    r"""Deprecated. Use `currentDeploymentId` on the environment instead; each
+    environment has its own live deployment. This field is the deployment
+    currently serving the app's production environment.
+    Omitted if that environment has no live deployment yet.
 
     """
     updated_at: NotRequired[int]
@@ -98,8 +103,17 @@ class App(BaseModel):
 
     """
 
-    is_rolled_back: Annotated[bool, pydantic.Field(alias="isRolledBack")]
-    r"""Whether the app is currently serving a rolled-back deployment rather than its latest one.
+    is_rolled_back: Annotated[
+        bool,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="isRolledBack",
+        ),
+    ]
+    r"""Deprecated. Use `isRolledBack` on the environment instead; each
+    environment is rolled back on its own. This field reports whether the
+    app's production environment is serving a rolled-back deployment rather
+    than its latest one.
 
     """
 
@@ -135,10 +149,16 @@ class App(BaseModel):
     """
 
     current_deployment_id: Annotated[
-        Optional[str], pydantic.Field(alias="currentDeploymentId")
+        Optional[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="currentDeploymentId",
+        ),
     ] = None
-    r"""The identifier of the deployment currently serving this app.
-    Omitted if the app has no active deployment yet.
+    r"""Deprecated. Use `currentDeploymentId` on the environment instead; each
+    environment has its own live deployment. This field is the deployment
+    currently serving the app's production environment.
+    Omitted if that environment has no live deployment yet.
 
     """
 

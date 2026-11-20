@@ -56,6 +56,14 @@ class V2PortalCreateSessionRequestBodyTypedDict(TypedDict):
     When omitted, the portal shows no return link.
 
     """
+    hostname: NotRequired[str]
+    r"""A verified custom domain of this portal to build the session URL on, so
+    end users stay on your domain. The domain must be verified on this
+    portal; any other value is rejected.
+
+    When omitted, the URL uses Unkey's portal host.
+
+    """
 
 
 class V2PortalCreateSessionRequestBody(BaseModel):
@@ -97,12 +105,21 @@ class V2PortalCreateSessionRequestBody(BaseModel):
 
     """
 
+    hostname: Optional[str] = None
+    r"""A verified custom domain of this portal to build the session URL on, so
+    end users stay on your domain. The domain must be verified on this
+    portal; any other value is rejected.
+
+    When omitted, the URL uses Unkey's portal host.
+
+    """
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["returnUrl"])
+        optional_fields = set(["returnUrl", "hostname"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
