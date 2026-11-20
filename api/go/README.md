@@ -220,17 +220,29 @@ func main() {
 
 	s := unkey.New()
 
-	res, err := s.Portal.GetVerifications(ctx, components.V2PortalGetVerificationsRequestBody{
-		StartTime: 1704067200000,
-		EndTime:   1704672000000,
-		KeyID:     unkey.Pointer("key_1234abcd"),
-	}, operations.PortalGetVerificationsSecurity{
+	res, err := s.Portal.CreateKey(ctx, components.V2PortalCreateKeyRequestBody{
+		Name: unkey.Pointer("Production server"),
+		Ratelimits: []components.V2PortalCreateKeyRatelimit{
+			components.V2PortalCreateKeyRatelimit{
+				Name:     "requests",
+				Limit:    50,
+				Duration: 60000,
+			},
+		},
+		ExpiresIn: unkey.Pointer[int64](2592000000),
+		Permissions: []string{
+			"documents.write",
+		},
+		Roles: []string{
+			"editor",
+		},
+	}, operations.PortalCreateKeySecurity{
 		PortalSession: os.Getenv("UNKEY_PORTAL_SESSION"),
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.V2PortalGetVerificationsResponseBody != nil {
+	if res.V2KeysCreateKeyResponseBody != nil {
 		// handle response
 	}
 }
@@ -360,6 +372,7 @@ func main() {
 ### [Portal](docs/sdks/portal/README.md)
 
 * [CreateDomain](docs/sdks/portal/README.md#createdomain) - Create portal domain
+* [CreateKey](docs/sdks/portal/README.md#createkey) - Create portal key
 * [CreatePortal](docs/sdks/portal/README.md#createportal) - Create portal
 * [CreateSession](docs/sdks/portal/README.md#createsession) - Create portal session
 * [DeleteDomain](docs/sdks/portal/README.md#deletedomain) - Delete portal domain

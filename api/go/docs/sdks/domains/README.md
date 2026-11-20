@@ -563,9 +563,9 @@ records at your provider stay in place.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.delete_domain` (to delete domains in any environment)
-- `environment.<environment_id>.delete_domain` (to delete domains in a specific environment)
+Your root key must have `delete` permission on the domain:
+`unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#delete`.
+Use `*` in place of resource IDs to grant access to all matching domains in your workspace.
 
 
 ### Example Usage: byId
@@ -2313,9 +2313,9 @@ A domain that is already `verified` returns a 412.
 
 **Required Permissions**
 
-Your root key must have one of the following permissions:
-- `environment.*.verify_domain` (to verify domains in any environment)
-- `environment.<environment_id>.verify_domain` (to verify domains in a specific environment)
+Your root key must have `write` on the domain:
+- `unkey:v1:<workspace_id>:projects/<project_id>/apps/<app_id>/environments/<environment_id>/domains/<domain_id>#write`
+- `unkey:v1:<workspace_id>:projects/*/apps/*/environments/*/domains/*#write` (all domains in your workspace)
 
 
 ### Example Usage: accepted

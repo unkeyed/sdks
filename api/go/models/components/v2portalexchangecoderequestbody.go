@@ -7,6 +7,11 @@ type V2PortalExchangeCodeRequestBody struct {
 	// Must be valid, unexpired, and not previously redeemed.
 	//
 	Code string `json:"code"`
+	// The domain the end user is visiting, such as `developers.example.com`.
+	// The code only works on Unkey's portal domain or on one of this portal's
+	// verified custom domains.
+	//
+	Host string `json:"host"`
 }
 
 func (v *V2PortalExchangeCodeRequestBody) GetCode() string {
@@ -14,6 +19,13 @@ func (v *V2PortalExchangeCodeRequestBody) GetCode() string {
 		return ""
 	}
 	return v.Code
+}
+
+func (v *V2PortalExchangeCodeRequestBody) GetHost() string {
+	if v == nil {
+		return ""
+	}
+	return v.Host
 }
 
 // #region class-body-v2portalexchangecoderequestbody

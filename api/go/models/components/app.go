@@ -59,12 +59,21 @@ type App struct {
 	// The configured OCI image source. Omitted when the app is not OCI-sourced.
 	//
 	Oci *AppOCI `json:"oci,omitzero"`
-	// The identifier of the deployment currently serving this app.
-	// Omitted if the app has no active deployment yet.
+	// Deprecated. Use `currentDeploymentId` on the environment instead; each
+	// environment has its own live deployment. This field is the deployment
+	// currently serving the app's production environment.
+	// Omitted if that environment has no live deployment yet.
 	//
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	CurrentDeploymentID *string `json:"currentDeploymentId,omitzero"`
-	// Whether the app is currently serving a rolled-back deployment rather than its latest one.
+	// Deprecated. Use `isRolledBack` on the environment instead; each
+	// environment is rolled back on its own. This field reports whether the
+	// app's production environment is serving a rolled-back deployment rather
+	// than its latest one.
 	//
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	IsRolledBack bool `json:"isRolledBack"`
 	// Whether delete protection is enabled for this app.
 	// When true, the app cannot be deleted until protection is disabled.

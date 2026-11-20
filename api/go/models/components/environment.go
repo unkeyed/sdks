@@ -23,6 +23,15 @@ type Environment struct {
 	// - `preview`: Deployments can be stopped and started and are eligible for preview lifecycle automation.
 	//
 	Kind EnvironmentKind `json:"kind"`
+	// The identifier of the deployment currently serving this environment.
+	// Omitted if the environment has no live deployment yet.
+	//
+	CurrentDeploymentID *string `json:"currentDeploymentId,omitzero"`
+	// Whether this environment is serving a rolled-back deployment rather than its latest one.
+	// New deployments do not replace a rolled-back deployment until one is promoted.
+	// Always returned.
+	//
+	IsRolledBack *bool `json:"isRolledBack,omitzero"`
 	// Whether delete protection is enabled for this environment.
 	// When true, the environment cannot be deleted until protection is disabled.
 	//
@@ -85,6 +94,20 @@ func (e *Environment) GetKind() EnvironmentKind {
 		return EnvironmentKind("")
 	}
 	return e.Kind
+}
+
+func (e *Environment) GetCurrentDeploymentID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CurrentDeploymentID
+}
+
+func (e *Environment) GetIsRolledBack() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.IsRolledBack
 }
 
 func (e *Environment) GetDeleteProtection() bool {

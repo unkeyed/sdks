@@ -343,7 +343,7 @@ func (s *RootKeys) CreateKey(ctx context.Context, request components.V2RootKeysC
 // Deletes a root key in the authenticated workspace.
 // Requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
 // Use `rootKeys/*#delete` to delete any root key in the workspace.
-// Deleted keys cannot authenticate.
+// Deleted keys cannot authenticate. Deletion can take up to 30 seconds to take effect.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *RootKeys) DeleteKey(ctx context.Context, request components.V2RootKeysDeleteKeyRequestBody, opts ...operations.Option) (*operations.RootKeysDeleteKeyResponse, error) {
@@ -1053,8 +1053,9 @@ func (s *RootKeys) ListKeys(ctx context.Context, request components.V2RootKeysLi
 // already hold every permission of the original key. When `expiration` is not null,
 // it also requires `unkey:v1:<workspace_id>:rootKeys/<key_id>#delete`.
 //
-// `expiration` controls the original key: 0 revokes it immediately, a positive value
-// keeps it valid for that many milliseconds, and null keeps its current expiration.
+// `expiration` controls the original key: 0 revokes it, a positive value keeps it
+// valid for that many milliseconds, and null keeps its current expiration. Revoking
+// the original key can take up to 30 seconds to take effect.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *RootKeys) RerollKey(ctx context.Context, request components.V2RootKeysRerollKeyRequestBody, opts ...operations.Option) (*operations.RootKeysRerollKeyResponse, error) {
@@ -1408,6 +1409,7 @@ func (s *RootKeys) RerollKey(ctx context.Context, request components.V2RootKeysR
 // `permissions` replaces the complete permission set. Each permission must be a supported URN
 // in the authenticated workspace and within the caller's permissions.
 // An expiring root key can only update root keys that expire no later than itself.
+// Changes to `enabled`, `permissions`, and `ipAllowlist` can take up to 30 seconds to take effect.
 //
 // If set, this operation will use [Security.RootKey] from the global security.
 func (s *RootKeys) UpdateKey(ctx context.Context, request components.V2RootKeysUpdateKeyRequestBody, opts ...operations.Option) (*operations.RootKeysUpdateKeyResponse, error) {
