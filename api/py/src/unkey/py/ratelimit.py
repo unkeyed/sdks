@@ -1210,364 +1210,6 @@ class Ratelimit(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    def limit(
-        self,
-        *,
-        namespace: str,
-        duration: int,
-        identifier: str,
-        limit: int,
-        cost: Optional[int] = 1,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2RatelimitLimitResponseBody:
-        r"""Apply rate limiting
-
-        Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-
-        Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-        **Required Permissions**
-
-        Your root key must have one of the following permissions:
-        - `ratelimit.*.limit` (to check limits in any namespace)
-        - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-
-        If set, this operation will use `root_key` from the global security.
-
-        :param namespace: The id or name of the namespace.
-        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
-            Shorter durations enable faster recovery but may be less effective against sustained abuse.
-            Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
-            Balance user experience with protection needs when choosing window sizes.
-
-        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
-            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
-            Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.
-            The same identifier can be used across different namespaces to apply multiple rate limit types.
-            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
-
-        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected.
-            When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
-            Balance user experience with resource protection when setting limits for different user tiers.
-            Consider system capacity, business requirements, and fair usage policies in limit determination.
-
-        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
-            Use higher values for resource-intensive operations and 0 for tracking without limiting.
-            When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.
-            Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
-
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.V2RatelimitLimitRequestBody(
-            namespace=namespace,
-            cost=cost,
-            duration=duration,
-            identifier=identifier,
-            limit=limit,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/v2/ratelimit.limit",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2RatelimitLimitRequestBody
-            ),
-            allow_empty_value=None,
-            allowed_fields=["root_key"],
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="ratelimit.limit",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-                tags=["ratelimit"],
-                extensions={
-                    "x-unkey-mcp": {
-                        "destructive": False,
-                        "idempotent": False,
-                        "readOnly": False,
-                        "toolsets": ["v2"],
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2RatelimitLimitResponseBody, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.BadRequestErrorResponseData, http_res
-            )
-            raise errors.BadRequestErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.UnauthorizedErrorResponseData, http_res
-            )
-            raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.NotFoundErrorResponseData, http_res
-            )
-            raise errors.NotFoundErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneErrorResponseData, http_res
-            )
-            raise errors.GoneErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/problem+json"):
-            response_data = unmarshal_json_response(
-                errors.TooManyRequestsErrorResponseData, http_res
-            )
-            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.InternalServerErrorResponseData, http_res
-            )
-            raise errors.InternalServerErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-
-        raise errors.APIError("Unexpected response received", http_res)
-
-    async def limit_async(
-        self,
-        *,
-        namespace: str,
-        duration: int,
-        identifier: str,
-        limit: int,
-        cost: Optional[int] = 1,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2RatelimitLimitResponseBody:
-        r"""Apply rate limiting
-
-        Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-
-        Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-        **Required Permissions**
-
-        Your root key must have one of the following permissions:
-        - `ratelimit.*.limit` (to check limits in any namespace)
-        - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-
-        If set, this operation will use `root_key` from the global security.
-
-        :param namespace: The id or name of the namespace.
-        :param duration: Sets the rate limit window duration in milliseconds after which the counter resets.
-            Shorter durations enable faster recovery but may be less effective against sustained abuse.
-            Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
-            Balance user experience with protection needs when choosing window sizes.
-
-        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
-            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
-            Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.
-            The same identifier can be used across different namespaces to apply multiple rate limit types.
-            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
-
-        :param limit: Sets the maximum operations allowed within the duration window before requests are rejected.
-            When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.
-            Balance user experience with resource protection when setting limits for different user tiers.
-            Consider system capacity, business requirements, and fair usage policies in limit determination.
-
-        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
-            Use higher values for resource-intensive operations and 0 for tracking without limiting.
-            When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.
-            Essential for implementing fair usage policies and preventing resource abuse through expensive operations.
-
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.V2RatelimitLimitRequestBody(
-            namespace=namespace,
-            cost=cost,
-            duration=duration,
-            identifier=identifier,
-            limit=limit,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/v2/ratelimit.limit",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.V2RatelimitLimitRequestBody
-            ),
-            allow_empty_value=None,
-            allowed_fields=["root_key"],
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="ratelimit.limit",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-                tags=["ratelimit"],
-                extensions={
-                    "x-unkey-mcp": {
-                        "destructive": False,
-                        "idempotent": False,
-                        "readOnly": False,
-                        "toolsets": ["v2"],
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2RatelimitLimitResponseBody, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.BadRequestErrorResponseData, http_res
-            )
-            raise errors.BadRequestErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.UnauthorizedErrorResponseData, http_res
-            )
-            raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.NotFoundErrorResponseData, http_res
-            )
-            raise errors.NotFoundErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneErrorResponseData, http_res
-            )
-            raise errors.GoneErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/problem+json"):
-            response_data = unmarshal_json_response(
-                errors.TooManyRequestsErrorResponseData, http_res
-            )
-            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.InternalServerErrorResponseData, http_res
-            )
-            raise errors.InternalServerErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-
-        raise errors.APIError("Unexpected response received", http_res)
-
     def list_namespaces(
         self,
         *,
@@ -2258,312 +1900,6 @@ class Ratelimit(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    def multi_limit(
-        self,
-        *,
-        request: Union[
-            Iterable[models.V2RatelimitLimitRequestBody],
-            Iterable[models.V2RatelimitLimitRequestBodyTypedDict],
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2RatelimitMultiLimitResponseBody:
-        r"""Apply multiple rate limit checks
-
-        Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-
-        Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-        **Required Permissions**
-
-        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-
-        To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-
-
-        If set, this operation will use `root_key` from the global security.
-
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, List[models.V2RatelimitLimitRequestBody])
-        request = cast(List[models.V2RatelimitLimitRequestBody], request)
-
-        req = self._build_request(
-            method="POST",
-            path="/v2/ratelimit.multiLimit",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
-            ),
-            allow_empty_value=None,
-            allowed_fields=["root_key"],
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="ratelimit.multiLimit",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-                tags=["ratelimit"],
-                extensions={
-                    "x-unkey-mcp": {
-                        "destructive": False,
-                        "idempotent": False,
-                        "readOnly": False,
-                        "toolsets": ["v2"],
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2RatelimitMultiLimitResponseBody, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.BadRequestErrorResponseData, http_res
-            )
-            raise errors.BadRequestErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.UnauthorizedErrorResponseData, http_res
-            )
-            raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.NotFoundErrorResponseData, http_res
-            )
-            raise errors.NotFoundErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneErrorResponseData, http_res
-            )
-            raise errors.GoneErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/problem+json"):
-            response_data = unmarshal_json_response(
-                errors.TooManyRequestsErrorResponseData, http_res
-            )
-            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.InternalServerErrorResponseData, http_res
-            )
-            raise errors.InternalServerErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-
-        raise errors.APIError("Unexpected response received", http_res)
-
-    async def multi_limit_async(
-        self,
-        *,
-        request: Union[
-            Iterable[models.V2RatelimitLimitRequestBody],
-            Iterable[models.V2RatelimitLimitRequestBodyTypedDict],
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.V2RatelimitMultiLimitResponseBody:
-        r"""Apply multiple rate limit checks
-
-        Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-
-        Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-
-        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-        **Required Permissions**
-
-        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-
-        To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-
-
-        If set, this operation will use `root_key` from the global security.
-
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, List[models.V2RatelimitLimitRequestBody])
-        request = cast(List[models.V2RatelimitLimitRequestBody], request)
-
-        req = self._build_request_async(
-            method="POST",
-            path="/v2/ratelimit.multiLimit",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", List[models.V2RatelimitLimitRequestBody]
-            ),
-            allow_empty_value=None,
-            allowed_fields=["root_key"],
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="ratelimit.multiLimit",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-                tags=["ratelimit"],
-                extensions={
-                    "x-unkey-mcp": {
-                        "destructive": False,
-                        "idempotent": False,
-                        "readOnly": False,
-                        "toolsets": ["v2"],
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.V2RatelimitMultiLimitResponseBody, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.BadRequestErrorResponseData, http_res
-            )
-            raise errors.BadRequestErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.UnauthorizedErrorResponseData, http_res
-            )
-            raise errors.UnauthorizedErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "403", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.ForbiddenErrorResponseData, http_res
-            )
-            raise errors.ForbiddenErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.NotFoundErrorResponseData, http_res
-            )
-            raise errors.NotFoundErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneErrorResponseData, http_res
-            )
-            raise errors.GoneErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/problem+json"):
-            response_data = unmarshal_json_response(
-                errors.TooManyRequestsErrorResponseData, http_res
-            )
-            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.InternalServerErrorResponseData, http_res
-            )
-            raise errors.InternalServerErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError("API error occurred", http_res, http_res_text)
-
-        raise errors.APIError("Unexpected response received", http_res)
-
     def set_override(
         self,
         *,
@@ -3216,6 +2552,676 @@ class Ratelimit(BaseSDK):
             )
             raise errors.ConflictErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def limit(
+        self,
+        *,
+        namespace: str,
+        duration: int,
+        identifier: str,
+        limit: int,
+        cost: Optional[int] = 1,
+        record: Optional[models.Record] = models.Record.IF_ALLOWED,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3RatelimitLimitResponseBody:
+        r"""Apply rate limiting
+
+        Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+
+        Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+        **Required Permissions**
+
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+
+        To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param namespace: The id or name of the namespace.
+        :param duration: Sets the rate limit duration in milliseconds. It must be at least 10000 (10 seconds) and at most 86400000 (24 hours).
+            Common values include 10000 (10 seconds), 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
+
+        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
+            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
+            The same identifier can be used across different namespaces to apply multiple rate limit types.
+            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
+
+        :param limit: Sets the maximum cost allowed per duration before requests are rejected.
+            Balance user experience with resource protection when setting limits for different user tiers.
+
+        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
+            Use higher values for resource-intensive operations and 0 for tracking without limiting.
+            A cost greater than the limit that applies, including the limit of a matching override, never fits: the check is denied and `retryAfter` is one duration.
+
+        :param record: Configure when this check persists its cost.
+            - `IF_ALLOWED`: counts the cost only if it fits.
+            - `ALWAYS`: counts the cost even if it does not fit, such as for usage that already happened.
+            - `NEVER`: counts nothing and only reports whether the cost fits. This is the same behavior as setting a cost of 0.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V3RatelimitLimitRequestBody(
+            namespace=namespace,
+            cost=cost,
+            duration=duration,
+            identifier=identifier,
+            record=record,
+            limit=limit,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v3/ratelimit.limit",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V3RatelimitLimitRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="ratelimit.limit",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["ratelimit"],
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V3RatelimitLimitResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GoneErrorResponseData, http_res
+            )
+            raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def limit_async(
+        self,
+        *,
+        namespace: str,
+        duration: int,
+        identifier: str,
+        limit: int,
+        cost: Optional[int] = 1,
+        record: Optional[models.Record] = models.Record.IF_ALLOWED,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3RatelimitLimitResponseBody:
+        r"""Apply rate limiting
+
+        Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+
+        Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+        **Required Permissions**
+
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+
+        To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param namespace: The id or name of the namespace.
+        :param duration: Sets the rate limit duration in milliseconds. It must be at least 10000 (10 seconds) and at most 86400000 (24 hours).
+            Common values include 10000 (10 seconds), 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).
+
+        :param identifier: Defines the scope of rate limiting by identifying the entity being limited.
+            Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.
+            The same identifier can be used across different namespaces to apply multiple rate limit types.
+            Choose identifiers that provide appropriate granularity for your rate limiting strategy.
+
+        :param limit: Sets the maximum cost allowed per duration before requests are rejected.
+            Balance user experience with resource protection when setting limits for different user tiers.
+
+        :param cost: Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.
+            Use higher values for resource-intensive operations and 0 for tracking without limiting.
+            A cost greater than the limit that applies, including the limit of a matching override, never fits: the check is denied and `retryAfter` is one duration.
+
+        :param record: Configure when this check persists its cost.
+            - `IF_ALLOWED`: counts the cost only if it fits.
+            - `ALWAYS`: counts the cost even if it does not fit, such as for usage that already happened.
+            - `NEVER`: counts nothing and only reports whether the cost fits. This is the same behavior as setting a cost of 0.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.V3RatelimitLimitRequestBody(
+            namespace=namespace,
+            cost=cost,
+            duration=duration,
+            identifier=identifier,
+            record=record,
+            limit=limit,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v3/ratelimit.limit",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.V3RatelimitLimitRequestBody
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="ratelimit.limit",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["ratelimit"],
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V3RatelimitLimitResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GoneErrorResponseData, http_res
+            )
+            raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def multi_limit(
+        self,
+        *,
+        request: Union[
+            Iterable[models.V3RatelimitLimitRequestBody],
+            Iterable[models.V3RatelimitLimitRequestBodyTypedDict],
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3RatelimitMultiLimitResponseBody:
+        r"""Apply multiple rate limit checks
+
+        Check and enforce multiple rate limits in a single request, all or nothing.
+
+        The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+
+        Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+        **Required Permissions**
+
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+
+        To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, List[models.V3RatelimitLimitRequestBody])
+        request = cast(List[models.V3RatelimitLimitRequestBody], request)
+
+        req = self._build_request(
+            method="POST",
+            path="/v3/ratelimit.multiLimit",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", List[models.V3RatelimitLimitRequestBody]
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="ratelimit.multiLimit",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["ratelimit"],
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V3RatelimitMultiLimitResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GoneErrorResponseData, http_res
+            )
+            raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsErrorResponseData, http_res
+            )
+            raise errors.TooManyRequestsErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerErrorResponseData, http_res
+            )
+            raise errors.InternalServerErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def multi_limit_async(
+        self,
+        *,
+        request: Union[
+            Iterable[models.V3RatelimitLimitRequestBody],
+            Iterable[models.V3RatelimitLimitRequestBodyTypedDict],
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.V3RatelimitMultiLimitResponseBody:
+        r"""Apply multiple rate limit checks
+
+        Check and enforce multiple rate limits in a single request, all or nothing.
+
+        The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+
+        Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+
+        **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+        **Required Permissions**
+
+        Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+
+        To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+        If set, this operation will use `root_key` from the global security.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, List[models.V3RatelimitLimitRequestBody])
+        request = cast(List[models.V3RatelimitLimitRequestBody], request)
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v3/ratelimit.multiLimit",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", List[models.V3RatelimitLimitRequestBody]
+            ),
+            allow_empty_value=None,
+            allowed_fields=["root_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(50, 1000, 1.5, 10000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="ratelimit.multiLimit",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+                tags=["ratelimit"],
+                extensions={
+                    "x-unkey-mcp": {
+                        "destructive": False,
+                        "idempotent": False,
+                        "readOnly": False,
+                        "toolsets": ["v2"],
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.V3RatelimitMultiLimitResponseBody, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorResponseData, http_res
+            )
+            raise errors.BadRequestErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorResponseData, http_res
+            )
+            raise errors.UnauthorizedErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenErrorResponseData, http_res
+            )
+            raise errors.ForbiddenErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundErrorResponseData, http_res
+            )
+            raise errors.NotFoundErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GoneErrorResponseData, http_res
+            )
+            raise errors.GoneErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/problem+json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsErrorResponseData, http_res
             )

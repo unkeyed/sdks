@@ -443,12 +443,12 @@ with Unkey() as unkey:
 * [delete_namespace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#delete_namespace) - Delete ratelimit namespace
 * [delete_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#delete_override) - Delete ratelimit override
 * [get_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#get_override) - Get ratelimit override
-* [limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [list_namespaces](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#list_namespaces) - List ratelimit namespaces
 * [list_overrides](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#list_overrides) - List ratelimit overrides
-* [multi_limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 * [set_override](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#set_override) - Set ratelimit override
 * [update_namespace](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#update_namespace) - Update ratelimit namespace
+* [limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [multi_limit](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 
 ### [RootKeys](https://github.com/unkeyed/sdks/blob/master/api/py/docs/sdks/rootkeys/README.md)
 

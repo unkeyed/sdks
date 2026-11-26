@@ -443,12 +443,12 @@ with Unkey() as unkey:
 * [delete_namespace](docs/sdks/ratelimit/README.md#delete_namespace) - Delete ratelimit namespace
 * [delete_override](docs/sdks/ratelimit/README.md#delete_override) - Delete ratelimit override
 * [get_override](docs/sdks/ratelimit/README.md#get_override) - Get ratelimit override
-* [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [list_namespaces](docs/sdks/ratelimit/README.md#list_namespaces) - List ratelimit namespaces
 * [list_overrides](docs/sdks/ratelimit/README.md#list_overrides) - List ratelimit overrides
-* [multi_limit](docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 * [set_override](docs/sdks/ratelimit/README.md#set_override) - Set ratelimit override
 * [update_namespace](docs/sdks/ratelimit/README.md#update_namespace) - Update ratelimit namespace
+* [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [multi_limit](docs/sdks/ratelimit/README.md#multi_limit) - Apply multiple rate limit checks
 
 ### [RootKeys](docs/sdks/rootkeys/README.md)
 
