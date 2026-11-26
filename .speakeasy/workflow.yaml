@@ -39,9 +39,6 @@ targets:
         target: typescript
         source: api
         output: ./api/ts
-        publish:
-            npm:
-                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/unkey/unkey/api-typescript-code-samples

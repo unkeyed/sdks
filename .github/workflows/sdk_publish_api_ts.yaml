@@ -19,9 +19,47 @@ jobs:
       target: api-ts
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
       slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+
+  # Speakeasy's publish workflow can only run `npm publish`, so .speakeasy/workflow.yaml has no
+  # npm target and this job stages the release instead. A maintainer must approve it on npmjs.com
+  # (Staged Packages tab) or with `npm stage approve` before anyone can install it.
+  stage-npm:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: api/ts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # npm stage publish needs npm 11.15.0 or later, which Node 24 ships.
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+      - name: Build
+        run: npm run build
+      - name: Stage on NPM
+        run: |
+          VERSION=$(npm pkg get version | tr -d '"')
+          # This workflow also runs for regenerations that keep the version.
+          if npm view "@unkey/api@$VERSION" version >/dev/null 2>&1; then
+            echo "@unkey/api@$VERSION is already published"
+            exit 0
+          fi
+          if [[ "$VERSION" == *"-"* ]]; then
+            PRERELEASE=${VERSION#*-}
+            npm stage publish --access public --tag "${PRERELEASE%%.*}"
+          else
+            npm stage publish --access public
+          fi
 
   publish-jsr:
     runs-on: ubuntu-latest
