@@ -403,12 +403,12 @@ func main() {
 * [DeleteNamespace](docs/sdks/ratelimit/README.md#deletenamespace) - Delete ratelimit namespace
 * [DeleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 * [GetOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
-* [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [ListNamespaces](docs/sdks/ratelimit/README.md#listnamespaces) - List ratelimit namespaces
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
-* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 * [UpdateNamespace](docs/sdks/ratelimit/README.md#updatenamespace) - Update ratelimit namespace
+* [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 
 ### [RootKeys](docs/sdks/rootkeys/README.md)
 

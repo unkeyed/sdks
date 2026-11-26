@@ -16,6 +16,8 @@ type V2RootKeysUpdateKeyRequestBody struct {
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
 	// Whether the root key can authenticate. Omit to keep the current state.
 	Enabled *bool `json:"enabled,omitzero"`
+	// New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it.
+	Expires optionalnullable.OptionalNullable[int64] `json:"expires,omitzero"`
 	// Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
 	// and within the caller's permissions. Omit to keep the current permissions.
 	//
@@ -59,6 +61,13 @@ func (v *V2RootKeysUpdateKeyRequestBody) GetEnabled() *bool {
 		return nil
 	}
 	return v.Enabled
+}
+
+func (v *V2RootKeysUpdateKeyRequestBody) GetExpires() optionalnullable.OptionalNullable[int64] {
+	if v == nil {
+		return nil
+	}
+	return v.Expires
 }
 
 func (v *V2RootKeysUpdateKeyRequestBody) GetPermissions() []string {

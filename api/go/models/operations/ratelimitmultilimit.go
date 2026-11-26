@@ -9,9 +9,9 @@ import (
 
 type RatelimitMultiLimitResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// All rate limit checks completed successfully. Check the `success` field in each result to determine if the corresponding request is allowed.
+	// All rate limit checks completed. Check the top-level `allowed` field to determine if the request may proceed.
 	//
-	V2RatelimitMultiLimitResponseBody *components.V2RatelimitMultiLimitResponseBody
+	V3RatelimitMultiLimitResponseBody *components.V3RatelimitMultiLimitResponseBody
 }
 
 func (r RatelimitMultiLimitResponse) MarshalJSON() ([]byte, error) {
@@ -32,9 +32,9 @@ func (r *RatelimitMultiLimitResponse) GetHTTPMeta() components.HTTPMetadata {
 	return r.HTTPMeta
 }
 
-func (r *RatelimitMultiLimitResponse) GetV2RatelimitMultiLimitResponseBody() *components.V2RatelimitMultiLimitResponseBody {
+func (r *RatelimitMultiLimitResponse) GetV3RatelimitMultiLimitResponseBody() *components.V3RatelimitMultiLimitResponseBody {
 	if r == nil {
 		return nil
 	}
-	return r.V2RatelimitMultiLimitResponseBody
+	return r.V3RatelimitMultiLimitResponseBody
 }

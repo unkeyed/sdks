@@ -2,25 +2,25 @@
 
 package components
 
-type V2RatelimitLimitResponseBody struct {
+type V3RatelimitLimitResponseBody struct {
 	// Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
 	Meta Meta                         `json:"meta"`
-	Data V2RatelimitLimitResponseData `json:"data"`
+	Data V3RatelimitLimitResponseData `json:"data"`
 }
 
-func (v *V2RatelimitLimitResponseBody) GetMeta() Meta {
+func (v *V3RatelimitLimitResponseBody) GetMeta() Meta {
 	if v == nil {
 		return Meta{}
 	}
 	return v.Meta
 }
 
-func (v *V2RatelimitLimitResponseBody) GetData() V2RatelimitLimitResponseData {
+func (v *V3RatelimitLimitResponseBody) GetData() V3RatelimitLimitResponseData {
 	if v == nil {
-		return V2RatelimitLimitResponseData{}
+		return V3RatelimitLimitResponseData{}
 	}
 	return v.Data
 }
 
-// #region class-body-v2ratelimitlimitresponsebody
-// #endregion class-body-v2ratelimitlimitresponsebody
+// #region class-body-v3ratelimitlimitresponsebody
+// #endregion class-body-v3ratelimitlimitresponsebody
