@@ -10,12 +10,12 @@ Rate limiting operations
 * [deleteNamespace](#deletenamespace) - Delete ratelimit namespace
 * [deleteOverride](#deleteoverride) - Delete ratelimit override
 * [getOverride](#getoverride) - Get ratelimit override
-* [limit](#limit) - Apply rate limiting
 * [listNamespaces](#listnamespaces) - List ratelimit namespaces
 * [listOverrides](#listoverrides) - List ratelimit overrides
-* [multiLimit](#multilimit) - Apply multiple rate limit checks
 * [setOverride](#setoverride) - Set ratelimit override
 * [updateNamespace](#updatenamespace) - Update ratelimit namespace
+* [limit](#limit) - Apply rate limiting
+* [multiLimit](#multilimit) - Apply multiple rate limit checks
 
 ## createNamespace
 
@@ -1068,390 +1068,6 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## limit
-
-Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-
-Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have one of the following permissions:
-- `ratelimit.*.limit` (to check limits in any namespace)
-- `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-
-### Example Usage: allowed
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: basic
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "api.requests",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_abc123",
-    limit: 100,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "api.requests",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_abc123",
-    limit: 100,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: ipLimit
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "auth.login",
-    cost: 5,
-    duration: 60000,
-    identifier: "203.0.113.42",
-    limit: 5,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "auth.login",
-    cost: 5,
-    duration: 60000,
-    identifier: "203.0.113.42",
-    limit: 5,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: limitReached
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: weightedCost
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "api.heavy_operations",
-    cost: 5,
-    duration: 3600000,
-    identifier: "user_def456",
-    limit: 50,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "api.heavy_operations",
-    cost: 5,
-    duration: 3600000,
-    identifier: "user_def456",
-    limit: 50,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.limit({
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitLimit(unkey, {
-    namespace: "sms.sign_up",
-    cost: 5,
-    duration: 60000,
-    identifier: "user_12345",
-    limit: 1000,
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitLimit failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.V2RatelimitLimitRequestBody](../../models/components/v2ratelimitlimitrequestbody.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.V2RatelimitLimitResponseBody](../../models/components/v2ratelimitlimitresponsebody.md)\>**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.GoneErrorResponse            | 410                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
-
 ## listNamespaces
 
 Retrieve a paginated list of the rate limit namespaces in your workspace.
@@ -2068,422 +1684,6 @@ run();
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## multiLimit
-
-Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-
-Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-
-To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-
-
-### Example Usage: allAllowed
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, []);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: ipHashAndUserLimits
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([
-    {
-      namespace: "auth.login",
-      cost: 5,
-      duration: 60000,
-      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
-      limit: 10,
-    },
-    {
-      namespace: "api.requests",
-      cost: 5,
-      duration: 3600000,
-      identifier: "user_def456",
-      limit: 1000,
-    },
-  ]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, [
-    {
-      namespace: "auth.login",
-      cost: 5,
-      duration: 60000,
-      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
-      limit: 10,
-    },
-    {
-      namespace: "api.requests",
-      cost: 5,
-      duration: 3600000,
-      identifier: "user_def456",
-      limit: 1000,
-    },
-  ]);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: mixedResults
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, []);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: multipleChecks
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([
-    {
-      namespace: "api.requests",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_abc123",
-      limit: 100,
-    },
-    {
-      namespace: "auth.login",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_abc123",
-      limit: 5,
-    },
-  ]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, [
-    {
-      namespace: "api.requests",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_abc123",
-      limit: 100,
-    },
-    {
-      namespace: "auth.login",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_abc123",
-      limit: 5,
-    },
-  ]);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([
-    {
-      namespace: "sms.sign_up",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_12345",
-      limit: 1000,
-    },
-  ]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, [
-    {
-      namespace: "sms.sign_up",
-      cost: 5,
-      duration: 60000,
-      identifier: "user_12345",
-      limit: 1000,
-    },
-  ]);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: withWeightedCost
-
-<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
-```typescript
-import { Unkey } from "@unkey/api";
-
-const unkey = new Unkey({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await unkey.ratelimit.multiLimit([
-    {
-      namespace: "api.light_operations",
-      duration: 60000,
-      identifier: "user_xyz789",
-      limit: 100,
-    },
-    {
-      namespace: "api.heavy_operations",
-      cost: 5,
-      duration: 3600000,
-      identifier: "user_xyz789",
-      limit: 50,
-    },
-  ]);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { UnkeyCore } from "@unkey/api/core.js";
-import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
-
-// Use `UnkeyCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const unkey = new UnkeyCore({
-  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await ratelimitMultiLimit(unkey, [
-    {
-      namespace: "api.light_operations",
-      duration: 60000,
-      identifier: "user_xyz789",
-      limit: 100,
-    },
-    {
-      namespace: "api.heavy_operations",
-      cost: 5,
-      duration: 3600000,
-      identifier: "user_xyz789",
-      limit: 50,
-    },
-  ]);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("ratelimitMultiLimit failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.V2RatelimitLimitRequestBody[]](../../models/.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.V2RatelimitMultiLimitResponseBody](../../models/components/v2ratelimitmultilimitresponsebody.md)\>**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.GoneErrorResponse            | 410                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
-
 ## setOverride
 
 Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
@@ -3086,5 +2286,852 @@ run();
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.ConflictErrorResponse        | 409                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## limit
+
+Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+
+Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allowed
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="allowed" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="basic" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "api.requests",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_abc123",
+    limit: 100,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "api.requests",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_abc123",
+    limit: 100,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="ipLimit" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "auth.login",
+    cost: 5,
+    duration: 60000,
+    identifier: "203.0.113.42",
+    limit: 5,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "auth.login",
+    cost: 5,
+    duration: 60000,
+    identifier: "203.0.113.42",
+    limit: 5,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="limitReached" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="weightedCost" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "api.heavy_operations",
+    cost: 5,
+    duration: 3600000,
+    identifier: "user_def456",
+    limit: 50,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "api.heavy_operations",
+    cost: 5,
+    duration: 3600000,
+    identifier: "user_def456",
+    limit: 50,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="withOverride" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.limit({
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitLimit } from "@unkey/api/funcs/ratelimitLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitLimit(unkey, {
+    namespace: "sms.sign_up",
+    cost: 5,
+    duration: 60000,
+    identifier: "user_12345",
+    limit: 1000,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitLimit failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V3RatelimitLimitRequestBody](../../models/components/v3ratelimitlimitrequestbody.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V3RatelimitLimitResponseBody](../../models/components/v3ratelimitlimitresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## multiLimit
+
+Check and enforce multiple rate limits in a single request, all or nothing.
+
+The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+
+Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allAllowed
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="allAllowed" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, []);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      limit: 10,
+    },
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_def456",
+      limit: 1000,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "auth.login",
+      cost: 5,
+      duration: 60000,
+      identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      limit: 10,
+    },
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_def456",
+      limit: 1000,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="mixedResults" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, []);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="multipleChecks" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_abc123",
+      limit: 50,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "api.requests",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_abc123",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_abc123",
+      limit: 50,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: oneExceeded
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="oneExceeded" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, []);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withOverride" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "sms.sign_up",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_12345",
+      limit: 1000,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "sms.sign_up",
+      cost: 5,
+      duration: 60000,
+      identifier: "user_12345",
+      limit: 1000,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="typescript" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withWeightedCost" -->
+```typescript
+import { Unkey } from "@unkey/api";
+
+const unkey = new Unkey({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await unkey.ratelimit.multiLimit([
+    {
+      namespace: "api.light_operations",
+      duration: 60000,
+      identifier: "user_xyz789",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_xyz789",
+      limit: 50,
+    },
+  ]);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { UnkeyCore } from "@unkey/api/core.js";
+import { ratelimitMultiLimit } from "@unkey/api/funcs/ratelimitMultiLimit.js";
+
+// Use `UnkeyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const unkey = new UnkeyCore({
+  rootKey: process.env["UNKEY_ROOT_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await ratelimitMultiLimit(unkey, [
+    {
+      namespace: "api.light_operations",
+      duration: 60000,
+      identifier: "user_xyz789",
+      limit: 100,
+    },
+    {
+      namespace: "api.heavy_operations",
+      cost: 5,
+      duration: 3600000,
+      identifier: "user_xyz789",
+      limit: 50,
+    },
+  ]);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ratelimitMultiLimit failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.V3RatelimitLimitRequestBody[]](../../models/.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.V3RatelimitMultiLimitResponseBody](../../models/components/v3ratelimitmultilimitresponsebody.md)\>**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

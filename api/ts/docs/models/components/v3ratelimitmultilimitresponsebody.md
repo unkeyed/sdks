@@ -1,17 +1,27 @@
-# V2RatelimitMultiLimitResponseBody
+# V3RatelimitMultiLimitResponseBody
 
 ## Example Usage
 
 ```typescript
-import { V2RatelimitMultiLimitResponseBody } from "@unkey/api/models/components";
+import { V3RatelimitMultiLimitResponseBody } from "@unkey/api/models/components";
 
-let value: V2RatelimitMultiLimitResponseBody = {
+let value: V3RatelimitMultiLimitResponseBody = {
   meta: {
     requestId: "req_123",
   },
   data: {
-    passed: true,
-    limits: [],
+    allowed: true,
+    retryAfter: 278149,
+    limits: [
+      {
+        namespace: "<value>",
+        identifier: "<value>",
+        limit: 385613,
+        remaining: 575993,
+        retryAfter: 613329,
+        allowed: true,
+      },
+    ],
   },
 };
 ```
@@ -21,4 +31,4 @@ let value: V2RatelimitMultiLimitResponseBody = {
 | Field                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `meta`                                                                                                                                                                                                                                                          | [components.Meta](../../models/components/meta.md)                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                              | Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team. |
-| `data`                                                                                                                                                                                                                                                          | [components.V2RatelimitMultiLimitResponseData](../../models/components/v2ratelimitmultilimitresponsedata.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                              | Container for multi-limit rate limit check results                                                                                                                                                                                                              |
+| `data`                                                                                                                                                                                                                                                          | [components.V3RatelimitMultiLimitResponseData](../../models/components/v3ratelimitmultilimitresponsedata.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                              | Container for multi-limit rate limit check results                                                                                                                                                                                                              |

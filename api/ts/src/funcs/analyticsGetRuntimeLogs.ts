@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * The root key must have the `project.*.read_runtime_logs` permission.
  * Unkey limits each query to the workspace of the root key. To get the logs of one project, app, environment, or deployment, add a filter on `project_id`, `app_id`, `environment_id`, or `deployment_id`.
  * The workspace retention period and the workspace query limits apply.
- * For the table, the columns, and more query examples, see [Query runtime logs](/platform/analytics/get-runtime-logs).
+ * For the table, the columns, and more query examples, see [Query runtime logs](https://www.unkey.com/docs/compute/observe/analytics-api).
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */
