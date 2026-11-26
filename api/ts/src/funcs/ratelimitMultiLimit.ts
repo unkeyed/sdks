@@ -31,27 +31,29 @@ import { Result } from "../types/fp.js";
  * Apply multiple rate limit checks
  *
  * @remarks
- * Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
+ * Check and enforce multiple rate limits in a single request, all or nothing.
  *
- * Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
+ * The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
  *
- * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+ * Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+ *
+ * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
  *
  * **Required Permissions**
  *
  * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
  *
- * To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
+ * To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
  *
  * If set, this operation will use {@link Security.rootKey} from the global security.
  */
 export function ratelimitMultiLimit(
   client: UnkeyCore,
-  request: Array<components.V2RatelimitLimitRequestBody>,
+  request: Array<components.V3RatelimitLimitRequestBody>,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.V2RatelimitMultiLimitResponseBody,
+    components.V3RatelimitMultiLimitResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
@@ -78,12 +80,12 @@ export function ratelimitMultiLimit(
 
 async function $do(
   client: UnkeyCore,
-  request: Array<components.V2RatelimitLimitRequestBody>,
+  request: Array<components.V3RatelimitLimitRequestBody>,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.V2RatelimitMultiLimitResponseBody,
+      components.V3RatelimitMultiLimitResponseBody,
       | errors.BadRequestErrorResponse
       | errors.UnauthorizedErrorResponse
       | errors.ForbiddenErrorResponse
@@ -106,7 +108,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.array(components.V2RatelimitLimitRequestBody$outboundSchema).parse(
+      z.array(components.V3RatelimitLimitRequestBody$outboundSchema).parse(
         value,
       ),
     "Input validation failed",
@@ -117,7 +119,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/ratelimit.multiLimit")();
+  const path = pathToFunc("/v3/ratelimit.multiLimit")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -185,7 +187,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.V2RatelimitMultiLimitResponseBody,
+    components.V3RatelimitMultiLimitResponseBody,
     | errors.BadRequestErrorResponse
     | errors.UnauthorizedErrorResponse
     | errors.ForbiddenErrorResponse
@@ -202,7 +204,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.V2RatelimitMultiLimitResponseBody$inboundSchema),
+    M.json(200, components.V3RatelimitMultiLimitResponseBody$inboundSchema),
     M.jsonErr(400, errors.BadRequestErrorResponse$inboundSchema),
     M.jsonErr(401, errors.UnauthorizedErrorResponse$inboundSchema),
     M.jsonErr(403, errors.ForbiddenErrorResponse$inboundSchema),

@@ -8,11 +8,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
-  V2RatelimitMultiLimitResponseData,
-  V2RatelimitMultiLimitResponseData$inboundSchema,
-} from "./v2ratelimitmultilimitresponsedata.js";
+  V3RatelimitMultiLimitResponseData,
+  V3RatelimitMultiLimitResponseData$inboundSchema,
+} from "./v3ratelimitmultilimitresponsedata.js";
 
-export type V2RatelimitMultiLimitResponseBody = {
+export type V3RatelimitMultiLimitResponseBody = {
   /**
    * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
    */
@@ -20,27 +20,27 @@ export type V2RatelimitMultiLimitResponseBody = {
   /**
    * Container for multi-limit rate limit check results
    */
-  data: V2RatelimitMultiLimitResponseData;
+  data: V3RatelimitMultiLimitResponseData;
 };
 
 /** @internal */
-export const V2RatelimitMultiLimitResponseBody$inboundSchema: z.ZodType<
-  V2RatelimitMultiLimitResponseBody,
+export const V3RatelimitMultiLimitResponseBody$inboundSchema: z.ZodType<
+  V3RatelimitMultiLimitResponseBody,
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     meta: Meta$inboundSchema,
-    data: V2RatelimitMultiLimitResponseData$inboundSchema,
+    data: V3RatelimitMultiLimitResponseData$inboundSchema,
   })
 );
 
-export function v2RatelimitMultiLimitResponseBodyFromJSON(
+export function v3RatelimitMultiLimitResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<V2RatelimitMultiLimitResponseBody, SDKValidationError> {
+): SafeParseResult<V3RatelimitMultiLimitResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => V2RatelimitMultiLimitResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitMultiLimitResponseBody' from JSON`,
+    (x) => V3RatelimitMultiLimitResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'V3RatelimitMultiLimitResponseBody' from JSON`,
   );
 }

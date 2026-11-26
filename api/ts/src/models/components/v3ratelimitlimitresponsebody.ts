@@ -8,36 +8,36 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Meta, Meta$inboundSchema } from "./meta.js";
 import {
-  V2RatelimitLimitResponseData,
-  V2RatelimitLimitResponseData$inboundSchema,
-} from "./v2ratelimitlimitresponsedata.js";
+  V3RatelimitLimitResponseData,
+  V3RatelimitLimitResponseData$inboundSchema,
+} from "./v3ratelimitlimitresponsedata.js";
 
-export type V2RatelimitLimitResponseBody = {
+export type V3RatelimitLimitResponseBody = {
   /**
    * Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team.
    */
   meta: Meta;
-  data: V2RatelimitLimitResponseData;
+  data: V3RatelimitLimitResponseData;
 };
 
 /** @internal */
-export const V2RatelimitLimitResponseBody$inboundSchema: z.ZodType<
-  V2RatelimitLimitResponseBody,
+export const V3RatelimitLimitResponseBody$inboundSchema: z.ZodType<
+  V3RatelimitLimitResponseBody,
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     meta: Meta$inboundSchema,
-    data: V2RatelimitLimitResponseData$inboundSchema,
+    data: V3RatelimitLimitResponseData$inboundSchema,
   })
 );
 
-export function v2RatelimitLimitResponseBodyFromJSON(
+export function v3RatelimitLimitResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<V2RatelimitLimitResponseBody, SDKValidationError> {
+): SafeParseResult<V3RatelimitLimitResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => V2RatelimitLimitResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'V2RatelimitLimitResponseBody' from JSON`,
+    (x) => V3RatelimitLimitResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'V3RatelimitLimitResponseBody' from JSON`,
   );
 }

@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 43fe009f-2e53-4f59-b943-58496679a998
 management:
-  docChecksum: 88835eab79dce69ac03f50d5f7ff2828
+  docChecksum: 056f3f10138ea4caae3107b043b757a3
   docVersion: 2.0.0
-  speakeasyVersion: 1.811.0
-  generationVersion: 2.968.1
-  releaseVersion: 2.6.0
-  configChecksum: 0b6bdfd311798a8cc07a6fd981940ab0
+  speakeasyVersion: 1.812.1
+  generationVersion: 2.968.17
+  releaseVersion: 2.6.1
+  configChecksum: f6b88b7ee0956b04e393882c053ad06e
   repoURL: https://github.com/unkeyed/sdks.git
   repoSubDirectory: api/ts
   installationURL: https://github.com/unkeyed/sdks
   published: true
 persistentEdits:
-  generation_id: 1996c5ff-0716-4e5e-b3cf-8b3f252f2de0
-  pristine_commit_hash: fdc964420bd5a068daf947107264b0b4d10fb9ca
-  pristine_tree_hash: 65e8e9b8617e28ee7a7c3f05901c621d2015baab
+  generation_id: 7955e654-5381-4c82-a19d-5c5a8ef8bd32
+  pristine_commit_hash: cffd072a8368081041f2410771ddc174d26ab8d2
+  pristine_tree_hash: 7a87c30ea08a502e25dd55416724eb86235e412b
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -456,6 +456,10 @@ trackedFiles:
     id: 1f4df5cccded
     last_write_checksum: sha1:dee65a8a7cc6f471e4812f0c8c491c0a1a3dc1fa
     pristine_git_object: fb6cfe003c9473384c6c4b9cd17409f83ca40be9
+  docs/models/components/recordt.md:
+    id: 9c45ba397f0f
+    last_write_checksum: sha1:74ec7978a03b56285084f4b65ba78ad2d431e202
+    pristine_git_object: 534f587fd5e029fb97b9d944fc32594732df6497
   docs/models/components/remoteipkey.md:
     id: 66c8c84b1359
     last_write_checksum: sha1:048a5db9d2b05ed3f11b2f1f68136a0956723150
@@ -1504,18 +1508,6 @@ trackedFiles:
     id: c944480f95a8
     last_write_checksum: sha1:df1002d0570873cb089d8071624abbeece6c643b
     pristine_git_object: 4cb0877727ce364e012bb155c58827e79e694142
-  docs/models/components/v2ratelimitlimitrequestbody.md:
-    id: b7be205c0a75
-    last_write_checksum: sha1:a9477c08c1b3634d8e60a4ce9744b951e30d843e
-    pristine_git_object: 6346b626f4a749746c4ba7e044fc7405f4914c0c
-  docs/models/components/v2ratelimitlimitresponsebody.md:
-    id: 70f9e7f7126d
-    last_write_checksum: sha1:fe33a38bf3134ddfb558d5d41d7ab7361e6c25a8
-    pristine_git_object: f9d3929025612be233cf0ac97e460c91c62bb2c5
-  docs/models/components/v2ratelimitlimitresponsedata.md:
-    id: b9f3101479f1
-    last_write_checksum: sha1:06c0e41df72f66afe13fcc5652469c7755686af7
-    pristine_git_object: 3dee13e4a61f855dbb44716d1152284e3454228e
   docs/models/components/v2ratelimitlistnamespacesrequestbody.md:
     id: 66d72b9a7fac
     last_write_checksum: sha1:fd56ae47f5deb0b6ebadc99744b7c455cc48cd04
@@ -1532,18 +1524,6 @@ trackedFiles:
     id: 1ead4c8a08d5
     last_write_checksum: sha1:228119babd26b9ffdcf8bba478e1f145cb88a7fc
     pristine_git_object: cd8ff439a25d7a8e3a435664a2ffeb3a3a98b361
-  docs/models/components/v2ratelimitmultilimitcheck.md:
-    id: 668059ee677c
-    last_write_checksum: sha1:6132b6b59358ccd9adb8ddd740e3b20a03933c08
-    pristine_git_object: 11228e26aa9809045e822ee1a21510840b3941d2
-  docs/models/components/v2ratelimitmultilimitresponsebody.md:
-    id: 8d292623a26c
-    last_write_checksum: sha1:fe1f9feedb2d30164da1010c19bf9221b869b008
-    pristine_git_object: 893c27383bf5b7c34050fde5b0bbbb1c8a7706e2
-  docs/models/components/v2ratelimitmultilimitresponsedata.md:
-    id: 0b3b40e49ad3
-    last_write_checksum: sha1:4639fff2268622bc4b474df35fb0928edfeb7ad9
-    pristine_git_object: 1ede65b33db95bd9ec3ca45c0daef287949f3571
   docs/models/components/v2ratelimitsetoverriderequestbody.md:
     id: 97a891c0f0c2
     last_write_checksum: sha1:7ec457bf78da744b77839bb44156350aa665ed25
@@ -1610,8 +1590,8 @@ trackedFiles:
     pristine_git_object: 281154f86f467bd6b4598933fcdfc5b2d82a6d2c
   docs/models/components/v2rootkeysupdatekeyrequestbody.md:
     id: 3fba6b9110ec
-    last_write_checksum: sha1:1b96f56fd4a17e819c2c823f481734bb26b4ea80
-    pristine_git_object: eb06d828673d473f4b4a24cd8977d14555136d09
+    last_write_checksum: sha1:bbdc54b36842ea745a84501a95d3447c568dbf18
+    pristine_git_object: 6546ee332ce5a33059e0b84f088355201ee72273
   docs/models/components/v2rootkeysupdatekeyresponsebody.md:
     id: 0158288c6cfa
     last_write_checksum: sha1:d97eab8532e39f244b8e4f8f8cfb6cdfd91b187b
@@ -1712,6 +1692,30 @@ trackedFiles:
     id: e6e9229173cc
     last_write_checksum: sha1:b01bc5129c27cf5b7efb519d805be7d63ff43135
     pristine_git_object: 59db65de4522d8078331e55eaee85a80c769eed6
+  docs/models/components/v3ratelimitlimitrequestbody.md:
+    id: 6cd8921a104f
+    last_write_checksum: sha1:d2523cca26736a7463248855d35a26e9b6390cf6
+    pristine_git_object: 1dcf313074c535b214fccc4478834400f04229d4
+  docs/models/components/v3ratelimitlimitresponsebody.md:
+    id: 498642a0e179
+    last_write_checksum: sha1:79389f7a084d7ec9d051d5f514107bfd6c681805
+    pristine_git_object: e37197823cd8d92f98939dbf76abdbbaaf867c2f
+  docs/models/components/v3ratelimitlimitresponsedata.md:
+    id: 8cfa6fe86d9b
+    last_write_checksum: sha1:908fdc479676f46f6280c877a4c419a68a4169be
+    pristine_git_object: 8fb87f1293b87f31bda0ba60be4d50151ab512d4
+  docs/models/components/v3ratelimitmultilimitcheck.md:
+    id: 1cfe985b71bc
+    last_write_checksum: sha1:abaa436ecf36d429f91cbf848caac46d7c6648c4
+    pristine_git_object: 51c3889082a0f44bf72161ef1caffb27baf4775a
+  docs/models/components/v3ratelimitmultilimitresponsebody.md:
+    id: 881b6319b05d
+    last_write_checksum: sha1:0217f75b07640e775b6307edb03f5d8425b6c722
+    pristine_git_object: 8e3127b0eeaa135b3fe70fbbec8aa3257b16a9c6
+  docs/models/components/v3ratelimitmultilimitresponsedata.md:
+    id: 80792c5b8dd9
+    last_write_checksum: sha1:48f8e3c69e6c019d81d7397f7e8915cc1d8bad44
+    pristine_git_object: 1538415db45d10cced534a4a0ecc750a2839733c
   docs/models/components/validationerror.md:
     id: 23910fc567b1
     last_write_checksum: sha1:c4edcf709b3d8ddbc5dc2d75e7c1054bfeb5bcfc
@@ -1858,8 +1862,8 @@ trackedFiles:
     pristine_git_object: 8034bbcc5518d78bf66f7e7998998e01aedefd41
   docs/sdks/analytics/README.md:
     id: 4c84abb05030
-    last_write_checksum: sha1:55c2bc6e6dd1884185ad2c620e1607e2fd297fb0
-    pristine_git_object: ad0bf19a9398c79c910525832980a0c2d48dfe07
+    last_write_checksum: sha1:072649081ac907e06455df9c8fa2e92af49db99e
+    pristine_git_object: 5fd1daea743d4e96eb1ee7277cd344b9b448d4e7
   docs/sdks/apis/README.md:
     id: 23f09d8da686
     last_write_checksum: sha1:02c7476f4ba4dbd06b53acdd630982de440b3100
@@ -1918,8 +1922,8 @@ trackedFiles:
     pristine_git_object: eb8884eb549e1c6291ccb05066b9cb4d9d16de87
   docs/sdks/ratelimit/README.md:
     id: b2f3b80218aa
-    last_write_checksum: sha1:bb2ccbd22902b109a9aead54529414cb9f5130f9
-    pristine_git_object: 17ac99a2c1c2ce7d65f6d63ffd5e1c721feccab7
+    last_write_checksum: sha1:39ad8ab7b49b96625d47c21bb54731b40c0cac76
+    pristine_git_object: 3e85b3d1883418ba32c39cdf2e50803f660699b4
   docs/sdks/rootkeys/README.md:
     id: 6c7959344b5a
     last_write_checksum: sha1:b9339522bd0a9b688b16fdf9541971b1870ed23a
@@ -1950,12 +1954,12 @@ trackedFiles:
     pristine_git_object: de0a8fbcae19f26332e9eee7b811267c13c45b9a
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:84eff81fe9a2034dba92049b3555843468eb8040
-    pristine_git_object: 16848fc0ee3e2a91c049a2ebd3a6958efa88dee9
+    last_write_checksum: sha1:8f7bd45c103e4bed5786ed9a68ff8778220a4587
+    pristine_git_object: 50d45037b2a59fb15e63234572c9141bd8b2b847
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5e1af569404f4ad00929ed275c0a9e132946a78c
-    pristine_git_object: fd01f5597cc6f1c409ae7863009f1d230ddf1b90
+    last_write_checksum: sha1:40faf9b0927825763b8c5497e004811faa10063d
+    pristine_git_object: 5fa85dd81eebbaef6cd60d2ecd08f31c289d6438
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:5ca9cd6962a4ff7751198caa08a951300c4e8982
@@ -1970,8 +1974,8 @@ trackedFiles:
     pristine_git_object: 84714011829cd6968e6b37d9563032c2b7ec15ac
   src/funcs/analyticsGetRuntimeLogs.ts:
     id: f09d99d00cbf
-    last_write_checksum: sha1:0f4f8ba9289d6038e68c4731005ac5edbd2d880a
-    pristine_git_object: eea7dd498a6fbdd48aa8e694cea7eddd3661f502
+    last_write_checksum: sha1:dde33a37cbeaf8c2789468909fc74fa5acd51b44
+    pristine_git_object: 9658229746965bd36bcd87b030aa96aa97d97e25
   src/funcs/analyticsGetVerifications.ts:
     id: f271511e3fa9
     last_write_checksum: sha1:48c964a24f96bdf773553deb5458753e17ee5347
@@ -2362,8 +2366,8 @@ trackedFiles:
     pristine_git_object: 0d9dbf785fd405c10512d9e0323726720a79bb67
   src/funcs/ratelimitLimit.ts:
     id: 483ed1742dd3
-    last_write_checksum: sha1:c14dc8a6cbba8065606d1189442c6d63398da1de
-    pristine_git_object: 6b12cb0ccc3f5b0bfdf73bc25d9903406a3cf851
+    last_write_checksum: sha1:f89480f074680857f1322f9c97fb1da4f240138e
+    pristine_git_object: 5a991e0e5435ab545ff4de45ecb562e75ffa7dec
   src/funcs/ratelimitListNamespaces.ts:
     id: 92cae25bfd2c
     last_write_checksum: sha1:0d95c5edb7302e144b4625ceefac498121923e49
@@ -2374,8 +2378,8 @@ trackedFiles:
     pristine_git_object: 2227eccd522c95968c5b6cc1c8e06540386af0a7
   src/funcs/ratelimitMultiLimit.ts:
     id: 903dc9059bc3
-    last_write_checksum: sha1:1c33351e74e5ed707cf50fb0dca5ccd9ad526e0a
-    pristine_git_object: 53c3c7f4d020dab4b31e6c5a3c0bde28f0e5c5ca
+    last_write_checksum: sha1:eb7ccf825ac02962fdcf3e0ae76773e07e333f9c
+    pristine_git_object: 312b789c71cadba4934ef7abaa34d62db3c4ff00
   src/funcs/ratelimitSetOverride.ts:
     id: b5acc5f6de5a
     last_write_checksum: sha1:e8cac0e5c006b1cd35df17428ca787565d027eee
@@ -2442,8 +2446,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:91cde8f0bfd7384e4b399303459f6dd67799565b
-    pristine_git_object: c531f5aaa2ab08c5e066404f9ebe2f632c971161
+    last_write_checksum: sha1:00e798d33986d3239644d412555f4960d69c2131
+    pristine_git_object: 0d23b45f88f9e6b43a8cc00c06d944ab5809f4a6
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:320ad978da272ff7ef2a1d1efd5d53a81190a936
@@ -2714,8 +2718,8 @@ trackedFiles:
     pristine_git_object: 6ab14d150800b0d6453d18b04bcbbb5ea9f82cf3
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:2fc6c2c0e0253df90ad22cd8a2b234476ebcb9b5
-    pristine_git_object: 309b10fe0f66070c23a2d38a7e2cf3e1a7c07d7d
+    last_write_checksum: sha1:a9affda1525b23018afbbd4d221a2d36f1286613
+    pristine_git_object: 46803336f8f7a5bb1390a60f94198a482eb2502c
   src/models/components/intfilter.ts:
     id: 1711450beed8
     last_write_checksum: sha1:c0aaac4573a6e73759942d1aff697bc76994300a
@@ -3828,18 +3832,6 @@ trackedFiles:
     id: b01c57b98aab
     last_write_checksum: sha1:040ddcbb5d66ec8f80d29c07199627ba042f611b
     pristine_git_object: 3d08d6e21a7bb7f2a355a95515df9205c986ec56
-  src/models/components/v2ratelimitlimitrequestbody.ts:
-    id: 2d35858fc60c
-    last_write_checksum: sha1:e468d40adb0c059e64b4ff6064382790adefe187
-    pristine_git_object: 3bf24972bbd2938092c84867ece729f00ed01300
-  src/models/components/v2ratelimitlimitresponsebody.ts:
-    id: 6636389458fa
-    last_write_checksum: sha1:26f951303a761b870a0c631af7f051ddbd4ae9d9
-    pristine_git_object: 0dcd28081014444a0505d02e943676e70dd26248
-  src/models/components/v2ratelimitlimitresponsedata.ts:
-    id: e0aa7bfd570b
-    last_write_checksum: sha1:b6e8e070a5c9dda82a1e49720dd20fffc75ee504
-    pristine_git_object: 5a8f931ca4c7c810e3a823598fc2a82112ffc243
   src/models/components/v2ratelimitlistnamespacesrequestbody.ts:
     id: a9cbebbe362b
     last_write_checksum: sha1:153ab00ab8c8f980867cd250dcd1dd527f438c19
@@ -3856,18 +3848,6 @@ trackedFiles:
     id: 2c2c4923a0fb
     last_write_checksum: sha1:4c69f9d384195d32ed6ed01c10b58bb7887dcb55
     pristine_git_object: 85015581f84e51b704cfe244b1032957793a12c6
-  src/models/components/v2ratelimitmultilimitcheck.ts:
-    id: 02e65eea19b7
-    last_write_checksum: sha1:2dc3d2b078cd164b0b9d1aac1a10754b5965ab79
-    pristine_git_object: d82dfa586ec7abefdda1ef6a0a9e46adfc47c0c2
-  src/models/components/v2ratelimitmultilimitresponsebody.ts:
-    id: c074eb3bcb58
-    last_write_checksum: sha1:6f94bf1218fa465eedd89e98155e54d6824fa8a9
-    pristine_git_object: 60b7286ae32c2a3fa04f8261e41071ad3961216f
-  src/models/components/v2ratelimitmultilimitresponsedata.ts:
-    id: dc7aa570ca21
-    last_write_checksum: sha1:bd21115e424abfa273a3f7c4cad207ec29a65a8a
-    pristine_git_object: 99ba5bcacb1d4dc542008d8eeaf1f0502d29ea68
   src/models/components/v2ratelimitsetoverriderequestbody.ts:
     id: 8c1986c8a184
     last_write_checksum: sha1:2f656f2a0bbe9a3be86e9718d5b227b607dee46e
@@ -3934,8 +3914,8 @@ trackedFiles:
     pristine_git_object: 0b662b00cdf99dc638d2b5cfc6886d92d13f7d57
   src/models/components/v2rootkeysupdatekeyrequestbody.ts:
     id: e35f96fe8b99
-    last_write_checksum: sha1:768b0b02df6dfb65d8f4272cd43dc1ca337cde0b
-    pristine_git_object: efe3ec882252f0672df81214bce1e4aed571905f
+    last_write_checksum: sha1:3e9b3867cc2df9bbc9df10a78e23ee24508ec22a
+    pristine_git_object: 98590b4e8e5168b1c7de77f81ab2032815c7f544
   src/models/components/v2rootkeysupdatekeyresponsebody.ts:
     id: 303b93786fb7
     last_write_checksum: sha1:b284f9aa45bea59e3883b5db265cfdfc75fb286b
@@ -4036,6 +4016,30 @@ trackedFiles:
     id: 37a07780621e
     last_write_checksum: sha1:14b0a9c042be13dcd3419e057dc31bd153f0c030
     pristine_git_object: aec1cd60872faf5a5c47a8b888e7b6efc88774b1
+  src/models/components/v3ratelimitlimitrequestbody.ts:
+    id: 4ed31f593a7a
+    last_write_checksum: sha1:c26841ede06bb02828e4cb2fa6cb7e637c58be13
+    pristine_git_object: efcd8342b4cbbc3c999774a27142aacc5db5c613
+  src/models/components/v3ratelimitlimitresponsebody.ts:
+    id: 7727a2306206
+    last_write_checksum: sha1:2d9e14377f939f0c4a3593f13e62dc0a6d8eac82
+    pristine_git_object: 5248aa9b2e85fbf7e672e735b5850b36de215e0c
+  src/models/components/v3ratelimitlimitresponsedata.ts:
+    id: c0a5728f205c
+    last_write_checksum: sha1:3a5b5e422933d5afe22168275432c0b8c3c8557f
+    pristine_git_object: b3d21273866eb3f7d75cbbe54d42f152d0dde621
+  src/models/components/v3ratelimitmultilimitcheck.ts:
+    id: a571679f4529
+    last_write_checksum: sha1:6727fbe824dc2f5249d64540c060d386ffee1622
+    pristine_git_object: bdc00225857a4c2bf665e729ea6b74dad8a65e69
+  src/models/components/v3ratelimitmultilimitresponsebody.ts:
+    id: db966e0335f5
+    last_write_checksum: sha1:a1c5fe45c639bb48d546743fc84f7f1527bbf5e5
+    pristine_git_object: b3ca5360359a38f144795a19247c6f82b517d98a
+  src/models/components/v3ratelimitmultilimitresponsedata.ts:
+    id: 13b8087799f3
+    last_write_checksum: sha1:0342888d466f40d1129af6eac644540e559b8475
+    pristine_git_object: 16912e63e1fdacd9602c85c47120cbd8a5d570c1
   src/models/components/validationerror.ts:
     id: 7f5955a97454
     last_write_checksum: sha1:a9cfefd5b0f1bd24ea2bf14baacefae8d920a16e
@@ -4206,12 +4210,12 @@ trackedFiles:
     pristine_git_object: a2a4d02918e8770796e5fc1649aa26a45789ff05
   src/sdk/analytics.lazy.ts:
     id: 6d218ec2b3a7
-    last_write_checksum: sha1:49bc2f25501e8e36e994618336de113961b6cd59
-    pristine_git_object: 9512f66777bc7bdc0b46a5846c82476eea28234b
+    last_write_checksum: sha1:4916db211fe7def17a24b91fed29c8c36dbd4e32
+    pristine_git_object: 399c3ee8c886da854b14a92270bdf38230bfd6d3
   src/sdk/analytics.ts:
     id: 411d91261be3
-    last_write_checksum: sha1:435982117e3ecb3cb0b94405d82b025a955e6733
-    pristine_git_object: ff95bd0a5fc1d59c9605bfbb2b0b6bfb9cbc1766
+    last_write_checksum: sha1:340828b8192aea76a566faeb72b4559d5244355c
+    pristine_git_object: 998623fc25f010e10365b10bddcb1fa5b5c30482
   src/sdk/apis.lazy.ts:
     id: bfa518892b2f
     last_write_checksum: sha1:adad69c137cabf58ef7b237fb82266e0771570c9
@@ -4330,12 +4334,12 @@ trackedFiles:
     pristine_git_object: 933ff541f1b9a010412db322ad19252eec595b34
   src/sdk/ratelimit.lazy.ts:
     id: adac55e08706
-    last_write_checksum: sha1:7373683426536095b773caed3d959af8e186463c
-    pristine_git_object: 6adc36d021289e0fad94a1632033c1a1ec55c4ae
+    last_write_checksum: sha1:54a1677b5a1c591f9cb4933154a2d668d1d42733
+    pristine_git_object: 076262af8731be3845108a4f3e9432aa115fc7a3
   src/sdk/ratelimit.ts:
     id: 014e7f752612
-    last_write_checksum: sha1:b3b3c10b628b531b9191d62eefb86c8833128e9d
-    pristine_git_object: 167c1e7917d09ce8f03ba43e1bf7772077a1db9e
+    last_write_checksum: sha1:44685c4e7cd130f16341b5a90fcb772a86d60a7d
+    pristine_git_object: aeb0ac1bb5572ac73801ce4cf4a6c0ee04ec32e8
   src/sdk/rootkeys.lazy.ts:
     id: 531b8854feba
     last_write_checksum: sha1:a9330e53ebab89fdc8f420c103b2e6f2c8220665
@@ -5238,10 +5242,10 @@ examples:
   ratelimit.limit:
     basic:
       requestBody:
-        application/json: {"namespace": "api.requests", "cost": 5, "duration": 60000, "identifier": "user_abc123", "limit": 100}
+        application/json: {"namespace": "api.requests", "cost": 5, "duration": 60000, "identifier": "user_abc123", "record": "IF_ALLOWED", "limit": 100}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"limit": 240650, "remaining": 72751, "reset": 165615, "success": false}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"limit": 240650, "remaining": 72751, "retryAfter": 240650, "allowed": true}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -5278,10 +5282,10 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     weightedCost:
       requestBody:
-        application/json: {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_def456", "limit": 50}
+        application/json: {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_def456", "record": "IF_ALLOWED", "limit": 50}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"limit": 240650, "remaining": 72751, "reset": 165615, "success": false}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"limit": 240650, "remaining": 72751, "retryAfter": 240650, "allowed": true}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -5298,22 +5302,22 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     allowed:
       requestBody:
-        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "limit": 1000}
+        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "record": "IF_ALLOWED", "limit": 1000}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"limit": 100, "remaining": 99, "reset": 1714582980000, "success": true}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"limit": 100, "remaining": 99, "retryAfter": 0, "allowed": true}}
     limitReached:
       requestBody:
-        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "limit": 1000}
+        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "record": "IF_ALLOWED", "limit": 1000}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQY"}, "data": {"limit": 100, "remaining": 0, "reset": 1714582980000, "success": false}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQY"}, "data": {"limit": 100, "remaining": 0, "retryAfter": 595, "allowed": false}}
     withOverride:
       requestBody:
-        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "limit": 1000}
+        application/json: {"namespace": "sms.sign_up", "cost": 5, "duration": 60000, "identifier": "user_12345", "record": "IF_ALLOWED", "limit": 1000}
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"limit": 1000, "remaining": 995, "reset": 1714582980000, "success": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"limit": 1000, "remaining": 995, "retryAfter": 0, "allowed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}}
   ratelimit.listOverrides:
     basic:
       requestBody:
@@ -5523,10 +5527,10 @@ examples:
           application/problem+json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
     multipleChecks:
       requestBody:
-        application/json: [{"namespace": "api.requests", "cost": 5, "duration": 60000, "identifier": "user_abc123", "limit": 100}, {"namespace": "auth.login", "cost": 5, "duration": 60000, "identifier": "user_abc123", "limit": 5}]
+        application/json: [{"namespace": "api.requests", "cost": 5, "duration": 60000, "identifier": "user_abc123", "record": "IF_ALLOWED", "limit": 100}, {"namespace": "api.heavy_operations", "cost": 5, "duration": 3600000, "identifier": "user_abc123", "record": "IF_ALLOWED", "limit": 50}]
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_123"}, "data": {"passed": false, "limits": []}}
+          application/json: {"meta": {"requestId": "req_123"}, "data": {"allowed": false, "retryAfter": 330997, "limits": []}}
         "400":
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found", "errors": []}}
         "401":
@@ -5566,7 +5570,7 @@ examples:
         application/json: []
       responses:
         "200":
-          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"passed": true, "limits": [{"namespace": "api.requests", "identifier": "user_abc123", "limit": 100, "remaining": 99, "reset": 1714582980000, "passed": false}, {"namespace": "auth.login", "identifier": "user_abc123", "limit": 5, "remaining": 4, "reset": 1714582980000, "passed": true}]}}
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQX"}, "data": {"allowed": true, "retryAfter": 0, "limits": [{"namespace": "api.requests", "identifier": "user_abc123", "limit": 100, "remaining": 99, "retryAfter": 0, "allowed": true}, {"namespace": "api.heavy_operations", "identifier": "user_abc123", "limit": 50, "remaining": 45, "retryAfter": 0, "allowed": true}]}}
     mixedResults:
       requestBody:
         application/json: []
@@ -5579,6 +5583,12 @@ examples:
       responses:
         "200":
           application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQZ"}, "data": {"passed": true, "limits": [{"namespace": "api.light_operations", "identifier": "user_xyz789", "limit": 100, "remaining": 95, "reset": 1714582980000, "passed": false}, {"namespace": "api.heavy_operations", "identifier": "user_xyz789", "limit": 1000, "remaining": 995, "reset": 1714582980000, "passed": true, "overrideId": "ovr_2cGKbMxRyIzhCxo1Idjz8q"}]}}
+    oneExceeded:
+      requestBody:
+        application/json: []
+      responses:
+        "200":
+          application/json: {"meta": {"requestId": "req_01H9TQPP77V5E48E9SH0BG0ZQY"}, "data": {"allowed": false, "retryAfter": 72000, "limits": [{"namespace": "api.requests", "identifier": "user_abc123", "limit": 100, "remaining": 40, "retryAfter": 0, "allowed": true}, {"namespace": "api.heavy_operations", "identifier": "user_abc123", "limit": 50, "remaining": 2, "retryAfter": 72000, "allowed": false}]}}
   apis.createApi:
     speakeasy-default-apis-create-api:
       requestBody:
@@ -9529,7 +9539,7 @@ examples:
           application/json: {"meta": {"requestId": "req_123"}, "error": {"detail": "Property foo is required but is missing.", "status": 404, "title": "Not Found", "type": "https://unkey.com/docs/errors/unkey/resource/not_found"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `unkey.portal.exchangeCode()`: \n  *  `request.host` **Added** (Breaking ⚠️)\n* `unkey.portal.createKey()`: **Added**\n* `unkey.apps.getApp()`:  `response.data` **Changed**\n* `unkey.apps.listApps()`:  `response.data[]` **Changed**\n* `unkey.apps.updateApp()`:  `response.data` **Changed**\n* `unkey.environments.getEnvironment()`:  `response.data` **Changed**\n* `unkey.environments.listEnvironments()`:  `response.data[]` **Changed**\n* `unkey.logs.getApiRequestMetrics()`:  `error.status[429]` **Added**\n* `unkey.logs.listApiRequests()`:  `error.status[429]` **Added**\n* `unkey.portal.createSession()`:  `request` **Changed**\n* `unkey.portal.listKeys()`:  `response.keyCreation` **Added**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `unkey.ratelimit.limit()`: \n  *  `request.record` **Added**\n  *  `response.data` **Changed** (Breaking ⚠️)\n* `unkey.ratelimit.multiLimit()`: \n  *  `request[].record` **Added**\n  *  `response.data` **Changed** (Breaking ⚠️)\n* `unkey.rootKeys.updateKey()`: \n  *  `request.expires` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

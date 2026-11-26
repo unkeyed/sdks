@@ -117,33 +117,6 @@ export class Ratelimit extends ClientSDK {
   }
 
   /**
-   * Apply rate limiting
-   *
-   * @remarks
-   * Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-   *
-   * Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-   *
-   * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-   *
-   * **Required Permissions**
-   *
-   * Your root key must have one of the following permissions:
-   * - `ratelimit.*.limit` (to check limits in any namespace)
-   * - `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-   */
-  async limit(
-    request: components.V2RatelimitLimitRequestBody,
-    options?: RequestOptions,
-  ): Promise<components.V2RatelimitLimitResponseBody> {
-    return unwrapAsync(ratelimitLimit(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List ratelimit namespaces
    *
    * @remarks
@@ -198,33 +171,6 @@ export class Ratelimit extends ClientSDK {
   }
 
   /**
-   * Apply multiple rate limit checks
-   *
-   * @remarks
-   * Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-   *
-   * Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-   *
-   * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-   *
-   * **Required Permissions**
-   *
-   * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-   *
-   * To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-   */
-  async multiLimit(
-    request: Array<components.V2RatelimitLimitRequestBody>,
-    options?: RequestOptions,
-  ): Promise<components.V2RatelimitMultiLimitResponseBody> {
-    return unwrapAsync(ratelimitMultiLimit(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Set ratelimit override
    *
    * @remarks
@@ -268,6 +214,62 @@ export class Ratelimit extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.V2RatelimitUpdateNamespaceResponseBody> {
     return unwrapAsync(ratelimitUpdateNamespace(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Apply rate limiting
+   *
+   * @remarks
+   * Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+   *
+   * Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+   *
+   * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+   *
+   * **Required Permissions**
+   *
+   * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+   *
+   * To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+   */
+  async limit(
+    request: components.V3RatelimitLimitRequestBody,
+    options?: RequestOptions,
+  ): Promise<components.V3RatelimitLimitResponseBody> {
+    return unwrapAsync(ratelimitLimit(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Apply multiple rate limit checks
+   *
+   * @remarks
+   * Check and enforce multiple rate limits in a single request, all or nothing.
+   *
+   * The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+   *
+   * Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+   *
+   * **Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+   *
+   * **Required Permissions**
+   *
+   * Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+   *
+   * To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+   */
+  async multiLimit(
+    request: Array<components.V3RatelimitLimitRequestBody>,
+    options?: RequestOptions,
+  ): Promise<components.V3RatelimitMultiLimitResponseBody> {
+    return unwrapAsync(ratelimitMultiLimit(
       this,
       request,
       options,
