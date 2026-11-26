@@ -2,24 +2,24 @@
 
 from __future__ import annotations
 from .meta import Meta, MetaTypedDict
-from .v2ratelimitmultilimitresponsedata import (
-    V2RatelimitMultiLimitResponseData,
-    V2RatelimitMultiLimitResponseDataTypedDict,
+from .v3ratelimitmultilimitresponsedata import (
+    V3RatelimitMultiLimitResponseData,
+    V3RatelimitMultiLimitResponseDataTypedDict,
 )
 from typing_extensions import TypedDict
 from unkey.py.types import BaseModel
 
 
-class V2RatelimitMultiLimitResponseBodyTypedDict(TypedDict):
+class V3RatelimitMultiLimitResponseBodyTypedDict(TypedDict):
     meta: MetaTypedDict
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
-    data: V2RatelimitMultiLimitResponseDataTypedDict
+    data: V3RatelimitMultiLimitResponseDataTypedDict
     r"""Container for multi-limit rate limit check results"""
 
 
-class V2RatelimitMultiLimitResponseBody(BaseModel):
+class V3RatelimitMultiLimitResponseBody(BaseModel):
     meta: Meta
     r"""Metadata object included in every API response. This provides context about the request and is essential for debugging, audit trails, and support inquiries. The `requestId` is particularly important when troubleshooting issues with the Unkey support team."""
 
-    data: V2RatelimitMultiLimitResponseData
+    data: V3RatelimitMultiLimitResponseData
     r"""Container for multi-limit rate limit check results"""

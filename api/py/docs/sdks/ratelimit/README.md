@@ -10,12 +10,12 @@ Rate limiting operations
 * [delete_namespace](#delete_namespace) - Delete ratelimit namespace
 * [delete_override](#delete_override) - Delete ratelimit override
 * [get_override](#get_override) - Get ratelimit override
-* [limit](#limit) - Apply rate limiting
 * [list_namespaces](#list_namespaces) - List ratelimit namespaces
 * [list_overrides](#list_overrides) - List ratelimit overrides
-* [multi_limit](#multi_limit) - Apply multiple rate limit checks
 * [set_override](#set_override) - Set ratelimit override
 * [update_namespace](#update_namespace) - Update ratelimit namespace
+* [limit](#limit) - Apply rate limiting
+* [multi_limit](#multi_limit) - Apply multiple rate limit checks
 
 ## create_namespace
 
@@ -470,152 +470,6 @@ with Unkey(
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## limit
-
-Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-
-Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have one of the following permissions:
-- `ratelimit.*.limit` (to check limits in any namespace)
-- `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-
-### Example Usage: allowed
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: basic
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="api.requests", duration=60000, identifier="user_abc123", limit=100, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: ipLimit
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="auth.login", duration=60000, identifier="203.0.113.42", limit=5, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: limitReached
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: weightedCost
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="api.heavy_operations", duration=3600000, identifier="user_def456", limit=50, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5)
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `namespace`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | The id or name of the namespace.                                                                                                                                                                                                                                                                                                                                                                                                                                                           | sms.sign_up                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `duration`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | *int*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Sets the rate limit window duration in milliseconds after which the counter resets.<br/>Shorter durations enable faster recovery but may be less effective against sustained abuse.<br/>Common values include 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).<br/>Balance user experience with protection needs when choosing window sizes.<br/>                                                                                                                              | 60000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `identifier`                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Defines the scope of rate limiting by identifying the entity being limited.<br/>Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.<br/>Accepts letters, numbers, underscores, dots, colons, slashes, and hyphens for flexible identifier formats.<br/>The same identifier can be used across different namespaces to apply multiple rate limit types.<br/>Choose identifiers that provide appropriate granularity for your rate limiting strategy.<br/> | user_12345                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `limit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *int*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Sets the maximum operations allowed within the duration window before requests are rejected.<br/>When this limit is reached, subsequent requests fail with `RATE_LIMITED` until the window resets.<br/>Balance user experience with resource protection when setting limits for different user tiers.<br/>Consider system capacity, business requirements, and fair usage policies in limit determination.<br/>                                                                            | 1000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `cost`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.<br/>Use higher values for resource-intensive operations and 0 for tracking without limiting.<br/>When accumulated cost exceeds the limit within the duration window, subsequent requests are rejected.<br/>Essential for implementing fair usage policies and preventing resource abuse through expensive operations.<br/>                                                                   | 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `retries`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-
-### Response
-
-**[models.V2RatelimitLimitResponseBody](../../models/v2ratelimitlimitresponsebody.md)**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.GoneErrorResponse            | 410                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
-
 ## list_namespaces
 
 Retrieve a paginated list of the rate limit namespaces in your workspace.
@@ -882,200 +736,6 @@ with Unkey(
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
-## multi_limit
-
-Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-
-Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-
-To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-
-
-### Example Usage: allAllowed
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[])
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: ipHashAndUserLimits
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[
-        {
-            "namespace": "auth.login",
-            "cost": 5,
-            "duration": 60000,
-            "identifier": "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
-            "limit": 10,
-        },
-        {
-            "namespace": "api.requests",
-            "cost": 5,
-            "duration": 3600000,
-            "identifier": "user_def456",
-            "limit": 1000,
-        },
-    ])
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: mixedResults
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[])
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: multipleChecks
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[
-        {
-            "namespace": "api.requests",
-            "cost": 5,
-            "duration": 60000,
-            "identifier": "user_abc123",
-            "limit": 100,
-        },
-        {
-            "namespace": "auth.login",
-            "cost": 5,
-            "duration": 60000,
-            "identifier": "user_abc123",
-            "limit": 5,
-        },
-    ])
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[
-        {
-            "namespace": "sms.sign_up",
-            "cost": 5,
-            "duration": 60000,
-            "identifier": "user_12345",
-            "limit": 1000,
-        },
-    ])
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: withWeightedCost
-
-<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
-```python
-from unkey.py import Unkey
-
-
-with Unkey(
-    root_key="<YOUR_BEARER_TOKEN_HERE>",
-) as unkey:
-
-    res = unkey.ratelimit.multi_limit(request=[
-        {
-            "namespace": "api.light_operations",
-            "duration": 60000,
-            "identifier": "user_xyz789",
-            "limit": 100,
-        },
-        {
-            "namespace": "api.heavy_operations",
-            "cost": 5,
-            "duration": 3600000,
-            "identifier": "user_xyz789",
-            "limit": 50,
-        },
-    ])
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [List[models.V2RatelimitLimitRequestBody]](../../models/.md)        | :heavy_check_mark:                                                  | The request object to use for the request.                          |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.V2RatelimitMultiLimitResponseBody](../../models/v2ratelimitmultilimitresponsebody.md)**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
-| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
-| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
-| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
-| errors.GoneErrorResponse            | 410                                 | application/json                    |
-| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
-| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
-
 ## set_override
 
 Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
@@ -1322,5 +982,365 @@ with Unkey(
 | errors.NotFoundErrorResponse        | 404                                 | application/json                    |
 | errors.ConflictErrorResponse        | 409                                 | application/json                    |
 | errors.TooManyRequestsErrorResponse | 429                                 | application/json                    |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## limit
+
+Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+
+Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allowed
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="allowed" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="basic" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="api.requests", duration=60000, identifier="user_abc123", limit=100, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="ipLimit" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="auth.login", duration=60000, identifier="203.0.113.42", limit=5, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="limitReached" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="weightedCost" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="api.heavy_operations", duration=3600000, identifier="user_def456", limit=50, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="withOverride" -->
+```python
+from unkey.py import Unkey, models
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.limit(namespace="sms.sign_up", duration=60000, identifier="user_12345", limit=1000, cost=5, record=models.Record.IF_ALLOWED)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                     | Example                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `namespace`                                                                                                                                                                                                                                                                                                                                                                     | *str*                                                                                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                              | The id or name of the namespace.                                                                                                                                                                                                                                                                                                                                                | sms.sign_up                                                                                                                                                                                                                                                                                                                                                                     |
+| `duration`                                                                                                                                                                                                                                                                                                                                                                      | *int*                                                                                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                              | Sets the rate limit duration in milliseconds. It must be at least 10000 (10 seconds) and at most 86400000 (24 hours).<br/>Common values include 10000 (10 seconds), 60000 (1 minute), 3600000 (1 hour), and 86400000 (24 hours).<br/>                                                                                                                                           | 60000                                                                                                                                                                                                                                                                                                                                                                           |
+| `identifier`                                                                                                                                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                              | Defines the scope of rate limiting by identifying the entity being limited.<br/>Use user IDs for per-user limits, IP addresses for anonymous limiting, or API key IDs for per-key limits.<br/>The same identifier can be used across different namespaces to apply multiple rate limit types.<br/>Choose identifiers that provide appropriate granularity for your rate limiting strategy.<br/> | user_12345                                                                                                                                                                                                                                                                                                                                                                      |
+| `limit`                                                                                                                                                                                                                                                                                                                                                                         | *int*                                                                                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                              | Sets the maximum cost allowed per duration before requests are rejected.<br/>Balance user experience with resource protection when setting limits for different user tiers.<br/>                                                                                                                                                                                                | 1000                                                                                                                                                                                                                                                                                                                                                                            |
+| `cost`                                                                                                                                                                                                                                                                                                                                                                          | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                              | Sets how much of the rate limit quota this request consumes, enabling weighted rate limiting.<br/>Use higher values for resource-intensive operations and 0 for tracking without limiting.<br/>A cost greater than the limit that applies, including the limit of a matching override, never fits: the check is denied and `retryAfter` is one duration.<br/>                   | 5                                                                                                                                                                                                                                                                                                                                                                               |
+| `record`                                                                                                                                                                                                                                                                                                                                                                        | [Optional[models.Record]](../../models/record.md)                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                              | Configure when this check persists its cost.<br/>- `IF_ALLOWED`: counts the cost only if it fits.<br/>- `ALWAYS`: counts the cost even if it does not fit, such as for usage that already happened.<br/>- `NEVER`: counts nothing and only reports whether the cost fits. This is the same behavior as setting a cost of 0.<br/>                                                | IF_ALLOWED                                                                                                                                                                                                                                                                                                                                                                      |
+| `retries`                                                                                                                                                                                                                                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                 |
+
+### Response
+
+**[models.V3RatelimitLimitResponseBody](../../models/v3ratelimitlimitresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
+| errors.InternalServerErrorResponse  | 500                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## multi_limit
+
+Check and enforce multiple rate limits in a single request, all or nothing.
+
+The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+
+Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allAllowed
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="allAllowed" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "auth.login",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "limit": 10,
+        },
+        {
+            "namespace": "api.requests",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_def456",
+            "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="mixedResults" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="multipleChecks" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.requests",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_abc123",
+            "limit": 100,
+        },
+        {
+            "namespace": "api.heavy_operations",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_abc123",
+            "limit": 50,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: oneExceeded
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="oneExceeded" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withOverride" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "sms.sign_up",
+            "cost": 5,
+            "duration": 60000,
+            "identifier": "user_12345",
+            "limit": 1000,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="python" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withWeightedCost" -->
+```python
+from unkey.py import Unkey
+
+
+with Unkey(
+    root_key="<YOUR_BEARER_TOKEN_HERE>",
+) as unkey:
+
+    res = unkey.ratelimit.multi_limit(request=[
+        {
+            "namespace": "api.light_operations",
+            "duration": 60000,
+            "identifier": "user_xyz789",
+            "limit": 100,
+        },
+        {
+            "namespace": "api.heavy_operations",
+            "cost": 5,
+            "duration": 3600000,
+            "identifier": "user_xyz789",
+            "limit": 50,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [List[models.V3RatelimitLimitRequestBody]](../../models/.md)        | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.V3RatelimitMultiLimitResponseBody](../../models/v3ratelimitmultilimitresponsebody.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestErrorResponse      | 400                                 | application/json                    |
+| errors.UnauthorizedErrorResponse    | 401                                 | application/json                    |
+| errors.ForbiddenErrorResponse       | 403                                 | application/json                    |
+| errors.NotFoundErrorResponse        | 404                                 | application/json                    |
+| errors.GoneErrorResponse            | 410                                 | application/json                    |
+| errors.TooManyRequestsErrorResponse | 429                                 | application/problem+json            |
 | errors.InternalServerErrorResponse  | 500                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

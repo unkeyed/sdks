@@ -9,8 +9,8 @@ sources:
             - 2.0.0
     api-python:
         sourceNamespace: api-python
-        sourceRevisionDigest: sha256:63ef610f48caa186ab944100b344dd7ac02dc6121000261bf27cc4861abbe0b3
-        sourceBlobDigest: sha256:5ed1e944b4c7fad7bf1a2d49c83dc8525ef465ec90eb976a74e61185c64cf046
+        sourceRevisionDigest: sha256:1add08e98ed14bdf56a9702d7bcdfbe1c75abcb0a02a27d4be87b1366fd72bd6
+        sourceBlobDigest: sha256:52d3fc43360b945a6fcf2b9b782cdf5634deeb2458d65d9a3f9c613ccca0db7a
         tags:
             - latest
             - 2.0.0
@@ -25,10 +25,10 @@ targets:
     api-py:
         source: api-python
         sourceNamespace: api-python
-        sourceRevisionDigest: sha256:63ef610f48caa186ab944100b344dd7ac02dc6121000261bf27cc4861abbe0b3
-        sourceBlobDigest: sha256:5ed1e944b4c7fad7bf1a2d49c83dc8525ef465ec90eb976a74e61185c64cf046
+        sourceRevisionDigest: sha256:1add08e98ed14bdf56a9702d7bcdfbe1c75abcb0a02a27d4be87b1366fd72bd6
+        sourceBlobDigest: sha256:52d3fc43360b945a6fcf2b9b782cdf5634deeb2458d65d9a3f9c613ccca0db7a
         codeSamplesNamespace: api-python-code-samples
-        codeSamplesRevisionDigest: sha256:35865020b50c09421a3a53036552f7d555b32cdc24ed997c1a7177967e65b3b2
+        codeSamplesRevisionDigest: sha256:5d35fd4041a560fc63889ebf89127a3fee15c333ad4df986afd3306dddd0feef
     api-ts:
         source: api
         sourceNamespace: api

@@ -26,6 +26,8 @@ class V2RootKeysUpdateKeyRequestBodyTypedDict(TypedDict):
     r"""New root key name. Set null to remove the name. Omit to keep the current name."""
     enabled: NotRequired[bool]
     r"""Whether the root key can authenticate. Omit to keep the current state."""
+    expires: NotRequired[Nullable[int]]
+    r"""New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it."""
     permissions: NotRequired[List[str]]
     r"""Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
     and within the caller's permissions. Omit to keep the current permissions.
@@ -48,6 +50,9 @@ class V2RootKeysUpdateKeyRequestBody(BaseModel):
     enabled: Optional[bool] = None
     r"""Whether the root key can authenticate. Omit to keep the current state."""
 
+    expires: OptionalNullable[int] = UNSET
+    r"""New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it."""
+
     permissions: Optional[List[str]] = None
     r"""Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
     and within the caller's permissions. Omit to keep the current permissions.
@@ -59,8 +64,10 @@ class V2RootKeysUpdateKeyRequestBody(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["ipAllowlist", "name", "enabled", "permissions"])
-        nullable_fields = set(["name"])
+        optional_fields = set(
+            ["ipAllowlist", "name", "enabled", "expires", "permissions"]
+        )
+        nullable_fields = set(["name", "expires"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

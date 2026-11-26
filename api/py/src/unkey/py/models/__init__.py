@@ -1201,18 +1201,6 @@ if TYPE_CHECKING:
         V2RatelimitGetOverrideResponseBody,
         V2RatelimitGetOverrideResponseBodyTypedDict,
     )
-    from .v2ratelimitlimitrequestbody import (
-        V2RatelimitLimitRequestBody,
-        V2RatelimitLimitRequestBodyTypedDict,
-    )
-    from .v2ratelimitlimitresponsebody import (
-        V2RatelimitLimitResponseBody,
-        V2RatelimitLimitResponseBodyTypedDict,
-    )
-    from .v2ratelimitlimitresponsedata import (
-        V2RatelimitLimitResponseData,
-        V2RatelimitLimitResponseDataTypedDict,
-    )
     from .v2ratelimitlistnamespacesrequestbody import (
         V2RatelimitListNamespacesRequestBody,
         V2RatelimitListNamespacesRequestBodyTypedDict,
@@ -1228,18 +1216,6 @@ if TYPE_CHECKING:
     from .v2ratelimitlistoverridesresponsebody import (
         V2RatelimitListOverridesResponseBody,
         V2RatelimitListOverridesResponseBodyTypedDict,
-    )
-    from .v2ratelimitmultilimitcheck import (
-        V2RatelimitMultiLimitCheck,
-        V2RatelimitMultiLimitCheckTypedDict,
-    )
-    from .v2ratelimitmultilimitresponsebody import (
-        V2RatelimitMultiLimitResponseBody,
-        V2RatelimitMultiLimitResponseBodyTypedDict,
-    )
-    from .v2ratelimitmultilimitresponsedata import (
-        V2RatelimitMultiLimitResponseData,
-        V2RatelimitMultiLimitResponseDataTypedDict,
     )
     from .v2ratelimitsetoverriderequestbody import (
         V2RatelimitSetOverrideRequestBody,
@@ -1408,6 +1384,31 @@ if TYPE_CHECKING:
     from .v3deploymentscreatedeploymentresponsedata import (
         V3DeploymentsCreateDeploymentResponseData,
         V3DeploymentsCreateDeploymentResponseDataTypedDict,
+    )
+    from .v3ratelimitlimitrequestbody import (
+        Record,
+        V3RatelimitLimitRequestBody,
+        V3RatelimitLimitRequestBodyTypedDict,
+    )
+    from .v3ratelimitlimitresponsebody import (
+        V3RatelimitLimitResponseBody,
+        V3RatelimitLimitResponseBodyTypedDict,
+    )
+    from .v3ratelimitlimitresponsedata import (
+        V3RatelimitLimitResponseData,
+        V3RatelimitLimitResponseDataTypedDict,
+    )
+    from .v3ratelimitmultilimitcheck import (
+        V3RatelimitMultiLimitCheck,
+        V3RatelimitMultiLimitCheckTypedDict,
+    )
+    from .v3ratelimitmultilimitresponsebody import (
+        V3RatelimitMultiLimitResponseBody,
+        V3RatelimitMultiLimitResponseBodyTypedDict,
+    )
+    from .v3ratelimitmultilimitresponsedata import (
+        V3RatelimitMultiLimitResponseData,
+        V3RatelimitMultiLimitResponseDataTypedDict,
     )
     from .validationerror import ValidationError, ValidationErrorTypedDict
     from .verifykeyratelimitdata import (
@@ -1633,6 +1634,7 @@ __all__ = [
     "RatelimitRequestTypedDict",
     "RatelimitResponse",
     "RatelimitResponseTypedDict",
+    "Record",
     "RemoteIPKey",
     "RemoteIPKeyTypedDict",
     "RemoteIPMatch",
@@ -2154,12 +2156,6 @@ __all__ = [
     "V2RatelimitGetOverrideRequestBodyTypedDict",
     "V2RatelimitGetOverrideResponseBody",
     "V2RatelimitGetOverrideResponseBodyTypedDict",
-    "V2RatelimitLimitRequestBody",
-    "V2RatelimitLimitRequestBodyTypedDict",
-    "V2RatelimitLimitResponseBody",
-    "V2RatelimitLimitResponseBodyTypedDict",
-    "V2RatelimitLimitResponseData",
-    "V2RatelimitLimitResponseDataTypedDict",
     "V2RatelimitListNamespacesRequestBody",
     "V2RatelimitListNamespacesRequestBodyTypedDict",
     "V2RatelimitListNamespacesResponseBody",
@@ -2168,12 +2164,6 @@ __all__ = [
     "V2RatelimitListOverridesRequestBodyTypedDict",
     "V2RatelimitListOverridesResponseBody",
     "V2RatelimitListOverridesResponseBodyTypedDict",
-    "V2RatelimitMultiLimitCheck",
-    "V2RatelimitMultiLimitCheckTypedDict",
-    "V2RatelimitMultiLimitResponseBody",
-    "V2RatelimitMultiLimitResponseBodyTypedDict",
-    "V2RatelimitMultiLimitResponseData",
-    "V2RatelimitMultiLimitResponseDataTypedDict",
     "V2RatelimitSetOverrideRequestBody",
     "V2RatelimitSetOverrideRequestBodyTypedDict",
     "V2RatelimitSetOverrideResponseBody",
@@ -2258,6 +2248,18 @@ __all__ = [
     "V3DeploymentsCreateDeploymentResponseBodyTypedDict",
     "V3DeploymentsCreateDeploymentResponseData",
     "V3DeploymentsCreateDeploymentResponseDataTypedDict",
+    "V3RatelimitLimitRequestBody",
+    "V3RatelimitLimitRequestBodyTypedDict",
+    "V3RatelimitLimitResponseBody",
+    "V3RatelimitLimitResponseBodyTypedDict",
+    "V3RatelimitLimitResponseData",
+    "V3RatelimitLimitResponseDataTypedDict",
+    "V3RatelimitMultiLimitCheck",
+    "V3RatelimitMultiLimitCheckTypedDict",
+    "V3RatelimitMultiLimitResponseBody",
+    "V3RatelimitMultiLimitResponseBodyTypedDict",
+    "V3RatelimitMultiLimitResponseData",
+    "V3RatelimitMultiLimitResponseDataTypedDict",
     "ValidationError",
     "ValidationErrorTypedDict",
     "VerifyKeyRatelimitData",
@@ -3005,12 +3007,6 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitGetOverrideRequestBodyTypedDict": ".v2ratelimitgetoverriderequestbody",
     "V2RatelimitGetOverrideResponseBody": ".v2ratelimitgetoverrideresponsebody",
     "V2RatelimitGetOverrideResponseBodyTypedDict": ".v2ratelimitgetoverrideresponsebody",
-    "V2RatelimitLimitRequestBody": ".v2ratelimitlimitrequestbody",
-    "V2RatelimitLimitRequestBodyTypedDict": ".v2ratelimitlimitrequestbody",
-    "V2RatelimitLimitResponseBody": ".v2ratelimitlimitresponsebody",
-    "V2RatelimitLimitResponseBodyTypedDict": ".v2ratelimitlimitresponsebody",
-    "V2RatelimitLimitResponseData": ".v2ratelimitlimitresponsedata",
-    "V2RatelimitLimitResponseDataTypedDict": ".v2ratelimitlimitresponsedata",
     "V2RatelimitListNamespacesRequestBody": ".v2ratelimitlistnamespacesrequestbody",
     "V2RatelimitListNamespacesRequestBodyTypedDict": ".v2ratelimitlistnamespacesrequestbody",
     "V2RatelimitListNamespacesResponseBody": ".v2ratelimitlistnamespacesresponsebody",
@@ -3019,12 +3015,6 @@ _dynamic_imports: dict[str, str] = {
     "V2RatelimitListOverridesRequestBodyTypedDict": ".v2ratelimitlistoverridesrequestbody",
     "V2RatelimitListOverridesResponseBody": ".v2ratelimitlistoverridesresponsebody",
     "V2RatelimitListOverridesResponseBodyTypedDict": ".v2ratelimitlistoverridesresponsebody",
-    "V2RatelimitMultiLimitCheck": ".v2ratelimitmultilimitcheck",
-    "V2RatelimitMultiLimitCheckTypedDict": ".v2ratelimitmultilimitcheck",
-    "V2RatelimitMultiLimitResponseBody": ".v2ratelimitmultilimitresponsebody",
-    "V2RatelimitMultiLimitResponseBodyTypedDict": ".v2ratelimitmultilimitresponsebody",
-    "V2RatelimitMultiLimitResponseData": ".v2ratelimitmultilimitresponsedata",
-    "V2RatelimitMultiLimitResponseDataTypedDict": ".v2ratelimitmultilimitresponsedata",
     "V2RatelimitSetOverrideRequestBody": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideRequestBodyTypedDict": ".v2ratelimitsetoverriderequestbody",
     "V2RatelimitSetOverrideResponseBody": ".v2ratelimitsetoverrideresponsebody",
@@ -3109,6 +3099,19 @@ _dynamic_imports: dict[str, str] = {
     "V3DeploymentsCreateDeploymentResponseBodyTypedDict": ".v3deploymentscreatedeploymentresponsebody",
     "V3DeploymentsCreateDeploymentResponseData": ".v3deploymentscreatedeploymentresponsedata",
     "V3DeploymentsCreateDeploymentResponseDataTypedDict": ".v3deploymentscreatedeploymentresponsedata",
+    "Record": ".v3ratelimitlimitrequestbody",
+    "V3RatelimitLimitRequestBody": ".v3ratelimitlimitrequestbody",
+    "V3RatelimitLimitRequestBodyTypedDict": ".v3ratelimitlimitrequestbody",
+    "V3RatelimitLimitResponseBody": ".v3ratelimitlimitresponsebody",
+    "V3RatelimitLimitResponseBodyTypedDict": ".v3ratelimitlimitresponsebody",
+    "V3RatelimitLimitResponseData": ".v3ratelimitlimitresponsedata",
+    "V3RatelimitLimitResponseDataTypedDict": ".v3ratelimitlimitresponsedata",
+    "V3RatelimitMultiLimitCheck": ".v3ratelimitmultilimitcheck",
+    "V3RatelimitMultiLimitCheckTypedDict": ".v3ratelimitmultilimitcheck",
+    "V3RatelimitMultiLimitResponseBody": ".v3ratelimitmultilimitresponsebody",
+    "V3RatelimitMultiLimitResponseBodyTypedDict": ".v3ratelimitmultilimitresponsebody",
+    "V3RatelimitMultiLimitResponseData": ".v3ratelimitmultilimitresponsedata",
+    "V3RatelimitMultiLimitResponseDataTypedDict": ".v3ratelimitmultilimitresponsedata",
     "ValidationError": ".validationerror",
     "ValidationErrorTypedDict": ".validationerror",
     "VerifyKeyRatelimitData": ".verifykeyratelimitdata",
