@@ -28,7 +28,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # npm stage publish needs npm 11.15.0 or later, which Node 24 ships.
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
@@ -37,7 +38,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Publish to NPM
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Uploads the version to npm's staging queue. A maintainer must approve it on
+      # npmjs.com (Staged Packages tab) or with `npm stage approve` before anyone can install it.
+      - name: Stage on NPM
+        run: npm stage publish
