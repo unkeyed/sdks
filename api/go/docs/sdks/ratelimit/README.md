@@ -10,12 +10,12 @@ Rate limiting operations
 * [DeleteNamespace](#deletenamespace) - Delete ratelimit namespace
 * [DeleteOverride](#deleteoverride) - Delete ratelimit override
 * [GetOverride](#getoverride) - Get ratelimit override
-* [Limit](#limit) - Apply rate limiting
 * [ListNamespaces](#listnamespaces) - List ratelimit namespaces
 * [ListOverrides](#listoverrides) - List ratelimit overrides
-* [MultiLimit](#multilimit) - Apply multiple rate limit checks
 * [SetOverride](#setoverride) - Set ratelimit override
 * [UpdateNamespace](#updatenamespace) - Update ratelimit namespace
+* [Limit](#limit) - Apply rate limiting
+* [MultiLimit](#multilimit) - Apply multiple rate limit checks
 
 ## CreateNamespace
 
@@ -40,8 +40,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -72,8 +72,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -104,8 +104,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -136,8 +136,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -168,8 +168,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -238,8 +238,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -270,8 +270,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -302,8 +302,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -334,8 +334,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -366,8 +366,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -434,8 +434,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -467,8 +467,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -500,8 +500,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -533,8 +533,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -602,8 +602,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -635,8 +635,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -668,8 +668,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -701,8 +701,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -750,263 +750,6 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Limit
-
-Check and enforce rate limits for any identifier (user ID, IP address, API client, etc.).
-
-Use this for rate limiting beyond API keys - limit users by ID, IPs by address, or any custom identifier. Supports namespace organization, variable costs, and custom overrides.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded — check the `success` field in the response to determine if the request should be allowed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have one of the following permissions:
-- `ratelimit.*.limit` (to check limits in any namespace)
-- `ratelimit.<namespace_id>.limit` (to check limits in a specific namespace)
-
-
-### Example Usage: allowed
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="allowed" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "sms.sign_up",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 60000,
-        Identifier: "user_12345",
-        Limit: 1000,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: basic
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="basic" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "api.requests",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 60000,
-        Identifier: "user_abc123",
-        Limit: 100,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: ipLimit
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="ipLimit" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "auth.login",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 60000,
-        Identifier: "203.0.113.42",
-        Limit: 5,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: limitReached
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="limitReached" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "sms.sign_up",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 60000,
-        Identifier: "user_12345",
-        Limit: 1000,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: weightedCost
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="weightedCost" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "api.heavy_operations",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 3600000,
-        Identifier: "user_def456",
-        Limit: 50,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v2/ratelimit.limit" example="withOverride" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.Limit(ctx, components.V2RatelimitLimitRequestBody{
-        Namespace: "sms.sign_up",
-        Cost: unkey.Pointer[int64](5),
-        Duration: 60000,
-        Identifier: "user_12345",
-        Limit: 1000,
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [components.V2RatelimitLimitRequestBody](../../models/components/v2ratelimitlimitrequestbody.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.RatelimitLimitResponse](../../models/operations/ratelimitlimitresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
-| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
-| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
-| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
-| apierrors.GoneErrorResponse            | 410                                    | application/json                       |
-| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
-| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
 ## ListNamespaces
 
 Retrieve a paginated list of the rate limit namespaces in your workspace.
@@ -1031,8 +774,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1073,8 +816,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1118,8 +861,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1163,8 +906,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1208,8 +951,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1253,8 +996,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1298,8 +1041,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1376,8 +1119,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1421,8 +1164,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1465,8 +1208,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1526,279 +1269,6 @@ func main() {
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## MultiLimit
-
-Check and enforce multiple rate limits in a single request for any identifiers (user IDs, IP addresses, API clients, etc.).
-
-Use this to efficiently check multiple rate limits at once. Each rate limit check is independent and returns its own result with a top-level `passed` indicator showing if all checks succeeded.
-
-**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded — check the `passed` field to see if all limits passed, or the `success` field in each individual result. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace existence/deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
-
-**Required Permissions**
-
-Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
-
-To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project. The `#limit` permission must cover each created namespace.
-
-
-### Example Usage: allAllowed
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="allAllowed" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: ipHashAndUserLimits
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "auth.login",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 60000,
-            Identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
-            Limit: 10,
-        },
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "api.requests",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 3600000,
-            Identifier: "user_def456",
-            Limit: 1000,
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: mixedResults
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="mixedResults" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: multipleChecks
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="multipleChecks" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "api.requests",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 60000,
-            Identifier: "user_abc123",
-            Limit: 100,
-        },
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "auth.login",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 60000,
-            Identifier: "user_abc123",
-            Limit: 5,
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: withOverride
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withOverride" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "sms.sign_up",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 60000,
-            Identifier: "user_12345",
-            Limit: 1000,
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-### Example Usage: withWeightedCost
-
-<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v2/ratelimit.multiLimit" example="withWeightedCost" -->
-```go
-package main
-
-import(
-	"context"
-	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := unkey.New(
-        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
-    )
-
-    res, err := s.Ratelimit.MultiLimit(ctx, []components.V2RatelimitLimitRequestBody{
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "api.light_operations",
-            Duration: 60000,
-            Identifier: "user_xyz789",
-            Limit: 100,
-        },
-        components.V2RatelimitLimitRequestBody{
-            Namespace: "api.heavy_operations",
-            Cost: unkey.Pointer[int64](5),
-            Duration: 3600000,
-            Identifier: "user_xyz789",
-            Limit: 50,
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V2RatelimitMultiLimitResponseBody != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `request`                                                | [[]components.V2RatelimitLimitRequestBody](../../.md)    | :heavy_check_mark:                                       | The request object to use for the request.               |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.RatelimitMultiLimitResponse](../../models/operations/ratelimitmultilimitresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
-| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
-| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
-| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
-| apierrors.GoneErrorResponse            | 410                                    | application/json                       |
-| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
-| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
 ## SetOverride
 
 Create or update a custom rate limit for specific identifiers, bypassing the namespace default.
@@ -1819,8 +1289,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1854,8 +1324,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1889,8 +1359,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1924,8 +1394,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1999,8 +1469,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2032,8 +1502,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2065,8 +1535,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2098,8 +1568,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2131,8 +1601,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2164,8 +1634,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -2211,5 +1681,567 @@ func main() {
 | apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
 | apierrors.ConflictErrorResponse        | 409                                    | application/json                       |
 | apierrors.TooManyRequestsErrorResponse | 429                                    | application/json                       |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Limit
+
+Check and enforce a rate limit for any identifier (user ID, IP address, API client, etc.).
+
+Usage decays continuously instead of resetting at window edges: after one duration, about 37% of it still counts. Durations must be at least 10000 milliseconds (10 seconds) and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether the limit is exceeded. Check the `allowed` field in the response to determine if the request should proceed. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit`. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create a missing namespace automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allowed
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="allowed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: basic
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="basic" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "api.requests",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_abc123",
+        Limit: 100,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: ipLimit
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="ipLimit" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "auth.login",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "203.0.113.42",
+        Limit: 5,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: limitReached
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="limitReached" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: weightedCost
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="weightedCost" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "api.heavy_operations",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 3600000,
+        Identifier: "user_def456",
+        Limit: 50,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="go" operationID="ratelimit.limit" method="post" path="/v3/ratelimit.limit" example="withOverride" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.Limit(ctx, components.V3RatelimitLimitRequestBody{
+        Namespace: "sms.sign_up",
+        Cost: unkey.Pointer[int64](5),
+        Duration: 60000,
+        Identifier: "user_12345",
+        Limit: 1000,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [components.V3RatelimitLimitRequestBody](../../models/components/v3ratelimitlimitrequestbody.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.RatelimitLimitResponse](../../models/operations/ratelimitlimitresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.GoneErrorResponse            | 410                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
+| apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## MultiLimit
+
+Check and enforce multiple rate limits in a single request, all or nothing.
+
+The request is allowed only if every check fits. Then the cost of every check is counted. If any check does not fit, no cost is counted, not even for the checks that fit on their own.
+
+Durations follow the same rules as `/v3/ratelimit.limit`: at least 10000 milliseconds and at most 86400000 milliseconds (24 hours).
+
+**Response Codes**: Rate limit checks return HTTP 200 regardless of whether limits are exceeded. Check the top-level `allowed` field. A 429 may be returned if the workspace exceeds its API rate limit. Other 4xx responses indicate auth, namespace deletion, or validation errors (e.g., 410 Gone for deleted namespaces). 5xx responses indicate server errors.
+
+**Required Permissions**
+
+Your root key must have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/<namespace_id>#limit` for every namespace in the request. Use `*` for the namespace ID to cover all namespaces in a project.
+
+To create missing namespaces automatically, your root key must also have `unkey:v1:<workspace_id>:projects/<project_id>/ratelimits/namespaces/*#write` for the workspace's default project.
+
+
+### Example Usage: allAllowed
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="allAllowed" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: ipHashAndUserLimits
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="ipHashAndUserLimits" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "auth.login",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "sha256_8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            Limit: 10,
+        },
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "api.requests",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 3600000,
+            Identifier: "user_def456",
+            Limit: 1000,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: mixedResults
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="mixedResults" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multipleChecks
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="multipleChecks" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "api.requests",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "user_abc123",
+            Limit: 100,
+        },
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "api.heavy_operations",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 3600000,
+            Identifier: "user_abc123",
+            Limit: 50,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: oneExceeded
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="oneExceeded" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withOverride
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withOverride" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "sms.sign_up",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 60000,
+            Identifier: "user_12345",
+            Limit: 1000,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: withWeightedCost
+
+<!-- UsageSnippet language="go" operationID="ratelimit.multiLimit" method="post" path="/v3/ratelimit.multiLimit" example="withWeightedCost" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := unkey.New(
+        unkey.WithSecurity(os.Getenv("UNKEY_ROOT_KEY")),
+    )
+
+    res, err := s.Ratelimit.MultiLimit(ctx, []components.V3RatelimitLimitRequestBody{
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "api.light_operations",
+            Duration: 60000,
+            Identifier: "user_xyz789",
+            Limit: 100,
+        },
+        components.V3RatelimitLimitRequestBody{
+            Namespace: "api.heavy_operations",
+            Cost: unkey.Pointer[int64](5),
+            Duration: 3600000,
+            Identifier: "user_xyz789",
+            Limit: 50,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3RatelimitMultiLimitResponseBody != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `request`                                                | [[]components.V3RatelimitLimitRequestBody](../../.md)    | :heavy_check_mark:                                       | The request object to use for the request.               |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.RatelimitMultiLimitResponse](../../models/operations/ratelimitmultilimitresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.BadRequestErrorResponse      | 400                                    | application/json                       |
+| apierrors.UnauthorizedErrorResponse    | 401                                    | application/json                       |
+| apierrors.ForbiddenErrorResponse       | 403                                    | application/json                       |
+| apierrors.NotFoundErrorResponse        | 404                                    | application/json                       |
+| apierrors.GoneErrorResponse            | 410                                    | application/json                       |
+| apierrors.TooManyRequestsErrorResponse | 429                                    | application/problem+json               |
 | apierrors.InternalServerErrorResponse  | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

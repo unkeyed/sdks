@@ -3,15 +3,15 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 )
 
 type RatelimitLimitResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Rate limit check completed successfully. Check the `success` field to determine if the request is allowed.
+	// Rate limit check completed successfully. Check the `allowed` field to determine if the request may proceed.
 	//
-	V2RatelimitLimitResponseBody *components.V2RatelimitLimitResponseBody
+	V3RatelimitLimitResponseBody *components.V3RatelimitLimitResponseBody
 }
 
 func (r RatelimitLimitResponse) MarshalJSON() ([]byte, error) {
@@ -32,9 +32,9 @@ func (r *RatelimitLimitResponse) GetHTTPMeta() components.HTTPMetadata {
 	return r.HTTPMeta
 }
 
-func (r *RatelimitLimitResponse) GetV2RatelimitLimitResponseBody() *components.V2RatelimitLimitResponseBody {
+func (r *RatelimitLimitResponse) GetV3RatelimitLimitResponseBody() *components.V3RatelimitLimitResponseBody {
 	if r == nil {
 		return nil
 	}
-	return r.V2RatelimitLimitResponseBody
+	return r.V3RatelimitLimitResponseBody
 }

@@ -16,7 +16,7 @@ Why the app stopped:
 
 ```go
 import (
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 )
 
 value := components.DeploymentExitReasonOutOfMemory

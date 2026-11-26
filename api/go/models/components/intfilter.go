@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // IntFilter - Filters an integer field. `is` keeps rows that equal one of its values.

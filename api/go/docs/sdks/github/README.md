@@ -36,7 +36,7 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
 	"log"
 )
 

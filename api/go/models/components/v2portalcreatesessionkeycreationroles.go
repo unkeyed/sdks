@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // V2PortalCreateSessionKeyCreationRoles - Roles created keys must or may carry. Every role must already exist in the

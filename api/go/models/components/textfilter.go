@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // TextFilter - Filters a text field. Every operator is exact and case-sensitive. `%` and `_` match only themselves.

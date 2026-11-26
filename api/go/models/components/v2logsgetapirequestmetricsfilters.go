@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // V2LogsGetAPIRequestMetricsFilters - Filters for the metrics. They have the same shape as the filters of `logs.listApiRequests`, without `requestId`. A missing field does not filter. Different fields are combined with AND.

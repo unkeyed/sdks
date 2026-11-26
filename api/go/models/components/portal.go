@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // Portal - A portal you expose to your end users so they can manage their own keys.

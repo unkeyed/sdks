@@ -3,8 +3,8 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/optionalnullable"
 )
 
 // UpdateKeyCreditsData - Credit configuration and remaining balance for this key.

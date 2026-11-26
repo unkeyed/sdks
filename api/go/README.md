@@ -116,7 +116,7 @@ This structure ensures you always have the context needed to debug issues and ta
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/unkeyed/sdks/api/go/v3
+go get github.com/unkeyed/sdks/api/go/v4
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -130,8 +130,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 	"os"
 )
@@ -174,8 +174,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 	"os"
 )
@@ -208,9 +208,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"github.com/unkeyed/sdks/api/go/v3/models/operations"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/models/operations"
 	"log"
 	"os"
 )
@@ -403,12 +403,12 @@ func main() {
 * [DeleteNamespace](docs/sdks/ratelimit/README.md#deletenamespace) - Delete ratelimit namespace
 * [DeleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 * [GetOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
-* [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [ListNamespaces](docs/sdks/ratelimit/README.md#listnamespaces) - List ratelimit namespaces
 * [ListOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
-* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [SetOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 * [UpdateNamespace](docs/sdks/ratelimit/README.md#updatenamespace) - Update ratelimit namespace
+* [Limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [MultiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 
 ### [RootKeys](docs/sdks/rootkeys/README.md)
 
@@ -441,8 +441,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 	"os"
 )
@@ -493,9 +493,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"github.com/unkeyed/sdks/api/go/v3/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/retry"
 	"log"
 	"models/operations"
 	"os"
@@ -537,9 +537,9 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
-	"github.com/unkeyed/sdks/api/go/v3/retry"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/retry"
 	"log"
 	"os"
 )
@@ -605,9 +605,9 @@ package main
 import (
 	"context"
 	"errors"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/apierrors"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/apierrors"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 	"os"
 )
@@ -694,8 +694,8 @@ package main
 
 import (
 	"context"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 	"os"
 )
@@ -740,7 +740,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v3"
+	"github.com/unkeyed/sdks/api/go/v4"
 )
 
 var (

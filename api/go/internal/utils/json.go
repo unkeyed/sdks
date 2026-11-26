@@ -16,8 +16,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
-	"github.com/unkeyed/sdks/api/go/v3/types"
+	"github.com/unkeyed/sdks/api/go/v4/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v4/types"
 )
 
 func MarshalJSON(v interface{}, tag reflect.StructTag, topLevel bool) ([]byte, error) {

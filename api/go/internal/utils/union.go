@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v3/types"
+	"github.com/unkeyed/sdks/api/go/v4/types"
 )
 
 // UnionCandidate represents a candidate type during union deserialization

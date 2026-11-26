@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // V2DomainsListDomainsRequestBody - Filter domains within a workspace. All filters are optional and combine with AND. Each resource
