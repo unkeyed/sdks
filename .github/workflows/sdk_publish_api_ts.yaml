@@ -75,6 +75,15 @@ jobs:
       - name: Install dependencies
         working-directory: api/ts
         run: npm install
+      # Speakeasy generates jsr.json, so this map is added here instead. Without it, JSR
+      # builds the invalid specifier "npm:zod@^3.25.0 || ^4.6.6/v3" from package.json.
+      - name: Map zod for JSR
+        working-directory: api/ts
+        run: |
+          jq '.imports = {"zod": "npm:zod@^3.25.0", "zod/": "npm:/zod@^3.25.0/"}' jsr.json > jsr.json.tmp
+          mv jsr.json.tmp jsr.json
+      # --allow-dirty: the step above changes jsr.json.
+      # --allow-slow-types: generated code such as src/types/unrecognized.ts has no explicit return types.
       - name: Publish to JSR
         working-directory: api/ts
-        run: npx jsr publish
+        run: npx jsr publish --allow-dirty --allow-slow-types
