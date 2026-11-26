@@ -1149,6 +1149,7 @@ class RootKeys(BaseSDK):
         ip_allowlist: Optional[Iterable[str]] = None,
         name: OptionalNullable[str] = UNSET,
         enabled: Optional[bool] = None,
+        expires: OptionalNullable[int] = UNSET,
         permissions: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1173,6 +1174,7 @@ class RootKeys(BaseSDK):
         :param ip_allowlist: Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list.
         :param name: New root key name. Set null to remove the name. Omit to keep the current name.
         :param enabled: Whether the root key can authenticate. Omit to keep the current state.
+        :param expires: New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it.
         :param permissions: Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
             and within the caller's permissions. Omit to keep the current permissions.
 
@@ -1196,6 +1198,7 @@ class RootKeys(BaseSDK):
             key_id=key_id,
             name=name,
             enabled=enabled,
+            expires=expires,
             permissions=utils.unmarshal(permissions, Optional[List[str]]),
         )
 
@@ -1302,6 +1305,7 @@ class RootKeys(BaseSDK):
         ip_allowlist: Optional[Iterable[str]] = None,
         name: OptionalNullable[str] = UNSET,
         enabled: Optional[bool] = None,
+        expires: OptionalNullable[int] = UNSET,
         permissions: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1326,6 +1330,7 @@ class RootKeys(BaseSDK):
         :param ip_allowlist: Replacement IPv4 or IPv6 addresses and CIDR ranges. Omit to keep the current list. Use an empty list for unrestricted access. A restricted root-key caller can expand the target's list only within the caller's allowed networks and cannot send an empty list.
         :param name: New root key name. Set null to remove the name. Omit to keep the current name.
         :param enabled: Whether the root key can authenticate. Omit to keep the current state.
+        :param expires: New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it.
         :param permissions: Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
             and within the caller's permissions. Omit to keep the current permissions.
 
@@ -1349,6 +1354,7 @@ class RootKeys(BaseSDK):
             key_id=key_id,
             name=name,
             enabled=enabled,
+            expires=expires,
             permissions=utils.unmarshal(permissions, Optional[List[str]]),
         )
 
