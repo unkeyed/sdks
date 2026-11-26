@@ -14,10 +14,10 @@ test("auth errors use the fallback", async () => {
       onErrorCalled++;
 
       return {
-        success: true,
+        allowed: true,
         limit: 10,
         remaining: 10,
-        reset: 999,
+        retryAfter: 999,
       };
     },
   });
@@ -25,10 +25,10 @@ test("auth errors use the fallback", async () => {
   const res = await unkey.limit("test");
 
   expect(res).toEqual({
-    success: true,
+    allowed: true,
     limit: 10,
     remaining: 10,
-    reset: 999,
+    retryAfter: 999,
   });
   expect(onErrorCalled).toBe(1);
 });

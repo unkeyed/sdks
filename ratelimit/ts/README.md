@@ -37,7 +37,7 @@ async function handler(request) {
   const identifier = request.getUserId(); // or IP or anything else you want
 
   const ratelimit = await unkey.limit(identifier);
-  if (!ratelimit.success) {
+  if (!ratelimit.allowed) {
     return new Response("try again later", { status: 429 });
   }
 
@@ -53,10 +53,10 @@ To ensure reliability, you can configure timeout and error handling:
 import { Ratelimit } from "@unkey/ratelimit";
 
 const fallback = (identifier: string) => ({
-  success: true,
+  allowed: true,
   limit: 0,
-  reset: 0,
   remaining: 0,
+  retryAfter: 0,
 });
 
 const unkey = new Ratelimit({
@@ -85,6 +85,17 @@ Check whether a specific identifier is currently allowed to do something or if t
 ```ts
 .limit(identifier: string, opts: LimitOptions): Promise<RatelimitResponse>
 ```
+
+## Upgrading from v2
+
+v3 uses the `/v3/ratelimit.limit` endpoint of `@unkey/api` v3.
+
+- `success` is now `allowed`.
+- `reset` (a unix timestamp) is now `retryAfter`: the milliseconds to wait until the same cost fits. It is `0` when the request is allowed. Update your `timeout.fallback` and `onError` responses.
+- Usage decays continuously instead of resetting at fixed window edges. `remaining` grows back over time.
+- `duration` must be between 10 seconds and 24 hours. Unkey rejects other durations.
+- v3 keeps separate counters from v2. Identifiers start with no usage after you upgrade, and instances that still run v2 count separately during a rollout.
+- A new `record` option sets when a request counts its cost: `IF_ALLOWED` (default), `ALWAYS`, or `NEVER`.
 
 ### Documentation
 

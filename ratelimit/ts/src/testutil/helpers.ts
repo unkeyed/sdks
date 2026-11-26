@@ -20,10 +20,10 @@ export const createSuccessResponse = (overrides = {}) => ({
     requestId: "req_test",
   },
   data: {
-    success: true,
+    allowed: true,
     limit: 10,
     remaining: 9,
-    reset: Date.now() + 60000,
+    retryAfter: 0,
     ...overrides,
   },
 });
@@ -71,7 +71,7 @@ export const createRatelimitHandler = (
   options: { delay?: number; status?: number } = {},
 ) => {
   return http.post(
-    "http://localhost:3000/v2/ratelimit.limit",
+    "http://localhost:3000/v3/ratelimit.limit",
     async ({ request }) => {
       if (options.delay) await delay(options.delay);
 
@@ -89,7 +89,7 @@ export const captureRequests = () => {
   const requests: any[] = [];
 
   const handler = http.post(
-    "http://localhost:3000/v2/ratelimit.limit",
+    "http://localhost:3000/v3/ratelimit.limit",
     async ({ request }) => {
       const body = await request.json();
       requests.push(body);
@@ -103,10 +103,10 @@ export const captureRequests = () => {
 // Custom matchers/assertions
 export const expectRatelimitResponse = (result: any, expect: any) => {
   expect(result).toMatchObject({
-    success: expect.any(Boolean),
+    allowed: expect.any(Boolean),
     limit: expect.any(Number),
     remaining: expect.any(Number),
-    reset: expect.any(Number),
+    retryAfter: expect.any(Number),
   });
 };
 
@@ -139,8 +139,9 @@ export const handlers = {
   ratelimited: () =>
     createRatelimitHandler(
       createSuccessResponse({
-        success: false,
+        allowed: false,
         remaining: 0,
+        retryAfter: 60000,
       }),
     ),
 
@@ -151,12 +152,12 @@ export const handlers = {
     createRatelimitHandler(createErrorResponse(message), { status }),
 
   networkError: () =>
-    http.post("http://localhost:3000/v2/ratelimit.limit", () => {
+    http.post("http://localhost:3000/v3/ratelimit.limit", () => {
       return HttpResponse.error();
     }),
 
   malformedResponse: () =>
-    http.post("http://localhost:3000/v2/ratelimit.limit", () => {
+    http.post("http://localhost:3000/v3/ratelimit.limit", () => {
       return new HttpResponse("invalid json{", {
         headers: { "Content-Type": "application/json" },
       });
