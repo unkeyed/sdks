@@ -23,6 +23,10 @@ export type V2RootKeysUpdateKeyRequestBody = {
    */
   enabled?: boolean | undefined;
   /**
+   * New expiration as Unix milliseconds, strictly in the future. Set null to remove the expiration. Omit to keep the current expiration. Expiring root-key callers must set an expiry no later than their own and cannot remove it.
+   */
+  expires?: number | null | undefined;
+  /**
    * Complete replacement permission set. Every permission must be a supported URN in the authenticated workspace
    *
    * @remarks
@@ -37,6 +41,7 @@ export type V2RootKeysUpdateKeyRequestBody$Outbound = {
   keyId: string;
   name?: string | null | undefined;
   enabled?: boolean | undefined;
+  expires?: number | null | undefined;
   permissions?: Array<string> | undefined;
 };
 
@@ -51,6 +56,7 @@ export const V2RootKeysUpdateKeyRequestBody$outboundSchema: z.ZodType<
     keyId: z.string(),
     name: z.nullable(z.string()).optional(),
     enabled: z.boolean().optional(),
+    expires: z.nullable(z.number().int()).optional(),
     permissions: z.array(z.string()).optional(),
   })
 );

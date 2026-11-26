@@ -421,12 +421,12 @@ run();
 * [deleteNamespace](docs/sdks/ratelimit/README.md#deletenamespace) - Delete ratelimit namespace
 * [deleteOverride](docs/sdks/ratelimit/README.md#deleteoverride) - Delete ratelimit override
 * [getOverride](docs/sdks/ratelimit/README.md#getoverride) - Get ratelimit override
-* [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
 * [listNamespaces](docs/sdks/ratelimit/README.md#listnamespaces) - List ratelimit namespaces
 * [listOverrides](docs/sdks/ratelimit/README.md#listoverrides) - List ratelimit overrides
-* [multiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 * [setOverride](docs/sdks/ratelimit/README.md#setoverride) - Set ratelimit override
 * [updateNamespace](docs/sdks/ratelimit/README.md#updatenamespace) - Update ratelimit namespace
+* [limit](docs/sdks/ratelimit/README.md#limit) - Apply rate limiting
+* [multiLimit](docs/sdks/ratelimit/README.md#multilimit) - Apply multiple rate limit checks
 
 ### [RootKeys](docs/sdks/rootkeys/README.md)
 
