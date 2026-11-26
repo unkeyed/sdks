@@ -4,8 +4,8 @@ package operations
 
 import (
 	"errors"
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v3/retry"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/retry"
 	"time"
 )
 

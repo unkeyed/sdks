@@ -17,8 +17,8 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
-	"github.com/unkeyed/sdks/api/go/v3/types"
+	"github.com/unkeyed/sdks/api/go/v4/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v4/types"
 )
 
 const (

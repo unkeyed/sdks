@@ -8,7 +8,7 @@ apps whose source could not be classified.
 
 ```go
 import (
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 )
 
 value := components.SourceTypeGit

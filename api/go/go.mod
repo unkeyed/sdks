@@ -1,4 +1,4 @@
-module github.com/unkeyed/sdks/api/go/v3
+module github.com/unkeyed/sdks/api/go/v4
 
 go 1.26.10
 

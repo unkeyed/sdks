@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
 )
 
 // RemoteIPMatch - Matches the remote IP against IPv4 or IPv6 CIDR ranges. Exactly one of `in`

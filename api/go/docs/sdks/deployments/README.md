@@ -45,8 +45,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -77,8 +77,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -109,8 +109,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -141,8 +141,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -173,8 +173,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -249,8 +249,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -281,8 +281,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -313,8 +313,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -345,8 +345,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -377,8 +377,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -451,8 +451,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -538,8 +538,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -570,8 +570,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -602,8 +602,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -692,8 +692,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -738,8 +738,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -784,8 +784,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -830,8 +830,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -874,8 +874,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -920,8 +920,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -966,8 +966,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1012,8 +1012,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1057,8 +1057,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1149,8 +1149,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1200,8 +1200,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1246,8 +1246,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1302,8 +1302,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1358,8 +1358,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1414,8 +1414,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1470,8 +1470,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1560,8 +1560,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1592,8 +1592,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1673,8 +1673,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1705,8 +1705,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1782,8 +1782,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1814,8 +1814,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1892,8 +1892,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1924,8 +1924,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 
@@ -1998,8 +1998,8 @@ package main
 import(
 	"context"
 	"os"
-	unkey "github.com/unkeyed/sdks/api/go/v3"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	unkey "github.com/unkeyed/sdks/api/go/v4"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 	"log"
 )
 

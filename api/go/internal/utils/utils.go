@@ -17,7 +17,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/unkeyed/sdks/api/go/v3/optionalnullable"
+	"github.com/unkeyed/sdks/api/go/v4/optionalnullable"
 )
 
 const (

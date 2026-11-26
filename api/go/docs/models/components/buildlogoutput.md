@@ -8,7 +8,7 @@ and warnings to `stderr`, so `stderr` does not mean that the step failed.
 
 ```go
 import (
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 )
 
 value := components.BuildLogOutputStdout

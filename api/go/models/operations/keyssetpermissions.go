@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/unkeyed/sdks/api/go/v3/internal/utils"
-	"github.com/unkeyed/sdks/api/go/v3/models/components"
+	"github.com/unkeyed/sdks/api/go/v4/internal/utils"
+	"github.com/unkeyed/sdks/api/go/v4/models/components"
 )
 
 type KeysSetPermissionsResponse struct {
