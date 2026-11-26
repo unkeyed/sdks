@@ -36,7 +36,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await ratelimit.limit("test-user-123");
 
       expectRatelimitResponse(result, expect);
-      expect(result.success).toBe(true);
+      expect(result.allowed).toBe(true);
       expect(result.remaining).toBe(9);
     });
 
@@ -47,7 +47,7 @@ describe("Ratelimit Core Functionality", () => {
       const rl = createTestRatelimit();
       const result = await rl.limit("heavy-user");
 
-      expect(result.success).toBe(false);
+      expect(result.allowed).toBe(false);
       expect(result.remaining).toBe(0);
       expect(result.limit).toBe(10);
     });
@@ -124,7 +124,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("test-user");
 
       // Should get the default fallback response
-      expect(result.success).toBe(false);
+      expect(result.allowed).toBe(false);
       expect(result.limit).toBe(0);
       expect(result.remaining).toBe(0);
     });
@@ -134,10 +134,10 @@ describe("Ratelimit Core Functionality", () => {
       cleanupFunctions.push(cleanup);
 
       const customFallback = {
-        success: true,
+        allowed: true,
         limit: 5,
         remaining: 3,
-        reset: Date.now() + 30000,
+        retryAfter: 30000,
       };
 
       const rl = createTestRatelimit({
@@ -160,10 +160,10 @@ describe("Ratelimit Core Functionality", () => {
         timeout: {
           ms: 1000,
           fallback: (identifier: string) => ({
-            success: identifier.startsWith("vip_"),
+            allowed: identifier.startsWith("vip_"),
             limit: 10,
             remaining: identifier.startsWith("vip_") ? 5 : 0,
-            reset: Date.now(),
+            retryAfter: 0,
           }),
         },
       });
@@ -171,10 +171,10 @@ describe("Ratelimit Core Functionality", () => {
       const vipResult = await rl.limit("vip_user123");
       const regularResult = await rl.limit("regular_user456");
 
-      expect(vipResult.success).toBe(true);
+      expect(vipResult.allowed).toBe(true);
       expect(vipResult.remaining).toBe(5);
 
-      expect(regularResult.success).toBe(false);
+      expect(regularResult.allowed).toBe(false);
       expect(regularResult.remaining).toBe(0);
     });
 
@@ -189,7 +189,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("patient-user");
 
       // Should wait for the actual response
-      expect(result.success).toBe(true);
+      expect(result.allowed).toBe(true);
       expect(result.remaining).toBe(9);
     }, 10000); // Increase test timeout for this specific test
   });
@@ -200,10 +200,10 @@ describe("Ratelimit Core Functionality", () => {
       cleanupFunctions.push(cleanup);
 
       const customErrorResponse = {
-        success: false,
+        allowed: false,
         limit: 0,
         remaining: 0,
-        reset: Date.now(),
+        retryAfter: 0,
       };
 
       let errorHandlerCalled = false;
@@ -221,7 +221,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("timeout-user");
 
       // Should use timeout fallback, not error handler for timeouts
-      expect(result.success).toBe(false);
+      expect(result.allowed).toBe(false);
       expect(result.limit).toBe(0);
       // Error handler should not be called for timeout
       expect(errorHandlerCalled).toBe(false);
@@ -241,10 +241,10 @@ describe("Ratelimit Core Functionality", () => {
           caughtError = error;
           expect(identifier).toBe("api-error-user");
           return {
-            success: false,
+            allowed: false,
             limit: 0,
             remaining: 0,
-            reset: Date.now(),
+            retryAfter: 0,
           };
         },
       });
@@ -253,7 +253,7 @@ describe("Ratelimit Core Functionality", () => {
 
       expect(errorHandlerCalled).toBe(true);
       expect(caughtError).toBeTruthy();
-      expect(result.success).toBe(false);
+      expect(result.allowed).toBe(false);
       expect(result.limit).toBe(0);
     });
 
@@ -271,10 +271,10 @@ describe("Ratelimit Core Functionality", () => {
           expect(error.message).toContain("API error occurred");
           expect(identifier).toBe("auth-error-user");
           return {
-            success: false,
+            allowed: false,
             limit: 0,
             remaining: 0,
-            reset: Date.now(),
+            retryAfter: 0,
           };
         },
       });
@@ -282,7 +282,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("auth-error-user");
 
       expect(errorHandlerCalled).toBe(true);
-      expect(result.success).toBe(false);
+      expect(result.allowed).toBe(false);
     });
   });
 
@@ -292,14 +292,14 @@ describe("Ratelimit Core Functionality", () => {
 
       // Create a custom handler that counts API calls
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           apiCallCount++;
           return HttpResponse.json(
             createSuccessResponse({
-              success: false,
+              allowed: false,
               remaining: 0,
-              reset: Date.now() + 60000, // Reset in 1 minute
+              retryAfter: 60000,
             }),
           );
         },
@@ -312,31 +312,85 @@ describe("Ratelimit Core Functionality", () => {
 
       // First request should hit the API
       const result1 = await rl.limit("cached-user");
-      expect(result1.success).toBe(false);
+      expect(result1.allowed).toBe(false);
       expect(apiCallCount).toBe(1);
 
       // Second request should use cache (no additional API call)
       const result2 = await rl.limit("cached-user");
-      expect(result2.success).toBe(false);
+      expect(result2.allowed).toBe(false);
       expect(apiCallCount).toBe(1); // Should still be 1
 
-      // Results should be identical
-      expect(result1).toEqual(result2);
+      // The cached response counts retryAfter down instead of returning the stored deadline
+      expect(result2.retryAfter).toBeGreaterThan(59000);
+      expect(result2.retryAfter).toBeLessThanOrEqual(result1.retryAfter);
     });
 
-    test("should expire cache after reset time", async () => {
+    test("should not share cached denials across costs", async () => {
       let apiCallCount = 0;
-      const shortResetTime = Date.now() + 100; // Reset in 100ms
-
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           apiCallCount++;
           return HttpResponse.json(
             createSuccessResponse({
-              success: false,
+              allowed: false,
               remaining: 0,
-              reset: shortResetTime,
+              retryAfter: 60000,
+            }),
+          );
+        },
+      );
+
+      const { cleanup } = createTestServer([countingHandler]);
+      cleanupFunctions.push(cleanup);
+
+      const rl = createTestRatelimit();
+      await rl.limit("cost-user", { cost: 5 });
+      await rl.limit("cost-user", { cost: 1 });
+      expect(apiCallCount).toBe(2);
+    });
+
+    test("should always send record ALWAYS requests to the API", async () => {
+      const requests: any[] = [];
+      const countingHandler = http.post(
+        "http://localhost:3000/v3/ratelimit.limit",
+        async ({ request }) => {
+          requests.push(await request.json());
+          return HttpResponse.json(
+            createSuccessResponse({
+              allowed: false,
+              remaining: 0,
+              retryAfter: 60000,
+            }),
+          );
+        },
+      );
+
+      const { cleanup } = createTestServer([countingHandler]);
+      cleanupFunctions.push(cleanup);
+
+      const rl = createTestRatelimit();
+      await rl.limit("always-user");
+      await rl.limit("always-user");
+      expect(requests).toHaveLength(1);
+
+      await rl.limit("always-user", { record: "ALWAYS" });
+      expect(requests).toHaveLength(2);
+      expect(requests[1].record).toBe("ALWAYS");
+    });
+
+    test("should expire cache after retryAfter", async () => {
+      let apiCallCount = 0;
+
+      const countingHandler = http.post(
+        "http://localhost:3000/v3/ratelimit.limit",
+        async () => {
+          apiCallCount++;
+          return HttpResponse.json(
+            createSuccessResponse({
+              allowed: false,
+              remaining: 0,
+              retryAfter: 100,
             }),
           );
         },
@@ -363,7 +417,7 @@ describe("Ratelimit Core Functionality", () => {
       let apiCallCount = 0;
 
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           apiCallCount++;
           return HttpResponse.json(createSuccessResponse());
@@ -406,15 +460,15 @@ describe("Ratelimit Core Functionality", () => {
       let apiCallCount = 0;
 
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async ({ request }) => {
           const body = await request.json();
           apiCallCount++;
           return HttpResponse.json(
             createSuccessResponse({
-              success: false,
+              allowed: false,
               remaining: 0,
-              reset: Date.now() + 60000,
+              retryAfter: 60000,
             }),
           );
         },
@@ -515,7 +569,7 @@ describe("Ratelimit Core Functionality", () => {
       let apiCallCount = 0;
 
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           apiCallCount++;
           // Small delay to ensure concurrency
@@ -540,7 +594,7 @@ describe("Ratelimit Core Functionality", () => {
       expect(apiCallCount).toBe(5);
       results.forEach((result) => {
         expectRatelimitResponse(result, expect);
-        expect(result.success).toBe(true);
+        expect(result.allowed).toBe(true);
       });
     });
 
@@ -548,14 +602,14 @@ describe("Ratelimit Core Functionality", () => {
       let apiCallCount = 0;
 
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           apiCallCount++;
           return HttpResponse.json(
             createSuccessResponse({
-              success: false,
+              allowed: false,
               remaining: 0,
-              reset: Date.now() + 60000,
+              retryAfter: 60000,
             }),
           );
         },
@@ -581,7 +635,7 @@ describe("Ratelimit Core Functionality", () => {
 
       // All results should be the same (either all from cache or all from API)
       results.forEach((result) => {
-        expect(result.success).toBe(false);
+        expect(result.allowed).toBe(false);
         expect(result.remaining).toBe(0);
       });
     });
@@ -609,13 +663,13 @@ describe("Ratelimit Core Functionality", () => {
       };
 
       const countingHandler = http.post(
-        "http://localhost:3000/v2/ratelimit.limit",
+        "http://localhost:3000/v3/ratelimit.limit",
         async () => {
           return HttpResponse.json(
             createSuccessResponse({
-              success: false,
+              allowed: false,
               remaining: 0,
-              reset: Date.now() + 60000,
+              retryAfter: 60000,
             }),
           );
         },
@@ -646,7 +700,7 @@ describe("Ratelimit Core Functionality", () => {
     test("should use custom baseUrl when configured", async () => {
       // Use a different port for custom base URL test
       const customHandler = http.post(
-        "http://localhost:3001/v2/ratelimit.limit",
+        "http://localhost:3001/v3/ratelimit.limit",
         async () => {
           return HttpResponse.json(createSuccessResponse());
         },
@@ -659,7 +713,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("custom-url-user");
 
       expectRatelimitResponse(result, expect);
-      expect(result.success).toBe(true);
+      expect(result.allowed).toBe(true);
     });
 
     test("should handle baseUrl without trailing slash", async () => {
@@ -670,7 +724,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("no-slash-user");
 
       expectRatelimitResponse(result, expect);
-      expect(result.success).toBe(true);
+      expect(result.allowed).toBe(true);
     });
 
     test("should handle baseUrl with trailing slash", async () => {
@@ -681,7 +735,7 @@ describe("Ratelimit Core Functionality", () => {
       const result = await rl.limit("with-slash-user");
 
       expectRatelimitResponse(result, expect);
-      expect(result.success).toBe(true);
+      expect(result.allowed).toBe(true);
     });
   });
 });

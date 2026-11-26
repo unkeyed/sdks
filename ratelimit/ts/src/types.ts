@@ -1,6 +1,10 @@
+import type { RecordT } from "@unkey/api/models/components";
 import type { Duration } from "./duration";
 
-export type Cache = Map<string, RatelimitResponse>;
+/**
+ * Holds denied responses. `retryAt` is the unix timestamp in milliseconds when the denial ends.
+ */
+export type Cache = Map<string, RatelimitResponse & { retryAt: number }>;
 
 export type Limit = {
   /**
@@ -9,28 +13,32 @@ export type Limit = {
   limit: number;
 
   /**
-   * Either a type string literal or milliseconds
+   * Either a type string literal or milliseconds.
+   *
+   * Must be at least 10 seconds and at most 24 hours.
    */
   duration: Duration | number;
 };
 
 export type RatelimitResponse = {
   /**
-   * Whether the request may pass(true) or exceeded the limit(false)
+   * Whether the request may pass (true) or exceeded the limit (false).
    */
-  success: boolean;
+  allowed: boolean;
   /**
-   * Maximum number of requests allowed within a window.
+   * The limit that applied: the configured limit, or the limit of a matching override.
    */
   limit: number;
   /**
-   * How many requests the user has left within the current window.
+   * The cost that still fits now. Usage decays continuously, so this grows again over time
+   * without a fixed reset.
    */
   remaining: number;
   /**
-   * Unix timestamp in milliseconds when the limits are reset.
+   * How many milliseconds to wait until the same cost fits, if nothing else is counted.
+   * 0 when the request is allowed.
    */
-  reset: number;
+  retryAfter: number;
 
   /**
    * The override id for the request that was used to override the limit.
@@ -40,29 +48,31 @@ export type RatelimitResponse = {
 
 export type LimitOptions = {
   /**
-   * Expensive requests may use up more resources. You can specify a cost to the request and
-   * we'll deduct this many tokens in the current window. If there are not enough tokens left,
-   * the request is denied.
+   * Expensive requests may use up more resources. Set a cost and the request counts this much
+   * against the limit. If the cost does not fit in the remaining limit, the request is denied.
+   *
+   * A cost greater than the limit never fits.
    *
    * @example
-   *
-   * 1. You have a limit of 10 requests per second you already used 4 of them in the current
-   * window.
-   *
-   * 2. Now a new request comes in with a higher cost:
    * ```ts
    * const res = await rl.limit("identifier", { cost: 4 })
    * ```
    *
-   * 3. The request passes and the current limit is now at `8`
-   *
-   * 4. The same request happens again, but would not be rejected, because it would exceed the
-   * limit in the current window: `8 + 4 > 10`
-   *
-   *
    * @default 1
    */
   cost?: number;
+
+  /**
+   * Configure when this request counts its cost.
+   *
+   * - `IF_ALLOWED`: count the cost only if it fits.
+   * - `ALWAYS`: count the cost even if it does not fit, such as for usage that already happened.
+   *   These requests always go to Unkey and never use the local cache of denied identifiers.
+   * - `NEVER`: count nothing and only report whether the cost fits.
+   *
+   * @default "IF_ALLOWED"
+   */
+  record?: RecordT;
 
   /**
    * Override the default limit.

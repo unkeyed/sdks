@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@unkey/api':
-    specifier: 2.2.0
-    version: 2.2.0
+    specifier: 3.0.0
+    version: 3.0.0
 
 devDependencies:
   '@biomejs/biome':
@@ -683,8 +683,8 @@ packages:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
     dev: true
 
-  /@unkey/api@2.2.0:
-    resolution: {integrity: sha512-XoFWPbZnyos04u+qQTAT+lHymRTNidMK64QywZaWNKbJmorPDd/jZlyKZvL+LNxxBlFXcHOHFtPHPk90wWmcvg==}
+  /@unkey/api@3.0.0:
+    resolution: {integrity: sha512-iptMWATV7mGy/fkKZk6BP2mNqcQ5giiBbGpIolnM9bOyHujOWCfzHPj6pc0uA4kHgE7D1c10lvWSXz9J59bPMw==}
     dependencies:
       zod: 3.25.76
     dev: false

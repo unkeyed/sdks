@@ -7,10 +7,10 @@ export class NoopRatelimit implements Ratelimiter {
     _opts?: LimitOptions,
   ): Promise<RatelimitResponse> {
     return Promise.resolve({
+      allowed: true,
       limit: 0,
       remaining: 0,
-      reset: 0,
-      success: true,
+      retryAfter: 0,
     });
   }
 }

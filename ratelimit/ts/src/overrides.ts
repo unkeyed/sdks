@@ -60,6 +60,8 @@ export class Overrides {
     request: V2RatelimitListOverridesRequestBody,
     options?: RequestOptions,
   ): Promise<V2RatelimitListOverridesResponseBody> {
-    return this.unkey.ratelimit.listOverrides(request, options);
+    return this.unkey.ratelimit
+      .listOverrides(request, options)
+      .then((page) => page.result);
   }
 }
